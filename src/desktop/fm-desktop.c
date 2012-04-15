@@ -334,11 +334,11 @@ static void on_open_item ( PtkFileBrowser* file_browser,
         gtk_window_present ( GTK_WINDOW( main_window ) );
         break;
     case PTK_OPEN_TERMINAL:
-        fm_main_window_open_terminal( GTK_WINDOW( main_window ), path );
+        fm_main_window_open_terminal( GTK_WINDOW( user_data ), path );
     }
 }
 
-void remove_filter( GObject* desktop, gpointer screen )
+static void remove_filter( GObject* desktop, gpointer screen )
 {
     gdk_window_remove_filter(
         gdk_screen_get_root_window( GDK_SCREEN( screen ) ),
@@ -428,6 +428,7 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     char* desktop_dir;
     GdkRectangle area;
     int rpad, bpad;
+    guint32 val;
 
     desktop = gtk_window_new( GTK_WINDOW_TOPLEVEL );
     get_working_area( screen, &area );
@@ -484,13 +485,20 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     g_signal_connect( desktop, "destroy", remove_filter, screen );
     g_signal_connect( desktop, "expose-event",
                       on_desktop_expose, NULL );
-    g_signal_connect( desktop, "key-press-event", 
+    g_signal_connect( desktop, "key-press-event",
                       on_desktop_key_press, browser );
 
     gtk_widget_set_double_buffered( desktop, FALSE );
     set_bg_pixmap( screen, PTK_ICON_VIEW(view), &area );
     gtk_window_set_skip_pager_hint( GTK_WINDOW(desktop), TRUE );
     gtk_window_set_skip_taskbar_hint( GTK_WINDOW(desktop), TRUE );
+
+    /* This is borrowed from fbpanel */
+#define WIN_HINTS_SKIP_FOCUS      (1<<0)    /* skip "alt-tab" */
+    val = WIN_HINTS_SKIP_FOCUS;
+    XChangeProperty(GDK_DISPLAY(), GDK_WINDOW_XWINDOW(desktop->window),
+          XInternAtom(GDK_DISPLAY(), "_WIN_HINTS", False), XA_CARDINAL, 32,
+          PropModeReplace, (unsigned char *) &val, 1);
 
     gdk_rgb_find_color( gtk_widget_get_colormap( view ),
                         &appSettings.desktopText );

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-15 00:48+0800\n"
+"POT-Creation-Date: 2006-11-12 16:31+0800\n"
 "PO-Revision-Date: 2006-03-20 07:54+0100\n"
 "Last-Translator: Xisco Bonet <xiscobv@gmail.com>\n"
 "Language-Team: \n"
@@ -93,7 +93,7 @@ msgstr "_Propietats"
 msgid "_Delete"
 msgstr "_Esborra"
 
-#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1317
+#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1340
 #: src/ptk/ptk-file-menu.c:112
 msgid "_Rename"
 msgstr "_Reanomena"
@@ -368,44 +368,44 @@ msgstr[1] "%d elements visibles (%d ocults)"
 msgid "Directory does'nt exist!"
 msgstr "El directori no existeix!"
 
-#: src/ptk/ptk-file-browser.c:1313 src/ptk/ptk-file-menu.c:125
+#: src/ptk/ptk-file-browser.c:1336 src/ptk/ptk-file-menu.c:125
 msgid "Open in New _Tab"
 msgstr "Obre en una nova pes_tanya"
 
-#: src/ptk/ptk-file-browser.c:1314 src/ptk/ptk-file-menu.c:126
+#: src/ptk/ptk-file-browser.c:1337 src/ptk/ptk-file-menu.c:126
 #, fuzzy
 msgid "Open in New _Window"
 msgstr "Obre en una nova finestra"
 
-#: src/ptk/ptk-file-browser.c:1548 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1571 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr "Nom"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Size"
 msgstr "Mida"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Type"
 msgstr "Tipus"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Permission"
 msgstr "Permissos"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Owner:Group"
 msgstr "Grup propietari"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Last Modification"
 msgstr "Modificat"
 
-#: src/ptk/ptk-file-browser.c:2584
+#: src/ptk/ptk-file-browser.c:2607
 msgid "Location"
 msgstr "Localització:"
 
-#: src/ptk/ptk-file-browser.c:2585
+#: src/ptk/ptk-file-browser.c:2608
 msgid "Directory Tree"
 msgstr "Arbre de directoris"
 
@@ -825,15 +825,15 @@ msgstr "Obre amb _un altre programa"
 msgid "Calculating..."
 msgstr "Calculant..."
 
-#: src/file-properties.c:656
+#: src/file-properties.c:657
 msgid "Invalid User"
 msgstr "Usuari invàlid"
 
-#: src/file-properties.c:666
+#: src/file-properties.c:668
 msgid "Invalid Group"
 msgstr "Grup invàlid"
 
-#: src/file-properties.c:714
+#: src/file-properties.c:716
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr "Aplicar els canvis recursivament a tots els fitxers i directoris?"
@@ -1061,7 +1061,7 @@ msgstr "Mou:"
 msgid "Command not found"
 msgstr "Línea de comandes: "
 
-#: src/vfs/vfs-file-task.c:702
+#: src/vfs/vfs-file-task.c:704
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr ""

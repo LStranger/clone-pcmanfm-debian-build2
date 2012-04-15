@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm 0.3.2-beta2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-15 00:48+0800\n"
+"POT-Creation-Date: 2006-11-12 16:31+0800\n"
 "PO-Revision-Date: 2006-09-26 22:40+0200\n"
 "Last-Translator: Mario Izquierdo (mariodebian) <mariodebian@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -93,7 +93,7 @@ msgstr "_Propiedades de archivo"
 msgid "_Delete"
 msgstr "_Borrar"
 
-#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1317
+#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1340
 #: src/ptk/ptk-file-menu.c:112
 msgid "_Rename"
 msgstr "_Renombrar"
@@ -362,43 +362,43 @@ msgstr[1] "%d elementos visibles (%d ocultos)%s"
 msgid "Directory does'nt exist!"
 msgstr "¡La carpeta no existe!"
 
-#: src/ptk/ptk-file-browser.c:1313 src/ptk/ptk-file-menu.c:125
+#: src/ptk/ptk-file-browser.c:1336 src/ptk/ptk-file-menu.c:125
 msgid "Open in New _Tab"
 msgstr "Abrir en nueva pes_taña"
 
-#: src/ptk/ptk-file-browser.c:1314 src/ptk/ptk-file-menu.c:126
+#: src/ptk/ptk-file-browser.c:1337 src/ptk/ptk-file-menu.c:126
 msgid "Open in New _Window"
 msgstr "Abrir en nueva _ventana"
 
-#: src/ptk/ptk-file-browser.c:1548 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1571 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr "Nombre"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Size"
 msgstr "Tamaño"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Type"
 msgstr "Tipo"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Permission"
 msgstr "Permisos"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Owner:Group"
 msgstr "Grupo propietario"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Last Modification"
 msgstr "Última modificación"
 
-#: src/ptk/ptk-file-browser.c:2584
+#: src/ptk/ptk-file-browser.c:2607
 msgid "Location"
 msgstr "Localización"
 
-#: src/ptk/ptk-file-browser.c:2585
+#: src/ptk/ptk-file-browser.c:2608
 msgid "Directory Tree"
 msgstr "Árbol de carpetas"
 
@@ -809,15 +809,15 @@ msgstr "Abrir con _otro programa"
 msgid "Calculating..."
 msgstr "Calculando..."
 
-#: src/file-properties.c:656
+#: src/file-properties.c:657
 msgid "Invalid User"
 msgstr "Usuario no válido"
 
-#: src/file-properties.c:666
+#: src/file-properties.c:668
 msgid "Invalid Group"
 msgstr "Grupo no válido"
 
-#: src/file-properties.c:714
+#: src/file-properties.c:716
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
@@ -1034,7 +1034,7 @@ msgstr "Mover a_bajo"
 msgid "Command not found"
 msgstr "Comando no encontrado"
 
-#: src/vfs/vfs-file-task.c:702
+#: src/vfs/vfs-file-task.c:704
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr ""

@@ -71,7 +71,7 @@ call_progress_callback( VFSFileTask* task )
     return FALSE;
 }
 
-void call_state_callback( VFSFileTask* task,
+static void call_state_callback( VFSFileTask* task,
                           VFSFileTaskState state )
 {
     task->state = state;
@@ -84,7 +84,7 @@ void call_state_callback( VFSFileTask* task,
     }
 }
 
-gboolean should_abort( VFSFileTask* task )
+static gboolean should_abort( VFSFileTask* task )
 {
     if ( task->state == VFS_FILE_TASK_QUERY_ABORT )
     {
@@ -102,6 +102,7 @@ gboolean should_abort( VFSFileTask* task )
 * skip this file, overwrite existing file, or cancel all file operation.
 * The returned string is the new destination file choosed by the user
 */
+static 
 gboolean check_overwrite( VFSFileTask* task,
                           const gchar* dest_file,
                           gboolean* dest_exists,
@@ -408,7 +409,6 @@ vfs_file_task_do_move ( VFSFileTask* task,
         task->current_dest = dest_file = new_dest_file;
 
     result = rename( src_file, dest_file );
-    chmod( dest_file, file_stat.st_mode );
 
     if ( result != 0 )
     {
@@ -420,6 +420,8 @@ vfs_file_task_do_move ( VFSFileTask* task,
             return ;
         }
     }
+    else
+        chmod( dest_file, file_stat.st_mode );
 
     task->progress += file_stat.st_size;
     call_progress_callback( task );

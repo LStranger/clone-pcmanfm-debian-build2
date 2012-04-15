@@ -498,13 +498,11 @@ gboolean ptk_file_browser_chdir( PtkFileBrowser* file_browser,
         return FALSE;
     }
     /* FIXME: check access */
-#ifdef HAVE_EUIDACCESS
+#if defined(HAVE_EUIDACCESS)
     test_access = euidaccess( path, R_OK | X_OK );
-#elif HAVE_EACCESS
-
+#elif defined(HAVE_EACCESS)
     test_access = eaccess( path, R_OK | X_OK );
 #else   /* No check */
-
     test_access = 0;
 #endif
 
@@ -852,13 +850,38 @@ void ptk_file_browser_invert_selection( PtkFileBrowser* file_browser )
     if ( file_browser->view_mode == FBVM_ICON_VIEW )
     {
         model = ptk_icon_view_get_model( PTK_ICON_VIEW( file_browser->folder_view ) );
+        g_signal_handlers_block_matched( file_browser->folder_view, 
+                                         G_SIGNAL_MATCH_FUNC,
+                                         0, 0, NULL, 
+                                         on_folder_view_item_sel_change, NULL );
+        gtk_tree_model_foreach ( model,
+                                 ( GtkTreeModelForeachFunc ) invert_selection, file_browser );
+        g_signal_handlers_unblock_matched( file_browser->folder_view, 
+                                           G_SIGNAL_MATCH_FUNC,
+                                           0, 0, NULL, 
+                                           on_folder_view_item_sel_change, NULL );
+        on_folder_view_item_sel_change( PTK_ICON_VIEW( file_browser->folder_view ),
+                                        file_browser );
     }
     else if ( file_browser->view_mode == FBVM_LIST_VIEW )
     {
+        GtkTreeSelection* tree_sel;
+        tree_sel = gtk_tree_view_get_selection(GTK_TREE_VIEW( file_browser->folder_view ));
+        g_signal_handlers_block_matched( tree_sel, 
+                                         G_SIGNAL_MATCH_FUNC,
+                                         0, 0, NULL, 
+                                         on_folder_view_item_sel_change, NULL );
         model = gtk_tree_view_get_model( GTK_TREE_VIEW( file_browser->folder_view ) );
+        gtk_tree_model_foreach ( model,
+                                 ( GtkTreeModelForeachFunc ) invert_selection, file_browser );
+        g_signal_handlers_unblock_matched( tree_sel, 
+                                           G_SIGNAL_MATCH_FUNC,
+                                           0, 0, NULL, 
+                                           on_folder_view_item_sel_change, NULL );
+        on_folder_view_item_sel_change( (PtkIconView*)tree_sel,
+                                        file_browser );
     }
-    gtk_tree_model_foreach ( model,
-                             ( GtkTreeModelForeachFunc ) invert_selection, file_browser );
+
 }
 
 /* signal handlers */

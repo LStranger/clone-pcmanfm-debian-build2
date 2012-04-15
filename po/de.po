@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCMan FM 0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-15 00:48+0800\n"
+"POT-Creation-Date: 2006-11-12 16:31+0800\n"
 "PO-Revision-Date: 2006-10-15 01:04+0800\n"
 "Last-Translator: 洪任諭 <pcman.tw@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -116,7 +116,7 @@ msgstr "_Eigenschaften"
 msgid "_Delete"
 msgstr "Lö_schen"
 
-#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1317
+#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1340
 #: src/ptk/ptk-file-menu.c:112
 msgid "_Rename"
 msgstr "_Umbenennen"
@@ -385,43 +385,43 @@ msgstr[1] "%d Objekte angezeigt (%d veborgen)%s"
 msgid "Directory does'nt exist!"
 msgstr "Das Verzeichnis existiert nicht!"
 
-#: src/ptk/ptk-file-browser.c:1313 src/ptk/ptk-file-menu.c:125
+#: src/ptk/ptk-file-browser.c:1336 src/ptk/ptk-file-menu.c:125
 msgid "Open in New _Tab"
 msgstr "In neuem Rei_ter öffnen"
 
-#: src/ptk/ptk-file-browser.c:1314 src/ptk/ptk-file-menu.c:126
+#: src/ptk/ptk-file-browser.c:1337 src/ptk/ptk-file-menu.c:126
 msgid "Open in New _Window"
 msgstr "In neuem _Fenster öffnen"
 
-#: src/ptk/ptk-file-browser.c:1548 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1571 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr "Name"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Size"
 msgstr "Größe"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Type"
 msgstr "Typ"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Permission"
 msgstr "Zugriffsrechte"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Owner:Group"
 msgstr "Besitzer:Gruppe"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Last Modification"
 msgstr "Änderungsdatum"
 
-#: src/ptk/ptk-file-browser.c:2584
+#: src/ptk/ptk-file-browser.c:2607
 msgid "Location"
 msgstr "Orte"
 
-#: src/ptk/ptk-file-browser.c:2585
+#: src/ptk/ptk-file-browser.c:2608
 msgid "Directory Tree"
 msgstr "Baum"
 
@@ -833,15 +833,15 @@ msgstr "Andere Anwendung..."
 msgid "Calculating..."
 msgstr "Dateigröße wird berechnet..."
 
-#: src/file-properties.c:656
+#: src/file-properties.c:657
 msgid "Invalid User"
 msgstr "Ungültiger Benutzername"
 
-#: src/file-properties.c:666
+#: src/file-properties.c:668
 msgid "Invalid Group"
 msgstr "Ungültige Gruppe"
 
-#: src/file-properties.c:714
+#: src/file-properties.c:716
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
@@ -1059,7 +1059,7 @@ msgstr "Nach _unten"
 msgid "Command not found"
 msgstr "Befehl nicht gefunden"
 
-#: src/vfs/vfs-file-task.c:702
+#: src/vfs/vfs-file-task.c:704
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "Der Zielordner \"%1$s\" befindet sich im Quellordner \"%2$s\""

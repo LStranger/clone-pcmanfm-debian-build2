@@ -33,11 +33,11 @@ const GdkColor desktopTextDefault={0, 65535, 65535, 65535};
 
 typedef void ( *SettingsParseFunc ) ( char* line );
 
-void color_from_str( GdkColor* ret, const char* value );
-void save_color( FILE* file, const char* name, 
+static void color_from_str( GdkColor* ret, const char* value );
+static void save_color( FILE* file, const char* name, 
                  GdkColor* color );
 
-void parse_general_settings( char* line )
+static void parse_general_settings( char* line )
 {
     char * sep = strstr( line, "=" );
     char* name;
@@ -97,19 +97,19 @@ void parse_general_settings( char* line )
     */
 }
 
-void color_from_str( GdkColor* ret, const char* value )
+static void color_from_str( GdkColor* ret, const char* value )
 {
     sscanf( value, "%d,%d,%d", 
             &ret->red, &ret->green, &ret->blue );
 }
 
-void save_color( FILE* file, const char* name, GdkColor* color )
+static void save_color( FILE* file, const char* name, GdkColor* color )
 {
     fprintf( file, "%s=%d,%d,%d\n", name, 
              color->red, color->green, color->blue );
 }
 
-void parse_window_state( char* line )
+static void parse_window_state( char* line )
 {
     char * sep = strstr( line, "=" );
     char* name;
@@ -137,7 +137,7 @@ void parse_window_state( char* line )
     }
 }
 
-void parse_desktop_settings( char* line )
+static void parse_desktop_settings( char* line )
 {
     char * sep = strstr( line, "=" );
     char* name;

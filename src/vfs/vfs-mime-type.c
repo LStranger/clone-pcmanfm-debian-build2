@@ -109,8 +109,9 @@ void finalize_mime_actions()
         g_key_file_free( mime_actions );
     if ( user_actions )
         g_key_file_free( user_actions );
-    vfs_file_monitor_remove( mime_actions_monitor,
-                             reload_mime_actions, mime_hash );
+    if ( mime_actions_monitor )
+        vfs_file_monitor_remove( mime_actions_monitor,
+                                 reload_mime_actions, mime_hash );
 }
 
 /* Save user profile */

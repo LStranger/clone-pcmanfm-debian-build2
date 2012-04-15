@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-15 00:48+0800\n"
+"POT-Creation-Date: 2006-11-12 16:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,7 +91,7 @@ msgstr ""
 msgid "_Delete"
 msgstr ""
 
-#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1317
+#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1340
 #: src/ptk/ptk-file-menu.c:112
 msgid "_Rename"
 msgstr ""
@@ -357,43 +357,43 @@ msgstr[1] ""
 msgid "Directory does'nt exist!"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1313 src/ptk/ptk-file-menu.c:125
+#: src/ptk/ptk-file-browser.c:1336 src/ptk/ptk-file-menu.c:125
 msgid "Open in New _Tab"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1314 src/ptk/ptk-file-menu.c:126
+#: src/ptk/ptk-file-browser.c:1337 src/ptk/ptk-file-menu.c:126
 msgid "Open in New _Window"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1548 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1571 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Size"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Type"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Permission"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Owner:Group"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Last Modification"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2584
+#: src/ptk/ptk-file-browser.c:2607
 msgid "Location"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2585
+#: src/ptk/ptk-file-browser.c:2608
 msgid "Directory Tree"
 msgstr ""
 
@@ -791,15 +791,15 @@ msgstr ""
 msgid "Calculating..."
 msgstr ""
 
-#: src/file-properties.c:656
+#: src/file-properties.c:657
 msgid "Invalid User"
 msgstr ""
 
-#: src/file-properties.c:666
+#: src/file-properties.c:668
 msgid "Invalid Group"
 msgstr ""
 
-#: src/file-properties.c:714
+#: src/file-properties.c:716
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
@@ -1013,7 +1013,7 @@ msgstr ""
 msgid "Command not found"
 msgstr ""
 
-#: src/vfs/vfs-file-task.c:702
+#: src/vfs/vfs-file-task.c:704
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr ""

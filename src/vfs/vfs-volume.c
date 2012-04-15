@@ -176,13 +176,13 @@ static void on_hal_device_added( LibHalContext *ctx, const char *udi )
     VFSVolume * volume;
     char* fs;
 
-    /* g_debug("device added: %s", udi); */
-
     if ( libhal_device_get_property_bool ( ctx, udi, "volume.ignore", NULL ) )
         return ;
 
     if ( ! libhal_device_property_exists ( ctx, udi, "volume.fsusage", NULL ) )
         return ;
+
+    /* g_debug("device added: %s", udi); */
 
     fs = libhal_device_get_property_string ( ctx, udi, "volume.fsusage", NULL );
     if ( !fs || ( ( strcmp ( fs, "filesystem" ) != 0 ) && ( strcmp ( fs, "crypto" ) != 0 ) ) )
@@ -190,7 +190,7 @@ static void on_hal_device_added( LibHalContext *ctx, const char *udi )
         libhal_free_string ( fs );
         return ;
     }
-
+g_debug("device added: %s", udi);
     volume = vfs_volume_new( udi );
     /* FIXME: sort items */
     volumes = g_array_append_val( volumes, volume );

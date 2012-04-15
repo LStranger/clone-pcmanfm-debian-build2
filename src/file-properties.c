@@ -527,7 +527,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
     return dlg;
 }
 
-uid_t uid_from_name( const char* user_name )
+static uid_t uid_from_name( const char* user_name )
 {
     struct passwd * pw;
     uid_t uid = -1;
@@ -648,7 +648,8 @@ on_filePropertiesDlg_response ( GtkDialog *dialog,
 
             /* Check if we need chown */
             owner_name = gtk_entry_get_text( data->owner );
-            if ( owner_name && *owner_name && strcmp( owner_name, data->owner_name ) )
+            if ( owner_name && *owner_name &&
+                 (!data->owner_name || strcmp( owner_name, data->owner_name )) )
             {
                 uid = uid_from_name( owner_name );
                 if ( uid == -1 )
@@ -658,7 +659,8 @@ on_filePropertiesDlg_response ( GtkDialog *dialog,
                 }
             }
             group_name = gtk_entry_get_text( data->group );
-            if ( group_name && *group_name && strcmp( group_name, data->group_name ) )
+            if ( group_name && *group_name && 
+                 (!data->group_name || strcmp( group_name, data->group_name )) )
             {
                 gid = gid_from_name( group_name );
                 if ( gid == -1 )

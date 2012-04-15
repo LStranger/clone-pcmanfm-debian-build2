@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-15 00:48+0800\n"
+"POT-Creation-Date: 2006-11-12 16:31+0800\n"
 "PO-Revision-Date: 2006-10-04 19:13+0100\n"
 "Last-Translator: Mona <nordisch(dash)herb(at)gmx(dot)net>\n"
 "Language-Team: Swedish <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgstr "Fil_egenskaper"
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1317
+#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1340
 #: src/ptk/ptk-file-menu.c:112
 msgid "_Rename"
 msgstr "_Bytt namn"
@@ -381,43 +381,43 @@ msgstr[1] "%d synliga objekt (%d dolda)%s"
 msgid "Directory does'nt exist!"
 msgstr "Katalogen existera inte!"
 
-#: src/ptk/ptk-file-browser.c:1313 src/ptk/ptk-file-menu.c:125
+#: src/ptk/ptk-file-browser.c:1336 src/ptk/ptk-file-menu.c:125
 msgid "Open in New _Tab"
 msgstr "Öppna i ny _flik"
 
-#: src/ptk/ptk-file-browser.c:1314 src/ptk/ptk-file-menu.c:126
+#: src/ptk/ptk-file-browser.c:1337 src/ptk/ptk-file-menu.c:126
 msgid "Open in New _Window"
 msgstr "Öppna i nytt _fönster"
 
-#: src/ptk/ptk-file-browser.c:1548 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1571 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr "Namn"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Size"
 msgstr "Storlek"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Type"
 msgstr "Typ"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Permission"
 msgstr "Rättighet"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Owner:Group"
 msgstr "Ägare:Grupp"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Last Modification"
 msgstr "Modifierad senast:"
 
-#: src/ptk/ptk-file-browser.c:2584
+#: src/ptk/ptk-file-browser.c:2607
 msgid "Location"
 msgstr "Address"
 
-#: src/ptk/ptk-file-browser.c:2585
+#: src/ptk/ptk-file-browser.c:2608
 msgid "Directory Tree"
 msgstr "Trädvyn"
 
@@ -829,15 +829,15 @@ msgstr "_Annat programm..."
 msgid "Calculating..."
 msgstr "Beräknar..."
 
-#: src/file-properties.c:656
+#: src/file-properties.c:657
 msgid "Invalid User"
 msgstr "Ogiltig användare"
 
-#: src/file-properties.c:666
+#: src/file-properties.c:668
 msgid "Invalid Group"
 msgstr "Ogiltig grupp"
 
-#: src/file-properties.c:714
+#: src/file-properties.c:716
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
@@ -1053,7 +1053,7 @@ msgstr "Flytta _nedåt"
 msgid "Command not found"
 msgstr "Kommando finns inte"
 
-#: src/vfs/vfs-file-task.c:702
+#: src/vfs/vfs-file-task.c:704
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "Målkatalogen \"%1$s\" finns redan i källan \"%2$s\""

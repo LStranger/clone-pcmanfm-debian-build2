@@ -498,8 +498,9 @@ xdg_mime_shutdown ( void )
 
     for ( l = monitor_list; l; l = l->next )
     {
-        vfs_file_monitor_remove( ( VFSFileMonitor* ) l->data,
-                                 xdg_mime_file_changed, NULL );
+	if ( l->data )
+            vfs_file_monitor_remove( ( VFSFileMonitor* ) l->data,
+                                     xdg_mime_file_changed, NULL );
     }
     g_slist_free( monitor_list );
     monitor_list = NULL;

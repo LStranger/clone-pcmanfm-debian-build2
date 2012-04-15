@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm 0.1.9.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-15 00:48+0800\n"
+"POT-Creation-Date: 2006-11-12 16:31+0800\n"
 "PO-Revision-Date: 2006-08-06 22:54+0100\n"
 "Last-Translator: Claudio Riva <firetux83@gmail.com>\n"
 "Language-Team: Italian <firetux83@gmail.com>\n"
@@ -115,7 +115,7 @@ msgstr "_Proprieta' file"
 msgid "_Delete"
 msgstr "_Elimina"
 
-#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1317
+#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1340
 #: src/ptk/ptk-file-menu.c:112
 msgid "_Rename"
 msgstr "_Rinomina"
@@ -384,43 +384,43 @@ msgstr[1] "%d oggetti visibili (%d nascosti)"
 msgid "Directory does'nt exist!"
 msgstr "La cartella non esiste!"
 
-#: src/ptk/ptk-file-browser.c:1313 src/ptk/ptk-file-menu.c:125
+#: src/ptk/ptk-file-browser.c:1336 src/ptk/ptk-file-menu.c:125
 msgid "Open in New _Tab"
 msgstr "Apri in una Nuova _Scheda"
 
-#: src/ptk/ptk-file-browser.c:1314 src/ptk/ptk-file-menu.c:126
+#: src/ptk/ptk-file-browser.c:1337 src/ptk/ptk-file-menu.c:126
 msgid "Open in New _Window"
 msgstr "Apri in una Nuova _Finestra"
 
-#: src/ptk/ptk-file-browser.c:1548 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1571 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr "Nome"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Size"
 msgstr "Dimensione"
 
-#: src/ptk/ptk-file-browser.c:1548
+#: src/ptk/ptk-file-browser.c:1571
 msgid "Type"
 msgstr "Tipo"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Permission"
 msgstr "Permessi"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Owner:Group"
 msgstr "Proprietario:Gruppo"
 
-#: src/ptk/ptk-file-browser.c:1549
+#: src/ptk/ptk-file-browser.c:1572
 msgid "Last Modification"
 msgstr "Ultima Modifica"
 
-#: src/ptk/ptk-file-browser.c:2584
+#: src/ptk/ptk-file-browser.c:2607
 msgid "Location"
 msgstr "Locazione"
 
-#: src/ptk/ptk-file-browser.c:2585
+#: src/ptk/ptk-file-browser.c:2608
 msgid "Directory Tree"
 msgstr "Albero Cartelle"
 
@@ -832,15 +832,15 @@ msgstr "_Apri con un altro programma"
 msgid "Calculating..."
 msgstr "In calcolazione..."
 
-#: src/file-properties.c:656
+#: src/file-properties.c:657
 msgid "Invalid User"
 msgstr "Utente non valido"
 
-#: src/file-properties.c:666
+#: src/file-properties.c:668
 msgid "Invalid Group"
 msgstr "Gruppo non valido"
 
-#: src/file-properties.c:714
+#: src/file-properties.c:716
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
@@ -1060,7 +1060,7 @@ msgstr "Sposta _Giu"
 msgid "Command not found"
 msgstr "Linea _Comando:"
 
-#: src/vfs/vfs-file-task.c:702
+#: src/vfs/vfs-file-task.c:704
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr ""
