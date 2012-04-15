@@ -1,3 +1,11 @@
+pcmanfm (0.9.8-2) unstable; urgency=low
+
+  * Apply revert-new-IPC.patch(from Arch Linux). (Closes: #605760)
+  * Bumped Standards-Version to 3.9.2.
+  * Updating description: fix description-synopsis-starts-with-article.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Fri, 30 Dec 2011 18:24:45 +0800
+
 pcmanfm (0.9.8-1) unstable; urgency=low
 
   [ Julien Lavergne ]

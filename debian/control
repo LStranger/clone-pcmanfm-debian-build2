@@ -18,7 +18,7 @@ Build-Depends: debhelper (>= 7.0.50~),
                libtool,
                lsb-release
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://pcmanfm.sourceforge.net/
 Vcs-Git: git://git.debian.org/git/collab-maint/pcmanfm.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/pcmanfm.git;a=summary
@@ -31,7 +31,7 @@ Recommends: lxde-icon-theme | gnome-icon-theme,
             gvfs-backends,
             gvfs-fuse
 Conflicts: pcmanfm-nohal
-Description: an extremely fast and lightweight file manager
+Description: extremely fast and lightweight file manager
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
   * Extremly fast and lightweight
@@ -56,7 +56,7 @@ Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          pcmanfm (= ${binary:Version})
-Description: an extremely fast and lightweight file manager - debugging symbols
+Description: extremely fast and lightweight file manager - debugging symbols
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
   * Extremly fast and lightweight
