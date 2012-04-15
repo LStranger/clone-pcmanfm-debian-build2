@@ -2,7 +2,8 @@ Source: pcmanfm
 Section: utils
 Priority: optional
 Maintainer: Debian LXDE Maintainers <lxde-debian@lists.lxde.org>
-Uploaders: Andrew Lee (李健秋) <ajqlee@debian.org>
+Uploaders:
+ Andrew Lee (李健秋) <ajqlee@debian.org>, Daniel Baumann <daniel@debian.org>
 Build-Depends:
  debhelper (>= 8), autoconf, automake, intltool, libdbus-glib-1-dev,
  libfm-dev (>= 0.1.17), libgamin-dev, libgtk2.0-dev (>= 2.16.0),
