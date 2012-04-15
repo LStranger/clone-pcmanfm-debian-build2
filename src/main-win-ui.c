@@ -27,6 +27,11 @@ static const char main_menu_xml[] =
     "<menuitem action='New'/>"
     "<menuitem action='NewTab'/>"
     "<separator/>"
+    "<menu action='CreateNew'>"
+      "<menuitem action='NewFolder'/>"
+      "<menuitem action='NewBlank'/>"
+    "</menu>"
+    "<separator/>"
     "<menuitem action='CloseTab'/>"
     "<menuitem action='Close'/>"
   "</menu>"
@@ -64,7 +69,16 @@ static const char main_menu_xml[] =
     "<menuitem action='AddBookmark'/>"
   "</menu>"
   "<menu action='ViewMenu'>"
+    "<menuitem action='Reload'/>"
     "<menuitem action='ShowHidden'/>"
+    "<menu action='SidePane'>"
+/*
+      "<menuitem action='ShowSidePane' />"
+      "<separator/>"
+*/
+      "<menuitem action='Places' />"
+      "<menuitem action='DirTree' />"
+    "</menu>"
     "<separator/>"
     "<menuitem action='IconView'/>"
     "<menuitem action='ThumbnailView'/>"
@@ -121,7 +135,8 @@ static const char main_menu_xml[] =
 "<accelerator action='Location'/>"
 "<accelerator action='Location2'/>"
 "<accelerator action='Prev2'/>"
-"<accelerator action='Next2'/>";
+"<accelerator action='Next2'/>"
+"<accelerator action='Reload2'/>";
 
 static GtkActionEntry main_win_actions[]=
 {
@@ -143,6 +158,8 @@ static GtkActionEntry main_win_actions[]=
         {"InvSel", NULL, N_("Invert Selection"), NULL, NULL, G_CALLBACK(on_invert_select)},
         {"Pref", GTK_STOCK_PREFERENCES, NULL, NULL, NULL, G_CALLBACK(on_preference)},
     {"ViewMenu", NULL, N_("_View"), NULL, NULL, NULL},
+        {"Reload", NULL, N_("Reload Folder"), "F5", N_("Reload current folder"), G_CALLBACK(on_reload)},
+        {"SidePane", NULL, N_("Side Pane"), NULL, NULL, NULL},
         {"Sort", NULL, N_("_Sort Files"), NULL, NULL, NULL},
     {"HelpMenu", NULL, N_("_Help"), NULL, NULL, NULL},
         {"About", GTK_STOCK_ABOUT, NULL, NULL, NULL, G_CALLBACK(on_about)},
@@ -167,8 +184,9 @@ static GtkActionEntry main_win_actions[]=
     {"Location2", NULL, NULL, "<Ctrl>L", NULL, G_CALLBACK(on_location)},
     {"Prev2", NULL, NULL, "XF86Back", NULL, G_CALLBACK(on_go_back)},
     {"Next2", NULL, NULL, "XF86Forward", NULL, G_CALLBACK(on_go_forward)},
+    {"Reload2", NULL, NULL, "<Ctrl>R", NULL, G_CALLBACK(on_reload)},
     /* for popup menu */
-    {"CreateNew", GTK_STOCK_NEW, N_("_New"), "", NULL, NULL},
+    {"CreateNew", NULL, N_("Create _New..."), "", NULL, NULL},
     {"NewFolder", "folder", N_("Folder"), "<Ctrl><Shift>N", NULL, G_CALLBACK(on_create_new)},
     {"NewBlank", "text-x-generic", N_("Blank File"), NULL, NULL, G_CALLBACK(on_create_new)},
     {"Prop", GTK_STOCK_PROPERTIES, NULL, NULL, NULL, G_CALLBACK(on_prop)}
@@ -176,7 +194,8 @@ static GtkActionEntry main_win_actions[]=
 
 static GtkToggleActionEntry main_win_toggle_actions[]=
 {
-    {"ShowHidden", NULL, N_("Show _Hidden"), "<Ctrl>H", NULL, G_CALLBACK(on_show_hidden), FALSE}
+    {"ShowHidden", NULL, N_("Show _Hidden"), "<Ctrl>H", NULL, G_CALLBACK(on_show_hidden), FALSE},
+    {"ShowSidePane", NULL, N_("Show Side Pane"), "F7", NULL, G_CALLBACK(on_show_side_pane), TRUE}
 };
 
 static GtkRadioActionEntry main_win_mode_actions[]=
@@ -201,6 +220,12 @@ static GtkRadioActionEntry main_win_sort_by_actions[]=
     {"ByType", NULL, N_("By File _Type"), NULL, NULL, COL_FILE_DESC}
 };
 
+static GtkRadioActionEntry main_win_side_bar_mode_actions[]=
+{
+    {"Places", NULL, N_("Places"), NULL, NULL, FM_SP_PLACES},
+    {"DirTree", NULL, N_("Directory Tree"), NULL, NULL, FM_SP_DIR_TREE},
+    {"Remote", NULL, N_("Remote"), NULL, NULL, FM_SP_REMOTE},
+};
 
 static const char folder_menu_xml[]=
 "<popup>"

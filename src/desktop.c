@@ -352,7 +352,7 @@ void fm_desktop_manager_init()
 
     if(!model)
     {
-        FmFolder* folder = fm_folder_get_for_path(fm_path_get_desktop());
+        FmFolder* folder = fm_folder_get(fm_path_get_desktop());
         if(folder)
         {
             model = fm_folder_model_new(folder, FALSE);
@@ -381,7 +381,7 @@ void fm_desktop_manager_init()
     if(model)
     {
         g_signal_connect(model, "loaded", G_CALLBACK(on_model_loaded), NULL);
-        if(!fm_folder_model_get_is_loading(model))
+        if(fm_folder_model_get_is_loaded(model))
             on_model_loaded(model, NULL);
     }
 
@@ -585,12 +585,14 @@ static inline void popup_menu(FmDesktop* desktop, GdkEventButton* evt)
     g_list_free(sel_items);
 
     fi = (FmFileInfo*)fm_list_peek_head(files);
-    menu = fm_file_menu_new_for_files(files, fm_path_get_desktop(), TRUE);
+    menu = fm_file_menu_new_for_files(GTK_WINDOW(desktop), files, fm_path_get_desktop(), TRUE);
     fm_file_menu_set_folder_func(menu, pcmanfm_open_folder, desktop);
     fm_list_unref(files);
 
     ui = fm_file_menu_get_ui(menu);
     act_grp = fm_file_menu_get_action_group(menu);
+    gtk_action_group_set_translation_domain(act_grp, NULL);
+
     /* merge some specific menu items for folders */
     if(fm_file_menu_is_single_file_type(menu) && fm_file_info_is_dir(fi))
     {
@@ -636,7 +638,7 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
         }
 
         /* if ctrl / shift is not pressed, deselect all. */
-        if(  evt->button != 3 && ! (evt->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) )
+        if( ! (evt->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) )
         {
             /* don't cancel selection if clicking on selected items */
             if( !( (evt->button == 1 || evt->button == 3) && clicked_item && clicked_item->is_selected) )
@@ -669,7 +671,12 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
             if( evt->button == 3 )  /* right click on the blank area => desktop popup menu */
             {
                 if(! app_config->show_wm_menu)
+                {
+                    if(gtk_menu_get_attach_widget(desktop_popup))
+                        gtk_menu_detach(desktop_popup);
+                    gtk_menu_attach_to_widget(desktop_popup, w, NULL);
                     gtk_menu_popup(GTK_MENU(desktop_popup), NULL, NULL, NULL, NULL, 3, evt->time);
+                }
             }
             else if( evt->button == 1 )
             {
@@ -826,6 +833,7 @@ gboolean on_motion_notify( GtkWidget* w, GdkEventMotion* evt )
                 gtk_drag_begin( w, target_list,
                              GDK_ACTION_COPY|GDK_ACTION_MOVE|GDK_ACTION_LINK,
                              1, evt );
+                fm_list_unref(files);
             }
         }
     }
@@ -850,9 +858,23 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt )
     FmDesktopItem* item;
     int modifier = ( evt->state & ( GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK ) );
     FmPathList* sels;
-
     switch ( evt->keyval )
     {
+    case GDK_Menu:
+        {
+            FmFileInfoList* files = fm_desktop_get_selected_files(desktop);
+            if(files)
+            {
+                popup_menu(desktop, evt);
+                fm_list_unref(files);
+            }
+            else
+            {
+                if(! app_config->show_wm_menu)
+                    gtk_menu_popup(GTK_MENU(desktop_popup), NULL, NULL, NULL, NULL, 3, evt->time);
+            }
+            return TRUE;
+        }
     case GDK_Left:
         item = get_nearest_item(desktop, desktop->focus, GTK_DIR_LEFT);
         if(item)
@@ -924,7 +946,7 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt )
             FmFileInfoList* infos = fm_desktop_get_selected_files(desktop);
             if(infos)
             {
-                fm_show_file_properties(infos);
+                fm_show_file_properties(GTK_WINDOW(desktop), infos);
                 fm_list_unref(infos);
                 return TRUE;
             }
@@ -959,7 +981,7 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt )
         sels = fm_desktop_get_selected_paths(desktop);
         if(sels)
         {
-            fm_rename_file(fm_list_peek_head(sels));
+            fm_rename_file(GTK_WINDOW(desktop), fm_list_peek_head(sels));
             fm_list_unref(sels);
         }
         break;
@@ -968,9 +990,9 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt )
         if(sels)
         {
             if(modifier & GDK_SHIFT_MASK)
-                fm_delete_files(sels);
+                fm_delete_files(GTK_WINDOW(desktop), sels);
             else
-                fm_trash_or_delete_files(sels);
+                fm_trash_or_delete_files(GTK_WINDOW(desktop), sels);
             fm_list_unref(sels);
         }
         break;
@@ -1676,6 +1698,10 @@ static void update_background(FmDesktop* desktop)
     GdkWindow* root = gdk_screen_get_root_window(gtk_widget_get_screen(widget));
     GdkWindow *window = gtk_widget_get_window(widget);
 
+    Display* xdisplay;
+    Pixmap xpixmap = 0;
+    Window xroot;
+
     if(app_config->wallpaper_mode == FM_WP_COLOR
        || !app_config->wallpaper
        || !*app_config->wallpaper
@@ -1762,6 +1788,33 @@ static void update_background(FmDesktop* desktop)
     pixmap_id = GDK_DRAWABLE_XID(pixmap);
     XChangeProperty(GDK_WINDOW_XDISPLAY(root), GDK_WINDOW_XID(root),
                     XA_XROOTMAP_ID, XA_PIXMAP, 32, PropModeReplace, (guchar*)&pixmap_id, 1);
+
+    /* set root map here */
+    xdisplay = GDK_WINDOW_XDISPLAY(root);
+    xroot = GDK_WINDOW_XID(root);
+
+    XGrabServer (xdisplay);
+
+    if( pixmap )
+    {
+        xpixmap = GDK_WINDOW_XWINDOW(pixmap);
+
+        XChangeProperty( xdisplay,
+                    xroot,
+                    gdk_x11_get_xatom_by_name("_XROOTPMAP_ID"), XA_PIXMAP,
+                    32, PropModeReplace,
+                    (guchar *) &xpixmap, 1);
+
+        XSetWindowBackgroundPixmap( xdisplay, xroot, xpixmap );
+    }
+    else
+    {
+        /* FIXME: Anyone knows how to handle this correctly??? */
+    }
+    XClearWindow( xdisplay, xroot );
+
+    XUngrabServer( xdisplay );
+    XFlush( xdisplay );
 
     g_object_unref(pixmap);
     if(pix)
@@ -2056,6 +2109,13 @@ static void on_fix_pos(GtkToggleAction* act, gpointer user_data)
         layout_items(desktop);
     }
     g_list_free(items);
+    save_item_pos(desktop);
+}
+
+/* round() is only available in C99. Don't use it now for portability. */
+inline double _round(double x)
+{
+    return (x > 0.0) ? floor(x + 0.5) : ceil(x - 0.5);
 }
 
 static void on_snap_to_grid(GtkAction* act, gpointer user_data)
@@ -2081,8 +2141,8 @@ static void on_snap_to_grid(GtkAction* act, gpointer user_data)
         item = (FmDesktopItem*)l->data;
         if(!item->fixed_pos)
             continue;
-        new_x = x + round((double)(item->x - x) / desktop->cell_w) * desktop->cell_w;
-        new_y = y + round((double)(item->y - y) / desktop->cell_h) * desktop->cell_h;
+        new_x = x + _round((double)(item->x - x) / desktop->cell_w) * desktop->cell_w;
+        new_y = y + _round((double)(item->y - y) / desktop->cell_h) * desktop->cell_h;
         move_item(desktop, item, new_x, new_y, FALSE);
     }
     g_list_free(items);
@@ -2436,7 +2496,7 @@ static gboolean on_drag_drop ( GtkWidget *dest_widget,
     {
         target = fm_dnd_dest_find_target(desktop->dnd_dest, drag_context);
         /* try FmDndDest */
-        ret = fm_dnd_dest_drag_drop(desktop->dnd_dest, drag_context, target, time);
+        ret = fm_dnd_dest_drag_drop(desktop->dnd_dest, drag_context, target, x, y, time);
         if(!ret)
             gtk_drag_finish(drag_context, FALSE, FALSE, time);
     }

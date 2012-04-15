@@ -43,36 +43,41 @@ static void fm_app_config_class_init(FmAppConfigClass *klass)
 
 static void fm_app_config_finalize(GObject *object)
 {
-    FmAppConfig *self;
+    FmAppConfig *cfg;
 
     g_return_if_fail(object != NULL);
     g_return_if_fail(IS_FM_APP_CONFIG(object));
 
-    self = FM_APP_CONFIG(object);
-    g_free(self->wallpaper);
+    cfg = FM_APP_CONFIG(object);
+    g_free(cfg->wallpaper);
 
     G_OBJECT_CLASS(fm_app_config_parent_class)->finalize(object);
 }
 
 
-static void fm_app_config_init(FmAppConfig *self)
+static void fm_app_config_init(FmAppConfig *cfg)
 {
     /* load libfm config file */
-    fm_config_load_from_file((FmConfig*)self, NULL);
+    fm_config_load_from_file((FmConfig*)cfg, NULL);
 
-    self->mount_on_startup = TRUE;
-    self->mount_removable = TRUE;
-    self->autorun = TRUE;
+    cfg->bm_open_method = FM_OPEN_IN_CURRENT_TAB;
 
-    self->desktop_fg.red = self->desktop_fg.green = self->desktop_fg.blue = 65535;
-    self->win_width = 640;
-    self->win_height = 480;
-    self->splitter_pos = 150;
+    cfg->mount_on_startup = TRUE;
+    cfg->mount_removable = TRUE;
+    cfg->autorun = TRUE;
 
-    self->view_mode = FM_FV_ICON_VIEW;
-    self->show_hidden = FALSE;
-    self->sort_type = GTK_SORT_ASCENDING;
-    self->sort_by = COL_FILE_NAME;
+    cfg->desktop_fg.red = cfg->desktop_fg.green = cfg->desktop_fg.blue = 65535;
+    cfg->win_width = 640;
+    cfg->win_height = 480;
+    cfg->splitter_pos = 150;
+    cfg->max_tab_chars = 32;
+
+    cfg->side_pane_mode = FM_SP_PLACES;
+
+    cfg->view_mode = FM_FV_ICON_VIEW;
+    cfg->show_hidden = FALSE;
+    cfg->sort_type = GTK_SORT_ASCENDING;
+    cfg->sort_by = COL_FILE_NAME;
 }
 
 
@@ -128,17 +133,26 @@ void fm_app_config_load_from_key_file(FmAppConfig* cfg, GKeyFile* kf)
     /* ui */
     fm_key_file_get_int(kf, "ui", "always_show_tabs", &cfg->always_show_tabs);
     fm_key_file_get_int(kf, "ui", "hide_close_btn", &cfg->hide_close_btn);
+    fm_key_file_get_int(kf, "ui", "max_tab_chars", &cfg->max_tab_chars);
 
     fm_key_file_get_int(kf, "ui", "win_width", &cfg->win_width);
     fm_key_file_get_int(kf, "ui", "win_height", &cfg->win_height);
 
     fm_key_file_get_int(kf, "ui", "splitter_pos", &cfg->splitter_pos);
 
+    fm_key_file_get_int(kf, "ui", "side_pane_mode", &cfg->side_pane_mode);
+
     /* default values for folder views */
     fm_key_file_get_int(kf, "ui", "view_mode", &cfg->view_mode);
+    if(!FM_FOLDER_VIEW_MODE_IS_VALID(cfg->view_mode))
+        cfg->view_mode = FM_FV_ICON_VIEW;
     fm_key_file_get_bool(kf, "ui", "show_hidden", &cfg->show_hidden);
     fm_key_file_get_int(kf, "ui", "sort_type", &cfg->sort_type);
+    if(cfg->sort_type != GTK_SORT_ASCENDING && cfg->sort_type != GTK_SORT_DESCENDING)
+        cfg->sort_type = GTK_SORT_ASCENDING;
     fm_key_file_get_int(kf, "ui", "sort_by", &cfg->sort_by);
+    if(!FM_FOLDER_MODEL_COL_IS_VALID(cfg->sort_by))
+        cfg->sort_by = COL_FILE_NAME;
 }
 
 void fm_app_config_load_from_profile(FmAppConfig* cfg, const char* name)
@@ -146,10 +160,29 @@ void fm_app_config_load_from_profile(FmAppConfig* cfg, const char* name)
     char **dirs, **dir;
     char *path, *rel_path;
     GKeyFile* kf = g_key_file_new();
+    const char* old_name = name;
+
+    if(!name || !*name) /* if profile name is not provided, use 'default' */
+    {
+        name = "default";
+        old_name = "pcmanfm"; /* for compatibility with old versions. */
+    }
+
+    /* load system-wide settings */
+    dirs = g_get_system_config_dirs();
+    for(dir=dirs;*dir;++dir)
+    {
+        path = g_build_filename(*dir, "pcmanfm", name, "pcmanfm.conf", NULL);
+        if(g_key_file_load_from_file(kf, path, 0, NULL))
+            fm_app_config_load_from_key_file(cfg, kf);
+        g_free(path);
+    }
+
+    /* override system-wide settings with user-specific configuration */
 
     /* For backward compatibility, try to load old config file and
      * then migrate to new location */
-    path = g_strconcat(g_get_user_config_dir(), "/pcmanfm/", name ? name : "pcmanfm", ".conf", NULL);
+    path = g_strconcat(g_get_user_config_dir(), "/pcmanfm/", old_name, ".conf", NULL);
     if(G_UNLIKELY(g_key_file_load_from_file(kf, path, 0, NULL)))
     {
         char* new_dir;
@@ -166,32 +199,22 @@ void fm_app_config_load_from_profile(FmAppConfig* cfg, const char* name)
             g_free(new_path);
         }
         g_free(new_dir);
-        g_free(path);
-        goto _out;
     }
-    g_free(path);
-
-    if(!name || !*name) /* if profile name is not provided, use 'default' */
-        name = "default";
-
-    /* load system-wide settings */
-    dirs = g_get_system_config_dirs();
-    for(dir=dirs;*dir;++dir)
+    else
     {
-        path = g_build_filename(*dir, "pcmanfm", name, "pcmanfm.conf", NULL);
+        g_free(path);
+        path = g_build_filename(g_get_user_config_dir(), "pcmanfm", name, "pcmanfm.conf", NULL);
         if(g_key_file_load_from_file(kf, path, 0, NULL))
             fm_app_config_load_from_key_file(cfg, kf);
-        g_free(path);
     }
-
-    /* override with user-specific configuration */
-    path = g_build_filename(g_get_user_config_dir(), "pcmanfm", name, "pcmanfm.conf", NULL);
-    if(g_key_file_load_from_file(kf, path, 0, NULL))
-        fm_app_config_load_from_key_file(cfg, kf);
     g_free(path);
 
 _out:
     g_key_file_free(kf);
+
+    /* set some additional default values when needed. */
+    if(!cfg->desktop_font) /* set a proper desktop font if needed */
+        cfg->desktop_font = g_strdup("Sans 12");
 }
 
 void fm_app_config_save_profile(FmAppConfig* cfg, const char* name)
@@ -229,10 +252,12 @@ void fm_app_config_save_profile(FmAppConfig* cfg, const char* name)
 
         g_string_append(buf, "\n[ui]\n");
         g_string_append_printf(buf, "always_show_tabs=%d\n", cfg->always_show_tabs);
-        g_string_append_printf(buf, "hide_close_btn=%d\n", cfg->hide_close_btn);
+        g_string_append_printf(buf, "max_tab_chars=%d\n", cfg->max_tab_chars);
+        /* g_string_append_printf(buf, "hide_close_btn=%d\n", cfg->hide_close_btn); */
         g_string_append_printf(buf, "win_width=%d\n", cfg->win_width);
         g_string_append_printf(buf, "win_height=%d\n", cfg->win_height);
         g_string_append_printf(buf, "splitter_pos=%d\n", cfg->splitter_pos);
+        g_string_append_printf(buf, "side_pane_mode=%d\n", cfg->side_pane_mode);
         g_string_append_printf(buf, "view_mode=%d\n", cfg->view_mode);
         g_string_append_printf(buf, "show_hidden=%d\n", cfg->show_hidden);
         g_string_append_printf(buf, "sort_type=%d\n", cfg->sort_type);

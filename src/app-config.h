@@ -1,7 +1,7 @@
 /*
  *      app-config.h
  *
- *      Copyright 2010 PCMan <pcman.tw@gmail.com>
+ *      Copyright 2010 - 2011 PCMan <pcman.tw@gmail.com>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #define __APP_CONFIG_H__
 
 #include <libfm/fm.h>
+#include <libfm/fm-gtk.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
@@ -49,6 +50,14 @@ typedef enum
     FM_WP_TILE
 }FmWallpaperMode;
 
+typedef enum
+{
+    FM_OPEN_IN_CURRENT_TAB,
+    FM_OPEN_IN_NEW_TAB,
+    FM_OPEN_IN_NEW_WINDOW,
+    FM_OPEN_IN_LAST_ACTIVE_WINDOW,
+}FmOpenMethod;
+
 typedef struct _FmAppConfig         FmAppConfig;
 typedef struct _FmAppConfigClass        FmAppConfigClass;
 
@@ -66,9 +75,12 @@ struct _FmAppConfig
     /* ui */
     gboolean always_show_tabs;
     gboolean hide_close_btn;
+    int max_tab_chars;
     int win_width;
     int win_height;
     int splitter_pos;
+
+    FmSidePaneMode side_pane_mode;
 
     /* default values for folder views */
     guint view_mode;

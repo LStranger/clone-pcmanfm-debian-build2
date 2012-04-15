@@ -24,6 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include <stdio.h>
 #include <glib/gi18n.h>
 
@@ -45,6 +46,7 @@
 
 static int signal_pipe[2] = {-1, -1};
 gboolean daemon_mode = FALSE;
+static guint save_config_idle = 0;
 
 static char** files_to_open = NULL;
 static int n_files_to_open = 0;
@@ -58,6 +60,7 @@ static int show_pref = 0;
 static gboolean desktop_pref = FALSE;
 static char* set_wallpaper = NULL;
 static char* wallpaper_mode = NULL;
+/* static gboolean new_win = FALSE; */
 static gboolean find_files = FALSE;
 static char* ipc_cwd = NULL;
 
@@ -65,35 +68,22 @@ static int n_pcmanfm_ref = 0;
 
 static GOptionEntry opt_entries[] =
 {
-    /* { "new-tab", 't', 0, G_OPTION_ARG_NONE, &new_tab, N_("Open folders in new tabs of the last used window instead of creating new windows"), NULL }, */
+    /* options only acceptable by first pcmanfm instance. These options are not passed through IPC */
     { "profile", 'p', 0, G_OPTION_ARG_STRING, &profile, N_("Name of configuration profile"), "<profile name>" },
+    { "daemon-mode", 'd', 0, G_OPTION_ARG_NONE, &daemon_mode, N_("Run PCManFM as a daemon"), NULL },
+    { "no-desktop", '\0', 0, G_OPTION_ARG_NONE, &no_desktop, N_("No function. Just to be compatible with nautilus"), NULL },
+
+    /* options that are acceptable for every instance of pcmanfm and will be passed through IPC. */
     { "desktop", '\0', 0, G_OPTION_ARG_NONE, &show_desktop, N_("Launch desktop manager"), NULL },
     { "desktop-off", '\0', 0, G_OPTION_ARG_NONE, &desktop_off, N_("Turn off desktop manager if it's running"), NULL },
-    { "daemon-mode", 'd', 0, G_OPTION_ARG_NONE, &daemon_mode, N_("Run PCManFM as a daemon"), NULL },
     { "desktop-pref", '\0', 0, G_OPTION_ARG_NONE, &desktop_pref, N_("Open desktop preference dialog"), NULL },
     { "set-wallpaper", 'w', 0, G_OPTION_ARG_FILENAME, &set_wallpaper, N_("Set desktop wallpaper"), N_("<image file>") },
     { "wallpaper-mode", '\0', 0, G_OPTION_ARG_STRING, &wallpaper_mode, N_("Set mode of desktop wallpaper. <mode>=(color|stretch|fit|center|tile)"), N_("<mode>") },
     { "show-pref", '\0', 0, G_OPTION_ARG_INT, &show_pref, N_("Open preference dialog. 'n' is number of the page you want to show (1, 2, 3...)."), "n" },
+    /* { "new-win", '\0', 'n', G_OPTION_ARG_NONE, &new_win, N_("Open new window"), NULL }, */
     /* { "find-files", 'f', 0, G_OPTION_ARG_NONE, &find_files, N_("Open Find Files utility"), NULL }, */
-    { "no-desktop", '\0', 0, G_OPTION_ARG_NONE, &no_desktop, N_("No function. Just to be compatible with nautilus"), NULL },
     {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &files_to_open, NULL, N_("[FILE1, FILE2,...]")},
     { NULL }
-};
-
-/* single instance command id */
-enum {
-    CMD_INVALID,
-    CMD_CWD,
-    CMD_PROFILE,
-    CMD_DESKTOP,
-    CMD_DESKTOP_OFF,
-    CMD_DAEMON_MODE,
-    CMD_DESKTOP_PREF,
-    CMD_SET_WALLPAPER,
-    CMD_WALLPAPER_MODE,
-    CMD_SHOW_PREF,
-    CMD_FILES_TO_OPEN,
-    CMD_EOF
 };
 
 static const char* valid_wallpaper_modes[] = {"color", "stretch", "fit", "center", "tile"};
@@ -121,101 +111,41 @@ static gboolean on_unix_signal(GIOChannel* ch, GIOCondition cond, gpointer user_
     return TRUE;
 }
 
-static gboolean on_single_inst_command(int cmd, SingleInstCmdData* data)
+static void single_inst_cb(const char* cwd, int screen_num)
 {
-    switch(cmd)
-    {
-    case CMD_CWD:
-        g_free(ipc_cwd);
-        ipc_cwd = single_inst_get_str(data, NULL);
-        break;
-    case CMD_PROFILE:
-        /* Not supported */
-        break;
-    case CMD_DESKTOP:
-        single_inst_get_bool(data, &show_desktop);
-        break;
-    case CMD_DESKTOP_OFF:
-        single_inst_get_bool(data, &desktop_off);
-        break;
-    case CMD_DAEMON_MODE:
-        /* Not supported */
-        break;
-    case CMD_DESKTOP_PREF:
-        single_inst_get_bool(data, &desktop_pref);
-        break;
-    case CMD_SET_WALLPAPER:
-        g_free(set_wallpaper);
-        set_wallpaper = single_inst_get_str(data, NULL);
-        break;
-    case CMD_WALLPAPER_MODE:
-        g_free(wallpaper_mode);
-        wallpaper_mode = single_inst_get_str(data, NULL);
-        break;
-    case CMD_SHOW_PREF:
-        single_inst_get_int(data, &show_pref);
-        break;
-    case CMD_FILES_TO_OPEN:
-        {
-            g_strfreev(files_to_open);
-            n_files_to_open = 0;
-            files_to_open = single_inst_get_strv(data, &n_files_to_open);
-        }
-        break;
-    case CMD_EOF:
-        {
-            int i;
-            /* canonicalize filename if needed. */
-            for(i = 0; i < n_files_to_open; ++i)
-            {
-                char* file = files_to_open[i];
-                char* scheme = g_uri_parse_scheme(file);
-                if(scheme) /* a valid URI */
-                {
-                    /* FIXME: should we canonicalize URIs? and how about file:///? */
-                    g_free(scheme);
-                }
-                else /* a file path */
-                {
-                    files_to_open[i] = fm_canonicalize_filename(file, ipc_cwd);
-                    g_free(file);
-                }
-            }
-
-            /* handle the parsed result and run the main program */
-            pcmanfm_run();
-        }
-        break;
-    }
-    return TRUE;
-}
-
-/* we're not the first instance. pass the argv to the existing one. */
-static void pass_args_to_existing_instance()
-{
-    /* send our current working dir to existing instance via IPC. */
-    ipc_cwd = g_get_current_dir();
-    single_inst_send_str(CMD_CWD, ipc_cwd);
     g_free(ipc_cwd);
+    ipc_cwd = g_strdup(cwd);
 
-    single_inst_send_bool(CMD_DESKTOP, show_desktop);
-    single_inst_send_bool(CMD_DESKTOP_OFF, desktop_off);
-    single_inst_send_bool(CMD_DESKTOP_PREF, desktop_pref);
-    single_inst_send_str(CMD_SET_WALLPAPER, set_wallpaper);
-    single_inst_send_str(CMD_WALLPAPER_MODE, wallpaper_mode);
-    single_inst_send_int(CMD_SHOW_PREF, show_pref);
-    /* single_inst_send_bool(CMD_FIND_FILES, find_files); */
-
-    single_inst_send_strv(CMD_FILES_TO_OPEN, files_to_open);
-    single_inst_send_bool(CMD_EOF, TRUE); /* all args have been sent. */
-
-    single_inst_finalize();
+    if(files_to_open)
+    {
+        int i;
+        n_files_to_open = g_strv_length(files_to_open);
+        /* canonicalize filename if needed. */
+        for(i = 0; i < n_files_to_open; ++i)
+        {
+            char* file = files_to_open[i];
+            char* scheme = g_uri_parse_scheme(file);
+            g_debug("file: %s", file);
+            if(scheme) /* a valid URI */
+            {
+                /* FIXME: should we canonicalize URIs? and how about file:///? */
+                g_free(scheme);
+            }
+            else /* a file path */
+            {
+                files_to_open[i] = fm_canonicalize_filename(file, cwd);
+                g_free(file);
+            }
+        }
+    }
+    pcmanfm_run();
 }
 
 int main(int argc, char** argv)
 {
     FmConfig* config;
     GError* err = NULL;
+
 #ifdef ENABLE_NLS
     bindtextdomain ( GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR );
     bind_textdomain_codeset ( GETTEXT_PACKAGE, "UTF-8" );
@@ -231,10 +161,10 @@ int main(int argc, char** argv)
     }
 
     /* ensure that there is only one instance of pcmanfm. */
-    switch(single_inst_init("pcmanfm", on_single_inst_command))
+    switch(single_inst_init("pcmanfm", single_inst_cb, opt_entries + 3, gdk_x11_get_default_screen()))
     {
     case SINGLE_INST_CLIENT: /* we're not the first instance. */
-        pass_args_to_existing_instance();
+        single_inst_finalize();
         gdk_notify_startup_complete();
         return 0;
     case SINGLE_INST_ERROR: /* error happened. */
@@ -269,8 +199,13 @@ int main(int argc, char** argv)
         gtk_main();
         if(desktop_running)
             fm_desktop_manager_finalize();
-        fm_config_save(config, NULL); /* save libfm config */
-        fm_app_config_save_profile((FmAppConfig*)config, profile); /* save pcmanfm config */
+
+        pcmanfm_save_config(TRUE);
+        if(save_config_idle)
+        {
+            g_source_remove(save_config_idle);
+            save_config_idle = 0;
+        }
         fm_volume_manager_finalize();
     }
 
@@ -293,7 +228,7 @@ static FmJobErrorAction on_file_info_job_error(FmFileInfoJob* job, GError* err, 
         else if(err->code == G_IO_ERROR_FAILED_HANDLED)
             return FM_JOB_CONTINUE;
     }
-    fm_show_error(NULL, err->message);
+    fm_show_error(NULL, NULL, err->message);
     return FM_JOB_CONTINUE;
 }
 
@@ -405,8 +340,10 @@ gboolean pcmanfm_run()
             for(filename=files_to_open; *filename; ++filename)
             {
                 FmPath* path;
-                if( **filename == '/' || strstr(*filename, ":/") ) /* absolute path or URI */
-                    path = fm_path_new(*filename);
+                if( **filename == '/') /* absolute path */
+                    path = fm_path_new_for_path(*filename);
+                else if(strstr(*filename, ":/") ) /* URI */
+                    path = fm_path_new_for_uri(*filename);
                 else if( strcmp(*filename, "~") == 0 ) /* special case for home dir */
                 {
                     path = fm_path_get_home();
@@ -418,6 +355,7 @@ gboolean pcmanfm_run()
                     if(G_UNLIKELY(!cwd))
                     {
                         /* FIXME: This won't work if those filenames are passed via IPC since the receiving process has different cwd. */
+                        /* FIXME: should we use ipc_cwd here? */
                         char* cwd_str = g_get_current_dir();
                         cwd = fm_path_new(cwd_str);
                         g_free(cwd_str);
@@ -441,13 +379,16 @@ gboolean pcmanfm_run()
         }
         else
         {
-            FmPath* path;
-            char* cwd = ipc_cwd ? ipc_cwd : g_get_current_dir();
-            path = fm_path_new(cwd);
-            fm_main_win_add_win(NULL, path);
-            fm_path_unref(path);
-            g_free(cwd);
-            ipc_cwd = NULL;
+            if(!daemon_mode)
+            {
+                FmPath* path;
+                char* cwd = ipc_cwd ? ipc_cwd : g_get_current_dir();
+                path = fm_path_new_for_path(cwd);
+                fm_main_win_add_win(NULL, path);
+                fm_path_unref(path);
+                g_free(cwd);
+                ipc_cwd = NULL;
+            }
         }
     }
     return ret;
@@ -482,10 +423,26 @@ gboolean pcmanfm_open_folder(GAppLaunchContext* ctx, GList* folder_infos, gpoint
     return TRUE;
 }
 
-void pcmanfm_save_config()
+static gboolean on_save_config_idle(gpointer user_data)
 {
-    fm_config_save(fm_config, NULL);
-    fm_app_config_save_profile(app_config, profile);
+    pcmanfm_save_config(TRUE);
+    save_config_idle = 0;
+    return FALSE;
+}
+
+void pcmanfm_save_config(gboolean immediate)
+{
+    if(immediate)
+    {
+        fm_config_save(fm_config, NULL);
+        fm_app_config_save_profile(app_config, profile);
+    }
+    else
+    {
+        /* install an idle handler to save the config file. */
+        if( 0 == save_config_idle)
+            save_config_idle = g_idle_add_full(G_PRIORITY_LOW, (GSourceFunc)on_save_config_idle, NULL, NULL);
+    }
 }
 
 void pcmanfm_open_folder_in_terminal(GtkWindow* parent, FmPath* dir)
@@ -495,7 +452,7 @@ void pcmanfm_open_folder_in_terminal(GtkWindow* parent, FmPath* dir)
     int argc;
     if(!fm_config->terminal)
     {
-        fm_show_error(parent, _("Terminal emulator is not set."));
+        fm_show_error(parent, NULL, _("Terminal emulator is not set."));
         fm_edit_preference(parent, PREF_ADVANCED);
         return;
     }
@@ -508,6 +465,7 @@ void pcmanfm_open_folder_in_terminal(GtkWindow* parent, FmPath* dir)
         GError* err = NULL;
         GAppLaunchContext* ctx = gdk_app_launch_context_new();
         char* cwd_str;
+        char* old_cwd = g_get_current_dir();
 
         if(fm_path_is_native(dir))
             cwd_str = fm_path_to_str(dir);
@@ -521,13 +479,18 @@ void pcmanfm_open_folder_in_terminal(GtkWindow* parent, FmPath* dir)
         gdk_app_launch_context_set_timestamp(GDK_APP_LAUNCH_CONTEXT(ctx), gtk_get_current_event_time());
         g_chdir(cwd_str); /* FIXME: currently we don't have better way for this. maybe a wrapper script? */
         g_free(cwd_str);
+
         if(!g_app_info_launch(app, NULL, ctx, &err))
         {
-            fm_show_error(parent, err->message);
+            fm_show_error(parent, NULL, err->message);
             g_error_free(err);
         }
         g_object_unref(ctx);
         g_object_unref(app);
+
+        /* switch back to old cwd and fix #3114626 - PCManFM 0.9.9 Umount partitions problem */
+        g_chdir(old_cwd); /* This is really dirty, but we don't have better solution now. */
+        g_free(old_cwd);
     }
 }
 
@@ -537,8 +500,14 @@ void pcmanfm_create_new(GtkWindow* parent, FmPath* cwd, const char* templ)
     GError* err = NULL;
     FmPath* dest;
     char* basename;
+    const char* msg;
+    FmMainWin* win = FM_MAIN_WIN(parent);
 _retry:
-    basename = fm_get_user_input(parent, _("Create New..."), _("Enter a name for the newly created file:"), _("New"));
+    if(templ == TEMPL_NAME_FOLDER)
+        msg = N_("Enter a name for the newly created folder:");
+    else
+        msg = N_("Enter a name for the newly created file:");
+    basename = fm_get_user_input(parent, _("Create New..."), _(msg), _("New"));
     if(!basename)
         return;
 
@@ -558,7 +527,7 @@ _retry:
                 err = NULL;
                 goto _retry;
             }
-            fm_show_error(parent, err->message);
+            fm_show_error(parent, NULL, err->message);
             g_error_free(err);
         }
 
@@ -592,7 +561,7 @@ _retry:
                 err = NULL;
                 goto _retry;
             }
-            fm_show_error(parent, err->message);
+            fm_show_error(parent, NULL, err->message);
             g_error_free(err);
         }
 
@@ -611,7 +580,7 @@ _retry:
     {
         FmPath* dir = fm_path_new(g_get_user_special_dir(G_USER_DIRECTORY_TEMPLATES));
         FmPath* template = fm_path_new_child(dir, templ);
-        fm_copy_file(template, cwd);
+        fm_copy_file(parent, template, cwd);
         fm_path_unref(template);
     }
     fm_path_unref(dest);

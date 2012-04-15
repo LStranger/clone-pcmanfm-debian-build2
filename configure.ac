@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.63])
-AC_INIT([pcmanfm], [0.9.8], [http://pcmanfm.sf.net/])
+AC_INIT([pcmanfm], [0.9.10], [http://pcmanfm.sf.net/])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 AC_CONFIG_HEADERS([config.h])
@@ -73,7 +73,17 @@ PKG_CHECK_MODULES(GTK, [$gtk_modules])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
-gio_modules="gthread-2.0 gio-unix-2.0"
+pango_modules="pango >= 1.20.0"
+PKG_CHECK_MODULES(PANGO, [$pango_modules])
+AC_SUBST(PANGO_CFLAGS)
+AC_SUBST(PANGO_LIBS)
+
+glib_modules="glib-2.0 >= 2.16.0"
+PKG_CHECK_MODULES(GLIB, [$glib_modules])
+AC_SUBST(GLIB_CFLAGS)
+AC_SUBST(GLIB_LIBS)
+
+gio_modules="gthread-2.0 gio-unix-2.0 >= 2.18.0"
 PKG_CHECK_MODULES(GIO, [$gio_modules])
 AC_SUBST(GIO_CFLAGS)
 AC_SUBST(GIO_LIBS)
@@ -83,7 +93,7 @@ PKG_CHECK_MODULES(GMODULE, [$gmodule_modules])
 AC_SUBST(GMODULE_CFLAGS)
 AC_SUBST(GMODULE_LIBS)
 
-fm_modules="libfm-gtk >= 0.1.10"
+fm_modules="libfm >= 0.1.15 libfm-gtk >= 0.1.15"
 PKG_CHECK_MODULES(FM, [$fm_modules])
 AC_SUBST(FM_CFLAGS)
 AC_SUBST(FM_LIBS)

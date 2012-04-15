@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-20 16:23+0200\n"
-"PO-Revision-Date: 2010-09-09 10:46+0200\n"
-"Last-Translator: sisco <sisco.garcia@ubuntu.cat>\n"
+"PO-Revision-Date: 2010-07-16 07:48+0200\n"
+"Last-Translator:  <atol@sokha.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ca\n"
+"Language: km\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.5\n"
+"Plural-Forms: nplurals=1; plural=0 ;\n"
+"X-Generator: Pootle 2.0.1\n"
 
 #: ../data/ui/about.glade.in.h:1
 msgid "Copyright (C) 2009 - 2010"
-msgstr "Copyright (C) 2009 - 2010"
+msgstr "រក្សាសិទ្ធិ (C) ២០០៩ - ២០១០"
 
 #: ../data/ui/about.glade.in.h:2
 msgid ""
@@ -28,369 +28,359 @@ msgid ""
 "\n"
 "Developed by Hon Jen Yee (PCMan)"
 msgstr ""
-"Gestor d'arxius lleuger\n"
+"កម្មវិធីគ្រប់គ្រងឯកសារទំហំតូច\n"
 "\n"
-"Desenvolupat per Hon Jen Yee (PCMan)"
+"បង្កើតឡើងដោយ Hon Jen Yee (PCMan)"
 
 #. Please replace this line with your own names, one name per line.
 #: ../data/ui/about.glade.in.h:6
 msgid "translator-credits"
-msgstr "Crèdits dels traductors"
+msgstr "រុន សុខា"
 
 #: ../data/ui/desktop-pref.glade.h:1
 msgid "<b>Background</b>"
-msgstr "<b>Fons</b>"
+msgstr "<b>ផ្ទៃខាងក្រោយ</b>"
 
 #: ../data/ui/desktop-pref.glade.h:2
 msgid "<b>Show desktop icons</b>"
-msgstr "<b>Mostra només les icones</b>"
+msgstr "<b>បង្ហាញរូបតំណាងនៅលើផ្ទៃតុ</b>"
 
 #: ../data/ui/desktop-pref.glade.h:3
 msgid "<b>Text</b>"
-msgstr "<b>Text</>"
+msgstr "<b>អត្ថបទ</b>"
 
 #: ../data/ui/desktop-pref.glade.h:4
 msgid "Advanced"
-msgstr "Avançat"
+msgstr "កម្រិតខ្ពស់"
 
 #: ../data/ui/desktop-pref.glade.h:5
 msgid "Appearance"
-msgstr "Aparença"
+msgstr "រូបរាង"
 
 #: ../data/ui/desktop-pref.glade.h:6
 msgid "Background color:"
-msgstr "Color de fons:"
+msgstr "ពណ៌ផ្ទៃខាងក្រោយ:"
 
 #: ../data/ui/desktop-pref.glade.h:7 ../data/ui/pref.glade.h:10
 msgid "Center on the screen"
-msgstr "Centra la finestra en pantalla"
+msgstr "កណ្ដាលអេក្រង់"
 
 #: ../data/ui/desktop-pref.glade.h:8
 msgid "Color of label text:"
-msgstr "Color del text de l'etiqueta:"
+msgstr "ពណ៌របស់ស្លាកអត្ថបទ:"
 
 #: ../data/ui/desktop-pref.glade.h:9
 msgid "Color of shadow:"
-msgstr "Color de l`ombra:"
+msgstr "ពណ៌របស់ស្រមោល:"
 
 #: ../data/ui/desktop-pref.glade.h:10
-#, fuzzy
 msgid "Desktop Icons"
-msgstr "Organitza les icones de l'escriptori"
+msgstr "រូបតំណាងនៅលើផ្ទៃតុ"
 
 #: ../data/ui/desktop-pref.glade.h:11 ../src/desktop-ui.c:58
 msgid "Desktop Preferences"
-msgstr "Obre les preferències de l'escriptori"
+msgstr "ចំណង់ចំណូលចិត្តផ្ទែតុ"
 
 #: ../data/ui/desktop-pref.glade.h:12
+#, fuzzy
 msgid "Fill with background color only"
-msgstr "Omple només amb el color de fons"
+msgstr "បំពេញតែពណ៌ផ្ទៃខាងក្រោយ"
 
 #: ../data/ui/desktop-pref.glade.h:13
 msgid "Font of label text:"
-msgstr "Font del text de l'etiqueta:"
+msgstr "ពុម្ពអក្សររបស់ស្លាកអត្ថបទ:"
 
 #: ../data/ui/desktop-pref.glade.h:14
 msgid "Please select an image file"
-msgstr "Si us plau seleccioneu un fitxer d'imatge"
+msgstr "សូមជ្រើសយករូបភាពមួយ"
 
 #: ../data/ui/desktop-pref.glade.h:15
 msgid "Show \"My Computer\" icon on desktop"
-msgstr "Mostra la icona «El meu ordinador» a l'escriptori"
+msgstr "បង្ហាញរូបតំណាង \"កំព្យួទ័ររបស់ខ្ញុំ\" នៅលើផ្ទៃតុ"
 
 #: ../data/ui/desktop-pref.glade.h:16
 msgid "Show \"My Documents\" icon on desktop"
-msgstr "Mostra la icona de «Els meus documents» a l'escriptori"
+msgstr "បង្ហាញរូបតំណាង \"ឯកសាររបស់ខ្ញុំ\" នៅលើផ្ទៃតុ"
 
 #: ../data/ui/desktop-pref.glade.h:17
 msgid "Show \"Trash Bin\" icon on desktop"
-msgstr "Mostra la icona «Paperera» a l'escriptori"
+msgstr "បង្ហាញរូបតំណាង \"ធុងសំរាម\" នៅលើផ្ទៃតុ"
 
 #: ../data/ui/desktop-pref.glade.h:18
 msgid "Show icons of volumes on desktop"
-msgstr "Mostra icones dels volums a l'escriptori"
+msgstr "បង្ហាញរូបតំណាងរបស់កំរិតសំលេង នៅលើផ្ទៃតុ"
 
 #: ../data/ui/desktop-pref.glade.h:19
 msgid "Show menus provided by window managers when desktop is clicked"
-msgstr "Mostra els menús dels gestors de finestres en fer clic a l'escriptori"
+msgstr "បង្ហាញ​ម៉ឺនុយ​ដែល​ផ្ដល់​ដោយ​កម្មវិធី​គ្រប់​គ្រង​បង្អួច​ នៅ​ពេល​ផ្ទៃតុ​ត្រូវ​បាន​ចុច"
 
 #: ../data/ui/desktop-pref.glade.h:20 ../data/ui/pref.glade.h:37
 msgid "Stretch to fill the entire screen"
-msgstr "Ajusta a pantalla sencera"
+msgstr "ទាញដើម្បីបំពេញ​អេក្រង់​ទាំងមូល"
 
 #: ../data/ui/desktop-pref.glade.h:21 ../data/ui/pref.glade.h:38
 msgid "Stretch to fit the screen"
-msgstr "Ajusta a la pantalla"
+msgstr "ទាញដើម្បីអោយប៉ុន​អេក្រង់​"
 
-# Entenc que és el que habitualment s'anomena «mosaic»
 #: ../data/ui/desktop-pref.glade.h:22 ../data/ui/pref.glade.h:42
-#, fuzzy
 msgid "Tile the image to fill the entire screen"
-msgstr "Reprodueix la imatge fins omplir la pantalla sencera"
+msgstr "រៀបដូចជាក្បឿង​ដើម្បីបំពេញ​អេក្រង់​ទាំងមូល"
 
 #: ../data/ui/desktop-pref.glade.h:23
 msgid "Wallpaper mode:"
-msgstr "Habilita el mode del fons de pantalla:"
+msgstr "របៀបបិទជញ្ជាំង:"
 
 #: ../data/ui/desktop-pref.glade.h:24
 msgid "Wallpaper:"
-msgstr "Fons de pantalla:"
+msgstr "ផ្ទាំងបិទជញ្ជាំង:"
 
 #: ../data/ui/pref.glade.h:1
 msgid "<b>Auto-mount</b>"
-msgstr "<b>Munta automàticament</b>"
+msgstr "<b>ដំឡើងដោយស្វ័យប្រវត្តិ</b>"
 
 #: ../data/ui/pref.glade.h:2
 msgid "<b>Behavior</b>"
-msgstr "<b>Comportament</b>"
+msgstr "<b>ឥរិយាបថ</b>"
 
 #: ../data/ui/pref.glade.h:3
 msgid "<b>Default View</b>"
-msgstr "<b>Visualització predeterminada</b>"
+msgstr "<b>ទិដ្ឋភាពលំនាំដើម</b>"
 
 #: ../data/ui/pref.glade.h:4
 msgid "<b>Icons</b>"
-msgstr "<b>Icones</b>"
+msgstr "<b>រូបតំណាង</b>"
 
 #: ../data/ui/pref.glade.h:5
 msgid "<b>Programs</b>"
-msgstr "Programes"
+msgstr "<b>កម្មវិធី</b>"
 
 #: ../data/ui/pref.glade.h:6
 msgid "<b>User Interface</b>"
-msgstr "<b>Interfície d'usuari</b>"
+msgstr "<b>ចំនុចប្រទាក់អ្នកប្រើប្រាស់</b>"
 
 #: ../data/ui/pref.glade.h:7
 msgid "Always show the tab bar"
-msgstr "Mostra sempre la barra de pestanyes"
+msgstr "បង្ហាញផ្ទាំងរបារជានិច្ច"
 
 #: ../data/ui/pref.glade.h:8
-#, fuzzy
 msgid "Archiver integration:"
-msgstr "Integració amb l'Archiver:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:9
 msgid "Bookmarks:"
-msgstr "Adreces d'interès:"
+msgstr "ចំណាំ:"
 
 #: ../data/ui/pref.glade.h:11
 msgid "Compact View"
-msgstr "Visualització compacta"
+msgstr "ទិដ្ឋភាពតូចល្មម"
 
 #: ../data/ui/pref.glade.h:12
 msgid "Confirm before deleting files"
-msgstr "Confirmeu abans d'esborrar fitxers"
+msgstr "បញ្ជាក់បន្ថែមមុននឹងលុបឯកសារ"
 
 #: ../data/ui/pref.glade.h:13
 msgid "Detailed List View"
-msgstr "Visualització de llista amb detalls"
+msgstr "ទិដ្ឋភាពបញ្ជីលំអិត"
 
 #: ../data/ui/pref.glade.h:14
 msgid "Do not generate thumbnails for files exceeding this size:"
-msgstr "No generis miniatures pels fitxers que superin la mida:"
+msgstr "កុំបង្កើតរូបតូចៗសំរាប់ឯកសារដែលមានទំហំលើសពី:"
 
 #: ../data/ui/pref.glade.h:16
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "Examples: \"xterm -e %s\" for terminal or \"gksu %s\" for switching user.\n"
 "%s = the command line you want to execute with terminal or su."
 msgstr ""
-"Exemples: \"xterm -e %s\" pel terminal o \"gksu %s\" per canviar d'usuari. \n"
-" %s = la línia de comandes que voleu per executar amb la terminal o su."
 
 #: ../data/ui/pref.glade.h:18
 msgid "Hide 'Close tab' buttons"
-msgstr "Amaga botons de 'Tanca pestanya'"
+msgstr "លាក់ប៊ូតុង 'បិទផ្ទាំង'"
 
 #: ../data/ui/pref.glade.h:19
-#, fuzzy
 msgid "Hide folder content border"
-msgstr "Amaga la vora del contingut de la carpeta"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:20
 msgid "Hide side pane buttons"
-msgstr "Amaga panell de botons laterals"
+msgstr "លាក់ប៊ូតុងផ្នែកស្លាបព្រិល"
 
 #: ../data/ui/pref.glade.h:21
 msgid "Icon View"
-msgstr "Vista d'icones"
+msgstr "ទិដ្ឋភាពរូបតំណាង"
 
 #: ../data/ui/pref.glade.h:22
 msgid "Mount mountable volumes automatically on program startup"
 msgstr ""
-"Munta els volums que es puguin muntar automàticament en engegar el programa"
 
 #: ../data/ui/pref.glade.h:23
 msgid "Mount removable media automatically when they are inserted"
-msgstr "Munta els dispositius extraïbles automàticament en ser inserits"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:24
 msgid "Move deleted files to \"trash bin\" instead of erasing from disk"
-msgstr ""
-"Mou els fitxers esborrats a la «paperera» enlloc d'esborrar-los del disc"
+msgstr "ផ្លាស់ទីឯកសារដែលបានលុបទៅ \"ធុងសំរាម\" ជាជាងលុបចេញពីថាស"
 
 #: ../data/ui/pref.glade.h:25
 msgid "Only show thumbnails for local files"
-msgstr "Mostra només miniatures pels fitxers locals"
+msgstr "បង្ហាញតែរូបភាពតូចៗសំរាប់តែឯកសារមូលដ្ឋាន"
 
 #: ../data/ui/pref.glade.h:26
 msgid "Open files with single click"
-msgstr "Obre arxius amb un sol clic"
+msgstr "បើក​ឯកសារដោយចុចតែម្ដង"
 
 #: ../data/ui/pref.glade.h:27
 msgid "Opened in Current Tab"
-msgstr "Obert en la pestanya actual"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:28
 msgid "Opened in New Tab"
-msgstr "Obert en una nova pestanya"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:29
 msgid "Opened in New Window"
-msgstr "Obert en una nova finestra"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:30
 msgid "Preferences"
-msgstr "Preferències"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:31
 msgid "Show available options for removable media when they are inserted"
 msgstr ""
-"Mostra les opcions disponibles pels dispositius extraïbles en ser inserits"
 
 #: ../data/ui/pref.glade.h:32
 msgid "Show thumbnails of files"
-msgstr "Mostra les miniatures dels fitxers"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:33
 msgid "Size of big icons:"
-msgstr "Mida de les icones grans:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:34
 msgid "Size of side pane icons:"
-msgstr "Mida de les icones del panell lateral:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:35
 msgid "Size of small icons:"
-msgstr "Mida de les icones petites:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:36
 msgid "Size of thumbnails:"
-msgstr "Mida de les miniatures:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:39
 msgid "Switch user command:"
-msgstr "Comanda de canvi d'usuari:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:40
 msgid "Terminal emulator:"
-msgstr "Emulador de terminal:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:41
 msgid "Thumbnail View"
-msgstr "Vista de miniatures"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:43
 msgid "Use SI decimal prefixes instead of IEC binary prefixes"
-msgstr "Utilitza prefixos decimals del SI en comptes de prefixos binaris IEC"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:44
 msgid "View Mode:"
-msgstr "Mode de visualització:"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:45
 msgid "_Advanced"
-msgstr "_Avançat"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:46
 msgid "_Display"
-msgstr "_Mostra"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:47
 msgid "_General"
-msgstr "_General"
+msgstr ""
 
 #: ../data/ui/pref.glade.h:48
 msgid "_Volume Management"
-msgstr "Gestió del _Volum"
+msgstr ""
 
 #: ../data/ui/autorun.glade.h:1
 msgid "<b>Removable medium is inserted</b>"
-msgstr "<b>Hi ha inserit un dispositiu extraïble</b>"
+msgstr ""
 
 #: ../data/ui/autorun.glade.h:2
 msgid "Detecting..."
-msgstr "S'estan detectant els dispositius..."
+msgstr ""
 
 #: ../data/ui/autorun.glade.h:3
 msgid "Please select the action you want to perform:"
-msgstr "Si us plau seleccioneu què voleu fer:"
+msgstr ""
 
 #: ../data/ui/autorun.glade.h:4
 msgid "Removable medium is inserted"
-msgstr "El dispositiu extraïble s'ha inserit"
+msgstr ""
 
 #: ../data/ui/autorun.glade.h:5
 msgid "Type of medium:"
-msgstr "Tipus de dispositiu:"
+msgstr ""
 
 #: ../src/volume-manager.c:150
 msgid "Removable Disk"
-msgstr "Disc extraïble"
+msgstr ""
 
 #: ../src/volume-manager.c:209
 msgid "Open in File Manager"
-msgstr "Obre amb el gestor de fitxers"
+msgstr ""
 
 #: ../src/desktop-ui.c:53
 msgid "_Invert Selection"
-msgstr "_Inverteix la selecció"
+msgstr ""
 
 #: ../src/desktop-ui.c:54 ../src/main-win-ui.c:163
 msgid "_Sort Files"
-msgstr "_Ordena els fitxers"
+msgstr ""
 
 #. for popup menu
 #: ../src/desktop-ui.c:55 ../src/main-win-ui.c:189
-#, fuzzy
 msgid "Create _New..."
-msgstr "Crea un de nou..."
+msgstr ""
 
 #: ../src/desktop-ui.c:56 ../src/main-win-ui.c:190
 msgid "Folder"
-msgstr "Carpeta"
+msgstr ""
 
 #: ../src/desktop-ui.c:57 ../src/main-win-ui.c:191
 msgid "Blank File"
-msgstr "Fitxer buit"
+msgstr ""
 
 #: ../src/desktop-ui.c:69 ../src/main-win-ui.c:217
 msgid "By _Name"
-msgstr "Per _nom"
+msgstr ""
 
 #: ../src/desktop-ui.c:70 ../src/main-win-ui.c:218
 msgid "By _Modification Time"
-msgstr "Per la data de _modificació"
+msgstr ""
 
 #: ../src/desktop-ui.c:71 ../src/main-win-ui.c:219
 msgid "By _Size"
-msgstr "Per _mida"
+msgstr ""
 
 #: ../src/desktop-ui.c:72 ../src/main-win-ui.c:220
 msgid "By File _Type"
-msgstr "Per tipus de fitxers"
+msgstr ""
 
 #: ../src/desktop-ui.c:88 ../src/main-win-ui.c:243
 msgid "Open in New Tab"
-msgstr "Obre a una nova pestanya"
+msgstr ""
 
 #: ../src/desktop-ui.c:89 ../src/main-win-ui.c:244
 msgid "Open in New Window"
-msgstr "Obre en una nova finestra"
+msgstr ""
 
 #: ../src/desktop-ui.c:91 ../src/main-win-ui.c:246
 msgid "Open in _Terminal"
-msgstr "Obre en un _terminal"
+msgstr ""
 
 #: ../src/desktop-ui.c:107
 msgid "Stick to Current Position"
@@ -402,61 +392,59 @@ msgstr ""
 
 #: ../src/main-win-ui.c:143
 msgid "_File"
-msgstr "_Fitxer"
+msgstr ""
 
 #: ../src/main-win-ui.c:144
 msgid "_New Window"
-msgstr "_Nova finestra"
+msgstr ""
 
 #: ../src/main-win-ui.c:145
 msgid "New _Tab"
-msgstr "_Nova pestanya"
+msgstr ""
 
 #: ../src/main-win-ui.c:146
 msgid "_Close Tab"
-msgstr "Tan_ca la pestanya"
+msgstr ""
 
 #: ../src/main-win-ui.c:147
 msgid "Close Window"
-msgstr "Tanca la finestra"
+msgstr ""
 
 #: ../src/main-win-ui.c:148
 msgid "_Edit"
-msgstr "_Edita"
+msgstr ""
 
 #: ../src/main-win-ui.c:153
 msgid "Rename"
-msgstr "Reanomena"
+msgstr ""
 
 #: ../src/main-win-ui.c:154
 msgid "Create Symlink"
-msgstr "Crea un enllaç simbòlic"
+msgstr ""
 
 #: ../src/main-win-ui.c:155
 msgid "Move To..."
-msgstr "Mou a..."
+msgstr ""
 
 #: ../src/main-win-ui.c:156
 msgid "Copy To..."
-msgstr "Copia a..."
+msgstr ""
 
 #: ../src/main-win-ui.c:158
 msgid "Invert Selection"
-msgstr "Inverteix la selecció"
+msgstr ""
 
 #: ../src/main-win-ui.c:160
 msgid "_View"
-msgstr "_Visualitza"
+msgstr ""
 
 #: ../src/main-win-ui.c:161
-#, fuzzy
 msgid "Reload Folder"
-msgstr "Carpeta següent"
+msgstr ""
 
 #: ../src/main-win-ui.c:161
-#, fuzzy
 msgid "Reload current folder"
-msgstr "Directori superior"
+msgstr ""
 
 #: ../src/main-win-ui.c:162
 msgid "Side Pane"
@@ -464,104 +452,103 @@ msgstr ""
 
 #: ../src/main-win-ui.c:164
 msgid "_Help"
-msgstr "_Ajuda"
+msgstr ""
 
 #: ../src/main-win-ui.c:166
 msgid "_Go"
-msgstr "_Ves"
+msgstr ""
 
 #: ../src/main-win-ui.c:167
 msgid "Previous Folder"
-msgstr "Directori anterior"
+msgstr ""
 
 #: ../src/main-win-ui.c:168
 msgid "Next Folder"
-msgstr "Carpeta següent"
+msgstr ""
 
 #: ../src/main-win-ui.c:169
 msgid "Parent Folder"
-msgstr "Directori superior"
+msgstr ""
 
 #: ../src/main-win-ui.c:169
 msgid "Go to parent Folder"
-msgstr "Vés a la carpeta superior"
+msgstr ""
 
 #: ../src/main-win-ui.c:170
 msgid "Home Folder"
-msgstr "Carpeta d'inici"
+msgstr ""
 
 #: ../src/main-win-ui.c:171
 msgid "Desktop"
-msgstr "Escriptori"
+msgstr ""
 
 #: ../src/main-win-ui.c:171
 msgid "Desktop Folder"
-msgstr "Carpeta escriptori"
+msgstr ""
 
 #: ../src/main-win-ui.c:172
 msgid "My Computer"
-msgstr "El meu ordinador"
+msgstr ""
 
 #: ../src/main-win-ui.c:173
 msgid "Trash Can"
-msgstr "Paperera"
+msgstr ""
 
 #: ../src/main-win-ui.c:174
 msgid "Network Drives"
-msgstr "Unitats de xarxa"
+msgstr ""
 
 #: ../src/main-win-ui.c:175
 msgid "Applications"
-msgstr "Aplicacions"
+msgstr ""
 
 #: ../src/main-win-ui.c:175
 msgid "Installed Applications"
-msgstr "Aplicacions instal·lades"
+msgstr ""
 
 #: ../src/main-win-ui.c:177
 msgid "_Bookmarks"
-msgstr "A_dreces d'interès"
+msgstr ""
 
 #: ../src/main-win-ui.c:178
 msgid "Add To Bookmarks"
-msgstr "Afegeix a les adreces d'interès"
+msgstr ""
 
 #: ../src/main-win-ui.c:179
 msgid "_Tools"
-msgstr "Ei_nes"
+msgstr ""
 
 #: ../src/main-win-ui.c:180
 msgid "Open Current Folder in _Terminal"
-msgstr "Obre el directori actual en un terminal"
+msgstr ""
 
 #: ../src/main-win-ui.c:181
 msgid "Open Current Folder as _Root"
-msgstr "Obre la carpeta actual com a _root"
+msgstr ""
 
 #: ../src/main-win-ui.c:197
 msgid "Show _Hidden"
-msgstr "Mostra els _ocults"
+msgstr ""
 
 #: ../src/main-win-ui.c:198
-#, fuzzy
 msgid "Show Side Pane"
-msgstr "Mostra els _ocults"
+msgstr ""
 
 #: ../src/main-win-ui.c:203
 msgid "_Icon View"
-msgstr "Vista d'icones"
+msgstr ""
 
 #: ../src/main-win-ui.c:204
 msgid "_Compact View"
-msgstr "Vista _compacta"
+msgstr ""
 
 #: ../src/main-win-ui.c:205
 msgid "_Thumbnail View"
-msgstr "Vista de miniatures"
+msgstr ""
 
 #: ../src/main-win-ui.c:206
 msgid "Detailed _List View"
-msgstr "Vista de llista amb detalls"
+msgstr ""
 
 #: ../src/main-win-ui.c:225
 msgid "Places"
@@ -577,12 +564,11 @@ msgstr ""
 
 #: ../src/main-win.c:471
 msgid "You are in super user mode"
-msgstr "Esteu en mode de super usuari"
+msgstr ""
 
 #: ../src/main-win.c:590
-#, fuzzy
 msgid "Switch user command is not set."
-msgstr "La comanda d'intercanvi d'usuaris no està a punt"
+msgstr ""
 
 #: ../src/main-win.c:1006
 #, c-format
@@ -591,56 +577,53 @@ msgid ""
 "'%s'\n"
 "Enter a name for the new bookmark item:"
 msgstr ""
-"Afegeix el següent directori a les adreces d'interès:\n"
-" '%s'\n"
-"Entreu un nom per la nova adreça d'interès:"
 
 #: ../src/main-win.c:1010
 msgid "Add to Bookmarks"
-msgstr "Afegeix a les adreces d'interès"
+msgstr ""
 
 #. options only acceptable by first pcmanfm instance. These options are not passed through IPC
 #: ../src/pcmanfm.c:72
 msgid "Name of configuration profile"
-msgstr "Nom del perfil de configuració"
+msgstr ""
 
 #: ../src/pcmanfm.c:73
 msgid "Run PCManFM as a daemon"
-msgstr "Executa PCManFM com un dimoni de sistema"
+msgstr ""
 
 #: ../src/pcmanfm.c:74
 msgid "No function. Just to be compatible with nautilus"
-msgstr "No funciona. Ha de ser compatible amb el nautilus"
+msgstr ""
 
 #. options that are acceptable for every instance of pcmanfm and will be passed through IPC.
 #: ../src/pcmanfm.c:77
 msgid "Launch desktop manager"
-msgstr "Engega el gestor d'escriptori"
+msgstr ""
 
 #: ../src/pcmanfm.c:78
 msgid "Turn off desktop manager if it's running"
-msgstr "Tanca el gestor d'escriptori si està funcionant"
+msgstr ""
 
 #: ../src/pcmanfm.c:79
 msgid "Open desktop preference dialog"
-msgstr "Obre el diàleg de preferències de l'escriptori"
+msgstr ""
 
 #: ../src/pcmanfm.c:80
 msgid "Set desktop wallpaper"
-msgstr "Defineix com a fons d'escriptori"
+msgstr "កំណត់ជញ្ជាំងរបស់ផ្ទៃតុ"
 
 #: ../src/pcmanfm.c:80
+#, fuzzy
 msgid "<image file>"
-msgstr "<Arxiu d'imatge>"
+msgstr "<image file>"
 
 #: ../src/pcmanfm.c:81
 #, fuzzy
 msgid "Set mode of desktop wallpaper. <mode>=(color|stretch|fit|center|tile)"
-msgstr ""
-"Ajusta el mode del fons d'escriptori. <mode>=(color|escalat|ajustat|centrat|"
-"mosaic)"
+msgstr "កំណត់របៀបរបស់ជញ្ជាំងផ្ទៃតុ <mode>=(color|stretch|fit|center|tile)"
 
 #: ../src/pcmanfm.c:81
+#, fuzzy
 msgid "<mode>"
 msgstr "<mode>"
 
@@ -649,67 +632,61 @@ msgid ""
 "Open preference dialog. 'n' is number of the page you want to show (1, 2, "
 "3...)."
 msgstr ""
-"Obre el diàleg de preferències. 'n' és el nombre de la pàgina que voleu "
-"mostrar (1, 2, 3...)."
 
 #. { "new-win", '\0', 'n', G_OPTION_ARG_NONE, &new_win, N_("Open new window"), NULL },
 #. { "find-files", 'f', 0, G_OPTION_ARG_NONE, &find_files, N_("Open Find Files utility"), NULL },
 #: ../src/pcmanfm.c:85
 msgid "[FILE1, FILE2,...]"
-msgstr "[Fitxer1, fitxer2 ,...]"
+msgstr ""
 
 #: ../src/pcmanfm.c:455
 msgid "Terminal emulator is not set."
-msgstr "L'emulador del terminal no està activat"
+msgstr ""
 
 #: ../src/pcmanfm.c:507
 #, fuzzy
 msgid "Enter a name for the newly created folder:"
-msgstr "Introduïu un nou pel nou fitxer creat:"
+msgstr "បញ្ចូលឈ្មោះឯកសារដែលបង្កើត:"
 
 #: ../src/pcmanfm.c:509
 msgid "Enter a name for the newly created file:"
-msgstr "Introduïu un nou pel nou fitxer creat:"
+msgstr "បញ្ចូលឈ្មោះឯកសារដែលបង្កើត:"
 
 #: ../src/pcmanfm.c:510
 msgid "Create New..."
-msgstr "Crea un de nou..."
+msgstr ""
 
 #: ../src/pcmanfm.c:510
 msgid "New"
-msgstr "Nous"
+msgstr "ថ្មី"
 
 #: ../src/tab-page.c:174
 #, c-format
 msgid "%d item selected"
 msgid_plural "%d items selected"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ../src/tab-page.c:196
 #, c-format
 msgid "Free space: %s (Total: %s)"
-msgstr "Espai lliure: %s (Total: %s)"
+msgstr ""
 
 #: ../src/tab-page.c:215
 #, c-format
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ../src/tab-page.c:216
 #, c-format
 msgid " (%d hidden)"
 msgid_plural " (%d hidden)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ../data/pcmanfm.desktop.in.h:1
 msgid "Browse the file system and manage the files"
 msgstr ""
 
 #: ../data/pcmanfm.desktop.in.h:2
-#, fuzzy
 msgid "File Manager"
-msgstr "Obre amb el gestor de fitxers"
+msgstr ""

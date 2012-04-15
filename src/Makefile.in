@@ -51,12 +51,14 @@ PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
 am__objects_1 =
 am_pcmanfm_OBJECTS = pcmanfm-pcmanfm.$(OBJEXT) \
 	pcmanfm-app-config.$(OBJEXT) pcmanfm-main-win.$(OBJEXT) \
-	pcmanfm-desktop.$(OBJEXT) pcmanfm-volume-manager.$(OBJEXT) \
-	pcmanfm-pref.$(OBJEXT) pcmanfm-utils.$(OBJEXT) \
-	pcmanfm-single-inst.$(OBJEXT) $(am__objects_1)
+	pcmanfm-tab-page.$(OBJEXT) pcmanfm-desktop.$(OBJEXT) \
+	pcmanfm-volume-manager.$(OBJEXT) pcmanfm-pref.$(OBJEXT) \
+	pcmanfm-utils.$(OBJEXT) pcmanfm-single-inst.$(OBJEXT) \
+	$(am__objects_1)
 pcmanfm_OBJECTS = $(am_pcmanfm_OBJECTS)
 am__DEPENDENCIES_1 =
 pcmanfm_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
@@ -106,6 +108,7 @@ CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
@@ -119,6 +122,8 @@ FM_LIBS = @FM_LIBS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GIO_CFLAGS = @GIO_CFLAGS@
 GIO_LIBS = @GIO_LIBS@
+GLIB_CFLAGS = @GLIB_CFLAGS@
+GLIB_LIBS = @GLIB_LIBS@
 GMODULE_CFLAGS = @GMODULE_CFLAGS@
 GMODULE_LIBS = @GMODULE_LIBS@
 GMOFILES = @GMOFILES@
@@ -147,6 +152,7 @@ LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
+MANIFEST_TOOL = @MANIFEST_TOOL@
 MENU_CACHE_CFLAGS = @MENU_CACHE_CFLAGS@
 MENU_CACHE_LIBS = @MENU_CACHE_LIBS@
 MKDIR_P = @MKDIR_P@
@@ -167,8 +173,12 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
+PANGO_CFLAGS = @PANGO_CFLAGS@
+PANGO_LIBS = @PANGO_LIBS@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 POFILES = @POFILES@
 POSUB = @POSUB@
 PO_IN_DATADIR_FALSE = @PO_IN_DATADIR_FALSE@
@@ -187,6 +197,7 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
+ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__include = @am__include@
@@ -219,7 +230,6 @@ libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
 localstatedir = @localstatedir@
-lt_ECHO = @lt_ECHO@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
@@ -245,6 +255,7 @@ pcmanfm_SOURCES = \
 	pcmanfm.c pcmanfm.h \
 	app-config.c app-config.h \
 	main-win.c main-win.h \
+	tab-page.c tab-page.h \
 	desktop.c desktop.h \
 	volume-manager.c volume-manager.h \
 	pref.c pref.h \
@@ -261,6 +272,8 @@ EXTRA_DIST = \
 pcmanfm_CFLAGS = \
 	$(XLIB_CFLAGS) \
 	$(GTK_CFLAGS) \
+	$(PANGO_CFLAGS) \
+	$(GLIB_CFLAGS) \
 	$(GIO_CFLAGS) \
 	$(GMODULE_CFLAGS) \
 	$(FM_CFLAGS) \
@@ -273,6 +286,8 @@ pcmanfm_CFLAGS = \
 pcmanfm_LDADD = \
 	$(XLIB_LIBS) \
 	$(GTK_LIBS) \
+	$(PANGO_LIBS) \
+	$(GLIB_LIBS) \
 	$(GIO_LIBS) \
 	$(GMODULE_LIBS) \
 	$(FM_LIBS) \
@@ -387,6 +402,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-pcmanfm.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-pref.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-single-inst.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-tab-page.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-volume-manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml_purge-xml-purge.Po@am__quote@
@@ -453,6 +469,20 @@ pcmanfm-main-win.obj: main-win.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main-win.c' object='pcmanfm-main-win.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-main-win.obj `if test -f 'main-win.c'; then $(CYGPATH_W) 'main-win.c'; else $(CYGPATH_W) '$(srcdir)/main-win.c'; fi`
+
+pcmanfm-tab-page.o: tab-page.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-tab-page.o -MD -MP -MF $(DEPDIR)/pcmanfm-tab-page.Tpo -c -o pcmanfm-tab-page.o `test -f 'tab-page.c' || echo '$(srcdir)/'`tab-page.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-tab-page.Tpo $(DEPDIR)/pcmanfm-tab-page.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='tab-page.c' object='pcmanfm-tab-page.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-tab-page.o `test -f 'tab-page.c' || echo '$(srcdir)/'`tab-page.c
+
+pcmanfm-tab-page.obj: tab-page.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-tab-page.obj -MD -MP -MF $(DEPDIR)/pcmanfm-tab-page.Tpo -c -o pcmanfm-tab-page.obj `if test -f 'tab-page.c'; then $(CYGPATH_W) 'tab-page.c'; else $(CYGPATH_W) '$(srcdir)/tab-page.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-tab-page.Tpo $(DEPDIR)/pcmanfm-tab-page.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='tab-page.c' object='pcmanfm-tab-page.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-tab-page.obj `if test -f 'tab-page.c'; then $(CYGPATH_W) 'tab-page.c'; else $(CYGPATH_W) '$(srcdir)/tab-page.c'; fi`
 
 pcmanfm-desktop.o: desktop.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-desktop.o -MD -MP -MF $(DEPDIR)/pcmanfm-desktop.Tpo -c -o pcmanfm-desktop.o `test -f 'desktop.c' || echo '$(srcdir)/'`desktop.c

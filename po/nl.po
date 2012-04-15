@@ -1,25 +1,27 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Dutch translation of the pcmanfm package.
+# Copyright (C) the author of the pcmanfm package.
+# This file is distributed under the same license as the 
+# pcmanfm package.
+# Glenn de Groot, 2010.
+# Pjotr, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pcmanfm 0.9.x\n"
+"Project-Id-Version: pcmanfm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-04 02:25+0800\n"
-"PO-Revision-Date: 2010-03-27 15:45+0100\n"
-"Last-Translator: Yorvyk <yorvik.ubunto@googlemail.com>\n"
-"Language-Team: English en_GB\n"
+"POT-Creation-Date: 2011-07-20 16:23+0200\n"
+"PO-Revision-Date: 2011-09-08 11:13+0200\n"
+"Last-Translator: Pjotr\n"
+"Language-Team: Dutch\n"
+"Language: nl (Dutch)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
-"X-Poedit-Country: UNITED KINGDOM\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/ui/about.glade.in.h:1
 msgid "Copyright (C) 2009 - 2010"
-msgstr "Copyright © 2009 - 2010"
+msgstr "Auteursrecht (C) 2009 - 2010"
 
 #: ../data/ui/about.glade.in.h:2
 msgid ""
@@ -27,14 +29,16 @@ msgid ""
 "\n"
 "Developed by Hon Jen Yee (PCMan)"
 msgstr ""
-"Lichtgewicht bestandsbeheerder\n"
+"Lichtgewicht bestandbeheerder\n"
 "\n"
 "Ontwikkeld door Hon Jen Yee (PCMan)"
 
 #. Please replace this line with your own names, one name per line.
 #: ../data/ui/about.glade.in.h:6
 msgid "translator-credits"
-msgstr "Glenn de Groot <glenn_de_groot@hotmail.com>"
+msgstr ""
+"Glenn de Groot\n"
+"Pjotr"
 
 #: ../data/ui/desktop-pref.glade.h:1
 msgid "<b>Background</b>"
@@ -42,15 +46,15 @@ msgstr "<b>Achtergrond</b>"
 
 #: ../data/ui/desktop-pref.glade.h:2
 msgid "<b>Show desktop icons</b>"
-msgstr "<b>Toon bureaublad iconen</b>"
+msgstr "<b>Toon bureaubladpictogrammen</b>"
 
 #: ../data/ui/desktop-pref.glade.h:3
 msgid "<b>Text</b>"
-msgstr "<b>Text</b>"
+msgstr "<b>Tekst</b>"
 
 #: ../data/ui/desktop-pref.glade.h:4
 msgid "Advanced"
-msgstr "Geavanceerd "
+msgstr "Geavanceerd"
 
 #: ../data/ui/desktop-pref.glade.h:5
 msgid "Appearance"
@@ -58,15 +62,15 @@ msgstr "Uiterlijk"
 
 #: ../data/ui/desktop-pref.glade.h:6
 msgid "Background color:"
-msgstr "Achtergrond kleur:"
+msgstr "Achtergrondkleur:"
 
 #: ../data/ui/desktop-pref.glade.h:7 ../data/ui/pref.glade.h:10
 msgid "Center on the screen"
-msgstr "Midden van het scherm"
+msgstr "Plaats in het midden van het scherm"
 
 #: ../data/ui/desktop-pref.glade.h:8
 msgid "Color of label text:"
-msgstr ""
+msgstr "Kleur van etikettekst:"
 
 #: ../data/ui/desktop-pref.glade.h:9
 msgid "Color of shadow:"
@@ -74,44 +78,44 @@ msgstr "Kleur van schaduw:"
 
 #: ../data/ui/desktop-pref.glade.h:10
 msgid "Desktop Icons"
-msgstr "Bureaublad iconen"
+msgstr "Bureaubladpictogrammen"
 
 #: ../data/ui/desktop-pref.glade.h:11 ../src/desktop-ui.c:58
 msgid "Desktop Preferences"
-msgstr "Bureaublad Voorkeuren"
+msgstr "Bureaubladvoorkeuren"
 
 #: ../data/ui/desktop-pref.glade.h:12
 msgid "Fill with background color only"
-msgstr "Vul alleen met achtergrond kleur"
+msgstr "Vul alleen met achtergrondkleur"
 
 #: ../data/ui/desktop-pref.glade.h:13
 msgid "Font of label text:"
-msgstr ""
+msgstr "Lettertype van etikettekst:"
 
 #: ../data/ui/desktop-pref.glade.h:14
 msgid "Please select an image file"
-msgstr "Kies alstublieft een afbeeldingsbestand"
+msgstr "Gelieve een afbeeldingbestand te kiezen"
 
 #: ../data/ui/desktop-pref.glade.h:15
 msgid "Show \"My Computer\" icon on desktop"
-msgstr "Toon\"Mijn Computer\" icoon op bureaublad"
+msgstr "Toon \"Mijn Computer\"-pictogram op bureaublad"
 
 #: ../data/ui/desktop-pref.glade.h:16
 msgid "Show \"My Documents\" icon on desktop"
-msgstr "Toon \"Mijn Documenten\" icoon op bureaublad"
+msgstr "Toon \"Mijn Documenten\"-pictogram op bureaublad"
 
 #: ../data/ui/desktop-pref.glade.h:17
 msgid "Show \"Trash Bin\" icon on desktop"
-msgstr "Toon \"Prullenbak\" icoon op bureaublad"
+msgstr "Toon \"Prullenbak\"-pictogram op bureaublad"
 
 #: ../data/ui/desktop-pref.glade.h:18
 msgid "Show icons of volumes on desktop"
-msgstr "Toon volume iconen op het bureaublad"
+msgstr "Toon mediapictogrammen op bureaublad"
 
 #: ../data/ui/desktop-pref.glade.h:19
 msgid "Show menus provided by window managers when desktop is clicked"
 msgstr ""
-"Toon menu´s voorzien door vensterbeheerders als u op het bureaublad klikt"
+"Toon menu´s verstrekt door vensterbeheerders als bureaublad wordt aangeklikt"
 
 #: ../data/ui/desktop-pref.glade.h:20 ../data/ui/pref.glade.h:37
 msgid "Stretch to fill the entire screen"
@@ -119,23 +123,24 @@ msgstr "Uitrekken om het hele scherm te vullen"
 
 #: ../data/ui/desktop-pref.glade.h:21 ../data/ui/pref.glade.h:38
 msgid "Stretch to fit the screen"
-msgstr "Uitrekken om het scherm te vullen"
+msgstr "Uitrekken om op het hele scherm te passen"
 
 #: ../data/ui/desktop-pref.glade.h:22 ../data/ui/pref.glade.h:42
 msgid "Tile the image to fill the entire screen"
 msgstr ""
+"Zet exemplaren van de afbeelding naast elkaar om het hele scherm te vullen"
 
 #: ../data/ui/desktop-pref.glade.h:23
 msgid "Wallpaper mode:"
-msgstr "Achtergrond modus:"
+msgstr "Modus van bureaubladachtergrond:"
 
 #: ../data/ui/desktop-pref.glade.h:24
 msgid "Wallpaper:"
-msgstr "Achtergrond:"
+msgstr "Bureaubladachtergrond:"
 
 #: ../data/ui/pref.glade.h:1
 msgid "<b>Auto-mount</b>"
-msgstr "<b>Automatisch-aankoppelen</b>"
+msgstr "<b>Automatisch aankoppelen</b>"
 
 #: ../data/ui/pref.glade.h:2
 msgid "<b>Behavior</b>"
@@ -143,27 +148,27 @@ msgstr "<b>Gedrag</b>"
 
 #: ../data/ui/pref.glade.h:3
 msgid "<b>Default View</b>"
-msgstr "<b>Standaard weergave</b>"
+msgstr "<b>Standaardweergave</b>"
 
 #: ../data/ui/pref.glade.h:4
 msgid "<b>Icons</b>"
-msgstr "<b>Iconen</b>"
+msgstr "<b>Pictogrammen</b>"
 
 #: ../data/ui/pref.glade.h:5
 msgid "<b>Programs</b>"
-msgstr "<b>Toepassingen</b>"
+msgstr "<b>Programma's</b>"
 
 #: ../data/ui/pref.glade.h:6
 msgid "<b>User Interface</b>"
-msgstr "<b>Gebruikersomgeving</b>"
+msgstr "<b>Gebruikersschil</b>"
 
 #: ../data/ui/pref.glade.h:7
 msgid "Always show the tab bar"
-msgstr "Toon altijd de tablad balk"
+msgstr "Toon altijd de tabblad-balk"
 
 #: ../data/ui/pref.glade.h:8
 msgid "Archiver integration:"
-msgstr "Archiefbeheer integratie:"
+msgstr "Integratie van archiefbeheerder:"
 
 #: ../data/ui/pref.glade.h:9
 msgid "Bookmarks:"
@@ -171,11 +176,11 @@ msgstr "Bladwijzers:"
 
 #: ../data/ui/pref.glade.h:11
 msgid "Compact View"
-msgstr "Compact Beeld"
+msgstr "Compacte weergave"
 
 #: ../data/ui/pref.glade.h:12
 msgid "Confirm before deleting files"
-msgstr "Bevestig voor het verwijderen van bestanden"
+msgstr "Bevestig voor verwijderen van bestanden"
 
 #: ../data/ui/pref.glade.h:13
 msgid "Detailed List View"
@@ -183,7 +188,7 @@ msgstr "Uitgebreide lijstweergave"
 
 #: ../data/ui/pref.glade.h:14
 msgid "Do not generate thumbnails for files exceeding this size:"
-msgstr ""
+msgstr "Maak geen miniaturen voor bestanden groter dan:"
 
 #: ../data/ui/pref.glade.h:16
 #, no-c-format
@@ -191,58 +196,58 @@ msgid ""
 "Examples: \"xterm -e %s\" for terminal or \"gksu %s\" for switching user.\n"
 "%s = the command line you want to execute with terminal or su."
 msgstr ""
+"Voorbeelden: \"xterm -e %s\" voor terminal of \"gksu %s\" voor gebruikers- \n"
+"wissel. %s = de opdrachtregel die u wil uitvoeren met terminal of su."
 
 #: ../data/ui/pref.glade.h:18
 msgid "Hide 'Close tab' buttons"
-msgstr "Verberg 'Sluit tablad' knoppen"
+msgstr "Verberg 'Sluit tabblad'-knoppen"
 
 #: ../data/ui/pref.glade.h:19
 msgid "Hide folder content border"
-msgstr ""
+msgstr "Verberg rand van mapinhoud"
 
 #: ../data/ui/pref.glade.h:20
 msgid "Hide side pane buttons"
-msgstr ""
+msgstr "Verberg knoppen op zijbalk"
 
 #: ../data/ui/pref.glade.h:21
 msgid "Icon View"
-msgstr "Pictogrammenweergave "
+msgstr "Pictogramweergave"
 
 #: ../data/ui/pref.glade.h:22
 msgid "Mount mountable volumes automatically on program startup"
-msgstr ""
-"Koppel koppelbare volumes automatisch aan bij opstarten van het programma"
+msgstr "Koppel koppelbare media automatisch aan bij opstarten van programma"
 
 #: ../data/ui/pref.glade.h:23
 msgid "Mount removable media automatically when they are inserted"
-msgstr ""
-"Koppel verwisselbare schijven automatisch aan als ze worden aangesloten"
+msgstr "Koppel verwijderbare media automatisch aan als ze worden ingebracht"
 
 #: ../data/ui/pref.glade.h:24
 msgid "Move deleted files to \"trash bin\" instead of erasing from disk"
 msgstr ""
-"Verplaats verwijderde bestanden naar de \"Prullenbak\" in plaats van ze van "
-"uw schijf te verwijderen"
+"Verplaats verwijderde bestanden naar de \"Prullenbak\" in plaats van ze te "
+"verwijderen van uw schijf"
 
 #: ../data/ui/pref.glade.h:25
 msgid "Only show thumbnails for local files"
-msgstr ""
+msgstr "Toon alleen miniaturen voor plaatselijke bestanden"
 
 #: ../data/ui/pref.glade.h:26
 msgid "Open files with single click"
-msgstr "Open bestanden met één muisklik"
+msgstr "Open bestanden met enkele muisklik"
 
 #: ../data/ui/pref.glade.h:27
 msgid "Opened in Current Tab"
-msgstr "Geopend in Huidig Tablad"
+msgstr "Geopend in huidig tabblad"
 
 #: ../data/ui/pref.glade.h:28
 msgid "Opened in New Tab"
-msgstr "Geopend in een Nieuw Tablad"
+msgstr "Geopend in nieuw tabblad"
 
 #: ../data/ui/pref.glade.h:29
 msgid "Opened in New Window"
-msgstr "Geopend in een nieuw venster"
+msgstr "Geopend in nieuw venster"
 
 #: ../data/ui/pref.glade.h:30
 msgid "Preferences"
@@ -251,46 +256,48 @@ msgstr "Voorkeuren"
 #: ../data/ui/pref.glade.h:31
 msgid "Show available options for removable media when they are inserted"
 msgstr ""
+"Toon beschikbare opties voor verwijderbare media wanneer ze worden ingebracht"
 
 #: ../data/ui/pref.glade.h:32
 msgid "Show thumbnails of files"
-msgstr ""
+msgstr "Toon miniaturen van bestanden"
 
 #: ../data/ui/pref.glade.h:33
 msgid "Size of big icons:"
-msgstr "Grootte van grote iconen:"
+msgstr "Omvang van grote pictogrammen:"
 
 #: ../data/ui/pref.glade.h:34
 msgid "Size of side pane icons:"
-msgstr ""
+msgstr "Omvang van zijbalkpictogrammen"
 
 #: ../data/ui/pref.glade.h:35
 msgid "Size of small icons:"
-msgstr "Grootte van kleine iconen:"
+msgstr "Omvang van kleine pictogrammen:"
 
 #: ../data/ui/pref.glade.h:36
 msgid "Size of thumbnails:"
-msgstr ""
+msgstr "Omvang van miniaturen:"
 
 #: ../data/ui/pref.glade.h:39
 msgid "Switch user command:"
-msgstr ""
+msgstr "Opdracht voor gebruikerswissel:"
 
 #: ../data/ui/pref.glade.h:40
 msgid "Terminal emulator:"
-msgstr "Terminal emulator:"
+msgstr "Terminalvenster:"
 
 #: ../data/ui/pref.glade.h:41
 msgid "Thumbnail View"
-msgstr ""
+msgstr "Miniatuurweergave"
 
 #: ../data/ui/pref.glade.h:43
 msgid "Use SI decimal prefixes instead of IEC binary prefixes"
 msgstr ""
+"Gebruik SI-decimale voorvoegsels in plaats van IEC-binaire voorvoegsels"
 
 #: ../data/ui/pref.glade.h:44
 msgid "View Mode:"
-msgstr "Beeldmodus:"
+msgstr "Weergavemodus:"
 
 #: ../data/ui/pref.glade.h:45
 msgid "_Advanced"
@@ -306,15 +313,15 @@ msgstr "_Algemeen"
 
 #: ../data/ui/pref.glade.h:48
 msgid "_Volume Management"
-msgstr "_Volume Beheer"
+msgstr "_Mediabeheer"
 
 #: ../data/ui/autorun.glade.h:1
 msgid "<b>Removable medium is inserted</b>"
-msgstr "<b>Verwijderbare schijf is aangesloten</b>"
+msgstr "<b>Verwijderbaar medium is ingebracht</b>"
 
 #: ../data/ui/autorun.glade.h:2
 msgid "Detecting..."
-msgstr "Detecteren..."
+msgstr "Aan het detecteren..."
 
 #: ../data/ui/autorun.glade.h:3
 msgid "Please select the action you want to perform:"
@@ -322,321 +329,395 @@ msgstr "Kies alstublieft de actie die u wilt uitvoeren:"
 
 #: ../data/ui/autorun.glade.h:4
 msgid "Removable medium is inserted"
-msgstr "Verwijderbare schijf is aangesloten"
+msgstr "Verwijderbaar medium is ingebracht"
 
 #: ../data/ui/autorun.glade.h:5
 msgid "Type of medium:"
-msgstr "Type schijf:"
+msgstr "Type medium:"
 
 #: ../src/volume-manager.c:150
 msgid "Removable Disk"
-msgstr "Verwisselbare schijf"
+msgstr "Verwijderbare schijf"
 
 #: ../src/volume-manager.c:209
 msgid "Open in File Manager"
-msgstr "Open in Bestandsbeheerder"
+msgstr "Open in bestandbeheerder"
 
 #: ../src/desktop-ui.c:53
 msgid "_Invert Selection"
-msgstr ""
+msgstr "_Keer selectie om"
 
-#: ../src/desktop-ui.c:54 ../src/main-win-ui.c:146
+#: ../src/desktop-ui.c:54 ../src/main-win-ui.c:163
 msgid "_Sort Files"
 msgstr "_Sorteer bestanden"
 
-#: ../src/desktop-ui.c:56 ../src/main-win-ui.c:172
+#. for popup menu
+#: ../src/desktop-ui.c:55 ../src/main-win-ui.c:189
+msgid "Create _New..."
+msgstr "Maak _nieuwe..."
+
+#: ../src/desktop-ui.c:56 ../src/main-win-ui.c:190
 msgid "Folder"
 msgstr "Map"
 
-#: ../src/desktop-ui.c:57 ../src/main-win-ui.c:173
+#: ../src/desktop-ui.c:57 ../src/main-win-ui.c:191
 msgid "Blank File"
 msgstr "Leeg bestand"
 
-#: ../src/desktop-ui.c:69 ../src/main-win-ui.c:198
+#: ../src/desktop-ui.c:69 ../src/main-win-ui.c:217
 msgid "By _Name"
-msgstr "Bij _Naam"
+msgstr "Op _naam"
 
-#: ../src/desktop-ui.c:70 ../src/main-win-ui.c:199
+#: ../src/desktop-ui.c:70 ../src/main-win-ui.c:218
 msgid "By _Modification Time"
-msgstr "Bij _Aanpassing´s tijd"
+msgstr "Op _tijdstip van aanpassing"
 
-#: ../src/desktop-ui.c:71 ../src/main-win-ui.c:200
+#: ../src/desktop-ui.c:71 ../src/main-win-ui.c:219
 msgid "By _Size"
-msgstr "Bij _Grootte"
+msgstr "Op _grootte"
 
-#: ../src/desktop-ui.c:72 ../src/main-win-ui.c:201
+#: ../src/desktop-ui.c:72 ../src/main-win-ui.c:220
 msgid "By File _Type"
-msgstr "Bij bestands_type"
+msgstr "Op bestand_type"
 
-#: ../src/desktop-ui.c:88 ../src/main-win-ui.c:218
+#: ../src/desktop-ui.c:88 ../src/main-win-ui.c:243
 msgid "Open in New Tab"
-msgstr "Openen in Nieuw Tablad"
+msgstr "Openen in nieuw tabblad"
 
-#: ../src/desktop-ui.c:89 ../src/main-win-ui.c:219
+#: ../src/desktop-ui.c:89 ../src/main-win-ui.c:244
 msgid "Open in New Window"
-msgstr "Openen in Nieuw Venster"
+msgstr "Openen in nieuw venster"
 
-#: ../src/desktop-ui.c:91 ../src/main-win-ui.c:221
+#: ../src/desktop-ui.c:91 ../src/main-win-ui.c:246
 msgid "Open in _Terminal"
-msgstr "Openen in _Terminal"
+msgstr "Openen in _terminal"
 
-#: ../src/main-win-ui.c:128
+#: ../src/desktop-ui.c:107
+msgid "Stick to Current Position"
+msgstr "Blijf bij de huidige positie"
+
+#: ../src/desktop-ui.c:112
+msgid "Snap to Grid"
+msgstr "Breek af naar rooster"
+
+#: ../src/main-win-ui.c:143
 msgid "_File"
 msgstr "_Bestand"
 
-#: ../src/main-win-ui.c:129
+#: ../src/main-win-ui.c:144
 msgid "_New Window"
-msgstr "_Nieuw Venster"
+msgstr "_Nieuw venster"
 
-#: ../src/main-win-ui.c:130
+#: ../src/main-win-ui.c:145
 msgid "New _Tab"
-msgstr "Nieuw _Tablad"
+msgstr "Nieuw _tabblad"
 
-#: ../src/main-win-ui.c:131
+#: ../src/main-win-ui.c:146
 msgid "_Close Tab"
-msgstr "_Sluit Tablad"
+msgstr "_Sluit tabblad"
 
-#: ../src/main-win-ui.c:132
+#: ../src/main-win-ui.c:147
 msgid "Close Window"
-msgstr "Sluit Venster"
+msgstr "Sluit venster"
 
-#: ../src/main-win-ui.c:133
+#: ../src/main-win-ui.c:148
 msgid "_Edit"
-msgstr "_Aanpassen"
+msgstr "B_ewerken"
 
-#: ../src/main-win-ui.c:138
+#: ../src/main-win-ui.c:153
 msgid "Rename"
 msgstr "Hernoemen"
 
-#: ../src/main-win-ui.c:139
+#: ../src/main-win-ui.c:154
 msgid "Create Symlink"
-msgstr "Maak Symlink aan"
+msgstr "Maak symbolische koppeling"
 
-#: ../src/main-win-ui.c:140
+#: ../src/main-win-ui.c:155
 msgid "Move To..."
 msgstr "Verplaatsen naar..."
 
-#: ../src/main-win-ui.c:141
+# Trema wordt soms vervormd. Daarom weggelaten.
+#: ../src/main-win-ui.c:156
 msgid "Copy To..."
 msgstr "Kopiëren naar..."
 
-#: ../src/main-win-ui.c:143
+#: ../src/main-win-ui.c:158
 msgid "Invert Selection"
-msgstr ""
+msgstr "Draai Selectie om"
 
-#: ../src/main-win-ui.c:145
+#: ../src/main-win-ui.c:160
 msgid "_View"
 msgstr "_Beeld"
 
-#: ../src/main-win-ui.c:147
-msgid "_Help"
-msgstr "_Help"
+#: ../src/main-win-ui.c:161
+msgid "Reload Folder"
+msgstr "Herlaad map"
 
-#: ../src/main-win-ui.c:149
+#: ../src/main-win-ui.c:161
+msgid "Reload current folder"
+msgstr "Herlaad bovenliggende map"
+
+#: ../src/main-win-ui.c:162
+msgid "Side Pane"
+msgstr "Zijbalk"
+
+#: ../src/main-win-ui.c:164
+msgid "_Help"
+msgstr "_Hulp"
+
+#: ../src/main-win-ui.c:166
 msgid "_Go"
 msgstr "_Ga"
 
-#: ../src/main-win-ui.c:150
+#: ../src/main-win-ui.c:167
 msgid "Previous Folder"
 msgstr "Vorige map"
 
-#: ../src/main-win-ui.c:151
+#: ../src/main-win-ui.c:168
 msgid "Next Folder"
 msgstr "Volgende map"
 
-#: ../src/main-win-ui.c:152
+#: ../src/main-win-ui.c:169
 msgid "Parent Folder"
-msgstr ""
+msgstr "Bovenliggende Map"
 
-#: ../src/main-win-ui.c:152
+#: ../src/main-win-ui.c:169
 msgid "Go to parent Folder"
-msgstr ""
+msgstr "Ga naar bovenliggende map"
 
-#: ../src/main-win-ui.c:153
+#: ../src/main-win-ui.c:170
 msgid "Home Folder"
-msgstr "Persoonlijke Map"
+msgstr "Persoonlijke map"
 
-#: ../src/main-win-ui.c:154
+#: ../src/main-win-ui.c:171
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#: ../src/main-win-ui.c:154
+#: ../src/main-win-ui.c:171
 msgid "Desktop Folder"
-msgstr "Bureaublad Map"
+msgstr "Bureaubladmap"
 
-#: ../src/main-win-ui.c:155
+#: ../src/main-win-ui.c:172
 msgid "My Computer"
 msgstr "Mijn Computer"
 
-#: ../src/main-win-ui.c:156
+#: ../src/main-win-ui.c:173
 msgid "Trash Can"
 msgstr "Prullenbak"
 
-#: ../src/main-win-ui.c:157
+#: ../src/main-win-ui.c:174
 msgid "Network Drives"
-msgstr ""
+msgstr "Netwerkstations"
 
-#: ../src/main-win-ui.c:158
+#: ../src/main-win-ui.c:175
 msgid "Applications"
 msgstr "Toepassingen"
 
-#: ../src/main-win-ui.c:158
+#: ../src/main-win-ui.c:175
 msgid "Installed Applications"
-msgstr "Geïnstalleerde Toepassingen"
+msgstr "Geïnstalleerde toepassingen"
 
-#: ../src/main-win-ui.c:160
+#: ../src/main-win-ui.c:177
 msgid "_Bookmarks"
 msgstr "_Bladwijzers"
 
-#: ../src/main-win-ui.c:161
+#: ../src/main-win-ui.c:178
 msgid "Add To Bookmarks"
-msgstr "Toevoegen aan Bladwijzers"
-
-#: ../src/main-win-ui.c:162
-msgid "_Tools"
-msgstr "_Hulpmiddelen"
-
-#: ../src/main-win-ui.c:163
-msgid "Open Current Folder in _Terminal"
-msgstr "Open Huidige Map in _terminal"
-
-#: ../src/main-win-ui.c:164
-msgid "Open Current Folder as _Root"
-msgstr "Open Huidige Map als _Root"
+msgstr "Toevoegen aan bladwijzers"
 
 #: ../src/main-win-ui.c:179
+msgid "_Tools"
+msgstr "_Gereedschappen"
+
+#: ../src/main-win-ui.c:180
+msgid "Open Current Folder in _Terminal"
+msgstr "Open huidige map in _terminal"
+
+#: ../src/main-win-ui.c:181
+msgid "Open Current Folder as _Root"
+msgstr "Open huidige map als _root"
+
+#: ../src/main-win-ui.c:197
 msgid "Show _Hidden"
-msgstr "Toon _Verborgen"
+msgstr "Toon _verborgen"
 
-#: ../src/main-win-ui.c:184
+#: ../src/main-win-ui.c:198
+msgid "Show Side Pane"
+msgstr "Toon zijbalk"
+
+#: ../src/main-win-ui.c:203
 msgid "_Icon View"
-msgstr "_Pictogrammenweergave"
+msgstr "_Pictogramweergave"
 
-#: ../src/main-win-ui.c:185
+#: ../src/main-win-ui.c:204
 msgid "_Compact View"
 msgstr "_Compacte weergave"
 
-#: ../src/main-win-ui.c:186
+#: ../src/main-win-ui.c:205
 msgid "_Thumbnail View"
-msgstr ""
+msgstr "_Miniaturenweergave"
 
-#: ../src/main-win-ui.c:187
+#: ../src/main-win-ui.c:206
 msgid "Detailed _List View"
-msgstr ""
+msgstr "Gedetailleerde _lijstweergave"
 
-#: ../src/main-win.c:561
+#: ../src/main-win-ui.c:225
+msgid "Places"
+msgstr "Locaties"
+
+#: ../src/main-win-ui.c:226
+msgid "Directory Tree"
+msgstr "Boomstructuur mappen"
+
+#: ../src/main-win-ui.c:227
+msgid "Remote"
+msgstr "Op afstand"
+
+#: ../src/main-win.c:471
 msgid "You are in super user mode"
-msgstr "U bent in Super user mode"
+msgstr "U bent in systeembeheermodus (su)"
 
-#: ../src/main-win.c:660
+#: ../src/main-win.c:590
 msgid "Switch user command is not set."
-msgstr ""
+msgstr "De opdracht voor gebruikerswissel is niet ingesteld."
 
-#: ../src/main-win.c:967
-#, c-format
-msgid "Free space: %s (Total: %s)"
-msgstr "Vrije ruimte: %s (Totaal: %s)"
-
-#: ../src/main-win.c:1183
+#: ../src/main-win.c:1006
 #, c-format
 msgid ""
 "Add following folder to bookmarks:\n"
 "'%s'\n"
 "Enter a name for the new bookmark item:"
 msgstr ""
-"Voeg dit bestand toe aan uw bladwijzers:\n"
+"Voeg de volgende map toe aan bladwijzers:\n"
 "'%s'\n"
-"Voer een naam in voor de nieuwe bladwijzer:"
+"Voer een naam in voor het nieuwe bladwijzerelement:"
 
-#: ../src/main-win.c:1187
+#: ../src/main-win.c:1010
 msgid "Add to Bookmarks"
-msgstr "Toevoegen aan Bladwijzers"
+msgstr "Toevoegen aan bladwijzers"
 
-#. { "new-tab", 't', 0, G_OPTION_ARG_NONE, &new_tab, N_("Open folders in new tabs of the last used window instead of creating new windows"), NULL },
-#: ../src/pcmanfm.c:71
-msgid "Name of configuration profile"
-msgstr ""
-
+#. options only acceptable by first pcmanfm instance. These options are not passed through IPC
 #: ../src/pcmanfm.c:72
-msgid "Launch desktop manager"
-msgstr "Start bureaubladbeheerder op"
+msgid "Name of configuration profile"
+msgstr "Naam van configuratieprofiel"
 
 #: ../src/pcmanfm.c:73
-msgid "Turn off desktop manager if it's running"
-msgstr "Sluit de bureaubladbeheerder af als hij aanstaat"
-
-#: ../src/pcmanfm.c:74
 msgid "Run PCManFM as a daemon"
-msgstr "Voer PCmanFM uit als een daemon"
+msgstr "Voer PCManFM uit als een achtergronddienst"
 
-#: ../src/pcmanfm.c:75
-msgid "Open desktop preference dialog"
-msgstr ""
+# Nautilus (verkenner van Gnome) moet met hoofdletter.
+#: ../src/pcmanfm.c:74
+msgid "No function. Just to be compatible with nautilus"
+msgstr "Geen functie. Gewoon om verenigbaar te zijn met Nautilus"
 
-#: ../src/pcmanfm.c:76
-msgid "Set desktop wallpaper"
-msgstr "Stel bureaublad achtergrond in"
-
-#: ../src/pcmanfm.c:76
-msgid "<image file>"
-msgstr "<afbeeldingsbestand>"
-
+#. options that are acceptable for every instance of pcmanfm and will be passed through IPC.
 #: ../src/pcmanfm.c:77
-msgid "Set mode of desktop wallpaper. <mode>=(color|stretch|fit|center|tile)"
-msgstr ""
-"Stel de modus van uw bureaublad achtergrond in. <modus>=(kleur|uitrekken|"
-"schalen|centreren|tegels)"
-
-#: ../src/pcmanfm.c:77
-msgid "<mode>"
-msgstr "<modus>"
+msgid "Launch desktop manager"
+msgstr "Start bureaubladbeheerder"
 
 #: ../src/pcmanfm.c:78
+msgid "Turn off desktop manager if it's running"
+msgstr "Sluit bureaubladbeheerder af als hij aanstaat"
+
+#: ../src/pcmanfm.c:79
+msgid "Open desktop preference dialog"
+msgstr "Open dialoog voor bureaubladvoorkeur"
+
+#: ../src/pcmanfm.c:80
+msgid "Set desktop wallpaper"
+msgstr "Stel bureaubladachtergrond in"
+
+#: ../src/pcmanfm.c:80
+msgid "<image file>"
+msgstr "<afbeeldingbestand>"
+
+#: ../src/pcmanfm.c:81
+msgid "Set mode of desktop wallpaper. <mode>=(color|stretch|fit|center|tile)"
+msgstr ""
+"Stel de modus van uw bureaubladachtergrond in.\n"
+"<mode>=(kleur|uitrekken|passend|centreren|tegels)"
+
+#: ../src/pcmanfm.c:81
+msgid "<mode>"
+msgstr "<mode>"
+
+#: ../src/pcmanfm.c:82
 msgid ""
 "Open preference dialog. 'n' is number of the page you want to show (1, 2, "
 "3...)."
 msgstr ""
+"Open de voorkeurdialoog. 'n' is het nummer van de pagina die u wil tonen (1, "
+"2, 3...)."
 
+#. { "new-win", '\0', 'n', G_OPTION_ARG_NONE, &new_win, N_("Open new window"), NULL },
 #. { "find-files", 'f', 0, G_OPTION_ARG_NONE, &find_files, N_("Open Find Files utility"), NULL },
-#: ../src/pcmanfm.c:80
-msgid "No function. Just to be compatible with nautilus"
-msgstr "Geen functie. Gewoon om compatibel te zijn met nautilus"
-
-#: ../src/pcmanfm.c:81
+#: ../src/pcmanfm.c:85
 msgid "[FILE1, FILE2,...]"
 msgstr "[BESTAND1, BESTAND2,...]"
 
-#: ../src/pcmanfm.c:501
+#: ../src/pcmanfm.c:455
 msgid "Terminal emulator is not set."
-msgstr ""
+msgstr "Terminalvenster is niet ingesteld."
 
-#: ../src/pcmanfm.c:544
-msgid "Create New..."
-msgstr "Maak nieuwe..."
+#: ../src/pcmanfm.c:507
+msgid "Enter a name for the newly created folder:"
+msgstr "Voer een naam in voor de nieuwe map:"
 
-#: ../src/pcmanfm.c:544
+#: ../src/pcmanfm.c:509
 msgid "Enter a name for the newly created file:"
 msgstr "Voer een naam in voor het nieuwe bestand:"
 
-#: ../src/pcmanfm.c:544
+#: ../src/pcmanfm.c:510
+msgid "Create New..."
+msgstr "Maak nieuwe..."
+
+#: ../src/pcmanfm.c:510
 msgid "New"
 msgstr "Nieuw"
 
+#: ../src/tab-page.c:174
+#, c-format
+msgid "%d item selected"
+msgid_plural "%d items selected"
+msgstr[0] "%d element geselecteerd"
+msgstr[1] "%d elementen geselecteerd"
+
+#: ../src/tab-page.c:196
+#, c-format
+msgid "Free space: %s (Total: %s)"
+msgstr "Vrije ruimte: %s (Totaal: %s)"
+
+#: ../src/tab-page.c:215
+#, c-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] "%d element"
+msgstr[1] "%d elementen"
+
+#: ../src/tab-page.c:216
+#, c-format
+msgid " (%d hidden)"
+msgid_plural " (%d hidden)"
+msgstr[0] " (%d verborgen)"
+msgstr[1] " (%d verborgen)"
+
 #: ../data/pcmanfm.desktop.in.h:1
 msgid "Browse the file system and manage the files"
-msgstr ""
+msgstr "Blader door het bestandssysteem en beheer de bestanden"
 
 #: ../data/pcmanfm.desktop.in.h:2
-#, fuzzy
 msgid "File Manager"
-msgstr "Open in Bestandsbeheerder"
+msgstr "Bestandbeheerder"
+
+#~ msgid "_New"
+#~ msgstr "_Nieuw"
 
 #~ msgid "Open Find Files utility"
-#~ msgstr "Open Find Files utility"
+#~ msgstr "Open de bestandenzoeker"
 
 #~ msgid ""
 #~ "Open folders in new tabs of the last used window instead of creating new "
 #~ "windows"
 #~ msgstr ""
-#~ "Open folders in new tabs of the last used window instead of creating new "
-#~ "windows"
+#~ "Open mappen in nieuwe tabbladen van het laatst gebruikte venster (geen "
+#~ "nieuw venster)"

@@ -11,6 +11,7 @@ pcmanfm_SOURCES = \
 	pcmanfm.c pcmanfm.h \
 	app-config.c app-config.h \
 	main-win.c main-win.h \
+	tab-page.c tab-page.h \
 	desktop.c desktop.h \
 	volume-manager.c volume-manager.h \
 	pref.c pref.h \
@@ -27,6 +28,8 @@ EXTRA_DIST= \
 pcmanfm_CFLAGS = \
 	$(XLIB_CFLAGS) \
 	$(GTK_CFLAGS) \
+	$(PANGO_CFLAGS) \
+	$(GLIB_CFLAGS) \
 	$(GIO_CFLAGS) \
 	$(GMODULE_CFLAGS) \
 	$(FM_CFLAGS) \
@@ -39,6 +42,8 @@ pcmanfm_CFLAGS = \
 pcmanfm_LDADD = \
 	$(XLIB_LIBS) \
 	$(GTK_LIBS) \
+	$(PANGO_LIBS) \
+	$(GLIB_LIBS) \
 	$(GIO_LIBS) \
 	$(GMODULE_LIBS) \
 	$(FM_LIBS) \
