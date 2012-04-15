@@ -41,6 +41,18 @@ struct _VFSDir
     GList* file_list;
     int n_files;
 
+    union {
+        int flags;
+        struct {
+            gboolean is_home : 1;
+            gboolean is_desktop : 1;
+            gboolean is_trash : 1;
+            gboolean is_mount_point : 1;
+            gboolean is_remote : 1;
+            gboolean is_virtual : 1;
+        };
+    };
+
     /*<private>*/
     VFSFileMonitor* monitor;
     GMutex* mutex;  /* Used to guard file_list */
@@ -89,6 +101,16 @@ void vfs_dir_emit_thumbnail_loaded( VFSDir* dir, VFSFileInfo* file );
 
 /* get the path of desktop dir */
 const char* vfs_get_desktop_dir();
+
+/* Get the path of user's trash dir under home dir.
+ * NOTE:
+ * According to the spec, there are many legal trash dirs on the system
+ * located at various places. However, because that spec is poor and try
+ * very hard to make simple things more complicated, we only support
+ * home trash dir instead. They are good at making things complicated and
+ * hard to implement. This time, they did it again.
+ */
+const char* vfs_get_trash_dir();
 
 /* call function "func" for every VFSDir instances */
 void vfs_dir_foreach( GHFunc func, gpointer user_data );

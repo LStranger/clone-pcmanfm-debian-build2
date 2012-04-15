@@ -15,9 +15,14 @@
 
 #include <glib.h>
 
-#if ! GLIB_CHECK_VERSION(2, 8, 0)
 /* older versions of glib don't provde these API */
+
+#if ! GLIB_CHECK_VERSION(2, 8, 0)
 int g_mkdir_with_parents(const gchar *pathname, int mode);
+#endif
+
+#if ! GLIB_CHECK_VERSION(2, 16, 0)
+int g_strcmp0(const char *str1, const char *str2);
 #endif
 
 #endif

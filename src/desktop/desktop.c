@@ -43,6 +43,8 @@
 
 #include "settings.h"
 
+static GtkWindowGroup* group = NULL;
+
 static GdkFilterReturn on_rootwin_event ( GdkXEvent *xevent, GdkEvent *event, gpointer data );
 
 static GtkWidget **desktops = NULL;
@@ -64,7 +66,10 @@ void fm_turn_on_desktop_icons()
     gint i;
     int big = 0;
 
-    theme_change_notify = g_signal_connect( gtk_icon_theme_get_default(), "changed", 
+    if( ! group )
+        group = gtk_window_group_new();
+
+    theme_change_notify = g_signal_connect( gtk_icon_theme_get_default(), "changed",
                                                                                                         G_CALLBACK(on_icon_theme_changed), NULL );
 
     vfs_mime_type_get_icon_size( &big, NULL );
@@ -77,10 +82,13 @@ void fm_turn_on_desktop_icons()
     {
         desktops[ i ] = desktop_window_new();
         desktop_window_set_icon_size( (DesktopWindow*)desktops[ i ], big );
+        desktop_window_set_single_click( (DesktopWindow*)desktops[ i ], app_settings.single_click );
 
         gtk_widget_realize( desktops[ i ] );  /* without this, setting wallpaper won't work */
         gtk_widget_show_all( desktops[ i ] );
         gdk_window_lower( desktops[ i ] ->window );
+
+        gtk_window_group_add_window( group, desktops[i] );
     }
     fm_desktop_update_colors();
     fm_desktop_update_wallpaper();
@@ -90,20 +98,28 @@ void fm_turn_off_desktop_icons()
 {
     int i;
 
-    g_signal_handler_disconnect( gtk_icon_theme_get_default(), theme_change_notify );
-    theme_change_notify = 0;
+    if( theme_change_notify )
+    {
+        g_signal_handler_disconnect( gtk_icon_theme_get_default(), theme_change_notify );
+        theme_change_notify = 0;
+    }
 
     for ( i = 0; i < n_screens; i++ )
+    {
         gtk_widget_destroy( desktops[ i ] );
+        /* gtk_window_group_remove_window() */
+    }
     g_free( desktops );
 
 //    if ( busy_cursor > 0 )
 //        g_source_remove( busy_cursor );
+    g_object_unref( group );
+    group = NULL;
 }
 
 void fm_desktop_update_thumbnails()
 {
-
+    /* FIXME: thumbnail on desktop cannot be turned off. */
 }
 
 void fm_desktop_update_wallpaper()
@@ -149,9 +165,8 @@ void fm_desktop_update_colors()
     int i;
     for ( i = 0; i < n_screens; i++ )
     {
-        GdkColor black = {0};
         desktop_window_set_bg_color( desktops[ i ], &app_settings.desktop_bg1 );
-        desktop_window_set_text_color( desktops[ i ], &app_settings.desktop_text, &black );
+        desktop_window_set_text_color( desktops[ i ], &app_settings.desktop_text, &app_settings.desktop_shadow );
     }
 }
 
@@ -166,6 +181,13 @@ void fm_desktop_update_icons()
         desktop_window_set_icon_size( (DesktopWindow*)desktops[ i ], big );
 }
 
+void fm_desktop_set_single_click( gboolean single_click )
+{
+    int i;
+    for ( i = 0; i < n_screens; i++ )
+        desktop_window_set_single_click( (DesktopWindow*)desktops[ i ], single_click );
+}
+
 #else /* ! DESKTOP_INTEGRATION */
 
 /* dummy implementations */
@@ -175,6 +197,6 @@ void fm_desktop_update_thumbnails() { }
 void fm_desktop_update_wallpaper() { }
 void fm_desktop_update_colors() { }
 void fm_desktop_update_icons() { }
-
+void fm_desktop_set_single_click( gboolean single_click ) { }
 #endif
 

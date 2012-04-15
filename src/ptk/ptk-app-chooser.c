@@ -16,6 +16,7 @@
 
 #include "ptk-app-chooser.h"
 #include "ptk-ui-xml.h"
+#include "ptk-utils.h"
 
 #include <gtk/gtk.h>
 #include <glib.h>
@@ -129,6 +130,9 @@ GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type )
     const char* mime_desc;
     GtkTreeView* view;
     GtkTreeModel* model;
+
+    gtk_dialog_set_alternative_button_order( dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
+    ptk_dialog_fit_small_screen( dlg );
 
     mime_desc = vfs_mime_type_get_description( mime_type );
     if ( mime_desc )

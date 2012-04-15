@@ -40,7 +40,8 @@
 #include <fnmatch.h>
 
 #define LIB_MAJOR_VERSION 1
-#define LIB_MINOR_VERSION 0
+#define LIB_MAX_MINOR_VERSION 1
+#define LIB_MIN_MINOR_VERSION 0
 
 /* handle byte order here */
 #define    VAL16(buffrer, idx)    GUINT16_FROM_BE(*(guint16*)(buffer + idx))
@@ -90,6 +91,7 @@ void mime_cache_free( MimeCache* cache )
 
 gboolean mime_cache_load( MimeCache* cache, const char* file_path )
 {
+    guint majv, minv;
     int fd = -1;
     struct stat statbuf;
     char* buffer = NULL;
@@ -129,9 +131,11 @@ gboolean mime_cache_load( MimeCache* cache, const char* file_path )
     if ( buffer == (void*)-1 )
         return FALSE;
 
+    majv = VAL16( buffer, MAJOR_VERSION );
+    minv = VAL16( buffer, MINOR_VERSION);
+
     /* Check version */
-    if ( VAL16( buffer, MAJOR_VERSION ) != LIB_MAJOR_VERSION ||
-        VAL16( buffer, MINOR_VERSION) != LIB_MINOR_VERSION )
+    if ( majv > LIB_MAJOR_VERSION || minv > LIB_MAX_MINOR_VERSION || minv < LIB_MIN_MINOR_VERSION )
     {
 #ifdef HAVE_MMAP
         munmap ( buffer, statbuf.st_size );
@@ -140,6 +144,16 @@ gboolean mime_cache_load( MimeCache* cache, const char* file_path )
 #endif
         return FALSE;
     }
+
+    /* Since mime.cache v1.1, shared mime info v0.4
+     * suffix tree is replaced with reverse suffix tree,
+     * and glob and literal strings are sorted by weight. */
+    if( minv >= 1 )
+    {
+        cache->has_reverse_suffix = TRUE;
+        cache->has_str_weight = TRUE;
+    }
+
     cache->buffer = buffer;
     cache->size = statbuf.st_size;
 
@@ -311,37 +325,114 @@ static const char* lookup_suffix_nodes( const char* buf, const char* nodes, guin
     return NULL;
 }
 
+/* Reverse suffix tree is used since mime.cache 1.1 (shared mime info 0.4)
+ * Returns the address of the found "node", not mime-type.
+ * FIXME: 1. Should be optimized with binary search
+ *        2. Should consider weight of suffix nodes
+ */
+static const char* lookup_reverse_suffix_nodes( const char* buf, const char* nodes, guint32 n, const char* name, const char* suffix, const char** suffix_pos )
+{
+    const char *ret = NULL;
+    const char *_suffix_pos = NULL, *cur_suffix_pos = (const char*)suffix + 1;
+    const char* leaf_node = NULL;
+    gunichar uchar;
+
+    uchar = suffix ? g_unichar_tolower( g_utf8_get_char( suffix ) ) : 0;
+    /* g_debug("%s: suffix= '%s'", name, suffix); */
+
+    int i;
+    for( i = 0; i < n; ++i )
+    {
+        const char* node =nodes + i * 12;
+        guint32 ch = VAL32(node, 0);
+        _suffix_pos = suffix;
+
+        if( G_LIKELY( ch ) )
+        {
+            if( ch == uchar )
+            {
+                guint32 n_children = VAL32(node, 4);
+                guint32 first_child_off = VAL32(node, 8);
+                leaf_node = lookup_reverse_suffix_nodes( buf,
+                                        buf + first_child_off,
+                                        n_children,
+                                        name,
+                                        g_utf8_find_prev_char(name, suffix),
+                                        &_suffix_pos );
+                if( leaf_node && _suffix_pos < cur_suffix_pos )
+                {
+                    ret = leaf_node;
+                    cur_suffix_pos = _suffix_pos;
+                }
+            }
+        }
+        else /* ch == 0 */
+        {
+            /* guint32 weight = VAL32(node, 8); */
+            /* suffix is found in the tree! */
+
+            if( suffix < cur_suffix_pos )
+            {
+                ret = node;
+                cur_suffix_pos = suffix;
+            }
+        }
+    }
+    *suffix_pos = cur_suffix_pos;
+    return ret;
+}
+
 const char* mime_cache_lookup_suffix( MimeCache* cache, const char* filename, const char** suffix_pos )
 {
     const char* root = cache->suffix_roots;
     int i, n = cache->n_suffix_roots;
     const char* mime_type = NULL, *ret = NULL, *prev_suffix_pos = (const char*)-1;
+    int fn_len, n_nodes;
 
     if( G_UNLIKELY( ! filename || ! *filename || 0 == n ) )
         return NULL;
 
-    for( i = 0; i <n; ++i, root += 16 )
+    if( cache->has_reverse_suffix )  /* since mime.cache ver: 1.1 */
     {
-        guint32 first_child_off;
-        guint32 ch = VAL32( root, 0 );
-        const char* suffix;
+        const char *suffix, *leaf_node, *_suffix_pos = (const char*)-1;
+        fn_len = strlen( filename );
+        suffix = g_utf8_find_prev_char( filename, filename + fn_len );
+        leaf_node = lookup_reverse_suffix_nodes( cache->buffer, root, n, filename, suffix, &_suffix_pos );
 
-        suffix = strchr( filename, ch );
-        if( ! suffix )
-            continue;
-
-        first_child_off = VAL32( root, 12 );
-        n = VAL32( root, 8 );
-        do{
-            mime_type = lookup_suffix_nodes( cache->buffer, cache->buffer + first_child_off, n, g_utf8_next_char(suffix) );
-            if( mime_type && suffix < prev_suffix_pos ) /* we want the longest suffix matched. */
-            {
-                ret = mime_type;
-                prev_suffix_pos = suffix;
-            }
-        }while( (suffix = strchr( suffix + 1, ch )) );
+        if( leaf_node )
+        {
+            mime_type = cache->buffer + VAL32( leaf_node, 4 );
+            /* g_debug( "found: %s", mime_type ); */
+            *suffix_pos = _suffix_pos;
+            ret = mime_type;
+        }
     }
-    *suffix_pos = ret ? prev_suffix_pos : (const char*)-1;
+    else  /* before mime.cache ver: 1.1 */
+    {
+        for( i = 0; i <n; ++i, root += 16 )
+        {
+            guint32 first_child_off;
+            guint32 ch = VAL32( root, 0 );
+            const char* suffix;
+
+            suffix = strchr( filename, ch );
+            if( ! suffix )
+                continue;
+
+            first_child_off = VAL32( root, 12 );
+            // FIXME: is this correct???
+            n = VAL32( root, 8 );
+            do{
+                mime_type = lookup_suffix_nodes( cache->buffer, cache->buffer + first_child_off, n, g_utf8_next_char(suffix) );
+                if( mime_type && suffix < prev_suffix_pos ) /* we want the longest suffix matched. */
+                {
+                    ret = mime_type;
+                    prev_suffix_pos = suffix;
+                }
+            }while( (suffix = strchr( suffix + 1, ch )) );
+        }
+        *suffix_pos = ret ? prev_suffix_pos : (const char*)-1;
+    }
     return ret;
 }
 
@@ -377,6 +468,35 @@ const char* mime_cache_lookup_alias( MimeCache* cache, const char* mime_type )
 
 const char* mime_cache_lookup_literal( MimeCache* cache, const char* filename )
 {
+    /* FIXME: weight is used in literal lookup after mime.cache v1.1.
+     * However, it's poorly documented. So I've no idea how to implement this. */
+    if( cache->has_str_weight )
+    {
+        const char* entries = cache->literals;
+        int n = cache->n_literals;
+        int upper = n, lower = 0;
+        int middle = upper/2;
+
+        if( G_LIKELY( entries && filename && *filename ) )
+        {
+            /* binary search */
+            while( upper >= lower )
+            {
+                /* The entry size is different in v 1.1 */
+                const char* entry = entries + middle * 12;
+                const char* str2 = cache->buffer + VAL32(entry, 0);
+                int comp = strcmp( filename, str2 );
+                if( comp < 0 )
+                    upper = middle - 1;
+                else if( comp > 0 )
+                    lower = middle + 1;
+                else /* comp == 0 */
+                    return ( cache->buffer+ VAL32(entry, 4) );
+                middle = (upper + lower) / 2;
+            }
+        }
+        return NULL;
+    }
     return lookup_str_in_entries( cache, cache->literals, cache->n_literals, filename );
 }
 
@@ -386,17 +506,21 @@ const char* mime_cache_lookup_glob( MimeCache* cache, const char* filename, int 
     int i;
     int max_glob_len = 0;
 
+    /* entry size is changed in mime.cache 1.1 */
+    size_t entry_size = cache->has_str_weight ? 12 : 8;
+
     for( i = 0; i < cache->n_globs; ++i )
     {
         const char* glob = cache->buffer + VAL32( entry, 0 );
-        int glob_len;
-        if( 0 == fnmatch( glob, filename, 0 ) && (glob_len = strlen(glob)) > max_glob_len )
+        int _glob_len;
+        if( 0 == fnmatch( glob, filename, 0 ) && (_glob_len = strlen(glob)) > max_glob_len )
         {
-            max_glob_len = glob_len;
+            max_glob_len = _glob_len;
             type = (cache->buffer + VAL32( entry, 4 ));
         }
-        entry += 8;
+        entry += entry_size;
     }
+    *glob_len = max_glob_len;
     return type;
 }
 

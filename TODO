@@ -1,8 +1,6 @@
-1. Add "Find files" (using external tools: grep and find)
-2. Support user scripts for mime-type handling. (Add user 
+1. Support user scripts for mime-type handling. (Add user 
    extended options in popup menu for selected files)	PENDING
-3. Use latest ExoIconView from libexo to provide column view.
-4. Improve desktop icon support.
-5. Support remote file systems via FUSE.
-6. Support tags
+2. Improve desktop icon support.
+3. Support remote file systems via FUSE.
+4. Support tags
 

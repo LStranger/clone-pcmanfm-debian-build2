@@ -754,7 +754,11 @@ GtkWidget* create_widget( GtkWidget* parent,
             return NULL;
 
         n = get_n_props( node );
-        params = g_new0( GParameter, n );
+        if( n > 0 )
+            params = g_new0( GParameter, n );
+        else
+            params = NULL;
+
         for( n = 0, l = node->children; l; l = l->next )
         {
             XmlNode* prop_node = (XmlNode*)l->data;
@@ -778,20 +782,25 @@ GtkWidget* create_widget( GtkWidget* parent,
             {
                 has_focus = TRUE;
                 continue;
-            }            if( property_to_gparameter( objcls, prop_name, prop_node, &params[n] ) )
+            }
+
+            if( property_to_gparameter( objcls, prop_name, prop_node, &params[n] ) )
                 ++n;
             else if( prop_node )
                 special = g_slist_prepend( special, prop_node );
         }
         widget = (GtkWidget*)g_object_newv( type, n, params );
-        while( n >=0 )
+        if( params )
         {
-            if( params[n].name )
-                g_value_unset( &params[n].value );
-            --n;
+            while( n >=0 )
+            {
+                if( params[n].name )
+                    g_value_unset( &params[n].value );
+                --n;
+            }
+            g_free( params );
         }
         g_type_class_unref( objcls );
-        g_free( params );
     }
 
     if( G_UNLIKELY( !widget ) )

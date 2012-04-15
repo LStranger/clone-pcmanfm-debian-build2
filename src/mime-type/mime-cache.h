@@ -31,6 +31,8 @@ G_BEGIN_DECLS
 struct _MimeCache
 {
     char* file_path;
+    gboolean has_reverse_suffix : 1; /* since mime.cache v1.1, shared mime info v0.4 */
+    gboolean has_str_weight : 1; /* since mime.cache v1.1, shared mime info v0.4 */
     const char* buffer;
     guint size;
 

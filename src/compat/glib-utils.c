@@ -63,3 +63,20 @@ err:
     return -1;
 }
 #endif
+
+#if ! GLIB_CHECK_VERSION(2, 16, 0)
+
+#include <string.h>
+
+int g_strcmp0(const char *str1, const char *str2)
+{
+    if( G_UNLIKELY(str1 == str2) ) /* the same string or both NULL */
+        return 0;
+    if( G_UNLIKELY(str1 == NULL) )  /* str2 is non-NULL */
+        return -1;
+    else if( G_UNLIKELY(str2 == NULL) )  /* str1 is non-NULL */
+        return 1;
+    return strcmp( str1, str2 );
+}
+
+#endif

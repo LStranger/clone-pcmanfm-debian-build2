@@ -2,11 +2,14 @@
 
 SUBDIRS = src po
 
-## for sshfs
-bin_SCRIPTS = pcmanfm-ask-pass
-
 desktopdir = $(datadir)/applications
-desktop_DATA = pcmanfm.desktop
+desktop_DATA = pcmanfm.desktop \
+	       pcmanfm-find.desktop \
+	       pcmanfm-folder-handler.desktop
+@INTLTOOL_DESKTOP_RULE@
+DISTCLEANFILES = pcmanfm.desktop \
+		 pcmanfm-find.desktop \
+		 pcmanfm-folder-handler.desktop
 
 mimedir = $(datadir)/mime/packages
 mime_DATA = src/mime-type/libmimetype.xml
@@ -28,7 +31,7 @@ ui_DATA= \
 	data/ui/appchooserdlg.glade \
 	data/ui/file_properties.glade \
 	data/ui/about-dlg.glade \
-	data/ui/remote-fs-dlg.glade
+	data/ui/find-files.glade
 
 EXTRA_DIST = \
 	autogen.sh \
@@ -38,8 +41,7 @@ EXTRA_DIST = \
 	$(file_DATA) \
 	$(fallbackicon_DATA) \
 	$(ui_DATA) \
-	please_read_README_carefully_before_packaging \
-	pcmanfm-ask-pass.in
+	please_read_README_carefully_before_packaging
 
 ##install-data-hook:
 ##	update-mime-database $(datadir)/mime

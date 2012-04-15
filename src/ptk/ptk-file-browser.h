@@ -5,8 +5,6 @@
 #include "vfs-dir.h"
 #include <sys/types.h>
 
-#include "exo-icon-view.h"
-
 G_BEGIN_DECLS
 
 #define PTK_TYPE_FILE_BROWSER             (ptk_file_browser_get_type())
@@ -24,8 +22,7 @@ typedef enum{
 
 typedef enum{
     PTK_FB_SIDE_PANE_BOOKMARKS,
-    PTK_FB_SIDE_PANE_DIR_TREE,
-    PTK_FB_SIDE_PANE_REMOTE_FS
+    PTK_FB_SIDE_PANE_DIR_TREE
 }PtkFBSidePaneMode;
 
 typedef enum{
@@ -66,13 +63,13 @@ struct _PtkFileBrowser
     /* side pane */
     GtkToggleToolButton* location_btn;
     GtkToggleToolButton* dir_tree_btn;
-    GtkToggleToolButton* remote_fs_btn;
 
     GtkSortType sort_type;
     PtkFBSidePaneMode side_pane_mode : 4;
     PtkFBSortOrder sort_order : 4;
     PtkFBViewMode view_mode : 2;
 
+    gboolean single_click : 1;
     gboolean show_side_pane : 1;
     gboolean show_hidden_files : 1;
     gboolean busy : 1;
@@ -87,6 +84,7 @@ struct _PtkFileBrowser
     GtkWidget* folder_view;
     GtkWidget* folder_view_scroll;
     GtkCellRenderer* icon_render;
+    guint single_click_timeout;
 
     glong prev_update_time;
     guint update_timeout;
@@ -161,6 +159,9 @@ GtkTreeView* ptk_file_browser_get_side_view( PtkFileBrowser* file_browser );
 
 void ptk_file_browser_show_hidden_files( PtkFileBrowser* file_browser,
                                          gboolean show );
+
+void ptk_file_browser_set_single_click( PtkFileBrowser* file_browser, gboolean single_click );
+void ptk_file_browser_set_single_click_timeout( PtkFileBrowser* file_browser, guint timeout );
 
 /* Side pane */
 void ptk_file_browser_set_side_pane_mode( PtkFileBrowser* file_browser,

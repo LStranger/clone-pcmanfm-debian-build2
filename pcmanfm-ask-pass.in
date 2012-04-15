@@ -1,2 +1,0 @@
-#!/bin/sh
-exec @prefix@/bin/pcmanfm --ask-pass="$1"

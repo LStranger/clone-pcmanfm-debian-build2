@@ -10,20 +10,17 @@ src/ptk/ptk-dir-tree.c
 src/ptk/ptk-file-menu.c
 src/ptk/ptk-file-misc.c
 src/ptk/ptk-file-properties.c
-src/ptk/ptk-remote-fs-view.c
-src/ptk/ptk-remote-volume.c
 src/edit-bookmarks.c
 src/ptk/ptk-app-chooser.c
 src/vfs/vfs-app-desktop.c
 src/vfs/vfs-file-task.c
 src/vfs/vfs-volume-hal.c
-src/vfs/vfs-remote-fs-mgr.c
 src/desktop/desktop.c
 src/desktop/desktop-window.c
+src/find-files.c
 
 data/ui/prefdlg.glade
 data/ui/file_properties.glade
 data/ui/appchooserdlg.glade
 data/ui/about-dlg.glade
-data/ui/remote-fs-dlg.glade
-
+data/ui/find-files.glade

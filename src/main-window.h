@@ -33,7 +33,6 @@ typedef struct _FMMainWindow
   GtkCheckMenuItem* open_side_pane_menu;
   GtkCheckMenuItem* show_location_menu;
   GtkCheckMenuItem* show_dir_tree_menu;
-  GtkCheckMenuItem* show_remote_fs_menu;
   GtkCheckMenuItem* show_hidden_files_menu;
 
   GtkCheckMenuItem* view_as_icon;
@@ -56,6 +55,7 @@ typedef struct _FMMainWindow
   GtkAccelGroup *accel_group;
   GtkTooltips *tooltips;
 
+  GtkWindowGroup* wgroup;
   int n_busy_tasks;
 }FMMainWindow;
 

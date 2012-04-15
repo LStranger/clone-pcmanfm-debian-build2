@@ -39,7 +39,11 @@
 
 #include "ptk-utils.h"
 #include "ptk-app-chooser.h"
+#include "ptk-file-properties.h"
+#include "ptk-file-menu.h"
 
+#include "find-files.h"
+#include "pref-dialog.h"
 #include "settings.h"
 
 #include "desktop.h"
@@ -47,12 +51,14 @@
 typedef enum{
     CMD_OPEN = 1,
     CMD_OPEN_TAB,
-    CMD_FILE_PROP,
-    CMD_FILE_MENU,
-    CMD_DAEMON_MODE
+    CMD_DAEMON_MODE,
+    CMD_PREF,
+    CMD_WALLPAPER,
+    CMD_FIND_FILES
 }SocketEvent;
 
-static gboolean initialized = FALSE;
+static gboolean folder_initialized = FALSE;
+static gboolean desktop_or_deamon_initialized = FALSE;
 
 static int sock;
 GIOChannel* io_channel = NULL;
@@ -65,11 +71,11 @@ static gboolean no_desktop = FALSE;
 static gboolean old_show_desktop = FALSE;
 
 static gboolean new_tab = FALSE;
-static gboolean file_prop = FALSE;
-static gboolean file_menu = FALSE;
 
-/* for FUSE support, especially sshfs */
-static char* ask_pass = NULL;
+static int show_pref = 0;
+static gboolean set_wallpaper = FALSE;
+
+static gboolean find_files = FALSE;
 
 #ifdef HAVE_HAL
 static char* mount = NULL;
@@ -77,20 +83,30 @@ static char* umount = NULL;
 static char* eject = NULL;
 #endif
 
+static int n_pcmanfm_ref = 0;
+
 static GOptionEntry opt_entries[] =
 {
     { "no-desktop", '\0', 0, G_OPTION_ARG_NONE, &no_desktop, N_("Don't show desktop icons."), NULL },
     { "daemon-mode", 'd', 0, G_OPTION_ARG_NONE, &daemon_mode, N_("Run PCManFM as a daemon"), NULL },
     { "new-tab", 't', 0, G_OPTION_ARG_NONE, &new_tab, N_("Open folders in new tabs of the last used window instead of creating new windows"), NULL },
-/*    { "file-prop", 'p', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &file_prop, NULL, NULL },
-    { "file-menu", 'n', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &file_menu, NULL, NULL }, */
+    { "show-pref", '\0', 0, G_OPTION_ARG_INT, &show_pref, N_("Open preference dialog. 'n' is the number of page you want to show (1, 2, 3...)."), "n" },
+    { "find-files", 'f', 0, G_OPTION_ARG_NONE, &find_files, N_("Find Files with PCManFM"), NULL },
+/*
+    { "query-type", '\0', 0, G_OPTION_ARG_STRING, &query_type, N_("Query mime-type of the specified file."), NULL },
+    { "query-default", '\0', 0, G_OPTION_ARG_STRING, &query_default, N_("Query default application of the specified mime-type."), NULL },
+    { "set-default", '\0', 0, G_OPTION_ARG_STRING, &set_default, N_("Set default application of the specified mime-type."), NULL },
+*/
+#ifdef DESKTOP_INTEGRATION
+    { "set-wallpaper", '\0', 0, G_OPTION_ARG_NONE, &set_wallpaper, N_("Set desktop wallpaper"), NULL },
+#endif
+
 #ifdef HAVE_HAL
     /* hidden arguments used to mount volumes */
     { "mount", 'm', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &mount, NULL, NULL },
     { "umount", 'u', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &umount, NULL, NULL },
     { "eject", 'e', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &eject, NULL, NULL },
 #endif
-    { "ask-pass", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &ask_pass, NULL, NULL },
     {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &files, NULL, N_("[FILE1, FILE2,...]")},
     { NULL }
 };
@@ -101,6 +117,7 @@ static void get_socket_name( char* buf, int len );
 static gboolean on_socket_event( GIOChannel* ioc, GIOCondition cond, gpointer data );
 
 static void init_folder();
+static void init_daemon_or_desktop();
 static void check_icon_theme();
 
 static gboolean handle_parsed_commandline_args();
@@ -132,24 +149,27 @@ gboolean on_socket_event( GIOChannel* ioc, GIOCondition cond, gpointer data )
             close( client );
 
             new_tab = FALSE;
-            file_prop = FALSE;
-            file_menu = FALSE;
 
             switch( args->str[0] )
             {
             case CMD_OPEN_TAB:
                 new_tab = TRUE;
                 break;
-            case CMD_FILE_PROP:
-                file_prop = TRUE;
-                break;
-            case CMD_FILE_MENU:
-                file_menu = TRUE;
-                break;
             case CMD_DAEMON_MODE:
                 daemon_mode = TRUE;
                 g_string_free( args, TRUE );
                 return TRUE;
+            case CMD_PREF:
+                GDK_THREADS_ENTER();
+                fm_edit_preference( NULL, (unsigned char)args->str[1] - 1 );
+                GDK_THREADS_LEAVE();
+                return TRUE;
+            case CMD_WALLPAPER:
+                set_wallpaper = TRUE;
+                break;
+            case CMD_FIND_FILES:
+                find_files = TRUE;
+                break;
             }
 
             if( args->str[ 1 ] )
@@ -217,19 +237,28 @@ gboolean single_instance_check()
             cmd = CMD_DAEMON_MODE;
         else if( new_tab )
             cmd = CMD_OPEN_TAB;
-        else if( file_prop )
-            cmd = CMD_FILE_PROP;
-        else if( file_menu )
-            cmd = CMD_FILE_MENU;
+        else if( show_pref > 0 )
+            cmd = CMD_PREF;
+        else if( set_wallpaper )
+            cmd = CMD_WALLPAPER;
+        else if( find_files )
+            cmd = CMD_FIND_FILES;
 
         write( sock, &cmd, sizeof(char) );
-
-        if( files )
+        if( G_UNLIKELY( show_pref > 0 ) )
         {
-            for( file = files; *file; ++file )
+            cmd = (unsigned char*)show_pref;
+            write( sock, &cmd, sizeof(char) );
+        }
+        else
+        {
+            if( files )
             {
-                write( sock, *file, strlen( *file ) );
-                write( sock, "\n", 1 );
+                for( file = files; *file; ++file )
+                {
+                    write( sock, *file, strlen( *file ) );
+                    write( sock, "\n", 1 );
+                }
             }
         }
 
@@ -363,7 +392,7 @@ static void _debug_gdk_threads_leave()
 
 void init_folder()
 {
-    if( G_LIKELY(initialized) )
+    if( G_LIKELY(folder_initialized) )
         return;
 
     app_settings.bookmarks = ptk_bookmarks_get();
@@ -377,7 +406,13 @@ void init_folder()
                                       app_settings.small_icon_size );
 
     check_icon_theme();
-    initialized = TRUE;
+    folder_initialized = TRUE;
+}
+
+static void init_daemon_or_desktop()
+{
+    if( app_settings.show_desktop )
+        fm_turn_on_desktop_icons();
 }
 
 #ifdef HAVE_HAL
@@ -429,10 +464,25 @@ gboolean delayed_popup( GtkWidget* popup )
     return FALSE;
 }
 
+static void init_desktop_or_daemon()
+{
+    init_folder();
+
+    signal( SIGPIPE, SIG_IGN );
+    signal( SIGHUP, gtk_main_quit );
+    signal( SIGINT, gtk_main_quit );
+    signal( SIGTERM, gtk_main_quit );
+
+    if( app_settings.show_desktop )
+        fm_turn_on_desktop_icons();
+    desktop_or_deamon_initialized = TRUE;
+}
+
 gboolean handle_parsed_commandline_args()
 {
     FMMainWindow * main_window = NULL;
     char** file;
+    gboolean ret = TRUE;
 
     /* If no files are specified, open home dir by defualt. */
     if( G_LIKELY( ! files ) )
@@ -446,136 +496,117 @@ gboolean handle_parsed_commandline_args()
     {
         main_window = fm_main_window_get_last_active();
     }
-    else if( file_menu )    /* show popup menu for files */
+
+    if( show_pref > 0 ) /* show preferences dialog */
     {
-        /* FIXME: This doesn't work properly */
-        GtkMenu* popup;
-        GList* file_list;
-
-        if( ! daemon_mode )
-        {
-            g_warning( "--file-menu is only availble when pcmanfm daemon is running." );
-            return FALSE;
-        }
-
-        file_list = get_file_info_list( files );
-
-        if( file_list )
-        {
-            char* dir_name = g_path_get_dirname( files[0] );
-            popup = ptk_file_menu_new(
-                        files[0], (VFSFileInfo*)file_list->data,
-                        dir_name,
-                        file_list, NULL );
-            /* FIXME: I have no idea why this crap is needed.
-             *  Without this delay, the menu will fail to popup. */
-            g_timeout_add( 150, (GSourceFunc)delayed_popup, popup );
-        }
-
-        if( files != default_files )
-            g_free( files );
-        files = NULL;
-        return TRUE;
+        /* We should initialize desktop support here.
+         * Otherwise, if the user turn on the desktop support
+         * in the pref dialog, the newly loaded desktop will be uninitialized.
+         */
+        init_desktop_or_daemon();
+        fm_edit_preference( main_window, show_pref - 1 );
+        show_pref = 0;
     }
-    else if( file_prop )    /* show file properties dialog */
+    else if( find_files ) /* find files */
     {
-        GList* file_list;
-
-        file_list = get_file_info_list( files );
-        if( file_list )
-        {
-            GtkWidget* dlg;
-            char* dir_name = g_path_get_dirname( files[0] );
-            dlg = file_properties_dlg_new( NULL, dir_name, file_list );
-            gtk_dialog_run( dlg );
-            gtk_widget_destroy( dlg );
-            g_free( dir_name );
-
-            if( files != default_files )
-                g_free( files );
-            return FALSE;
-        }
+        init_folder();
+        fm_find_files( files );
+        find_files = FALSE;
     }
-
-    /* open files passed in command line arguments */
-    for( file = files; *file; ++file )
+#ifdef DESKTOP_INTEGRATION
+    else if( set_wallpaper ) /* change wallpaper */
     {
-        char* file_path, *real_path;
+        char* file = files ? files[0] : NULL;
+        char* path;
+        if( ! file )
+            return FALSE;
 
-        if( ! **file )  /* skip empty string */
-            continue;
-
-        if( g_str_has_prefix( *file, "file:" ) ) /* It's a URI */
+        if( g_str_has_prefix( file, "file:" ) )  /* URI */
         {
-            file_path = g_filename_from_uri( *file, NULL, NULL );
-            g_free( *file );
-            *file = file_path;
+            path = g_filename_from_uri( file, NULL, NULL );
+            g_free( file );
+            file = path;
         }
         else
-            file_path = *file;
+            file = g_strdup( file );
 
-        real_path = vfs_file_resolve_path( NULL, file_path );
-        if( g_file_test( real_path, G_FILE_TEST_IS_DIR ) )
+        if( g_file_test( file, G_FILE_TEST_IS_REGULAR ) )
         {
-            if( G_UNLIKELY( ! main_window ) )   /* create main window if needed */
+            g_free( app_settings.wallpaper );
+            app_settings.wallpaper = file;
+            save_settings();
+
+            if( app_settings.show_desktop && app_settings.show_wallpaper )
             {
-                /* initialize things required by folder view... */
-                if( G_UNLIKELY( ! daemon_mode ) )
-                    init_folder();
-                main_window = create_main_window();
+                if( desktop_or_deamon_initialized )
+                    fm_desktop_update_wallpaper();
             }
-            fm_main_window_add_new_tab( main_window, real_path,
-                                        app_settings.show_side_pane,
-                                        app_settings.side_pane_mode );
+        }
+        else
+            g_free( file );
+
+        ret = ( daemon_mode || (app_settings.show_desktop && desktop_or_deamon_initialized)  );
+        goto out;
+    }
+#endif
+    else /* open files/folders */
+    {
+        if( (daemon_mode || app_settings.show_desktop) && ! desktop_or_deamon_initialized )
+        {
+            init_desktop_or_daemon();
         }
         else
         {
-            open_file( real_path );
+            /* open files passed in command line arguments */
+            for( file = files; *file; ++file )
+            {
+                char* file_path, *real_path;
+
+                if( ! **file )  /* skip empty string */
+                    continue;
+
+                if( g_str_has_prefix( *file, "file:" ) ) /* It's a URI */
+                {
+                    file_path = g_filename_from_uri( *file, NULL, NULL );
+                    g_free( *file );
+                    *file = file_path;
+                }
+                else
+                    file_path = *file;
+
+                real_path = vfs_file_resolve_path( NULL, file_path );
+                if( g_file_test( real_path, G_FILE_TEST_IS_DIR ) )
+                {
+                    if( G_UNLIKELY( ! main_window ) )   /* create main window if needed */
+                    {
+                        /* initialize things required by folder view... */
+                        if( G_UNLIKELY( ! daemon_mode ) )
+                            init_folder();
+                        main_window = create_main_window();
+                    }
+                    fm_main_window_add_new_tab( main_window, real_path,
+                                                app_settings.show_side_pane,
+                                                app_settings.side_pane_mode );
+                    gtk_window_present( main_window );
+                }
+                else
+                {
+                    open_file( real_path );
+                }
+                g_free( real_path );
+            }
         }
-        g_free( real_path );
     }
 
+out:
     if( files != default_files )
         g_strfreev( files );
 
     files = NULL;
 
-    return TRUE;
-}
-
-static int ask_for_password()
-{
-    int ret = 1;
-    GtkWidget* dlg = gtk_dialog_new_with_buttons( _("Authantication"), NULL,
-                                GTK_DIALOG_MODAL,
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                GTK_STOCK_OK, GTK_RESPONSE_OK, NULL );
-    GtkWidget* hbox = gtk_hbox_new( FALSE, 4 );
-    GtkWidget* img = gtk_image_new_from_stock( GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_DIALOG );
-    GtkWidget* label = gtk_label_new(_(ask_pass));
-    GtkWidget* entry = gtk_entry_new();
-#if 0
-    const char* default_prompt = _("Password: ");
-#endif
-
-    gtk_entry_set_visibility( (GtkEntry*)entry, FALSE );
-    gtk_entry_set_activates_default( entry, TRUE );
-    gtk_dialog_set_default_response( (GtkDialog*)dlg, GTK_RESPONSE_OK );
-
-    gtk_box_pack_start( (GtkBox*)hbox, img, FALSE, TRUE, 2 );
-    gtk_box_pack_start( (GtkBox*)hbox, label, FALSE, TRUE, 2 );
-    gtk_box_pack_start( (GtkBox*)hbox, entry, TRUE, TRUE, 2 );
-
-    gtk_box_pack_start( (GtkBox*)((GtkDialog*)dlg)->vbox, hbox, TRUE, TRUE, 2 );
-    gtk_widget_show_all( dlg );
-    if( gtk_dialog_run( (GtkDialog*)dlg ) == GTK_RESPONSE_OK )
-    {
-        printf( gtk_entry_get_text(entry) );
-        ret = 0;
-    }
-    gtk_widget_destroy( dlg );
     return ret;
 }
+
 
 int main ( int argc, char *argv[] )
 {
@@ -605,10 +636,6 @@ int main ( int argc, char *argv[] )
     if( G_UNLIKELY( mount || umount || eject ) )
         return handle_mount( argv );
 #endif
-
-    /* ask the user for password, used by sshfs */
-    if( G_UNLIKELY(ask_pass) )
-        return ask_for_password();
 
     /* ensure that there is only one instance of pcmanfm.
          if there is an existing instance, command line arguments
@@ -642,32 +669,19 @@ int main ( int argc, char *argv[] )
         app_settings.show_desktop = FALSE;
     }
 
+    /* If we reach this point, we are the first instance.
+     * Subsequent processes will exit() inside single_instance_check and won't reach here.
+     */
+
     /* handle the parsed result of command line args */
-    if( daemon_mode || app_settings.show_desktop )
-    {
-        init_folder();
-        run = TRUE; /* we always need to run the main loop for daemon mode */
-
-        /* FIXME: are these necessary?? */
-        signal( SIGPIPE, SIG_IGN );
-        signal( SIGHUP, gtk_main_quit );
-        signal( SIGINT, gtk_main_quit );
-        signal( SIGTERM, gtk_main_quit );
-    }
-    else
-        run = handle_parsed_commandline_args();
-
-    if( app_settings.show_desktop )
-    {
-        fm_turn_on_desktop_icons();
-    }
+    run = handle_parsed_commandline_args();
 
     if( run )   /* run the main loop */
         gtk_main();
 
     single_instance_finalize();
 
-    if( app_settings.show_desktop )
+    if( app_settings.show_desktop && desktop_or_deamon_initialized )
         fm_turn_off_desktop_icons();
 
     if( no_desktop )    /* desktop icons is temporarily supressed */
@@ -760,4 +774,21 @@ void open_file( const char* path )
     }
     vfs_mime_type_unref( mime_type );
     vfs_file_info_unref( file );
+}
+
+/* After opening any window/dialog/tool, this should be called. */
+void pcmanfm_ref()
+{
+    ++n_pcmanfm_ref;
+}
+
+/* After closing any window/dialog/tool, this should be called.
+ * If the last window is closed and we are not a deamon, pcmanfm will quit.
+ */
+gboolean pcmanfm_unref()
+{
+    --n_pcmanfm_ref;
+    if( 0 == n_pcmanfm_ref && ! daemon_mode && !app_settings.show_desktop )
+        gtk_main_quit();
+    return FALSE;
 }

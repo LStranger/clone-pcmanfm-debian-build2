@@ -24,11 +24,15 @@
 
 #include <glib.h>
 #include "glib-mem.h"
+#include "glib-utils.h"
 #include <glib/gi18n.h>
 
 #include <stdio.h>
+#include <stdlib.h> /* for mkstemp */
 #include <string.h>
 #include <errno.h>
+
+#include "vfs-dir.h"
 
 const mode_t chmod_flags[] =
     {
@@ -102,7 +106,7 @@ static gboolean should_abort( VFSFileTask* task )
 * skip this file, overwrite existing file, or cancel all file operation.
 * The returned string is the new destination file choosed by the user
 */
-static 
+static
 gboolean check_overwrite( VFSFileTask* task,
                           const gchar* dest_file,
                           gboolean* dest_exists,
@@ -233,7 +237,9 @@ vfs_file_task_do_copy( VFSFileTask* task,
             times.modtime = file_stat.st_mtime;
             utime( dest_file, &times );
             /* Move files to different device: Need to delete source files */
-            if ( task->type == VFS_FILE_TASK_MOVE && !should_abort( task ) )
+            if ( ( task->type == VFS_FILE_TASK_MOVE
+                 || task->type == VFS_FILE_TASK_TRASH )
+                 && !should_abort( task ) )
             {
                 if ( (result = rmdir( src_file )) )
                 {
@@ -265,7 +271,7 @@ vfs_file_task_do_copy( VFSFileTask* task,
             {
                 chmod( dest_file, file_stat.st_mode );
                 /* Move files to different device: Need to delete source files */
-                if ( task->type == VFS_FILE_TASK_MOVE )
+                if( task->type == VFS_FILE_TASK_MOVE || task->type == VFS_FILE_TASK_TRASH )
                 {
                     result = unlink( src_file );
                     if ( result )
@@ -300,7 +306,7 @@ vfs_file_task_do_copy( VFSFileTask* task,
             if ( new_dest_file )
                 task->current_dest = dest_file = new_dest_file;
 
-            if ( ( wfd = creat( dest_file, 
+            if ( ( wfd = creat( dest_file,
                                 file_stat.st_mode | S_IWUSR ) ) >= 0 )
             {
                 struct utimbuf times;
@@ -324,9 +330,10 @@ vfs_file_task_do_copy( VFSFileTask* task,
                 times.actime = file_stat.st_atime;
                 times.modtime = file_stat.st_mtime;
                 utime( dest_file, &times );
-                /* Move files to different device: Need to delete source files */
 
-                if ( task->type == VFS_FILE_TASK_MOVE && !should_abort( task ) )
+                /* Move files to different device: Need to delete source files */
+                if ( (task->type == VFS_FILE_TASK_MOVE || task->type == VFS_FILE_TASK_TRASH)
+                     && !should_abort( task ) )
                 {
                     result = unlink( src_file );
                     if ( result )
@@ -432,6 +439,8 @@ vfs_file_task_move( char* src_file, VFSFileTask* task )
     struct stat dest_stat;
     gchar* file_name;
     gchar* dest_file;
+    GKeyFile* kf;   /* for trash info */
+    int tmpfd = -1;
 
     if ( should_abort( task ) )
         return ;
@@ -439,7 +448,19 @@ vfs_file_task_move( char* src_file, VFSFileTask* task )
     task->current_file = src_file;
 
     file_name = g_path_get_basename( src_file );
-    dest_file = g_build_filename( task->dest_dir, file_name, NULL );
+    if( task->type == VFS_FILE_TASK_TRASH )
+    {
+        dest_file = g_strconcat( task->dest_dir, "/",  file_name, "XXXXXX", NULL );
+        tmpfd = mkstemp( dest_file );
+        if( tmpfd < 0 )
+        {
+            goto on_error;
+        }
+        g_debug( dest_file );
+    }
+    else
+        dest_file = g_build_filename( task->dest_dir, file_name, NULL );
+
     g_free( file_name );
 
     if ( lstat( src_file, &src_stat ) == 0
@@ -461,6 +482,12 @@ vfs_file_task_move( char* src_file, VFSFileTask* task )
     {
         task->error = errno;
         call_state_callback( task, VFS_FILE_TASK_ERROR );
+    }
+on_error:
+    if( tmpfd >= 0 )
+    {
+        close( tmpfd );
+        unlink( dest_file );
     }
     g_free( dest_file );
 }
@@ -659,6 +686,7 @@ static gpointer vfs_file_task_thread ( VFSFileTask* task )
     dev_t dest_dev = 0;
     GFunc funcs[] = {( GFunc ) vfs_file_task_move,
                      ( GFunc ) vfs_file_task_copy,
+                     ( GFunc ) vfs_file_task_move,  /* trash */
                      ( GFunc ) vfs_file_task_delete,
                      ( GFunc ) vfs_file_task_link,
                      ( GFunc ) vfs_file_task_chown_chmod};
@@ -670,6 +698,14 @@ static gpointer vfs_file_task_thread ( VFSFileTask* task )
     task->state = VFS_FILE_TASK_RUNNING;
     task->current_file = ( char* ) task->src_paths->data;
     task->total_size = 0;
+
+    if( task->type == VFS_FILE_TASK_TRASH )
+    {
+        task->dest_dir = g_build_filename( vfs_get_trash_dir(), "files", NULL );
+        /* Create the trash dir if it doesn't exist */
+        if( ! g_file_test( task->dest_dir, G_FILE_TEST_EXISTS ) )
+            g_mkdir_with_parents( task->dest_dir, 0700 );
+    }
 
     call_progress_callback( task );
 
@@ -739,7 +775,7 @@ static gpointer vfs_file_task_thread ( VFSFileTask* task )
             }
             if ( S_ISLNK( file_stat.st_mode ) )      /* Don't do deep copy for symlinks */
                 task->recursive = FALSE;
-            else if ( task->type == VFS_FILE_TASK_MOVE )
+            else if ( task->type == VFS_FILE_TASK_MOVE || task->type == VFS_FILE_TASK_TRASH )
                 task->recursive = ( file_stat.st_dev != dest_dev );
 
             if ( task->recursive )

@@ -25,6 +25,9 @@ typedef struct
     int big_icon_size;
     int small_icon_size;
 
+    gboolean use_trash_can;
+    gboolean single_click;
+
     /* char* iconTheme; */
     char* terminal;
 

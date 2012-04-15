@@ -33,6 +33,9 @@
 #include "vfs-execute.h"
 #include "ptk-app-chooser.h"
 
+/* FIXME: This is a bad hack and break the independence of ptk */
+#include "settings.h"   /* for app_settings.use_trash_can */
+
 void ptk_delete_files( GtkWindow* parent_win,
                        const char* cwd,
                        GList* sel_files )
@@ -48,15 +51,18 @@ void ptk_delete_files( GtkWindow* parent_win,
     if ( ! sel_files )
         return ;
 
-    dlg = gtk_message_dialog_new( parent_win,
-                                  GTK_DIALOG_MODAL,
-                                  GTK_MESSAGE_WARNING,
-                                  GTK_BUTTONS_YES_NO,
-                                  _( "Really delete selected files?" ) );
-    ret = gtk_dialog_run( GTK_DIALOG( dlg ) );
-    gtk_widget_destroy( dlg );
-    if ( ret != GTK_RESPONSE_YES )
-        return ;
+    if( ! app_settings.use_trash_can )
+    {
+        dlg = gtk_message_dialog_new( parent_win,
+                                      GTK_DIALOG_MODAL,
+                                      GTK_MESSAGE_WARNING,
+                                      GTK_BUTTONS_YES_NO,
+                                      _( "Really delete selected files?" ) );
+        ret = gtk_dialog_run( GTK_DIALOG( dlg ) );
+        gtk_widget_destroy( dlg );
+        if ( ret != GTK_RESPONSE_YES )
+            return ;
+    }
 
     file_list = NULL;
     for ( sel = sel_files; sel; sel = g_list_next( sel ) )
@@ -67,7 +73,7 @@ void ptk_delete_files( GtkWindow* parent_win,
         file_list = g_list_prepend( file_list, file_path );
     }
     /* file_list = g_list_reverse( file_list ); */
-    task = ptk_file_task_new( VFS_FILE_TASK_DELETE,
+    task = ptk_file_task_new( app_settings.use_trash_can ? VFS_FILE_TASK_TRASH : VFS_FILE_TASK_DELETE,
                               file_list,
                               NULL,
                               GTK_WINDOW( parent_win ) );
@@ -223,12 +229,12 @@ gboolean  ptk_create_new_file( GtkWindow* parent_win,
         }
         if ( create_folder )
         {
-            result = mkdir( full_path, S_IRWXU | S_IRUSR | S_IRGRP );
+            result = mkdir( full_path, 0755 );
             ret = (result==0);
         }
         else
         {
-            result = open( full_path, O_CREAT, S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH );
+            result = open( full_path, O_CREAT, 0644 );
             if ( result != -1 )
             {
                 close( result );

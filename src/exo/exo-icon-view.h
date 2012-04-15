@@ -165,6 +165,7 @@ struct _ExoIconViewClass
   gboolean (*start_interactive_search)  (ExoIconView    *icon_view);
 
   /*< private >*/
+/*
   void (*reserved0) (void);
   void (*reserved1) (void);
   void (*reserved2) (void);
@@ -175,6 +176,7 @@ struct _ExoIconViewClass
   void (*reserved7) (void);
   void (*reserved8) (void);
   void (*reserved9) (void);
+*/
 };
 
 GType                 exo_icon_view_get_type                  (void) G_GNUC_CONST;

@@ -101,7 +101,7 @@ const char* mime_type_get_by_filename( const char* filename, struct stat* statbu
         if( G_LIKELY( ! type ) )
         {
             const char* _type = mime_cache_lookup_suffix( cache, filename, &suffix_pos );
-            if( _type &&suffix_pos < prev_suffix_pos )
+            if( _type && suffix_pos < prev_suffix_pos )
             {
                 type = _type;
                 prev_suffix_pos = suffix_pos;
@@ -117,7 +117,7 @@ const char* mime_type_get_by_filename( const char* filename, struct stat* statbu
             cache = caches[i];
             const char* matched_type;
             matched_type = mime_cache_lookup_glob( cache, filename, &glob_len );
-            /* according to the spec, we should use the longest glob matched. */
+            /* according to the mime.cache 1.0 spec, we should use the longest glob matched. */
             if( matched_type && glob_len > max_glob_len )
             {
                 type = matched_type;

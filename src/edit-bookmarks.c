@@ -14,6 +14,8 @@
 #  include <config.h>
 #endif
 
+#include "pcmanfm.h"
+
 #include "edit-bookmarks.h"
 #include "ptk-bookmarks.h"
 
@@ -154,6 +156,7 @@ gboolean edit_bookmarks( GtkWindow* parent )
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                         GTK_STOCK_OK, GTK_RESPONSE_OK,
                                         NULL );
+    gtk_dialog_set_alternative_button_order( dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
 
     list = gtk_list_store_new( NUM_COLS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING );
 
@@ -230,10 +233,12 @@ gboolean edit_bookmarks( GtkWindow* parent )
                         gtk_label_new(_("Use drag & drop to sort the items")),
                         FALSE, FALSE, 4 );
 
-    gtk_window_set_default_size ( GTK_WINDOW(dlg), 480, 460 );
+    gtk_window_set_default_size ( GTK_WINDOW(dlg), 480, 400 );
 
     gtk_widget_show_all( dlg );
     gtk_widget_grab_focus( list_view );
+
+    pcmanfm_ref();
 
     if( gtk_dialog_run( GTK_DIALOG(dlg) ) == GTK_RESPONSE_OK )
     {
@@ -265,6 +270,8 @@ gboolean edit_bookmarks( GtkWindow* parent )
     ptk_bookmarks_unref();
 
     gtk_widget_destroy( dlg );
+    pcmanfm_unref();
+
     return ret;
 }
 

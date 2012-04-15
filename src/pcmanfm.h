@@ -1,7 +1,7 @@
 /*
- *      desktop.h
+ *      pcmanfm.h
  *
- *      Copyright 2008 PCMan <pcman.tw@gmail.com>
+ *      Copyright 2008  <pcman.tw@gmail.com>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -19,26 +19,20 @@
  *      MA 02110-1301, USA.
  */
 
-#ifndef _DESKTOP_H_
-#define _DESKTOP_H_
-
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#ifndef _PCMANFM_H_
+#define _PCMANFM_H_
 
 #include <gtk/gtk.h>
-#include "desktop-window.h"
-
 
 G_BEGIN_DECLS
 
-void fm_turn_on_desktop_icons();
-void fm_turn_off_desktop_icons();
-void fm_desktop_update_thumbnails();
-void fm_desktop_update_wallpaper();
-void fm_desktop_update_colors();
-void fm_desktop_update_icons();
-void fm_desktop_set_single_click( gboolean single_click );
+/* After opening any window/dialog/tool, this should be called. */
+void pcmanfm_ref();
+
+/* After closing any window/dialog/tool, this should be called.
+ * If the last window is closed and we are not a deamon, pcmanfm will quit.
+ */
+gboolean pcmanfm_unref();
 
 G_END_DECLS
 

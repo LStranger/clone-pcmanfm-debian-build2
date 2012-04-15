@@ -102,6 +102,7 @@ gboolean open_up_progress_dlg( PtkFileTask* task )
         {
             N_( "Move: " ),
             N_( "Copy: " ),
+            N_( "Move to Trash: " ),
             N_( "Delete: " ),
             N_( "Link: " ),
             N_( "Change Properties: " )
@@ -110,6 +111,7 @@ gboolean open_up_progress_dlg( PtkFileTask* task )
         {
             N_( "Moving..." ),
             N_( "Copying..." ),
+            N_( "Moving to Trash..." ),
             N_( "Deleting..." ),
             N_( "Linking..." ),
             N_( "Changing Properties" )
@@ -304,6 +306,7 @@ gboolean on_vfs_file_task_state_cb( VFSFileTask* task,
             data->complete_notify( task, data->user_data );
         vfs_file_task_free( data->task );
         data->task = NULL;
+        ptk_file_task_destroy( data );
         break;
     case VFS_FILE_TASK_QUERY_OVERWRITE:
         new_dest = ( char** ) state_data;

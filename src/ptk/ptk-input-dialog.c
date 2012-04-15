@@ -1,7 +1,7 @@
 /*
 *  C Implementation: ptk-input-dialog
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2005
@@ -29,12 +29,14 @@ GtkWidget* ptk_input_dialog_new( const char* title,
     GtkWidget* entry;
     dlg = gtk_dialog_new_with_buttons( title,
                                        parent,
-                                       GTK_DIALOG_MODAL,
+                                       0,
                                        GTK_STOCK_CANCEL,
                                        GTK_RESPONSE_CANCEL,
                                        GTK_STOCK_OK,
                                        GTK_RESPONSE_OK,
                                        NULL );
+    gtk_dialog_set_alternative_button_order( dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
+
     box = ( ( GtkDialog* ) dlg )->vbox;
     label = gtk_label_new( prompt );
     gtk_box_pack_start( GTK_BOX( box ), label, FALSE, FALSE, 4 );

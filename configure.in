@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(pcmanfm, 0.4.4.2)
+AM_INIT_AUTOMAKE(pcmanfm, 0.5)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
@@ -11,6 +11,7 @@ AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_LIBTOOL
 AM_PROG_CC_STDC
+AC_PROG_INTLTOOL
 AC_HEADER_STDC
 
 # libtool option to control which symbols are exported
@@ -188,7 +189,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 
 dnl Add the languages which your application supports here.
-ALL_LINGUAS="zh_TW zh_CN hu fr pl it es de sv ru pt_BR ca tr eu ja pt_PT ur da no lt he"
+ALL_LINGUAS="zh_TW zh_CN hu fr pl it es de sv ru pt_BR ca tr eu ja pt_PT ur da no lt he cs nl"
 AM_GLIB_GNU_GETTEXT
 
 AC_OUTPUT([
@@ -196,7 +197,8 @@ Makefile
 src/Makefile
 po/Makefile.in
 pcmanfm.desktop
-pcmanfm-ask-pass
+pcmanfm-find.desktop
+pcmanfm-folder-handler.desktop
 ])
 
 echo

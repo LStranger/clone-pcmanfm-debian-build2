@@ -323,6 +323,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
     gboolean same_type = TRUE;
     char *owner_group, *tmp;
 
+    gtk_dialog_set_alternative_button_order( dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
     gtk_window_set_transient_for( GTK_WINDOW( dlg ), parent );
 
     data = g_slice_new0( FilePropertiesDialogData );
@@ -560,6 +561,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
                         "clicked",
                         G_CALLBACK(gtk_widget_destroy), dlg );
 
+    ptk_dialog_fit_small_screen( dlg );
     return dlg;
 }
 

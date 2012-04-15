@@ -35,6 +35,10 @@ const gboolean show_thumbnail_default = TRUE;
 const int max_thumb_size_default = 1 << 20;
 const int big_icon_size_default = 48;
 const int small_icon_size_default = 20;
+const gboolean single_click_default = FALSE;
+
+/* FIXME: temporarily disable trash since it's not finished */
+const gboolean use_trash_can_default = FALSE;
 const int open_bookmark_method_default = 1;
 const int view_mode_default = PTK_FB_ICON_VIEW;
 const int sort_order_default = PTK_FB_SORT_BY_NAME;
@@ -91,6 +95,13 @@ static void parse_general_settings( char* line )
         if( app_settings.small_icon_size <= 0 || app_settings.small_icon_size > 128 )
             app_settings.small_icon_size = small_icon_size_default;
     }
+    /* FIXME: temporarily disable trash since it's not finished */
+#if 0
+    else if ( 0 == strcmp( name, "use_trash_can" ) )
+        app_settings.use_trash_can = atoi(value);
+#endif
+    else if ( 0 == strcmp( name, "single_click" ) )
+        app_settings.single_click = atoi(value);
     else if ( 0 == strcmp( name, "view_mode" ) )
         app_settings.view_mode = atoi( value );
     else if ( 0 == strcmp( name, "sort_order" ) )
@@ -223,6 +234,7 @@ void load_settings()
     app_settings.max_thumb_size = max_thumb_size_default;
     app_settings.big_icon_size = big_icon_size_default;
     app_settings.small_icon_size = small_icon_size_default;
+    app_settings.use_trash_can = use_trash_can_default;
     app_settings.view_mode = view_mode_default;
     app_settings.open_bookmark_method = open_bookmark_method_default;
     /* app_settings.iconTheme = NULL; */
@@ -327,6 +339,13 @@ void save_settings()
             fprintf( file, "big_icon_size=%d\n", app_settings.big_icon_size );
         if ( app_settings.small_icon_size != small_icon_size_default )
             fprintf( file, "small_icon_size=%d\n", app_settings.small_icon_size );
+        /* FIXME: temporarily disable trash since it's not finished */
+#if 0
+        if ( app_settings.use_trash_can != use_trash_can_default )
+            fprintf( file, "use_trash_can=%d\n", app_settings.use_trash_can );
+#endif
+        if ( app_settings.single_click != single_click_default )
+            fprintf( file, "single_click=%d\n", app_settings.single_click );
         if ( app_settings.view_mode != view_mode_default )
             fprintf( file, "view_mode=%d\n", app_settings.view_mode );
         if ( app_settings.sort_order != sort_order_default )
