@@ -15,6 +15,7 @@ include /usr/share/dpatch/dpatch.make
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_ARCH_OS    ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
 
 
 CFLAGS = -Wall -g
@@ -86,6 +87,7 @@ install: build
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/pcmanfm-nohal
 	install -m 644 -D $(CURDIR)/pcmanfm.desktop \
 		$(CURDIR)/debian/pcmanfm-nohal/usr/share/applications/pcmanfm.desktop
+ifeq (linux,$(DEB_HOST_ARCH_OS))
 	$(MAKE) distclean
 
 	# Make pcmanfm-hal
@@ -94,6 +96,7 @@ install: build
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/pcmanfm
 	install -m 644 -D $(CURDIR)/pcmanfm.desktop \
 		$(CURDIR)/debian/pcmanfm/usr/share/applications/pcmanfm.desktop
+endif
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -105,7 +108,7 @@ binary-arch: build install
 	dh_testroot
 	dh_installchangelogs
 	dh_installdocs -A debian/AFL-2.0
-#	dh_installexamples
+	dh_installexamples -A debian/scripts
 #	dh_install
 	dh_installmenu
 #	dh_installdebconf	
@@ -126,9 +129,9 @@ binary-arch: build install
 #	dh_makeshlibs
 	dh_installdeb
 	dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
+	dh_gencontrol -s
+	dh_md5sums -s
+	dh_builddeb -s
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install 

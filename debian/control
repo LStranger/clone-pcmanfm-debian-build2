@@ -3,12 +3,12 @@ Section: utils
 Priority: optional
 Maintainer: Lu, Chao-Ming (Tetralet) <tetralet@debian.org.tw>
 Uploaders: Andrew Lee <andrew@linux.org.tw>
-Build-Depends: debhelper (>= 5), dpatch, libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake1.9, autoconf, pkg-config, libstartup-notification0-dev, shared-mime-info, libhal-dev, libdbus-glib-1-dev, libhal-storage-dev
+Build-Depends: debhelper (>= 5), dpatch, libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake1.9, autoconf, pkg-config, libstartup-notification0-dev, shared-mime-info, libhal-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386]
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.7.2.2
 
 Package: pcmanfm
-Architecture: any
+Architecture: linux-any
 Depends: ${shlibs:Depends}, gamin, shared-mime-info
 Recommends: gnome-icon-theme
 Conflicts: pcmanfm-nohal

@@ -1,7 +1,31 @@
+pcmanfm (0.3.2.2-1) unstable; urgency=low
+
+  [ Lu, Chao-Ming (Tetralet) ]
+  * New upstream release 0.3.2.2.
+    - Block unnecessary signal handlers to fix the performance problem
+      caused when doing invert selection.
+    - Fix a segfault in on_file_propertiesDlg_response triggered on 
+      chown.
+    - Fix let to avoid SegFault when file monitoring.
+    - Mark some functions as static to avoid conflicts.
+    - Invoke vfs_file_monitor_remove() with care.
+    - Fix #ifdef EACCESS for FreeBSD.
+    - Little fix for opening terminal with popup menu of desktop.
+    - Skip desktop window in Alt+Tab.
+  * Applied a patch for "FTBFS on GNU/kFreeBSD (due to unsatisfied 
+    Build-Depends on libhal-dev)" by 
+    Petr Salinger <Petr.Salinger@seznam.cz> (Closes:#404050)
+
+  [ Andrew Lee ]
+  * Taken a entry from Enrico Zini's blog to README.Debian for how to
+    replace nautilus with pcmanfm and provide genconf.sh 
+
+ -- Andrew Lee <andrew@linux.org.tw>  Tue, 26 Dec 2006 23:28:33 +0800
+
 pcmanfm (0.3.2.1-2) unstable; urgency=low
 
   [ Lu, Chao-Ming (Tetralet) ]
-  * Split to two binary packages(and conflict each other):
+  * Split to two binary packages (and conflict each other):
     - pcmanfm (HAL enabled).
     - pcmanfm-nohal (HAL disabled).
   * debian/controls: build-depends on libhal-dev, libdbus-glib-1-dev,
