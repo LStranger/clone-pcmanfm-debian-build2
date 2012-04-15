@@ -1,0 +1,18 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01_implicit-pointer-conversion.dpatch by  <andrew@linux.org.tw>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad pcmanfm-0.3.2.1~/src/vfs/vfs-file-monitor.c pcmanfm-0.3.2.1/src/vfs/vfs-file-monitor.c
+--- pcmanfm-0.3.2.1~/src/vfs/vfs-file-monitor.c	2006-10-14 23:53:54.000000000 +0800
++++ pcmanfm-0.3.2.1/src/vfs/vfs-file-monitor.c	2006-10-18 16:20:51.000000000 +0800
+@@ -20,6 +20,7 @@
+ #endif
+ 
+ #include "vfs-file-monitor.h"
++#include "vfs-file-info.h"
+ #include <sys/types.h>  /* for stat */
+ #include <sys/stat.h>
+ #include <errno.h>

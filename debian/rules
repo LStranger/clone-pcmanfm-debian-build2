@@ -25,7 +25,7 @@ else
 	CFLAGS += -O2
 endif
 
-config.status: patch-stamp configure
+config-nohal: patch-stamp configure
 	dh_testdir
 	# Add here commands to configure the package.
 	CFLAGS="$(CFLAGS)" ./configure \
@@ -36,13 +36,23 @@ config.status: patch-stamp configure
 	--infodir=\$${prefix}/share/info \
 	--disable-hal
 
+config-hal: patch-stamp configure
+	dh_testdir
+	# Add here commands to configure the package.
+	CFLAGS="$(CFLAGS)" ./configure \
+	--host=$(DEB_HOST_GNU_TYPE) \
+	--build=$(DEB_BUILD_GNU_TYPE) \
+	--prefix=/usr \
+	--mandir=\$${prefix}/share/man \
+	--infodir=\$${prefix}/share/info
+	
 build: build-stamp
 
-build-stamp:  config.status
+build-stamp:
 	dh_testdir
 
 	# Add here commands to compile the package.
-	$(MAKE)
+	
 	#docbook-to-man debian/pcmanfm.sgml > pcmanfm.1
 
 	touch build-stamp
@@ -61,7 +71,6 @@ clean: unpatch
 #	cp -f /usr/share/misc/config.guess config.guess
 #endif
 
-
 	dh_clean 
 
 install: build
@@ -71,10 +80,20 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/pcmanfm.
+	# Make pcmanfm-nohal
+	$(MAKE) -f debian/rules config-nohal
+	$(MAKE)
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/pcmanfm-nohal
+	install -m 644 -D $(CURDIR)/pcmanfm.desktop \
+		$(CURDIR)/debian/pcmanfm-nohal/usr/share/applications/pcmanfm.desktop
+	$(MAKE) distclean
+
+	# Make pcmanfm-hal
+	$(MAKE) -f debian/rules config-hal
+	$(MAKE)
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/pcmanfm
 	install -m 644 -D $(CURDIR)/pcmanfm.desktop \
 		$(CURDIR)/debian/pcmanfm/usr/share/applications/pcmanfm.desktop
-
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -84,9 +103,9 @@ binary-indep: build install
 binary-arch: build install
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs 
-	dh_installdocs debian/AFL-2.0
-	dh_installexamples
+	dh_installchangelogs
+	dh_installdocs -A debian/AFL-2.0
+#	dh_installexamples
 #	dh_install
 	dh_installmenu
 #	dh_installdebconf	
@@ -97,8 +116,8 @@ binary-arch: build install
 #	dh_installinit
 #	dh_installcron
 #	dh_installinfo
-	dh_installman debian/pcmanfm.1
-	dh_link
+	dh_installman -A debian/pcmanfm.1
+#	dh_link
 	dh_strip
 	dh_compress
 	dh_fixperms
