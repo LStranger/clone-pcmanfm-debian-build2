@@ -16,6 +16,8 @@
 #include <gtk/gtk.h>
 #include <sys/types.h>
 
+#include "vfs-volume.h"
+
 G_BEGIN_DECLS
 
 /* Create a new location view */
@@ -29,6 +31,10 @@ gboolean ptk_location_view_is_item_bookmark( GtkTreeView* location_view,
                                              GtkTreeIter* it );
 
 void ptk_location_view_rename_selected_bookmark( GtkTreeView* location_view );
+
+gboolean ptk_location_view_is_item_volume(  GtkTreeView* location_view, GtkTreeIter* it );
+
+VFSVolume* ptk_location_view_get_volume(  GtkTreeView* location_view, GtkTreeIter* it );
 
 G_END_DECLS
 

@@ -5,10 +5,12 @@ INCLUDES = \
 	-I$(top_srcdir)/src/compat \
 	-I$(top_srcdir)/src/ptk \
 	-I$(top_srcdir)/src/vfs \
-        -I$(top_srcdir)/src/libmd5-rfc \
+	-I$(top_srcdir)/src/libmd5-rfc \
+	-I$(top_srcdir)/src/desktop \
+	-I$(top_srcdir)/src/inotify \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	@PACKAGE_CFLAGS@ @HAL_CFLAGS@
+	@PACKAGE_CFLAGS@ @HAL_CFLAGS@ 
 
 bin_PROGRAMS = pcmanfm
 
@@ -31,12 +33,14 @@ VFS_SOURCES= \
 	vfs/vfs-dir.c vfs/vfs-dir.h \
 	vfs/vfs-app-desktop.c vfs/vfs-app-desktop.h \
 	vfs/vfs-file-task.c vfs/vfs-file-task.h \
-	vfs/vfs-volume.c vfs/vfs-volume.h
+	vfs/vfs-volume.c vfs/vfs-volume.h \
+	vfs/vfs-execute.c vfs/vfs-execute.h
 
 PTK_SOURCES= \
 	ptk/ptk-file-browser.c ptk/ptk-file-browser.h \
 	ptk/ptk-file-list.c ptk/ptk-file-list.h \
 	ptk/ptk-icon-view.c ptk/ptk-icon-view.h \
+	ptk/ptk-path-entry.c ptk/ptk-path-entry.h \
 	ptk/ptk-text-renderer.c ptk/ptk-text-renderer.h \
 	ptk/exo-marshal.c ptk/exo-marshal.h \
 	ptk/exo-string.c ptk/exo-string.h \
@@ -50,13 +54,25 @@ PTK_SOURCES= \
 	ptk/ptk-file-task.c ptk/ptk-file-task.h \
 	ptk/ptk-file-archiver.c ptk/ptk-file-archiver.h \
 	ptk/ptk-console-output.c ptk/ptk-console-output.h \
-	ptk/ptk-clipboard.c ptk/ptk-clipboard.h
+	ptk/ptk-clipboard.c ptk/ptk-clipboard.h \
+	ptk/ptk-file-menu.c ptk/ptk-file-menu.h \
+	ptk/ptk-file-misc.c ptk/ptk-file-misc.h
+
+DESKTOP_SOURCES= \
+	desktop/fm-desktop.c desktop/fm-desktop.h \
+	desktop/working-area.c desktop/working-area.h
+
+INOTIFY_SOURCES= \
+    inotify/inotify-syscalls.h \
+    inotify/linux-inotify.h
 
 pcmanfm_SOURCES = \
 	$(XDGMIME_SOURCES) \
 	$(PTK_SOURCES) \
+	$(INOTIFY_SOURCES) \
 	$(VFS_SOURCES) \
 	$(MD5_SOURCES) \
+	$(DESKTOP_SOURCES) \
 	compat/glib-mem.h \
 	main.c \
 	glade-support.c glade-support.h \

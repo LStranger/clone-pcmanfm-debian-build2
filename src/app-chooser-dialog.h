@@ -19,7 +19,7 @@
 G_BEGIN_DECLS
 
 /* Let the user choose a application */
-char* ptk_choose_app_for_mime_type( GtkWindow* parent,
+const gchar* ptk_choose_app_for_mime_type( GtkWindow* parent,
                                     VFSMimeType* mime_type );
 
 /* Let the user choose a application */
@@ -31,7 +31,7 @@ GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type );
 * These two can be separated by check if the returned string is ended
 * with ".desktop".
 */
-char* app_chooser_dialog_get_selected_app( GtkWidget* dlg );
+const gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg );
 
 /*
 * Check if the user set the selected app default handler.

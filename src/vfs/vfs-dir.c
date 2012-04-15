@@ -24,6 +24,7 @@ FIXME: The original multi-threading synchronization in this file is poor and
 #include "vfs-dir.h"
 #include "vfs-file-info.h"
 #include "glib-mem.h"
+#include <string.h>
 
 static void vfs_dir_class_init( VFSDirClass* klass );
 static void vfs_dir_init( VFSDir* dir );
@@ -68,6 +69,8 @@ static GObjectClass *parent_class = NULL;
 
 static GHashTable* dir_hash = NULL;
 static int xdg_mime_cb_id = 0;
+
+static guint change_notify_timeout = 0;
 
 struct VFSDirStateCallbackEnt
 {
@@ -192,12 +195,20 @@ static void vfs_dir_clear( VFSDir* dir )
     if ( dir->path )
     {
         g_hash_table_remove( dir_hash, dir->path );
+
+        /* There is no VFSDir instance */
         if ( 0 == g_hash_table_size( dir_hash ) )
         {
             g_hash_table_destroy( dir_hash );
             dir_hash = NULL;
             xdg_mime_remove_callback( xdg_mime_cb_id );
             xdg_mime_cb_id = 0;
+
+            if( change_notify_timeout )
+            {
+                g_source_remove( change_notify_timeout );
+                change_notify_timeout = 0;
+            }
         }
         g_free( dir->path );
         g_free( dir->disp_path );
@@ -254,14 +265,22 @@ static void vfs_dir_clear( VFSDir* dir )
         dir->file_list = NULL;
         dir->n_files = 0;
     }
+
+    if( dir->changed_files )
+    {
+        g_slist_foreach( dir->changed_files, (GFunc)vfs_file_info_unref, NULL );
+        g_slist_free( dir->changed_files ); 
+        dir->changed_files = NULL;
+    }
 }
 
 void vfs_dir_finalize( GObject *obj )
 {
     VFSDir * dir = VFS_DIR( obj );
 
-    if ( dir->load_notify )
-        g_source_remove( dir->load_notify );
+    do{}
+    while( g_source_remove_by_user_data( dir ) );
+
     vfs_dir_clear( dir );
 
     G_OBJECT_CLASS( parent_class ) ->finalize( obj );
@@ -316,6 +335,26 @@ void vfs_dir_load( VFSDir* dir, const char* path )
     }
 }
 
+static gboolean is_dir_desktop( const char* path )
+{
+    static int len_home_dir = 0;
+    static const char* home_dir;
+    gboolean is_desktop = FALSE;
+
+    if( G_UNLIKELY( 0 == len_home_dir ) )
+    {
+        home_dir = g_get_home_dir();
+        len_home_dir = strlen( home_dir );
+    }
+    if( 0 == strncmp( path, home_dir, len_home_dir) )
+    {
+        if( path[len_home_dir] == '/' &&
+            G_UNLIKELY(0 == strcmp(path+len_home_dir+1, "Desktop")))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 gpointer vfs_dir_load_thread( VFSDir* dir )
 {
     const gchar * file_name;
@@ -323,6 +362,7 @@ gpointer vfs_dir_load_thread( VFSDir* dir )
     GDir* dir_content;
     VFSFileInfo* file;
     GList* l;
+    gboolean is_desktop;
 
     dir->file_listed = 0;
     dir->load_complete = 0;
@@ -337,6 +377,7 @@ gpointer vfs_dir_load_thread( VFSDir* dir )
         dir_content = g_dir_open( dir->path, 0, NULL );
         if ( dir_content )
         {
+            is_desktop = is_dir_desktop( dir->path );
             while ( !dir->cancel && ( file_name = g_dir_read_name( dir_content ) ) )
             {
                 full_path = g_build_filename( dir->path, file_name, NULL );
@@ -346,6 +387,9 @@ gpointer vfs_dir_load_thread( VFSDir* dir )
                 if ( vfs_file_info_get( file, full_path, file_name ) )
                 {
                     g_mutex_lock( dir->mutex );
+                    /* Special processing for desktop folder */
+                    if( G_UNLIKELY(is_desktop) )
+                        vfs_file_info_load_special_info( file, full_path );
                     dir->file_list = g_list_prepend( dir->file_list, file );
                     g_mutex_unlock( dir->mutex );
                     ++dir->n_files;
@@ -399,6 +443,82 @@ GList* vfs_dir_find_file( VFSDir* dir, const char* file_name )
     return NULL;
 }
 
+static gboolean update_file_info( VFSDir* dir, VFSFileInfo* file )
+{
+    char* full_path;
+    char* file_name;
+    gboolean ret;
+    gboolean is_desktop = is_dir_desktop(dir->path);
+
+    /* FIXME: Dirty hack: steal the string to prevent memory allocation */
+    file_name = file->name;
+    if( file->name == file->disp_name )
+        file->disp_name = NULL;
+    file->name = NULL;
+
+    full_path = g_build_filename( dir->path, file_name, NULL );
+
+    if ( G_LIKELY( full_path ) )
+    {
+        if( G_LIKELY( vfs_file_info_get( file, full_path, file_name ) ) )
+        {
+            ret = TRUE;
+            if( G_UNLIKELY(is_desktop) )
+                vfs_file_info_load_special_info( file, full_path );
+        }
+        else /* The file doesn't exist */
+        {
+            GList* l;
+            l = g_list_find( dir->file_list, file );
+            if( G_UNLIKELY(l) )
+            {
+                dir->file_list = g_list_delete_link( dir->file_list, l );
+                --dir->n_files;
+                if ( file )
+                {
+                    g_signal_emit( dir, signals[ FILE_DELETED_SIGNAL ], 0, file );
+                    vfs_file_info_unref( file );
+                }
+            }
+            ret = FALSE;
+        }
+        g_free( full_path );
+    }
+    g_free( file_name );
+    return ret;
+}
+
+static void update_changed_files( gpointer key, gpointer data,
+                                  gpointer user_data )
+{
+    VFSDir* dir = (VFSDir*)data;
+    GSList* l;
+
+    if( dir->changed_files )
+    {
+        for( l = dir->changed_files; l; l = l->next )
+        {
+            VFSFileInfo* file = l->data;
+            g_mutex_lock( dir->mutex );
+            update_file_info( dir, file );
+            g_mutex_unlock( dir->mutex );
+            vfs_file_info_unref( file );
+        }
+        g_slist_free( dir->changed_files );
+        dir->changed_files = NULL;
+    }
+}
+
+static gboolean notify_file_change( gpointer user_data )
+{
+    GDK_THREADS_ENTER();
+    g_hash_table_foreach( dir_hash, update_changed_files, NULL );
+    /* remove the timeout */
+    change_notify_timeout = 0;
+    GDK_THREADS_LEAVE();
+    return FALSE;
+}
+
 /* Callback function which will be called when monitored events happen */
 void vfs_dir_monitor_callback( VFSFileMonitor* fm,
                                VFSFileMonitorEvent event,
@@ -410,6 +530,8 @@ void vfs_dir_monitor_callback( VFSFileMonitor* fm,
     VFSFileInfo* file = NULL;
     GList* l;
     guint signal;
+
+    GDK_THREADS_ENTER();
 
     g_mutex_lock( dir->mutex );
     switch ( event )
@@ -424,6 +546,9 @@ void vfs_dir_monitor_callback( VFSFileMonitor* fm,
                 file = vfs_file_info_new();
                 if ( vfs_file_info_get( file, full_path, NULL ) )
                 {
+                    gboolean is_desktop = is_dir_desktop(dir->path);
+                    if( G_UNLIKELY(is_desktop) )
+                        vfs_file_info_load_special_info( file, full_path );
                     dir->file_list = g_list_prepend( dir->file_list, file );
                     vfs_file_info_ref( file );
                     ++dir->n_files;
@@ -452,16 +577,42 @@ void vfs_dir_monitor_callback( VFSFileMonitor* fm,
         if ( l )
         {
             signal = FILE_CHANGED_SIGNAL;
-            full_path = g_build_filename( dir->path, file_name, NULL );
-            if ( full_path )
+            file = ( VFSFileInfo* ) l->data;
+            vfs_file_info_ref( file );
+            /*
+                NOTE: We should do some hack here not to fire "change" signal
+                      too often, or the GUI will need to be refreshed every
+                      second when the file is continuously changed.
+                      For example, when downloading a file this happens.
+
+                FIXME: Is there any better way to do this? Here's an idea:
+                       Maybe adding a timer with an interval of 5 sec or so.
+                       When the timeout handler called, it check if there is
+                       anyone request the timer to be alive. If it's true,
+                       the timeout stays alive, and will be called in the next
+                       5 seconds. The "change" signal only get fired when the file
+                       wasn't changed in the past 5 seconds, or we'll wait until
+                       the next time the handler called, and fire the signal if the
+                       file wasn't changed in the past 5 seconds.
+            */
+            if( ! g_slist_find( dir->changed_files, file ) )
             {
-                file = ( VFSFileInfo* ) l->data;
-                vfs_file_info_ref( file );
-                vfs_file_info_get( file, full_path, file_name );
-                g_free( full_path );
+                /* update file info the first time */
+                if( G_LIKELY( update_file_info( dir, file ) ) )
+                {
+                    vfs_file_info_ref( file );
+                    dir->changed_files = g_slist_prepend( dir->changed_files, file );
+
+                    if( 0 == change_notify_timeout )
+                    {
+                        /* check every 5 seconds */
+                        change_notify_timeout = g_timeout_add_full( G_PRIORITY_LOW,
+                                                                    5000,
+                                                                    notify_file_change,
+                                                                    NULL, NULL );
+                    }
+                }
             }
-            else
-                file = NULL;
         }
         break;
     }
@@ -472,12 +623,15 @@ void vfs_dir_monitor_callback( VFSFileMonitor* fm,
         g_signal_emit( dir, signals[ signal ], 0, file );
         vfs_file_info_unref( file );
     }
+    GDK_THREADS_LEAVE();
 }
 
 gboolean vfs_dir_call_state_callback( VFSDir* dir )
 {
     GSList * l;
     struct VFSDirStateCallbackEnt* ent;
+
+    gdk_threads_enter();
 
     dir->load_notify = 0;
 
@@ -512,6 +666,8 @@ gboolean vfs_dir_call_state_callback( VFSDir* dir )
             }
         }
     }
+
+    gdk_threads_leave();
     return FALSE;
 }
 
@@ -760,7 +916,6 @@ static void reload_mime_type( char* key, VFSDir* dir, gpointer user_data )
 
     if( G_UNLIKELY( ! dir || ! dir->file_list ) )
         return;
-    gdk_threads_enter();
     g_mutex_lock( dir->mutex );
     for( l = dir->file_list; l; l = l->next )
     {
@@ -777,13 +932,14 @@ static void reload_mime_type( char* key, VFSDir* dir, gpointer user_data )
         g_signal_emit( dir, signals[FILE_CHANGED_SIGNAL], 0, file );
     }
     g_mutex_unlock( dir->mutex );
-    gdk_threads_leave();
 }
 
 static void on_mime_type_reload( gpointer user_data )
 {
     if( ! dir_hash )
         return;
+    GDK_THREADS_ENTER();
     g_hash_table_foreach( dir_hash, (GHFunc)reload_mime_type, NULL );
+    GDK_THREADS_LEAVE();
 }
 

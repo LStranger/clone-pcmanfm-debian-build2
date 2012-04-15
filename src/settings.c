@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/stat.h>
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -11,7 +12,7 @@
 #include "ptk-file-browser.h"
 
 AppSettings appSettings = {0};
-const gboolean singleInstanceDefault = TRUE;
+/* const gboolean singleInstanceDefault = TRUE; */
 const gboolean showHiddenFilesDefault = FALSE;
 const gboolean showSidePaneDefault = FALSE;
 const int sidePaneModeDefault = FB_SIDE_PANE_BOOKMARKS;
@@ -24,7 +25,17 @@ const int viewModeDefault = FBVM_ICON_VIEW;
 const int sortOrderDefault = FB_SORT_BY_NAME;
 const int sortTypeDefault = GTK_SORT_ASCENDING;
 
+const gboolean showDesktopDefault = FALSE;
+const gboolean showWallpaperDefault = FALSE;
+const GdkColor desktopBg1Default={0};
+const GdkColor desktopBg2Default={0};
+const GdkColor desktopTextDefault={0, 65535, 65535, 65535};
+
 typedef void ( *SettingsParseFunc ) ( char* line );
+
+void color_from_str( GdkColor* ret, const char* value );
+void save_color( FILE* file, const char* name, 
+                 GdkColor* color );
 
 void parse_general_settings( char* line )
 {
@@ -80,8 +91,22 @@ void parse_general_settings( char* line )
         if ( value && *value )
             appSettings.terminal = strdup( value );
     }
+    /*
     else if ( 0 == strcmp( name, "singleInstance" ) )
         appSettings.singleInstance = atoi( value );
+    */
+}
+
+void color_from_str( GdkColor* ret, const char* value )
+{
+    sscanf( value, "%d,%d,%d", 
+            &ret->red, &ret->green, &ret->blue );
+}
+
+void save_color( FILE* file, const char* name, GdkColor* color )
+{
+    fprintf( file, "%s=%d,%d,%d\n", name, 
+             color->red, color->green, color->blue );
 }
 
 void parse_window_state( char* line )
@@ -112,6 +137,30 @@ void parse_window_state( char* line )
     }
 }
 
+void parse_desktop_settings( char* line )
+{
+    char * sep = strstr( line, "=" );
+    char* name;
+    char* value;
+    if ( !sep )
+        return ;
+    name = line;
+    value = sep + 1;
+    *sep = '\0';
+
+    if ( 0 == strcmp( name, "showDesktop" ) )
+        appSettings.showDesktop = atoi( value );
+    else if ( 0 == strcmp( name, "showWallpaper" ) )
+        appSettings.showWallpaper = atoi( value );
+    else if ( 0 == strcmp( name, "wallpaper" ) )
+        appSettings.wallpaper = g_strdup( value );
+    else if ( 0 == strcmp( name, "Bg1" ) )
+        color_from_str( &appSettings.desktopBg1, value );
+    else if ( 0 == strcmp( name, "Bg2" ) )
+        color_from_str( &appSettings.desktopBg2, value );
+    else if ( 0 == strcmp( name, "Text" ) )
+        color_from_str( &appSettings.desktopText, value );
+}
 
 void load_settings()
 {
@@ -123,7 +172,14 @@ void load_settings()
 
     /* set default value */
     /* General */
-    appSettings.singleInstance = singleInstanceDefault;
+    /* appSettings.singleInstance = singleInstanceDefault; */
+    appSettings.showDesktop = showDesktopDefault;
+    appSettings.showWallpaper = showWallpaperDefault;
+    appSettings.wallpaper = NULL;
+    appSettings.desktopBg1 = desktopBg1Default;
+    appSettings.desktopBg2 = desktopBg2Default;
+    appSettings.desktopText = desktopTextDefault;
+
     appSettings.encoding[ 0 ] = '\0';
     appSettings.showHiddenFiles = showHiddenFilesDefault;
     appSettings.showSidePane = showSidePaneDefault;
@@ -160,6 +216,8 @@ void load_settings()
                     func = &parse_general_settings;
                 else if ( 0 == strcmp( line + 1, "Window" ) )
                     func = &parse_window_state;
+                else if ( 0 == strcmp( line + 1, "Desktop" ) )
+                    func = &parse_desktop_settings;
                 else
                     func = NULL;
                 continue;
@@ -189,7 +247,7 @@ void save_settings()
 
     if ( ! g_file_test( path, G_FILE_TEST_EXISTS ) )
     {
-        g_mkdir( path, 0766 );
+        mkdir( path, 0766 );
     }
     chdir( path );
     g_free( path );
@@ -198,8 +256,10 @@ void save_settings()
     {
         /* General */
         fputs( "[General]\n", file );
+        /*
         if ( appSettings.singleInstance != singleInstanceDefault )
             fprintf( file, "singleInstance=%d\n", !!appSettings.singleInstance );
+        */
         if ( appSettings.encoding[ 0 ] )
             fprintf( file, "encoding=%s\n", appSettings.encoding );
         if ( appSettings.showHiddenFiles != showHiddenFilesDefault )
@@ -231,11 +291,31 @@ void save_settings()
         if ( appSettings.terminal )
             fprintf( file, "terminal=%s\n", appSettings.terminal );
 
-        fputs( "[Window]\n", file );
+        fputs( "\n[Window]\n", file );
         fprintf( file, "width=%d\n", appSettings.width );
         fprintf( file, "height=%d\n", appSettings.height );
         fprintf( file, "splitterPos=%d\n", appSettings.splitterPos );
 
+        /* Desktop */
+        fputs( "\n[Desktop]\n", file );
+        if ( appSettings.showDesktop != showDesktopDefault )
+            fprintf( file, "showDesktop=%d\n", !!appSettings.showDesktop );
+        if ( appSettings.showWallpaper != showWallpaperDefault )
+            fprintf( file, "showWallpaper=%d\n", !!appSettings.showWallpaper );
+        if ( appSettings.wallpaper && appSettings.wallpaper[ 0 ] )
+            fprintf( file, "wallpaper=%s\n", appSettings.wallpaper );
+        if ( ! gdk_color_equal( &appSettings.desktopBg1,
+               &desktopBg1Default ) )
+            save_color( file, "Bg1",
+                        &appSettings.desktopBg1 );
+        if ( ! gdk_color_equal( &appSettings.desktopBg2,
+               &desktopBg2Default ) )
+            save_color( file, "Bg2",
+                        &appSettings.desktopBg2 );
+        if ( ! gdk_color_equal( &appSettings.desktopText,
+               &desktopTextDefault ) )
+            save_color( file, "Text",
+                        &appSettings.desktopText );
         fclose( file );
     }
 
@@ -251,8 +331,8 @@ void free_settings()
     if ( appSettings.iconTheme )
         g_free( appSettings.iconTheme );
 */
-    if ( appSettings.terminal )
-        g_free( appSettings.terminal );
+    g_free( appSettings.terminal );
+    g_free( appSettings.wallpaper );
 
     ptk_bookmarks_unref();
 }

@@ -18,6 +18,7 @@
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <utime.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -26,6 +27,7 @@
 #include <glib/gi18n.h>
 
 #include <stdio.h>
+#include <string.h>
 #include <errno.h>
 
 const mode_t chmod_flags[] =
@@ -45,9 +47,9 @@ const mode_t chmod_flags[] =
 * calculation is cancelled.
 * NOTE: *size should be set to zero before calling this function.
 */
-static void get_total_size_of_dir( const char* path,
-                                   off_t* size,
-                                   gboolean* cancel );
+static void get_total_size_of_dir( VFSFileTask* task,
+                                   const char* path,
+                                   off_t* size );
 
 static gboolean
 call_progress_callback( VFSFileTask* task )
@@ -143,8 +145,7 @@ gboolean check_overwrite( VFSFileTask* task,
                 return FALSE;
             if( task->overwrite_mode != VFS_FILE_TASK_RENAME )
             {
-                if ( new_dest )
-                    g_free( new_dest );
+                g_free( new_dest );
                 *new_dest_file = NULL;
                 if( task->overwrite_mode == VFS_FILE_TASK_OVERWRITE ||
                     task->overwrite_mode == VFS_FILE_TASK_OVERWRITE_ALL )
@@ -211,11 +212,12 @@ vfs_file_task_do_copy( VFSFileTask* task,
 
         if ( result == 0 )
         {
+            struct utimbuf times;
             task->progress += file_stat.st_size;
             call_progress_callback( task );
 
             dir = g_dir_open( src_file, 0, NULL );
-            while ( file_name = g_dir_read_name( dir ) )
+            while ( (file_name = g_dir_read_name( dir )) )
             {
                 if ( should_abort( task ) )
                     break;
@@ -227,10 +229,13 @@ vfs_file_task_do_copy( VFSFileTask* task,
             }
             g_dir_close( dir );
             chmod( dest_file, file_stat.st_mode );
+            times.actime = file_stat.st_atime;
+            times.modtime = file_stat.st_mtime;
+            utime( dest_file, &times );
             /* Move files to different device: Need to delete source files */
             if ( task->type == VFS_FILE_TASK_MOVE && !should_abort( task ) )
             {
-                if ( result = rmdir( src_file ) )
+                if ( (result = rmdir( src_file )) )
                 {
                     task->error = errno;
                     call_state_callback( task, VFS_FILE_TASK_ERROR );
@@ -298,6 +303,7 @@ vfs_file_task_do_copy( VFSFileTask* task,
             if ( ( wfd = creat( dest_file, 
                                 file_stat.st_mode | S_IWUSR ) ) >= 0 )
             {
+                struct utimbuf times;
                 while ( ( rsize = read( rfd, buffer, sizeof( buffer ) ) ) > 0 )
                 {
                     if ( should_abort( task ) )
@@ -315,6 +321,9 @@ vfs_file_task_do_copy( VFSFileTask* task,
                 }
                 close( wfd );
                 chmod( dest_file, file_stat.st_mode );
+                times.actime = file_stat.st_atime;
+                times.modtime = file_stat.st_mtime;
+                utime( dest_file, &times );
                 /* Move files to different device: Need to delete source files */
 
                 if ( task->type == VFS_FILE_TASK_MOVE && !should_abort( task ) )
@@ -341,8 +350,7 @@ vfs_file_task_do_copy( VFSFileTask* task,
         }
     }
 _return_:
-    if ( new_dest_file )
-        g_free( new_dest_file );
+    g_free( new_dest_file );
 }
 
 static void
@@ -408,8 +416,7 @@ vfs_file_task_do_move ( VFSFileTask* task,
         call_state_callback( task, VFS_FILE_TASK_ERROR );
         if ( should_abort( task ) )
         {
-            if ( new_dest_file )
-                g_free( new_dest_file );
+            g_free( new_dest_file );
             return ;
         }
     }
@@ -417,8 +424,7 @@ vfs_file_task_do_move ( VFSFileTask* task,
     task->progress += file_stat.st_size;
     call_progress_callback( task );
 
-    if ( new_dest_file )
-        g_free( new_dest_file );
+    g_free( new_dest_file );
 }
 
 
@@ -489,7 +495,7 @@ vfs_file_task_delete( char* src_file, VFSFileTask* task )
     if ( S_ISDIR( file_stat.st_mode ) )
     {
         dir = g_dir_open( src_file, 0, NULL );
-        while ( file_name = g_dir_read_name( dir ) )
+        while ( (file_name = g_dir_read_name( dir )) )
         {
             if ( should_abort( task ) )
                 break;
@@ -626,9 +632,9 @@ vfs_file_task_chown_chmod( char* src_file, VFSFileTask* task )
 
         if ( S_ISDIR( src_stat.st_mode ) && task->recursive )
         {
-            if ( dir = g_dir_open( src_file, NULL, NULL ) )
+            if ( (dir = g_dir_open( src_file, 0, NULL )) )
             {
-                while ( file_name = g_dir_read_name( dir ) )
+                while ( (file_name = g_dir_read_name( dir )) )
                 {
                     if ( should_abort( task ) )
                         break;
@@ -677,10 +683,10 @@ static gpointer vfs_file_task_thread ( VFSFileTask* task )
     {
         for ( l = task->src_paths; l; l = l->next )
         {
-            /* FIXME: This has serious problems */
-            /* Check if source file is contained in destination dir */
             if( task->dest_dir && g_str_has_prefix( task->dest_dir, (char*)l->data ) )
             {
+                /* FIXME: This has serious problems */
+                /* Check if source file is contained in destination dir */
                 /* The src file is already in dest dir */
                 if( lstat( (char*)l->data, &file_stat ) == 0
                     && S_ISDIR(file_stat.st_mode) )
@@ -709,7 +715,7 @@ static gpointer vfs_file_task_thread ( VFSFileTask* task )
                         goto _exit_thread;
                 }
             }
-            get_total_size_of_dir( ( char* ) l->data, &task->total_size, &cancelled );
+            get_total_size_of_dir( task, ( char* ) l->data, &task->total_size );
         }
     }
     else
@@ -743,9 +749,8 @@ static gpointer vfs_file_task_thread ( VFSFileTask* task )
 
             if ( task->recursive )
             {
-                get_total_size_of_dir( ( char* ) l->data,
-                                       &task->total_size,
-                                       &cancelled );
+                get_total_size_of_dir( task, ( char* ) l->data,
+                                       &task->total_size );
             }
             else
             {
@@ -838,8 +843,7 @@ void vfs_file_task_free ( VFSFileTask* task )
         g_list_free( task->src_paths );
     }
 
-    if ( task->dest_dir )
-        g_free( task->dest_dir );
+    g_free( task->dest_dir );
 
     if ( task->chmod_actions )
         g_slice_free1( sizeof( guchar ) * N_CHMOD_ACTIONS,
@@ -857,17 +861,17 @@ void vfs_file_task_free ( VFSFileTask* task )
 * calculation is cancelled.
 * NOTE: *size should be set to zero before calling this function.
 */
-void get_total_size_of_dir( const char* path,
-                            off_t* size,
-                            gboolean* cancel )
+void get_total_size_of_dir( VFSFileTask* task,
+                            const char* path,
+                            off_t* size )
 {
     GDir * dir;
     const char* name;
     char* full_path;
     struct stat file_stat;
 
-    if ( *cancel )
-        return ;
+    if ( should_abort( task ) )
+        return;
 
     lstat( path, &file_stat );
 
@@ -878,15 +882,15 @@ void get_total_size_of_dir( const char* path,
     dir = g_dir_open( path, 0, NULL );
     if ( dir )
     {
-        while ( name = g_dir_read_name( dir ) )
+        while ( (name = g_dir_read_name( dir )) )
         {
-            if ( *cancel )
+            if ( should_abort( task ) )
                 break;
             full_path = g_build_filename( path, name, NULL );
             lstat( full_path, &file_stat );
             if ( S_ISDIR( file_stat.st_mode ) )
             {
-                get_total_size_of_dir( full_path, size, cancel );
+                get_total_size_of_dir( task, full_path, size );
             }
             else
             {

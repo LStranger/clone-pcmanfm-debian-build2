@@ -10,6 +10,9 @@
 *
 */
 
+#ifndef _VFS_VOLUME_H_
+#define _VFS_VOLUME_H_
+
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -21,7 +24,7 @@ typedef enum{
     VFS_VOLUME_REMOVED,
     VFS_VOLUME_MOUNTED, /* Not implemented */
     VFS_VOLUME_UNMOUNTED, /* Not implemented */
-    VFS_VOLUME_CHANGED /* Not implemented */
+    VFS_VOLUME_CHANGED
 }VFSVolumeState;
 
 typedef void ( *VFSVolumeCallback ) ( VFSVolume* vol,
@@ -62,3 +65,4 @@ gboolean vfs_volume_requires_eject( VFSVolume *vol );
 
 G_END_DECLS
 
+#endif

@@ -41,7 +41,7 @@ VFSAppDesktop* vfs_app_desktop_new( const char* file_name );
 
 void vfs_app_desktop_ref( VFSAppDesktop* app );
 
-void vfs_app_desktop_unref( VFSAppDesktop* app );
+void vfs_app_desktop_unref( gpointer data );
 
 const char* vfs_app_desktop_get_name( VFSAppDesktop* app );
 
@@ -51,15 +51,17 @@ const char* vfs_app_desktop_get_exec( VFSAppDesktop* app );
 
 GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size );
 
+const char* vfs_app_desktop_get_icon_name( VFSAppDesktop* app );
+
 gboolean vfs_app_desktop_open_multiple_files( VFSAppDesktop* app );
 
 gboolean vfs_app_desktop_open_in_terminal( VFSAppDesktop* app );
 
-#define vfs_app_desktop_execute( app, err ) \
-    vfs_app_desktop_open_files( app, NULL, err )
-
-gboolean vfs_app_desktop_open_files( VFSAppDesktop* app,
-                                     GList* file_paths, GError** err );
+gboolean vfs_app_desktop_open_files( GdkScreen* screen,
+                                     const char* working_dir,
+                                     VFSAppDesktop* app,
+                                     GList* file_paths,
+                                     GError** err );
 
 G_END_DECLS
 

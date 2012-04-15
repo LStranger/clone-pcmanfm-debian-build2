@@ -16,10 +16,8 @@
 
 #include <string.h>
 
-#define SN_API_NOT_YET_FROZEN /* FIXME:This may cause problems */
-#include <libsn/sn-launcher.h>
+#include "vfs-execute.h"
 
-#include <gdk/gdkx.h>
 
 const char desktop_entry_name[] = "Desktop Entry";
 
@@ -62,6 +60,7 @@ VFSAppDesktop* vfs_app_desktop_new( const char* file_name )
 
     if( load )
     {
+        char* tmp;
         app->disp_name = g_key_file_get_locale_string ( file,
                                                         desktop_entry_name,
                                                         "Name", NULL, NULL);
@@ -82,17 +81,10 @@ VFSAppDesktop* vfs_app_desktop_new( const char* file_name )
 
 static void vfs_app_desktop_free( VFSAppDesktop* app )
 {
-    if( app->disp_name )
-        g_free( app->disp_name );
-
-    if( app->comment )
-        g_free( app->comment );
-
-    if( app->exec )
-        g_free( app->exec );
-
-    if( app->icon_name )
-        g_free( app->icon_name );
+    g_free( app->disp_name );
+    g_free( app->comment );
+    g_free( app->exec );
+    g_free( app->icon_name );
 
     g_slice_free( VFSAppDesktop, app );
 }
@@ -102,8 +94,9 @@ void vfs_app_desktop_ref( VFSAppDesktop* app )
     ++app->n_ref;
 }
 
-void vfs_app_desktop_unref( VFSAppDesktop* app )
+void vfs_app_desktop_unref( gpointer data )
 {
+    VFSAppDesktop* app = (VFSAppDesktop*)data;
     --app->n_ref;
     if( app->n_ref <=0 )
         vfs_app_desktop_free( app );
@@ -116,7 +109,9 @@ const char* vfs_app_desktop_get_name( VFSAppDesktop* app )
 
 const char* vfs_app_desktop_get_disp_name( VFSAppDesktop* app )
 {
-    return app->disp_name;
+    if( G_LIKELY(app->disp_name) )
+        return app->disp_name;
+    return app->file_name;
 }
 
 const char* vfs_app_desktop_get_exec( VFSAppDesktop* app )
@@ -233,13 +228,16 @@ static char* translate_app_exec_to_command_line( VFSAppDesktop* app,
                 add_files = TRUE;
                 break;
             case 'u':
-                file = (char*)file_list->data;
-                tmp = g_filename_to_uri( file, NULL, NULL );
-                file = g_shell_quote( tmp );
-                g_free( tmp );
-                g_string_append( cmd, file );
-                g_free( file );
-                add_files = TRUE;
+                if( file_list && file_list->data )
+                {
+                    file = (char*)file_list->data;
+                    tmp = g_filename_to_uri( file, NULL, NULL );
+                    file = g_shell_quote( tmp );
+                    g_free( tmp );
+                    g_string_append( cmd, file );
+                    g_free( file );
+                    add_files = TRUE;
+                }
                 break;
             case 'F':
             case 'N':
@@ -255,11 +253,14 @@ static char* translate_app_exec_to_command_line( VFSAppDesktop* app,
                 break;
             case 'f':
             case 'n':
-                file = (char*)file_list->data;
-                tmp = g_shell_quote( file );
-                g_string_append( cmd, tmp );
-                g_free( tmp );
-                add_files = TRUE;
+                if( file_list && file_list->data )
+                {
+                    file = (char*)file_list->data;
+                    tmp = g_shell_quote( file );
+                    g_string_append( cmd, tmp );
+                    g_free( tmp );
+                    add_files = TRUE;
+                }
                 break;
             case 'D':
                 for( l = file_list; l; l = l->next )
@@ -274,12 +275,15 @@ static char* translate_app_exec_to_command_line( VFSAppDesktop* app,
                 add_files = TRUE;
                 break;
             case 'd':
-                tmp = g_path_get_dirname( (char*)file_list->data );
-                file = g_shell_quote( tmp );
-                g_free( tmp );
-                g_string_append( cmd, file );
-                g_free( tmp );
-                add_files = TRUE;
+                if( file_list && file_list->data )
+                {
+                    tmp = g_path_get_dirname( (char*)file_list->data );
+                    file = g_shell_quote( tmp );
+                    g_free( tmp );
+                    g_string_append( cmd, file );
+                    g_free( tmp );
+                    add_files = TRUE;
+                }
                 break;
             case 'c':
                 g_string_append( cmd, vfs_app_desktop_get_disp_name( app ) );
@@ -328,28 +332,17 @@ _finish:
     return g_string_free( cmd, FALSE );
 }
 
-gboolean sn_timeout( gpointer user_data )
-{
-    SnLauncherContext* ctx = (SnLauncherContext*)user_data;
-    gdk_threads_enter();
-    /* FIXME: startup notification, is this correct? */
-    sn_launcher_context_complete ( ctx );
-    sn_launcher_context_unref ( ctx );
-    gdk_threads_leave();
-    return FALSE;
-}
-
-gboolean vfs_app_desktop_open_files( VFSAppDesktop* app,
-                                     GList* file_paths, GError** err )
+gboolean vfs_app_desktop_open_files( GdkScreen* screen,
+                                     const char* working_dir,
+                                     VFSAppDesktop* app,
+                                     GList* file_paths,
+                                     GError** err )
 {
     char* exec = NULL;
     char* cmd;
     GList* l;
     gchar** argv;
     gint argc;
-    SnLauncherContext* ctx;
-    SnDisplay* display;
-    GdkScreen* screen;
     const char* sn_desc;
 
     if( vfs_app_desktop_get_exec( app ) )
@@ -366,8 +359,9 @@ gboolean vfs_app_desktop_open_files( VFSAppDesktop* app,
 
     if ( exec )
     {
-        display = sn_display_new (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), NULL, NULL );
-        screen = gdk_display_get_default_screen (gdk_display_get_default ());
+        if( !screen )
+            screen = gdk_screen_get_default();
+
         sn_desc = vfs_app_desktop_get_disp_name( app );
         if( !sn_desc )
             sn_desc = exec;
@@ -379,29 +373,9 @@ gboolean vfs_app_desktop_open_files( VFSAppDesktop* app,
                 g_debug( "Execute %s\n", cmd );
                 if( g_shell_parse_argv( cmd, &argc, &argv, NULL ) )
                 {
-                    ctx = sn_launcher_context_new( display, gdk_screen_get_number(screen) );
-
-                    sn_launcher_context_set_description( ctx, sn_desc );
-                    sn_launcher_context_set_name( ctx, g_get_prgname() );
-                    sn_launcher_context_set_binary_name( ctx, argv[0] );
-                    sn_launcher_context_initiate( ctx, g_get_prgname(),
-                                                  argv[0],
-                                                  CurrentTime );
-                    /* CurrentTime is defined in X11/X.h */
-
-                    g_spawn_async( NULL,
-                                   argv,
-                                   NULL,
-                                   G_SPAWN_SEARCH_PATH|
-                                   G_SPAWN_STDOUT_TO_DEV_NULL|
-                                   G_SPAWN_STDERR_TO_DEV_NULL,
-                                   sn_launcher_context_setup_child_process,
-                                   ctx,
-                                   NULL,
-                                   &err );
+                    vfs_exec_on_screen( screen, NULL, argv, NULL,
+                                        sn_desc, VFS_EXEC_DEFAULT_FLAGS, err );
                     g_strfreev( argv );
-
-                    g_timeout_add ( 30 * 1000, sn_timeout, ctx );
                 }
                 g_free( cmd );
             }
@@ -415,28 +389,12 @@ gboolean vfs_app_desktop_open_files( VFSAppDesktop* app,
                         g_debug( "Execute %s\n", cmd );
                         if( g_shell_parse_argv( cmd, &argc, &argv, NULL ) )
                         {
-                            ctx = sn_launcher_context_new( display, gdk_screen_get_number(screen) );
-
-                            sn_launcher_context_set_description( ctx, sn_desc );
-                            sn_launcher_context_set_name( ctx, g_get_prgname() );
-                            sn_launcher_context_set_binary_name( ctx, argv[0] );
-                            sn_launcher_context_initiate( ctx, g_get_prgname(),
-                                    argv[0],
-                                    CurrentTime );
-
-                            g_spawn_async( NULL,
-                                           argv,
-                                           NULL,
-                                           G_SPAWN_SEARCH_PATH|
-                                                   G_SPAWN_STDOUT_TO_DEV_NULL|
-                                                   G_SPAWN_STDERR_TO_DEV_NULL,
-                                           sn_launcher_context_setup_child_process,
-                                           ctx,
-                                           NULL,
-                                           &err );
+                            vfs_exec_on_screen( screen, NULL,argv, NULL, sn_desc,
+                                                G_SPAWN_SEARCH_PATH|
+                                                G_SPAWN_STDOUT_TO_DEV_NULL|
+                                                G_SPAWN_STDERR_TO_DEV_NULL,
+                                    err );
                             g_strfreev( argv );
-
-                            g_timeout_add ( 30 * 1000, sn_timeout, ctx );
                         }
                         g_free( cmd );
                     }

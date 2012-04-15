@@ -15,8 +15,10 @@
 
 #include "ptk-location-view.h"
 #include <stdio.h>
+#include <string.h>
 
 #include "ptk-bookmarks.h"
+#include "ptk-utils.h"
 
 #include "vfs-volume.h"
 
@@ -45,8 +47,9 @@ enum {
     N_COLS
 };
 
-static void on_bookmark_changed( PtkBookmarks* bookmarks, gpointer data )
+static void on_bookmark_changed( gpointer bookmarks_, gpointer data )
 {
+    PtkBookmarks* bookmarks = (PtkBookmarks*)bookmarks_;
     gtk_list_store_clear( GTK_LIST_STORE( model ) );
     ptk_location_view_init_model( GTK_LIST_STORE( model ) );
 }
@@ -56,7 +59,7 @@ static void on_model_destroy( gpointer data, GObject* object )
     GtkIconTheme* icon_theme;
 
     model = NULL;
-    ptk_bookmarks_remove_callback( ( GSourceFunc ) on_bookmark_changed, NULL );
+    ptk_bookmarks_remove_callback( on_bookmark_changed, NULL );
     n_vols = 0;
 
     icon_theme = gtk_icon_theme_get_default();
@@ -85,6 +88,7 @@ static void update_icons()
     gtk_list_store_set( list, &it, COL_ICON, icon, -1 );
     if ( icon )
         gdk_pixbuf_unref( icon );
+
 
     for( i = 0; i < n_vols; ++i )
     {
@@ -154,6 +158,7 @@ void ptk_location_view_init_model( GtkListStore* list )
       gdk_pixbuf_unref(icon);
     */
 
+    n_vols = 0;
     volumes = vfs_volume_get_all_volumes( &n );
     vfs_volume_add_callback( on_volume_event, model );
     /* Add mountable devices to the list */
@@ -240,7 +245,7 @@ GtkWidget* ptk_location_view_new()
         g_object_weak_ref( G_OBJECT( list ), on_model_destroy, NULL );
         model = ( GtkTreeModel* ) list;
         ptk_location_view_init_model( list );
-        ptk_bookmarks_add_callback( ( GSourceFunc ) on_bookmark_changed, NULL );
+        ptk_bookmarks_add_callback( on_bookmark_changed, NULL );
         icon_theme = gtk_icon_theme_get_default();
         theme_changed = g_signal_connect( icon_theme, "changed",
                                           G_CALLBACK( update_icons ), NULL );
@@ -250,7 +255,7 @@ GtkWidget* ptk_location_view_new()
         g_object_ref( G_OBJECT( model ) );
     }
 
-    view = gtk_tree_view_new_with_model( model );
+    view = GTK_TREE_VIEW(gtk_tree_view_new_with_model( model ));
     g_object_unref( G_OBJECT( model ) );
 
     gtk_tree_view_set_headers_visible( view, FALSE );
@@ -310,6 +315,32 @@ gboolean ptk_location_view_chdir( GtkTreeView* location_view, const char* path )
     return FALSE;
 }
 
+static gboolean try_mount( GtkTreeView* view, VFSVolume* vol )
+{
+    GtkWidget* parent;
+    GtkWidget* dlg;
+    gboolean mount_ok = FALSE;
+
+    parent = gtk_widget_get_toplevel( GTK_WIDGET(view) );
+    dlg = gtk_message_dialog_new( GTK_WINDOW(parent),
+                                  GTK_DIALOG_MODAL,
+                                  GTK_MESSAGE_QUESTION,
+                                  GTK_BUTTONS_YES_NO,
+                                  _("The volume \"%s\" is not mounted.\nDo you want to mount it?"),
+                                  vfs_volume_get_disp_name( vol ) );
+    mount_ok = (gtk_dialog_run( GTK_DIALOG(dlg) ) == GTK_RESPONSE_YES );
+    gtk_widget_destroy( dlg );
+
+    if( mount_ok )
+    {
+        mount_ok = vfs_volume_mount( vol );
+        if( ! mount_ok )
+            ptk_show_error( GTK_WINDOW(parent), _("Unable to mount device") );
+    }
+
+    return mount_ok;
+}
+
 char* ptk_location_view_get_selected_dir( GtkTreeView* location_view )
 {
     GtkTreeIter it;
@@ -332,9 +363,12 @@ char* ptk_location_view_get_selected_dir( GtkTreeView* location_view )
             if( i >= 2 && i < (2 + n_vols) ) /* volume */
             {
                 gtk_tree_model_get( model, &it, COL_DATA, &vol, -1 );
+                if( ! vfs_volume_is_mounted( vol ) )
+                    try_mount( location_view, vol );
+
                 real_path = (char*)vfs_volume_get_mount_point( vol );
                 gtk_list_store_set( GTK_LIST_STORE(model), &it, COL_PATH, real_path, -1 );
-                return real_path ? g_strdup(real_path) : NULL;
+                return g_strdup(real_path);
             }
         }
     }
@@ -347,12 +381,17 @@ void on_volume_event ( VFSVolume* vol, VFSVolumeState state, gpointer user_data 
     {
     case VFS_VOLUME_ADDED:
         add_volume( vol, TRUE );
+        vfs_volume_mount( vol );
         break;
     case VFS_VOLUME_REMOVED:
         remove_volume( vol );
         break;
     case VFS_VOLUME_CHANGED:
         update_volume( vol );
+        break;
+    /* FIXME:
+        VFS_VOLUME_MOUNTED VFS_VOLUME_UNMOUNTED not handled */
+    default:
         break;
     }
 }
@@ -363,17 +402,22 @@ void add_volume( VFSVolume* vol, gboolean set_icon )
     GdkPixbuf* icon;
     GtkTreeIter it;
     int pos;
+    const char* mnt;
 
     if ( vfs_volume_is_removable( vol ) )
         pos = 2;
     else
         pos = 2 + n_vols;
 
+    mnt = vfs_volume_get_mount_point( vol );
+    if( mnt && !*mnt )
+        mnt = NULL;
+    /* FIXME: Volumes should be sorted */
     gtk_list_store_insert_with_values( GTK_LIST_STORE( model ), &it, pos,
                                        COL_NAME,
                                        vfs_volume_get_disp_name( vol ),
                                        COL_PATH,
-                                       vfs_volume_get_mount_point( vol ),
+                                       mnt,
                                        COL_DATA, vol, -1 );
     if( set_icon )
     {
@@ -412,11 +456,10 @@ void update_volume( VFSVolume* vol )
     GtkTreeIter it;
     VFSVolume* v = NULL;
 
-    return ;
     gtk_tree_model_get_iter_first( model, &it );
     do
     {
-        gtk_tree_model_get( model, COL_DATA, &v, -1 );
+        gtk_tree_model_get( model, &it, COL_DATA, &v, -1 );
     }
     while ( v != vol && gtk_tree_model_iter_next( model, &it ) );
     if ( v != vol )
@@ -446,15 +489,17 @@ void on_row_activated( GtkTreeView* view, GtkTreePath* tree_path,
     GtkWidget* toplevel;
     GdkCursor* cursor;
 
+#if 0
     i = gtk_tree_path_get_indices( tree_path ) [ 0 ];
     if ( i >= 2 && i < ( 2 + n_vols ) )   /* Volume */
     {
         if ( ! gtk_tree_model_get_iter( model, &it, tree_path ) )
             return ;
         gtk_tree_model_get( model, &it, COL_DATA, &vol, -1 );
+
         if ( ! vfs_volume_is_mounted( vol ) )
         {
-            toplevel = gtk_widget_get_toplevel( view );
+            toplevel = gtk_widget_get_toplevel( GTK_WIDGET(view) );
             cursor = gdk_cursor_new_for_display( gdk_display_get_default(), GDK_WATCH );
             gdk_window_set_cursor( toplevel->window, cursor );
             gdk_cursor_unref( cursor );
@@ -465,8 +510,14 @@ void on_row_activated( GtkTreeView* view, GtkTreePath* tree_path,
                                 _( "Unable to mount device" ) );
             }
             gdk_window_set_cursor( toplevel->window, NULL );
+            if( vfs_volume_get_mount_point( vol ) )
+            {
+                gtk_list_store_set( GTK_LIST_STORE( model ), &it,
+                                    COL_PATH, vfs_volume_get_mount_point( vol ), -1 );
+            }
         }
     }
+#endif
 }
 
 static void on_mount( GtkMenuItem* item, VFSVolume* vol )
@@ -485,8 +536,6 @@ static void on_eject( GtkMenuItem* item, VFSVolume* vol )
 {
     if( vfs_volume_is_mounted( vol ) )
         on_umount( item, vol );
-    if( ! vfs_volume_is_mounted( vol ) )
-        return;
     if( ! vfs_volume_eject( vol ) )
         ptk_show_error( NULL, _("Unable to eject device") );
 }
@@ -516,7 +565,7 @@ gboolean on_button_press_event( GtkTreeView* view, GdkEventButton* evt,
     GtkTreePath* tree_path;
     int pos;
     GtkMenu* popup;
-    GtkImageMenuItem* item;
+    GtkWidget* item;
     VFSVolume* vol;
 
     if( evt->button != 2 && evt->button != 3 )
@@ -537,7 +586,7 @@ gboolean on_button_press_event( GtkTreeView* view, GdkEventButton* evt,
         {
             if( pos < ( 2 + n_vols ) )  /* volume */
             {
-                popup = gtk_menu_new();
+                popup = GTK_MENU(gtk_menu_new());
                 gtk_tree_model_get( model, &it, COL_DATA, &vol, -1 );
 
                 item = gtk_menu_item_new_with_mnemonic( _( "_Mount File System" ) );
@@ -561,7 +610,7 @@ gboolean on_button_press_event( GtkTreeView* view, GdkEventButton* evt,
                     gtk_widget_set_sensitive( item, FALSE );
                 gtk_menu_shell_append( GTK_MENU_SHELL( popup ), item );
 
-                gtk_widget_show_all( popup );
+                gtk_widget_show_all( GTK_WIDGET(popup) );
                 g_signal_connect( popup, "selection-done",
                                   G_CALLBACK( gtk_widget_destroy ), NULL );
                 gtk_menu_popup( popup, NULL, NULL, NULL, NULL, evt->button, evt->time );
@@ -598,7 +647,7 @@ void ptk_location_view_rename_selected_bookmark( GtkTreeView* location_view )
                     g_object_set( G_OBJECT(l->data), "editable", TRUE, NULL );
                     gtk_tree_view_set_cursor_on_cell( location_view, tree_path,
                                                       col,
-                                                      GTK_CELL_RENDERER_TEXT( l->data ),
+                                                      GTK_CELL_RENDERER( l->data ),
                                                       TRUE );
                     g_object_set( G_OBJECT(l->data), "editable", FALSE, NULL );
                     break;
@@ -611,3 +660,27 @@ void ptk_location_view_rename_selected_bookmark( GtkTreeView* location_view )
 }
 
 
+gboolean ptk_location_view_is_item_volume(  GtkTreeView* location_view, GtkTreeIter* it )
+{
+    int pos;
+    GtkTreePath* tree_path;
+
+    if( n_vols == 0 )
+        return FALSE;
+
+    tree_path = gtk_tree_model_get_path( model, it );
+    if( ! tree_path )
+        return FALSE;
+
+    pos = gtk_tree_path_get_indices( tree_path ) [ 0 ];
+    gtk_tree_path_free( tree_path );
+
+    return ( pos > 2 && pos < ( 2 + n_vols ));
+}
+
+VFSVolume* ptk_location_view_get_volume(  GtkTreeView* location_view, GtkTreeIter* it )
+{
+    VFSVolume* vol = NULL;
+    gtk_tree_model_get( model, it, COL_DATA, &vol, -1 );
+    return vol;
+}

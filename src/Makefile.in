@@ -52,27 +52,31 @@ am__objects_1 = xdgmimealias.$(OBJEXT) xdgmime.$(OBJEXT) \
 	xdgmimeint.$(OBJEXT) xdgmimemagic.$(OBJEXT) \
 	xdgmimeparent.$(OBJEXT)
 am__objects_2 = ptk-file-browser.$(OBJEXT) ptk-file-list.$(OBJEXT) \
-	ptk-icon-view.$(OBJEXT) ptk-text-renderer.$(OBJEXT) \
-	exo-marshal.$(OBJEXT) exo-string.$(OBJEXT) \
-	ptk-file-icon-renderer.$(OBJEXT) ptk-utils.$(OBJEXT) \
-	ptk-dir-tree-view.$(OBJEXT) ptk-dir-tree.$(OBJEXT) \
-	ptk-location-view.$(OBJEXT) ptk-bookmarks.$(OBJEXT) \
-	ptk-input-dialog.$(OBJEXT) ptk-file-task.$(OBJEXT) \
-	ptk-file-archiver.$(OBJEXT) ptk-console-output.$(OBJEXT) \
-	ptk-clipboard.$(OBJEXT)
-am__objects_3 = vfs-file-monitor.$(OBJEXT) vfs-mime-type.$(OBJEXT) \
+	ptk-icon-view.$(OBJEXT) ptk-path-entry.$(OBJEXT) \
+	ptk-text-renderer.$(OBJEXT) exo-marshal.$(OBJEXT) \
+	exo-string.$(OBJEXT) ptk-file-icon-renderer.$(OBJEXT) \
+	ptk-utils.$(OBJEXT) ptk-dir-tree-view.$(OBJEXT) \
+	ptk-dir-tree.$(OBJEXT) ptk-location-view.$(OBJEXT) \
+	ptk-bookmarks.$(OBJEXT) ptk-input-dialog.$(OBJEXT) \
+	ptk-file-task.$(OBJEXT) ptk-file-archiver.$(OBJEXT) \
+	ptk-console-output.$(OBJEXT) ptk-clipboard.$(OBJEXT) \
+	ptk-file-menu.$(OBJEXT) ptk-file-misc.$(OBJEXT)
+am__objects_3 =
+am__objects_4 = vfs-file-monitor.$(OBJEXT) vfs-mime-type.$(OBJEXT) \
 	vfs-file-info.$(OBJEXT) vfs-dir.$(OBJEXT) \
 	vfs-app-desktop.$(OBJEXT) vfs-file-task.$(OBJEXT) \
-	vfs-volume.$(OBJEXT)
-am__objects_4 = md5.$(OBJEXT)
+	vfs-volume.$(OBJEXT) vfs-execute.$(OBJEXT)
+am__objects_5 = md5.$(OBJEXT)
+am__objects_6 = fm-desktop.$(OBJEXT) working-area.$(OBJEXT)
 am_pcmanfm_OBJECTS = $(am__objects_1) $(am__objects_2) \
-	$(am__objects_3) $(am__objects_4) main.$(OBJEXT) \
-	glade-support.$(OBJEXT) main-window.$(OBJEXT) \
-	file-properties.$(OBJEXT) file-properties-ui.$(OBJEXT) \
-	settings.$(OBJEXT) pref-dialog.$(OBJEXT) \
-	pref-dialog-ui.$(OBJEXT) edit-bookmarks.$(OBJEXT) \
-	app-chooser-dialog.$(OBJEXT) app-chooser-dialog-ui.$(OBJEXT) \
-	file-assoc-dlg.$(OBJEXT) file-assoc-dlg-ui.$(OBJEXT)
+	$(am__objects_3) $(am__objects_4) $(am__objects_5) \
+	$(am__objects_6) main.$(OBJEXT) glade-support.$(OBJEXT) \
+	main-window.$(OBJEXT) file-properties.$(OBJEXT) \
+	file-properties-ui.$(OBJEXT) settings.$(OBJEXT) \
+	pref-dialog.$(OBJEXT) pref-dialog-ui.$(OBJEXT) \
+	edit-bookmarks.$(OBJEXT) app-chooser-dialog.$(OBJEXT) \
+	app-chooser-dialog-ui.$(OBJEXT) file-assoc-dlg.$(OBJEXT) \
+	file-assoc-dlg-ui.$(OBJEXT)
 pcmanfm_OBJECTS = $(am_pcmanfm_OBJECTS)
 am__DEPENDENCIES_1 =
 pcmanfm_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -197,10 +201,12 @@ INCLUDES = \
 	-I$(top_srcdir)/src/compat \
 	-I$(top_srcdir)/src/ptk \
 	-I$(top_srcdir)/src/vfs \
-        -I$(top_srcdir)/src/libmd5-rfc \
+	-I$(top_srcdir)/src/libmd5-rfc \
+	-I$(top_srcdir)/src/desktop \
+	-I$(top_srcdir)/src/inotify \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-	@PACKAGE_CFLAGS@ @HAL_CFLAGS@
+	@PACKAGE_CFLAGS@ @HAL_CFLAGS@ 
 
 XDGMIME_SOURCES = \
 	xdgmime/xdgmimealias.c xdgmime/xdgmimealias.h \
@@ -221,12 +227,14 @@ VFS_SOURCES = \
 	vfs/vfs-dir.c vfs/vfs-dir.h \
 	vfs/vfs-app-desktop.c vfs/vfs-app-desktop.h \
 	vfs/vfs-file-task.c vfs/vfs-file-task.h \
-	vfs/vfs-volume.c vfs/vfs-volume.h
+	vfs/vfs-volume.c vfs/vfs-volume.h \
+	vfs/vfs-execute.c vfs/vfs-execute.h
 
 PTK_SOURCES = \
 	ptk/ptk-file-browser.c ptk/ptk-file-browser.h \
 	ptk/ptk-file-list.c ptk/ptk-file-list.h \
 	ptk/ptk-icon-view.c ptk/ptk-icon-view.h \
+	ptk/ptk-path-entry.c ptk/ptk-path-entry.h \
 	ptk/ptk-text-renderer.c ptk/ptk-text-renderer.h \
 	ptk/exo-marshal.c ptk/exo-marshal.h \
 	ptk/exo-string.c ptk/exo-string.h \
@@ -240,13 +248,25 @@ PTK_SOURCES = \
 	ptk/ptk-file-task.c ptk/ptk-file-task.h \
 	ptk/ptk-file-archiver.c ptk/ptk-file-archiver.h \
 	ptk/ptk-console-output.c ptk/ptk-console-output.h \
-	ptk/ptk-clipboard.c ptk/ptk-clipboard.h
+	ptk/ptk-clipboard.c ptk/ptk-clipboard.h \
+	ptk/ptk-file-menu.c ptk/ptk-file-menu.h \
+	ptk/ptk-file-misc.c ptk/ptk-file-misc.h
+
+DESKTOP_SOURCES = \
+	desktop/fm-desktop.c desktop/fm-desktop.h \
+	desktop/working-area.c desktop/working-area.h
+
+INOTIFY_SOURCES = \
+    inotify/inotify-syscalls.h \
+    inotify/linux-inotify.h
 
 pcmanfm_SOURCES = \
 	$(XDGMIME_SOURCES) \
 	$(PTK_SOURCES) \
+	$(INOTIFY_SOURCES) \
 	$(VFS_SOURCES) \
 	$(MD5_SOURCES) \
+	$(DESKTOP_SOURCES) \
 	compat/glib-mem.h \
 	main.c \
 	glade-support.c glade-support.h \
@@ -338,6 +358,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file-assoc-dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file-properties-ui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file-properties.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fm-desktop.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glade-support.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main-window.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
@@ -353,20 +374,25 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-file-browser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-file-icon-renderer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-file-list.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-file-menu.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-file-misc.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-file-task.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-icon-view.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-input-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-location-view.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-path-entry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-text-renderer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ptk-utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/settings.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-app-desktop.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-dir.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-execute.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-file-info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-file-monitor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-file-task.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-mime-type.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs-volume.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/working-area.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmime.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimealias.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimecache.Po@am__quote@
@@ -528,6 +554,20 @@ ptk-icon-view.obj: ptk/ptk-icon-view.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ptk/ptk-icon-view.c' object='ptk-icon-view.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-icon-view.obj `if test -f 'ptk/ptk-icon-view.c'; then $(CYGPATH_W) 'ptk/ptk-icon-view.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-icon-view.c'; fi`
+
+ptk-path-entry.o: ptk/ptk-path-entry.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ptk-path-entry.o -MD -MP -MF "$(DEPDIR)/ptk-path-entry.Tpo" -c -o ptk-path-entry.o `test -f 'ptk/ptk-path-entry.c' || echo '$(srcdir)/'`ptk/ptk-path-entry.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/ptk-path-entry.Tpo" "$(DEPDIR)/ptk-path-entry.Po"; else rm -f "$(DEPDIR)/ptk-path-entry.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ptk/ptk-path-entry.c' object='ptk-path-entry.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-path-entry.o `test -f 'ptk/ptk-path-entry.c' || echo '$(srcdir)/'`ptk/ptk-path-entry.c
+
+ptk-path-entry.obj: ptk/ptk-path-entry.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ptk-path-entry.obj -MD -MP -MF "$(DEPDIR)/ptk-path-entry.Tpo" -c -o ptk-path-entry.obj `if test -f 'ptk/ptk-path-entry.c'; then $(CYGPATH_W) 'ptk/ptk-path-entry.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-path-entry.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/ptk-path-entry.Tpo" "$(DEPDIR)/ptk-path-entry.Po"; else rm -f "$(DEPDIR)/ptk-path-entry.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ptk/ptk-path-entry.c' object='ptk-path-entry.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-path-entry.obj `if test -f 'ptk/ptk-path-entry.c'; then $(CYGPATH_W) 'ptk/ptk-path-entry.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-path-entry.c'; fi`
 
 ptk-text-renderer.o: ptk/ptk-text-renderer.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ptk-text-renderer.o -MD -MP -MF "$(DEPDIR)/ptk-text-renderer.Tpo" -c -o ptk-text-renderer.o `test -f 'ptk/ptk-text-renderer.c' || echo '$(srcdir)/'`ptk/ptk-text-renderer.c; \
@@ -725,6 +765,34 @@ ptk-clipboard.obj: ptk/ptk-clipboard.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-clipboard.obj `if test -f 'ptk/ptk-clipboard.c'; then $(CYGPATH_W) 'ptk/ptk-clipboard.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-clipboard.c'; fi`
 
+ptk-file-menu.o: ptk/ptk-file-menu.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ptk-file-menu.o -MD -MP -MF "$(DEPDIR)/ptk-file-menu.Tpo" -c -o ptk-file-menu.o `test -f 'ptk/ptk-file-menu.c' || echo '$(srcdir)/'`ptk/ptk-file-menu.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/ptk-file-menu.Tpo" "$(DEPDIR)/ptk-file-menu.Po"; else rm -f "$(DEPDIR)/ptk-file-menu.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ptk/ptk-file-menu.c' object='ptk-file-menu.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-file-menu.o `test -f 'ptk/ptk-file-menu.c' || echo '$(srcdir)/'`ptk/ptk-file-menu.c
+
+ptk-file-menu.obj: ptk/ptk-file-menu.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ptk-file-menu.obj -MD -MP -MF "$(DEPDIR)/ptk-file-menu.Tpo" -c -o ptk-file-menu.obj `if test -f 'ptk/ptk-file-menu.c'; then $(CYGPATH_W) 'ptk/ptk-file-menu.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-file-menu.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/ptk-file-menu.Tpo" "$(DEPDIR)/ptk-file-menu.Po"; else rm -f "$(DEPDIR)/ptk-file-menu.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ptk/ptk-file-menu.c' object='ptk-file-menu.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-file-menu.obj `if test -f 'ptk/ptk-file-menu.c'; then $(CYGPATH_W) 'ptk/ptk-file-menu.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-file-menu.c'; fi`
+
+ptk-file-misc.o: ptk/ptk-file-misc.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ptk-file-misc.o -MD -MP -MF "$(DEPDIR)/ptk-file-misc.Tpo" -c -o ptk-file-misc.o `test -f 'ptk/ptk-file-misc.c' || echo '$(srcdir)/'`ptk/ptk-file-misc.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/ptk-file-misc.Tpo" "$(DEPDIR)/ptk-file-misc.Po"; else rm -f "$(DEPDIR)/ptk-file-misc.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ptk/ptk-file-misc.c' object='ptk-file-misc.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-file-misc.o `test -f 'ptk/ptk-file-misc.c' || echo '$(srcdir)/'`ptk/ptk-file-misc.c
+
+ptk-file-misc.obj: ptk/ptk-file-misc.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT ptk-file-misc.obj -MD -MP -MF "$(DEPDIR)/ptk-file-misc.Tpo" -c -o ptk-file-misc.obj `if test -f 'ptk/ptk-file-misc.c'; then $(CYGPATH_W) 'ptk/ptk-file-misc.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-file-misc.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/ptk-file-misc.Tpo" "$(DEPDIR)/ptk-file-misc.Po"; else rm -f "$(DEPDIR)/ptk-file-misc.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ptk/ptk-file-misc.c' object='ptk-file-misc.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o ptk-file-misc.obj `if test -f 'ptk/ptk-file-misc.c'; then $(CYGPATH_W) 'ptk/ptk-file-misc.c'; else $(CYGPATH_W) '$(srcdir)/ptk/ptk-file-misc.c'; fi`
+
 vfs-file-monitor.o: vfs/vfs-file-monitor.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT vfs-file-monitor.o -MD -MP -MF "$(DEPDIR)/vfs-file-monitor.Tpo" -c -o vfs-file-monitor.o `test -f 'vfs/vfs-file-monitor.c' || echo '$(srcdir)/'`vfs/vfs-file-monitor.c; \
 @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/vfs-file-monitor.Tpo" "$(DEPDIR)/vfs-file-monitor.Po"; else rm -f "$(DEPDIR)/vfs-file-monitor.Tpo"; exit 1; fi
@@ -823,6 +891,20 @@ vfs-volume.obj: vfs/vfs-volume.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o vfs-volume.obj `if test -f 'vfs/vfs-volume.c'; then $(CYGPATH_W) 'vfs/vfs-volume.c'; else $(CYGPATH_W) '$(srcdir)/vfs/vfs-volume.c'; fi`
 
+vfs-execute.o: vfs/vfs-execute.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT vfs-execute.o -MD -MP -MF "$(DEPDIR)/vfs-execute.Tpo" -c -o vfs-execute.o `test -f 'vfs/vfs-execute.c' || echo '$(srcdir)/'`vfs/vfs-execute.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/vfs-execute.Tpo" "$(DEPDIR)/vfs-execute.Po"; else rm -f "$(DEPDIR)/vfs-execute.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='vfs/vfs-execute.c' object='vfs-execute.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o vfs-execute.o `test -f 'vfs/vfs-execute.c' || echo '$(srcdir)/'`vfs/vfs-execute.c
+
+vfs-execute.obj: vfs/vfs-execute.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT vfs-execute.obj -MD -MP -MF "$(DEPDIR)/vfs-execute.Tpo" -c -o vfs-execute.obj `if test -f 'vfs/vfs-execute.c'; then $(CYGPATH_W) 'vfs/vfs-execute.c'; else $(CYGPATH_W) '$(srcdir)/vfs/vfs-execute.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/vfs-execute.Tpo" "$(DEPDIR)/vfs-execute.Po"; else rm -f "$(DEPDIR)/vfs-execute.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='vfs/vfs-execute.c' object='vfs-execute.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o vfs-execute.obj `if test -f 'vfs/vfs-execute.c'; then $(CYGPATH_W) 'vfs/vfs-execute.c'; else $(CYGPATH_W) '$(srcdir)/vfs/vfs-execute.c'; fi`
+
 md5.o: libmd5-rfc/md5.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT md5.o -MD -MP -MF "$(DEPDIR)/md5.Tpo" -c -o md5.o `test -f 'libmd5-rfc/md5.c' || echo '$(srcdir)/'`libmd5-rfc/md5.c; \
 @am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/md5.Tpo" "$(DEPDIR)/md5.Po"; else rm -f "$(DEPDIR)/md5.Tpo"; exit 1; fi
@@ -836,6 +918,34 @@ md5.obj: libmd5-rfc/md5.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='libmd5-rfc/md5.c' object='md5.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o md5.obj `if test -f 'libmd5-rfc/md5.c'; then $(CYGPATH_W) 'libmd5-rfc/md5.c'; else $(CYGPATH_W) '$(srcdir)/libmd5-rfc/md5.c'; fi`
+
+fm-desktop.o: desktop/fm-desktop.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT fm-desktop.o -MD -MP -MF "$(DEPDIR)/fm-desktop.Tpo" -c -o fm-desktop.o `test -f 'desktop/fm-desktop.c' || echo '$(srcdir)/'`desktop/fm-desktop.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/fm-desktop.Tpo" "$(DEPDIR)/fm-desktop.Po"; else rm -f "$(DEPDIR)/fm-desktop.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop/fm-desktop.c' object='fm-desktop.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o fm-desktop.o `test -f 'desktop/fm-desktop.c' || echo '$(srcdir)/'`desktop/fm-desktop.c
+
+fm-desktop.obj: desktop/fm-desktop.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT fm-desktop.obj -MD -MP -MF "$(DEPDIR)/fm-desktop.Tpo" -c -o fm-desktop.obj `if test -f 'desktop/fm-desktop.c'; then $(CYGPATH_W) 'desktop/fm-desktop.c'; else $(CYGPATH_W) '$(srcdir)/desktop/fm-desktop.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/fm-desktop.Tpo" "$(DEPDIR)/fm-desktop.Po"; else rm -f "$(DEPDIR)/fm-desktop.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop/fm-desktop.c' object='fm-desktop.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o fm-desktop.obj `if test -f 'desktop/fm-desktop.c'; then $(CYGPATH_W) 'desktop/fm-desktop.c'; else $(CYGPATH_W) '$(srcdir)/desktop/fm-desktop.c'; fi`
+
+working-area.o: desktop/working-area.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT working-area.o -MD -MP -MF "$(DEPDIR)/working-area.Tpo" -c -o working-area.o `test -f 'desktop/working-area.c' || echo '$(srcdir)/'`desktop/working-area.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/working-area.Tpo" "$(DEPDIR)/working-area.Po"; else rm -f "$(DEPDIR)/working-area.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop/working-area.c' object='working-area.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o working-area.o `test -f 'desktop/working-area.c' || echo '$(srcdir)/'`desktop/working-area.c
+
+working-area.obj: desktop/working-area.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT working-area.obj -MD -MP -MF "$(DEPDIR)/working-area.Tpo" -c -o working-area.obj `if test -f 'desktop/working-area.c'; then $(CYGPATH_W) 'desktop/working-area.c'; else $(CYGPATH_W) '$(srcdir)/desktop/working-area.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/working-area.Tpo" "$(DEPDIR)/working-area.Po"; else rm -f "$(DEPDIR)/working-area.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop/working-area.c' object='working-area.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o working-area.obj `if test -f 'desktop/working-area.c'; then $(CYGPATH_W) 'desktop/working-area.c'; else $(CYGPATH_W) '$(srcdir)/desktop/working-area.c'; fi`
 uninstall-info-am:
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)

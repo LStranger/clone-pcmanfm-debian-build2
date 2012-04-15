@@ -23,11 +23,31 @@
 
 G_BEGIN_DECLS
 
+typedef enum
+{
+    VFS_FILE_INFO_NONE = 0,
+    VFS_FILE_INFO_HOME_DIR = (1 << 0),
+    VFS_FILE_INFO_DESKTOP_DIR = (1 << 1),
+    VFS_FILE_INFO_DESKTOP_ENTRY = (1 << 2),
+}VFSFileInfoFlag;
+
 typedef struct _VFSFileInfo VFSFileInfo;
 
 struct _VFSFileInfo
 {
-    struct stat file_stat;
+    /* struct stat file_stat; */
+    /* Only use some members of struct stat to reduce memory usage */
+    mode_t mode;
+    dev_t dev;
+    uid_t uid;
+    gid_t gid;
+    off_t size;
+    time_t mtime;
+    time_t atime;
+    /* FIXME: blksize_t blksize; */
+    long blksize;
+    blkcnt_t blocks;
+
     char* name; /* real name on file system */
     char* disp_name;  /* displayed name (in UTF-8) */
     char* disp_size;  /* displayed human-readable file size */
@@ -38,6 +58,7 @@ struct _VFSFileInfo
     GdkPixbuf* big_thumbnail; /* thumbnail of the file */
     GdkPixbuf* small_thumbnail; /* thumbnail of the file */
 
+    VFSFileInfoFlag flags; /* if it's a special file */
     /*<private>*/
     int n_ref;
 };
@@ -82,6 +103,8 @@ void vfs_file_info_set_thumbnail_size( int big, int small );
 gboolean vfs_file_info_load_thumbnail( VFSFileInfo* fi,
                                        const char* full_path,
                                        gboolean big );
+gboolean vfs_file_info_is_thumbnail_loaded( VFSFileInfo* fi,
+                                            gboolean big );
 
 GdkPixbuf* vfs_file_info_get_big_icon( VFSFileInfo* fi );
 GdkPixbuf* vfs_file_info_get_small_icon( VFSFileInfo* fi );
@@ -97,6 +120,8 @@ gboolean vfs_file_info_is_symlink( VFSFileInfo* fi );
 
 gboolean vfs_file_info_is_image( VFSFileInfo* fi );
 
+gboolean vfs_file_info_is_unknown_type( VFSFileInfo* fi );
+
 /* Full path of the file is required by this function */
 gboolean vfs_file_info_is_executable( VFSFileInfo* fi, const char* file_path );
 
@@ -110,6 +135,14 @@ gboolean vfs_file_info_is_text( VFSFileInfo* fi, const char* file_path );
 gboolean vfs_file_info_open_file( VFSFileInfo* fi,
                                   const char* file_path,
                                   GError** err );
+
+void vfs_file_info_load_special_info( VFSFileInfo* fi,
+                                      const char* file_path );
+
+void vfs_file_info_list_free( GList* list );
+
+/* resolve file path name */
+char* vfs_file_resolve_path( const char* cwd, const char* relative_path );
 
 G_END_DECLS
 

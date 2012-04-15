@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(pcmanfm, 0.3.0.2)
+AM_INIT_AUTOMAKE(pcmanfm, 0.3.2.1)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
@@ -21,52 +21,61 @@ AC_SUBST(PACKAGE_LIBS)
 AC_ARG_ENABLE(
 	[hal],
 	AS_HELP_STRING([--enable-hal],
-	               [Build with experimental HAL support (default: no)]),
-	use_hal=$enableval, use_hal="no")
+	               [build with Linux HAL support (default: yes)]),
+	use_hal=$enableval, use_hal="yes")
 
 if test x"$use_hal" = x"yes"; then
 dnl Check HAL support
-	hal_modules=" \
-		dbus-glib-1 >= 0.31 \
-		hal >= 0.5.0 \
-		hal-storage"
-
+	hal_modules="dbus-glib-1 >= 0.31 hal >= 0.5.0"
 	PKG_CHECK_MODULES(HAL, [$hal_modules], [have_hal=yes], [have_hal=no])
+
 	if test x"$have_hal" = x"yes"; then
 	    AC_DEFINE([HAVE_HAL], [1], [Define to 1 if you have HAL.])
+	else
+	    AC_MSG_ERROR([To use HAL support, you must have developing packages of dbus-glib-1 (>=0.31) and hal(>=0.5.0), or you can use --disable-hal to disable HAL support.])
 	fi
 fi
 
 AC_SUBST(HAL_CFLAGS)
 AC_SUBST(HAL_LIBS)
 
-dnl ***************************
-dnl *** Check for Gamin/FAM ***
-dnl ***************************
-dnl *Modified from XFCE Thunar*
+AC_ARG_ENABLE([inotify],
+	AS_HELP_STRING([--enable-inotify],
+		[enable experimental Linux inotify support for file alteration monitor (default: no)]),
+	use_inotify=$enableval, use_inotify="no")
 
-FAM_CFLAGS=""
-FAM_LIBS=""
-have_libfam=no
-AC_CHECK_HEADERS([fam.h],
-[
-  AC_CHECK_LIB([fam], [FAMOpen], [have_libfam="yes" FAM_LIBS="-lfam"])
-])
-
-if test x"$have_libfam" = x"yes"; then
-  dnl Define appropriate symbols
-  AC_DEFINE([HAVE_FAM_H], [1], [Define to 1 if you have the <fam.h> header file.])
-  AC_DEFINE([HAVE_LIBFAM], [1], [Define to 1 if the File Alteration Monitor is available.])
-
-  dnl Check for FAMNoExists (currently Gamin only)
-  save_LIBS="$LIBS"
-  LIBS="$LIBS $FAM_LIBS"
-  AC_CHECK_FUNCS([FAMNoExists])
-  LIBS="$save_LIBS"
+if test x"$use_inotify" = x"yes"; then
+	dnl Linux inotify is enabled.
+	dnl So, both of FAM and gamin are not needed.
+  AC_DEFINE(USE_INOTIFY, 1, [Whether to enable Linux inotify support])
 else
-  AC_MSG_ERROR([Fatal Error: no fam or gamin detected.])
-fi
+	dnl ***************************
+	dnl *** Check for Gamin/FAM ***
+	dnl ***************************
+	dnl *Modified from XFCE Thunar*
 
+	FAM_CFLAGS=""
+	FAM_LIBS=""
+	have_libfam=no
+	AC_CHECK_HEADERS([fam.h],
+	[
+		AC_CHECK_LIB([fam], [FAMOpen], [have_libfam="yes" FAM_LIBS="-lfam"])
+	])
+
+	if test x"$have_libfam" = x"yes"; then
+		dnl Define appropriate symbols
+		AC_DEFINE([HAVE_FAM_H], [1], [Define to 1 if you have the <fam.h> header file.])
+		AC_DEFINE([HAVE_LIBFAM], [1], [Define to 1 if the File Alteration Monitor is available.])
+
+		dnl Check for FAMNoExists (currently Gamin only)
+		save_LIBS="$LIBS"
+		LIBS="$LIBS $FAM_LIBS"
+		AC_CHECK_FUNCS([FAMNoExists])
+		LIBS="$save_LIBS"
+	else
+		AC_MSG_ERROR([Fatal Error: no fam or gamin detected.])
+	fi
+fi
 AC_SUBST([FAM_CFLAGS])
 AC_SUBST([FAM_LIBS])
 
@@ -80,6 +89,11 @@ if test x"$largefile" = x"yes"; then
   AC_DEFINE(_LARGEFILE64_SOURCE, 1, [Whether to enable large file support])
   AC_DEFINE(_FILE_OFFSET_BITS, 64, [File offset bits])
 fi
+
+AC_CHECK_FUNC(euidaccess,[AC_DEFINE(HAVE_EUIDACCESS,[],[Define to 1 if euidaccess is available])])
+AC_CHECK_FUNC(eaccess,[AC_DEFINE(HAVE_EACCESS,[],[Define to 1 if eaccess is available])])
+
+AC_CHECK_FUNC(statvfs,[AC_DEFINE(HAVE_STATVFS,[],[Define to 1 if statvfs is available])])
 
 GETTEXT_PACKAGE=pcmanfm
 AC_SUBST(GETTEXT_PACKAGE)
@@ -96,3 +110,15 @@ po/Makefile.in
 pcmanfm.desktop
 ])
 
+echo
+echo PCMan File Manager............. : Version $VERSION
+echo
+echo Prefix..........................: $prefix
+echo Linux HAL support.............. : $use_hal
+echo Linux inotify support...........: $use_inotify
+echo 64-bit Large file support.......: $largefile
+echo
+echo The binary will be installed in $prefix/bin
+echo
+echo http://pcmanfm.sourceforge.net/
+echo

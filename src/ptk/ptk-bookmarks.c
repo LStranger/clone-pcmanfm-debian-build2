@@ -13,6 +13,7 @@
 #include "ptk-bookmarks.h"
 
 #include <stdio.h>
+#include <string.h>
 
 const char bookmarks_file_name[] = ".gtk-bookmarks";
 static PtkBookmarks bookmarks = {0};
@@ -93,10 +94,7 @@ PtkBookmarks* ptk_bookmarks_get ()
                         bookmarks.list = g_list_append( bookmarks.list,
                                                         item );
                         g_free(upath);
-                        if( basename )
-                        {
-                            g_free( basename );
-                        }
+                        g_free( basename );
                     }
                 }
             }

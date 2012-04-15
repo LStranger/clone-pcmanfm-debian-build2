@@ -57,6 +57,19 @@ create_prefdlg (void)
   GtkWidget *label5;
   GtkWidget *terminal;
   GtkWidget *general_tab_label;
+  GtkWidget *desktop_page;
+  GtkWidget *show_desktop;
+  GtkWidget *hbox7;
+  GtkWidget *show_wallpaper;
+  GtkWidget *wallpaper;
+  GtkWidget *hbox8;
+  GtkWidget *hbox9;
+  GtkWidget *label10;
+  GtkWidget *bg_color1;
+  GtkWidget *hbox10;
+  GtkWidget *label11;
+  GtkWidget *text_color;
+  GtkWidget *label9;
   GtkWidget *dialog_action_area1;
   GtkWidget *cancelbutton;
   GtkWidget *okbutton;
@@ -77,6 +90,7 @@ create_prefdlg (void)
   gtk_container_add (GTK_CONTAINER (notebook1), vbox1);
   gtk_notebook_set_tab_label_packing (GTK_NOTEBOOK (notebook1), vbox1,
                                       FALSE, FALSE, GTK_PACK_START);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox1), 2);
 
   hbox1 = gtk_hbox_new (FALSE, 2);
   gtk_widget_show (hbox1);
@@ -199,6 +213,60 @@ create_prefdlg (void)
   gtk_widget_show (general_tab_label);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 0), general_tab_label);
 
+  desktop_page = gtk_vbox_new (FALSE, 0);
+  gtk_widget_show (desktop_page);
+  gtk_container_add (GTK_CONTAINER (notebook1), desktop_page);
+  gtk_container_set_border_width (GTK_CONTAINER (desktop_page), 2);
+
+  show_desktop = gtk_check_button_new_with_mnemonic (_("Show file icons on desktop"));
+  gtk_widget_show (show_desktop);
+  gtk_box_pack_start (GTK_BOX (desktop_page), show_desktop, FALSE, FALSE, 4);
+
+  hbox7 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox7);
+  gtk_box_pack_start (GTK_BOX (desktop_page), hbox7, FALSE, TRUE, 4);
+
+  show_wallpaper = gtk_check_button_new_with_mnemonic (_("Wallpaper:"));
+  gtk_widget_show (show_wallpaper);
+  gtk_box_pack_start (GTK_BOX (hbox7), show_wallpaper, FALSE, FALSE, 0);
+
+  wallpaper = gtk_file_chooser_button_new (_("Please select an image file"), GTK_FILE_CHOOSER_ACTION_OPEN);
+  gtk_widget_show (wallpaper);
+  gtk_box_pack_start (GTK_BOX (hbox7), wallpaper, TRUE, TRUE, 0);
+
+  hbox8 = gtk_hbox_new (FALSE, 10);
+  gtk_widget_show (hbox8);
+  gtk_box_pack_start (GTK_BOX (desktop_page), hbox8, FALSE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (hbox8), 4);
+
+  hbox9 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox9);
+  gtk_box_pack_start (GTK_BOX (hbox8), hbox9, FALSE, FALSE, 0);
+
+  label10 = gtk_label_new (_("Background Color"));
+  gtk_widget_show (label10);
+  gtk_box_pack_start (GTK_BOX (hbox9), label10, FALSE, FALSE, 0);
+
+  bg_color1 = gtk_color_button_new ();
+  gtk_widget_show (bg_color1);
+  gtk_box_pack_start (GTK_BOX (hbox9), bg_color1, FALSE, FALSE, 0);
+
+  hbox10 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox10);
+  gtk_box_pack_start (GTK_BOX (hbox8), hbox10, TRUE, TRUE, 0);
+
+  label11 = gtk_label_new (_("Text Color"));
+  gtk_widget_show (label11);
+  gtk_box_pack_start (GTK_BOX (hbox10), label11, FALSE, FALSE, 0);
+
+  text_color = gtk_color_button_new ();
+  gtk_widget_show (text_color);
+  gtk_box_pack_start (GTK_BOX (hbox10), text_color, FALSE, FALSE, 0);
+
+  label9 = gtk_label_new_with_mnemonic (_("_Desktop"));
+  gtk_widget_show (label9);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 1), label9);
+
   dialog_action_area1 = GTK_DIALOG (prefdlg)->action_area;
   gtk_widget_show (dialog_action_area1);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
@@ -241,6 +309,19 @@ create_prefdlg (void)
   GLADE_HOOKUP_OBJECT (prefdlg, label5, "label5");
   GLADE_HOOKUP_OBJECT (prefdlg, terminal, "terminal");
   GLADE_HOOKUP_OBJECT (prefdlg, general_tab_label, "general_tab_label");
+  GLADE_HOOKUP_OBJECT (prefdlg, desktop_page, "desktop_page");
+  GLADE_HOOKUP_OBJECT (prefdlg, show_desktop, "show_desktop");
+  GLADE_HOOKUP_OBJECT (prefdlg, hbox7, "hbox7");
+  GLADE_HOOKUP_OBJECT (prefdlg, show_wallpaper, "show_wallpaper");
+  GLADE_HOOKUP_OBJECT (prefdlg, wallpaper, "wallpaper");
+  GLADE_HOOKUP_OBJECT (prefdlg, hbox8, "hbox8");
+  GLADE_HOOKUP_OBJECT (prefdlg, hbox9, "hbox9");
+  GLADE_HOOKUP_OBJECT (prefdlg, label10, "label10");
+  GLADE_HOOKUP_OBJECT (prefdlg, bg_color1, "bg_color1");
+  GLADE_HOOKUP_OBJECT (prefdlg, hbox10, "hbox10");
+  GLADE_HOOKUP_OBJECT (prefdlg, label11, "label11");
+  GLADE_HOOKUP_OBJECT (prefdlg, text_color, "text_color");
+  GLADE_HOOKUP_OBJECT (prefdlg, label9, "label9");
   GLADE_HOOKUP_OBJECT_NO_REF (prefdlg, dialog_action_area1, "dialog_action_area1");
   GLADE_HOOKUP_OBJECT (prefdlg, cancelbutton, "cancelbutton");
   GLADE_HOOKUP_OBJECT (prefdlg, okbutton, "okbutton");

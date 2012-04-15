@@ -47,6 +47,8 @@ create_filePropertiesDlg (void)
   GtkWidget *file_name;
   GtkWidget *label21;
   GtkWidget *size_on_disk;
+  GtkWidget *open_with_label;
+  GtkWidget *open_with;
   GtkWidget *label1;
   GtkWidget *vbox1;
   GtkWidget *table3;
@@ -91,7 +93,7 @@ create_filePropertiesDlg (void)
   gtk_widget_show (notebook);
   gtk_box_pack_start (GTK_BOX (dialog_vbox), notebook, TRUE, TRUE, 0);
 
-  general_table = gtk_table_new (7, 2, FALSE);
+  general_table = gtk_table_new (8, 2, FALSE);
   gtk_widget_show (general_table);
   gtk_container_add (GTK_CONTAINER (notebook), general_table);
   gtk_container_set_border_width (GTK_CONTAINER (general_table), 4);
@@ -114,14 +116,14 @@ create_filePropertiesDlg (void)
 
   label5 = gtk_label_new (_("Total Size of Files:"));
   gtk_widget_show (label5);
-  gtk_table_attach (GTK_TABLE (general_table), label5, 0, 1, 3, 4,
+  gtk_table_attach (GTK_TABLE (general_table), label5, 0, 1, 4, 5,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label5), 0, 0.5);
 
   label7 = gtk_label_new (_("Last Modification:"));
   gtk_widget_show (label7);
-  gtk_table_attach (GTK_TABLE (general_table), label7, 0, 1, 5, 6,
+  gtk_table_attach (GTK_TABLE (general_table), label7, 0, 1, 6, 7,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label7), 0, 0.5);
@@ -137,7 +139,7 @@ create_filePropertiesDlg (void)
 
   total_size = gtk_label_new ("");
   gtk_widget_show (total_size);
-  gtk_table_attach (GTK_TABLE (general_table), total_size, 1, 2, 3, 4,
+  gtk_table_attach (GTK_TABLE (general_table), total_size, 1, 2, 4, 5,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   GTK_WIDGET_SET_FLAGS (total_size, GTK_CAN_FOCUS);
@@ -146,7 +148,7 @@ create_filePropertiesDlg (void)
 
   mtime = gtk_label_new ("");
   gtk_widget_show (mtime);
-  gtk_table_attach (GTK_TABLE (general_table), mtime, 1, 2, 5, 6,
+  gtk_table_attach (GTK_TABLE (general_table), mtime, 1, 2, 6, 7,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   GTK_WIDGET_SET_FLAGS (mtime, GTK_CAN_FOCUS);
@@ -155,14 +157,14 @@ create_filePropertiesDlg (void)
 
   label13 = gtk_label_new (_("Last Access:"));
   gtk_widget_show (label13);
-  gtk_table_attach (GTK_TABLE (general_table), label13, 0, 1, 6, 7,
+  gtk_table_attach (GTK_TABLE (general_table), label13, 0, 1, 7, 8,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label13), 0, 0.5);
 
   atime = gtk_label_new ("");
   gtk_widget_show (atime);
-  gtk_table_attach (GTK_TABLE (general_table), atime, 1, 2, 6, 7,
+  gtk_table_attach (GTK_TABLE (general_table), atime, 1, 2, 7, 8,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (atime), 0, 0.5);
@@ -191,19 +193,32 @@ create_filePropertiesDlg (void)
 
   label21 = gtk_label_new (_("Size on Disk:"));
   gtk_widget_show (label21);
-  gtk_table_attach (GTK_TABLE (general_table), label21, 0, 1, 4, 5,
+  gtk_table_attach (GTK_TABLE (general_table), label21, 0, 1, 5, 6,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label21), 0, 0.5);
 
   size_on_disk = gtk_label_new ("");
   gtk_widget_show (size_on_disk);
-  gtk_table_attach (GTK_TABLE (general_table), size_on_disk, 1, 2, 4, 5,
+  gtk_table_attach (GTK_TABLE (general_table), size_on_disk, 1, 2, 5, 6,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (0), 0, 0);
   GTK_WIDGET_SET_FLAGS (size_on_disk, GTK_CAN_FOCUS);
   gtk_label_set_selectable (GTK_LABEL (size_on_disk), TRUE);
   gtk_misc_set_alignment (GTK_MISC (size_on_disk), 0, 0.5);
+
+  open_with_label = gtk_label_new (_("Open with:"));
+  gtk_widget_show (open_with_label);
+  gtk_table_attach (GTK_TABLE (general_table), open_with_label, 0, 1, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (open_with_label), 0, 0.5);
+
+  open_with = gtk_combo_box_new_text ();
+  gtk_widget_show (open_with);
+  gtk_table_attach (GTK_TABLE (general_table), open_with, 1, 2, 3, 4,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (GTK_FILL), 0, 0);
 
   label1 = gtk_label_new_with_mnemonic (_("_General"));
   gtk_widget_show (label1);
@@ -416,6 +431,8 @@ create_filePropertiesDlg (void)
   GLADE_HOOKUP_OBJECT (filePropertiesDlg, file_name, "file_name");
   GLADE_HOOKUP_OBJECT (filePropertiesDlg, label21, "label21");
   GLADE_HOOKUP_OBJECT (filePropertiesDlg, size_on_disk, "size_on_disk");
+  GLADE_HOOKUP_OBJECT (filePropertiesDlg, open_with_label, "open_with_label");
+  GLADE_HOOKUP_OBJECT (filePropertiesDlg, open_with, "open_with");
   GLADE_HOOKUP_OBJECT (filePropertiesDlg, label1, "label1");
   GLADE_HOOKUP_OBJECT (filePropertiesDlg, vbox1, "vbox1");
   GLADE_HOOKUP_OBJECT (filePropertiesDlg, table3, "table3");

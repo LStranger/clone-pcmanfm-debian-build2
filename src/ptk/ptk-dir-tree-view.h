@@ -14,11 +14,13 @@
 #define _PTK_DIR_TREE_VIEW_H_
 
 #include <gtk/gtk.h>
+#include "ptk-file-browser.h"
 
 G_BEGIN_DECLS
 
 /* Create a new dir tree view */
-GtkWidget* ptk_dir_tree_view_new();
+GtkWidget* ptk_dir_tree_view_new( PtkFileBrowser* browser,
+                                  gboolean show_hidden );
 
 gboolean ptk_dir_tree_view_chdir( GtkTreeView* dir_tree_view, const char* path );
 

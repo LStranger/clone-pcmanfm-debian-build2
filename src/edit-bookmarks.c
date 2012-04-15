@@ -15,6 +15,8 @@
 
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <string.h>
+
 #include "glade-support.h"
 
 enum{
@@ -227,8 +229,7 @@ gboolean edit_bookmarks( GtkWindow* parent )
                                                path ? path : "", path ? strlen(path) : 0 );
                 l = g_list_append( l, item );
                 g_free(name);
-                if(path)
-                    g_free(path);
+                g_free(path);
             }
             while( gtk_tree_model_iter_next( GTK_TREE_MODEL(list), &it) );
         }

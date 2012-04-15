@@ -297,8 +297,7 @@ ptk_text_renderer_finalize ( GObject *object )
 
     pango_font_description_free ( celltext->font );
 
-    if ( celltext->text )
-        g_free ( celltext->text );
+    g_free ( celltext->text );
 
     ( * G_OBJECT_CLASS ( parent_class ) ->finalize ) ( object );
 }
@@ -585,8 +584,7 @@ ptk_text_renderer_set_property ( GObject *object,
     switch ( param_id )
     {
     case PROP_TEXT:
-        if ( celltext->text )
-            g_free ( celltext->text );
+        g_free ( celltext->text );
 
         celltext->text = g_strdup ( g_value_get_string ( value ) );
         g_object_notify ( object, "text" );

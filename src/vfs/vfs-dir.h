@@ -61,6 +61,8 @@ struct _VFSDir
     GThread* thumbnail_thread;
     guint thumbnail_idle;
     GList* loaded_thumbnails;
+
+    GSList* changed_files;
 };
 
 struct _VFSDirClass

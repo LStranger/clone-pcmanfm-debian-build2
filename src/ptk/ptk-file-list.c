@@ -419,11 +419,14 @@ void ptk_file_list_get_value ( GtkTreeModel *tree_model,
     g_return_if_fail ( l != NULL );
 
     info = (VFSFileInfo*)iter->user_data2;
+
     switch(column)
     {
     case COL_FILE_BIG_ICON:
         icon = NULL;
-        if( list->max_thumbnail > vfs_file_info_get_size( info ) )
+        /* special file can use special icons saved as thumbnails*/
+        if( list->max_thumbnail > vfs_file_info_get_size( info ) 
+            && info->flags == VFS_FILE_INFO_NONE )
             icon = vfs_file_info_get_big_thumbnail( info );
         if( ! icon )
             icon = vfs_file_info_get_big_icon( info );
@@ -435,6 +438,7 @@ void ptk_file_list_get_value ( GtkTreeModel *tree_model,
         break;
     case COL_FILE_SMALL_ICON:
         icon = NULL;
+        /* special file can use special icons saved as thumbnails*/
         if( list->max_thumbnail > vfs_file_info_get_size( info ) )
             icon = vfs_file_info_get_small_thumbnail( info );
         if( !icon )
@@ -639,7 +643,7 @@ static gint ptk_file_list_compare( gconstpointer a,
                                   vfs_file_info_get_disp_name(file2) );
         break;
     case COL_FILE_SIZE:
-        ret = file1->file_stat.st_size - file2->file_stat.st_size;
+        ret = file1->size - file2->size;
         break;
     case COL_FILE_DESC:
         ret = g_ascii_strcasecmp( vfs_file_info_get_mime_type_desc(file1),
@@ -654,7 +658,7 @@ static gint ptk_file_list_compare( gconstpointer a,
                                   vfs_file_info_get_disp_owner(file2) );
         break;
     case COL_FILE_MTIME:
-        ret = file1->file_stat.st_mtime - file2->file_stat.st_mtime;
+        ret = file1->mtime - file2->mtime;
         break;
     }
     return list->sort_order == GTK_SORT_ASCENDING ? ret : -ret;
@@ -667,6 +671,9 @@ void ptk_file_list_sort ( PtkFileList* list )
     GtkTreePath *path;
     GList* l;
     int i;
+
+    if( list->n_files <=1 )
+        return;
 
     old_order = g_hash_table_new( g_direct_hash, g_direct_equal );
     /* save old order */

@@ -1,4 +1,4 @@
-/* $Id: ptk-icon-view.c 184 2006-07-16 17:30:34Z pcmanx $ */
+/* $Id: ptk-icon-view.c 405 2006-10-10 12:40:26Z pcmanx $ */
 /*-
  * Copyright (c) 2004-2006  os-cillation e.K.
  * Copyright (c) 2002,2004  Anders Carlsson <andersca@gnu.org>
@@ -122,8 +122,8 @@ enum
 /* Icon view flags */
 typedef enum
 {
-    PTK_ICON_VIEW_DRAW_KEYFOCUS = ( 1l << 0 ),     /* whether to draw keyboard focus */
-    PTK_ICON_VIEW_ITERS_PERSIST = ( 1l << 1 ),     /* whether current model provides persistent iterators */
+    PTK_ICON_VIEW_DRAW_KEYFOCUS = ( 1l << 0 ),      /* whether to draw keyboard focus */
+    PTK_ICON_VIEW_ITERS_PERSIST = ( 1l << 1 ),      /* whether current model provides persistent iterators */
 } PtkIconViewFlags;
 
 #define PTK_ICON_VIEW_SET_FLAG(icon_view, flag)   G_STMT_START{ (PTK_ICON_VIEW (icon_view)->priv->flags |= flag); }G_STMT_END
@@ -455,8 +455,10 @@ struct _PtkIconViewPrivate
     GdkWindow *bin_window;
     GList *children;
     GtkTreeModel *model;
-
+#if ! GLIB_CHECK_VERSION(2, 10, 0)
     GMemChunk *items_chunk;
+#endif
+
     GList *items;
 
     GtkAdjustment *hadjustment;
@@ -557,6 +559,11 @@ guint imcontext_changed :
 
     /* PtkIconViewFlags */
     guint flags;
+
+    /* background pixmap */
+    GdkPixmap* pixmap;
+    int pixmap_x_offset;
+    int pixmap_y_offset;
 };
 
 
@@ -1090,7 +1097,10 @@ ptk_icon_view_init ( PtkIconView *icon_view )
 {
     icon_view->priv = PTK_ICON_VIEW_GET_PRIVATE ( icon_view );
 
-    icon_view->priv->items_chunk = g_mem_chunk_create ( PtkIconViewItem, 512, G_ALLOC_ONLY );
+#if ! GLIB_CHECK_VERSION( 2, 10, 0 )
+    icon_view->priv->items_chunk = g_mem_chunk_create ( PtkIconViewItem,
+                                                        512, G_ALLOC_ONLY );
+#endif
 
     icon_view->priv->width = 0;
     icon_view->priv->height = 0;
@@ -1165,12 +1175,18 @@ ptk_icon_view_finalize ( GObject *object )
     /* drop the cell renderers */
     ptk_icon_view_cell_layout_clear ( GTK_CELL_LAYOUT ( icon_view ) );
 
+#if ! GLIB_CHECK_VERSION(2, 10, 0)
     /* drop the items chunk */
     g_mem_chunk_destroy ( icon_view->priv->items_chunk );
+#endif
 
     /* kill the layout idle source (it's important to have this last!) */
     if ( G_UNLIKELY ( icon_view->priv->layout_idle_id >= 0 ) )
         g_source_remove ( icon_view->priv->layout_idle_id );
+
+    /* unref background pixmap if it exists */
+    if ( icon_view->priv->pixmap )
+        g_object_unref( G_OBJECT( icon_view->priv->pixmap ) );
 
     ( *G_OBJECT_CLASS ( ptk_icon_view_parent_class ) ->finalize ) ( object );
 }
@@ -1536,6 +1552,16 @@ ptk_icon_view_expose_event ( GtkWidget *widget,
     if ( G_UNLIKELY ( event->window != icon_view->priv->bin_window ) )
         return FALSE;
 
+    /* Paint background pixmap if it exists */
+    if ( icon_view->priv->pixmap )
+    {
+        gdk_draw_drawable( event->window, widget->style->fg_gc[ GTK_STATE_NORMAL ],
+                           icon_view->priv->pixmap, 
+                           icon_view->priv->pixmap_x_offset + event->area.x,
+                           icon_view->priv->pixmap_y_offset + event->area.y,
+                           event->area.x, event->area.y,
+                           event->area.width, event->area.height );
+    }
     /* don't handle expose if the layout isn't done yet; the layout
      * method will schedule a redraw when done.
      */
@@ -2350,6 +2376,13 @@ ptk_icon_view_item_hit_test ( PtkIconView *icon_view,
         if ( !info->cell->visible )
             continue;
 
+        /* FIXME: Don't know exactly why this check is needed.
+                  Sometimes item->box may be NULL, and hence causes seg faults.
+                  This seems to be a bug of the original icon view from libexo.
+        */
+        if( G_UNLIKELY( ! item->box ) )
+            return FALSE;
+
         box = item->box[ info->position ];
 
         if ( MIN ( x + width, box.x + box.width ) - MAX ( x, box.x ) > 0 &&
@@ -3001,11 +3034,12 @@ ptk_icon_view_paint_item ( PtkIconView *icon_view,
         {
             box = item->box[ info->position ];
 #if 0
+
             gdk_draw_rectangle ( drawable,
                                  GTK_WIDGET ( icon_view ) ->style->base_gc[ state ],
                                  TRUE,
-                                 x - item->area.x + box.x/* + padding + focus_pad*/,
-                                 y - item->area.y + box.y/* + padding - focus_pad*/,
+                                 x - item->area.x + box.x /* + padding + focus_pad*/,
+                                 y - item->area.y + box.y /* + padding - focus_pad*/,
                                  box.width, box.height );
 #endif
             /*
@@ -3019,7 +3053,7 @@ ptk_icon_view_paint_item ( PtkIconView *icon_view,
                                         &cell_area,
                                         &box.x, &box.y,
                                         &box.width, &box.height );
-            box.x+= cell_area.x;
+            box.x += cell_area.x;
             box.y += cell_area.y;
 
             gdk_draw_rectangle ( drawable,
@@ -3310,7 +3344,11 @@ ptk_icon_view_row_inserted ( GtkTreeModel *model,
     index = gtk_tree_path_get_indices ( path ) [ 0 ];
 
     /* allocate the new item */
+#if GLIB_CHECK_VERSION(2, 10, 0)
+    item = g_slice_new0( PtkIconViewItem );
+#else
     item = g_chunk_new0 ( PtkIconViewItem, icon_view->priv->items_chunk );
+#endif
     item->iter = *iter;
     item->index = index;
     item->area.width = -1;
@@ -3368,11 +3406,16 @@ ptk_icon_view_row_deleted ( GtkTreeModel *model,
         PTK_ICON_VIEW_ITEM ( next->data ) ->index--;
 
     /* drop the item from the list */
+#if GLIB_CHECK_VERSION(2, 10, 0)
+    g_slice_free( PtkIconViewItem, list->data );
+#endif
     icon_view->priv->items = g_list_delete_link ( icon_view->priv->items, list );
 
+#if ! GLIB_CHECK_VERSION(2, 10, 0)
     /* reset the item chunk if this was the last item */
     if ( G_UNLIKELY ( icon_view->priv->items == NULL ) )
         g_mem_chunk_reset ( icon_view->priv->items_chunk );
+#endif
 
     /* recalculate the layout */
     ptk_icon_view_queue_layout ( icon_view );
@@ -4608,13 +4651,19 @@ ptk_icon_view_set_model ( PtkIconView *icon_view,
 
         /* drop all items belonging to the previous model */
         for ( lp = icon_view->priv->items; lp != NULL; lp = lp->next )
+        {
             g_free ( PTK_ICON_VIEW_ITEM ( lp->data ) ->box );
+#if GLIB_CHECK_VERSION(2, 10, 0)
+            g_slice_free( PtkIconViewItem, lp->data );
+#endif
+        }
         g_list_free ( icon_view->priv->items );
         icon_view->priv->items = NULL;
 
+#if ! GLIB_CHECK_VERSION(2, 10, 0)
         /* reset the item memory chunk as there are no items left now */
         g_mem_chunk_reset ( icon_view->priv->items_chunk );
-
+#endif
         /* reset statistics */
         icon_view->priv->anchor_item = NULL;
         icon_view->priv->cursor_item = NULL;
@@ -4650,7 +4699,11 @@ ptk_icon_view_set_model ( PtkIconView *icon_view,
         {
             do
             {
+#if GLIB_CHECK_VERSION(2, 10, 0)
+                item = g_slice_new0( PtkIconViewItem );
+#else
                 item = g_chunk_new0 ( PtkIconViewItem, icon_view->priv->items_chunk );
+#endif
                 item->iter = iter;
                 item->index = index++;
                 item->area.width = -1;
@@ -8021,14 +8074,14 @@ ptk_icon_view_item_accessible_get_type ( void )
         static const GTypeInfo tinfo =
             {
                 sizeof ( PtkIconViewItemAccessibleClass ),
-                ( GBaseInitFunc ) NULL,    /* base init */
-                ( GBaseFinalizeFunc ) NULL,    /* base finalize */
-                ( GClassInitFunc ) ptk_icon_view_item_accessible_class_init,    /* class init */
-                ( GClassFinalizeFunc ) NULL,    /* class finalize */
-                NULL,    /* class data */
-                sizeof ( PtkIconViewItemAccessible ),    /* instance size */
-                0,    /* nb preallocs */
-                ( GInstanceInitFunc ) ptk_icon_view_item_accessible_object_init,    /* instance init */
+                ( GBaseInitFunc ) NULL,     /* base init */
+                ( GBaseFinalizeFunc ) NULL,     /* base finalize */
+                ( GClassInitFunc ) ptk_icon_view_item_accessible_class_init,     /* class init */
+                ( GClassFinalizeFunc ) NULL,     /* class finalize */
+                NULL,     /* class data */
+                sizeof ( PtkIconViewItemAccessible ),     /* instance size */
+                0,     /* nb preallocs */
+                ( GInstanceInitFunc ) ptk_icon_view_item_accessible_object_init,     /* instance init */
                 NULL /* value table */
             };
 
@@ -8945,15 +8998,15 @@ ptk_icon_view_accessible_get_type ( void )
     {
         static GTypeInfo tinfo =
             {
-                0,    /* class size */
-                ( GBaseInitFunc ) NULL,    /* base init */
-                ( GBaseFinalizeFunc ) NULL,    /* base finalize */
+                0,     /* class size */
+                ( GBaseInitFunc ) NULL,     /* base init */
+                ( GBaseFinalizeFunc ) NULL,     /* base finalize */
                 ( GClassInitFunc ) ptk_icon_view_accessible_class_init,
-                ( GClassFinalizeFunc ) NULL,    /* class finalize */
-                NULL,    /* class data */
-                0,    /* instance size */
-                0,    /* nb preallocs */
-                ( GInstanceInitFunc ) NULL,    /* instance init */
+                ( GClassFinalizeFunc ) NULL,     /* class finalize */
+                NULL,     /* class data */
+                0,     /* instance size */
+                0,     /* nb preallocs */
+                ( GInstanceInitFunc ) NULL,     /* instance init */
                 NULL /* value table */
             };
         static const GInterfaceInfo atk_component_info =
@@ -9039,13 +9092,13 @@ ptk_icon_view_accessible_factory_get_type ( void )
         static const GTypeInfo tinfo =
             {
                 sizeof ( AtkObjectFactoryClass ),
-                NULL,              /* base_init */
-                NULL,              /* base_finalize */
+                NULL,               /* base_init */
+                NULL,               /* base_finalize */
                 ( GClassInitFunc ) ptk_icon_view_accessible_factory_class_init,
-                NULL,              /* class_finalize */
-                NULL,              /* class_data */
+                NULL,               /* class_finalize */
+                NULL,               /* class_data */
                 sizeof ( AtkObjectFactory ),
-                0,                /* n_preallocs */
+                0,                 /* n_preallocs */
                 NULL, NULL
             };
 
@@ -9288,7 +9341,7 @@ ptk_icon_view_search_position_func ( PtkIconView *icon_view,
 
     if ( tree_y + tree_height > gdk_screen_get_height ( screen ) )
         y = gdk_screen_get_height ( screen ) - requisition.height;
-    else if ( tree_y + tree_height < 0 )    /* isn't really possible ... */
+    else if ( tree_y + tree_height < 0 )     /* isn't really possible ... */
         y = 0;
     else
         y = tree_y + tree_height;
@@ -9918,8 +9971,8 @@ ptk_icon_view_key_press ( GtkWidget *widget,
         new_text = gtk_entry_get_text ( GTK_ENTRY ( icon_view->priv->search_entry ) );
         text_modified = strcmp ( old_text, new_text ) != 0;
         g_free ( old_text );
-        if ( icon_view->priv->imcontext_changed ||      /* we're in a preedit */
-                ( retval && text_modified ) )                 /* ...or the text was modified */
+        if ( icon_view->priv->imcontext_changed ||       /* we're in a preedit */
+                ( retval && text_modified ) )                  /* ...or the text was modified */
         {
             if ( ptk_icon_view_real_start_interactive_search ( icon_view, FALSE ) )
             {
@@ -9946,6 +9999,19 @@ ptk_icon_view_key_release ( GtkWidget *widget,
     return ( * GTK_WIDGET_CLASS ( parent_class ) ->key_release_event ) ( widget, event );
 }
 
+void ptk_icon_view_set_background ( PtkIconView *icon_view, GdkPixmap* background, int x_off, int y_off )
+{
+    if ( icon_view->priv->pixmap )
+        g_object_unref( G_OBJECT( icon_view->priv->pixmap ) );
+    icon_view->priv->pixmap = background ? GDK_PIXMAP( g_object_ref( background ) ) : NULL;
+    icon_view->priv->pixmap_x_offset = x_off;
+    icon_view->priv->pixmap_y_offset = y_off;
+}
+
+GdkPixmap* ptk_icon_view_get_background ( PtkIconView *icon_view )
+{
+    return icon_view->priv->pixmap;
+}
 
 
 #define __PTK_ICON_VIEW_C__

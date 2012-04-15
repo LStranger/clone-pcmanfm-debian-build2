@@ -14,6 +14,8 @@
 #include <gdk/gdk.h>
 #include <glib/gi18n.h>
 
+#include <string.h>
+
 #include "vfs-file-info.h"
 #include "vfs-file-monitor.h"
 #include "glib-mem.h"
@@ -342,7 +344,7 @@ GtkTreePath *ptk_dir_tree_get_path ( GtkTreeModel *tree_model,
 
     path = gtk_tree_path_new();
     node = (PtkDirTreeNode*)iter->user_data;
-    g_return_val_if_fail( node->parent != NULL, -1 );
+    g_return_val_if_fail( node->parent != NULL, (GtkTreePath *)(-1) );
 
     while( node != tree->root )
     {
@@ -667,8 +669,8 @@ void ptk_dir_tree_insert_child( PtkDirTree* tree,
     {
         if( parent->children )
         {
-            parent->last->next = child_node;
             child_node->prev = parent->last;
+            parent->last->next = child_node;
             parent->last = child_node;
         }
         else
@@ -682,7 +684,7 @@ void ptk_dir_tree_insert_child( PtkDirTree* tree,
     it.user_data = child_node;
     it.user_data2 = it.user_data3 = NULL;
 
-    tree_path = gtk_tree_model_get_path( GTK_TREE_MODEL(tree), &it );
+    tree_path = ptk_dir_tree_get_path( GTK_TREE_MODEL(tree), &it );
     gtk_tree_model_row_inserted( GTK_TREE_MODEL(tree), tree_path, &it );
     gtk_tree_model_row_has_child_toggled( GTK_TREE_MODEL(tree), tree_path, &it );
     gtk_tree_path_free( tree_path );
@@ -702,7 +704,7 @@ void ptk_dir_tree_delete_child( PtkDirTree* tree,
     child_it.user_data = child;
     child_it.user_data2 = child_it.user_data3 = NULL;
 
-    tree_path = ptk_dir_tree_get_path( tree, &child_it );
+    tree_path = ptk_dir_tree_get_path( GTK_TREE_MODEL(tree), &child_it );
     gtk_tree_model_row_deleted( GTK_TREE_MODEL(tree), tree_path );
     gtk_tree_path_free( tree_path );
 
@@ -710,7 +712,9 @@ void ptk_dir_tree_delete_child( PtkDirTree* tree,
     --parent->n_children;
 
     if( child == parent->children )
-        parent->children = child->next;
+        parent->children = parent->last = child->next;
+    else if( child == parent->last )
+        parent->last = child->prev;
 
     if( child->prev )
         child->prev->next = child->next;
@@ -734,7 +738,8 @@ void ptk_dir_tree_expand_row ( PtkDirTree* tree,
     PtkDirTreeNode *node, *place_holder;
     GtkTreeIter child;
     GDir *dir;
-    char *path, *name, *file_path;
+    char *path, *file_path;
+    const char *name=NULL;
 
     node = (PtkDirTreeNode*)iter->user_data;
     ++node->n_expand;
@@ -744,13 +749,13 @@ void ptk_dir_tree_expand_row ( PtkDirTree* tree,
     place_holder = node->children;
     path = dir_path_from_tree_node( tree, node );
 
-    dir = g_dir_open( path, NULL, NULL );
+    dir = g_dir_open( path, 0, NULL );
     if( dir )
     {
         node->monitor = vfs_file_monitor_add( path,
                                               &on_file_monitor_event,
                                               node );
-        while( name = g_dir_read_name( dir ) )
+        while( (name = g_dir_read_name( dir )) )
         {
             file_path = g_build_filename( path, name, NULL );
             if( g_file_test( file_path, G_FILE_TEST_IS_DIR ) )
@@ -835,6 +840,9 @@ void on_file_monitor_event ( VFSFileMonitor* fm,
     GtkTreePath* tree_path;
     char* file_path;
     g_return_if_fail( node );
+
+    GDK_THREADS_ENTER();
+
     child = find_node( node, file_name );
     switch( event )
     {
@@ -846,11 +854,16 @@ void on_file_monitor_event ( VFSFileMonitor* fm,
                 child = node->children;
             else
                 child = NULL;
-            ptk_dir_tree_insert_child( node->tree,
-                                       node, fm->path,
-                                       file_name );
-            if( child )
-                ptk_dir_tree_delete_child( node->tree, child );
+            file_path = g_build_filename( fm->path, file_name, NULL );
+            if( g_file_test( file_path, G_FILE_TEST_IS_DIR ) )
+            {
+                ptk_dir_tree_insert_child( node->tree,
+                                        node, fm->path,
+                                        file_name );
+                if( child )
+                    ptk_dir_tree_delete_child( node->tree, child );
+            }
+            g_free( file_path );
         }
         break;
     case VFS_FILE_MONITOR_DELETE:
@@ -863,12 +876,17 @@ void on_file_monitor_event ( VFSFileMonitor* fm,
         if( G_LIKELY( child && child->file ) )
         {
             file_path = g_build_filename( fm->path, file_name, NULL );
+            if( ! g_file_test( file_path, G_FILE_TEST_IS_DIR ) )
+            {
+                g_free( file_path );
+                break;
+            }
             vfs_file_info_get( child->file, file_path, file_name );
             g_free( file_path );
             it.stamp = node->tree->stamp;
             it.user_data = child;
             it.user_data2 = it.user_data3 = NULL;
-            tree_path = ptk_dir_tree_get_path( node->tree, &it );
+            tree_path = ptk_dir_tree_get_path(GTK_TREE_MODEL(node->tree), &it);
 
             gtk_tree_model_row_changed( GTK_TREE_MODEL( node->tree ),
                                         tree_path, &it );
@@ -878,5 +896,6 @@ void on_file_monitor_event ( VFSFileMonitor* fm,
         }
         break;
     }
+    GDK_THREADS_LEAVE();
 }
 

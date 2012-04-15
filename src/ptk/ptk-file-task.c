@@ -15,6 +15,7 @@
 #include "glib-mem.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #include "ptk-file-task.h"
 #include "ptk-utils.h"
@@ -129,18 +130,18 @@ gboolean open_up_progress_dlg( PtkFileTask* task )
                              0, GTK_STOCK_CANCEL,
                              GTK_RESPONSE_CANCEL, NULL );
 
-    table = gtk_table_new( 4, 2, FALSE );
+    table = GTK_TABLE(gtk_table_new( 4, 2, FALSE ));
     gtk_container_set_border_width( GTK_CONTAINER ( table ), 4 );
     gtk_table_set_row_spacings( table, 4 );
     gtk_table_set_col_spacings( table, 4 );
 
     /* From: */
-    label = gtk_label_new( _( actions[ task->task->type ] ) );
+    label = GTK_LABEL(gtk_label_new( _( actions[ task->task->type ] ) ));
     gtk_misc_set_alignment( GTK_MISC ( label ), 0, 0.5 );
     gtk_table_attach( table,
-                      label,
+                      GTK_WIDGET(label),
                       0, 1, 0, 1, GTK_FILL, 0, 0, 0 );
-    task->from = gtk_label_new( task->task->current_file );
+    task->from = GTK_LABEL(gtk_label_new( task->task->current_file ));
     gtk_misc_set_alignment( GTK_MISC ( task->from ), 0, 0.5 );
     gtk_label_set_ellipsize( task->from, PANGO_ELLIPSIZE_MIDDLE );
     gtk_table_attach( table,
@@ -152,12 +153,12 @@ gboolean open_up_progress_dlg( PtkFileTask* task )
     {
         /* To: <Destination folder>
         ex. Copy file to..., Move file to...etc. */
-        label = gtk_label_new( _( "To:" ) );
+        label = GTK_LABEL(gtk_label_new( _( "To:" ) ));
         gtk_misc_set_alignment( GTK_MISC ( label ), 0, 0.5 );
         gtk_table_attach( table,
-                          label,
+                          GTK_WIDGET(label),
                           0, 1, 1, 2, GTK_FILL, 0, 0, 0 );
-        task->to = gtk_label_new( task->task->dest_dir );
+        task->to = GTK_LABEL(gtk_label_new( task->task->dest_dir ));
         gtk_misc_set_alignment( GTK_MISC ( task->to ), 0, 0.5 );
         gtk_label_set_ellipsize( task->to, PANGO_ELLIPSIZE_MIDDLE );
         gtk_table_attach( table,
@@ -167,14 +168,14 @@ gboolean open_up_progress_dlg( PtkFileTask* task )
 
     /* Processing: */
     /* Processing: <Name of currently proccesed file> */
-    label = gtk_label_new( _( "Processing:" ) );
+    label = GTK_LABEL(gtk_label_new( _( "Processing:" ) ));
     gtk_misc_set_alignment( GTK_MISC ( label ), 0, 0.5 );
     gtk_table_attach( table,
-                      label,
+                      GTK_WIDGET(label),
                       0, 1, 2, 3, GTK_FILL, 0, 0, 0 );
 
     /* Preparing to do some file operation (Copy, Move, Delete...) */
-    task->current = gtk_label_new( _( "Preparing..." ) );
+    task->current = GTK_LABEL(gtk_label_new( _( "Preparing..." ) ));
     gtk_label_set_ellipsize( task->current, PANGO_ELLIPSIZE_MIDDLE );
     gtk_misc_set_alignment( GTK_MISC ( task->current ), 0, 0.5 );
     gtk_table_attach( table,
@@ -182,12 +183,12 @@ gboolean open_up_progress_dlg( PtkFileTask* task )
                       1, 2, 2, 3, GTK_FILL, 0, 0, 0 );
 
     /* Progress: */
-    label = gtk_label_new( _( "Progress:" ) );
+    label = GTK_LABEL(gtk_label_new( _( "Progress:" ) ));
     gtk_misc_set_alignment( GTK_MISC ( label ), 0, 0.5 );
     gtk_table_attach( table,
-                      label,
+                      GTK_WIDGET(label),
                       0, 1, 3, 4, GTK_FILL, 0, 0, 0 );
-    task->progress = gtk_progress_bar_new();
+    task->progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
     gtk_table_attach( table,
                       GTK_WIDGET( task->progress ),
                       1, 2, 3, 4, GTK_FILL | GTK_EXPAND, 0, 0, 0 );
@@ -328,9 +329,13 @@ gboolean on_vfs_file_task_state_cb( VFSFileTask* task,
             g_source_remove( data->timeout );
             data->timeout = 0;
         }
-        ptk_show_error( data->progress_dlg ? data->progress_dlg : data->parent_window,
+        ptk_show_error( data->progress_dlg ? GTK_WINDOW(data->progress_dlg) : data->parent_window,
                         state_data ? (char*)state_data : g_strerror( task->error ) );
         ret = FALSE;   /* abort */
+        break;
+    /* FIXME:
+        VFS_FILE_TASK_RUNNING, VFS_FILE_TASK_ABORTED not handled */
+    default:
         break;
     }
 
@@ -428,7 +433,7 @@ gboolean query_overwrite( PtkFileTask* task, char** new_dest )
     }
 
     udest_file = g_filename_display_name( task->task->current_dest );
-    parent_win = task->progress_dlg ? task->progress_dlg : task->parent_window;
+    parent_win = task->progress_dlg ? task->progress_dlg : GTK_WIDGET(task->parent_window);
     dlg = gtk_message_dialog_new( GTK_WINDOW( parent_win ),
                                   GTK_DIALOG_MODAL,
                                   GTK_MESSAGE_QUESTION,

@@ -23,6 +23,12 @@
 #include "vfs-mime-type.h"
 #include "vfs-app-desktop.h"
 
+#include "vfs-file-monitor.h"
+#include "vfs-volume.h"
+
+#include "ptk-utils.h"
+#include "app-chooser-dialog.h"
+
 #include "glade-support.h"
 #include "settings.h"
 
@@ -50,24 +56,27 @@ static gboolean on_socket_event( GIOChannel* ioc,
 
     if ( cond & G_IO_IN )
     {
-        client = accept( g_io_channel_unix_get_fd( ioc ), &client_addr, &addr_len );
+        client = accept( g_io_channel_unix_get_fd( ioc ), (struct sockaddr *)&client_addr, &addr_len );
         if ( client != -1 )
         {
             r = read( client, path, PATH_MAX );
             if ( r != -1 )
             {
                 path[ r ] = '\0';
+                GDK_THREADS_ENTER();
                 if ( g_file_test( path, G_FILE_TEST_IS_DIR ) )
                 {
                     main_window = create_main_window();
                     fm_main_window_add_new_tab( main_window, path,
                                                 appSettings.showSidePane,
                                                 appSettings.sidePaneMode );
+                    gtk_window_present( GTK_WINDOW(main_window) );
                 }
                 else
                 {
                     open_file( path );
                 }
+                GDK_THREADS_LEAVE();
             }
             shutdown( client, 2 );
             close( client );
@@ -160,7 +169,7 @@ static void single_instance_finalize()
 
 FMMainWindow* create_main_window()
 {
-    FMMainWindow * main_window = fm_main_window_new ();
+    FMMainWindow * main_window = FM_MAIN_WINDOW(fm_main_window_new ());
     gtk_window_set_default_size( GTK_WINDOW( main_window ),
                                  appSettings.width, appSettings.height );
     gtk_widget_show ( GTK_WIDGET( main_window ) );
@@ -203,8 +212,7 @@ static void check_icon_theme()
         gtk_dialog_run( GTK_DIALOG( dlg ) );
         gtk_widget_destroy( dlg );
     }
-    if ( theme )
-        g_free( theme );
+    g_free( theme );
 }
 
 int
@@ -233,7 +241,7 @@ main ( int argc, char *argv[] )
         if ( 0 == g_ascii_strncasecmp( argv[ argc ], "file:", 5 ) )
             init_path = g_filename_from_uri( argv[ argc ], NULL, NULL );
         else
-            init_path = g_strdup( argv[ argc ] );
+            init_path = vfs_file_resolve_path( NULL, argv[ argc ] );
         is_init_path_dir = g_file_test( init_path, G_FILE_TEST_IS_DIR );
     }
     else
@@ -242,8 +250,8 @@ main ( int argc, char *argv[] )
         is_init_path_dir = TRUE;
     }
 
-    if ( appSettings.singleInstance )
-        single_instance_init();
+    /* if ( appSettings.singleInstance ) */
+    single_instance_init();
 
 #ifdef ENABLE_NLS
     bindtextdomain ( GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR );
@@ -270,17 +278,22 @@ main ( int argc, char *argv[] )
 
     check_icon_theme();
 
-    main_window = create_main_window();
-    fm_main_window_add_new_tab( main_window, init_path,
-                                appSettings.showSidePane,
-                                appSettings.sidePaneMode );
+    if( appSettings.showDesktop )
+        fm_desktop_init();
+    else
+    {
+        main_window = create_main_window();
+        fm_main_window_add_new_tab( main_window, init_path,
+                                    appSettings.showSidePane,
+                                    appSettings.sidePaneMode );
+    }
     g_free( init_path );
     init_path = NULL;
 
     gtk_main ();
 
-    if ( appSettings.singleInstance )
-        single_instance_finalize();
+    /* if ( appSettings.singleInstance ) */
+    single_instance_finalize();
 
     save_settings();
     free_settings();
@@ -288,6 +301,9 @@ main ( int argc, char *argv[] )
     vfs_volume_clean();
     vfs_mime_type_clean();
     vfs_file_monitor_clean();
+
+    if( appSettings.showDesktop )
+        fm_desktop_cleanup();
 
     return 0;
 }
@@ -331,7 +347,8 @@ void open_file( const char* path )
             if ( ! vfs_app_desktop_get_exec( app ) )
                 app->exec = g_strdup( app_name ); /* This is a command line */
             files = g_list_prepend( NULL, path );
-            opened = vfs_app_desktop_open_files( app, files, &err );
+            opened = vfs_app_desktop_open_files( gdk_screen_get_default(),
+                                                 NULL, app, files, &err );
             g_free( files->data );
             g_list_free( files );
             vfs_app_desktop_unref( app );

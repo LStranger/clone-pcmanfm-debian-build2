@@ -1294,7 +1294,9 @@ Optional Features:
 			  (and sometimes confusing) to the casual installer
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
-  --enable-hal            Build with experimental HAL support (default: no)
+  --enable-hal            build with Linux HAL support (default: yes)
+  --enable-inotify        enable experimental Linux inotify support for file
+                          alteration monitor (default: no)
   --enable-largefile      enable Large file support (default: yes)
 
 Some influential environment variables:
@@ -2052,7 +2054,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=pcmanfm
- VERSION=0.3.0.2
+ VERSION=0.3.2.1
 
 
 cat >>confdefs.h <<_ACEOF
@@ -6097,16 +6099,12 @@ fi
 if test "${enable_hal+set}" = set; then
   enableval=$enable_hal; use_hal=$enableval
 else
-  use_hal="no"
+  use_hal="yes"
 fi
 
 
 if test x"$use_hal" = x"yes"; then
-	hal_modules=" \
-		dbus-glib-1 >= 0.31 \
-		hal >= 0.5.0 \
-		hal-storage"
-
+	hal_modules="dbus-glib-1 >= 0.31 hal >= 0.5.0"
 
 pkg_failed=no
 { echo "$as_me:$LINENO: checking for HAL" >&5
@@ -6166,9 +6164,7 @@ fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$HAL_PKG_ERRORS" >&5
 
-	{ echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6; }
-                have_hal=no
+	have_hal=no
 elif test $pkg_failed = untried; then
 	have_hal=no
 else
@@ -6178,23 +6174,43 @@ else
 echo "${ECHO_T}yes" >&6; }
 	have_hal=yes
 fi
+
 	if test x"$have_hal" = x"yes"; then
 
 cat >>confdefs.h <<\_ACEOF
 #define HAVE_HAL 1
 _ACEOF
 
+	else
+	    { { echo "$as_me:$LINENO: error: To use HAL support, you must have developing packages of dbus-glib-1 (>=0.31) and hal(>=0.5.0), or you can use --disable-hal to disable HAL support." >&5
+echo "$as_me: error: To use HAL support, you must have developing packages of dbus-glib-1 (>=0.31) and hal(>=0.5.0), or you can use --disable-hal to disable HAL support." >&2;}
+   { (exit 1); exit 1; }; }
 	fi
 fi
 
 
 
 
+# Check whether --enable-inotify was given.
+if test "${enable_inotify+set}" = set; then
+  enableval=$enable_inotify; use_inotify=$enableval
+else
+  use_inotify="no"
+fi
 
-FAM_CFLAGS=""
-FAM_LIBS=""
-have_libfam=no
-# On IRIX 5.3, sys/types and inttypes.h are conflicting.
+
+if test x"$use_inotify" = x"yes"; then
+
+cat >>confdefs.h <<\_ACEOF
+#define USE_INOTIFY 1
+_ACEOF
+
+else
+
+	FAM_CFLAGS=""
+	FAM_LIBS=""
+	have_libfam=no
+	# On IRIX 5.3, sys/types and inttypes.h are conflicting.
 
 
 
@@ -6440,7 +6456,7 @@ if test `eval echo '${'$as_ac_Header'}'` = yes; then
 #define `echo "HAVE_$ac_header" | $as_tr_cpp` 1
 _ACEOF
 
-  { echo "$as_me:$LINENO: checking for FAMOpen in -lfam" >&5
+		{ echo "$as_me:$LINENO: checking for FAMOpen in -lfam" >&5
 echo $ECHO_N "checking for FAMOpen in -lfam... $ECHO_C" >&6; }
 if test "${ac_cv_lib_fam_FAMOpen+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
@@ -6527,7 +6543,7 @@ fi
 done
 
 
-if test x"$have_libfam" = x"yes"; then
+	if test x"$have_libfam" = x"yes"; then
 
 cat >>confdefs.h <<\_ACEOF
 #define HAVE_FAM_H 1
@@ -6539,8 +6555,8 @@ cat >>confdefs.h <<\_ACEOF
 _ACEOF
 
 
-    save_LIBS="$LIBS"
-  LIBS="$LIBS $FAM_LIBS"
+				save_LIBS="$LIBS"
+		LIBS="$LIBS $FAM_LIBS"
 
 for ac_func in FAMNoExists
 do
@@ -6651,13 +6667,13 @@ _ACEOF
 fi
 done
 
-  LIBS="$save_LIBS"
-else
-  { { echo "$as_me:$LINENO: error: Fatal Error: no fam or gamin detected." >&5
+		LIBS="$save_LIBS"
+	else
+		{ { echo "$as_me:$LINENO: error: Fatal Error: no fam or gamin detected." >&5
 echo "$as_me: error: Fatal Error: no fam or gamin detected." >&2;}
    { (exit 1); exit 1; }; }
+	fi
 fi
-
 
 
 
@@ -6682,6 +6698,323 @@ cat >>confdefs.h <<\_ACEOF
 _ACEOF
 
 fi
+
+{ echo "$as_me:$LINENO: checking for euidaccess" >&5
+echo $ECHO_N "checking for euidaccess... $ECHO_C" >&6; }
+if test "${ac_cv_func_euidaccess+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+/* Define euidaccess to an innocuous variant, in case <limits.h> declares euidaccess.
+   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
+#define euidaccess innocuous_euidaccess
+
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char euidaccess (); below.
+    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
+    <limits.h> exists even on freestanding compilers.  */
+
+#ifdef __STDC__
+# include <limits.h>
+#else
+# include <assert.h>
+#endif
+
+#undef euidaccess
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char euidaccess ();
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined __stub_euidaccess || defined __stub___euidaccess
+choke me
+#endif
+
+int
+main ()
+{
+return euidaccess ();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (ac_try="$ac_link"
+case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_link") 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag" || test ! -s conftest.err'
+  { (case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_try") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_try") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_func_euidaccess=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+	ac_cv_func_euidaccess=no
+fi
+
+rm -f core conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+fi
+{ echo "$as_me:$LINENO: result: $ac_cv_func_euidaccess" >&5
+echo "${ECHO_T}$ac_cv_func_euidaccess" >&6; }
+if test $ac_cv_func_euidaccess = yes; then
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_EUIDACCESS
+_ACEOF
+
+fi
+
+{ echo "$as_me:$LINENO: checking for eaccess" >&5
+echo $ECHO_N "checking for eaccess... $ECHO_C" >&6; }
+if test "${ac_cv_func_eaccess+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+/* Define eaccess to an innocuous variant, in case <limits.h> declares eaccess.
+   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
+#define eaccess innocuous_eaccess
+
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char eaccess (); below.
+    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
+    <limits.h> exists even on freestanding compilers.  */
+
+#ifdef __STDC__
+# include <limits.h>
+#else
+# include <assert.h>
+#endif
+
+#undef eaccess
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char eaccess ();
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined __stub_eaccess || defined __stub___eaccess
+choke me
+#endif
+
+int
+main ()
+{
+return eaccess ();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (ac_try="$ac_link"
+case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_link") 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag" || test ! -s conftest.err'
+  { (case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_try") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_try") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_func_eaccess=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+	ac_cv_func_eaccess=no
+fi
+
+rm -f core conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+fi
+{ echo "$as_me:$LINENO: result: $ac_cv_func_eaccess" >&5
+echo "${ECHO_T}$ac_cv_func_eaccess" >&6; }
+if test $ac_cv_func_eaccess = yes; then
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_EACCESS
+_ACEOF
+
+fi
+
+
+{ echo "$as_me:$LINENO: checking for statvfs" >&5
+echo $ECHO_N "checking for statvfs... $ECHO_C" >&6; }
+if test "${ac_cv_func_statvfs+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+/* Define statvfs to an innocuous variant, in case <limits.h> declares statvfs.
+   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
+#define statvfs innocuous_statvfs
+
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char statvfs (); below.
+    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
+    <limits.h> exists even on freestanding compilers.  */
+
+#ifdef __STDC__
+# include <limits.h>
+#else
+# include <assert.h>
+#endif
+
+#undef statvfs
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char statvfs ();
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined __stub_statvfs || defined __stub___statvfs
+choke me
+#endif
+
+int
+main ()
+{
+return statvfs ();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (ac_try="$ac_link"
+case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_link") 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag" || test ! -s conftest.err'
+  { (case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_try") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (case "(($ac_try" in
+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+  *) ac_try_echo=$ac_try;;
+esac
+eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+  (eval "$ac_try") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_func_statvfs=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+	ac_cv_func_statvfs=no
+fi
+
+rm -f core conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+fi
+{ echo "$as_me:$LINENO: result: $ac_cv_func_statvfs" >&5
+echo "${ECHO_T}$ac_cv_func_statvfs" >&6; }
+if test $ac_cv_func_statvfs = yes; then
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_STATVFS
+_ACEOF
+
+fi
+
 
 GETTEXT_PACKAGE=pcmanfm
 
@@ -9835,3 +10168,15 @@ if test "$no_create" != yes; then
 fi
 
 
+echo
+echo PCMan File Manager............. : Version $VERSION
+echo
+echo Prefix..........................: $prefix
+echo Linux HAL support.............. : $use_hal
+echo Linux inotify support...........: $use_inotify
+echo 64-bit Large file support.......: $largefile
+echo
+echo The binary will be installed in $prefix/bin
+echo
+echo http://pcmanfm.sourceforge.net/
+echo

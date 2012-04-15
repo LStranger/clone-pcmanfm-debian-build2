@@ -12,6 +12,12 @@
 /* Define to 1 if you have the `dcgettext' function. */
 #undef HAVE_DCGETTEXT
 
+/* Define to 1 if eaccess is available */
+#undef HAVE_EACCESS
+
+/* Define to 1 if euidaccess is available */
+#undef HAVE_EUIDACCESS
+
 /* Define to 1 if you have the `FAMNoExists' function. */
 #undef HAVE_FAMNOEXISTS
 
@@ -38,6 +44,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* Define to 1 if statvfs is available */
+#undef HAVE_STATVFS
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
@@ -80,6 +89,9 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
+
+/* Whether to enable Linux inotify support */
+#undef USE_INOTIFY
 
 /* Version number of package */
 #undef VERSION

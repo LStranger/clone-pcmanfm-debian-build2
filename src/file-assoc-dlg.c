@@ -4,6 +4,7 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <string.h>
 
 #include "file-assoc-dlg.h"
 #include "file-assoc-dlg-ui.h"
@@ -89,10 +90,10 @@ static void add_mime_types_to_tree( GtkTreeStore* tree,
         if( icon )
             gdk_pixbuf_unref( icon );
         vfs_mime_type_unref( mime_type );
-        dir = g_dir_open( dir_path, NULL, NULL );
+        dir = g_dir_open( dir_path, 0, NULL );
         if( dir )
         {
-            while( name = g_dir_read_name( dir ) )
+            while( (name = g_dir_read_name( dir )) )
             {
                 if( ! g_str_has_suffix( name, ".xml" ) )
                     continue;
@@ -148,10 +149,10 @@ static void init_type_tree( GtkTreeView* view )
     for( dir = dirs; *dir; ++dir )
     {
         dir_path = g_build_filename( *dir, "mime", NULL );
-        dir_scan = g_dir_open( dir_path, NULL, NULL );
+        dir_scan = g_dir_open( dir_path, 0, NULL );
         if( dir_scan )
         {
-            while( name = g_dir_read_name( dir_scan ) )
+            while( (name = g_dir_read_name( dir_scan )) )
             {
                 file_path = g_build_filename( dir_path, name, NULL );
                 if( g_file_test( file_path, G_FILE_TEST_IS_DIR ) )

@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-20 22:46+0800\n"
-"PO-Revision-Date: 2006-02-14 21:52+0800\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2006-10-15 00:48+0800\n"
+"PO-Revision-Date: 2006-10-04 19:13+0100\n"
+"Last-Translator: Mona <nordisch(dash)herb(at)gmx(dot)net>\n"
 "Language-Team: Swedish <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: src/main.c:174
+#: src/main.c:183
 msgid "GTK+ icon theme is not properly set"
-msgstr ""
+msgstr "GTK+ ikontemat är inte riktigt inställt"
 
-#: src/main.c:176
+#: src/main.c:185
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -41,254 +41,294 @@ msgid ""
 "icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
 "no standard for this, but it will be solved by freedesktop.org in the future."
 msgstr ""
+"<big><b>%s</b></big>\n"
+"\n"
+"Det betyder vanligtvis att du inte har en XSETTINGS hanterare som körs. "
+"Skrivbordsplattformer som GNOME och XFCE startar upp deras XSETTING "
+"hanterare automatiskt som gnome-settings-daemon och xfce-mcs-manager.\n"
+"\n"
+"<b>Om du inte användar dessa skrivbordsplattformer, har du två möjligheter "
+"att välja:\n"
+"1. kör en XSETTINGS hanterare, eller\n"
+"2. bestämma ikontemat in ~/.gtkrc-2.0.</b>\n"
+"Till exempel för att använda Tango ikonteman lägg till raden:\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> i din ~/.gtkrc-2.0. (skapa ny, "
+"om det inte finns en sådan fil)\n"
+"\n"
+"<b>OBS: Ikontemat som väljas skulle vara kompatibel med GNOME, eller "
+"filikonerna kan inte visas korrekt.</b> På grund av skillnader i "
+"ikonnamnsformat av GNOME och KDE, kan KDE teman inte användas. För "
+"närvarande finns ingen standard för det, men det ska lösas från freedesktop."
+"org i framtiden."
 
-#: src/main.c:306
-#, fuzzy
+#: src/main.c:322
 msgid "File doesn't exist"
-msgstr "Katalogen existera inte!"
+msgstr "Filen existera inte!"
 
-#: src/main.c:352
-#, fuzzy
+#: src/main.c:369
 msgid "Don't know how to open the file"
-msgstr "Vill du överskriva filen?"
+msgstr "Vet inte, hur jag ska öppna filen"
 
-#: src/main.c:354
+#: src/main.c:371
 #, c-format
 msgid ""
 "Unable to open file:\n"
 "\"%s\"\n"
 "%s"
 msgstr ""
+"Kan inte öppna filen:\n"
+"\"%s\"\n"
+"%s"
 
-#: src/main-window.c:254 src/ptk/ptk-file-browser.c:2366
+#: src/main-window.c:268 src/ptk/ptk-file-menu.c:92
 msgid "_Folder"
 msgstr "_Katalogen"
 
-#: src/main-window.c:255 src/ptk/ptk-file-browser.c:2367
+#: src/main-window.c:269 src/ptk/ptk-file-menu.c:93
 msgid "_Text File"
 msgstr "_Textfil"
 
-#: src/main-window.c:261
+#: src/main-window.c:275
 msgid "New _Window"
-msgstr "_Nytt fönster"
+msgstr "Nytt _fönster"
 
-#: src/main-window.c:262
+#: src/main-window.c:276
 msgid "New _Tab"
 msgstr "Ny _flik"
 
-#: src/main-window.c:263
+#: src/main-window.c:277
 msgid "Close Tab"
 msgstr "Stäng flik"
 
-#: src/main-window.c:265 src/ptk/ptk-file-browser.c:2390
+#: src/main-window.c:279 src/ptk/ptk-file-menu.c:116
 msgid "_Create New"
-msgstr " _Skapa Ny"
+msgstr " _Skapa ny"
 
-#: src/main-window.c:266
-#, fuzzy
+#: src/main-window.c:280
 msgid "File _Properties"
-msgstr "Filens egenskaper"
+msgstr "Fil_egenskaper"
 
-#: src/main-window.c:277 src/ptk/ptk-file-browser.c:2385
+#: src/main-window.c:291 src/ptk/ptk-file-menu.c:111
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: src/main-window.c:278 src/ptk/ptk-file-browser.c:1170
-#: src/ptk/ptk-file-browser.c:2386
+#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1317
+#: src/ptk/ptk-file-menu.c:112
 msgid "_Rename"
 msgstr "_Bytt namn"
 
-#: src/main-window.c:280
+#: src/main-window.c:294
 msgid "Select _All"
 msgstr "Markera _alla"
 
-#: src/main-window.c:281
+#: src/main-window.c:295
 msgid "_Invert Selection"
 msgstr "_Invertera urval"
 
-#: src/main-window.c:290
+#: src/main-window.c:304
 msgid "Go _Back"
 msgstr "_Bakåt"
 
-#: src/main-window.c:291
+#: src/main-window.c:305
 msgid "Go _Forward"
 msgstr "_Framåt"
 
-#: src/main-window.c:292
+#: src/main-window.c:306
 msgid "Go to _Parent Folder"
-msgstr "_Foräldrarkatalogen"
+msgstr "Gå till _foräldrarkatalogen"
 
-#: src/main-window.c:293
+#: src/main-window.c:307
 msgid "Go _Home"
-msgstr "_Startsida"
+msgstr "Hem_katalogen"
 
-#: src/main-window.c:305
+#: src/main-window.c:319
 msgid "Sort by _Name"
 msgstr "Sortera efter _namn"
 
-#: src/main-window.c:306
+#: src/main-window.c:320
 msgid "Sort by _Size"
 msgstr "Sortera efter _storlek"
 
-#: src/main-window.c:307
-#, fuzzy
+#: src/main-window.c:321
 msgid "Sort by _Modification Time"
-msgstr "Sortera efter _datum"
+msgstr "Sortera efter _ändringsdatum"
 
-#: src/main-window.c:308
-#, fuzzy
+#: src/main-window.c:322
 msgid "Sort by _Type"
-msgstr "Sortera efter _datum"
+msgstr "Sortera efter _typ"
 
-#: src/main-window.c:309
-#, fuzzy
+#: src/main-window.c:323
 msgid "Sort by _Permission"
-msgstr "_Rättigheter"
+msgstr "Sortera efter _rättigheter"
 
-#: src/main-window.c:310
-#, fuzzy
+#: src/main-window.c:324
 msgid "Sort by _Owner"
-msgstr "Sortera efter _datum"
+msgstr "Sortera efter _ägare"
 
-#: src/main-window.c:312
+#: src/main-window.c:326
 msgid "Ascending"
 msgstr "Uppstigande"
 
-#: src/main-window.c:313
+#: src/main-window.c:327
 msgid "Descending"
 msgstr "Nedstigande"
 
-#: src/main-window.c:319
+#: src/main-window.c:333
 msgid "_Open Side Pane"
-msgstr ""
+msgstr "_Öppna sidopanel"
 
-#: src/main-window.c:321
+#: src/main-window.c:335
 msgid "Show _Location Pane"
-msgstr ""
+msgstr "Visa _addressraden"
 
-#: src/main-window.c:322
-#, fuzzy
+#: src/main-window.c:336
 msgid "Show _Directory Tree"
-msgstr "Trädvyn"
+msgstr "Visa _trädvyn"
 
-#: src/main-window.c:328
+#: src/main-window.c:342
 msgid "_Refresh"
 msgstr "_Uppdatera"
 
-#: src/main-window.c:329
+#: src/main-window.c:343
 msgid "Side _Pane"
-msgstr ""
+msgstr "Sido_panel"
 
-#: src/main-window.c:332
+#: src/main-window.c:346
 msgid "Show _Hidden Files"
-msgstr "_Visa gömda filer"
+msgstr "Visa _dolda filer"
 
-#: src/main-window.c:333
+#: src/main-window.c:347
 msgid "_Sort..."
 msgstr "_Sortera..."
 
-#: src/main-window.c:335
+#: src/main-window.c:349
 msgid "View as _Icons"
 msgstr "Visa som _Ikoner"
 
-#: src/main-window.c:336
-#, fuzzy
+#: src/main-window.c:350
 msgid "View as Detailed _List"
-msgstr "Visa som _List"
+msgstr "Visa som detaljerad _List"
 
-#: src/main-window.c:342
-#, fuzzy
+#: src/main-window.c:356
 msgid "Open _Terminal"
-msgstr "Öppna via terminal"
+msgstr "Öppna _terminal"
 
-#: src/main-window.c:343
+#: src/main-window.c:357
 msgid "Open Current Folder as _Root"
-msgstr ""
+msgstr "Öppna denna katalogen som _systemadministratör"
 
-#: src/main-window.c:351
+#: src/main-window.c:365
 msgid "_File"
 msgstr "_Arkiv"
 
-#: src/main-window.c:352
+#: src/main-window.c:366
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: src/main-window.c:353
+#. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
+#: src/main-window.c:368
 msgid "_Go"
 msgstr "_Gå till"
 
-#: src/main-window.c:354
+#: src/main-window.c:369
 msgid "_Bookmark"
 msgstr "_Bokmärken"
 
-#: src/main-window.c:355
+#: src/main-window.c:370
 msgid "_View"
 msgstr "_Visa"
 
-#: src/main-window.c:356
+#: src/main-window.c:371
 msgid "_Tool"
-msgstr ""
+msgstr "_Verktyg"
 
-#: src/main-window.c:357
+#: src/main-window.c:372
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: src/main-window.c:365
+#: src/main-window.c:380
 msgid "New Tab"
 msgstr "Ny flik"
 
-#: src/main-window.c:366
+#: src/main-window.c:381
 msgid "Back"
 msgstr "Bakåt"
 
-#: src/main-window.c:367
+#: src/main-window.c:382
 msgid "Forward"
 msgstr "Framåt"
 
-#: src/main-window.c:368
+#: src/main-window.c:383
 msgid "Parent Folder"
 msgstr "Foräldrarkatalogen"
 
-#: src/main-window.c:369
+#: src/main-window.c:384
 msgid "Refresh"
 msgstr "Uppdatera"
 
-#: src/main-window.c:370
+#: src/main-window.c:385
 msgid "Home Directory"
-msgstr "Hem Katalogen"
+msgstr "Hemkatalogen"
 
-#: src/main-window.c:371
-#, fuzzy
+#: src/main-window.c:386
 msgid "Open Side Pane"
-msgstr "Öppna i ny _flik"
+msgstr "Öppna sidopanel"
 
-#: src/main-window.c:377
+#: src/main-window.c:392
 msgid "Go"
 msgstr "Gå till"
 
 #. FIXME: Is this label required? What about the hotkey?
-#: src/main-window.c:460
+#: src/main-window.c:486
 msgid "A_ddress:"
 msgstr "A_ddress"
 
-#: src/main-window.c:488
+#: src/main-window.c:514
 msgid "Warning: You are in super user mode"
-msgstr ""
+msgstr "Varning: du är i administratorsläge"
+
+#: src/main-window.c:935
+msgid "Source code taken from other projects:"
+msgstr "Källkoden som tagits av andra projekter:"
+
+#: src/main-window.c:936
+msgid " * xdgmime: Red Hat, Inc & Jonathan Blandford"
+msgstr " * xdgmime: Red Hat, Inc & Jonathan Blandford"
+
+#: src/main-window.c:937
+msgid " * libmd5-rfc: Aladdin Enterprises"
+msgstr " * libmd5-rfc: Aladdin Enterprises"
+
+#: src/main-window.c:938
+msgid " * Working area detection: Gary Kramlich"
+msgstr " * Upptäckning av arbetsområden: Gary Kramlich"
+
+#: src/main-window.c:939
+msgid " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
+msgstr " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
+
+#: src/main-window.c:940
+msgid " * Text and icon renderer uese code from Jonathan Blandford"
+msgstr "* Text och ikon renderer användar kod från Jonathan Blandford"
+
+#: src/main-window.c:941
+msgid " * Desktop icons use code from Brian Tarricone"
+msgstr "* Skrivbord ikoner användar kod från Brian Tarricone"
 
 #. TRANSLATORS: Replace this string with your names, one name per line.
-#: src/main-window.c:861
+#: src/main-window.c:945
 msgid "translator-credits"
-msgstr "Mona Zehle <nordisch-herb(at)gmx.net>"
+msgstr "Mona Zehle"
 
-#: src/main-window.c:866
+#: src/main-window.c:950
 msgid "PCMan File Manager"
 msgstr "PCMan Filhanterare"
 
-#: src/main-window.c:867
+#: src/main-window.c:951
 msgid "Copyright (C) 2005 - 2006"
 msgstr "Copyright (C) 2005 - 2006"
 
-#: src/main-window.c:868
+#: src/main-window.c:952
 msgid ""
 "Lightweight file manager\n"
 "\n"
@@ -298,289 +338,211 @@ msgstr ""
 "\n"
 "Utvecklad av Hon Jen Yee (PCMan)"
 
-#: src/main-window.c:1406
+#: src/main-window.c:1488
 msgid "Terminal program has not been set"
-msgstr ""
+msgstr "Inget terminalprogramm inställt"
 
-#: src/main-window.c:1448
+#: src/main-window.c:1535
 msgid "gksu or kdesu is not found"
-msgstr ""
+msgstr "gksu eller kdesu finns inte"
 
-#: src/main-window.c:1525
+#: src/main-window.c:1612
 msgid "_Add to Bookmarks"
 msgstr "_Lägg till Bokmärken"
 
-#: src/main-window.c:1526
+#: src/main-window.c:1613
 msgid "_Edit Bookmarks"
 msgstr "_Redigera Bokmärken"
 
-#: src/main-window.c:1606
+#: src/main-window.c:1693
 msgid "Loading..."
 msgstr "Laddar..."
 
-#: src/main-window.c:1786
+#: src/main-window.c:1880
 #, c-format
-msgid "%d item selected (%s)"
-msgid_plural "%d items selected (%s)"
-msgstr[0] ""
-msgstr[1] ""
+msgid ", Free space: %s (Total: %s )"
+msgstr ", Fri diskutrymme: %s (Totalt: %s )"
 
-#: src/main-window.c:1794
+#: src/main-window.c:1888
 #, c-format
-msgid "%d visible item (%d hidden)"
-msgid_plural "%d visible items (%d hidden)"
-msgstr[0] ""
-msgstr[1] ""
+msgid "%d item selected (%s)%s"
+msgid_plural "%d items selected (%s)%s"
+msgstr[0] "%d objekt valt (%s)%s"
+msgstr[1] "%d objekt valde (%s)%s"
 
-#: src/ptk/ptk-file-browser.c:532
+#: src/main-window.c:1896
+#, c-format
+msgid "%d visible item (%d hidden)%s"
+msgid_plural "%d visible items (%d hidden)%s"
+msgstr[0] "%d synlig objekt (%d dold)%s"
+msgstr[1] "%d synliga objekt (%d dolda)%s"
+
+#: src/ptk/ptk-file-browser.c:496
 msgid "Directory does'nt exist!"
 msgstr "Katalogen existera inte!"
 
-#: src/ptk/ptk-file-browser.c:1166 src/ptk/ptk-file-browser.c:2478
+#: src/ptk/ptk-file-browser.c:1313 src/ptk/ptk-file-menu.c:125
 msgid "Open in New _Tab"
 msgstr "Öppna i ny _flik"
 
-#: src/ptk/ptk-file-browser.c:1167 src/ptk/ptk-file-browser.c:2485
-#, fuzzy
+#: src/ptk/ptk-file-browser.c:1314 src/ptk/ptk-file-menu.c:126
 msgid "Open in New _Window"
-msgstr "Öppna via terminal"
+msgstr "Öppna i nytt _fönster"
 
-#: src/ptk/ptk-file-browser.c:1412 src/edit-bookmarks.c:173
+#: src/ptk/ptk-file-browser.c:1548 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr "Namn"
 
-#: src/ptk/ptk-file-browser.c:1412
+#: src/ptk/ptk-file-browser.c:1548
 msgid "Size"
 msgstr "Storlek"
 
-#: src/ptk/ptk-file-browser.c:1412
+#: src/ptk/ptk-file-browser.c:1548
 msgid "Type"
 msgstr "Typ"
 
-#: src/ptk/ptk-file-browser.c:1413
+#: src/ptk/ptk-file-browser.c:1549
 msgid "Permission"
 msgstr "Rättighet"
 
-#: src/ptk/ptk-file-browser.c:1413
+#: src/ptk/ptk-file-browser.c:1549
 msgid "Owner:Group"
 msgstr "Ägare:Grupp"
 
-#: src/ptk/ptk-file-browser.c:1413
+#: src/ptk/ptk-file-browser.c:1549
 msgid "Last Modification"
-msgstr "Modifierad senast"
+msgstr "Modifierad senast:"
 
-#: src/ptk/ptk-file-browser.c:1927
-msgid "Rename File"
-msgstr "Bytt namn"
-
-#: src/ptk/ptk-file-browser.c:1928
-msgid "Please input new file name:"
-msgstr "Infoga ny filnamn:"
-
-#: src/ptk/ptk-file-browser.c:1957 src/ptk/ptk-file-browser.c:1975
-#: src/ptk/ptk-file-browser.c:3196
-msgid ""
-"The file name you specified has existed.\n"
-"Please input a new one:"
-msgstr ""
-"Den valda filnamn existera redan.\n"
-"Snälla infoga ny namn:"
-
-#: src/ptk/ptk-file-browser.c:2112
-msgid "Really delete selected files?"
-msgstr "Verkligen tappa bort valda filerna?"
-
-#: src/ptk/ptk-file-browser.c:2373
-msgid "E_xtract Here"
-msgstr ""
-
-#: src/ptk/ptk-file-browser.c:2374
-msgid "Extract _To"
-msgstr ""
-
-#: src/ptk/ptk-file-browser.c:2380
-msgid "Open _with..."
-msgstr "Öppna _med..."
-
-#: src/ptk/ptk-file-browser.c:2388
-msgid "Compress"
-msgstr ""
-
-#: src/ptk/ptk-file-browser.c:2389
-#, fuzzy
-msgid "E_xtract"
-msgstr "Kör"
-
-#: src/ptk/ptk-file-browser.c:2392
-#, fuzzy
-msgid "_Properties"
-msgstr "_Property"
-
-#: src/ptk/ptk-file-browser.c:2492
-#, fuzzy
-msgid "Open in Terminal"
-msgstr "Öppna via terminal"
-
-#: src/ptk/ptk-file-browser.c:2588
-msgid "_Open with another program"
-msgstr "_Öppna med annat program"
-
-#: src/ptk/ptk-file-browser.c:2602
-#, fuzzy
-msgid "E_xecute"
-msgstr "Kör"
-
-#: src/ptk/ptk-file-browser.c:2611
-#, fuzzy, c-format
-msgid "_Open with \"%s\""
-msgstr "Öppna _med..."
-
-#: src/ptk/ptk-file-browser.c:2622 src/ptk/ptk-file-browser.c:2628
-msgid "_Open"
-msgstr ""
-
-#: src/ptk/ptk-file-browser.c:3169 src/ptk/ptk-file-browser.c:3171
-msgid "New Folder"
-msgstr "Ny katalogen"
-
-#: src/ptk/ptk-file-browser.c:3170
-msgid "Input a name for the new folder:"
-msgstr "Infoga ny namn för nya katalogen:"
-
-#: src/ptk/ptk-file-browser.c:3176 src/ptk/ptk-file-browser.c:3178
-msgid "New File"
-msgstr "Ny fil"
-
-#: src/ptk/ptk-file-browser.c:3177
-msgid "Input a name for the new file:"
-msgstr "Infoga ny filnamn:"
-
-#: src/ptk/ptk-file-browser.c:3313
-#, fuzzy
+#: src/ptk/ptk-file-browser.c:2584
 msgid "Location"
-msgstr "Address:"
+msgstr "Address"
 
-#: src/ptk/ptk-file-browser.c:3314
+#: src/ptk/ptk-file-browser.c:2585
 msgid "Directory Tree"
 msgstr "Trädvyn"
 
-#: src/ptk/ptk-location-view.c:138
+#: src/ptk/ptk-location-view.c:142
 msgid "Desktop"
-msgstr ""
+msgstr "Skrivbord"
 
-#: src/ptk/ptk-location-view.c:465 src/ptk/ptk-location-view.c:475
+#: src/ptk/ptk-location-view.c:329
+#, c-format
+msgid ""
+"The volume \"%s\" is not mounted.\n"
+"Do you want to mount it?"
+msgstr ""
+"Enheten \"%s\" är inte monterad.\n"
+"Vill du montera den nu?"
+
+#: src/ptk/ptk-location-view.c:338 src/ptk/ptk-location-view.c:510
+#: src/ptk/ptk-location-view.c:526
 msgid "Unable to mount device"
-msgstr ""
+msgstr "Kan inte montera enheten"
 
-#: src/ptk/ptk-location-view.c:481
+#: src/ptk/ptk-location-view.c:532
 msgid "Unable to unmount device"
-msgstr ""
+msgstr "Kan inte avmontera enheten"
 
-#: src/ptk/ptk-location-view.c:491
+#: src/ptk/ptk-location-view.c:540
 msgid "Unable to eject device"
-msgstr ""
+msgstr "Kan inte mata ut enheten"
 
-#: src/ptk/ptk-location-view.c:543
+#: src/ptk/ptk-location-view.c:592
 msgid "_Mount File System"
-msgstr ""
+msgstr "_Montera filsystem"
 
-#: src/ptk/ptk-location-view.c:552
-#, fuzzy
+#: src/ptk/ptk-location-view.c:601
 msgid "_Eject"
-msgstr "Kör"
+msgstr "_Mata ut"
 
-#: src/ptk/ptk-location-view.c:557
+#: src/ptk/ptk-location-view.c:606
 msgid "_Unmount File System"
-msgstr ""
+msgstr "_Avmontera filsystem"
 
-#: src/ptk/ptk-file-task.c:106
+#: src/ptk/ptk-file-task.c:107
 msgid "Move: "
 msgstr "Flytta:"
 
-#: src/ptk/ptk-file-task.c:107
+#: src/ptk/ptk-file-task.c:108
 msgid "Copy: "
 msgstr "Kopiera:"
 
-#: src/ptk/ptk-file-task.c:108
+#: src/ptk/ptk-file-task.c:109
 msgid "Delete: "
 msgstr "Ta bort:"
 
-#: src/ptk/ptk-file-task.c:109
+#: src/ptk/ptk-file-task.c:110
 msgid "Link: "
 msgstr "Länk:"
 
-#: src/ptk/ptk-file-task.c:110
+#: src/ptk/ptk-file-task.c:111
 msgid "Change Properties: "
-msgstr "Ändra Egenskaper:"
+msgstr "Ändra egenskaper:"
 
-#: src/ptk/ptk-file-task.c:114
+#: src/ptk/ptk-file-task.c:115
 msgid "Moving..."
 msgstr "Flyttar..."
 
-#: src/ptk/ptk-file-task.c:115
+#: src/ptk/ptk-file-task.c:116
 msgid "Copying..."
 msgstr "Kopierar..."
 
-#: src/ptk/ptk-file-task.c:116
+#: src/ptk/ptk-file-task.c:117
 msgid "Deleting..."
 msgstr "Tar bort..."
 
-#: src/ptk/ptk-file-task.c:117
+#: src/ptk/ptk-file-task.c:118
 msgid "Linking..."
 msgstr "Länkar..."
 
-#: src/ptk/ptk-file-task.c:118
+#: src/ptk/ptk-file-task.c:119
 msgid "Changing Properties"
-msgstr "Ändrar Egenskaper:"
+msgstr "Ändrar egenskaper:"
 
 #. To: <Destination folder>
 #. ex. Copy file to..., Move file to...etc.
-#: src/ptk/ptk-file-task.c:155
-#, fuzzy
+#: src/ptk/ptk-file-task.c:156
 msgid "To:"
 msgstr "Till:"
 
 #. Processing:
 #. Processing: <Name of currently proccesed file>
-#: src/ptk/ptk-file-task.c:170
-#, fuzzy
+#: src/ptk/ptk-file-task.c:171
 msgid "Processing:"
 msgstr "Behandlar:"
 
 #. Preparing to do some file operation (Copy, Move, Delete...)
-#: src/ptk/ptk-file-task.c:177
-#, fuzzy
+#: src/ptk/ptk-file-task.c:178
 msgid "Preparing..."
 msgstr "Förbereder..."
 
 #. Progress:
-#: src/ptk/ptk-file-task.c:185
-#, fuzzy
+#: src/ptk/ptk-file-task.c:186
 msgid "Progress:"
 msgstr "Förlopp:"
 
-#: src/ptk/ptk-file-task.c:320
+#: src/ptk/ptk-file-task.c:321
 msgid "Cancel the operation?"
-msgstr "Avbryt operationen?"
+msgstr "Avbryta operationen?"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:404
+#: src/ptk/ptk-file-task.c:409
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "Vill du överskriva katalogen samt innehåll?"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:409
+#: src/ptk/ptk-file-task.c:414
 msgid "Do you want to overwrite this file?"
 msgstr "Vill du överskriva filen?"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:414
+#: src/ptk/ptk-file-task.c:419
 msgid "Please choose a new file name."
-msgstr "Välj ny filnamn."
+msgstr "Välj ett nytt filnamn."
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:422
+#: src/ptk/ptk-file-task.c:427
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -592,7 +554,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:427
+#: src/ptk/ptk-file-task.c:432
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -607,290 +569,394 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:444
+#: src/ptk/ptk-file-task.c:449
 msgid "Overwrite"
-msgstr "Överskriv"
-
-#: src/ptk/ptk-file-task.c:445
-msgid "Overwrite All"
-msgstr "Överskriv alla"
+msgstr "Skriv över"
 
 #: src/ptk/ptk-file-task.c:450
+msgid "Overwrite All"
+msgstr "Skriv över alla"
+
+#: src/ptk/ptk-file-task.c:455
 msgid "Rename"
 msgstr "Bytt namn"
 
-#: src/ptk/ptk-file-task.c:451
+#: src/ptk/ptk-file-task.c:456
 msgid "Skip"
 msgstr "Kasta"
 
-#: src/ptk/ptk-file-task.c:452
+#: src/ptk/ptk-file-task.c:457
 msgid "Skip All"
 msgstr "Kasta alla"
 
-#: src/ptk/ptk-file-archiver.c:116
+#: src/ptk/ptk-file-archiver.c:119
 msgid "Save Compressd Files to..."
-msgstr ""
+msgstr "Spara komprimerade filer som..."
 
-#: src/ptk/ptk-file-archiver.c:124
+#: src/ptk/ptk-file-archiver.c:127
 msgid "Format of compressed File:"
-msgstr ""
-
-#: src/ptk/ptk-file-archiver.c:195
-#, c-format
-msgid "Creating Compressed File: %s"
-msgstr ""
+msgstr "Format av komprimerad arkiv:"
 
 #: src/ptk/ptk-file-archiver.c:198
+#, c-format
+msgid "Creating Compressed File: %s"
+msgstr "Skapar komprimerad arkiv: %s"
+
+#: src/ptk/ptk-file-archiver.c:201
 msgid "Compress Files"
-msgstr ""
+msgstr "Komprimera filer"
 
-#: src/ptk/ptk-file-archiver.c:229
+#: src/ptk/ptk-file-archiver.c:232
 msgid "Extract File to..."
-msgstr ""
+msgstr "Extrahera filer till..."
 
-#: src/ptk/ptk-file-archiver.c:278
+#: src/ptk/ptk-file-archiver.c:281
 #, c-format
 msgid "Extracting Files to: %s"
-msgstr ""
+msgstr "Extraherar filer till: %s"
 
-#: src/ptk/ptk-file-archiver.c:280
-#, fuzzy
+#: src/ptk/ptk-file-archiver.c:283
 msgid "Extract Files"
-msgstr "Kör"
+msgstr "Extrahera filer"
 
-#: src/ptk/ptk-console-output.c:59
+#: src/ptk/ptk-console-output.c:66
 msgid ""
 "\n"
 "Complete!"
 msgstr ""
+"\n"
+"Klar!"
 
-#: src/ptk/ptk-console-output.c:156
-#, fuzzy
+#: src/ptk/ptk-console-output.c:170
 msgid "Command:"
-msgstr "Kommandorad:"
+msgstr "Kommandot:"
 
-#: src/ptk/ptk-dir-tree.c:172
-#, fuzzy
+#: src/ptk/ptk-dir-tree.c:174 src/vfs/vfs-volume.c:149
 msgid "File System"
-msgstr "Mime-Type:"
+msgstr "Filsystem"
 
-#: src/ptk/ptk-dir-tree.c:396
-#, fuzzy
+#: src/ptk/ptk-dir-tree.c:398
 msgid "No Sub Folder"
+msgstr "Ingen underkatalog"
+
+#: src/ptk/ptk-file-menu.c:99
+msgid "E_xtract Here"
+msgstr "E_xtrahera här"
+
+#: src/ptk/ptk-file-menu.c:100
+msgid "Extract _To"
+msgstr "Extrahera _till"
+
+#: src/ptk/ptk-file-menu.c:106
+msgid "Open _with..."
+msgstr "Öppna _med..."
+
+#: src/ptk/ptk-file-menu.c:114
+msgid "Compress"
+msgstr "Komprimera"
+
+#: src/ptk/ptk-file-menu.c:115
+msgid "E_xtract"
+msgstr "E_xtrahera"
+
+#: src/ptk/ptk-file-menu.c:118
+msgid "_Properties"
+msgstr "_Egenskaper"
+
+#: src/ptk/ptk-file-menu.c:127
+msgid "Open in Terminal"
+msgstr "Öppna i terminal"
+
+#: src/ptk/ptk-file-menu.c:307
+msgid "_Open with another program"
+msgstr "_Öppna med annat program"
+
+#: src/ptk/ptk-file-menu.c:322
+msgid "E_xecute"
+msgstr "K_ör"
+
+#: src/ptk/ptk-file-menu.c:331
+#, c-format
+msgid "_Open with \"%s\""
+msgstr "_Öppna med \"%s\""
+
+#: src/ptk/ptk-file-menu.c:342 src/ptk/ptk-file-menu.c:348
+msgid "_Open"
+msgstr "_Öppna"
+
+#: src/ptk/ptk-file-misc.c:54
+msgid "Really delete selected files?"
+msgstr "Verkligen ta bort valda filerna?"
+
+#: src/ptk/ptk-file-misc.c:109
+msgid "Rename File"
+msgstr "Bytt namn"
+
+#: src/ptk/ptk-file-misc.c:110
+msgid "Please input new file name:"
+msgstr "Skriv in nytt filnamn:"
+
+#: src/ptk/ptk-file-misc.c:138 src/ptk/ptk-file-misc.c:156
+#: src/ptk/ptk-file-misc.c:206
+msgid ""
+"The file name you specified has existed.\n"
+"Please input a new one:"
+msgstr ""
+"Önskat filnamn existera redan.\n"
+"Skriv in nytt namn:"
+
+#: src/ptk/ptk-file-misc.c:176 src/ptk/ptk-file-misc.c:178
+msgid "New Folder"
 msgstr "Ny katalogen"
 
-#: src/file-properties-ui.c:81
-msgid "File Properties"
-msgstr "Filens egenskaper"
+#: src/ptk/ptk-file-misc.c:177
+msgid "Input a name for the new folder:"
+msgstr "Infoga namnet för nya katalogen:"
 
-#: src/file-properties-ui.c:101
+#: src/ptk/ptk-file-misc.c:183 src/ptk/ptk-file-misc.c:185
+msgid "New File"
+msgstr "Ny fil"
+
+#: src/ptk/ptk-file-misc.c:184
+msgid "Input a name for the new file:"
+msgstr "Skriv in nytt filnamn:"
+
+#: src/ptk/ptk-file-misc.c:228
+msgid "The new file cannot be created!"
+msgstr "Nya filen kan inte skapas!"
+
+#: src/file-properties-ui.c:83
+msgid "File Properties"
+msgstr "Filegenskaper"
+
+#: src/file-properties-ui.c:103
 msgid "File Name:"
 msgstr "Filnamn:"
 
-#: src/file-properties-ui.c:108
-#, fuzzy
+#: src/file-properties-ui.c:110
 msgid "File Type:"
-msgstr "Mime-Type:"
+msgstr "Filtyp:"
 
-#: src/file-properties-ui.c:115
+#: src/file-properties-ui.c:117
 msgid "Total Size of Files:"
-msgstr "Totalt storlek av filerna:"
+msgstr "Totalt storlek av filer:"
 
-#: src/file-properties-ui.c:122
+#: src/file-properties-ui.c:124
 msgid "Last Modification:"
 msgstr "Modifierad senast:"
 
-#: src/file-properties-ui.c:156
+#: src/file-properties-ui.c:158
 msgid "Last Access:"
-msgstr "Accessad senast:"
+msgstr "Accessat senast:"
 
-#: src/file-properties-ui.c:170
+#: src/file-properties-ui.c:172
 msgid "Location:"
 msgstr "Address:"
 
-#: src/file-properties-ui.c:192
+#: src/file-properties-ui.c:194
 msgid "Size on Disk:"
 msgstr "Storlek på disken:"
 
-#: src/file-properties-ui.c:208 src/pref-dialog-ui.c:198
-msgid "_General"
-msgstr "_Allmän:"
+#: src/file-properties-ui.c:210
+msgid "Open with:"
+msgstr "Öppna med:"
 
-#: src/file-properties-ui.c:223 src/file-properties-ui.c:258
+#: src/file-properties-ui.c:223 src/pref-dialog-ui.c:212
+msgid "_General"
+msgstr "_Allmänt:"
+
+#: src/file-properties-ui.c:238 src/file-properties-ui.c:273
 msgid "Owner:"
 msgstr "Ägare:"
 
-#: src/file-properties-ui.c:229 src/file-properties-ui.c:265
+#: src/file-properties-ui.c:244 src/file-properties-ui.c:280
 msgid "Group:"
 msgstr "Grupp:"
 
-#: src/file-properties-ui.c:272
+#: src/file-properties-ui.c:287
 msgid "Other Users:"
 msgstr "Andra användare:"
 
-#: src/file-properties-ui.c:279 src/file-properties-ui.c:286
-#: src/file-properties-ui.c:293
+#: src/file-properties-ui.c:294 src/file-properties-ui.c:301
+#: src/file-properties-ui.c:308
 msgid "Read"
 msgstr "Läs"
 
-#: src/file-properties-ui.c:300 src/file-properties-ui.c:307
-#: src/file-properties-ui.c:314
+#: src/file-properties-ui.c:315 src/file-properties-ui.c:322
+#: src/file-properties-ui.c:329
 msgid "Write"
 msgstr "Skriv"
 
-#: src/file-properties-ui.c:321 src/file-properties-ui.c:328
-#: src/file-properties-ui.c:335
+#: src/file-properties-ui.c:336 src/file-properties-ui.c:343
+#: src/file-properties-ui.c:350
 msgid "Execute"
 msgstr "Kör"
 
 #. This is used in file attribute
-#: src/file-properties-ui.c:343
+#: src/file-properties-ui.c:358
 msgid "Set UID"
-msgstr ""
+msgstr "Ställ in UID"
 
 #. This is used in file attribute
-#: src/file-properties-ui.c:351
+#: src/file-properties-ui.c:366
 msgid "Set GID"
-msgstr ""
+msgstr "Ställ in GID"
 
 #. This is used in file attribute
-#: src/file-properties-ui.c:359
+#: src/file-properties-ui.c:374
 msgid "Sticky"
-msgstr ""
+msgstr "Klistrig"
 
-#: src/file-properties-ui.c:372
+#: src/file-properties-ui.c:387
 msgid "_Permissions"
 msgstr "_Rättigheter"
 
-#: src/file-properties.c:180
+#: src/file-properties.c:286
 msgid "Multiple files are selected"
 msgstr "Flera filer väljas"
 
-#: src/file-properties.c:257
+#: src/file-properties.c:364
 msgid "Multiple files of different types"
 msgstr "Flera filer av olika typer"
 
+#: src/file-properties.c:431
+msgid "Other program..."
+msgstr "_Annat programm..."
+
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: src/file-properties.c:328
+#: src/file-properties.c:515
 msgid "Calculating..."
 msgstr "Beräknar..."
 
-#: src/file-properties.c:447
+#: src/file-properties.c:656
 msgid "Invalid User"
-msgstr ""
+msgstr "Ogiltig användare"
 
-#: src/file-properties.c:457
+#: src/file-properties.c:666
 msgid "Invalid Group"
-msgstr ""
+msgstr "Ogiltig grupp"
 
-#: src/file-properties.c:505
+#: src/file-properties.c:714
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
 "Vill du verkligen verkställa ändringarna rekursivt på alla filer och "
 "underkataloger?"
 
-#: src/pref-dialog-ui.c:65
+#: src/pref-dialog-ui.c:78
 msgid "Preference"
 msgstr "Inställningar"
 
-#: src/pref-dialog-ui.c:86
-#, fuzzy
+#: src/pref-dialog-ui.c:100
 msgid "On-disk file name encoding:"
 msgstr "On-disk filnamns encoding"
 
-#: src/pref-dialog-ui.c:102
-#, fuzzy
+#: src/pref-dialog-ui.c:116
 msgid "Bookmarks:"
-msgstr "_Bokmärken"
+msgstr "Bokmärken:"
 
-#: src/pref-dialog-ui.c:109
-#, fuzzy
+#: src/pref-dialog-ui.c:123
 msgid "Opened in Current Tab"
-msgstr "Öppna i ny _flik"
+msgstr "Öppnat i denna flik"
 
-#: src/pref-dialog-ui.c:110
-#, fuzzy
+#: src/pref-dialog-ui.c:124
 msgid "Opened in New Tab"
-msgstr "Öppna i ny _flik"
+msgstr "Öppnat i ny flik"
 
-#: src/pref-dialog-ui.c:111
-#, fuzzy
+#: src/pref-dialog-ui.c:125
 msgid "Opened in New Window"
-msgstr "Öppna via terminal"
+msgstr "Öppnat i nytt fönster"
 
-#: src/pref-dialog-ui.c:118
+#: src/pref-dialog-ui.c:132
 msgid "Icon Theme:"
-msgstr ""
+msgstr "Ikontema:"
 
-#: src/pref-dialog-ui.c:131
-#, fuzzy
+#: src/pref-dialog-ui.c:145
 msgid "Size of Big Icons:"
-msgstr "Storlek på disken:"
+msgstr "Storlek av stora ikoner:"
 
-#: src/pref-dialog-ui.c:146
+#: src/pref-dialog-ui.c:160
 msgid "Size of Small Icons:"
-msgstr ""
+msgstr "Storlek av små ikoner:"
 
-#: src/pref-dialog-ui.c:162
-#, fuzzy
+#: src/pref-dialog-ui.c:176
 msgid "Display image files with supported format as thumbnails"
-msgstr "Maximalt filstorlek visas som thumbnails:"
+msgstr "Visa bildfiler med stöda format som thumbnails"
 
-#: src/pref-dialog-ui.c:171
+#: src/pref-dialog-ui.c:185
 msgid "Max size of files displayed as thumbnails:"
-msgstr "Maximalt filstorlek visas som thumbnails:"
+msgstr "Maximalt storlek av filer som visas som thumbnails:"
 
-#: src/pref-dialog-ui.c:190
+#: src/pref-dialog-ui.c:204
 msgid "Terminal:"
-msgstr ""
+msgstr "Kommandorad:"
 
-#: src/edit-bookmarks.c:57
-#, fuzzy
+#: src/pref-dialog-ui.c:221
+msgid "Show file icons on desktop"
+msgstr "Visa filikoner på skrivbordet"
+
+#: src/pref-dialog-ui.c:229
+msgid "Wallpaper:"
+msgstr "Bakgrundsbild:"
+
+#: src/pref-dialog-ui.c:233
+msgid "Please select an image file"
+msgstr "Välj bildfil"
+
+#: src/pref-dialog-ui.c:246
+msgid "Background Color"
+msgstr "Bakgrundsfärg"
+
+#: src/pref-dialog-ui.c:258
+msgid "Text Color"
+msgstr "Textfärg"
+
+#: src/pref-dialog-ui.c:266
+msgid "_Desktop"
+msgstr "_Skrivbord"
+
+#: src/edit-bookmarks.c:59
 msgid "New Item"
-msgstr "Ny fil"
+msgstr "Nytt objekt"
 
-#: src/edit-bookmarks.c:126
+#: src/edit-bookmarks.c:128
 msgid "Edit Bookmarks"
-msgstr "Redigera Bokmärken"
+msgstr "Redigera bokmärken"
 
-#: src/edit-bookmarks.c:182
+#: src/edit-bookmarks.c:184
 msgid "Path"
-msgstr ""
+msgstr "Led"
 
-#: src/edit-bookmarks.c:205
+#: src/edit-bookmarks.c:207
 msgid "Use drag & drop to sort the items"
-msgstr "Dra och släpp för att sortera objekten"
+msgstr "Dra och släpp för att sortera objekt"
 
 #: src/app-chooser-dialog-ui.c:61
 msgid "Choose an Application"
-msgstr "Välj en applikation"
+msgstr "Välj applikation"
 
 #: src/app-chooser-dialog-ui.c:73
 msgid "File Type To be Opened:"
-msgstr "Filtyp som öppnas:"
+msgstr "Filtyp som ska öppnas:"
 
 #: src/app-chooser-dialog-ui.c:82
 msgid ""
 "Please choose an application from following lists or enter the command line "
 "by hand:"
-msgstr "Välj en programm från listen eller ange kommandot:"
+msgstr "Välj applikation från följande översikt eller ange kommandot:"
 
 #: src/app-chooser-dialog-ui.c:103
-#, fuzzy
 msgid "_Recommended Applications"
-msgstr "Förvalda Programm"
+msgstr "_Förvalda programm"
 
 #: src/app-chooser-dialog-ui.c:118
-#, fuzzy
 msgid "_All Applications"
-msgstr "Alla Programm"
+msgstr "_Alla programm"
 
 #: src/app-chooser-dialog-ui.c:127
-#, fuzzy
 msgid "_Command Line: "
-msgstr "Kommandorad:"
+msgstr "_Kommandorad:"
 
 #: src/app-chooser-dialog-ui.c:152
 msgid "_Browse"
@@ -898,105 +964,99 @@ msgstr "_Bläddra"
 
 #: src/app-chooser-dialog-ui.c:161
 msgid "Opened in Terminal"
-msgstr "Öppna via terminal"
+msgstr "Öppna i terminal"
 
 #: src/app-chooser-dialog-ui.c:165
 msgid "Set selected application to default action"
-msgstr "Sätt som standard körhändelse för markerade applikationen"
+msgstr "Sätt som standard körhändelse för vald applikation"
 
 #. mime-type: application
-#: src/file-assoc-dlg.c:35
-#, fuzzy
+#: src/file-assoc-dlg.c:36
 msgid "application"
-msgstr "Alla Programm"
+msgstr "applikation"
 
 #. mime-type: audio
-#: src/file-assoc-dlg.c:38
+#: src/file-assoc-dlg.c:39
 msgid "audio"
-msgstr ""
+msgstr "audio"
 
 #. mime-type: video
-#: src/file-assoc-dlg.c:41
+#: src/file-assoc-dlg.c:42
 msgid "video"
-msgstr ""
+msgstr "video"
 
 #. mime-type: text
-#: src/file-assoc-dlg.c:44
+#: src/file-assoc-dlg.c:45
 msgid "text"
-msgstr ""
+msgstr "text"
 
 #. mime-type: multipart
-#: src/file-assoc-dlg.c:47
+#: src/file-assoc-dlg.c:48
 msgid "multipart"
-msgstr ""
+msgstr "multipart"
 
 #. mime-type: image
-#: src/file-assoc-dlg.c:50
+#: src/file-assoc-dlg.c:51
 msgid "image"
-msgstr ""
+msgstr "bildfil"
 
 #. mime-type: message
-#: src/file-assoc-dlg.c:53
+#: src/file-assoc-dlg.c:54
 msgid "message"
-msgstr ""
+msgstr "notifikation"
 
 #. mime-type: model
-#: src/file-assoc-dlg.c:56
+#: src/file-assoc-dlg.c:57
 msgid "model"
-msgstr ""
+msgstr "modell"
 
 #. mime-type: inode
-#: src/file-assoc-dlg.c:59
+#: src/file-assoc-dlg.c:60
 msgid "inode"
-msgstr ""
+msgstr "inode"
 
 #. mime-type: packages
-#: src/file-assoc-dlg.c:62
+#: src/file-assoc-dlg.c:63
 msgid "packages"
-msgstr ""
+msgstr "paketfiler"
 
 #: src/file-assoc-dlg-ui.c:72
-#, fuzzy
 msgid "File Associations"
-msgstr "Alla Programm"
+msgstr "Filbindningar"
 
 #: src/file-assoc-dlg-ui.c:90
-#, fuzzy
 msgid "Known File Types:"
-msgstr "Mime-Type:"
+msgstr "Kända filtyper:"
 
 #: src/file-assoc-dlg-ui.c:111
 msgid "Actions Showed in Popup Menus"
-msgstr ""
+msgstr "Aktioner som visas i popup modus"
 
 #: src/file-assoc-dlg-ui.c:153
-#, fuzzy
 msgid "Add _Application"
-msgstr "Alla Programm"
+msgstr "Lägg till _applikation"
 
 #: src/file-assoc-dlg-ui.c:173
 msgid "Add _Custom Action"
-msgstr ""
+msgstr "Lägg till _egen kommando"
 
 #: src/file-assoc-dlg-ui.c:201
-#, fuzzy
 msgid "Move _Up"
-msgstr "Flytta:"
+msgstr "Flytta _uppåt"
 
 #: src/file-assoc-dlg-ui.c:221
-#, fuzzy
 msgid "Move _Down"
-msgstr "Flytta:"
+msgstr "Flytta _nedåt"
 
-#: src/vfs/vfs-app-desktop.c:450
-#, fuzzy, c-format
+#: src/vfs/vfs-app-desktop.c:408
+#, c-format
 msgid "Command not found"
-msgstr "Kommandorad:"
+msgstr "Kommando finns inte"
 
-#: src/vfs/vfs-file-task.c:696
+#: src/vfs/vfs-file-task.c:702
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
-msgstr ""
+msgstr "Målkatalogen \"%1$s\" finns redan i källan \"%2$s\""
 
 #~ msgid ""
 #~ "File operation failed.\n"

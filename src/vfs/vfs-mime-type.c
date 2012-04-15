@@ -17,6 +17,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
 
 #include <gtk/gtk.h>
 
@@ -60,7 +61,7 @@ static void reload_mime_actions( VFSFileMonitor* fm,
     /* FIXME: Why sometimes this callback gets called twice? */
     g_hash_table_foreach( mime_hash, free_old_actions, NULL );
 #endif
-
+    GDK_THREADS_ENTER();
     if ( mime_actions )
     {
         g_key_file_free( mime_actions );
@@ -70,6 +71,7 @@ static void reload_mime_actions( VFSFileMonitor* fm,
                                    fm->path,
                                    G_KEY_FILE_NONE, NULL );
     }
+    GDK_THREADS_LEAVE();
 }
 
 
@@ -124,7 +126,7 @@ static void save_mime_actions()
 
     if ( user_actions )
     {
-        if ( data = g_key_file_to_data ( user_actions, &len, NULL ) )
+        if ( (data = g_key_file_to_data ( user_actions, &len, NULL )) )
         {
             full_path = g_build_filename( g_get_home_dir(),
                                           ".pcmanfm/mime_info",
@@ -151,7 +153,9 @@ static void vfs_mime_type_reload( void* user_data )
 {
     /* FIXME: process mime database reloading properly. */
     /* Remove all items in the hash table */
+    GDK_THREADS_ENTER();
     g_hash_table_foreach_remove ( mime_hash, ( GHRFunc ) gtk_true, NULL );
+    GDK_THREADS_LEAVE();
 }
 
 void vfs_mime_type_init()
@@ -255,13 +259,13 @@ void vfs_mime_type_ref( VFSMimeType* mime_type )
     ++mime_type->n_ref;
 }
 
-void vfs_mime_type_unref( VFSMimeType* mime_type )
+void vfs_mime_type_unref( gpointer mime_type_ )
 {
+    VFSMimeType* mime_type = (VFSMimeType*)mime_type_;
     --mime_type->n_ref;
-    if ( mime_type->n_ref <= 0 )
+    if ( mime_type->n_ref == 0 )
     {
-        if ( mime_type->type )
-            g_free( mime_type->type );
+        g_free( mime_type->type );
         if ( mime_type->big_icon )
             gdk_pixbuf_unref( mime_type->big_icon );
         if ( mime_type->small_icon )
@@ -334,6 +338,11 @@ GdkPixbuf* vfs_mime_type_get_icon( VFSMimeType* mime_type, gboolean big )
             icon = vfs_mime_type_get_icon( unknown, big );
             vfs_mime_type_unref( unknown );
         }
+        else /* unknown */
+        {
+            icon = gtk_icon_theme_load_icon ( icon_theme, "unknown",
+                                              size, 0, NULL );
+        }
     }
 
     if ( big )
@@ -405,7 +414,7 @@ const char* vfs_mime_type_get_description( VFSMimeType* mime_type )
 {
     int fd;
     struct stat file_stat;
-    const char** lang;
+    const gchar* const * lang;
     char full_path[ 256 ];
     char* buf = NULL;
     char* desc = NULL;
@@ -433,7 +442,7 @@ const char* vfs_mime_type_get_description( VFSMimeType* mime_type )
                 eng_desc += 9;
                 for ( desc = eng_desc; *desc != '\n' && *desc; ++desc )
                     ;
-                while ( desc = strstr( desc, "<comment xml:lang=" ) )
+                while ( (desc = strstr( desc, "<comment xml:lang=" )) )
                 {
                     if ( !desc )
                         break;
@@ -465,14 +474,11 @@ const char* vfs_mime_type_get_description( VFSMimeType* mime_type )
 
     if ( desc )
     {
-        if ( tmp = strstr( desc, "</" ) )
+        if ( (tmp = strstr( desc, "</" )) )
             * tmp = '\0';
         desc = g_strdup( desc );
     }
-    if ( buf )
-    {
-        g_free( buf );
-    }
+    g_free( buf );
     mime_type->description = desc;
     return desc;
 }
@@ -731,6 +737,7 @@ static char** get_all_known_apps_from_profile( GKeyFile* profile,
     gchar **key;
     gchar **apps;
     gchar **app;
+    gboolean hash_value_true = TRUE;
     int len = 0;
 
     hash = g_hash_table_new( g_str_hash, g_str_equal );
@@ -754,7 +761,7 @@ static char** get_all_known_apps_from_profile( GKeyFile* profile,
             /* duplicated */
             if ( g_hash_table_lookup( hash, *app ) )
                 continue;
-            g_hash_table_insert( hash, g_strdup( *app ), TRUE );
+            g_hash_table_insert( hash, g_strdup( *app ), &hash_value_true );
             ++len;
         }
         g_strfreev( apps );

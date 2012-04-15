@@ -169,10 +169,10 @@ ptk_file_icon_renderer_init ( PtkFileIconRenderer *renderer )
                 sizeof(link_icon_data),
                 link_icon_data,
                 FALSE, NULL );
-        g_object_add_weak_pointer( link_icon, &link_icon  );
+        g_object_add_weak_pointer( G_OBJECT(link_icon), (gpointer)&link_icon  );
     }
     else
-        gdk_pixbuf_ref( G_OBJECT(link_icon) );
+        gdk_pixbuf_ref( (link_icon) );
 }
 
 
@@ -229,7 +229,7 @@ ptk_file_icon_renderer_finalize ( GObject *object )
     if( renderer->info )
         vfs_file_info_unref( renderer->info );
 
-    gdk_pixbuf_unref( G_OBJECT(link_icon) );
+    gdk_pixbuf_unref( (link_icon) );
     ( * G_OBJECT_CLASS ( parent_class ) ->finalize ) ( object );
 }
 

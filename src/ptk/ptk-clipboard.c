@@ -12,7 +12,10 @@
 
 #include "ptk-clipboard.h"
 
+#include <string.h>
+
 #include "vfs-file-info.h"
+#include "ptk-file-task.h"
 #include "vfs-file-task.h"
 
 static GdkDragAction clipboard_action = GDK_ACTION_DEFAULT;

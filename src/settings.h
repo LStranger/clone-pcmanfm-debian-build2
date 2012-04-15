@@ -2,13 +2,20 @@
 #define _SETTINGS_H_
 
 #include <glib.h>
+#include <gdk/gdk.h>
 #include "ptk-bookmarks.h"
 
 typedef struct
 {
     /* General Settings */
-    gboolean singleInstance;
-    char* encoding[ 32 ];
+    /* gboolean singleInstance; */
+    gboolean showDesktop;
+    gboolean showWallpaper;
+    char* wallpaper;
+    GdkColor desktopBg1;
+    GdkColor desktopBg2;
+    GdkColor desktopText;
+    char encoding[ 32 ];
     gboolean showHiddenFiles;
     gboolean showSidePane;
     int sidePaneMode;

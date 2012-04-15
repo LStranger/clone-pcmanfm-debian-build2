@@ -46,7 +46,7 @@ void ptk_menu_add_items_from_data( GtkWidget* menu,
         menu_item = gtk_image_menu_item_new_from_stock( ent->label, accel_group );
       }
       else if( G_LIKELY(ent->stock_icon) )  {
-        if( G_LIKELY( ent->stock_icon > 2 ) )  {
+        if( G_LIKELY( ent->stock_icon > (char *)2 ) )  {
           menu_item = gtk_image_menu_item_new_with_mnemonic(_(ent->label));
           image = gtk_image_new_from_stock( ent->stock_icon, GTK_ICON_SIZE_MENU );
           gtk_image_menu_item_set_image( GTK_IMAGE_MENU_ITEM(menu_item), image );
@@ -122,37 +122,37 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
 
       if( G_LIKELY( ! ent->menu ) )  { /* Normal button */
         if( G_UNLIKELY( PTK_IS_STOCK_ITEM(ent) ) )
-          btn = gtk_tool_button_new_from_stock ( ent->label );
+          btn = GTK_WIDGET(gtk_tool_button_new_from_stock ( ent->label ));
         else
-          btn = gtk_tool_button_new ( image, _(ent->label) );
+          btn = GTK_WIDGET(gtk_tool_button_new ( image, _(ent->label) ));
       }
       else if( G_UNLIKELY( PTK_IS_CHECK_TOOL_ITEM(ent) ) )  {
         if( G_UNLIKELY( PTK_IS_STOCK_ITEM(ent) ) )
-          btn = gtk_toggle_tool_button_new_from_stock( ent->label );
+          btn = GTK_WIDGET(gtk_toggle_tool_button_new_from_stock(ent->label));
         else {
-          btn = gtk_toggle_tool_button_new ();
-          gtk_tool_button_set_icon_widget( btn, image );
-          gtk_tool_button_set_label(btn, _(ent->label));
+          btn = GTK_WIDGET(gtk_toggle_tool_button_new ());
+          gtk_tool_button_set_icon_widget( GTK_TOOL_BUTTON(btn), image );
+          gtk_tool_button_set_label(GTK_TOOL_BUTTON(btn), _(ent->label));
         }
       }
       else if( G_UNLIKELY( PTK_IS_RADIO_TOOL_ITEM(ent) ) )  {
         if( G_UNLIKELY( PTK_IS_STOCK_ITEM(ent) ) )
-          btn = gtk_radio_tool_button_new_from_stock( radio_group, ent->label );
+          btn = GTK_WIDGET(gtk_radio_tool_button_new_from_stock( radio_group, ent->label ));
         else {
-          btn = gtk_radio_tool_button_new( radio_group );
+          btn = GTK_WIDGET(gtk_radio_tool_button_new( radio_group ));
           if( G_LIKELY( PTK_IS_RADIO_TOOL_ITEM( (ent + 1) ) ) )
             radio_group = gtk_radio_tool_button_get_group( GTK_RADIO_TOOL_BUTTON(btn) );
           else
             radio_group = NULL;
-          gtk_tool_button_set_icon_widget( btn, image );
-          gtk_tool_button_set_label(btn, _(ent->label));
+          gtk_tool_button_set_icon_widget( GTK_TOOL_BUTTON(btn), image );
+          gtk_tool_button_set_label(GTK_TOOL_BUTTON(btn), _(ent->label));
         }
       }
       else if( ent->menu )  {
         if( G_UNLIKELY( PTK_IS_STOCK_ITEM(ent) ) )
-          btn = gtk_menu_tool_button_new_from_stock ( ent->label );
+          btn = GTK_WIDGET(gtk_menu_tool_button_new_from_stock ( ent->label ));
         else {
-          btn = gtk_menu_tool_button_new ( image, _(ent->label) );
+          btn = GTK_WIDGET(gtk_menu_tool_button_new ( image, _(ent->label) ));
           if( G_LIKELY( ent->menu ) )  { /* Sub menu */
             menu = ptk_menu_new_from_data( ent->menu, cb_data, NULL );
             gtk_menu_tool_button_set_menu( GTK_MENU_TOOL_BUTTON(btn), menu );
@@ -174,7 +174,7 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
     {
       if( ! PTK_IS_SEPARATOR_TOOL_ITEM(ent) ) /* End of menu */
         break;
-      btn = gtk_separator_tool_item_new ();
+      btn = (GtkWidget*)gtk_separator_tool_item_new ();
     }
 
     gtk_toolbar_insert ( GTK_TOOLBAR(toolbar), GTK_TOOL_ITEM(btn), -1 );
@@ -184,6 +184,7 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
       ent->ret = NULL;
     }
   }
+  return NULL;
 }
 
 void ptk_show_error(GtkWindow* parent, const char* message )

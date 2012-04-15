@@ -29,23 +29,23 @@ G_BEGIN_DECLS
 #define PTK_IMG_MENU_ITEM( label, icon, cb, key, mod ) { label, icon, G_CALLBACK(cb), key, mod, NULL, NULL }
 #define PTK_POPUP_MENU( label, sub ) { label, NULL, NULL, 0, 0, sub, NULL }
 #define PTK_POPUP_IMG_MENU( label, icon, sub ) { label, icon, NULL, 0, 0, sub, NULL }
-#define PTK_SEPARATOR_MENU_ITEM { NULL, -1, NULL, 0, 0, NULL, 0}
+#define PTK_SEPARATOR_MENU_ITEM { NULL, (char *)(-1), NULL, 0, 0, NULL, 0}
 #define PTK_MENU_END  {0}
 #define PTK_IS_STOCK_ITEM( ent )  ( ent->label && (*(guint32*)ent->label) == *(guint32*)"gtk-" )
 #define PTK_IS_CHECK_MENU_ITEM( ent )  ( ent->stock_icon == (char*)1 )
 #define PTK_IS_RADIO_MENU_ITEM( ent )  ( ent->stock_icon == (char*)2 )
 
-typedef struct _PtkMenuItemEntry PtkMenuItemEntry;
-typedef struct _PtkMenuItemEntry
+struct _PtkMenuItemEntry
 {
   const char* label; /* or stock id */
   const char* stock_icon; /* or menu type  1: check, 2: radio */
   GCallback callback;
   guint key;
   GdkModifierType mod;
-  PtkMenuItemEntry* sub_menu;
+  struct _PtkMenuItemEntry* sub_menu;
   GtkWidget** ret;
 };
+typedef struct _PtkMenuItemEntry PtkMenuItemEntry;
 
 #define PTK_STOCK_TOOL_ITEM( id, cb ) { id, NULL, NULL, G_CALLBACK(cb), NULL, NULL }
 #define PTK_TOOL_ITEM( label, icon, tooltip, cb ) { label, icon, tooltip, G_CALLBACK(cb), NULL, NULL }
@@ -58,16 +58,16 @@ typedef struct _PtkMenuItemEntry
 #define PTK_IS_RADIO_TOOL_ITEM( ent )  ( ent->menu == (PtkMenuItemEntry*)2 )
 #define PTK_IS_SEPARATOR_TOOL_ITEM( ent )  ( ent->callback == G_CALLBACK(-1) )
 
-typedef struct _PtkToolItemEntry PtkToolItemEntry;
-typedef struct _PtkToolItemEntry
+struct _PtkToolItemEntry
 {
   const char* label; /* or stock id */
   const char* stock_icon; /* or menu type  1: check, 2: radio */
   const char* tooltip;
   GCallback callback;
-  PtkMenuItemEntry* menu; /* NULL: normal, 1: check, 2: radio, > 2: menu */
+  struct _PtkMenuItemEntry* menu; /* NULL: normal, 1: check, 2: radio, > 2: menu */
   GtkWidget** ret;
 };
+typedef struct _PtkToolItemEntry PtkToolItemEntry;
 
 GtkWidget* ptk_menu_new_from_data( PtkMenuItemEntry* entries,
                                    gpointer cb_data,

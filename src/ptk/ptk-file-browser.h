@@ -82,6 +82,7 @@ struct _PtkFileBrowser
 };
 
 typedef enum{
+    PTK_OPEN_DIR,
     PTK_OPEN_NEW_TAB,
     PTK_OPEN_NEW_WINDOW,
     PTK_OPEN_TERMINAL,
@@ -101,7 +102,7 @@ struct _PtkFileBrowserClass
     void ( *pane_mode_change ) ( PtkFileBrowser* file_browser );
 };
 
-GType ptk_filebrowser_window_get_type ( void );
+GType ptk_file_browser_get_type ( void );
 
 GtkWidget* ptk_file_browser_new( GtkWidget* mainWindow,
                                  PtkFileBrowserViewMode view_mode );
@@ -203,6 +204,10 @@ void ptk_file_browser_show_thumbnails( PtkFileBrowser* file_browser,
                                        int max_file_size );
 
 void ptk_file_browser_update_display( PtkFileBrowser* file_browser );
+
+void ptk_file_browser_emit_open( PtkFileBrowser* file_browser,
+                                 const char* path,
+                                 PtkOpenAction action );
 
 G_END_DECLS
 

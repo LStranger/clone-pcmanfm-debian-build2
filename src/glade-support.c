@@ -42,6 +42,7 @@ lookup_widget                          (GtkWidget       *widget,
   return found_widget;
 }
 
+#if 0
 static GList *pixmaps_directories = NULL;
 
 /* Use this function to set the directory containing installed pixmaps. */
@@ -142,3 +143,4 @@ glade_set_atk_action_description       (AtkAction       *action,
     }
 }
 
+#endif

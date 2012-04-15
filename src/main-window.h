@@ -75,6 +75,13 @@ void fm_main_window_add_new_tab( FMMainWindow* mainWindow,
                                  gboolean open_dir_tree,
                                  PtkFileBrowserSidePaneMode side_pane_mode );
 
+void fm_main_window_preference( FMMainWindow* main_window );
+
+FMMainWindow* fm_main_window_get_last_active();
+
+void fm_main_window_open_terminal( GtkWindow* parent,
+                                   const char* path );
+
 G_END_DECLS
 
 #endif

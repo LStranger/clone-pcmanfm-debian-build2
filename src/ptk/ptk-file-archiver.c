@@ -11,8 +11,11 @@
 */
 
 #include <glib/gi18n.h>
+#include <string.h>
 
 #include "ptk-file-archiver.h"
+#include "ptk-console-output.h"
+
 #include "vfs-file-info.h"
 
 typedef struct _ArchiveHandler
@@ -66,7 +69,7 @@ static void on_format_changed( GtkComboBox* combo, gpointer user_data )
 {
     int i, n, len;
     GtkFileChooser* dlg = GTK_FILE_CHOOSER(user_data);
-    const char* ext;
+    char* ext = NULL;
     const char* old_ext;
     char *path, *name, *new_name;
 
@@ -134,31 +137,31 @@ void ptk_file_archiver_create( GtkWindow* parent_win,
             gtk_combo_box_append_text( GTK_COMBO_BOX(combo), handlers[i].file_ext );
         }
     }
-    gtk_file_chooser_set_filter( dlg, filter );
+    gtk_file_chooser_set_filter( GTK_FILE_CHOOSER(dlg), filter );
     g_signal_connect( combo, "changed", on_format_changed, dlg );
     gtk_combo_box_set_active( GTK_COMBO_BOX(combo), 0 );
     gtk_box_pack_start( GTK_BOX(hbox),
                         combo,
                         FALSE, FALSE, 2 );
     gtk_widget_show_all( hbox );
-    gtk_file_chooser_set_extra_widget( dlg, hbox );
+    gtk_file_chooser_set_extra_widget( GTK_FILE_CHOOSER(dlg), hbox );
 
-    gtk_file_chooser_set_action( dlg, GTK_FILE_CHOOSER_ACTION_SAVE );
+    gtk_file_chooser_set_action( GTK_FILE_CHOOSER(dlg), GTK_FILE_CHOOSER_ACTION_SAVE );
 #if GTK_CHECK_VERSION(2, 8, 0)
-    gtk_file_chooser_set_do_overwrite_confirmation( dlg, TRUE );
+    gtk_file_chooser_set_do_overwrite_confirmation( GTK_FILE_CHOOSER(dlg), TRUE );
 #endif
     if( files && ! files->next )
     {
-        ext = gtk_combo_box_get_active_text( combo );
+        ext = gtk_combo_box_get_active_text( GTK_COMBO_BOX(combo) );
         dest_file = g_strjoin( NULL,
                                 vfs_file_info_get_disp_name( (VFSFileInfo*)files->data ),
                                 ext, NULL );
         g_free( ext );
-        gtk_file_chooser_set_current_name( dlg, dest_file );
+        gtk_file_chooser_set_current_name( GTK_FILE_CHOOSER(dlg), dest_file );
         g_free( dest_file );
     }
 
-    res = gtk_dialog_run(dlg);
+    res = gtk_dialog_run(GTK_DIALOG(dlg));
 
     dest_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dlg));
     format = gtk_combo_box_get_active( GTK_COMBO_BOX(combo) );
@@ -231,8 +234,8 @@ void ptk_file_archiver_extract( GtkWindow* parent_win,
                                            GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                            GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                            GTK_STOCK_OK, GTK_RESPONSE_OK, NULL );
-        if( gtk_dialog_run( dlg ) == GTK_RESPONSE_OK )
-            _dest_dir = gtk_file_chooser_get_filename( dlg );
+        if( gtk_dialog_run( GTK_DIALOG(dlg) ) == GTK_RESPONSE_OK )
+            _dest_dir = gtk_file_chooser_get_filename( GTK_FILE_CHOOSER(dlg) );
         gtk_widget_destroy( dlg );
         if( !_dest_dir )
             return;
@@ -287,8 +290,7 @@ void ptk_file_archiver_extract( GtkWindow* parent_win,
         g_free( argv );
     }
 
-    if( _dest_dir )
-        g_free( _dest_dir );
+    g_free( _dest_dir );
 }
 
 gboolean ptk_file_archiver_is_format_supported( VFSMimeType* mime,

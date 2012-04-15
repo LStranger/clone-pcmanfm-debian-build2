@@ -15,9 +15,11 @@
 
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <string.h>
 
 #include "vfs-mime-type.h"
 #include "vfs-app-desktop.h"
+#include "glade-support.h"
 
 enum{
     COL_APP_ICON = 0,
@@ -190,9 +192,9 @@ on_notebook_switch_page ( GtkNotebook *notebook,
 * These two can be separated by check if the returned string is ended
 * with ".desktop" postfix.
 */
-char* app_chooser_dialog_get_selected_app( GtkWidget* dlg )
+const gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg )
 {
-    char * app = NULL;
+    const gchar * app = NULL;
     GtkEntry* entry = GTK_ENTRY( lookup_widget( dlg, "cmdline" ) );
     GtkNotebook* notebook;
     int idx;
@@ -211,7 +213,7 @@ char* app_chooser_dialog_get_selected_app( GtkWidget* dlg )
     notebook = GTK_NOTEBOOK( lookup_widget( dlg, "notebook" ) );
     idx = gtk_notebook_get_current_page ( notebook );
     scroll = GTK_BIN( gtk_notebook_get_nth_page( notebook, idx ) );
-    view = gtk_bin_get_child( scroll );
+    view = GTK_TREE_VIEW(gtk_bin_get_child( scroll ));
     tree_sel = gtk_tree_view_get_selection( view );
 
     if ( gtk_tree_selection_get_selected ( tree_sel, &model, &it ) )
@@ -273,11 +275,11 @@ on_browse_btn_clicked ( GtkButton *button,
     gtk_widget_destroy( dlg );
 }
 
-char* ptk_choose_app_for_mime_type( GtkWindow* parent,
-                                    VFSMimeType* mime_type )
+const gchar* ptk_choose_app_for_mime_type( GtkWindow* parent,
+                                           VFSMimeType* mime_type )
 {
     GtkWidget * dlg;
-    char* app = NULL;
+    const gchar* app = NULL;
 
     dlg = app_chooser_dialog_new( parent, mime_type );
 
