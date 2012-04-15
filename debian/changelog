@@ -1,3 +1,19 @@
+pcmanfm (0.9.5-2) unstable; urgency=low
+
+  * Upload to sid. No new additional bug report since last upload into 
+    experimental. (Closes:#506243, #509257, #532973, #502225, #535810, 
+    #570114, #581033, #518683)
+  * debian/control:
+    Adjusted depends/recommends for people who doesn't want to have gvfs
+    on their system. Without gvfs installed, pcmanfm would still works 
+    but lose volume management and trashcan support.
+    - Drop depends on gamin, shared-mime-info, desktop-file-utils, dbus, 
+      xdg-user-dirs
+    - Recommends on lxde-icon-theme | gnome-icon-theme, gvfs-backends,
+      gvfs-fuse
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Sun, 23 May 2010 23:04:11 +0800
+
 pcmanfm (0.9.5-1) experimental; urgency=low
 
   * New upstream experimental release

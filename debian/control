@@ -12,8 +12,8 @@ Vcs-Browser: http://git.debian.org/?p=collab-maint/pcmanfm.git;a=summary
 
 Package: pcmanfm
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, gvfs-backends, xdg-user-dirs 
-Recommends: gnome-icon-theme, gksu | kdesu, ntfs-3g
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: lxde-icon-theme | gnome-icon-theme, gvfs-backends, gvfs-fuse
 Conflicts: pcmanfm-nohal
 Description: an extremely fast and lightweight file manager
  PCMan File Manager is a gtk2 based file manager for the X Window System.
@@ -37,7 +37,7 @@ Package: pcmanfm-dbg
 Section: debug
 Priority: extra
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, pcmanfm (= ${binary:Version}), gamin, shared-mime-info, desktop-file-utils
+Depends: ${shlibs:Depends}, ${misc:Depends}, pcmanfm (= ${binary:Version})
 Description: an extremely fast and lightweight file manager - debugging symbols
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
