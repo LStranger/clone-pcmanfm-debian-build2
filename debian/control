@@ -15,7 +15,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-lxde/pcmanfm.git;a=summary
 
 Package: pcmanfm
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, libfm-gtk-bin
 Recommends:
  gvfs-backends, gvfs-fuse, lxde-icon-theme | gnome-icon-theme,
 Description: extremely fast and lightweight file manager

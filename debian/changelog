@@ -1,3 +1,13 @@
+pcmanfm (0.9.10-2) unstable; urgency=low
+
+  [ Sergey Slipchenko ]
+  * Completely rewrite pcmanfm's manpage. (Closes: #562784, #583171, #585605)
+
+  [ Andrew Lee (李健秋) ]
+  * Depends on libfm-gtk-bin.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 14 Feb 2012 00:16:32 +0800
+
 pcmanfm (0.9.10-1) unstable; urgency=low
 
   [ Andrew Lee (李健秋) ]

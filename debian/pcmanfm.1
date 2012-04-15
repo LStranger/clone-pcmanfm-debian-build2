@@ -1,45 +1,45 @@
-.\" Process this file with
-.\" groff -man -Tascii pcmanfm.1
-.\"
-.TH PCManFM 1 "February 2006" Linux "User Manuals"
+.TH PCMANFM 1 "February 13, 2012"
 .SH NAME
-PCManFM \- A gtk2 based file manager for X Window.
+pcmanfm \- lightweight file manager based on GTK+.
 .SH SYNOPSIS
 .B pcmanfm
-.SH DESCRIPTION
-This manual page documents briefly the
-.BR PCManFM
-file manager.
-This manual page was written for the Debian GNU/Linux distribution
-(but may be used by others), because the original program does not
-have a manual page.
-.PP
-.B PCManFM
-,PCMan File Manager, is an extremly fast and lightweight file manager which features tabbed browsing and user-friendly interface.
-Features:
-  * Extremly fast and lightweight
-  * Can be started in one second on normal machine
-  * Tabbed browsing (Similiar to Firefox)
-  * Drag & Drop support
-  * Files can be dragged among tabs
-  * Load large directories in reasonable time
-  * File association support (Default application)
-  * Basic thumbnail support
-  * Bookmarks support
-  * Handles non-UTF-8 encoded filenames correctly
-  * Provide icon view and detailed list view
-  * Standard compliant (Follows FreeDesktop.org)
-  * Clean and user-friendly interface (GTK+ 2)
-.SH FILES
-.I ~/.pcmanfm/bookmarks
-: stores your bookmarks.
-.br
-.I ~/.pcmanfm/main
-: stores your preferences.
-.br
-.I ~/.pcmanfm/mime_info
-: stores your mime infomations.
-.br
+[\fIOPTION\fR]... [\fIFILE\fR]...
+.SH OPTIONS
+.TP
+.B \-p, \-\-profile=<profile>
+Use settings from <profile>
+.TP
+.B \-d, \-\-daemon-mode
+Run PCManFM as a daemon
+.TP
+.B \-\-no\-desktop
+No function. Just to be compatible with nautilus
+.TP
+.B \-\-desktop
+Launch desktop manager
+.TP
+.B \-\-desktop\-off
+Turn off desktop manager if it's already running
+.TP
+.B \-\-desktop\-pref
+Open desktop preferences dialog
+.TP
+.B \-w, \-\-set\-wallpaper=<file>
+Set desktop wallpaper
+.TP
+.B \-\-wallpaper\-mode={color,stretch,fit,center,tile}
+Set wallpaper mode
+.TP
+.B \-\-show\-pref=n
+Open preferences dialog at n-th page
+.TP
+.B \-\-display=DISPLAY
+X display to use
+.TP
+.B \-h, \-\-help
+Show summary of options.
 .SH AUTHOR
-This manual page was written by Tetralet <tetralet@debian.org.tw>
-for the Debian GNU/Linux system.
+pcmanfm was written by Hong Jen Yee <pcman.tw@gmail.com>.
+.PP
+This manual page was written by Sergey Slipchenko <faergeek@gmail.com>,
+for the Debian project (and may be used by others).
