@@ -84,6 +84,10 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
                                             gpointer cb_data,
                                             GtkTooltips* tooltips );
 
+/* The string 'message' can contain pango markups.
+  * If special characters like < and > are used in the string,
+  * they should be escaped with g_markup_escape_text().
+  */
 void ptk_show_error(GtkWindow* parent, const char* title, const char* message );
 
 G_END_DECLS

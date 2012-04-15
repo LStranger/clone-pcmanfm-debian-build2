@@ -11,6 +11,7 @@
 */
 
 #include "vfs-mime-type.h"
+#include "mime-action.h"
 #include "vfs-file-monitor.h"
 
 #include <sys/types.h>
@@ -22,6 +23,8 @@
 #include <gtk/gtk.h>
 
 #include "glib-mem.h"
+
+#include "vfs-utils.h"  /* for vfs_load_icon */
 
 static GHashTable *mime_hash = NULL;
 GStaticRWLock mime_hash_lock = G_STATIC_RW_LOCK_INIT; /* mutex lock is needed */
@@ -151,7 +154,6 @@ VFSMimeType* vfs_mime_type_get_from_file( const char* file_path,
                                           const char* base_name,
                                           struct stat* pstat )
 {
-    struct stat file_stat;
     const char * type;
     type = mime_type_get_by_file( file_path, pstat, base_name );
     return vfs_mime_type_get_from_type( type );
@@ -230,8 +232,7 @@ GdkPixbuf* vfs_mime_type_get_icon( VFSMimeType* mime_type, gboolean big )
 
     if ( G_UNLIKELY( 0 == strcmp( mime_type->type, XDG_MIME_TYPE_DIRECTORY ) ) )
     {
-        icon = gtk_icon_theme_load_icon ( icon_theme, "gnome-fs-directory",
-                                          size, 0, NULL );
+        icon = vfs_load_icon ( icon_theme, "gnome-fs-directory", size );
         if ( big )
             mime_type->big_icon = icon;
         else
@@ -244,23 +245,20 @@ GdkPixbuf* vfs_mime_type_get_icon( VFSMimeType* mime_type, gboolean big )
     {
         strcpy( icon_name, mime_type->type );
         icon_name[ (sep - mime_type->type) ] = '-';
-        icon = gtk_icon_theme_load_icon ( icon_theme, icon_name,
-                                          size, 0, NULL );
+        icon = vfs_load_icon ( icon_theme, icon_name, size );
         if ( ! icon )
         {
             strcpy( icon_name, "gnome-mime-" );
             strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
             strcat( icon_name, "-" );
             strcat( icon_name, sep + 1 );
-            icon = gtk_icon_theme_load_icon ( icon_theme, icon_name,
-                                              size, 0, NULL );
+            icon = vfs_load_icon ( icon_theme, icon_name, size );
         }
         if ( G_UNLIKELY( ! icon ) )
         {
             icon_name[ 11 ] = 0;
             strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
-            icon = gtk_icon_theme_load_icon ( icon_theme, icon_name,
-                                              size, 0, NULL );
+            icon = vfs_load_icon ( icon_theme, icon_name, size );
         }
     }
     if( G_UNLIKELY( !icon ) )
@@ -276,8 +274,7 @@ GdkPixbuf* vfs_mime_type_get_icon( VFSMimeType* mime_type, gboolean big )
         }
         else /* unknown */
         {
-            icon = gtk_icon_theme_load_icon ( icon_theme, "unknown",
-                                              size, 0, NULL );
+            icon = vfs_load_icon ( icon_theme, "unknown", size );
         }
     }
 
@@ -456,12 +453,14 @@ void vfs_mime_type_add_action( VFSMimeType* mime_type,
 * and should be freed when no longer needed.
 */
 
+#if 0
 static void hash_to_strv ( gpointer key, gpointer value, gpointer user_data )
 {
     char***all_apps = ( char*** ) user_data;
     **all_apps = ( char* ) key;
     ++*all_apps;
 }
+#endif
 
 void on_icon_theme_changed( GtkIconTheme *icon_theme,
                             gpointer user_data )

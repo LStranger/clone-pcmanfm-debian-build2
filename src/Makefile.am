@@ -12,7 +12,7 @@ INCLUDES = \
     -DPACKAGE_DATA_DIR=\""$(datadir)/pcmanfm"\" \
     -DPACKAGE_UI_DIR=\""$(datadir)/pcmanfm/ui"\" \
     -DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-    @PACKAGE_CFLAGS@ @HAL_CFLAGS@
+    @PACKAGE_CFLAGS@ @HAL_CFLAGS@ @G_CAST_CHECKS@
 
 bin_PROGRAMS = pcmanfm
 
@@ -51,7 +51,8 @@ VFS_SOURCES = \
     $(VOLUME_SOURCES) \
     vfs/vfs-execute.c vfs/vfs-execute.h \
     vfs/vfs-async-task.c vfs/vfs-async-task.h \
-    vfs/vfs-thumbnail-loader.c vfs/vfs-thumbnail-loader.h
+    vfs/vfs-thumbnail-loader.c vfs/vfs-thumbnail-loader.h \
+    vfs/vfs-utils.c vfs/vfs-utils.h
 
 PTK_SOURCES = \
     ptk/ptk-file-browser.c ptk/ptk-file-browser.h \
@@ -108,9 +109,7 @@ pcmanfm_SOURCES = \
     settings.c settings.h \
     pref-dialog.c pref-dialog.h \
     edit-bookmarks.c edit-bookmarks.h \
-    app-chooser-dialog.c app-chooser-dialog.h \
-    file-assoc-dlg.c file-assoc-dlg.h \
-    file-assoc-dlg-ui.c file-assoc-dlg-ui.h
+    app-chooser-dialog.c app-chooser-dialog.h
 
 pcmanfm_LDADD = @PACKAGE_LIBS@ $(INTLLIBS) @FAM_LIBS@ @HAL_LIBS@
 

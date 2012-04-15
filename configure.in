@@ -1,12 +1,13 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(pcmanfm, 0.3.5.23)
+AM_INIT_AUTOMAKE(pcmanfm, 0.3.6.1)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
 AC_ISC_POSIX
 AC_PROG_CC
+AM_PROG_LIBTOOL
 AM_PROG_CC_STDC
 AC_HEADER_STDC
 
@@ -19,6 +20,39 @@ AC_FUNC_MMAP
 PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
+
+dnl linker optimizations
+AC_MSG_CHECKING([whether $LD accepts --as-needed])
+case `$LD --as-needed -v 2>&1 </dev/null` in
+*GNU* | *'with BFD'*)
+  LDFLAGS="$LDFLAGS -Wl,--as-needed"
+  AC_MSG_RESULT([yes])
+  ;;
+*)
+  AC_MSG_RESULT([no])
+  ;;
+esac
+AC_MSG_CHECKING([whether $LD accepts -O1])
+case `$LD -O1 -v 2>&1 </dev/null` in
+*GNU* | *'with BFD'*)
+  LDFLAGS="$LDFLAGS -Wl,-O1"
+  AC_MSG_RESULT([yes])
+  ;;
+*)
+  AC_MSG_RESULT([no])
+  ;;
+esac
+
+AC_ARG_ENABLE(
+    [cast-checks],
+    AS_HELP_STRING([--enable-cast-checks],
+                   [enable Glib casting checks (default: disable)]),
+    cast_checks=$enableval, cast_checks="no")
+G_CAST_CHECKS=""
+if test x"$cast_checks" = "xno"; then
+    G_CAST_CHECKS="-DG_DISABLE_CAST_CHECKS"
+fi
+AC_SUBST(G_CAST_CHECKS)
 
 AC_ARG_ENABLE(
     [hal],
@@ -92,6 +126,24 @@ if test x"$largefile" = x"yes"; then
   AC_DEFINE(_FILE_OFFSET_BITS, 64, [File offset bits])
 fi
 
+AC_ARG_ENABLE(
+    [superuser-checks],
+    AS_HELP_STRING([--disable-superuser-checks],
+                   [disable checks running as super user (useful to LiveCD or embedded) (default: enable)]),
+    superuser_checks=$enableval, superuser_checks="yes")
+if test x"$superuser_checks" = "xyes"; then
+  AC_DEFINE(SUPER_USER_CHECKS, 1, [Whether to check running as super user or not])
+fi
+
+AC_ARG_WITH(
+    [preferable-sudo],
+    AS_HELP_STRING([--with-preferable-sudo=PROG],
+                   [Specify preferable program to switch to super user]),
+                   [ preferable_sudo="$withval" ])
+if test ! -z "$preferable_sudo"; then
+  CPPFLAGS="$CPPFLAGS -DPREFERABLE_SUDO_PROG=\\\"$preferable_sudo\\\""
+fi
+
 AC_CHECK_FUNC(euidaccess,[AC_DEFINE(HAVE_EUIDACCESS,[],[Define to 1 if euidaccess is available])])
 AC_CHECK_FUNC(eaccess,[AC_DEFINE(HAVE_EACCESS,[],[Define to 1 if eaccess is available])])
 
@@ -113,15 +165,22 @@ pcmanfm.desktop
 ])
 
 echo
-echo PCMan File Manager........................ : Version $VERSION
+echo PCMan File Manager........................... : Version $VERSION
 echo
-echo Prefix.................................... : $prefix
-echo Linux HAL support......................... : $use_hal
-echo Linux inotify support \(currently broken\).. : $use_inotify
-echo 64-bit Large file support................. : $largefile
+echo Prefix....................................... : $prefix
+echo Linux HAL support............................ : $use_hal
+echo Linux inotify support \(currently broken\)..... : $use_inotify
+echo 64-bit Large file support.................... : $largefile
+echo Show warnings if run as super user........... : $superuser_checks 
+if test ! -z "$preferable_sudo"; then
+echo Preferable program to switch to super user... : $preferable_sudo
+fi
 echo
 echo The binary will be installed in $prefix/bin
 echo
 echo http://pcmanfm.sourceforge.net/
+echo
+echo Please read README carefully if you are packaging PCManFM.
+echo
 echo
 

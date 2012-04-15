@@ -155,7 +155,9 @@ set_widget_special_property( GtkWidget* widget,
             else if( 0 == strcmp( name, "text" ) && GTK_IS_TEXT_VIEW( widget ) )
             {
                 GtkTextBuffer* buf = gtk_text_buffer_new( NULL );
-                const char* text = is_translatable( prop_node ) ? _(text) : text;
+                const char* text = NULL;
+	       	if (is_translatable( prop_node ))
+			text = _(text);
                 gtk_text_buffer_set_text( buf, text, strlen(text) );
                 gtk_text_view_set_buffer( GTK_TEXT_VIEW(widget), buf );
                 g_object_unref( buf );
@@ -483,7 +485,6 @@ static gboolean pack_widget( GtkWidget* parent,
         name = xml_node_get_prop( node, "name" );
         if( G_LIKELY( name ) )
         {
-            GType type;
             GObjectClass* objcls;
             GParamSpec* spec;
 
@@ -553,6 +554,7 @@ static void load_child_widget( GtkWidget* parent,
 
 static void set_widget_accel( GtkWidget* parent, XmlNode* child )
 {
+#if 0
     const char* key = xml_node_get_prop( child, "key" );
     const char* mod = xml_node_get_prop( child, "modifiers" );
     const char* signal = xml_node_get_prop( child, "signal" );
@@ -564,11 +566,11 @@ static void set_widget_accel( GtkWidget* parent, XmlNode* child )
                     stock_item.modifier,
                     GTK_ACCEL_VISIBLE);
 */
+#endif
 }
 
 static GType load_type( const char* type_name )
 {
-    GObjectClass* ret = NULL;
     char func_name[ 256 ];
     char* pname = func_name;
     GType (*func)();
@@ -588,7 +590,7 @@ static GType load_type( const char* type_name )
         }
     }
     strcpy( pname, "_get_type" );
-    if( g_module_symbol( this_mod, func_name, (gpointer*)&func ) )
+    if( g_module_symbol( this_mod, func_name, (gpointer*) (gpointer) &func ) )
         return func();
     return 0;
 }
@@ -699,7 +701,7 @@ need_remove_from_hash( gpointer key, gpointer val, GtkWidget* widget )
 static void remove_widget_from_hash( PtkUIXml* xml, GtkWidget* widget )
 {
     if( G_LIKELY(xml && xml->hash) )
-        g_hash_table_foreach_remove( xml->hash, (GHFunc)need_remove_from_hash, widget );
+        g_hash_table_foreach_remove( xml->hash, (GHRFunc)need_remove_from_hash, widget );
 }
 
 GtkWidget* create_widget( GtkWidget* parent,
@@ -713,7 +715,6 @@ GtkWidget* create_widget( GtkWidget* parent,
     char* class_name = NULL;
     char* id = NULL;
     GType type = 0;
-    GArray* params = NULL;
     gboolean visible = FALSE, has_default = FALSE, has_focus = FALSE;
 
     if( G_UNLIKELY(!node->name || strcmp(node->name, "widget") ) )
@@ -808,7 +809,7 @@ GtkWidget* create_widget( GtkWidget* parent,
     if( G_LIKELY( id ) && G_UNLIKELY( is_id_meaningful(class_name, id) ) )
     {
         g_hash_table_insert( xml->hash, g_strdup(id), widget );
-        g_object_weak_ref( widget, (GDestroyNotify)remove_widget_from_hash, xml);
+        g_object_weak_ref( G_OBJECT(widget), (GWeakNotify)remove_widget_from_hash, xml);
     }
 
     /* create a simple text model for combo boxes */
@@ -934,12 +935,12 @@ PtkUIXml* ptk_ui_xml_get( GtkWidget* widget )
 
 void ptk_ui_xml_ref( PtkUIXml* xml )
 {
-    g_atomic_int_inc( &xml->n_ref );
+    g_atomic_int_inc( (gint *) &xml->n_ref );
 }
 
 void ptk_ui_xml_unref( PtkUIXml* xml )
 {
-    if( g_atomic_int_dec_and_test(&xml->n_ref) )
+    if( g_atomic_int_dec_and_test( (gint *) &xml->n_ref) )
         ptk_ui_xml_free( xml );
 }
 

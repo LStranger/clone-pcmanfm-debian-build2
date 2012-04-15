@@ -12,14 +12,14 @@
 
 #include "glib-utils.h"
 
+/* older versions of glib don't provde these API */
+#if ! GLIB_CHECK_VERSION(2, 8, 0)
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
-
-/* older versions of glib don't provde these API */
-#if ! GLIB_CHECK_VERSION(2, 8, 0)
 
 int g_mkdir_with_parents(const gchar *pathname, int mode)
 {

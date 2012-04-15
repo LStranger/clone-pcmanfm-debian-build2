@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCMan File Manager 0.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-15 23:40+0800\n"
+"POT-Creation-Date: 2008-02-24 21:48+0800\n"
 "PO-Revision-Date: 2008-02-14 22:26+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 
-#: src/main.c:56
+#: src/main.c:58
 msgid "Don't show desktop icons."
 msgstr "Asztali ikonok mellőzése"
 
-#: src/main.c:64
+#: src/main.c:66
 msgid "[FILE1, FILE2,...]"
 msgstr "[FÁJL1, FÁJL2,...]"
 
-#: src/main.c:243
+#: src/main.c:245
 msgid "GTK+ icon theme is not properly set"
 msgstr "A GTK+ ikon téma nincs helyesen beállítva"
 
-#: src/main.c:245
+#: src/main.c:247
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -69,21 +69,21 @@ msgstr ""
 "eltérés miatt, a KDE témák nem használhatók.  Még nincs erre szabvány, de a "
 "freedesktop.org megoldja a jövőben."
 
-#: src/main.c:370
+#: src/main.c:373
 #, c-format
 msgid "Error: %s\n"
 msgstr "Hiba: %s\n"
 
-#: src/main.c:410 src/main.c:511 src/main.c:562 src/main-window.c:1604
-#: src/main-window.c:1654 src/ptk/ptk-file-browser.c:503
-#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:333
-#: src/ptk/ptk-console-output.c:224 src/ptk/ptk-file-misc.c:252
-#: src/ptk/ptk-file-misc.c:325 src/ptk/ptk-file-misc.c:414
-#: src/file-properties.c:695 src/file-properties.c:706
+#: src/main.c:413 src/main.c:514 src/main.c:565 src/main-window.c:1618
+#: src/main-window.c:1674 src/ptk/ptk-file-browser.c:503
+#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:329
+#: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
+#: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
+#: src/file-properties.c:693 src/file-properties.c:704
 msgid "Error"
 msgstr "Hiba"
 
-#: src/main.c:410
+#: src/main.c:413
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -93,15 +93,15 @@ msgstr ""
 "\n"
 "A \"FAM\" vagy \"Gamin\" telepítve van és fut?"
 
-#: src/main.c:511
+#: src/main.c:514
 msgid "File doesn't exist"
 msgstr "A fájl nem létezik"
 
-#: src/main.c:558
+#: src/main.c:561
 msgid "Don't know how to open the file"
 msgstr "Nincs adatom e fájl megnyitásáról"
 
-#: src/main.c:560
+#: src/main.c:563
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -112,411 +112,401 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: src/main-window.c:282 src/ptk/ptk-file-menu.c:98
+#: src/main-window.c:289 src/ptk/ptk-file-menu.c:107
 msgid "_Folder"
 msgstr "_Mappa"
 
-#: src/main-window.c:283 src/ptk/ptk-file-menu.c:99
+#: src/main-window.c:290 src/ptk/ptk-file-menu.c:108
 msgid "_Text File"
 msgstr "_Szövegfájl"
 
-#: src/main-window.c:289
+#: src/main-window.c:296
 msgid "New _Window"
 msgstr "Új _ablak"
 
-#: src/main-window.c:290
+#: src/main-window.c:297
 msgid "New _Tab"
 msgstr "Új _lap"
 
-#: src/main-window.c:291
+#: src/main-window.c:298
 msgid "Close Tab"
 msgstr "Lap bezárása"
 
-#: src/main-window.c:293 src/ptk/ptk-file-menu.c:122
+#: src/main-window.c:300 src/ptk/ptk-file-menu.c:131
 msgid "_Create New"
 msgstr "Ú_j"
 
-#: src/main-window.c:294
+#: src/main-window.c:301
 msgid "File _Properties"
 msgstr "Fájl _tulajdonságok"
 
-#: src/main-window.c:305 src/ptk/ptk-file-menu.c:117
+#: src/main-window.c:312 src/ptk/ptk-file-menu.c:126
 msgid "_Delete"
 msgstr "_Törlés"
 
-#: src/main-window.c:306 src/ptk/ptk-file-browser.c:1387
-#: src/ptk/ptk-file-menu.c:118
+#: src/main-window.c:313 src/ptk/ptk-file-browser.c:1365
+#: src/ptk/ptk-file-menu.c:127
 msgid "_Rename"
 msgstr "Át_nevezés"
 
-#: src/main-window.c:308
+#: src/main-window.c:315
 msgid "Select _All"
 msgstr "M_indent kiválaszt"
 
-#: src/main-window.c:309
+#: src/main-window.c:316
 msgid "_Invert Selection"
 msgstr "Választás meg_fordítása"
 
-#: src/main-window.c:318
+#: src/main-window.c:325
 msgid "Go _Back"
 msgstr "_Vissza"
 
-#: src/main-window.c:319
+#: src/main-window.c:326
 msgid "Go _Forward"
 msgstr "_Előre"
 
-#: src/main-window.c:320
+#: src/main-window.c:327
 msgid "Go to _Parent Folder"
 msgstr "_Szülő"
 
-#: src/main-window.c:321
+#: src/main-window.c:328
 msgid "Go _Home"
 msgstr "_Haza"
 
-#: src/main-window.c:333
+#: src/main-window.c:340
 msgid "Sort by _Name"
 msgstr "_Név"
 
-#: src/main-window.c:334
+#: src/main-window.c:341
 msgid "Sort by _Size"
 msgstr "_Méret"
 
-#: src/main-window.c:335
+#: src/main-window.c:342
 msgid "Sort by _Modification Time"
 msgstr "Rendezés módosítás szerint"
 
-#: src/main-window.c:336
+#: src/main-window.c:343
 msgid "Sort by _Type"
 msgstr "Rendezés típus szerint"
 
-#: src/main-window.c:337
+#: src/main-window.c:344
 msgid "Sort by _Permission"
 msgstr "Rendezés jogok szerint"
 
-#: src/main-window.c:338
+#: src/main-window.c:345
 msgid "Sort by _Owner"
 msgstr "Rendezés tulajdonos szerint"
 
-#: src/main-window.c:340
+#: src/main-window.c:347
 msgid "Ascending"
 msgstr "Növekvő"
 
-#: src/main-window.c:341
+#: src/main-window.c:348
 msgid "Descending"
 msgstr "Csökkenő"
 
-#: src/main-window.c:347
+#: src/main-window.c:354
 msgid "_Open Side Pane"
 msgstr "_Oldalpanel megnyitása"
 
-#: src/main-window.c:349
+#: src/main-window.c:356
 msgid "Show _Location Pane"
 msgstr "Címpanel megjelenítése"
 
-#: src/main-window.c:350
+#: src/main-window.c:357
 msgid "Show _Directory Tree"
 msgstr "_Könyvtárfa megjelenítése"
 
-#: src/main-window.c:356
+#: src/main-window.c:363
 msgid "_Refresh"
 msgstr "_Frissít"
 
-#: src/main-window.c:357
+#: src/main-window.c:364
 msgid "Side _Pane"
 msgstr "Oldal_panel"
 
-#: src/main-window.c:360
+#: src/main-window.c:367
 msgid "Show _Hidden Files"
 msgstr "R_ejtettek"
 
-#: src/main-window.c:361
+#: src/main-window.c:368
 msgid "_Sort..."
 msgstr "_Rendezés..."
 
-#: src/main-window.c:363
+#: src/main-window.c:370
 msgid "View as _Icons"
 msgstr "_Ikonnézet"
 
-#: src/main-window.c:364
+#: src/main-window.c:371
 msgid "View as Detailed _List"
 msgstr "Részletes _Lista"
 
-#: src/main-window.c:370
+#: src/main-window.c:377
 msgid "Open _Terminal"
 msgstr "_Terminál megnyitása"
 
-#: src/main-window.c:371
+#: src/main-window.c:378
 msgid "Open Current Folder as _Root"
 msgstr "E könyvtár megnyitása rendszergazdaként"
 
-#: src/main-window.c:379
+#: src/main-window.c:386
 msgid "_File"
 msgstr "_Fájl"
 
-#: src/main-window.c:380
+#: src/main-window.c:387
 msgid "_Edit"
 msgstr "Sz_erkesztés"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: src/main-window.c:382
+#: src/main-window.c:389
 msgid "_Go"
 msgstr "_Ugrás"
 
-#: src/main-window.c:383
+#: src/main-window.c:390
 msgid "_Bookmark"
 msgstr "_Könyvjelzők"
 
-#: src/main-window.c:384
+#: src/main-window.c:391
 msgid "_View"
 msgstr "_Nézet"
 
-#: src/main-window.c:385
+#: src/main-window.c:392
 msgid "_Tool"
 msgstr "Esz_köz"
 
-#: src/main-window.c:386
+#: src/main-window.c:393
 msgid "_Help"
 msgstr "_Súgó"
 
-#: src/main-window.c:394
+#: src/main-window.c:401
 msgid "New Tab"
 msgstr "Új lap"
 
-#: src/main-window.c:395
+#: src/main-window.c:402
 msgid "Back"
 msgstr "Vissza"
 
-#: src/main-window.c:396
+#: src/main-window.c:403
 msgid "Forward"
 msgstr "Előre"
 
-#: src/main-window.c:397
+#: src/main-window.c:404
 msgid "Parent Folder"
 msgstr "Szülő"
 
-#: src/main-window.c:398
+#: src/main-window.c:405
 msgid "Refresh"
 msgstr "Frissít"
 
-#: src/main-window.c:399
+#: src/main-window.c:406
 msgid "Home Directory"
 msgstr "Saját könyvtár"
 
-#: src/main-window.c:400
+#: src/main-window.c:407
 msgid "Open Side Pane"
 msgstr "Oldalpanel megnyitása"
 
-#: src/main-window.c:406
+#: src/main-window.c:413
 msgid "Go"
 msgstr "Ugrás"
 
-#: src/main-window.c:607
+#: src/main-window.c:617
 msgid "Warning: You are in super user mode"
 msgstr "Figyelj!: Most rendszergazda módban vagy!"
 
-#: src/main-window.c:1605
+#: src/main-window.c:1619
 msgid "Terminal program has not been set"
 msgstr "Nem állítottál be Terminál programot"
 
-#: src/main-window.c:1654
+#: src/main-window.c:1674
 msgid "gksu or kdesu is not found"
 msgstr "Nem találok ismert su felületet (gksu v. kdesu)"
 
-#: src/main-window.c:1731
+#: src/main-window.c:1757
 msgid "_Add to Bookmarks"
 msgstr "Hozzá_adás a könyvjelzőkhöz"
 
-#: src/main-window.c:1732
+#: src/main-window.c:1758
 msgid "_Edit Bookmarks"
 msgstr "Könyvjelzők sz_erkesztése"
 
-#: src/main-window.c:1811
+#: src/main-window.c:1835
 msgid "Loading..."
 msgstr "Betöltés..."
 
-#: src/main-window.c:2003
+#: src/main-window.c:2036
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr ", Szabad hely: %s (Összesen: %s )"
 
-#: src/main-window.c:2011
+#: src/main-window.c:2044
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
 msgstr[0] "%d kijelölt elem (%s)%s"
 
-#: src/main-window.c:2019
+#: src/main-window.c:2052
 #, c-format
 msgid "%d visible item (%d hidden)%s"
 msgid_plural "%d visible items (%d hidden)%s"
 msgstr[0] "%d látható elem (%d rejtett)%s"
 
 #: src/ptk/ptk-file-browser.c:504
-msgid "Directory does'nt exist!"
+msgid "Directory doesn't exist!"
 msgstr "A könyvtár nem létezik!"
 
-#: src/ptk/ptk-file-browser.c:1383 src/ptk/ptk-file-menu.c:131
+#: src/ptk/ptk-file-browser.c:1361 src/ptk/ptk-file-menu.c:140
 msgid "Open in New _Tab"
 msgstr "Megnyitás új _lapon"
 
-#: src/ptk/ptk-file-browser.c:1384 src/ptk/ptk-file-menu.c:132
+#: src/ptk/ptk-file-browser.c:1362 src/ptk/ptk-file-menu.c:141
 msgid "Open in New _Window"
 msgstr "Megnyitás új ablakban"
 
-#: src/ptk/ptk-file-browser.c:1632 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1599 src/edit-bookmarks.c:198
 msgid "Name"
 msgstr "Név"
 
-#: src/ptk/ptk-file-browser.c:1632
+#: src/ptk/ptk-file-browser.c:1599
 msgid "Size"
 msgstr "Méret"
 
-#: src/ptk/ptk-file-browser.c:1632
+#: src/ptk/ptk-file-browser.c:1599
 msgid "Type"
 msgstr "Típus"
 
-#: src/ptk/ptk-file-browser.c:1633
+#: src/ptk/ptk-file-browser.c:1600
 msgid "Permission"
 msgstr "Engedély"
 
-#: src/ptk/ptk-file-browser.c:1633
+#: src/ptk/ptk-file-browser.c:1600
 msgid "Owner:Group"
 msgstr "Tulajdonos:Csoport"
 
-#: src/ptk/ptk-file-browser.c:1633
+#: src/ptk/ptk-file-browser.c:1600
 msgid "Last Modification"
 msgstr "Utolsó módosítás"
 
-#: src/ptk/ptk-file-browser.c:2749
+#: src/ptk/ptk-file-browser.c:2793
 msgid "Location"
 msgstr "Hely"
 
-#: src/ptk/ptk-file-browser.c:2750
+#: src/ptk/ptk-file-browser.c:2794
 msgid "Directory Tree"
 msgstr "Könyvtárfa"
 
-#: src/ptk/ptk-location-view.c:177
+#: src/ptk/ptk-location-view.c:184
 msgid "Desktop"
 msgstr "Munkaasztal"
 
-#: src/ptk/ptk-location-view.c:367
-#, c-format
-msgid ""
-"The volume \"%s\" is not mounted.\n"
-"Do you want to mount it?"
-msgstr ""
-"Az alábbi kötet nincs csatolva: \"%s\" \n"
-"Csatoljuk?"
-
-#: src/ptk/ptk-location-view.c:378 src/ptk/ptk-location-view.c:550
-#: src/ptk/ptk-location-view.c:578
+#: src/ptk/ptk-location-view.c:380 src/ptk/ptk-location-view.c:572
 msgid "Unable to mount device"
 msgstr "Eszköz csatolása sikertelen"
 
-#: src/ptk/ptk-location-view.c:593
+#: src/ptk/ptk-location-view.c:587
 msgid "Unable to unmount device"
 msgstr "Eszköz lecsatolása sikertelen"
 
-#: src/ptk/ptk-location-view.c:610
+#: src/ptk/ptk-location-view.c:604
 msgid "Unable to eject device"
 msgstr "Eszköz kiadása sikertelen"
 
-#: src/ptk/ptk-location-view.c:670
+#: src/ptk/ptk-location-view.c:662
 msgid "_Mount File System"
 msgstr "Fájlrendszer _felcsatolása"
 
-#: src/ptk/ptk-location-view.c:680
+#: src/ptk/ptk-location-view.c:672
 msgid "_Eject"
 msgstr "Kiad"
 
-#: src/ptk/ptk-location-view.c:686
+#: src/ptk/ptk-location-view.c:678
 msgid "_Unmount File System"
 msgstr "Fájlrendszer _lecsatolása"
 
-#: src/ptk/ptk-file-task.c:107
+#: src/ptk/ptk-file-task.c:103
 msgid "Move: "
 msgstr "Mozgatás:"
 
-#: src/ptk/ptk-file-task.c:108
+#: src/ptk/ptk-file-task.c:104
 msgid "Copy: "
 msgstr "Másolás:"
 
-#: src/ptk/ptk-file-task.c:109
+#: src/ptk/ptk-file-task.c:105
 msgid "Delete: "
 msgstr "Törlés:"
 
-#: src/ptk/ptk-file-task.c:110
+#: src/ptk/ptk-file-task.c:106
 msgid "Link: "
 msgstr "Lánc:"
 
-#: src/ptk/ptk-file-task.c:111
+#: src/ptk/ptk-file-task.c:107
 msgid "Change Properties: "
 msgstr "Tulajdonságok megváltoztatása:"
 
-#: src/ptk/ptk-file-task.c:115
+#: src/ptk/ptk-file-task.c:111
 msgid "Moving..."
 msgstr "Mozgatás..."
 
-#: src/ptk/ptk-file-task.c:116
+#: src/ptk/ptk-file-task.c:112
 msgid "Copying..."
 msgstr "Másolás..."
 
-#: src/ptk/ptk-file-task.c:117
+#: src/ptk/ptk-file-task.c:113
 msgid "Deleting..."
 msgstr "Törlés..."
 
-#: src/ptk/ptk-file-task.c:118
+#: src/ptk/ptk-file-task.c:114
 msgid "Linking..."
 msgstr "Láncolás..."
 
-#: src/ptk/ptk-file-task.c:119
+#: src/ptk/ptk-file-task.c:115
 msgid "Changing Properties"
 msgstr "Tulajdonságok megváltoztatása"
 
 #. To: <Destination folder>
 #. ex. Copy file to..., Move file to...etc.
-#: src/ptk/ptk-file-task.c:156
+#: src/ptk/ptk-file-task.c:152
 msgid "To:"
 msgstr "Ide:"
 
 #. Processing:
 #. Processing: <Name of currently proccesed file>
-#: src/ptk/ptk-file-task.c:171
+#: src/ptk/ptk-file-task.c:167
 msgid "Processing:"
 msgstr "Feldolgozás:"
 
 #. Preparing to do some file operation (Copy, Move, Delete...)
-#: src/ptk/ptk-file-task.c:178
+#: src/ptk/ptk-file-task.c:174
 msgid "Preparing..."
 msgstr "Előkészítés..."
 
 #. Progress:
-#: src/ptk/ptk-file-task.c:186
+#: src/ptk/ptk-file-task.c:182
 msgid "Progress:"
 msgstr "Folyamat:"
 
-#: src/ptk/ptk-file-task.c:321
+#: src/ptk/ptk-file-task.c:317
 msgid "Cancel the operation?"
 msgstr "Törlöd a műveletet?"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:410
+#: src/ptk/ptk-file-task.c:406
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "Felülírod a mappát és tartalmát?"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:415
+#: src/ptk/ptk-file-task.c:411
 msgid "Do you want to overwrite this file?"
 msgstr "Felülírod e fájlt?"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:420
+#: src/ptk/ptk-file-task.c:416
 msgid "Please choose a new file name."
 msgstr "Adj új nevet"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:428
+#: src/ptk/ptk-file-task.c:424
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -528,7 +518,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:433
+#: src/ptk/ptk-file-task.c:429
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -543,53 +533,53 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:450
+#: src/ptk/ptk-file-task.c:446
 msgid "Overwrite"
 msgstr "Felülír"
 
-#: src/ptk/ptk-file-task.c:451
+#: src/ptk/ptk-file-task.c:447
 msgid "Overwrite All"
 msgstr "Mindet felülírja"
 
-#: src/ptk/ptk-file-task.c:456
+#: src/ptk/ptk-file-task.c:452
 msgid "Rename"
 msgstr "Átnevezés"
 
-#: src/ptk/ptk-file-task.c:457
+#: src/ptk/ptk-file-task.c:453
 msgid "Skip"
 msgstr "Kihagy"
 
-#: src/ptk/ptk-file-task.c:458
+#: src/ptk/ptk-file-task.c:454
 msgid "Skip All"
 msgstr "Mindet kihagyja"
 
-#: src/ptk/ptk-file-archiver.c:120
+#: src/ptk/ptk-file-archiver.c:119
 msgid "Save Compressd Files to..."
 msgstr "Tömörített fájlok mentése ide..."
 
-#: src/ptk/ptk-file-archiver.c:128
+#: src/ptk/ptk-file-archiver.c:127
 msgid "Format of compressed File:"
 msgstr "Tömörített fájl formátuma:"
 
-#: src/ptk/ptk-file-archiver.c:199
+#: src/ptk/ptk-file-archiver.c:198
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Tömörített fájl létrehozása: %s"
 
-#: src/ptk/ptk-file-archiver.c:202
+#: src/ptk/ptk-file-archiver.c:201
 msgid "Compress Files"
 msgstr "Fájlok tömörítése"
 
-#: src/ptk/ptk-file-archiver.c:233
+#: src/ptk/ptk-file-archiver.c:232
 msgid "Extract File to..."
 msgstr "Fájlok kibontása ide..."
 
-#: src/ptk/ptk-file-archiver.c:282
+#: src/ptk/ptk-file-archiver.c:281
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Fájlok kibontása ide: %s"
 
-#: src/ptk/ptk-file-archiver.c:284
+#: src/ptk/ptk-file-archiver.c:283
 msgid "Extract Files"
 msgstr "Fájlok kibontása"
 
@@ -601,7 +591,7 @@ msgstr ""
 "\n"
 "Kész!"
 
-#: src/ptk/ptk-console-output.c:170
+#: src/ptk/ptk-console-output.c:168
 msgid "Command:"
 msgstr "Parancs:"
 
@@ -609,57 +599,57 @@ msgstr "Parancs:"
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#: src/ptk/ptk-dir-tree.c:398
+#: src/ptk/ptk-dir-tree.c:397
 msgid "No Sub Folder"
 msgstr "Nincs alkönyvtár"
 
-#: src/ptk/ptk-file-menu.c:105
+#: src/ptk/ptk-file-menu.c:114
 msgid "E_xtract Here"
 msgstr "Kibontás itt"
 
-#: src/ptk/ptk-file-menu.c:106
+#: src/ptk/ptk-file-menu.c:115
 msgid "Extract _To"
 msgstr "Kibontás ide"
 
-#: src/ptk/ptk-file-menu.c:112
+#: src/ptk/ptk-file-menu.c:121
 msgid "Open _with..."
 msgstr "Megnyitás _ezzel:"
 
-#: src/ptk/ptk-file-menu.c:120
+#: src/ptk/ptk-file-menu.c:129
 msgid "Compress"
 msgstr "Tömörít"
 
-#: src/ptk/ptk-file-menu.c:121
+#: src/ptk/ptk-file-menu.c:130
 msgid "E_xtract"
 msgstr "Kibontás"
 
-#: src/ptk/ptk-file-menu.c:124
+#: src/ptk/ptk-file-menu.c:133
 msgid "_Properties"
 msgstr "T_ulajdonságok"
 
-#: src/ptk/ptk-file-menu.c:133
+#: src/ptk/ptk-file-menu.c:142
 msgid "Open in Terminal"
 msgstr "Megnyitás Terminálban"
 
-#: src/ptk/ptk-file-menu.c:345
+#: src/ptk/ptk-file-menu.c:368
 msgid "_Open with another program"
 msgstr "Megnyitás _más programmal"
 
-#: src/ptk/ptk-file-menu.c:360
+#: src/ptk/ptk-file-menu.c:383
 msgid "E_xecute"
 msgstr "_Futtat"
 
-#: src/ptk/ptk-file-menu.c:369
+#: src/ptk/ptk-file-menu.c:392
 #, c-format
 msgid "_Open with \"%s\""
 msgstr "Megnyitás _ezzel: \"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
-#: src/ptk/ptk-file-menu.c:380 src/ptk/ptk-file-menu.c:389
+#: src/ptk/ptk-file-menu.c:403 src/ptk/ptk-file-menu.c:412
 msgid "_Open"
 msgstr "Megnyitás"
 
-#: src/ptk/ptk-file-misc.c:54
+#: src/ptk/ptk-file-misc.c:55
 msgid "Really delete selected files?"
 msgstr "Tényleg törlöd a kijelölt fájlokat?"
 
@@ -700,137 +690,59 @@ msgstr "Adj nevet az új fájlnak:"
 msgid "The new file cannot be created!"
 msgstr "Az új fájl nem hozható létre!"
 
-#: src/file-properties.c:303
+#: src/file-properties.c:304
 msgid "Multiple files are selected"
 msgstr "Fájlok kiválasztva"
 
-#: src/file-properties.c:381
+#: src/file-properties.c:380
 msgid "Multiple files of different types"
 msgstr "Különböző típusú fájlok"
 
-#: src/file-properties.c:449
+#: src/file-properties.c:448
 msgid "Other program..."
 msgstr "Más program..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: src/file-properties.c:543
+#: src/file-properties.c:542
 msgid "Calculating..."
 msgstr "Számolás..."
 
-#: src/file-properties.c:695
+#: src/file-properties.c:693
 msgid "Invalid User"
 msgstr "Nem létező felhasználó"
 
-#: src/file-properties.c:706
+#: src/file-properties.c:704
 msgid "Invalid Group"
 msgstr "Nem létező csoport"
 
-#: src/file-properties.c:754
+#: src/file-properties.c:752
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr "Minden fájl és alkönyvtár módosítása?"
 
-#: src/edit-bookmarks.c:59
+#: src/edit-bookmarks.c:77
 msgid "New Item"
 msgstr "Új elem"
 
-#: src/edit-bookmarks.c:128
+#: src/edit-bookmarks.c:151
 msgid "Edit Bookmarks"
 msgstr "Könyvjelzők szerkesztése"
 
-#: src/edit-bookmarks.c:184
+#: src/edit-bookmarks.c:207
 msgid "Path"
 msgstr "Ösvény"
 
-#: src/edit-bookmarks.c:207
+#: src/edit-bookmarks.c:230
 msgid "Use drag & drop to sort the items"
 msgstr "Vidd és ejtsd a rendezéshez"
 
-#. mime-type: application
-#: src/file-assoc-dlg.c:35
-msgid "application"
-msgstr "alkalmazás"
-
-#. mime-type: audio
-#: src/file-assoc-dlg.c:38
-msgid "audio"
-msgstr "hang"
-
-#. mime-type: video
-#: src/file-assoc-dlg.c:41
-msgid "video"
-msgstr "mozgókép"
-
-#. mime-type: text
-#: src/file-assoc-dlg.c:44
-msgid "text"
-msgstr "szöveg"
-
-#. mime-type: multipart
-#: src/file-assoc-dlg.c:47
-msgid "multipart"
-msgstr "többrészes"
-
-#. mime-type: image
-#: src/file-assoc-dlg.c:50
-msgid "image"
-msgstr "kép"
-
-#. mime-type: message
-#: src/file-assoc-dlg.c:53
-msgid "message"
-msgstr "üzenet"
-
-#. mime-type: model
-#: src/file-assoc-dlg.c:56
-msgid "model"
-msgstr "modell"
-
-#. mime-type: inode
-#: src/file-assoc-dlg.c:59
-msgid "inode"
-msgstr "inode"
-
-#. mime-type: packages
-#: src/file-assoc-dlg.c:62
-msgid "packages"
-msgstr "csomagok"
-
-#: src/file-assoc-dlg-ui.c:73
-msgid "File Associations"
-msgstr "Fájl társítások"
-
-#: src/file-assoc-dlg-ui.c:91
-msgid "Known File Types:"
-msgstr "Ismert fájl típusok:"
-
-#: src/file-assoc-dlg-ui.c:112
-msgid "Actions Showed in Popup Menus"
-msgstr "Felugró menükben megjelenő műveletek"
-
-#: src/file-assoc-dlg-ui.c:154
-msgid "Add _Application"
-msgstr "Alkalmazás hozzá_adása"
-
-#: src/file-assoc-dlg-ui.c:174
-msgid "Add _Custom Action"
-msgstr "Egyéni művelet hozáadása"
-
-#: src/file-assoc-dlg-ui.c:202
-msgid "Move _Up"
-msgstr "Mozgatás _fel:"
-
-#: src/file-assoc-dlg-ui.c:222
-msgid "Move _Down"
-msgstr "Mozgatás _le:"
-
-#: src/vfs/vfs-app-desktop.c:427
+#: src/vfs/vfs-app-desktop.c:445
 #, c-format
 msgid "Command not found"
 msgstr "Parancs nem található"
 
-#: src/vfs/vfs-file-task.c:704
+#: src/vfs/vfs-file-task.c:697
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "\"%1$s\" cél könyvtár szerepel a forrásban: \"%2$s\""
@@ -1020,39 +932,39 @@ msgid "Failed to connect to the HAL daemon: %s"
 msgstr "Nem tudtam kapcsolódni a HAL démonhoz: %s"
 
 #. definitely not a device that we're able to mount, eject or unmount
-#: src/vfs/vfs-volume-hal.c:1924 src/vfs/vfs-volume-hal.c:1980
+#: src/vfs/vfs-volume-hal.c:1926 src/vfs/vfs-volume-hal.c:1982
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
 msgstr "A megadott \"%s\" eszköz nem kötet vagy meghajtó"
 
 #. tell the caller that no matching device was found
-#: src/vfs/vfs-volume-hal.c:2056
+#: src/vfs/vfs-volume-hal.c:2058
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
 msgstr "\"%s\" eszköz nincs a fájlrendszer eszköz táblában"
 
-#: src/vfs/vfs-volume-hal.c:2226
+#: src/vfs/vfs-volume-hal.c:2228
 #, c-format
 msgid "You are not privileged to mount the volume \"%s\""
 msgstr "Nincs jogod csatolni \"%s\" kötetet"
 
-#: src/vfs/vfs-volume-hal.c:2227
+#: src/vfs/vfs-volume-hal.c:2229
 #, c-format
 msgid "You are not privileged to unmount the volume \"%s\""
 msgstr "Nincs jogod lecsatolni \"%s\" kötetet"
 
-#: src/vfs/vfs-volume-hal.c:2228
+#: src/vfs/vfs-volume-hal.c:2230
 #, c-format
 msgid "You are not privileged to eject the volume \"%s\""
 msgstr "Nincs jogod kiadni \"%s\" kötetet"
 
 #. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
-#: src/vfs/vfs-volume-hal.c:2240
+#: src/vfs/vfs-volume-hal.c:2242
 #, c-format
 msgid "Invalid mount option when attempting to mount the volume \"%s\""
 msgstr "Érvénytelen csatolási opció \"%s\" kötet csatolása közben"
 
-#: src/vfs/vfs-volume-hal.c:2242
+#: src/vfs/vfs-volume-hal.c:2244
 #, c-format
 msgid ""
 "The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
@@ -1060,28 +972,28 @@ msgid ""
 msgstr ""
 "\"%s\" kötet <i>%s</i> fájlrendszert használja, melyet nem támogat rendszered"
 
-#: src/vfs/vfs-volume-hal.c:2244
+#: src/vfs/vfs-volume-hal.c:2246
 #, c-format
 msgid "An application is preventing the volume \"%s\" from being unmounted"
 msgstr "Egy alkalmazás gátolja \"%s\" kötet lecsatolását"
 
-#: src/vfs/vfs-volume-hal.c:2246
+#: src/vfs/vfs-volume-hal.c:2248
 #, c-format
 msgid "The volume \"%s\" is not mounted"
 msgstr "Az alábbi kötet nincs csatolva: \"%s\""
 
-#: src/vfs/vfs-volume-hal.c:2248
+#: src/vfs/vfs-volume-hal.c:2250
 #, c-format
 msgid "Error <i>%s</i>"
 msgstr "Hiba: <i>%s</i>"
 
 #. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
-#: src/vfs/vfs-volume-hal.c:2251
+#: src/vfs/vfs-volume-hal.c:2253
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
 msgstr "Az alábbi kötet valószínűleg kézzel került csatolásra: \"%s\""
 
-#: src/vfs/vfs-volume-hal.c:2259
+#: src/vfs/vfs-volume-hal.c:2261
 #, c-format
 msgid ""
 "Blank discs cannot be mounted, use a CD recording application to record "
@@ -1090,7 +1002,7 @@ msgstr ""
 "Az üres lemezek nem csatolhatók, használj egy CD-író alkalmazást hangsávok "
 "vagy adatok rögzítésére a lemezen"
 
-#: src/vfs/vfs-volume-hal.c:2270
+#: src/vfs/vfs-volume-hal.c:2272
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr ""
@@ -1321,6 +1233,64 @@ msgid ""
 "created by Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 msgstr ""
+
+#~ msgid ""
+#~ "The volume \"%s\" is not mounted.\n"
+#~ "Do you want to mount it?"
+#~ msgstr ""
+#~ "Az alábbi kötet nincs csatolva: \"%s\" \n"
+#~ "Csatoljuk?"
+
+#~ msgid "application"
+#~ msgstr "alkalmazás"
+
+#~ msgid "audio"
+#~ msgstr "hang"
+
+#~ msgid "video"
+#~ msgstr "mozgókép"
+
+#~ msgid "text"
+#~ msgstr "szöveg"
+
+#~ msgid "multipart"
+#~ msgstr "többrészes"
+
+#~ msgid "image"
+#~ msgstr "kép"
+
+#~ msgid "message"
+#~ msgstr "üzenet"
+
+#~ msgid "model"
+#~ msgstr "modell"
+
+#~ msgid "inode"
+#~ msgstr "inode"
+
+#~ msgid "packages"
+#~ msgstr "csomagok"
+
+#~ msgid "File Associations"
+#~ msgstr "Fájl társítások"
+
+#~ msgid "Known File Types:"
+#~ msgstr "Ismert fájl típusok:"
+
+#~ msgid "Actions Showed in Popup Menus"
+#~ msgstr "Felugró menükben megjelenő műveletek"
+
+#~ msgid "Add _Application"
+#~ msgstr "Alkalmazás hozzá_adása"
+
+#~ msgid "Add _Custom Action"
+#~ msgstr "Egyéni művelet hozáadása"
+
+#~ msgid "Move _Up"
+#~ msgstr "Mozgatás _fel:"
+
+#~ msgid "Move _Down"
+#~ msgstr "Mozgatás _le:"
 
 #~ msgid "Source code taken from other projects:"
 #~ msgstr "Más projektekből származó kódok:"

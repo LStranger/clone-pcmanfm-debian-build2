@@ -36,6 +36,7 @@
 #endif
 
 #include <fcntl.h>
+#include <unistd.h>
 #include <fnmatch.h>
 
 #define LIB_MAJOR_VERSION 1
@@ -181,7 +182,6 @@ static gboolean magic_rule_match( const char* buf, const char* rule, const char*
 
     for( ; offset < max_offset && (offset + val_len) <= len ; ++offset )
     {
-        guint32 word_size = VAL32( rule, 8 );
         guint32 val_off = VAL32( rule, 16 );
         guint32 mask_off = VAL32( rule, 20 );
         const char* value = buf + val_off;
@@ -260,8 +260,6 @@ const char* mime_cache_lookup_magic( MimeCache* cache, const char* data, int len
 
 static const char* lookup_suffix_nodes( const char* buf, const char* nodes, guint32 n, const char* name )
 {
-    const char* node = nodes;
-    int i;
     gunichar uchar;
 
     uchar = g_unichar_tolower( g_utf8_get_char( name ) );
@@ -333,7 +331,7 @@ const char* mime_cache_lookup_suffix( MimeCache* cache, const char* filename, co
                 ret = mime_type;
                 prev_suffix_pos = suffix;
             }
-        }while( suffix = strchr( suffix + 1, ch ) );
+        }while( (suffix = strchr( suffix + 1, ch )) );
     }
     *suffix_pos = ret ? prev_suffix_pos : (const char*)-1;
     return ret;

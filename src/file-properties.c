@@ -34,6 +34,7 @@
 
 #include "vfs-file-info.h"
 #include "vfs-app-desktop.h"
+#include "app-chooser-dialog.h"
 
 const char* chmod_names[] =
     {
@@ -222,7 +223,7 @@ static void on_combo_change( GtkComboBox* combo, gpointer user_data )
             GtkWidget* parent;
             VFSMimeType* mime = (VFSMimeType*)user_data;
             parent = gtk_widget_get_toplevel( GTK_WIDGET( combo ) );
-            action = ptk_choose_app_for_mime_type( GTK_WINDOW(parent),
+            action = (char *) ptk_choose_app_for_mime_type( GTK_WINDOW(parent),
                                                    mime );
             if( action )
             {
@@ -272,19 +273,19 @@ static void on_combo_change( GtkComboBox* combo, gpointer user_data )
             else
             {
                 int prev_sel;
-                prev_sel = GPOINTER_TO_INT( g_object_get_data( combo, "prev_sel") );
+                prev_sel = GPOINTER_TO_INT( g_object_get_data( G_OBJECT(combo), "prev_sel") );
                 gtk_combo_box_set_active( combo, prev_sel );
             }
         }
         else
         {
             int prev_sel = gtk_combo_box_get_active( combo );
-            g_object_set_data( combo, "prev_sel", GINT_TO_POINTER(prev_sel) );
+            g_object_set_data( G_OBJECT(combo), "prev_sel", GINT_TO_POINTER(prev_sel) );
         }
     }
     else
     {
-        g_object_set_data( combo, "prev_sel", GINT_TO_POINTER(-1) );
+        g_object_set_data( G_OBJECT(combo), "prev_sel", GINT_TO_POINTER(-1) );
     }
 }
 
@@ -314,9 +315,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
     char buf2[ 32 ];
     const char* time_format = "%Y-%m-%d %H:%M";
 
-    gchar* file_name;
     gchar* disp_path;
-    gchar* file_path;
     gchar* file_type;
 
     int i;
@@ -437,7 +436,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
         }
         else
         {
-            g_object_set_data( open_with, "prev_sel", GINT_TO_POINTER(-1) );
+            g_object_set_data( G_OBJECT(open_with), "prev_sel", GINT_TO_POINTER(-1) );
         }
 
         /* separator */
@@ -454,7 +453,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
                 NULL, NULL );
         gtk_combo_box_set_active(GTK_COMBO_BOX(open_with), 0);
         g_signal_connect( open_with, "changed",
-                          on_combo_change, mime );
+                          G_CALLBACK(on_combo_change), mime );
 
         /* vfs_mime_type_unref( mime ); */
         /* We can unref mime when combo box gets destroyed */
@@ -474,7 +473,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
         for ( i = 0; i < N_CHMOD_ACTIONS; ++i )
         {
             gtk_toggle_button_set_inconsistent ( data->chmod_btns[ i ], TRUE );
-            data->chmod_states[ i ] = 2;
+            data->chmod_states[ i ] = 2; /* Don't touch this bit */
             g_signal_connect( G_OBJECT( data->chmod_btns[ i ] ), "toggled",
                               G_CALLBACK( on_chmod_btn_toggled ), data );
         }
@@ -519,7 +518,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
                   time_format, localtime( vfs_file_info_get_atime( file ) ) );
         gtk_label_set_text( GTK_LABEL( atime ), buf );
 
-        owner_group = vfs_file_info_get_disp_owner( file );
+        owner_group = (char *) vfs_file_info_get_disp_owner( file );
         tmp = strchr( owner_group, ':' );
         data->owner_name = g_strndup( owner_group, tmp - owner_group );
         gtk_entry_set_text( GTK_ENTRY( data->owner ), data->owner_name );
@@ -528,7 +527,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
 
         for ( i = 0; i < N_CHMOD_ACTIONS; ++i )
         {
-            if ( data->chmod_btns[ i ] != 2 )
+            if ( data->chmod_states[ i ] != 2 ) /* allow to touch this bit */
             {
                 data->chmod_states[ i ] = ( vfs_file_info_get_mode( file ) & chmod_flags[ i ] ? 1 : 0 );
                 gtk_toggle_button_set_active( data->chmod_btns[ i ], data->chmod_states[ i ] );
@@ -640,7 +639,6 @@ on_dlg_response ( GtkDialog *dialog,
     gid_t gid = -1;
     const char* owner_name;
     const char* group_name;
-    guchar* chmod_actions;
     int i;
     GList* l;
     GList* file_list;
@@ -664,7 +662,7 @@ on_dlg_response ( GtkDialog *dialog,
             GtkWidget* open_with;
 
             /* Set default action for mimetype */
-            if( open_with = ptk_ui_xml_get_widget( dialog, "open_with" ) )
+            if( ( open_with = ptk_ui_xml_get_widget( GTK_WIDGET(dialog), "open_with" ) ) )
             {
                 GtkTreeModel* model = gtk_combo_box_get_model( GTK_COMBO_BOX(open_with) );
                 GtkTreeIter it;

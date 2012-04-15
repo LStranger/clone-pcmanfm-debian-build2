@@ -19,6 +19,7 @@
  *      MA 02110-1301, USA.
  */
 
+#include <string.h>
 #include "ptk-xml-tree.h"
 #include "glib-mem.h"
 

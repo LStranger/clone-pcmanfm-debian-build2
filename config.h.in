@@ -12,6 +12,9 @@
 /* Define to 1 if you have the `dcgettext' function. */
 #undef HAVE_DCGETTEXT
 
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
 /* Define to 1 if eaccess is available */
 #undef HAVE_EACCESS
 
@@ -95,6 +98,9 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
+
+/* Whether to check running as super user or not */
+#undef SUPER_USER_CHECKS
 
 /* Whether to enable Linux inotify support */
 #undef USE_INOTIFY

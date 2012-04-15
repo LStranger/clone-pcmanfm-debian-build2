@@ -95,10 +95,6 @@ void on_progress_dlg_response( GtkDialog* dlg, int response, PtkFileTask* task )
 
 gboolean open_up_progress_dlg( PtkFileTask* task )
 {
-    GtkLabel * action;
-    GtkLabel* from;
-    GtkLabel* to;
-    GtkLabel* cur;
     GtkTable* table;
     GtkLabel* label;
 

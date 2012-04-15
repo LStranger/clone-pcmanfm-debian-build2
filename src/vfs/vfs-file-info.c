@@ -20,6 +20,7 @@
 
 #include "vfs-app-desktop.h"
 #include "vfs-thumbnail-loader.h"
+#include "vfs-utils.h"  /* for vfs_load_icon */
 
 static int big_thumb_size = 48, small_thumb_size = 20;
 static gboolean utf8_file_name = FALSE;
@@ -218,6 +219,7 @@ void vfs_file_info_reload_mime_type( VFSFileInfo* fi,
     old_mime_type = fi->mime_type;
     fi->mime_type = vfs_mime_type_get_from_file( full_path,
                                                  fi->name, &file_stat );
+    vfs_file_info_load_special_info( fi, full_path );
     vfs_mime_type_unref( old_mime_type );  /* FIXME: is vfs_mime_type_unref needed ?*/
 }
 
@@ -259,10 +261,9 @@ GdkPixbuf* vfs_file_info_get_big_icon( VFSFileInfo* fi )
                 if ( G_UNLIKELY( icon_name[ 0 ] == '/' ) )
                     fi->big_thumbnail = gdk_pixbuf_new_from_file( icon_name, NULL );
                 else
-                    fi->big_thumbnail = gtk_icon_theme_load_icon(
+                    fi->big_thumbnail = vfs_load_icon(
                                             gtk_icon_theme_get_default(),
-                                            icon_name,
-                                            icon_size, 0, NULL );
+                                            icon_name, icon_size );
             }
             if ( fi->big_thumbnail )
                 g_object_set_data_full( G_OBJECT(fi->big_thumbnail), "name", icon_name, g_free );
@@ -501,7 +502,7 @@ gboolean vfs_file_info_open_file( VFSFileInfo* fi,
 
     if ( vfs_file_info_is_executable( fi, file_path ) )
     {
-        argv[ 0 ] = file_path;
+        argv[ 0 ] = (char *) file_path;
         argv[ 1 ] = '\0';
         ret = g_spawn_async( NULL, argv, NULL, G_SPAWN_STDOUT_TO_DEV_NULL|
                              G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, err );
@@ -515,7 +516,7 @@ gboolean vfs_file_info_open_file( VFSFileInfo* fi,
             app = vfs_app_desktop_new( app_name );
             if ( ! vfs_app_desktop_get_exec( app ) )
                 app->exec = g_strdup( app_name );   /* FIXME: app->exec */
-            files = g_list_prepend( files, file_path );
+            files = g_list_prepend( files, (gpointer) file_path );
             /* FIXME: working dir is needed */
             ret = vfs_app_desktop_open_files( gdk_screen_get_default(),
                                               NULL, app, files, err );
@@ -597,22 +598,24 @@ void vfs_file_info_load_special_info( VFSFileInfo* fi,
             vfs_file_info_set_disp_name(
                 fi, vfs_app_desktop_get_disp_name( desktop ) );
         }
-        if( fi->big_thumbnail )
-        {
-            gdk_pixbuf_unref( fi->big_thumbnail );
-            fi->big_thumbnail = NULL;
-        }
+
         if ( (icon_name = vfs_app_desktop_get_icon_name( desktop )) )
         {
             GdkPixbuf* icon;
             int big_size, small_size;
             vfs_mime_type_get_icon_size( &big_size, &small_size );
-            icon = vfs_app_desktop_get_icon( desktop, big_size, FALSE );
-            if( G_LIKELY(icon) )
-                fi->big_thumbnail =icon;
-            icon = vfs_app_desktop_get_icon( desktop, small_size, FALSE );
-            if( G_LIKELY(icon) )
-                fi->small_thumbnail =icon;
+            if( ! fi->big_thumbnail )
+            {
+                icon = vfs_app_desktop_get_icon( desktop, big_size, FALSE );
+                if( G_LIKELY(icon) )
+                    fi->big_thumbnail =icon;
+            }
+            if( ! fi->small_thumbnail )
+            {
+                icon = vfs_app_desktop_get_icon( desktop, small_size, FALSE );
+                if( G_LIKELY(icon) )
+                    fi->small_thumbnail =icon;
+            }
         }
         vfs_app_desktop_unref( desktop );
     }
@@ -628,7 +631,6 @@ void vfs_file_info_list_free( GList* list )
 char* vfs_file_resolve_path( const char* cwd, const char* relative_path )
 {
     GString* ret = g_string_sized_new( 4096 );
-    const char* sep;
     int len;
     gboolean strip_tail;
 
@@ -648,16 +650,17 @@ char* vfs_file_resolve_path( const char* cwd, const char* relative_path )
         {
             if( ! cwd )
             {
-                cwd = g_get_current_dir();
-                g_string_append( ret, cwd );
-                g_free( cwd );
+                char *cwd_new;
+                cwd_new = g_get_current_dir();
+                g_string_append( ret, cwd_new );
+                g_free( cwd_new );
             }
             else
                 g_string_append( ret, cwd );
         }
     }
 
-    if( relative_path[0] != '/' )
+    if( relative_path[0] != '/'  && (0 == ret->len || ret->str[ ret->len - 1 ] != '/' ) )
         g_string_append_c( ret, '/' );
 
     while( G_LIKELY( *relative_path ) )

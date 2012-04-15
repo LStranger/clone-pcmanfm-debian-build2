@@ -18,6 +18,7 @@
 
 #include "vfs-execute.h"
 
+#include "vfs-utils.h"  /* for vfs_load_icon */
 
 const char desktop_entry_name[] = "Desktop Entry";
 
@@ -60,7 +61,6 @@ VFSAppDesktop* vfs_app_desktop_new( const char* file_name )
 
     if( load )
     {
-        char* tmp;
         app->disp_name = g_key_file_get_locale_string ( file,
                                                         desktop_entry_name,
                                                         "Name", NULL, NULL);
@@ -125,6 +125,23 @@ const char* vfs_app_desktop_get_icon_name( VFSAppDesktop* app )
     return app->icon_name;
 }
 
+static GdkPixbuf* load_icon_file( const char* file_name, int size )
+{
+    GdkPixbuf* icon = NULL;
+    char* file_path;
+    const gchar** dirs = (const gchar**) g_get_system_data_dirs();
+    const gchar** dir;
+    for( dir = dirs; *dir; ++dir )
+    {
+        file_path = g_build_filename( *dir, "pixmaps", file_name, NULL );
+        icon = gdk_pixbuf_new_from_file_at_scale( file_path, size, size, TRUE, NULL );
+        g_free( file_path );
+        if( icon )
+            break;
+    }
+    return icon;
+}
+
 GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size, gboolean use_fallback )
 {
     GtkIconTheme* theme;
@@ -134,40 +151,41 @@ GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size, gboolean use_
     if( app->icon_name )
     {
         if( g_path_is_absolute( app->icon_name) )
-            icon = gdk_pixbuf_new_from_file_at_size( app->icon_name,
-                                                     size, size, NULL );
+        {
+            icon = gdk_pixbuf_new_from_file_at_scale( app->icon_name,
+                                                     size, size, TRUE, NULL );
+        }
         else
         {
             theme = gtk_icon_theme_get_default();
             suffix = strchr( app->icon_name, '.' );
-            if( suffix ) /* has suffix */
+            if( suffix ) /* has file extension, it's a basename of icon file */
             {
-                icon_name = g_strndup( app->icon_name,
-                                       (suffix - app->icon_name) );
-                icon = gtk_icon_theme_load_icon( theme, icon_name, size,
-                                                 GTK_ICON_LOOKUP_USE_BUILTIN,
-                                                 NULL );
-                g_free( icon_name );
+                /* try to find it in pixmaps dirs */
+                icon = load_icon_file( app->icon_name, size );
+                if( G_UNLIKELY( ! icon ) )  /* unfortunately, not found */
+                {
+                    /* Let's remove the suffix, and see if this name can match an icon
+                         in current icon theme */
+                    icon_name = g_strndup( app->icon_name,
+                                           (suffix - app->icon_name) );
+                    icon = vfs_load_icon( theme, icon_name, size );
+                    g_free( icon_name );
+                }
             }
-            else
+            else  /* no file extension, it could be an icon name in the icon theme */
             {
-                icon = gtk_icon_theme_load_icon( theme, app->icon_name, size,
-                                                 GTK_ICON_LOOKUP_USE_BUILTIN,
-                                                 NULL );
+                icon = vfs_load_icon( theme, app->icon_name, size );
             }
         }
     }
     if( G_UNLIKELY( ! icon ) && use_fallback )  /* fallback to generic icon */
     {
         theme = gtk_icon_theme_get_default();
-        icon = gtk_icon_theme_load_icon( theme, "application-x-executable", size,
-                                         GTK_ICON_LOOKUP_USE_BUILTIN,
-                                         NULL );
+        icon = vfs_load_icon( theme, "application-x-executable", size );
         if( G_UNLIKELY( ! icon ) )  /* fallback to generic icon */
         {
-            icon = gtk_icon_theme_load_icon( theme, "gnome-mime-application-x-executable", size,
-                                             GTK_ICON_LOOKUP_USE_BUILTIN,
-                                             NULL );
+            icon = vfs_load_icon( theme, "gnome-mime-application-x-executable", size );
         }
     }
     return icon;
@@ -223,7 +241,7 @@ static char* translate_app_exec_to_command_line( VFSAppDesktop* app,
     const char* pexec = vfs_app_desktop_get_exec( app );
     char* file;
     GList* l;
-    gchar *tmp, *tmp2;
+    gchar *tmp;
     GString* cmd = g_string_new("");
     gboolean add_files = FALSE;
 

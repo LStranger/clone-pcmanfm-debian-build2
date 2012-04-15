@@ -10,6 +10,10 @@
 *
 */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include "app-chooser-dialog.h"
 #include "ptk-ui-xml.h"
 
@@ -90,7 +94,8 @@ static void add_list_item( GtkListStore* list, VFSAppDesktop* desktop )
 
 static GtkTreeModel* create_model_from_mime_type( VFSMimeType* mime_type )
 {
-    char** apps, **app, *type;
+    char** apps, **app;
+    const char *type;
     GtkListStore* list = gtk_list_store_new( N_COLS, GDK_TYPE_PIXBUF,
                                                     G_TYPE_STRING, G_TYPE_STRING );
     if ( mime_type )
@@ -114,7 +119,7 @@ static GtkTreeModel* create_model_from_mime_type( VFSMimeType* mime_type )
             g_strfreev( apps );
         }
     }
-    return list;
+    return (GtkTreeModel*) list;
 }
 
 GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type )
@@ -167,7 +172,7 @@ static void on_load_all_apps_finish( VFSAsyncTask* task, gboolean is_cancelled, 
         return;
     }
 
-    view = (GtkTreeView*)g_object_get_data( task, "view" );
+    view = (GtkTreeView*)g_object_get_data( G_OBJECT(task), "view" );
 
     gtk_tree_sortable_set_sort_func ( GTK_TREE_SORTABLE( model ),
                                     COL_APP_NAME, sort_by_name, NULL, NULL );
@@ -201,14 +206,14 @@ on_notebook_switch_page ( GtkNotebook *notebook,
             init_list_view( view );
             gtk_widget_grab_focus( GTK_WIDGET( view ) );
             busy = gdk_cursor_new_for_display( gtk_widget_get_display(GTK_WIDGET( view )), GDK_WATCH );
-            gdk_window_set_cursor( GTK_WIDGET( gtk_widget_get_toplevel(view) )->window, busy );
+            gdk_window_set_cursor( GTK_WIDGET( gtk_widget_get_toplevel(GTK_WIDGET(view)) )->window, busy );
             gdk_cursor_unref( busy );
 
             list = gtk_list_store_new( N_COLS, GDK_TYPE_PIXBUF,
                                        G_TYPE_STRING, G_TYPE_STRING );
-            task = vfs_async_task_new( load_all_known_apps_thread, list );
-            g_object_set_data( task, "view", view );
-            g_object_set_data( dlg, "task", task );
+            task = vfs_async_task_new( (VFSAsyncFunc) load_all_known_apps_thread, list );
+            g_object_set_data( G_OBJECT(task), "view", view );
+            g_object_set_data( G_OBJECT(dlg), "task", task );
             g_signal_connect( task, "finish", G_CALLBACK(on_load_all_apps_finish), dlg );
             vfs_async_task_execute( task );
         }
@@ -315,7 +320,7 @@ static void on_dlg_response( GtkDialog* dlg, int id, gpointer user_data )
     case GTK_RESPONSE_NONE:
     case GTK_RESPONSE_DELETE_EVENT:
         /* cancel app loading on dialog closing... */
-        task = (VFSAsyncTask*)g_object_get_data( dlg, "task" );
+        task = (VFSAsyncTask*)g_object_get_data( G_OBJECT(dlg), "task" );
         if( task )
         {
             vfs_async_task_cancel( task );
@@ -363,7 +368,8 @@ void load_all_apps_in_dir( const char* dir_path, GtkListStore* list, VFSAsyncTas
     GDir* dir = g_dir_open( dir_path, 0, NULL );
     if( dir )
     {
-        char* name, *path;
+        const char* name;
+        char* path;
         VFSAppDesktop* app;
         while( (name = g_dir_read_name( dir )) )
         {
@@ -409,7 +415,7 @@ void load_all_apps_in_dir( const char* dir_path, GtkListStore* list, VFSAsyncTas
 
 gpointer load_all_known_apps_thread( VFSAsyncTask* task )
 {
-    char* dir, **dirs;
+    gchar* dir, **dirs;
     GtkListStore* list;
     gboolean cancel = FALSE;
 
@@ -421,7 +427,7 @@ gpointer load_all_known_apps_thread( VFSAsyncTask* task )
     load_all_apps_in_dir( dir, list, task );
     g_free( dir );
 
-    for( dirs = g_get_system_data_dirs(); ! task->cancel && *dirs; ++dirs )
+    for( dirs = (gchar **) g_get_system_data_dirs(); ! task->cancel && *dirs; ++dirs )
     {
         dir = g_build_filename( *dirs, "applications", NULL );
         load_all_apps_in_dir( dir, list, task );

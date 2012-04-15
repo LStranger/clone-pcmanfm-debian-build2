@@ -29,9 +29,9 @@ on_show_desktop_toggled( GtkToggleButton* show_desktop, GtkWidget* dlg )
 {
     GtkWidget* desktop_page = ptk_ui_xml_get_widget( dlg,  "desktop_page" );
     gtk_container_foreach( GTK_CONTAINER(desktop_page),
-                           gtk_widget_set_sensitive,
-                           gtk_toggle_button_get_active( show_desktop ) );
-    gtk_widget_set_sensitive( show_desktop, TRUE );
+                           (GtkCallback) gtk_widget_set_sensitive,
+                           (gpointer) gtk_toggle_button_get_active( show_desktop ) );
+    gtk_widget_set_sensitive( GTK_WIDGET(show_desktop), TRUE );
 }
 
 gboolean show_preference_dialog( GtkWindow* parent )
@@ -53,8 +53,6 @@ gboolean show_preference_dialog( GtkWindow* parent )
     GtkWidget* text_color;
 
     const char* filename_encoding;
-    char* theme_name;
-    gboolean theme_changed;
     int i;
     const int big_icon_sizes[] =
         {
@@ -64,7 +62,6 @@ gboolean show_preference_dialog( GtkWindow* parent )
         {
             48, 36, 32, 24, 20, 16, 12
         };
-    char icon_size_str[8];
     int ibig_icon = -1, ismall_icon = -1;
     const char* terminal_programs[] =
         {
@@ -153,7 +150,7 @@ gboolean show_preference_dialog( GtkWindow* parent )
     show_desktop = ptk_ui_xml_get_widget( dlg,  "show_desktop" );
     gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( show_desktop ),
                                   appSettings.showDesktop );
-    on_show_desktop_toggled( show_desktop, dlg );
+    on_show_desktop_toggled( GTK_TOGGLE_BUTTON(show_desktop), dlg );
     g_signal_connect( show_desktop, "toggled",
                       G_CALLBACK(on_show_desktop_toggled), dlg );
 

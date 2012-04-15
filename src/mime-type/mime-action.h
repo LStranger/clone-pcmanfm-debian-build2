@@ -19,8 +19,8 @@
  *      MA 02110-1301, USA.
  */
 
-#ifndef _MIME_TYPE_H_INCLUDED_
-#define _MIME_TYPE_H_INCLUDED_
+#ifndef _MIME_ACTION_H_INCLUDED_
+#define _MIME_ACTION_H_INCLUDED_
 
 #include <glib.h>
 

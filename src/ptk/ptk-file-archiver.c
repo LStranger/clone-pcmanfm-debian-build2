@@ -71,7 +71,6 @@ static void on_format_changed( GtkComboBox* combo, gpointer user_data )
     int i, n, len;
     GtkFileChooser* dlg = GTK_FILE_CHOOSER(user_data);
     char* ext = NULL;
-    const char* old_ext;
     char *path, *name, *new_name;
 
     path = gtk_file_chooser_get_filename( dlg );
@@ -139,7 +138,7 @@ void ptk_file_archiver_create( GtkWindow* parent_win,
         }
     }
     gtk_file_chooser_set_filter( GTK_FILE_CHOOSER(dlg), filter );
-    g_signal_connect( combo, "changed", on_format_changed, dlg );
+    g_signal_connect( combo, "changed", G_CALLBACK(on_format_changed), dlg );
     gtk_combo_box_set_active( GTK_COMBO_BOX(combo), 0 );
     gtk_box_pack_start( GTK_BOX(hbox),
                         combo,
@@ -190,7 +189,7 @@ void ptk_file_archiver_create( GtkWindow* parent_win,
     for( l = files; l; l = l->next )
     {
         /* FIXME: Maybe we should consider filename encoding here. */
-        argv[i] = vfs_file_info_get_name( (VFSFileInfo*)l->data );
+        argv[i] = (char *) vfs_file_info_get_name( (VFSFileInfo*) l->data );
         ++i;
     }
     argv[i] = NULL;
@@ -299,13 +298,12 @@ gboolean ptk_file_archiver_is_format_supported( VFSMimeType* mime,
 {
     int i;
     const char* type;
-    char** alias;
 
     if( !mime ) return FALSE;
     type = vfs_mime_type_get_type( mime );
     if(! type ) return FALSE;
 
-    alias = mime_type_get_alias( type );
+    /* alias = mime_type_get_alias( type ); */
 
     for( i = 0; i < G_N_ELEMENTS(handlers); ++i )
     {

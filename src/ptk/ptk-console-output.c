@@ -142,8 +142,6 @@ int ptk_console_output_run( GtkWindow* parent_win,
     GtkWidget* hbox;
     GtkWidget* entry;
     GdkColor black={0}, white={0, 65535, 65535, 65535};
-    GtkTextIter it;
-    int status;
     char* cmd;
     GError* err;
 
@@ -215,8 +213,8 @@ int ptk_console_output_run( GtkWindow* parent_win,
         g_io_channel_set_encoding( data->chstde, NULL, NULL );
         g_io_channel_set_buffered( data->chstde, FALSE );
         g_io_add_watch( data->chstde, G_IO_IN|G_IO_HUP, on_output, data );
-        g_signal_connect( main_dlg, "delete-event", gtk_widget_destroy, NULL );
-        g_signal_connect( main_dlg, "response", on_response, data );
+        g_signal_connect( main_dlg, "delete-event", G_CALLBACK(gtk_widget_destroy), NULL );
+        g_signal_connect( main_dlg, "response", G_CALLBACK(on_response), data );
     }
     else
     {

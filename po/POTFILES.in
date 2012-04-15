@@ -13,8 +13,6 @@ src/ptk/ptk-file-misc.c
 src/file-properties.c
 src/edit-bookmarks.c
 src/app-chooser-dialog.c
-src/file-assoc-dlg.c
-src/file-assoc-dlg-ui.c
 src/vfs/vfs-app-desktop.c
 src/vfs/vfs-file-task.c
 src/vfs/vfs-volume-hal.c

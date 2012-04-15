@@ -365,7 +365,6 @@ void ptk_dir_tree_get_value ( GtkTreeModel *tree_model,
                               gint column,
                               GValue *value )
 {
-    PtkDirTree* tree = PTK_DIR_TREE(tree_model);
     VFSFileInfo* info;
     GdkPixbuf* icon;
     PtkDirTreeNode* node;
@@ -437,7 +436,6 @@ gboolean ptk_dir_tree_iter_children ( GtkTreeModel *tree_model,
 {
     PtkDirTree* tree;
     PtkDirTreeNode* parent_node;
-    PtkDirTreeNode* node;
     g_return_val_if_fail ( parent == NULL || parent->user_data != NULL, FALSE );
 
     g_return_val_if_fail ( PTK_IS_DIR_TREE ( tree_model ), FALSE );
@@ -612,7 +610,7 @@ static char* dir_path_from_tree_node( PtkDirTree* tree, PtkDirTreeNode* node )
             g_slist_free( names );
             return NULL;
         }
-        names = g_slist_prepend( names, name );
+        names = g_slist_prepend( names, (gpointer) name );
         node = node->parent;
     }
     for( len = 1, l = names; l; l = l->next )
@@ -735,7 +733,6 @@ void ptk_dir_tree_expand_row ( PtkDirTree* tree,
                                GtkTreePath *tree_path )
 {
     PtkDirTreeNode *node, *place_holder;
-    GtkTreeIter child;
     GDir *dir;
     char *path, *file_path;
     const char *name=NULL;

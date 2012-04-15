@@ -449,6 +449,7 @@ set_fg_color ( PtkTextRenderer *celltext,
     }
 }
 
+#if 0
 static PangoFontMask
 set_font_desc_fields ( PangoFontDescription *desc,
                        PangoFontMask to_set )
@@ -488,6 +489,7 @@ set_font_desc_fields ( PangoFontDescription *desc,
 
     return changed_mask;
 }
+#endif
 
 static void
 notify_set_changed ( GObject *object,
@@ -507,6 +509,7 @@ notify_set_changed ( GObject *object,
         g_object_notify ( object, "size-set" );
 }
 
+#if 0
 static void
 notify_fields_changed ( GObject *object,
                         PangoFontMask changed_mask )
@@ -524,6 +527,7 @@ notify_fields_changed ( GObject *object,
     if ( changed_mask & PANGO_FONT_MASK_SIZE )
         g_object_notify ( object, "size" );
 }
+#endif
 
 static void
 set_font_description ( PtkTextRenderer *celltext,

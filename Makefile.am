@@ -33,7 +33,8 @@ EXTRA_DIST = \
 	$(mime_DATA) \
 	$(file_DATA) \
 	$(fallbackicon_DATA) \
-	$(ui_DATA)
+	$(ui_DATA) \
+	please_read_README_carefully_before_packaging
 
 ##install-data-hook:
 ##	update-mime-database $(datadir)/mime

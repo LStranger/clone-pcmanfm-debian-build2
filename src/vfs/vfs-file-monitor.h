@@ -63,7 +63,11 @@ struct _VFSFileMonitor{
   GArray* callbacks;
 };
 
-/* Callback function which will be called when monitored events happen */
+/* Callback function which will be called when monitored events happen
+ *  NOTE: GDK_THREADS_ENTER and GDK_THREADS_LEAVE might be needed
+ *  if gtk+ APIs are called in this callback, since the callback is called from
+ *  IO channel handler.
+ */
 typedef void (*VFSFileMonitorCallback)( VFSFileMonitor* fm,
                                         VFSFileMonitorEvent event,
                                         const char* file_name,

@@ -17,23 +17,31 @@ G_BEGIN_DECLS
 #define PTK_FILE_BROWSER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj),  PTK_TYPE_FILE_BROWSER, PtkFileBrowserClass))
 
 typedef enum{
-    FBVM_ICON_VIEW,
-    FBVM_LIST_VIEW
-}PtkFileBrowserViewMode;
+    PTK_FB_ICON_VIEW,
+    PTK_FB_LIST_VIEW
+}PtkFBViewMode;
 
 typedef enum{
-    FB_SIDE_PANE_BOOKMARKS,
-    FB_SIDE_PANE_DIR_TREE
-}PtkFileBrowserSidePaneMode;
+    PTK_FB_SIDE_PANE_BOOKMARKS,
+    PTK_FB_SIDE_PANE_DIR_TREE
+}PtkFBSidePaneMode;
 
 typedef enum{
-    FB_SORT_BY_NAME = 0,
-    FB_SORT_BY_SIZE,
-    FB_SORT_BY_MTIME,
-    FB_SORT_BY_TYPE,
-    FB_SORT_BY_PERM,
-    FB_SORT_BY_OWNER
-}FileBrowserSortOrder;
+    PTK_FB_SORT_BY_NAME = 0,
+    PTK_FB_SORT_BY_SIZE,
+    PTK_FB_SORT_BY_MTIME,
+    PTK_FB_SORT_BY_TYPE,
+    PTK_FB_SORT_BY_PERM,
+    PTK_FB_SORT_BY_OWNER
+}PtkFBSortOrder;
+
+typedef enum{
+    PTK_FB_CHDIR_NORMAL,
+    PTK_FB_CHDIR_ADD_HISTORY,
+    PTK_FB_CHDIR_NO_HISTORY,
+    PTK_FB_CHDIR_BACK,
+    PTK_FB_CHDIR_FORWARD
+}PtkFBChdirMode;
 
 typedef struct _PtkFileBrowser PtkFileBrowser;
 typedef struct _PtkFileBrowserClass PtkFileBrowserClass;
@@ -46,17 +54,10 @@ struct _PtkFileBrowser
     /* <private> */
     GList* history;
     GList* curHistory;
-    int historyNum;
 
     VFSDir* dir;
     GtkTreeModel* file_list;
-
-    gboolean show_hidden_files;
     int max_thumbnail;
-
-    FileBrowserSortOrder sort_order;
-    GtkSortType sort_type;
-
     int n_sel_files;
     off_t sel_size;
 
@@ -64,8 +65,16 @@ struct _PtkFileBrowser
     GtkToggleToolButton* location_btn;
     GtkToggleToolButton* dir_tree_btn;
 
-    gboolean show_side_pane;
-    PtkFileBrowserSidePaneMode side_pane_mode;
+    GtkSortType sort_type;
+    PtkFBSidePaneMode side_pane_mode : 4;
+    PtkFBSortOrder sort_order : 4;
+    PtkFBViewMode view_mode : 2;
+
+    gboolean show_side_pane : 1;
+    gboolean show_hidden_files : 1;
+    gboolean busy : 1;
+    gboolean pending_drag_status : 1;
+    dev_t drag_source_dev;
 
     GtkWidget* side_pane;
     GtkTreeView* side_view;
@@ -74,10 +83,8 @@ struct _PtkFileBrowser
     /* folder view */
     GtkWidget* folder_view;
     GtkWidget* folder_view_scroll;
-    PtkFileBrowserViewMode view_mode;
     GtkCellRenderer* icon_render;
 
-    gboolean busy;
     glong prev_update_time;
     guint update_timeout;
 };
@@ -96,6 +103,7 @@ struct _PtkFileBrowserClass
 
     /* Default signal handlers */
     void ( *before_chdir ) ( PtkFileBrowser* file_browser, const char* path, gboolean* cancel );
+    void ( *begin_chdir ) ( PtkFileBrowser* file_browser );
     void ( *after_chdir ) ( PtkFileBrowser* file_browser );
     void ( *open_item ) ( PtkFileBrowser* file_browser, const char* path, int action );
     void ( *content_change ) ( PtkFileBrowser* file_browser );
@@ -106,14 +114,14 @@ struct _PtkFileBrowserClass
 GType ptk_file_browser_get_type ( void );
 
 GtkWidget* ptk_file_browser_new( GtkWidget* mainWindow,
-                                 PtkFileBrowserViewMode view_mode );
+                                 PtkFBViewMode view_mode );
 
 /*
 * folder_path should be encodede in on-disk encoding
 */
 gboolean ptk_file_browser_chdir( PtkFileBrowser* file_browser,
                                  const char* folder_path,
-                                 gboolean add_history );
+                                 PtkFBChdirMode mode );
 
 /*
 * returned path should be encodede in on-disk encoding
@@ -153,11 +161,11 @@ void ptk_file_browser_show_hidden_files( PtkFileBrowser* file_browser,
 
 /* Side pane */
 void ptk_file_browser_set_side_pane_mode( PtkFileBrowser* file_browser,
-                                          PtkFileBrowserSidePaneMode mode );
-PtkFileBrowserSidePaneMode ptk_file_browser_get_side_pane_mode( PtkFileBrowser* file_browser );
+                                          PtkFBSidePaneMode mode );
+PtkFBSidePaneMode ptk_file_browser_get_side_pane_mode( PtkFileBrowser* file_browser );
 
 void ptk_file_browser_show_side_pane( PtkFileBrowser* file_browser,
-                                      PtkFileBrowserSidePaneMode mode );
+                                      PtkFBSidePaneMode mode );
 void ptk_file_browser_hide_side_pane( PtkFileBrowser* file_browser );
 
 gboolean ptk_file_browser_is_side_pane_visible( PtkFileBrowser* file_browser );
@@ -165,12 +173,12 @@ gboolean ptk_file_browser_is_side_pane_visible( PtkFileBrowser* file_browser );
 
 /* Sorting files */
 void ptk_file_browser_set_sort_order( PtkFileBrowser* file_browser,
-                                      FileBrowserSortOrder order );
+                                      PtkFBSortOrder order );
 
 void ptk_file_browser_set_sort_type( PtkFileBrowser* file_browser,
                                      GtkSortType order );
 
-FileBrowserSortOrder ptk_file_browser_get_sort_order( PtkFileBrowser* file_browser );
+PtkFBSortOrder ptk_file_browser_get_sort_order( PtkFileBrowser* file_browser );
 
 GtkSortType ptk_file_browser_get_sort_type( PtkFileBrowser* file_browser );
 

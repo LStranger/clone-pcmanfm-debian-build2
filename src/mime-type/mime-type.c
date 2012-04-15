@@ -31,6 +31,7 @@
 #include <string.h>
 
 #include <fcntl.h>
+#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 
@@ -257,8 +258,8 @@ const char* mime_type_get_by_file( const char* filepath, struct stat* statbuf, c
 static char* parse_xml_desc( const char* buf, size_t len, const char* locale )
 {
     const char *buf_end = buf + len;
-    const char *comment, *comment_end, *eng_comment;
-    size_t eng_comment_len = 0, comment_len;
+    const char *comment = NULL, *comment_end, *eng_comment;
+    size_t eng_comment_len = 0, comment_len = 0;
     char target[64];
     static const char end_comment_tag[]="</comment>";
 
@@ -277,7 +278,7 @@ static char* parse_xml_desc( const char* buf, size_t len, const char* locale )
         int target_len = g_snprintf( target, 64, "<comment xml:lang=\"%s\">", locale);
         buf = comment_end + 10;
         len = (buf_end - buf);
-        if( G_LIKELY( comment = g_strstr_len( buf, len, target ) ) )
+        if( G_LIKELY( ( comment = g_strstr_len( buf, len, target ) ) ) )
         {
             len -= target_len;
             comment += target_len;
@@ -523,7 +524,6 @@ gboolean mime_type_is_text_file( const char *file_path, const char* mime_type )
 {
     int file;
     int rlen;
-    int i;
     gboolean ret = FALSE;
 
     if( mime_type )
@@ -554,7 +554,7 @@ gboolean mime_type_is_text_file( const char *file_path, const char* mime_type )
 #else
                 unsigned char data[ TEXT_MAX_EXTENT ];
                 rlen = read ( file, data, sizeof( data ) );
-                ret = mime_type_is_data_plain_text( data, rlen );
+                ret = mime_type_is_data_plain_text( (char*) data, rlen );
 #endif
             }
         }
@@ -565,10 +565,6 @@ gboolean mime_type_is_text_file( const char *file_path, const char* mime_type )
 
 gboolean mime_type_is_executable_file( const char *file_path, const char* mime_type )
 {
-    int file;
-    int i;
-    gboolean ret = FALSE;
-
     if ( !mime_type )
     {
         mime_type = mime_type_get_by_file( file_path, NULL, NULL );
@@ -658,7 +654,7 @@ char** mime_type_get_alias( const char* type )
 
     for( i = 0; i < n_caches; ++i )
     {
-        alias = mime_cache_lookup_alias( caches[i], type );
+        alias = (const char **) mime_cache_lookup_alias( caches[i], type );
         if( alias )
         {
             for( p = alias; *p; ++p )

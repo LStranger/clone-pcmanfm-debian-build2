@@ -4,6 +4,7 @@
 
 #include "vfs-volume-hal-options.h"
 
+#include <string.h>
 #include <unistd.h> /* for getuid() */
 #include <sys/types.h>
 
@@ -21,7 +22,8 @@ gboolean vfs_volume_hal_get_options( const char* fs, VFSVolumeOptions* ret )
     f = g_key_file_new();
     if( g_key_file_load_from_file( f, CONFIG_FILE, 0, NULL) )
     {
-        int n = 0, i;
+        gsize n = 0;
+	int i;
         ret->mount_options = g_key_file_get_string_list( f, fs, "mount_options", &n, NULL );
         ret->fstype_override = g_key_file_get_string(f, fs, "fstype_override", NULL );
 

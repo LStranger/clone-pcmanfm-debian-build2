@@ -28,7 +28,6 @@ static void clipboard_get_data ( GtkClipboard *clipboard,
 {
     GdkAtom uri_list_target = gdk_atom_intern( "text/uri-list", FALSE );
     GdkAtom gnome_target = gdk_atom_intern( "x-special/gnome-copied-files", FALSE );
-    GdkAtom text_target = gdk_atom_intern( "text/plain", FALSE );
     GList* l;
     gchar* file_name;
     gchar* action;
@@ -148,7 +147,7 @@ void ptk_clipboard_paste_files( GtkWindow* parent_win,
     GList* files = NULL;
     gchar* file_path;
 
-    VFSFileTask* task;
+    PtkFileTask* task;
     VFSFileTaskType action;
     char* uri_list_str;
 

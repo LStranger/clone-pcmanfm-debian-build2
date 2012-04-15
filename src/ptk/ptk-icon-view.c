@@ -1,4 +1,4 @@
-/* $Id: ptk-icon-view.c 518 2008-02-15 06:02:13Z pcmanx $ */
+/* $Id: ptk-icon-view.c 563 2008-02-23 06:19:28Z jserv $ */
 /*-
  * Copyright (c) 2004-2006  os-cillation e.K.
  * Copyright (c) 2002,2004  Anders Carlsson <andersca@gnu.org>
@@ -1544,7 +1544,7 @@ ptk_icon_view_expose_event ( GtkWidget *widget,
     PtkIconViewItem *item;
     PtkIconView *icon_view = PTK_ICON_VIEW ( widget );
     GtkTreePath *path;
-    GdkRectangle rubber_rect;
+    GdkRectangle rubber_rect = { 0, 0, 0, 0 };
     const GList *lp;
     gint dest_index = -1;
 
@@ -1706,7 +1706,6 @@ static gboolean
 ptk_icon_view_motion_notify_event ( GtkWidget *widget,
                                     GdkEventMotion *event )
 {
-    PtkIconViewItem * item;
     PtkIconView *icon_view = PTK_ICON_VIEW ( widget );
     gint abs_y;
 
@@ -4747,7 +4746,7 @@ update_text_cell ( PtkIconView *icon_view )
             info = g_list_nth_data ( icon_view->priv->cell_list,
                                      icon_view->priv->text_cell );
 
-            g_list_remove ( icon_view->priv->cell_list, info );
+            icon_view->priv->cell_list = g_list_remove ( icon_view->priv->cell_list, info );
 
             free_cell_info ( info );
 
@@ -4802,7 +4801,7 @@ update_pixbuf_cell ( PtkIconView *icon_view )
             info = g_list_nth_data ( icon_view->priv->cell_list,
                                      icon_view->priv->pixbuf_cell );
 
-            g_list_remove ( icon_view->priv->cell_list, info );
+            icon_view->priv->cell_list = g_list_remove ( icon_view->priv->cell_list, info );
 
             free_cell_info ( info );
 
@@ -7709,7 +7708,7 @@ ptk_icon_view_item_accessible_text_get_offset_at_point ( AtkText *text,
 {
     PtkIconViewItemAccessible * item;
     PtkIconView *icon_view;
-    gint offset;
+    gint offset = 0;
 
     item = PTK_ICON_VIEW_ITEM_ACCESSIBLE ( text );
 
@@ -8350,7 +8349,7 @@ ptk_icon_view_accessible_set_scroll_adjustments ( GtkWidget *widget,
         if ( priv->old_hadj )
         {
             g_object_remove_weak_pointer ( G_OBJECT ( priv->old_hadj ),
-                                           ( gpointer * ) & priv->old_hadj );
+                                           ( gpointer * ) (GtkWidget *) & priv->old_hadj );
 
             g_signal_handlers_disconnect_by_func ( priv->old_hadj,
                                                    ( gpointer ) ptk_icon_view_accessible_adjustment_changed,
@@ -8360,7 +8359,7 @@ ptk_icon_view_accessible_set_scroll_adjustments ( GtkWidget *widget,
         if ( priv->old_hadj )
         {
             g_object_add_weak_pointer ( G_OBJECT ( priv->old_hadj ),
-                                        ( gpointer * ) & priv->old_hadj );
+                                        ( gpointer * ) (GtkWidget *) & priv->old_hadj );
             g_signal_connect ( hadj,
                                "value-changed",
                                G_CALLBACK ( ptk_icon_view_accessible_adjustment_changed ),
@@ -8372,7 +8371,7 @@ ptk_icon_view_accessible_set_scroll_adjustments ( GtkWidget *widget,
         if ( priv->old_vadj )
         {
             g_object_remove_weak_pointer ( G_OBJECT ( priv->old_vadj ),
-                                           ( gpointer * ) & priv->old_vadj );
+                                           ( gpointer * ) (GtkWidget *) & priv->old_vadj );
 
             g_signal_handlers_disconnect_by_func ( priv->old_vadj,
                                                    ( gpointer ) ptk_icon_view_accessible_adjustment_changed,
@@ -8382,7 +8381,7 @@ ptk_icon_view_accessible_set_scroll_adjustments ( GtkWidget *widget,
         if ( priv->old_vadj )
         {
             g_object_add_weak_pointer ( G_OBJECT ( priv->old_vadj ),
-                                        ( gpointer * ) & priv->old_vadj );
+                                        ( gpointer * ) (GtkWidget *) & priv->old_vadj );
             g_signal_connect ( vadj,
                                "value-changed",
                                G_CALLBACK ( ptk_icon_view_accessible_adjustment_changed ),
@@ -8624,7 +8623,7 @@ ptk_icon_view_accessible_notify_gtk ( GObject *obj,
         if ( priv->model )
         {
             g_object_remove_weak_pointer ( G_OBJECT ( priv->model ),
-                                           ( gpointer * ) & priv->model );
+                                           ( gpointer * ) (GtkWidget *) & priv->model );
             ptk_icon_view_accessible_disconnect_model_signals ( priv->model, widget );
         }
         ptk_icon_view_accessible_clear_cache ( priv );
@@ -8634,7 +8633,7 @@ ptk_icon_view_accessible_notify_gtk ( GObject *obj,
         /* If there is no model the PtkIconView is probably being destroyed */
         if ( priv->model )
         {
-            g_object_add_weak_pointer ( G_OBJECT ( priv->model ), ( gpointer * ) & priv->model );
+            g_object_add_weak_pointer ( G_OBJECT ( priv->model ), ( gpointer * ) (GtkWidget *) & priv->model );
             ptk_icon_view_accessible_connect_model_signals ( icon_view );
         }
     }
@@ -8661,7 +8660,7 @@ ptk_icon_view_accessible_initialize ( AtkObject *accessible,
     if ( icon_view->priv->hadjustment )
     {
         priv->old_hadj = icon_view->priv->hadjustment;
-        g_object_add_weak_pointer ( G_OBJECT ( priv->old_hadj ), ( gpointer * ) & priv->old_hadj );
+        g_object_add_weak_pointer ( G_OBJECT ( priv->old_hadj ), ( gpointer * ) (GtkWidget *) & priv->old_hadj );
         g_signal_connect ( icon_view->priv->hadjustment,
                            "value-changed",
                            G_CALLBACK ( ptk_icon_view_accessible_adjustment_changed ),
@@ -8670,7 +8669,7 @@ ptk_icon_view_accessible_initialize ( AtkObject *accessible,
     if ( icon_view->priv->vadjustment )
     {
         priv->old_vadj = icon_view->priv->vadjustment;
-        g_object_add_weak_pointer ( G_OBJECT ( priv->old_vadj ), ( gpointer * ) & priv->old_vadj );
+        g_object_add_weak_pointer ( G_OBJECT ( priv->old_vadj ), ( gpointer * ) (GtkWidget *) & priv->old_vadj );
         g_signal_connect ( icon_view->priv->vadjustment,
                            "value-changed",
                            G_CALLBACK ( ptk_icon_view_accessible_adjustment_changed ),
@@ -8688,7 +8687,7 @@ ptk_icon_view_accessible_initialize ( AtkObject *accessible,
     priv->model = icon_view->priv->model;
     if ( priv->model )
     {
-        g_object_add_weak_pointer ( G_OBJECT ( priv->model ), ( gpointer * ) & priv->model );
+        g_object_add_weak_pointer ( G_OBJECT ( priv->model ), ( gpointer * ) (GtkWidget *) & priv->model );
         ptk_icon_view_accessible_connect_model_signals ( icon_view );
     }
 
@@ -8720,7 +8719,7 @@ ptk_icon_view_accessible_destroyed ( GtkWidget *widget,
     if ( priv->old_hadj )
     {
         g_object_remove_weak_pointer ( G_OBJECT ( priv->old_hadj ),
-                                       ( gpointer * ) & priv->old_hadj );
+                                       ( gpointer * ) (GtkWidget *) & priv->old_hadj );
 
         g_signal_handlers_disconnect_by_func ( priv->old_hadj,
                                                ( gpointer ) ptk_icon_view_accessible_adjustment_changed,
@@ -8730,7 +8729,7 @@ ptk_icon_view_accessible_destroyed ( GtkWidget *widget,
     if ( priv->old_vadj )
     {
         g_object_remove_weak_pointer ( G_OBJECT ( priv->old_vadj ),
-                                       ( gpointer * ) & priv->old_vadj );
+                                       ( gpointer * ) (GtkWidget *) & priv->old_vadj );
 
         g_signal_handlers_disconnect_by_func ( priv->old_vadj,
                                                ( gpointer ) ptk_icon_view_accessible_adjustment_changed,
@@ -9835,7 +9834,6 @@ ptk_icon_view_real_start_interactive_search ( PtkIconView *icon_view,
     * have focus.  If one of our children have focus, we don't want to
     * start the search.
     */
-    GList * list;
     gboolean found_focus = FALSE;
     GtkWidgetClass *entry_parent_class;
 
@@ -9909,11 +9907,13 @@ ptk_icon_view_real_start_interactive_search ( PtkIconView *icon_view,
     return TRUE;
 }
 
+#if 0
 static gboolean
 ptk_icon_view_start_interactive_search ( PtkIconView *icon_view )
 {
     return ptk_icon_view_real_start_interactive_search ( icon_view, TRUE );
 }
+#endif
 
 static gboolean
 ptk_icon_view_key_press ( GtkWidget *widget,
@@ -9921,7 +9921,6 @@ ptk_icon_view_key_press ( GtkWidget *widget,
 {
     PtkIconView * icon_view = ( PtkIconView * ) widget;
     GtkWidgetClass* parent_class;
-    GList *list;
 
     /* Chain up to the parent class.  It handles the keybindings. */
     parent_class = g_type_class_peek_parent( PTK_ICON_VIEW_GET_CLASS( icon_view ) );

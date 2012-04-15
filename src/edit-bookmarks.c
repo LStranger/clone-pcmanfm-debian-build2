@@ -10,6 +10,10 @@
 *
 */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include "edit-bookmarks.h"
 #include "ptk-bookmarks.h"
 
@@ -40,6 +44,8 @@ static void on_add( GtkButton* btn, gpointer data )
     GdkPixbuf* icon = gtk_icon_theme_load_icon( gtk_icon_theme_get_default(),
                                                 "gnome-fs-directory",
                                                 20, 0, NULL );
+    GtkWidget* dlg;
+    char *path = NULL, *basename = NULL;
 
     if( gtk_tree_selection_get_selected ( sel, &model, &it ) )
     {
@@ -52,11 +58,28 @@ static void on_add( GtkButton* btn, gpointer data )
         tree_path = gtk_tree_path_new_first();
         pit = NULL;
     }
+
+    dlg = gtk_file_chooser_dialog_new( NULL, parent,
+                            GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+                            GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                            GTK_STOCK_OK, GTK_RESPONSE_OK, NULL );
+    if( gtk_dialog_run( (GtkDialog*) dlg ) == GTK_RESPONSE_OK )
+    {
+        path = gtk_file_chooser_get_filename( (GtkFileChooser*)dlg );
+        basename = g_filename_display_basename( path );
+    }
+    gtk_widget_destroy( dlg );
+
     col = gtk_tree_view_get_column( view, 1 );
     gtk_list_store_insert_after( GTK_LIST_STORE(model), &new_it, pit );
     gtk_list_store_set( GTK_LIST_STORE(model), &new_it,
                         COL_ICON, icon,
-                        COL_NAME, _("New Item"), -1);
+                        COL_NAME, basename ? basename : _("New Item"),
+                        COL_DIRPATH, path, -1);
+
+    g_free( path );
+    g_free( basename );
+
     if( tree_path )
     {
         gtk_tree_view_set_cursor_on_cell( view, tree_path, col, NULL, TRUE );
@@ -207,7 +230,7 @@ gboolean edit_bookmarks( GtkWindow* parent )
                         gtk_label_new(_("Use drag & drop to sort the items")),
                         FALSE, FALSE, 4 );
 
-    gtk_window_set_default_size ( GTK_WINDOW(dlg), 400, 300 );
+    gtk_window_set_default_size ( GTK_WINDOW(dlg), 480, 460 );
 
     gtk_widget_show_all( dlg );
     gtk_widget_grab_focus( list_view );
@@ -235,7 +258,6 @@ gboolean edit_bookmarks( GtkWindow* parent )
         }
 
         ptk_bookmarks_set( l );
-        ptk_bookmarks_save();
 
         ret = TRUE;
     }

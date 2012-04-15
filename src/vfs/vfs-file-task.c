@@ -171,7 +171,7 @@ vfs_file_task_do_copy( VFSFileTask* task,
                        const char* dest_file )
 {
     GDir * dir;
-    gchar* file_name;
+    const gchar* file_name;
     gchar* sub_src_file;
     gchar* sub_dest_file;
     struct stat file_stat;
@@ -181,7 +181,6 @@ vfs_file_task_do_copy( VFSFileTask* task,
     ssize_t rsize;
     char* new_dest_file = NULL;
     gboolean dest_exists;
-    int overwrite_mode;
     int result;
 
     if ( should_abort( task ) )
@@ -373,14 +372,10 @@ vfs_file_task_do_move ( VFSFileTask* task,
                         const char* src_file,
                         const char* dest_file )
 {
-    GDir * dir;
-    gchar* file_name;
     gchar* new_dest_file = NULL;
     gboolean dest_exists;
-    gchar* sub_src_file;
-    gchar* sub_dest_file;
     struct stat file_stat;
-    int overwrite_mode, result;
+    int result;
 
     if ( should_abort( task ) )
         return ;
@@ -474,7 +469,7 @@ static void
 vfs_file_task_delete( char* src_file, VFSFileTask* task )
 {
     GDir * dir;
-    gchar* file_name;
+    const gchar* file_name;
     gchar* sub_src_file;
     struct stat file_stat;
     int result;
@@ -537,7 +532,7 @@ vfs_file_task_delete( char* src_file, VFSFileTask* task )
 static void
 vfs_file_task_link( char* src_file, VFSFileTask* task )
 {
-    struct stat src_stat, dest_stat;
+    struct stat src_stat;
     int result;
     gchar* dest_file;
     gchar* file_name = g_path_get_basename( src_file );
@@ -577,7 +572,7 @@ vfs_file_task_chown_chmod( char* src_file, VFSFileTask* task )
     int i;
     GDir* dir;
     gchar* sub_src_file;
-    gchar* file_name;
+    const gchar* file_name;
     mode_t new_mode;
 
     int result;
@@ -661,9 +656,7 @@ static gpointer vfs_file_task_thread ( VFSFileTask* task )
 {
     GList * l;
     struct stat file_stat;
-    dev_t dest_dev;
-    char* src_path;
-    gboolean cancelled = FALSE;
+    dev_t dest_dev = 0;
     GFunc funcs[] = {( GFunc ) vfs_file_task_move,
                      ( GFunc ) vfs_file_task_copy,
                      ( GFunc ) vfs_file_task_delete,

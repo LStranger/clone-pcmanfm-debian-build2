@@ -61,11 +61,13 @@ struct _DirTreeNode
     int n_expand;
 };
 
+#if 0
 /*  Drag & Drop/Clipboard targets  */
 static GtkTargetEntry drag_targets[] =
     {
         { "text/uri-list", 0 , 0 }
     };
+#endif
 
 static gboolean filter_func( GtkTreeModel *model,
                              GtkTreeIter *iter,
@@ -172,7 +174,7 @@ GtkWidget* ptk_dir_tree_view_new( PtkFileBrowser* browser,
     gtk_tree_view_expand_row( dir_tree_view, tree_path, FALSE );
     gtk_tree_path_free( tree_path );
 
-    g_signal_connect( dir_tree_view, "destroy", on_destroy, NULL );
+    g_signal_connect( dir_tree_view, "destroy", G_CALLBACK(on_destroy), NULL );
     return GTK_WIDGET( dir_tree_view );
 }
 
@@ -262,7 +264,6 @@ char* ptk_dir_view_get_dir_path( GtkTreeModel* model, GtkTreeIter* it )
 {
     GtkTreeModel * tree;
     GtkTreeIter real_it;
-    char* dir_path = NULL;
 
     gtk_tree_model_filter_convert_iter_to_child_iter(
         GTK_TREE_MODEL_FILTER( model ), &real_it, it );
@@ -275,7 +276,6 @@ char* ptk_dir_tree_view_get_selected_dir( GtkTreeView* dir_tree_view )
 {
     GtkTreeModel * model;
     GtkTreeIter it;
-    GtkTreePath* tree_path;
     GtkTreeSelection* tree_sel;
 
     tree_sel = gtk_tree_view_get_selection( dir_tree_view );
@@ -292,7 +292,7 @@ GtkTreeModel* get_dir_tree_model()
     {
         dir_tree_model = ptk_dir_tree_new( TRUE );
         g_object_add_weak_pointer( G_OBJECT( dir_tree_model ),
-                                   ( gpointer * ) & dir_tree_model );
+                                   ( gpointer * ) (GtkWidget *) & dir_tree_model );
     }
     else
     {

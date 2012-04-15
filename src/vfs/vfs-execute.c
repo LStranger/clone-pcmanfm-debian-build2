@@ -115,7 +115,6 @@ gboolean vfs_exec_on_screen( GdkScreen* screen,
     int i, n_env = 0;
     char* display_name;
     int display_index = -1, startup_id_index = -1;
-    time_t cur_time;
 
     if ( ! envp )
         envp = environ;
@@ -160,7 +159,7 @@ gboolean vfs_exec_on_screen( GdkScreen* screen,
         sn_launcher_context_initiate( ctx, g_get_prgname(),
                                       argv[ 0 ], gtk_get_current_event_time() /*cur_time*/ );
 
-        setup_func = sn_launcher_context_setup_child_process;
+        setup_func = (GSpawnChildSetupFunc) sn_launcher_context_setup_child_process;
         if( startup_id_index >= 0 )
             g_free( new_env[i] );
         else

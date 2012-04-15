@@ -26,6 +26,10 @@
 #include "mime-action.h"
 #include "glib-utils.h"
 #include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 gboolean save_to_file( const char* path, const char* data, gssize len )
 {
@@ -53,13 +57,13 @@ static char* data_dir_foreach( DataDirFunc func, const char* mime_type, gpointer
     const gchar* const * dirs;
     const char* dir = g_get_user_data_dir();
 
-    if( ret = func( dir, mime_type, user_data ) )
+    if( (ret = func( dir, mime_type, user_data )) )
         return ret;
 
     dirs = g_get_system_data_dirs();
     for( ; *dirs; ++dirs )
     {
-        if( ret = func( *dirs, mime_type, user_data ) )
+        if( (ret = func( *dirs, mime_type, user_data )) )
             return ret;
     }
     return NULL;
@@ -148,7 +152,7 @@ char** mime_type_get_actions( const char* type )
     data_dir_foreach( (DataDirFunc)get_actions, type, actions );
 
     /* ensure default app is in the list */
-    if( G_LIKELY( default_app = mime_type_get_default_action( type ) ) )
+    if( G_LIKELY( ( default_app = mime_type_get_default_action( type ) ) ) )
     {
         int i = strv_index( (char**)actions->data, default_app );
         if( i == -1 )   /* default app is not in the list, add it! */
@@ -263,6 +267,7 @@ gboolean mime_type_has_action( const char* type, const char* desktop_id )
     return found;
 }
 
+#if 0
 static gboolean is_custom_desktop_file( const char* desktop_id )
 {
     char* path = g_build_filename( g_get_user_data_dir(), "applications", desktop_id, NULL );
@@ -270,6 +275,7 @@ static gboolean is_custom_desktop_file( const char* desktop_id )
     g_free( path );
     return ret;
 }
+#endif
 
 static char* make_custom_desktop_file( const char* desktop_id, const char* mime_type )
 {
@@ -286,7 +292,7 @@ static char* make_custom_desktop_file( const char* desktop_id, const char* mime_
                                                             G_KEY_FILE_KEEP_TRANSLATIONS, NULL ) ) )
         {
             g_free( name );
-            return; /* not a valid desktop file */
+            return NULL; /* not a valid desktop file */
         }
         g_free( name );
 /*
@@ -323,7 +329,7 @@ static char* make_custom_desktop_file( const char* desktop_id, const char* mime_
             "NoDisplay=true\n"; /* FIXME: Terminal? */
         /* Make a user-created desktop file for the command */
         name = g_path_get_basename( desktop_id );
-        if( p = strchr(name, ' ') ) /* FIXME: skip command line arguments. is this safe? */
+        if( (p = strchr(name, ' ')) ) /* FIXME: skip command line arguments. is this safe? */
             *p = '\0';
         file_content = g_strdup_printf( file_templ, name, desktop_id, mime_type );
         len = strlen( file_content );
@@ -382,13 +388,13 @@ void mime_type_add_action( const char* type, const char* desktop_id, char** cust
         g_free( cust );
 }
 
-static char* _locate_desktop_file( const char* dir, const char* unused, gpointer desktop_id )
+static char* _locate_desktop_file( const char* dir, const char* unused, const gpointer desktop_id )
 {
     char *path, *sep = NULL;
     gboolean found = FALSE;
 
-    path = g_build_filename( dir, "applications", (char*)desktop_id, NULL );
-    sep = strchr( (char*)desktop_id, '-' );
+    path = g_build_filename( dir, "applications", (const char*)desktop_id, NULL );
+    sep = strchr( (const char*)desktop_id, '-' );
     if( sep )
         sep = strrchr( path, '-' );
 
@@ -418,8 +424,8 @@ static char* _locate_desktop_file( const char* dir, const char* unused, gpointer
 char* mime_type_locate_desktop_file( const char* dir, const char* desktop_id )
 {
     if( dir )
-        return _locate_desktop_file( dir, NULL, desktop_id );
-    return data_dir_foreach( _locate_desktop_file, NULL, desktop_id );
+        return _locate_desktop_file( dir, NULL, (gpointer) desktop_id );
+    return data_dir_foreach( _locate_desktop_file, NULL, (gpointer) desktop_id );
 }
 
 static char* get_default_action( const char* dir, const char* type, gpointer user_data )
@@ -469,7 +475,7 @@ char* mime_type_get_default_action( const char* type )
 void mime_type_set_default_action( const char* type, const char* desktop_id )
 {
     GKeyFile* file;
-    gssize len = 0;
+    gsize len = 0;
     char* data = NULL;
     char* dir = g_build_filename( g_get_user_data_dir(), "applications", NULL );
     char* path = g_build_filename( dir, "defaults.list", NULL );

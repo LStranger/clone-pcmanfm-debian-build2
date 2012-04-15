@@ -292,7 +292,7 @@ static void                vfs_volume_device_condition         (LibHalContext   
                                                                                    const gchar                    *details);
 
 
-static call_callbacks( VFSVolume* vol, VFSVolumeState state )
+static void call_callbacks( VFSVolume* vol, VFSVolumeState state )
 {
     int i;
     VFSVolumeCallbackData* e;
@@ -1317,6 +1317,7 @@ vfs_volume_device_condition (LibHalContext *context,
                                                 const gchar   *name,
                                                 const gchar   *details)
 {
+#if 0
   VFSVolume        *volume;
   DBusError                  derror;
   GList                     *eject_volumes = NULL;
@@ -1324,6 +1325,7 @@ vfs_volume_device_condition (LibHalContext *context,
   gchar                    **volume_udis;
   gint                       n_volume_udis;
   gint                       n;
+#endif
 
 // FIXME: What's this?
 #if 0
@@ -2286,7 +2288,7 @@ vfs_volume_hal_mount (ExoMountHalDevice *device,
   DBusMessage *message;
   DBusMessage *result;
   DBusError    derror;
-  gchar       *mount_point;
+  gchar       *mount_point = NULL;
   gchar      **options = NULL;
   gchar       *fstype = NULL;
   gchar       *s;
@@ -2439,12 +2441,12 @@ vfs_volume_hal_mount (ExoMountHalDevice *device,
   if (G_LIKELY (device->volume != NULL))
     {
       /* maybe we can use the volume's label... */
-      mount_point = (gchar *) libhal_volume_get_label (device->volume);
+      mount_point = g_strdup( libhal_volume_get_label (device->volume) );
     }
   else
     {
       /* maybe we can use the the textual type... */
-      mount_point = (gchar *) libhal_drive_get_type_textual (device->drive);
+      mount_point = g_strdup( libhal_drive_get_type_textual (device->drive) );
     }
 
     /* However, the label may contain G_DIR_SEPARATOR so just replace these
@@ -2787,7 +2789,7 @@ gboolean vfs_volume_eject( VFSVolume *vol, GError** err )
 gboolean vfs_volume_mount_by_udi( const char* udi, GError** err )
 {
     VFSVolume* volume = vfs_volume_get_volume_by_udi( udi );
-    return volume ? vfs_volume_hal_mount( volume, err ) : FALSE;
+    return volume ? vfs_volume_hal_mount( (ExoMountHalDevice*) volume, err ) : FALSE;
 }
 
 gboolean vfs_volume_umount_by_udi( const char* udi, GError** err )

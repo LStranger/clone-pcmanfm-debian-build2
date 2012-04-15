@@ -13,6 +13,7 @@
 #include "ptk-path-entry.h"
 #include <gdk/gdkkeysyms.h>
 #include "vfs-file-info.h"  /* for vfs_file_resolve_path */
+#include <string.h>
 
 enum
 {
@@ -45,10 +46,9 @@ static gboolean match_func( GtkEntryCompletion *completion,
                                                      gpointer user_data)
 {
     char* name = NULL;
-    const char *sep;
     GtkTreeModel* model = gtk_entry_completion_get_model(completion);
 
-    key = (const char*)g_object_get_data( completion, "fn" );
+    key = (const char*)g_object_get_data( G_OBJECT(completion), "fn" );
     gtk_tree_model_get( model, it, COL_NAME, &name, -1 );
 
     if( G_LIKELY(name) )
@@ -76,7 +76,7 @@ static void update_completion( GtkEntry* entry,
         fn = (char*)sep + 1;
     else
         fn = (char*)gtk_entry_get_text(entry);
-    g_object_set_data_full( completion, "fn", g_strdup(fn), (GDestroyNotify)g_free );
+    g_object_set_data_full( G_OBJECT(completion), "fn", g_strdup(fn), (GDestroyNotify)g_free );
 
     new_dir = get_cwd( entry );
     old_dir = (const char*)g_object_get_data( (GObject*)completion, "cwd" );
@@ -92,10 +92,10 @@ static void update_completion( GtkEntry* entry,
     if( new_dir )
     {
         GDir* dir;
-        if( dir = g_dir_open( new_dir, 0, NULL ) )
+        if( (dir = g_dir_open( new_dir, 0, NULL )) )
         {
             const char* name;
-            while( name = g_dir_read_name( dir ) )
+            while( (name = g_dir_read_name( dir )) )
             {
                 char* full_path = g_build_filename( new_dir, name, NULL );
                 if( g_file_test( full_path, G_FILE_TEST_IS_DIR ) )
@@ -135,7 +135,7 @@ on_key_press( GtkWidget *entry, GdkEventKey* evt, gpointer user_data )
            related to this API which cause crash.
            Reported in bug #1570063 by Orlando Fiol <fiolorlando@gmail.com>
         */
-        gtk_entry_completion_insert_prefix( gtk_entry_get_completion(entry) );
+        gtk_entry_completion_insert_prefix( gtk_entry_get_completion(GTK_ENTRY(entry)) );
 #endif
         gtk_editable_set_position( (GtkEditable*)entry, -1 );
         return TRUE;
@@ -166,7 +166,7 @@ on_focus_in( GtkWidget *entry, GdkEventFocus* evt, gpointer user_data )
     gtk_entry_completion_set_popup_set_width( completion, TRUE );
 #endif
     gtk_entry_set_completion( GTK_ENTRY(entry), completion );
-    g_signal_connect( entry, "changed", on_changed, NULL );
+    g_signal_connect( G_OBJECT(entry), "changed", G_CALLBACK(on_changed), NULL );
     g_object_unref( completion );
 
     return FALSE;

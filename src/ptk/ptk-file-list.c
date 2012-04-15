@@ -287,8 +287,6 @@ static void _ptk_file_list_file_created( VFSDir* dir, VFSFileInfo* file,
 void ptk_file_list_set_dir( PtkFileList* list, VFSDir* dir )
 {
     GList* l;
-    int i;
-    VFSFileInfo* file;
 
     if( list->dir == dir )
         return;

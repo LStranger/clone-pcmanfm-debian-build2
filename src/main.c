@@ -33,11 +33,13 @@
 
 #include "vfs-file-monitor.h"
 #include "vfs-volume.h"
+#include "vfs-thumbnail-loader.h"
 
 #include "ptk-utils.h"
 #include "app-chooser-dialog.h"
 
 #include "settings.h"
+#include "fm-desktop.h"
 
 static int sock;
 GIOChannel* io_channel = NULL;
@@ -161,7 +163,7 @@ static void single_instance_init()
         if( ! files )
         {
             files = default_files;
-            files[0] = g_get_home_dir();
+            files[0] = (char *) g_get_home_dir();
         }
         for( file = files; *file; ++file )
         {
@@ -305,6 +307,8 @@ static void _debug_gdk_threads_leave()
 
 static void init_folder()
 {
+    appSettings.bookmarks = ptk_bookmarks_get();
+
     vfs_volume_init();
     vfs_thumbnail_init();
 
@@ -319,7 +323,6 @@ static void init_folder()
 #ifdef HAVE_HAL
 static int handle_mount( char** argv )
 {
-    char* self = argv[0];
     vfs_volume_init();
     if( mount )
     {
@@ -334,6 +337,7 @@ static int handle_mount( char** argv )
 
     }
     vfs_volume_finalize();
+    return 0;
 }
 #endif
 
@@ -341,7 +345,6 @@ int
 main ( int argc, char *argv[] )
 {
     FMMainWindow * main_window = NULL;
-    GtkSettings *settings;
     GOptionContext *context;
     char** file;
     GError* err = NULL;
@@ -400,7 +403,7 @@ main ( int argc, char *argv[] )
         files = default_files;
         /* only show home dir when desktop icons is not used. */
         if( ! appSettings.showDesktop )
-            files[0] = g_get_home_dir();
+            files[0] = (char *) g_get_home_dir();
     }
 
     vfs_file_info_set_utf8_filename( g_get_filename_charsets( NULL ) );
@@ -529,13 +532,13 @@ void open_file( const char* path )
         VFSAppDesktop* app;
         GList* files;
 
-        app_name = ptk_choose_app_for_mime_type( NULL, mime_type );
+        app_name = (char *) ptk_choose_app_for_mime_type( NULL, mime_type );
         if ( app_name )
         {
             app = vfs_app_desktop_new( app_name );
             if ( ! vfs_app_desktop_get_exec( app ) )
                 app->exec = g_strdup( app_name ); /* This is a command line */
-            files = g_list_prepend( NULL, path );
+            files = g_list_prepend( NULL, (gpointer) path );
             opened = vfs_app_desktop_open_files( gdk_screen_get_default(),
                                                  NULL, app, files, &err );
             g_free( files->data );

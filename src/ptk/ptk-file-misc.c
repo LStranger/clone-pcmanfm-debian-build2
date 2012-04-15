@@ -31,6 +31,7 @@
 #include "ptk-file-browser.h"
 #include "vfs-app-desktop.h"
 #include "vfs-execute.h"
+#include "app-chooser-dialog.h"
 
 void ptk_delete_files( GtkWindow* parent_win,
                        const char* cwd,
@@ -97,7 +98,6 @@ gboolean  ptk_rename_file( GtkWindow* parent_win,
 {
     GtkWidget * input_dlg;
     GtkLabel* prompt;
-    GList* files;
     char* ufile_name;
     char* file_name;
     char* from_path;
@@ -260,20 +260,15 @@ void ptk_show_file_properties( GtkWindow* parent_win,
                                GList* sel_files )
 {
     GtkWidget * dlg;
-    VFSFileInfo* file;
-    char* dir_path = NULL;
+
     /* Make a copy of the list */
     sel_files = g_list_copy( sel_files );
-    g_list_foreach( sel_files, vfs_file_info_ref, NULL );
+    g_list_foreach( sel_files, (GFunc) vfs_file_info_ref, NULL );
 
-    dlg = file_properties_dlg_new( parent_win,
-                                   dir_path ? dir_path : cwd,
-                                   sel_files );
+    dlg = file_properties_dlg_new( parent_win, cwd, sel_files );
     g_signal_connect_swapped( dlg, "destroy",
                               G_CALLBACK( vfs_file_info_list_free ), sel_files );
     gtk_widget_show( dlg );
-
-    g_free( dir_path );
 }
 
 static gboolean open_files_with_app( const char* cwd,
@@ -283,7 +278,6 @@ static gboolean open_files_with_app( const char* cwd,
 {
     gchar * name;
     GError* err = NULL;
-    GList* l;
     VFSAppDesktop* app;
     GdkScreen* screen;
 
@@ -314,7 +308,7 @@ static gboolean open_files_with_app( const char* cwd,
     }
 
     if( file_browser )
-        screen = gtk_widget_get_screen( file_browser );
+        screen = gtk_widget_get_screen( GTK_WIDGET(file_browser) );
     else
         screen = gdk_screen_get_default();
 
@@ -359,11 +353,9 @@ void ptk_open_files_with_app( const char* cwd,
 
 {
     GList * l;
-    gchar* full_path;
-    const char* desktop_file;
+    gchar* full_path = NULL;
     VFSFileInfo* file;
     VFSMimeType* mime_type;
-    gboolean is_first_dir = TRUE;
     GList* files_to_open = NULL;
     GHashTable* file_list_hash = NULL;
     GError* err;
@@ -403,7 +395,7 @@ void ptk_open_files_with_app( const char* cwd,
                 if ( vfs_file_info_is_executable( file, full_path ) )
                 {
                     char * argv[ 2 ] = { full_path, NULL };
-                    GdkScreen* screen = file_browser ? gtk_widget_get_screen( file_browser ) : gdk_screen_get_default();
+                    GdkScreen* screen = file_browser ? gtk_widget_get_screen( GTK_WIDGET(file_browser) ) : gdk_screen_get_default();
                     err = NULL;
                     if ( ! vfs_exec_on_screen ( screen, cwd, argv, NULL,
                                                 vfs_file_info_get_disp_name( file ),
@@ -444,7 +436,7 @@ void ptk_open_files_with_app( const char* cwd,
                 if ( !app_desktop )
                 {
                     toplevel = file_browser ? gtk_widget_get_toplevel( GTK_WIDGET( file_browser ) ) : NULL;                    /* Let the user choose an application */
-                    choosen_app = ptk_choose_app_for_mime_type(
+                    choosen_app = (char *) ptk_choose_app_for_mime_type(
                                       ( GtkWindow* ) toplevel,
                                       mime_type );
                     app_desktop = choosen_app;
@@ -492,7 +484,7 @@ void ptk_open_files_with_app( const char* cwd,
     if ( new_dir )
     {
         /*
-        ptk_file_browser_chdir( file_browser, new_dir, TRUE );
+        ptk_file_browser_chdir( file_browser, new_dir, PTK_FB_CHDIR_ADD_HISTORY );
         */
         if ( G_LIKELY( file_browser ) )
         {

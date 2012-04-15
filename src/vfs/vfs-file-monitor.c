@@ -20,6 +20,7 @@
 #endif
 
 #include "vfs-file-monitor.h"
+#include "vfs-file-info.h"
 #include <sys/types.h>  /* for stat */
 #include <sys/stat.h>
 #include <errno.h>
@@ -145,7 +146,6 @@ VFSFileMonitor* vfs_file_monitor_add( char* path,
 {
     VFSFileMonitor * monitor;
     VFSFileMonitorCallbackEntry cb_ent;
-    gboolean add_new = FALSE;
     struct stat file_stat;
     gchar* real_path = NULL;
 
@@ -172,7 +172,6 @@ VFSFileMonitor* vfs_file_monitor_add( char* path,
             {
                 char* link = g_file_read_link( link_file, NULL );
                 char* dirname = g_path_get_dirname( link_file );
-                g_free( real_path );
                 real_path = vfs_file_resolve_path( dirname, link );
                 g_free( link );
                 g_free( dirname );
@@ -206,8 +205,6 @@ VFSFileMonitor* vfs_file_monitor_add( char* path,
                             real_path ? real_path : path,
                             &monitor->request,
                             monitor );
-
-
         }
 #endif
         g_free( real_path );
@@ -439,6 +436,8 @@ static gboolean on_fam_event( GIOChannel * channel,
                 dispatch_event( monitor, evt.code, evt.filename );
                 break;
                 /* Other events are not supported */
+            default:
+                break;
             }
         }
     }

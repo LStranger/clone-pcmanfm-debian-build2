@@ -8,6 +8,7 @@
 #include "settings.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
 
@@ -24,14 +25,14 @@ AppSettings appSettings = {0};
 /* const gboolean singleInstanceDefault = TRUE; */
 const gboolean showHiddenFilesDefault = FALSE;
 const gboolean showSidePaneDefault = TRUE;
-const int sidePaneModeDefault = FB_SIDE_PANE_BOOKMARKS;
+const int sidePaneModeDefault = PTK_FB_SIDE_PANE_BOOKMARKS;
 const gboolean showThumbnailDefault = TRUE;
 const int maxThumbSizeDefault = 1 << 20;
 const int bigIconSizeDefault = 48;
 const int smallIconSizeDefault = 20;
 const int openBookmarkMethodDefault = 1;
-const int viewModeDefault = FBVM_ICON_VIEW;
-const int sortOrderDefault = FB_SORT_BY_NAME;
+const int viewModeDefault = PTK_FB_ICON_VIEW;
+const int sortOrderDefault = PTK_FB_SORT_BY_NAME;
 const int sortTypeDefault = GTK_SORT_ASCENDING;
 
 const gboolean showDesktopDefault = FALSE;
@@ -108,7 +109,7 @@ static void parse_general_settings( char* line )
 
 static void color_from_str( GdkColor* ret, const char* value )
 {
-    sscanf( value, "%d,%d,%d",
+    sscanf( value, "%hu,%hu,%hu",
             &ret->red, &ret->green, &ret->blue );
 }
 
@@ -247,7 +248,8 @@ void load_settings()
     }
 
     /* Load bookmarks */
-    appSettings.bookmarks = ptk_bookmarks_get();
+    /* Don't load bookmarks here since we won't use it in some cases */
+    /* appSettings.bookmarks = ptk_bookmarks_get(); */
 }
 
 

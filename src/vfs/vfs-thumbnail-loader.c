@@ -23,6 +23,7 @@
 #include "glib-mem.h" /* for g_slice API */
 #include "glib-utils.h" /* for g_mkdir_with_parents() */
 #include <string.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 
 #include "md5.h"    /* for thumbnails */
@@ -83,12 +84,12 @@ void vfs_thumbnail_loader_free( VFSThumbnailLoader* loader )
 
     if( loader->queue )
     {
-        g_queue_foreach( loader->queue, thumbnail_request_free, NULL );
+        g_queue_foreach( loader->queue, (GFunc) thumbnail_request_free, NULL );
         g_queue_free( loader->queue );
     }
     if( loader->update_queue )
     {
-        g_queue_foreach( loader->update_queue, vfs_file_info_unref, NULL );
+        g_queue_foreach( loader->update_queue, (GFunc) vfs_file_info_unref, NULL );
         g_queue_free( loader->update_queue );
     }
     /* g_debug( "FREE THUMBNAIL LOADER" ); */
@@ -192,7 +193,7 @@ gpointer thumbnail_loader_thread( VFSAsyncTask* task, VFSThumbnailLoader* loader
             vfs_async_task_lock( task );
             g_queue_push_tail( loader->update_queue, vfs_file_info_ref(req->file) );
             if( 0 == loader->idle_handler)
-                loader->idle_handler = g_idle_add_full( G_PRIORITY_LOW, on_thumbnail_idle, loader, NULL );
+                loader->idle_handler = g_idle_add_full( G_PRIORITY_LOW, (GSourceFunc) on_thumbnail_idle, loader, NULL );
             vfs_async_task_unlock( task );
         }
         /* g_debug( "NEED_UPDATE: %d", need_update ); */
@@ -215,7 +216,7 @@ gpointer thumbnail_loader_thread( VFSAsyncTask* task, VFSThumbnailLoader* loader
         if( 0 == loader->idle_handler)
         {
             /* g_debug( "ADD IDLE HANDLER BEFORE THREAD ENDING" ); */
-            loader->idle_handler = g_idle_add_full( G_PRIORITY_LOW, on_thumbnail_idle, loader, NULL );
+            loader->idle_handler = g_idle_add_full( G_PRIORITY_LOW, (GSourceFunc) on_thumbnail_idle, loader, NULL );
         }
     }
     /* g_debug("THREAD ENDED!");  */
@@ -420,7 +421,7 @@ GdkPixbuf* vfs_thumbnail_load_for_file( const char* file, int size, time_t mtime
 /* Ensure the thumbnail dirs exist and have proper file permission. */
 void vfs_thumbnail_init()
 {
-    char* dir, *sep;
+    char* dir;
     dir = g_build_filename( g_get_home_dir(), ".thumbnails/normal", NULL );
 
     if( G_LIKELY( g_file_test( dir, G_FILE_TEST_IS_DIR ) ) )

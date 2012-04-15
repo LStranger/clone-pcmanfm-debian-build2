@@ -11,12 +11,15 @@
 */
 
 #include "ptk-bookmarks.h"
+#include "vfs-file-monitor.h"
 
 #include <stdio.h>
 #include <string.h>
+#include <gtk/gtk.h>
 
 const char bookmarks_file_name[] = ".gtk-bookmarks";
 static PtkBookmarks bookmarks = {0};
+static VFSFileMonitor* monitor = NULL;
 
 typedef struct
 {
@@ -41,14 +44,9 @@ static void ptk_bookmarks_notify()
     }
 }
 
-/*
-  Get a self-maintained list of bookmarks
-  This is read from "~/.gtk-bookmarks".
-*/
-PtkBookmarks* ptk_bookmarks_get ()
+static void load( const char* path )
 {
     FILE* file;
-    gchar* path;
     gchar* upath;
     gchar* uri;
     gchar* item;
@@ -57,49 +55,78 @@ PtkBookmarks* ptk_bookmarks_get ()
     char line[1024];
     gsize name_len, upath_len;
 
+    file = fopen( path, "r" );
+    if( file )
+    {
+        while( fgets( line, sizeof(line), file ) )
+        {
+            /* Every line is an URI containing no space charactetrs
+               with its name appended (optional) */
+            uri = strtok( line, " \r\n" );
+            if( ! uri || !*uri )
+                continue;
+            path = g_filename_from_uri(uri, NULL, NULL);
+            if( path )
+            {
+                upath = g_filename_to_utf8(path, -1, NULL, &upath_len, NULL);
+                g_free( (gpointer) path );
+                if( upath )
+                {
+                    name = strtok( NULL, "\r\n" );
+                    if( name )
+                    {
+                        name_len = strlen( name );
+                        basename = NULL;
+                    }
+                    else
+                    {
+                        name = basename = g_path_get_basename( upath );
+                        name_len = strlen( basename );
+                    }
+                    item = ptk_bookmarks_item_new( name, name_len,
+                                                   upath, upath_len );
+                    bookmarks.list = g_list_append( bookmarks.list,
+                                                    item );
+                    g_free(upath);
+                    g_free( basename );
+                }
+            }
+        }
+        fclose( file );
+    }
+}
+
+static void on_bookmark_file_changed( VFSFileMonitor* fm,
+                                        VFSFileMonitorEvent event,
+                                        const char* file_name,
+                                        gpointer user_data )
+{
+    /* This callback is called from IO channel handler insode VFSFileMonotor. */
+    GDK_THREADS_ENTER();
+
+    g_list_foreach( bookmarks.list, (GFunc)g_free, NULL );
+    g_list_free( bookmarks.list );
+    bookmarks.list = 0;
+
+    load( file_name );
+
+    ptk_bookmarks_notify();
+    GDK_THREADS_LEAVE();
+}
+
+/*
+  Get a self-maintained list of bookmarks
+  This is read from "~/.gtk-bookmarks".
+*/
+PtkBookmarks* ptk_bookmarks_get ()
+{
+    gchar* path;
     if( 0 == bookmarks.n_ref )
     {
         path = g_build_filename( g_get_home_dir(), bookmarks_file_name, NULL );
-        file = fopen( path, "r" );
+        monitor = vfs_file_monitor_add_file( path, on_bookmark_file_changed, NULL );
+        load( path );
         g_free( path );
-        if( file )
-        {
-            while( fgets( line, sizeof(line), file ) )
-            {
-                /* Every line is an URI containing no space charactetrs
-                   with its name appended (optional) */
-                uri = strtok( line, " \r\n" );
-                if( ! uri || !*uri )
-                    continue;
-                path = g_filename_from_uri(uri, NULL, NULL);
-                if( path )
-                {
-                    upath = g_filename_to_utf8(path, -1, NULL, &upath_len, NULL);
-                    g_free( path );
-                    if( upath )
-                    {
-                        name = strtok( NULL, "\r\n" );
-                        if( name )
-                        {
-                            name_len = strlen( name );
-                            basename = NULL;
-                        }
-                        else
-                        {
-                            name = basename = g_path_get_basename( upath );
-                            name_len = strlen( basename );
-                        }
-                        item = ptk_bookmarks_item_new( name, name_len,
-                                                       upath, upath_len );
-                        bookmarks.list = g_list_append( bookmarks.list,
-                                                        item );
-                        g_free(upath);
-                        g_free( basename );
-                    }
-                }
-            }
-            fclose( file );
-        }
     }
     g_atomic_int_inc( &bookmarks.n_ref );
     return &bookmarks;
@@ -115,7 +142,10 @@ void ptk_bookmarks_set ( GList* new_list )
     g_list_foreach( bookmarks.list, (GFunc)g_free, NULL );
     g_list_free( bookmarks.list );
     bookmarks.list = new_list;
-    ptk_bookmarks_notify();
+
+    ptk_bookmarks_save();
+    /* We don't need to fire the notify since this will be done by FAM. */
+    /* ptk_bookmarks_notify(); */
 }
 
 /* Insert an item into bookmarks */
@@ -126,6 +156,7 @@ void ptk_bookmarks_insert ( const char* name, const char* path, gint pos )
     bookmarks.list = g_list_insert( bookmarks.list,
                                     item, pos );
     ptk_bookmarks_notify();
+    ptk_bookmarks_save();
 }
 
 /* Append an item into bookmarks */
@@ -136,6 +167,7 @@ void ptk_bookmarks_append ( const char* name, const char* path )
     bookmarks.list = g_list_append( bookmarks.list,
                                     item );
     ptk_bookmarks_notify();
+    ptk_bookmarks_save();
 }
 
 static GList* find_item( const char* path )
@@ -165,7 +197,9 @@ void ptk_bookmarks_remove ( const char* path )
     {
         g_free( l->data );
         bookmarks.list = g_list_delete_link( bookmarks.list, l );
+
         ptk_bookmarks_notify();
+        ptk_bookmarks_save();
     }
 }
 
@@ -180,7 +214,9 @@ void ptk_bookmarks_rename ( const char* path, const char* new_name )
                                       path, strlen(path));
         g_free( l->data );
         l->data = item;
+
         ptk_bookmarks_notify();
+        ptk_bookmarks_save();
     }
 }
 
@@ -188,7 +224,6 @@ static void ptk_bookmarks_save_item( GList* l, FILE* file )
 {
     gchar* item;
     const gchar* upath;
-    int len;
     char* uri;
     char* path;
 
@@ -263,6 +298,9 @@ void ptk_bookmarks_unref ()
 {
     if( g_atomic_int_dec_and_test(&bookmarks.n_ref) )
     {
+        vfs_file_monitor_remove( monitor, on_bookmark_file_changed, NULL );
+        monitor = NULL;
+
         bookmarks.n_ref = 0;
         if( bookmarks.list )
         {

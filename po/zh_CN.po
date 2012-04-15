@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCMan File Manager 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-15 23:40+0800\n"
+"POT-Creation-Date: 2008-02-24 21:48+0800\n"
 "PO-Revision-Date: 2008-02-14 19:57+0800\n"
 "Last-Translator: 陈海峰 <optical.dlz@gmail.com>\n"
 "Language-Team: zh_CN\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1;plural=0;\n"
 
-#: src/main.c:56
+#: src/main.c:58
 msgid "Don't show desktop icons."
 msgstr "不显示桌面图标"
 
-#: src/main.c:64
+#: src/main.c:66
 msgid "[FILE1, FILE2,...]"
 msgstr "[文件1，文件2，...]"
 
-#: src/main.c:243
+#: src/main.c:245
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ 图标主题未正确设置"
 
-#: src/main.c:245
+#: src/main.c:247
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -65,21 +65,21 @@ msgstr ""
 "b>由于 GNOME 和 KDE 图标的命名机制不同，KDE 主题将无法使用。现在还没有这种标"
 "准，将来 freedesktop.org 会解决这个问题。 "
 
-#: src/main.c:370
+#: src/main.c:373
 #, c-format
 msgid "Error: %s\n"
 msgstr "错误：%s\n"
 
-#: src/main.c:410 src/main.c:511 src/main.c:562 src/main-window.c:1604
-#: src/main-window.c:1654 src/ptk/ptk-file-browser.c:503
-#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:333
-#: src/ptk/ptk-console-output.c:224 src/ptk/ptk-file-misc.c:252
-#: src/ptk/ptk-file-misc.c:325 src/ptk/ptk-file-misc.c:414
-#: src/file-properties.c:695 src/file-properties.c:706
+#: src/main.c:413 src/main.c:514 src/main.c:565 src/main-window.c:1618
+#: src/main-window.c:1674 src/ptk/ptk-file-browser.c:503
+#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:329
+#: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
+#: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
+#: src/file-properties.c:693 src/file-properties.c:704
 msgid "Error"
 msgstr "错误"
 
-#: src/main.c:410
+#: src/main.c:413
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -89,15 +89,15 @@ msgstr ""
 "\n"
 "您是否已安装 \"FAM\" 或 \"Gamin\" 并正确运行？"
 
-#: src/main.c:511
+#: src/main.c:514
 msgid "File doesn't exist"
 msgstr "文件不存在"
 
-#: src/main.c:558
+#: src/main.c:561
 msgid "Don't know how to open the file"
 msgstr "不知道如何打开这个文件"
 
-#: src/main.c:560
+#: src/main.c:563
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -108,411 +108,401 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: src/main-window.c:282 src/ptk/ptk-file-menu.c:98
+#: src/main-window.c:289 src/ptk/ptk-file-menu.c:107
 msgid "_Folder"
 msgstr "文件夹(_F)"
 
-#: src/main-window.c:283 src/ptk/ptk-file-menu.c:99
+#: src/main-window.c:290 src/ptk/ptk-file-menu.c:108
 msgid "_Text File"
 msgstr "文本文件(_T)"
 
-#: src/main-window.c:289
+#: src/main-window.c:296
 msgid "New _Window"
 msgstr "新窗口(_W)"
 
-#: src/main-window.c:290
+#: src/main-window.c:297
 msgid "New _Tab"
 msgstr "新标签(_T)"
 
-#: src/main-window.c:291
+#: src/main-window.c:298
 msgid "Close Tab"
 msgstr "关闭标签"
 
-#: src/main-window.c:293 src/ptk/ptk-file-menu.c:122
+#: src/main-window.c:300 src/ptk/ptk-file-menu.c:131
 msgid "_Create New"
 msgstr "新建(_C)"
 
-#: src/main-window.c:294
+#: src/main-window.c:301
 msgid "File _Properties"
 msgstr "文件属性(_P)"
 
-#: src/main-window.c:305 src/ptk/ptk-file-menu.c:117
+#: src/main-window.c:312 src/ptk/ptk-file-menu.c:126
 msgid "_Delete"
 msgstr "删除(_D)"
 
-#: src/main-window.c:306 src/ptk/ptk-file-browser.c:1387
-#: src/ptk/ptk-file-menu.c:118
+#: src/main-window.c:313 src/ptk/ptk-file-browser.c:1365
+#: src/ptk/ptk-file-menu.c:127
 msgid "_Rename"
 msgstr "重命名(_R)"
 
-#: src/main-window.c:308
+#: src/main-window.c:315
 msgid "Select _All"
 msgstr "全选(_A)"
 
-#: src/main-window.c:309
+#: src/main-window.c:316
 msgid "_Invert Selection"
 msgstr "反向选择(_I)"
 
-#: src/main-window.c:318
+#: src/main-window.c:325
 msgid "Go _Back"
 msgstr "后退(_B)"
 
-#: src/main-window.c:319
+#: src/main-window.c:326
 msgid "Go _Forward"
 msgstr "前进(_F)"
 
-#: src/main-window.c:320
+#: src/main-window.c:327
 msgid "Go to _Parent Folder"
 msgstr "向上(_P)"
 
-#: src/main-window.c:321
+#: src/main-window.c:328
 msgid "Go _Home"
 msgstr "转到主文件夹(_H)"
 
-#: src/main-window.c:333
+#: src/main-window.c:340
 msgid "Sort by _Name"
 msgstr "按名称排列(_N)"
 
-#: src/main-window.c:334
+#: src/main-window.c:341
 msgid "Sort by _Size"
 msgstr "按大小排列(_S)"
 
-#: src/main-window.c:335
+#: src/main-window.c:342
 msgid "Sort by _Modification Time"
 msgstr "按修改时间排列(_M)"
 
-#: src/main-window.c:336
+#: src/main-window.c:343
 msgid "Sort by _Type"
 msgstr "按文件类型排列(_T)"
 
-#: src/main-window.c:337
+#: src/main-window.c:344
 msgid "Sort by _Permission"
 msgstr "按权限排列(_P)"
 
-#: src/main-window.c:338
+#: src/main-window.c:345
 msgid "Sort by _Owner"
 msgstr "按所有者排列(_O)"
 
-#: src/main-window.c:340
+#: src/main-window.c:347
 msgid "Ascending"
 msgstr "顺序"
 
-#: src/main-window.c:341
+#: src/main-window.c:348
 msgid "Descending"
 msgstr "逆序"
 
-#: src/main-window.c:347
+#: src/main-window.c:354
 msgid "_Open Side Pane"
 msgstr "打开侧边栏(_O)"
 
-#: src/main-window.c:349
+#: src/main-window.c:356
 msgid "Show _Location Pane"
 msgstr "显示位置栏(_L)"
 
-#: src/main-window.c:350
+#: src/main-window.c:357
 msgid "Show _Directory Tree"
 msgstr "显示树状目录(_D)"
 
-#: src/main-window.c:356
+#: src/main-window.c:363
 msgid "_Refresh"
 msgstr "刷新(_R)"
 
-#: src/main-window.c:357
+#: src/main-window.c:364
 msgid "Side _Pane"
 msgstr "侧边栏(_P)"
 
-#: src/main-window.c:360
+#: src/main-window.c:367
 msgid "Show _Hidden Files"
 msgstr "显示隐藏文件(_H)"
 
-#: src/main-window.c:361
+#: src/main-window.c:368
 msgid "_Sort..."
 msgstr "排列项目...(_S)"
 
-#: src/main-window.c:363
+#: src/main-window.c:370
 msgid "View as _Icons"
 msgstr "以图标视图查看(_I)"
 
-#: src/main-window.c:364
+#: src/main-window.c:371
 msgid "View as Detailed _List"
 msgstr "以列表视图查看(_L)"
 
-#: src/main-window.c:370
+#: src/main-window.c:377
 msgid "Open _Terminal"
 msgstr "打开终端(_T)"
 
-#: src/main-window.c:371
+#: src/main-window.c:378
 msgid "Open Current Folder as _Root"
 msgstr "以 Root 权限打开当前文件夹(_R)"
 
-#: src/main-window.c:379
+#: src/main-window.c:386
 msgid "_File"
 msgstr "文件(_F)"
 
-#: src/main-window.c:380
+#: src/main-window.c:387
 msgid "_Edit"
 msgstr "编辑(_E)"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: src/main-window.c:382
+#: src/main-window.c:389
 msgid "_Go"
 msgstr "转到(_G)"
 
-#: src/main-window.c:383
+#: src/main-window.c:390
 msgid "_Bookmark"
 msgstr "书签(_B)"
 
-#: src/main-window.c:384
+#: src/main-window.c:391
 msgid "_View"
 msgstr "视图(_V)"
 
-#: src/main-window.c:385
+#: src/main-window.c:392
 msgid "_Tool"
 msgstr "工具(_T)"
 
-#: src/main-window.c:386
+#: src/main-window.c:393
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: src/main-window.c:394
+#: src/main-window.c:401
 msgid "New Tab"
 msgstr "新标签"
 
-#: src/main-window.c:395
+#: src/main-window.c:402
 msgid "Back"
 msgstr "上一页"
 
-#: src/main-window.c:396
+#: src/main-window.c:403
 msgid "Forward"
 msgstr "下一页"
 
-#: src/main-window.c:397
+#: src/main-window.c:404
 msgid "Parent Folder"
 msgstr "向上"
 
-#: src/main-window.c:398
+#: src/main-window.c:405
 msgid "Refresh"
 msgstr "刷新"
 
-#: src/main-window.c:399
+#: src/main-window.c:406
 msgid "Home Directory"
 msgstr "主目录"
 
-#: src/main-window.c:400
+#: src/main-window.c:407
 msgid "Open Side Pane"
 msgstr "在侧边栏中打开"
 
-#: src/main-window.c:406
+#: src/main-window.c:413
 msgid "Go"
 msgstr "转到"
 
-#: src/main-window.c:607
+#: src/main-window.c:617
 msgid "Warning: You are in super user mode"
 msgstr "警告：您现在处于超级用户的状态"
 
-#: src/main-window.c:1605
+#: src/main-window.c:1619
 msgid "Terminal program has not been set"
 msgstr "终端程序未设定"
 
-#: src/main-window.c:1654
+#: src/main-window.c:1674
 msgid "gksu or kdesu is not found"
 msgstr "没有发现 gksu 或者 kdesu"
 
-#: src/main-window.c:1731
+#: src/main-window.c:1757
 msgid "_Add to Bookmarks"
 msgstr "添加书签 (_A)"
 
-#: src/main-window.c:1732
+#: src/main-window.c:1758
 msgid "_Edit Bookmarks"
 msgstr "编辑书签(_E)"
 
-#: src/main-window.c:1811
+#: src/main-window.c:1835
 msgid "Loading..."
 msgstr "下载中..."
 
-#: src/main-window.c:2003
+#: src/main-window.c:2036
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr "，剩余空间：%s (总共：%s)"
 
-#: src/main-window.c:2011
+#: src/main-window.c:2044
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
 msgstr[0] "选中了 %d 项 (%s)%s"
 
-#: src/main-window.c:2019
+#: src/main-window.c:2052
 #, c-format
 msgid "%d visible item (%d hidden)%s"
 msgid_plural "%d visible items (%d hidden)%s"
 msgstr[0] "%d 项可见 (%d 项隐藏)%s"
 
 #: src/ptk/ptk-file-browser.c:504
-msgid "Directory does'nt exist!"
+msgid "Directory doesn't exist!"
 msgstr "目录不存在！"
 
-#: src/ptk/ptk-file-browser.c:1383 src/ptk/ptk-file-menu.c:131
+#: src/ptk/ptk-file-browser.c:1361 src/ptk/ptk-file-menu.c:140
 msgid "Open in New _Tab"
 msgstr "在新标签中打开(_T)"
 
-#: src/ptk/ptk-file-browser.c:1384 src/ptk/ptk-file-menu.c:132
+#: src/ptk/ptk-file-browser.c:1362 src/ptk/ptk-file-menu.c:141
 msgid "Open in New _Window"
 msgstr "在新窗口中打开(_W)"
 
-#: src/ptk/ptk-file-browser.c:1632 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1599 src/edit-bookmarks.c:198
 msgid "Name"
 msgstr "名称"
 
-#: src/ptk/ptk-file-browser.c:1632
+#: src/ptk/ptk-file-browser.c:1599
 msgid "Size"
 msgstr "大小"
 
-#: src/ptk/ptk-file-browser.c:1632
+#: src/ptk/ptk-file-browser.c:1599
 msgid "Type"
 msgstr "类型"
 
-#: src/ptk/ptk-file-browser.c:1633
+#: src/ptk/ptk-file-browser.c:1600
 msgid "Permission"
 msgstr "权限"
 
-#: src/ptk/ptk-file-browser.c:1633
+#: src/ptk/ptk-file-browser.c:1600
 msgid "Owner:Group"
 msgstr "所有者：群组"
 
-#: src/ptk/ptk-file-browser.c:1633
+#: src/ptk/ptk-file-browser.c:1600
 msgid "Last Modification"
 msgstr "最后修改"
 
-#: src/ptk/ptk-file-browser.c:2749
+#: src/ptk/ptk-file-browser.c:2793
 msgid "Location"
 msgstr "位置："
 
-#: src/ptk/ptk-file-browser.c:2750
+#: src/ptk/ptk-file-browser.c:2794
 msgid "Directory Tree"
 msgstr "树状目录"
 
-#: src/ptk/ptk-location-view.c:177
+#: src/ptk/ptk-location-view.c:184
 msgid "Desktop"
 msgstr "桌面"
 
-#: src/ptk/ptk-location-view.c:367
-#, c-format
-msgid ""
-"The volume \"%s\" is not mounted.\n"
-"Do you want to mount it?"
-msgstr ""
-"磁盘 \"%s\" 尚未挂载\n"
-"您是否想挂载这个磁盘？"
-
-#: src/ptk/ptk-location-view.c:378 src/ptk/ptk-location-view.c:550
-#: src/ptk/ptk-location-view.c:578
+#: src/ptk/ptk-location-view.c:380 src/ptk/ptk-location-view.c:572
 msgid "Unable to mount device"
 msgstr "无法挂载设备"
 
-#: src/ptk/ptk-location-view.c:593
+#: src/ptk/ptk-location-view.c:587
 msgid "Unable to unmount device"
 msgstr "无法卸载设备"
 
-#: src/ptk/ptk-location-view.c:610
+#: src/ptk/ptk-location-view.c:604
 msgid "Unable to eject device"
 msgstr "无法弹出设备"
 
-#: src/ptk/ptk-location-view.c:670
+#: src/ptk/ptk-location-view.c:662
 msgid "_Mount File System"
 msgstr "挂载文件系统(_M)"
 
-#: src/ptk/ptk-location-view.c:680
+#: src/ptk/ptk-location-view.c:672
 msgid "_Eject"
 msgstr "弹出(_E)"
 
-#: src/ptk/ptk-location-view.c:686
+#: src/ptk/ptk-location-view.c:678
 msgid "_Unmount File System"
 msgstr "卸载文件系统(_F)"
 
-#: src/ptk/ptk-file-task.c:107
+#: src/ptk/ptk-file-task.c:103
 msgid "Move: "
 msgstr "移动："
 
-#: src/ptk/ptk-file-task.c:108
+#: src/ptk/ptk-file-task.c:104
 msgid "Copy: "
 msgstr "复制："
 
-#: src/ptk/ptk-file-task.c:109
+#: src/ptk/ptk-file-task.c:105
 msgid "Delete: "
 msgstr "删除："
 
-#: src/ptk/ptk-file-task.c:110
+#: src/ptk/ptk-file-task.c:106
 msgid "Link: "
 msgstr "创建链接："
 
-#: src/ptk/ptk-file-task.c:111
+#: src/ptk/ptk-file-task.c:107
 msgid "Change Properties: "
 msgstr "修改属性："
 
-#: src/ptk/ptk-file-task.c:115
+#: src/ptk/ptk-file-task.c:111
 msgid "Moving..."
 msgstr "移动中..."
 
-#: src/ptk/ptk-file-task.c:116
+#: src/ptk/ptk-file-task.c:112
 msgid "Copying..."
 msgstr "复制中..."
 
-#: src/ptk/ptk-file-task.c:117
+#: src/ptk/ptk-file-task.c:113
 msgid "Deleting..."
 msgstr "正在刪除..."
 
-#: src/ptk/ptk-file-task.c:118
+#: src/ptk/ptk-file-task.c:114
 msgid "Linking..."
 msgstr "正在创建链接..."
 
-#: src/ptk/ptk-file-task.c:119
+#: src/ptk/ptk-file-task.c:115
 msgid "Changing Properties"
 msgstr "修改属性"
 
 #. To: <Destination folder>
 #. ex. Copy file to..., Move file to...etc.
-#: src/ptk/ptk-file-task.c:156
+#: src/ptk/ptk-file-task.c:152
 msgid "To:"
 msgstr "到："
 
 #. Processing:
 #. Processing: <Name of currently proccesed file>
-#: src/ptk/ptk-file-task.c:171
+#: src/ptk/ptk-file-task.c:167
 msgid "Processing:"
 msgstr "正在处理："
 
 #. Preparing to do some file operation (Copy, Move, Delete...)
-#: src/ptk/ptk-file-task.c:178
+#: src/ptk/ptk-file-task.c:174
 msgid "Preparing..."
 msgstr "准备中..."
 
 #. Progress:
-#: src/ptk/ptk-file-task.c:186
+#: src/ptk/ptk-file-task.c:182
 msgid "Progress:"
 msgstr "进度："
 
-#: src/ptk/ptk-file-task.c:321
+#: src/ptk/ptk-file-task.c:317
 msgid "Cancel the operation?"
 msgstr "取消这个操作？"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:410
+#: src/ptk/ptk-file-task.c:406
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "您想要覆盖这个文件夹，以及文件夹内的所有内容吗？"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:415
+#: src/ptk/ptk-file-task.c:411
 msgid "Do you want to overwrite this file?"
 msgstr "您想要覆盖这个文件吗？"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:420
+#: src/ptk/ptk-file-task.c:416
 msgid "Please choose a new file name."
 msgstr "请输入新文件名"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:428
+#: src/ptk/ptk-file-task.c:424
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -524,7 +514,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:433
+#: src/ptk/ptk-file-task.c:429
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -539,53 +529,53 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:450
+#: src/ptk/ptk-file-task.c:446
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: src/ptk/ptk-file-task.c:451
+#: src/ptk/ptk-file-task.c:447
 msgid "Overwrite All"
 msgstr "全部覆盖"
 
-#: src/ptk/ptk-file-task.c:456
+#: src/ptk/ptk-file-task.c:452
 msgid "Rename"
 msgstr "重命名"
 
-#: src/ptk/ptk-file-task.c:457
+#: src/ptk/ptk-file-task.c:453
 msgid "Skip"
 msgstr "跳过"
 
-#: src/ptk/ptk-file-task.c:458
+#: src/ptk/ptk-file-task.c:454
 msgid "Skip All"
 msgstr "全部跳过"
 
-#: src/ptk/ptk-file-archiver.c:120
+#: src/ptk/ptk-file-archiver.c:119
 msgid "Save Compressd Files to..."
 msgstr "将压缩文件保存到..."
 
-#: src/ptk/ptk-file-archiver.c:128
+#: src/ptk/ptk-file-archiver.c:127
 msgid "Format of compressed File:"
 msgstr "压缩文件的格式为："
 
-#: src/ptk/ptk-file-archiver.c:199
+#: src/ptk/ptk-file-archiver.c:198
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "创建压缩文件：%s"
 
-#: src/ptk/ptk-file-archiver.c:202
+#: src/ptk/ptk-file-archiver.c:201
 msgid "Compress Files"
 msgstr "压缩文件"
 
-#: src/ptk/ptk-file-archiver.c:233
+#: src/ptk/ptk-file-archiver.c:232
 msgid "Extract File to..."
 msgstr "解压缩到..."
 
-#: src/ptk/ptk-file-archiver.c:282
+#: src/ptk/ptk-file-archiver.c:281
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "解压缩到：%s"
 
-#: src/ptk/ptk-file-archiver.c:284
+#: src/ptk/ptk-file-archiver.c:283
 msgid "Extract Files"
 msgstr "解压缩文件"
 
@@ -597,7 +587,7 @@ msgstr ""
 "\n"
 "完成！"
 
-#: src/ptk/ptk-console-output.c:170
+#: src/ptk/ptk-console-output.c:168
 msgid "Command:"
 msgstr "命令行："
 
@@ -605,57 +595,57 @@ msgstr "命令行："
 msgid "File System"
 msgstr "文件系统"
 
-#: src/ptk/ptk-dir-tree.c:398
+#: src/ptk/ptk-dir-tree.c:397
 msgid "No Sub Folder"
 msgstr "没有子文件夹"
 
-#: src/ptk/ptk-file-menu.c:105
+#: src/ptk/ptk-file-menu.c:114
 msgid "E_xtract Here"
 msgstr "解压缩到此处(_x)"
 
-#: src/ptk/ptk-file-menu.c:106
+#: src/ptk/ptk-file-menu.c:115
 msgid "Extract _To"
 msgstr "解压缩到(_T)"
 
-#: src/ptk/ptk-file-menu.c:112
+#: src/ptk/ptk-file-menu.c:121
 msgid "Open _with..."
 msgstr "打开文件..."
 
-#: src/ptk/ptk-file-menu.c:120
+#: src/ptk/ptk-file-menu.c:129
 msgid "Compress"
 msgstr "压缩"
 
-#: src/ptk/ptk-file-menu.c:121
+#: src/ptk/ptk-file-menu.c:130
 msgid "E_xtract"
 msgstr "解压(_x)"
 
-#: src/ptk/ptk-file-menu.c:124
+#: src/ptk/ptk-file-menu.c:133
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: src/ptk/ptk-file-menu.c:133
+#: src/ptk/ptk-file-menu.c:142
 msgid "Open in Terminal"
 msgstr "在终端中打开"
 
-#: src/ptk/ptk-file-menu.c:345
+#: src/ptk/ptk-file-menu.c:368
 msgid "_Open with another program"
 msgstr "使用其他程序打开(_O)"
 
-#: src/ptk/ptk-file-menu.c:360
+#: src/ptk/ptk-file-menu.c:383
 msgid "E_xecute"
 msgstr "执行(_x)"
 
-#: src/ptk/ptk-file-menu.c:369
+#: src/ptk/ptk-file-menu.c:392
 #, c-format
 msgid "_Open with \"%s\""
 msgstr "用\"%s\"打开(_O)"
 
 #. delete some confusing menu item if this menu is for current folder
-#: src/ptk/ptk-file-menu.c:380 src/ptk/ptk-file-menu.c:389
+#: src/ptk/ptk-file-menu.c:403 src/ptk/ptk-file-menu.c:412
 msgid "_Open"
 msgstr "打开(_O)"
 
-#: src/ptk/ptk-file-misc.c:54
+#: src/ptk/ptk-file-misc.c:55
 msgid "Really delete selected files?"
 msgstr "确定要删除文件？"
 
@@ -696,137 +686,59 @@ msgstr "请输入新建文件的名称："
 msgid "The new file cannot be created!"
 msgstr "无法创建新文件！"
 
-#: src/file-properties.c:303
+#: src/file-properties.c:304
 msgid "Multiple files are selected"
 msgstr "多个文件被选中"
 
-#: src/file-properties.c:381
+#: src/file-properties.c:380
 msgid "Multiple files of different types"
 msgstr "多个不同类型文件"
 
-#: src/file-properties.c:449
+#: src/file-properties.c:448
 msgid "Other program..."
 msgstr "使用其他程序打开..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: src/file-properties.c:543
+#: src/file-properties.c:542
 msgid "Calculating..."
 msgstr "统计中..."
 
-#: src/file-properties.c:695
+#: src/file-properties.c:693
 msgid "Invalid User"
 msgstr "无效用户"
 
-#: src/file-properties.c:706
+#: src/file-properties.c:704
 msgid "Invalid Group"
 msgstr "无效群组"
 
-#: src/file-properties.c:754
+#: src/file-properties.c:752
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr "将改变应用于所有文件夹和子文件夹？"
 
-#: src/edit-bookmarks.c:59
+#: src/edit-bookmarks.c:77
 msgid "New Item"
 msgstr "新建项目"
 
-#: src/edit-bookmarks.c:128
+#: src/edit-bookmarks.c:151
 msgid "Edit Bookmarks"
 msgstr "编辑书签"
 
-#: src/edit-bookmarks.c:184
+#: src/edit-bookmarks.c:207
 msgid "Path"
 msgstr "路径"
 
-#: src/edit-bookmarks.c:207
+#: src/edit-bookmarks.c:230
 msgid "Use drag & drop to sort the items"
 msgstr "使用鼠标拖拽来排列书签"
 
-#. mime-type: application
-#: src/file-assoc-dlg.c:35
-msgid "application"
-msgstr "应用程式"
-
-#. mime-type: audio
-#: src/file-assoc-dlg.c:38
-msgid "audio"
-msgstr "音乐"
-
-#. mime-type: video
-#: src/file-assoc-dlg.c:41
-msgid "video"
-msgstr "视频"
-
-#. mime-type: text
-#: src/file-assoc-dlg.c:44
-msgid "text"
-msgstr "文档"
-
-#. mime-type: multipart
-#: src/file-assoc-dlg.c:47
-msgid "multipart"
-msgstr "multipart"
-
-#. mime-type: image
-#: src/file-assoc-dlg.c:50
-msgid "image"
-msgstr "图片"
-
-#. mime-type: message
-#: src/file-assoc-dlg.c:53
-msgid "message"
-msgstr "消息"
-
-#. mime-type: model
-#: src/file-assoc-dlg.c:56
-msgid "model"
-msgstr "模式"
-
-#. mime-type: inode
-#: src/file-assoc-dlg.c:59
-msgid "inode"
-msgstr "节点"
-
-#. mime-type: packages
-#: src/file-assoc-dlg.c:62
-msgid "packages"
-msgstr "软件包"
-
-#: src/file-assoc-dlg-ui.c:73
-msgid "File Associations"
-msgstr "文件关联"
-
-#: src/file-assoc-dlg-ui.c:91
-msgid "Known File Types:"
-msgstr "已知文件类型："
-
-#: src/file-assoc-dlg-ui.c:112
-msgid "Actions Showed in Popup Menus"
-msgstr "在弹出窗口中显示的动作"
-
-#: src/file-assoc-dlg-ui.c:154
-msgid "Add _Application"
-msgstr "添加应用程序(_A)"
-
-#: src/file-assoc-dlg-ui.c:174
-msgid "Add _Custom Action"
-msgstr "添加自定义动作(_C)"
-
-#: src/file-assoc-dlg-ui.c:202
-msgid "Move _Up"
-msgstr "向上移动(_U)"
-
-#: src/file-assoc-dlg-ui.c:222
-msgid "Move _Down"
-msgstr "向下移动(_D)"
-
-#: src/vfs/vfs-app-desktop.c:427
+#: src/vfs/vfs-app-desktop.c:445
 #, c-format
 msgid "Command not found"
 msgstr "命令未找到"
 
-#: src/vfs/vfs-file-task.c:704
+#: src/vfs/vfs-file-task.c:697
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "目标目录 \"%1$s\" 包含在源 \"%2$s\" 中"
@@ -1017,74 +929,74 @@ msgid "Failed to connect to the HAL daemon: %s"
 msgstr "无法和连接到 HAL 服务：%s"
 
 #. definitely not a device that we're able to mount, eject or unmount
-#: src/vfs/vfs-volume-hal.c:1924 src/vfs/vfs-volume-hal.c:1980
+#: src/vfs/vfs-volume-hal.c:1926 src/vfs/vfs-volume-hal.c:1982
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
 msgstr "设备 \"%s\" 不是磁盘"
 
 #. tell the caller that no matching device was found
-#: src/vfs/vfs-volume-hal.c:2056
+#: src/vfs/vfs-volume-hal.c:2058
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
 msgstr "文件系统设备表中没有设备 \"%s\""
 
-#: src/vfs/vfs-volume-hal.c:2226
+#: src/vfs/vfs-volume-hal.c:2228
 #, c-format
 msgid "You are not privileged to mount the volume \"%s\""
 msgstr "您没有权限挂载磁盘 \"%s\""
 
-#: src/vfs/vfs-volume-hal.c:2227
+#: src/vfs/vfs-volume-hal.c:2229
 #, c-format
 msgid "You are not privileged to unmount the volume \"%s\""
 msgstr "您没有权限卸载磁盘 \"%s\""
 
-#: src/vfs/vfs-volume-hal.c:2228
+#: src/vfs/vfs-volume-hal.c:2230
 #, c-format
 msgid "You are not privileged to eject the volume \"%s\""
 msgstr "您没有权限弹出磁盘 \"%s\""
 
 #. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
-#: src/vfs/vfs-volume-hal.c:2240
+#: src/vfs/vfs-volume-hal.c:2242
 #, c-format
 msgid "Invalid mount option when attempting to mount the volume \"%s\""
 msgstr "挂载磁盘 \"%s\" 时使用了无效的挂载参数"
 
-#: src/vfs/vfs-volume-hal.c:2242
+#: src/vfs/vfs-volume-hal.c:2244
 #, c-format
 msgid ""
 "The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
 "your system"
 msgstr "您的系统无法支持磁盘 \"%s\" 所使用的 <i>%s</i> 文件系统"
 
-#: src/vfs/vfs-volume-hal.c:2244
+#: src/vfs/vfs-volume-hal.c:2246
 #, c-format
 msgid "An application is preventing the volume \"%s\" from being unmounted"
 msgstr "其他程序正在访问磁盘 \"%s\"，无法卸载"
 
-#: src/vfs/vfs-volume-hal.c:2246
+#: src/vfs/vfs-volume-hal.c:2248
 #, c-format
 msgid "The volume \"%s\" is not mounted"
 msgstr "磁盘 \"%s\" 尚未挂载"
 
-#: src/vfs/vfs-volume-hal.c:2248
+#: src/vfs/vfs-volume-hal.c:2250
 #, c-format
 msgid "Error <i>%s</i>"
 msgstr "错误 <i>%s</i>"
 
 #. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
-#: src/vfs/vfs-volume-hal.c:2251
+#: src/vfs/vfs-volume-hal.c:2253
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
 msgstr "磁盘 \"%s\" 很有可能是通过命令行手动挂载的"
 
-#: src/vfs/vfs-volume-hal.c:2259
+#: src/vfs/vfs-volume-hal.c:2261
 #, c-format
 msgid ""
 "Blank discs cannot be mounted, use a CD recording application to record "
 "audio or data on the disc"
 msgstr "无法挂在空白碟片，请使用刻录程序往碟片里添加音频或数据"
 
-#: src/vfs/vfs-volume-hal.c:2270
+#: src/vfs/vfs-volume-hal.c:2272
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr "无法挂载音频 CD，请使用音乐播放器来播放音轨"
@@ -1313,6 +1225,64 @@ msgid ""
 "created by Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 msgstr ""
+
+#~ msgid ""
+#~ "The volume \"%s\" is not mounted.\n"
+#~ "Do you want to mount it?"
+#~ msgstr ""
+#~ "磁盘 \"%s\" 尚未挂载\n"
+#~ "您是否想挂载这个磁盘？"
+
+#~ msgid "application"
+#~ msgstr "应用程式"
+
+#~ msgid "audio"
+#~ msgstr "音乐"
+
+#~ msgid "video"
+#~ msgstr "视频"
+
+#~ msgid "text"
+#~ msgstr "文档"
+
+#~ msgid "multipart"
+#~ msgstr "multipart"
+
+#~ msgid "image"
+#~ msgstr "图片"
+
+#~ msgid "message"
+#~ msgstr "消息"
+
+#~ msgid "model"
+#~ msgstr "模式"
+
+#~ msgid "inode"
+#~ msgstr "节点"
+
+#~ msgid "packages"
+#~ msgstr "软件包"
+
+#~ msgid "File Associations"
+#~ msgstr "文件关联"
+
+#~ msgid "Known File Types:"
+#~ msgstr "已知文件类型："
+
+#~ msgid "Actions Showed in Popup Menus"
+#~ msgstr "在弹出窗口中显示的动作"
+
+#~ msgid "Add _Application"
+#~ msgstr "添加应用程序(_A)"
+
+#~ msgid "Add _Custom Action"
+#~ msgstr "添加自定义动作(_C)"
+
+#~ msgid "Move _Up"
+#~ msgstr "向上移动(_U)"
+
+#~ msgid "Move _Down"
+#~ msgstr "向下移动(_D)"
 
 #~ msgid "Source code taken from other projects:"
 #~ msgstr "从其他项目借鉴的代码："

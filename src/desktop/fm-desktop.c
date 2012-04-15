@@ -142,7 +142,6 @@ scroll_cb( GtkWidget *w, GdkEventScroll *evt, gpointer user_data )
 static gboolean
 button_cb( GtkWidget *w, GdkEventButton *evt, gpointer user_data )
 {
-    GdkScreen * gscreen = gtk_widget_get_screen( w );
     gint button = evt->button;
     gint state = evt->state;
 
@@ -237,10 +236,6 @@ int fm_desktop_init()
 {
     GdkDisplay * gdpy;
     gint i;
-    Window xid;
-    GtkSettings *settings;
-    const gchar *message = NULL;
-    gboolean already_running;
 
     gdpy = gdk_display_get_default();
 
@@ -335,6 +330,9 @@ static void on_open_item ( PtkFileBrowser* file_browser,
         break;
     case PTK_OPEN_TERMINAL:
         fm_main_window_open_terminal( GTK_WINDOW( user_data ), path );
+        break;
+    default:
+        break;
     }
 }
 
@@ -445,7 +443,7 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     alignment = gtk_alignment_new( 0.5, 0.5, 1, 1 );
     gtk_container_add( GTK_CONTAINER(desktop), alignment );
 
-    browser = PTK_FILE_BROWSER(ptk_file_browser_new( alignment, FBVM_ICON_VIEW ));
+    browser = PTK_FILE_BROWSER(ptk_file_browser_new( alignment, PTK_FB_ICON_VIEW ));
 
     g_signal_connect( browser, "open-item",
                       G_CALLBACK( on_open_item ), desktop );
@@ -463,7 +461,7 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
 
     /* FIXME: add histroy should be true because
     current working directory is stored in history list. */
-    ptk_file_browser_chdir( browser, desktop_dir, TRUE );
+    ptk_file_browser_chdir( browser, desktop_dir, PTK_FB_CHDIR_ADD_HISTORY );
 
     gtk_widget_set_size_request( GTK_WIDGET(browser),
                                  area.width, area.height );
@@ -492,11 +490,11 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     gdk_window_set_events( root, gdk_window_get_events( root )
                            | GDK_PROPERTY_CHANGE_MASK );
     gdk_window_add_filter( root, on_rootwin_event, desktop );
-    g_signal_connect( desktop, "destroy", remove_filter, screen );
+    g_signal_connect( desktop, "destroy", G_CALLBACK(remove_filter), screen );
     g_signal_connect( desktop, "expose-event",
-                      on_desktop_expose, NULL );
+                      G_CALLBACK(on_desktop_expose), NULL );
     g_signal_connect( desktop, "key-press-event",
-                      on_desktop_key_press, browser );
+                      G_CALLBACK(on_desktop_key_press), browser );
 
     gtk_widget_set_double_buffered( desktop, FALSE );
     set_bg_pixmap( screen, PTK_ICON_VIEW(view), &area );
@@ -597,7 +595,6 @@ void resize_desktops()
     for ( i = 0; i < n_screens; ++i )
     {
         GtkWidget *view, *alignment, *browser;
-        GdkPixmap* pix;
         int bpad, rpad;
 
         screen = gdk_display_get_screen( display, i );

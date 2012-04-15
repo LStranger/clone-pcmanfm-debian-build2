@@ -11,6 +11,7 @@
 */
 
 #include "vfs-dir.h"
+#include "vfs-thumbnail-loader.h"
 #include "glib-mem.h"
 
 #include <string.h>
@@ -41,7 +42,9 @@ static void vfs_dir_monitor_callback( VFSFileMonitor* fm,
                                       const char* file_name,
                                       gpointer user_data );
 
+#if 0
 static gpointer load_thumbnail_thread( gpointer user_data );
+#endif
 
 static void on_mime_type_reload( gpointer user_data );
 
@@ -51,7 +54,11 @@ static void update_changed_files( gpointer key, gpointer data,
 static gboolean notify_file_change( gpointer user_data );
 static gboolean update_file_info( VFSDir* dir, VFSFileInfo* file );
 
+#if 0
 static gboolean is_dir_desktop( const char* path );
+#endif
+
+static void on_list_task_finished( VFSAsyncTask* task, gboolean is_cancelled, VFSDir* dir );
 
 enum {
     FILE_CREATED_SIGNAL = 0,
@@ -68,6 +75,7 @@ static GObjectClass *parent_class = NULL;
 static GHashTable* dir_hash = NULL;
 static GList* mime_cb = NULL;
 static guint change_notify_timeout = 0;
+static guint theme_change_notify = 0;
 
 static char* desktop_dir = NULL;
 static gboolean is_desktop_set = FALSE;
@@ -184,14 +192,15 @@ void vfs_dir_init( VFSDir* dir )
 void vfs_dir_finalize( GObject *obj )
 {
     VFSDir * dir = VFS_DIR( obj );
-    GList* l;
 
     do{}
     while( g_source_remove_by_user_data( dir ) );
 
     if( G_UNLIKELY( dir->task ) )
     {
+        g_signal_handlers_disconnect_by_func( dir->task, on_list_task_finished, dir );
         /* FIXME: should we generate a "file-list" signal to indicate the dir loading was cancelled? */
+        vfs_async_task_cancel( dir->task );
         g_object_unref( dir->task );
         dir->task = NULL;
     }
@@ -221,6 +230,10 @@ void vfs_dir_finalize( GObject *obj )
                     g_source_remove( change_notify_timeout );
                     change_notify_timeout = 0;
                 }
+
+                g_signal_handler_disconnect( gtk_icon_theme_get_default(),
+                                                                theme_change_notify );
+                theme_change_notify = 0;
             }
         }
         g_free( dir->path );
@@ -467,7 +480,7 @@ VFSDir* vfs_dir_new( const char* path )
     return dir;
 }
 
-static void on_list_task_finished( VFSAsyncTask* task, gboolean is_cancelled, VFSDir* dir )
+void on_list_task_finished( VFSAsyncTask* task, gboolean is_cancelled, VFSDir* dir )
 {
     g_object_unref( dir->task );
     dir->task = NULL;
@@ -476,9 +489,6 @@ static void on_list_task_finished( VFSAsyncTask* task, gboolean is_cancelled, VF
 
 void vfs_dir_load( VFSDir* dir )
 {
-    GSList * l;
-    struct VFSDirStateCallbackEnt* ent;
-
     if ( G_LIKELY(dir->path) )
     {
         dir->task = vfs_async_task_new( (VFSAsyncFunc)vfs_dir_load_thread, dir );
@@ -487,10 +497,12 @@ void vfs_dir_load( VFSDir* dir )
     }
 }
 
+#if 0
 gboolean is_dir_desktop( const char* path )
 {
     return (desktop_dir && 0 == strcmp(path, desktop_dir));
 }
+#endif
 
 gpointer vfs_dir_load_thread(  VFSAsyncTask* task, VFSDir* dir )
 {
@@ -498,7 +510,6 @@ gpointer vfs_dir_load_thread(  VFSAsyncTask* task, VFSDir* dir )
     char* full_path;
     GDir* dir_content;
     VFSFileInfo* file;
-    GList* l;
     /* gboolean is_desktop; */
 
     dir->file_listed = 0;
@@ -521,6 +532,8 @@ gpointer vfs_dir_load_thread(  VFSAsyncTask* task, VFSDir* dir )
                 full_path = g_build_filename( dir->path, file_name, NULL );
                 if ( !full_path )
                     continue;
+                /* FIXME: Is locking GDK needed here? */
+                /* GDK_THREADS_ENTER(); */
                 file = vfs_file_info_new();
                 if ( G_LIKELY( vfs_file_info_get( file, full_path, file_name ) ) )
                 {
@@ -536,6 +549,7 @@ gpointer vfs_dir_load_thread(  VFSAsyncTask* task, VFSDir* dir )
                 {
                     vfs_file_info_unref( file );
                 }
+                /* GDK_THREADS_LEAVE(); */
                 g_free( full_path );
             }
             g_dir_close( dir_content );
@@ -571,7 +585,7 @@ gboolean update_file_info( VFSDir* dir, VFSFileInfo* file )
 {
     char* full_path;
     char* file_name;
-    gboolean ret;
+    gboolean ret = FALSE;
     /* gboolean is_desktop = is_dir_desktop(dir->path); */
 
     /* FIXME: Dirty hack: steal the string to prevent memory allocation */
@@ -670,6 +684,38 @@ void vfs_dir_monitor_callback( VFSFileMonitor* fm,
     GDK_THREADS_LEAVE();
 }
 
+/* called on every VFSDir when icon theme got changed */
+static void reload_icons( const char* path, VFSDir* dir, gpointer user_data )
+{
+    GList* l;
+    for( l = dir->file_list; l; l = l->next )
+    {
+        VFSFileInfo* fi = (VFSFileInfo*)l->data;
+        /* It's a desktop entry file */
+        if( fi->flags & VFS_FILE_INFO_DESKTOP_ENTRY )
+        {
+            char* file_path = g_build_filename( path, fi->name,NULL );
+            if( fi->big_thumbnail )
+            {
+                g_object_unref( fi->big_thumbnail );
+                fi->big_thumbnail = NULL;
+            }
+            if( fi->small_thumbnail )
+            {
+                g_object_unref( fi->small_thumbnail );
+                fi->small_thumbnail = NULL;
+            }
+            vfs_file_info_load_special_info( fi, file_path );
+            g_free( file_path );
+        }
+    }
+}
+
+static void on_theme_changed( GtkIconTheme *icon_theme, gpointer user_data )
+{
+    g_hash_table_foreach( dir_hash, (GHFunc)reload_icons, NULL );
+}
+
 VFSDir* vfs_dir_get_by_path( const char* path )
 {
     VFSDir * dir = NULL;
@@ -677,7 +723,11 @@ VFSDir* vfs_dir_get_by_path( const char* path )
     g_return_val_if_fail( G_UNLIKELY(path), NULL );
 
     if ( G_UNLIKELY( ! dir_hash ) )
+    {
         dir_hash = g_hash_table_new_full( g_str_hash, g_str_equal, NULL, NULL );
+        theme_change_notify = g_signal_connect( gtk_icon_theme_get_default(), "changed",
+                                                                    G_CALLBACK( on_theme_changed ), NULL );
+    }
     else
         dir = g_hash_table_lookup( dir_hash, path );
 
@@ -762,7 +812,7 @@ const char* vfs_get_desktop_dir()
                     {
                         char* eol;
                         line += 16;
-                        if( G_LIKELY( eol = strchr( line, '\n' ) ) )
+                        if( G_LIKELY( ( eol = strchr( line, '\n' ) ) ) )
                             *eol = '\0';
                         line = g_shell_unquote( line, NULL );
                         if( g_str_has_prefix(line, "$HOME") )
@@ -808,6 +858,8 @@ void vfs_dir_unload_thumbnails( VFSDir* dir, gboolean is_big )
 {
     GList* l;
     VFSFileInfo* file;
+    char* file_path;
+
     g_mutex_lock( dir->mutex );
     if( is_big )
     {
@@ -818,6 +870,14 @@ void vfs_dir_unload_thumbnails( VFSDir* dir, gboolean is_big )
             {
                 g_object_unref( file->big_thumbnail );
                 file->big_thumbnail = NULL;
+            }
+            /* This is a desktop entry file, so the icon needs reload
+                 FIXME: This is not a good way to do things, but there is no better way now.  */
+            if( file->flags & VFS_FILE_INFO_DESKTOP_ENTRY )
+            {
+                file_path = g_build_filename( dir->path, file->name, NULL );
+                vfs_file_info_load_special_info( file, file_path );
+                g_free( file_path );
             }
         }
     }
@@ -830,6 +890,14 @@ void vfs_dir_unload_thumbnails( VFSDir* dir, gboolean is_big )
             {
                 g_object_unref( file->small_thumbnail );
                 file->small_thumbnail = NULL;
+            }
+            /* This is a desktop entry file, so the icon needs reload
+                 FIXME: This is not a good way to do things, but there is no better way now.  */
+            if( file->flags & VFS_FILE_INFO_DESKTOP_ENTRY )
+            {
+                file_path = g_build_filename( dir->path, file->name, NULL );
+                vfs_file_info_load_special_info( file, file_path );
+                g_free( file_path );
             }
         }
     }
