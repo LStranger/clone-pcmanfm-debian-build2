@@ -119,7 +119,6 @@ binary-arch: build install
 #	dh_installemacsen
 #	dh_installpam
 	dh_installmime -a
-	dh_desktop -A pcmanfm.desktop
 #	dh_installinit
 #	dh_installcron
 #	dh_installinfo

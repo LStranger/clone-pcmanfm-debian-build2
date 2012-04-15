@@ -1,3 +1,15 @@
+pcmanfm (0.5.2+svn20091029-1) unstable; urgency=low
+
+  * New upstream release+translation update from SVN
+    - Fix compatibility issue with shared-mime-info 0.70
+  * debian/watch: 
+    - s/gz/bz2/
+  * debian/rules:
+    - Remove deprecated dh_desktop 
+  * Bumped Standard-version to 3.8.3
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Sat, 31 Oct 2009 17:27:15 +0800
+
 pcmanfm (0.5.1+svn20090607-1) unstable; urgency=low
 
   * New upstream release (Closes:#509757, #523404, #531055, #443982)

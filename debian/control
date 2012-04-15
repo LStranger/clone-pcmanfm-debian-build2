@@ -1,11 +1,10 @@
 Source: pcmanfm
 Section: utils
 Priority: optional
-Maintainer: Andrew Lee <andrew@linux.org.tw>
+Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
 Build-Depends: debhelper (>= 5), libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake, autoconf, pkg-config, intltool, libstartup-notification0-dev, libhal-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], python
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.8.1
-DM-Upload-Allowed: yes
+Standards-Version: 3.8.3
 Homepage: http://pcmanfm.sourceforge.net/
 
 Package: pcmanfm
