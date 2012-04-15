@@ -30,7 +30,6 @@
 
 #include "ptk-file-misc.h"
 #include "ptk-file-menu.h"
-#include "ptk-file-task.h"
 #include "ptk-utils.h"
 
 #include "settings.h"
@@ -83,14 +82,6 @@ static gboolean on_focus_in( GtkWidget* w, GdkEventFocus* evt );
 static gboolean on_focus_out( GtkWidget* w, GdkEventFocus* evt );
 /* static gboolean on_scroll( GtkWidget *w, GdkEventScroll *evt, gpointer user_data ); */
 
-static void on_drag_begin( GtkWidget* w, GdkDragContext* ctx );
-static gboolean on_drag_motion( GtkWidget* w, GdkDragContext* ctx, gint x, gint y, guint time );
-static gboolean on_drag_drop( GtkWidget* w, GdkDragContext* ctx, gint x, gint y, guint time );
-static void on_drag_data_get( GtkWidget* w, GdkDragContext* ctx, GtkSelectionData* data, guint info, guint time );
-static void on_drag_data_received( GtkWidget* w, GdkDragContext* ctx, gint x, gint y, GtkSelectionData* data, guint info, guint time );
-static void on_drag_leave( GtkWidget* w, GdkDragContext* ctx, guint time );
-static void on_drag_end( GtkWidget* w, GdkDragContext* ctx );
-
 static void on_file_listed( VFSDir* dir,  gboolean is_cancelled, DesktopWindow* self );
 static void on_file_created( VFSDir* dir, VFSFileInfo* file, gpointer user_data );
 static void on_file_deleted( VFSDir* dir, VFSFileInfo* file, gpointer user_data );
@@ -109,7 +100,7 @@ static void on_paste( GtkMenuItem *menuitem, DesktopWindow* self );
 static void on_settings( GtkMenuItem *menuitem, DesktopWindow* self );
 
 static void on_popup_new_folder_activate ( GtkMenuItem *menuitem, gpointer data );
-static void on_popup_new_text_file_activate ( GtkMenuItem *menuitem, gpointer data );
+static void on_popup_new_text_file_activate ( GtkMenuItem *menuitem, gpointer data );                           
 
 static GdkFilterReturn on_rootwin_event ( GdkXEvent *xevent, GdkEvent *event, gpointer data );
 static void forward_event_to_rootwin( GdkScreen *gscreen, GdkEvent *event );
@@ -117,8 +108,6 @@ static void forward_event_to_rootwin( GdkScreen *gscreen, GdkEvent *event );
 static void calc_item_size( DesktopWindow* self, DesktopItem* item );
 static void layout_items( DesktopWindow* self );
 static void paint_item( DesktopWindow* self, DesktopItem* item, GdkRectangle* expose_area );
-static void move_item( DesktopWindow* self, DesktopItem* item, int x, int y, gboolean is_offset );
-static void paint_rubber_banding_rect( DesktopWindow* self );
 
 /* FIXME: this is too dirty and here is some redundant code.
  *  We really need better and cleaner APIs for this */
@@ -149,20 +138,6 @@ static Atom ATOM_NET_WORKAREA = 0;
 static GtkWindowClass *parent_class = NULL;
 
 static GdkPixmap* pix = NULL;
-
-enum {
-    DRAG_TARGET_URI_LIST,
-    DRAG_TARGET_DESKTOP_ICON
-};
-
-/*  Drag & Drop/Clipboard targets  */
-static GtkTargetEntry drag_targets[] = {
-   { "text/uri-list", 0 , DRAG_TARGET_URI_LIST },
-   { "DESKTOP_ICON", GTK_TARGET_SAME_WIDGET, DRAG_TARGET_DESKTOP_ICON }
-};
-
-static GdkAtom text_uri_list_atom = 0;
-static GdkAtom desktop_icon_atom = 0;
 
 static PtkMenuItemEntry icon_menu[] =
 {
@@ -244,21 +219,10 @@ static void desktop_window_class_init(DesktopWindowClass *klass)
     /* wc->scroll_event = on_scroll; */
     wc->delete_event = (DeleteEvtHandler) gtk_true;
 
-    wc->drag_begin = on_drag_begin;
-    wc->drag_motion = on_drag_motion;
-    wc->drag_drop = on_drag_drop;
-    wc->drag_data_get = on_drag_data_get;
-    wc->drag_data_received = on_drag_data_received;
-    wc->drag_leave = on_drag_leave;
-    wc->drag_end = on_drag_end;
-
     parent_class = (GtkWindowClass*)g_type_class_peek(GTK_TYPE_WINDOW);
 
     /* ATOM_XROOTMAP_ID = XInternAtom( GDK_DISPLAY(),"_XROOTMAP_ID", False ); */
     ATOM_NET_WORKAREA = XInternAtom( GDK_DISPLAY(),"_NET_WORKAREA", False );
-
-    text_uri_list_atom = gdk_atom_intern_static_string( drag_targets[DRAG_TARGET_URI_LIST].target );
-    desktop_icon_atom = gdk_atom_intern_static_string( drag_targets[DRAG_TARGET_DESKTOP_ICON].target );
 }
 
 static void desktop_window_init(DesktopWindow *self)
@@ -322,9 +286,6 @@ static void desktop_window_init(DesktopWindow *self)
                                             GDK_BUTTON_RELEASE_MASK |
                                             GDK_KEY_PRESS_MASK|
                                             GDK_PROPERTY_CHANGE_MASK );
-
-    gtk_drag_dest_set( (GtkWidget*)self, 0, NULL, 0,
-                       GDK_ACTION_COPY|GDK_ACTION_MOVE|GDK_ACTION_LINK );
 
     root = gdk_screen_get_root_window( gtk_widget_get_screen( (GtkWidget*)self ) );
     gdk_window_set_events( root, gdk_window_get_events( root )
@@ -394,9 +355,6 @@ gboolean on_expose( GtkWidget* w, GdkEventExpose* evt )
                         evt->area.x, evt->area.y,
                         evt->area.width, evt->area.height );
 */
-
-    if( self->rubber_bending )
-        paint_rubber_banding_rect( self );
 
     for( l = self->items; l; l = l->next )
     {
@@ -474,8 +432,6 @@ void desktop_window_set_background( DesktopWindow* win, GdkPixbuf* src_pix, DWBg
     Display* xdisplay;
     Pixmap xpixmap = 0;
     Window xroot;
-
-    win->bg_type = type;
 
     if( src_pix )
     {
@@ -682,212 +638,6 @@ void on_size_request( GtkWidget* w, GtkRequisition* req )
     req->height = gdk_screen_get_height( scr );
 }
 
-static void calc_rubber_banding_rect( DesktopWindow* self, int x, int y, GdkRectangle* rect )
-{
-    int x1, x2, y1, y2, w, h;
-    if( self->drag_start_x < x )
-    {
-        x1 = self->drag_start_x;
-        x2 = x;
-    }
-    else
-    {
-        x1 = x;
-        x2 = self->drag_start_x;
-    }
-
-    if( self->drag_start_y < y )
-    {
-        y1 = self->drag_start_y;
-        y2 = y;
-    }
-    else
-    {
-        y1 = y;
-        y2 = self->drag_start_y;
-    }
-
-    rect->x = x1;
-    rect->y = y1;
-    rect->width = x2 - x1;
-    rect->height = y2 - y1;
-}
-
-/*
- * Reference: xfdesktop source code
- * http://svn.xfce.org/index.cgi/xfce/view/xfdesktop/trunk/src/xfdesktop-icon-view.c
- * xfdesktop_multiply_pixbuf_rgba()
- * Originally copied from Nautilus, Copyright (C) 2000 Eazel, Inc.
- * Multiplies each pixel in a pixbuf by the specified color
- */
-static void colorize_pixbuf( GdkPixbuf* pix, GdkColor* clr, guint alpha )
-{
-    guchar *pixels, *p;
-    int x, y, width, height, rowstride;
-    gboolean has_alpha;
-    int r = clr->red * 255 / 65535;
-    int g = clr->green * 255 / 65535;
-    int b = clr->blue * 255 / 65535;
-    int a = alpha * 255 / 255;
-
-    pixels = gdk_pixbuf_get_pixels(pix);
-    width = gdk_pixbuf_get_width(pix);
-    height = gdk_pixbuf_get_height(pix);
-    has_alpha = gdk_pixbuf_get_has_alpha(pix);
-    rowstride = gdk_pixbuf_get_rowstride(pix);
-
-    for (y = 0; y < height; y++)
-    {
-        p = pixels;
-        for (x = 0; x < width; x++)
-        {
-            p[0] = p[0] * r / 255;
-            p[1] = p[1] * g / 255;
-            p[2] = p[2] * b / 255;
-            if( has_alpha )
-            {
-                p[3] = p[3] * a / 255;
-                p += 4;
-            }
-            else
-                p += 3;
-        }
-        pixels += rowstride;
-    }
-}
-
-void paint_rubber_banding_rect( DesktopWindow* self )
-{
-    int x1, x2, y1, y2, w, h, pattern_w, pattern_h;
-    GdkRectangle rect;
-    GdkColor *clr;
-    guchar alpha;
-    GdkPixbuf* pix;
-    GdkGC* gc;
-
-    calc_rubber_banding_rect( self, self->rubber_bending_x, self->rubber_bending_y, &rect );
-
-    if( rect.width <= 0 || rect.height <= 0 )
-        return;
-/*
-    gtk_widget_style_get( GTK_WIDGET(self),
-                        "selection-box-color", &clr,
-                        "selection-box-alpha", &alpha,
-                        NULL);
-*/
-
-    gc = gdk_gc_new( ((GtkWidget*)self)->window);
-    clr = gdk_color_copy (&GTK_WIDGET (self)->style->base[GTK_STATE_SELECTED]);
-    alpha = 64;  /* FIXME: should be themable in the future */
-
-    pix = NULL;
-    if( self->bg_type == DW_BG_TILE )
-    {
-        /* FIXME: disable background in tile mode because current implementation is too slow */
-        /*
-        gdk_drawable_get_size( self->background, &pattern_w, &pattern_h );
-        pix = gdk_pixbuf_get_from_drawable( NULL, self->background, gdk_drawable_get_colormap(self->background),
-                                                  0, 0, 0, 0, pattern_w, pattern_h );
-        */
-    }
-    else if( self->bg_type != DW_BG_COLOR )
-    {
-        if( self->background )
-            pix = gdk_pixbuf_get_from_drawable( NULL, self->background, gdk_drawable_get_colormap(self->background),
-                                                rect.x, rect.y, 0, 0, rect.width, rect.height );
-    }
-
-    if( pix )
-    {
-        colorize_pixbuf( pix, clr, alpha );
-        if( self->bg_type == DW_BG_TILE )
-        {
-            GdkPixmap* pattern;
-            /* FIXME: This is damn slow!! */
-            pattern = gdk_pixmap_new( ((GtkWidget*)self)->window, pattern_w, pattern_h, -1 );
-            if( pattern )
-            {
-                gdk_draw_pixbuf( pattern, gc, pix, 0, 0,
-                                 0, 0, pattern_w, pattern_h, GDK_RGB_DITHER_NONE, 0, 0 );
-                gdk_gc_set_tile( gc, pattern );
-                gdk_gc_set_fill( gc, GDK_TILED );
-        gdk_draw_rectangle( ((GtkWidget*)self)->window, gc, TRUE,
-                            rect.x, rect.y, rect.width-1, rect.height-1 );
-                g_object_unref( pattern );
-                gdk_gc_set_fill( gc, GDK_SOLID );
-            }
-        }
-        else
-        {
-            gdk_draw_pixbuf( ((GtkWidget*)self)->window, gc, pix, 0, 0,
-                            rect.x, rect.y, rect.width, rect.height, GDK_RGB_DITHER_NONE, 0, 0 );
-        }
-        g_object_unref( pix );
-    }
-    else if( self->bg_type == DW_BG_COLOR ) /* draw background color */
-    {
-        GdkColor clr2 = self->bg;
-        clr2.pixel = 0;
-        clr2.red = clr2.red * clr->red / 65535;
-        clr2.green = clr2.green * clr->green / 65535;
-        clr2.blue = clr2.blue * clr->blue / 65535;
-        gdk_gc_set_rgb_fg_color( gc, &clr2 );
-        gdk_gc_set_fill( gc, GDK_SOLID );
-        gdk_draw_rectangle( ((GtkWidget*)self)->window, gc, TRUE,
-                            rect.x, rect.y, rect.width-1, rect.height-1 );
-    }
-
-    /* draw the border */
-    gdk_gc_set_foreground( gc, clr );
-    gdk_draw_rectangle( ((GtkWidget*)self)->window, gc, FALSE,
-                        rect.x, rect.y, rect.width-1, rect.height-1 );
-
-    gdk_color_free (clr);
-    gdk_gc_destroy( gc );
-}
-
-static void update_rubberbanding( DesktopWindow* self, int newx, int newy )
-{
-    GList* l;
-    GdkRectangle old_rect, new_rect;
-    GdkRegion *region;
-
-    calc_rubber_banding_rect(self, self->rubber_bending_x, self->rubber_bending_y, &old_rect );
-    calc_rubber_banding_rect(self, newx, newy, &new_rect );
-
-    gdk_window_invalidate_rect(((GtkWidget*)self)->window, &old_rect, FALSE );
-    gdk_window_invalidate_rect(((GtkWidget*)self)->window, &new_rect, FALSE );
-//    gdk_window_clear_area(((GtkWidget*)self)->window, new_rect.x, new_rect.y, new_rect.width, new_rect.height );
-/*
-    region = gdk_region_rectangle( &old_rect );
-    gdk_region_union_with_rect( region, &new_rect );
-
-//    gdk_window_invalidate_region( ((GtkWidget*)self)->window, &region, TRUE );
-
-    gdk_region_destroy( region );
-*/
-    self->rubber_bending_x = newx;
-    self->rubber_bending_y = newy;
-
-    /* update selection */
-    for( l = self->items; l; l = l->next )
-    {
-        DesktopItem* item = (DesktopItem*)l->data;
-        gboolean selected;
-        if( gdk_rectangle_intersect( &new_rect, &item->icon_rect, NULL ) ||
-            gdk_rectangle_intersect( &new_rect, &item->text_rect, NULL ) )
-            selected = TRUE;
-        else
-            selected = FALSE;
-
-        if( item->is_selected != selected )
-        {
-            item->is_selected = selected;
-            redraw_item( self, item );
-        }
-    }
-}
-
 gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
 {
     DesktopWindow* self = (DesktopWindow*)w;
@@ -898,18 +648,11 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
 
     if( evt->type == GDK_BUTTON_PRESS )
     {
-        if( evt->button == 1 )  /* left button */
-        {
-            self->button_pressed = TRUE;    /* store button state for drag & drop */
-            self->drag_start_x = evt->x;
-            self->drag_start_y = evt->y;
-        }
-
-        /* if ctrl / shift is not pressed, deselect all. */
+        /* if this is a left click, and ctrl / shift is not pressed, deselect all. */
         if( ! (evt->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) )
         {
-            /* don't cancel selection if clicking on selected items */
-            if( !( (evt->button == 1 || evt->button == 3) && clicked_item && clicked_item->is_selected) )
+            /* don't cancel selection if right button is pressed */
+            if( ! (evt->button == 3 && clicked_item && clicked_item->is_selected) )
             {
                 for( l = self->items; l ;l = l->next )
                 {
@@ -982,19 +725,6 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
                     goto out;   /* don't forward the event to root win */
                 }
             }
-            else if( evt->button == 1 )
-            {
-                self->rubber_bending = TRUE;
-
-                /* FIXME: if you foward the event here, this will break rubber bending... */
-                /* forward the event to root window */
-                /* forward_event_to_rootwin( gtk_widget_get_screen(w), evt ); */
-
-                gtk_grab_add( w );
-                self->rubber_bending_x = evt->x;
-                self->rubber_bending_y = evt->y;
-                goto out;
-            }
         }
     }
     else if( evt->type == GDK_2BUTTON_PRESS )
@@ -1032,21 +762,6 @@ out:
 
 gboolean on_button_release( GtkWidget* w, GdkEventButton* evt )
 {
-    DesktopWindow* self = (DesktopWindow*)w;
-
-    self->button_pressed = FALSE;
-
-    if( self->rubber_bending )
-    {
-        update_rubberbanding( self, evt->x, evt->y );
-        gtk_grab_remove( w );
-        self->rubber_bending = FALSE;
-    }
-    else if( self->dragging )
-    {
-        self->dragging = FALSE;
-    }
-
     /* forward the event to root window */
     if( ! hit_test( w, (int)evt->x, (int)evt->y ) )
         forward_event_to_rootwin( gtk_widget_get_screen(w), evt );
@@ -1056,357 +771,7 @@ gboolean on_button_release( GtkWidget* w, GdkEventButton* evt )
 
 gboolean on_mouse_move( GtkWidget* w, GdkEventMotion* evt )
 {
-    DesktopWindow* self = (DesktopWindow*)w;
-
-    if( ! self->button_pressed )
-        return TRUE;
-
-    if( self->dragging )
-    {
-    }
-    else if( self->rubber_bending )
-    {
-        update_rubberbanding( self, evt->x, evt->y );
-    }
-    else
-    {
-        if ( gtk_drag_check_threshold( w,
-                                    self->drag_start_x,
-                                    self->drag_start_y,
-                                    evt->x, evt->y))
-        {
-            GtkTargetList* target_list;
-            gboolean virtual_item = FALSE;
-            GList* sels = desktop_window_get_selected_items(self);
-
-            self->dragging = TRUE;
-            if( sels && sels->next == NULL ) /* only one item selected */
-            {
-                DesktopItem* item = (DesktopItem*)sels->data;
-                if( item->fi->flags & VFS_FILE_INFO_VIRTUAL )
-                    virtual_item = TRUE;
-            }
-            g_list_free( sels );
-            if( virtual_item )
-                target_list = gtk_target_list_new( drag_targets + 1, G_N_ELEMENTS(drag_targets) - 1 );
-            else
-                target_list = gtk_target_list_new( drag_targets, G_N_ELEMENTS(drag_targets) );
-            gtk_drag_begin( w, target_list,
-                         GDK_ACTION_COPY|GDK_ACTION_MOVE|GDK_ACTION_LINK,
-                         1, evt );
-            gtk_target_list_unref( target_list );
-        }
-    }
-
     return TRUE;
-}
-
-void on_drag_begin( GtkWidget* w, GdkDragContext* ctx )
-{
-    DesktopWindow* self = (DesktopWindow*)w;
-}
-
-static GdkAtom get_best_target_at_dest( DesktopWindow* self, GdkDragContext* ctx, gint x, gint y )
-{
-    DesktopItem* item;
-    GdkAtom expected_target = 0;
-
-    if( G_LIKELY(ctx->targets) )
-    {
-        if( ctx->action != GDK_ACTION_MOVE )
-            expected_target = text_uri_list_atom;
-        else
-        {
-            item = hit_test( self, x, y );
-            if( item )  /* drag over a desktpo item */
-            {
-                GList* sels;
-                sels = desktop_window_get_selected_items( self );
-                /* drag over the selected items themselves */
-                if( g_list_find( sels, item ) )
-                    expected_target = desktop_icon_atom;
-                else
-                    expected_target = text_uri_list_atom;
-                g_list_free( sels );
-            }
-            else    /* drag over blank area, check if it's a desktop icon first. */
-            {
-                if( g_list_find( ctx->targets, GUINT_TO_POINTER(desktop_icon_atom) ) )
-                    return desktop_icon_atom;
-                expected_target = text_uri_list_atom;
-            }
-        }
-        if( g_list_find( ctx->targets, GUINT_TO_POINTER(expected_target) ) )
-            return expected_target;
-    }
-    return GDK_NONE;
-}
-
-#define GDK_ACTION_ALL  (GDK_ACTION_MOVE|GDK_ACTION_COPY|GDK_ACTION_LINK)
-
-gboolean on_drag_motion( GtkWidget* w, GdkDragContext* ctx, gint x, gint y, guint time )
-{
-    DesktopWindow* self = (DesktopWindow*)w;
-    DesktopItem* item;
-    GdkAtom target;
-
-    if( ! self->drag_entered )
-    {
-        self->drag_entered = TRUE;
-    }
-
-    if( self->rubber_bending )
-    {
-        /* g_debug("rubber banding!"); */
-        return TRUE;
-    }
-
-    /* g_debug( "suggest: %d, action = %d", ctx->suggested_action, ctx->action ); */
-
-    if( g_list_find( ctx->targets, GUINT_TO_POINTER(text_uri_list_atom) ) )
-    {
-        GdkDragAction suggested_action = 0;
-        /* Only 'move' is available. The user force move action by pressing Shift key */
-        if( (ctx->actions & GDK_ACTION_ALL) == GDK_ACTION_MOVE )
-            suggested_action = GDK_ACTION_MOVE;
-        /* Only 'copy' is available. The user force copy action by pressing Ctrl key */
-        else if( (ctx->actions & GDK_ACTION_ALL) == GDK_ACTION_COPY )
-            suggested_action = GDK_ACTION_COPY;
-        /* Only 'link' is available. The user force link action by pressing Shift+Ctrl key */
-        else if( (ctx->actions & GDK_ACTION_ALL) == GDK_ACTION_LINK )
-            suggested_action = GDK_ACTION_LINK;
-        /* Several different actions are available. We have to figure out a good default action. */
-        else
-        {
-            if( get_best_target_at_dest(self, ctx, x, y ) == text_uri_list_atom )
-            {
-                self->pending_drop_action = TRUE;
-                /* check the status of drop site */
-                gtk_drag_get_data( w, ctx, text_uri_list_atom, time );
-                return TRUE;
-            }
-            else /* move desktop icon */
-            {
-                suggested_action = GDK_ACTION_MOVE;
-            }
-        }
-        ctx->action = suggested_action;
-        gdk_drag_status( ctx, suggested_action, time );
-    }
-    else if( g_list_find( ctx->targets, GUINT_TO_POINTER(desktop_icon_atom) ) ) /* moving desktop icon */
-    {
-        ctx->action = GDK_ACTION_MOVE;
-        gdk_drag_status( ctx, GDK_ACTION_MOVE, time );
-    }
-    else
-    {
-        gdk_drag_status (ctx, 0, time);
-    }
-    return TRUE;
-}
-
-gboolean on_drag_drop( GtkWidget* w, GdkDragContext* ctx, gint x, gint y, guint time )
-{
-    DesktopWindow* self = (DesktopWindow*)w;
-    GdkAtom target = get_best_target_at_dest( self, ctx, x, y );
-    /* g_debug("DROP: %s!", gdk_atom_name(target) ); */
-    if( target == GDK_NONE )
-        return FALSE;
-    if( target == text_uri_list_atom || target == desktop_icon_atom )
-        gtk_drag_get_data( w, ctx, target, time );
-    return TRUE;
-}
-
-void on_drag_data_get( GtkWidget* w, GdkDragContext* ctx, GtkSelectionData* data, guint info, guint time )
-{
-    DesktopWindow* self = (DesktopWindow*)w;
-    GList *sels, *l;
-    char* uri_list;
-    gsize len;
-
-    if( info == DRAG_TARGET_URI_LIST )
-    {
-        GString *buf = g_string_sized_new( 4096 );
-
-        sels = desktop_window_get_selected_files( self );
-
-        for( l = sels; l; l = l->next )
-        {
-            VFSFileInfo* fi = (VFSFileInfo*)l->data;
-            char* path, *uri;
-
-            if( fi->flags & VFS_FILE_INFO_VIRTUAL )
-                continue;
-
-            path = g_build_filename( vfs_get_desktop_dir(), fi->name, NULL );
-            uri = g_filename_to_uri( path, NULL, NULL );
-            g_free( path );
-            g_string_append( buf, uri );
-            g_string_append( buf, "\r\n" );
-            g_free( uri );
-        }
-
-        g_list_foreach( sels, vfs_file_info_unref, NULL );
-        g_list_free( sels );
-
-        uri_list = g_convert( buf->str, buf->len, "ASCII", "UTF-8", NULL, &len, NULL);
-        g_string_free( buf, TRUE);
-
-        if( uri_list )
-        {
-            gtk_selection_data_set( data,
-                      text_uri_list_atom,
-                      8, (guchar *)uri_list, len );
-            g_free (uri_list);
-        }
-    }
-    else if( info == DRAG_TARGET_DESKTOP_ICON )
-    {
-    }
-}
-
-static char** get_files_from_selection_data(GtkSelectionData* data)
-{
-    char** files = gtk_selection_data_get_uris(data), **pfile;
-    if( files )
-    {
-        /* convert uris to filenames */
-        for( pfile = files; *pfile; ++pfile )
-        {
-            char* file = g_filename_from_uri( *pfile, NULL, NULL );
-            g_free( *pfile );
-            *pfile = file;
-        }
-    }
-    return files;
-}
-
-void on_drag_data_received( GtkWidget* w, GdkDragContext* ctx, gint x, gint y, GtkSelectionData* data, guint info, guint time )
-{
-    DesktopWindow* self = (DesktopWindow*)w;
-
-    if( data->target == text_uri_list_atom )
-    {
-        DesktopItem* item = hit_test( self, x, y );
-        char* dest_dir = NULL;
-        VFSFileTaskType file_action = VFS_FILE_TASK_MOVE;
-        PtkFileTask* task = NULL;
-        char** files;
-        int n, i;
-        GList* file_list;
-
-        if( (data->length < 0) || (data->format != 8) )
-        {
-            gtk_drag_finish( ctx, FALSE, FALSE, time );
-            return;
-        }
-
-        if( item )
-        {
-            if( (item->fi->flags & VFS_FILE_INFO_VIRTUAL) && vfs_file_info_is_dir( item->fi ) )
-                dest_dir = g_build_filename( vfs_get_desktop_dir(), item->fi->name, NULL );
-        }
-
-        /* We are just checking the suggested actions for the drop site, not really drop */
-        if( self->pending_drop_action )
-        {
-            GdkDragAction suggested_action = 0;
-            dev_t dest_dev;
-            struct stat statbuf;
-
-            if( stat( dest_dir ? dest_dir : vfs_get_desktop_dir(), &statbuf ) == 0 )
-            {
-                dest_dev = statbuf.st_dev;
-                if( 0 == self->drag_src_dev )
-                {
-                    char** pfile;
-                    files = get_files_from_selection_data(data);
-                    self->drag_src_dev = dest_dev;
-                    if( files )
-                    {
-                        for( pfile = files; *pfile; ++pfile )
-                        {
-                            if( stat( *pfile, &statbuf ) == 0 && statbuf.st_dev != dest_dev )
-                            {
-                                self->drag_src_dev = statbuf.st_dev;
-                                break;
-                            }
-                        }
-                    }
-                    g_strfreev( files );
-                }
-
-                if( self->drag_src_dev != dest_dev )     /* src and dest are on different devices */
-                    suggested_action = GDK_ACTION_COPY;
-                else
-                    suggested_action = GDK_ACTION_MOVE;
-            }
-            g_free( dest_dir );
-            self->pending_drop_action = FALSE;
-            gdk_drag_status( ctx, suggested_action, time );
-            return;
-        }
-
-        switch ( ctx->action )
-        {
-        case GDK_ACTION_COPY:
-            file_action = VFS_FILE_TASK_COPY;
-            break;
-        case GDK_ACTION_LINK:
-            file_action = VFS_FILE_TASK_LINK;
-            break;
-            /* FIXME:
-              GDK_ACTION_DEFAULT, GDK_ACTION_PRIVATE, and GDK_ACTION_ASK are not handled */
-        default:
-            break;
-        }
-
-        files = get_files_from_selection_data( data );
-        /* g_debug("file_atcion: %d", file_action); */
-        file_list = NULL;
-        n = g_strv_length( files );
-        for( i = 0; i < n; ++i )
-            file_list = g_list_prepend( file_list, files[i] );
-        g_free( files );
-
-        task = ptk_file_task_new( file_action,
-                                  file_list,
-                                  dest_dir ? dest_dir : vfs_get_desktop_dir(),
-                                  GTK_WINDOW( self ) );
-        ptk_file_task_run( task );
-
-        g_free( dest_dir );
-
-        gtk_drag_finish( ctx, TRUE, FALSE, time );
-    }
-    else if( data->target == desktop_icon_atom ) /* moving desktop icon */
-    {
-        GList* sels = desktop_window_get_selected_items(self), *l;
-        int x_off = x - self->drag_start_x;
-        int y_off = y - self->drag_start_y;
-        for( l = sels; l; l = l->next )
-        {
-            DesktopItem* item = l->data;
-            #if 0   /* temporarily turn off */
-            move_item( self, item, x_off, y_off, TRUE );
-            #endif
-            /* g_debug( "move: %d, %d", x_off, y_off ); */
-        }
-        g_list_free( sels );
-        gtk_drag_finish( ctx, TRUE, FALSE, time );
-    }
-}
-
-void on_drag_leave( GtkWidget* w, GdkDragContext* ctx, guint time )
-{
-    DesktopWindow* self = (DesktopWindow*)w;
-    self->drag_entered = FALSE;
-    self->drag_src_dev = 0;
-}
-
-void on_drag_end( GtkWidget* w, GdkDragContext* ctx )
-{
-    DesktopWindow* self = (DesktopWindow*)w;
 }
 
 gboolean on_key_press( GtkWidget* w, GdkEventKey* evt )
@@ -1970,26 +1335,6 @@ void paint_item( DesktopWindow* self, DesktopItem* item, GdkRectangle* expose_ar
     widget->style->fg_gc[0] = tmp;
 }
 
-void move_item( DesktopWindow* self, DesktopItem* item, int x, int y, gboolean is_offset )
-{
-    GdkRectangle old = item->box;
-
-    if( ! is_offset )
-    {
-        x -= item->box.x;
-        y -= item->box.y;
-    }
-    item->box.x += x;
-    item->box.y += y;
-    item->icon_rect.x += x;
-    item->icon_rect.y += y;
-    item->text_rect.x += x;
-    item->text_rect.y += y;
-
-    gtk_widget_queue_draw_area( (GtkWidget*)self, old.x, old.y, old.width, old.height );
-    gtk_widget_queue_draw_area( (GtkWidget*)self, item->box.x, item->box.y, item->box.width, item->box.height );
-}
-
 static gboolean is_point_in_rect( GdkRectangle* rect, int x, int y )
 {
     return rect->x < x && x < (rect->x + rect->width) && y > rect->y && y < (rect->y + rect->height);
@@ -2213,9 +1558,9 @@ GList* desktop_window_get_selected_files( DesktopWindow* win )
         {
             /* don't include virtual items */
             GList* tmp = l;
+            sel = g_list_delete_link( sel, l );
             l = tmp->next;
-            sel = g_list_remove_link( sel, tmp );
-            g_list_free1( tmp );
+            g_list_free1( l );
         }
         else
         {

@@ -6,10 +6,10 @@
 # Avoid injury or death
 msgid ""
 msgstr ""
-"Project-Id-Version: PCMan FM 0.4.1.1\n"
+"Project-Id-Version: PCMan FM 0.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 21:33+0800\n"
-"PO-Revision-Date: 2008-05-12 01:31+0100\n"
+"POT-Creation-Date: 2008-05-21 22:29+0800\n"
+"PO-Revision-Date: 2008-02-16 12:46+0100\n"
 "Last-Translator: Rüdiger Arp <ruediger@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,31 +17,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/main.c:81
+#: src/main.c:82
 msgid "Don't show desktop icons."
 msgstr "Desktop-Symbole nicht anzeigen"
 
-#: src/main.c:82
-msgid "Run PCManFM as a daemon"
-msgstr "PCManFM als Daemon ausführen"
-
 #: src/main.c:83
+msgid "Run PCManFM as a daemon"
+msgstr ""
+
+#: src/main.c:84
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
 msgstr ""
-"Ordner in neuen Reitern des zuletzt benutzten Fensters öffnen, anstatt neue "
-"Fenster zu öffnen"
 
-#: src/main.c:92
+#: src/main.c:94
 msgid "[FILE1, FILE2,...]"
 msgstr "[DATEI1, DATEI2,...]"
 
-#: src/main.c:299
+#: src/main.c:301
 msgid "GTK+ icon theme is not properly set"
 msgstr "Das GTK+-Symbolthema wurde nicht korrekt eingerichtet"
 
-#: src/main.c:301
+#: src/main.c:303
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -84,16 +82,26 @@ msgstr ""
 "Benennung von Symbolen gehen. Gegenwärtig existiert hierfür kein allgemeiner "
 "Standard, allerdings arbeitet freedesktop.org an einer Lösung."
 
-#: src/main.c:583 src/main.c:665 src/main.c:716 src/main-window.c:1561
-#: src/main-window.c:1613 src/ptk/ptk-file-browser.c:503
-#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:330
+#: src/main.c:549
+#, fuzzy
+msgid "Authantication"
+msgstr "Anwendung"
+
+#: src/main.c:558
+msgid "Password: "
+msgstr ""
+
+#: src/main.c:623 src/main.c:705 src/main.c:756 src/main-window.c:1586
+#: src/main-window.c:1651 src/ptk/ptk-file-browser.c:520
+#: src/ptk/ptk-file-browser.c:537 src/ptk/ptk-file-task.c:329
 #: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
 #: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
 #: src/ptk/ptk-file-properties.c:693 src/ptk/ptk-file-properties.c:704
+#: src/ptk/ptk-remote-volume.c:163 src/ptk/ptk-remote-volume.c:171
 msgid "Error"
 msgstr "Fehler"
 
-#: src/main.c:583
+#: src/main.c:623
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -103,15 +111,15 @@ msgstr ""
 "\n"
 "Sind \"FAM\" oder \"Gamin\" installiert und aktiv?"
 
-#: src/main.c:665
+#: src/main.c:705
 msgid "File doesn't exist"
 msgstr "Die Datei existiert nicht"
 
-#: src/main.c:712
+#: src/main.c:752
 msgid "Don't know how to open the file"
 msgstr "Die Datei konnte nicht angezeigt werden"
 
-#: src/main.c:714
+#: src/main.c:754
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -122,326 +130,342 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: src/main-window.c:294 src/ptk/ptk-file-menu.c:109
-#: src/desktop/desktop-window.c:182
+#: src/main-window.c:299 src/ptk/ptk-file-menu.c:109
+#: src/desktop/desktop-window.c:157
 msgid "_Folder"
 msgstr "_Ordner"
 
-#: src/main-window.c:295 src/ptk/ptk-file-menu.c:110
-#: src/desktop/desktop-window.c:183
+#: src/main-window.c:300 src/ptk/ptk-file-menu.c:110
+#: src/desktop/desktop-window.c:158
 msgid "_Text File"
 msgstr "_Textdatei"
 
-#: src/main-window.c:301
+#: src/main-window.c:306
 msgid "New _Window"
 msgstr "Neues _Fenster"
 
-#: src/main-window.c:302
+#: src/main-window.c:307
 msgid "New _Tab"
 msgstr "Neuer _Reiter"
 
-#: src/main-window.c:303
+#: src/main-window.c:308
 msgid "Close Tab"
 msgstr "Reiter schließen"
 
-#: src/main-window.c:305 src/ptk/ptk-file-menu.c:133
-#: src/desktop/desktop-window.c:192
+#: src/main-window.c:310 src/ptk/ptk-file-menu.c:133
+#: src/desktop/desktop-window.c:167
 msgid "_Create New"
 msgstr "Neu _anlegen"
 
-#: src/main-window.c:306
+#: src/main-window.c:311
 msgid "File _Properties"
 msgstr "_Eigenschaften"
 
-#: src/main-window.c:317 src/ptk/ptk-file-menu.c:128
+#: src/main-window.c:322 src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "Lö_schen"
 
-#: src/main-window.c:318 src/ptk/ptk-file-browser.c:1368
+#: src/main-window.c:323 src/ptk/ptk-file-browser.c:1398
 #: src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "_Umbenennen"
 
-#: src/main-window.c:320
+#: src/main-window.c:325
 msgid "Select _All"
 msgstr "A_lle auswählen"
 
-#: src/main-window.c:321
+#: src/main-window.c:326
 msgid "_Invert Selection"
 msgstr "Aus_wahl umkehren"
 
-#: src/main-window.c:330
+#: src/main-window.c:335
 msgid "Go _Back"
 msgstr "_Zurück"
 
-#: src/main-window.c:331
+#: src/main-window.c:336
 msgid "Go _Forward"
 msgstr "_Vor"
 
-#: src/main-window.c:332
+#: src/main-window.c:337
 msgid "Go to _Parent Folder"
 msgstr "_Eltern-Ordner öffnen"
 
-#: src/main-window.c:333
+#: src/main-window.c:338
 msgid "Go _Home"
 msgstr "_Persönlicher Ordner"
 
-#: src/main-window.c:345 src/desktop/desktop-window.c:169
+#: src/main-window.c:350 src/desktop/desktop-window.c:144
 msgid "Sort by _Name"
 msgstr "Nach _Name sortieren"
 
-#: src/main-window.c:346 src/desktop/desktop-window.c:170
+#: src/main-window.c:351 src/desktop/desktop-window.c:145
 msgid "Sort by _Size"
 msgstr "Nach _Größe sortieren"
 
-#: src/main-window.c:347 src/desktop/desktop-window.c:172
+#: src/main-window.c:352 src/desktop/desktop-window.c:147
 msgid "Sort by _Modification Time"
 msgstr "Nach Än_derungsdatum sortieren"
 
-#: src/main-window.c:348 src/desktop/desktop-window.c:171
+#: src/main-window.c:353 src/desktop/desktop-window.c:146
 msgid "Sort by _Type"
 msgstr "Nach _Typ sortieren"
 
-#: src/main-window.c:349
+#: src/main-window.c:354
 msgid "Sort by _Permission"
 msgstr "Nach _Zugriffsrechten sortieren"
 
-#: src/main-window.c:350
+#: src/main-window.c:355
 msgid "Sort by _Owner"
 msgstr "Nach _Besitzer sortieren"
 
-#: src/main-window.c:352 src/desktop/desktop-window.c:175
+#: src/main-window.c:357 src/desktop/desktop-window.c:150
 msgid "Ascending"
 msgstr "Aufsteigend"
 
-#: src/main-window.c:353 src/desktop/desktop-window.c:176
+#: src/main-window.c:358 src/desktop/desktop-window.c:151
 msgid "Descending"
 msgstr "Absteigend"
 
-#: src/main-window.c:359
+#: src/main-window.c:364
 msgid "_Open Side Pane"
 msgstr "Sei_tenleiste öffnen"
 
-#: src/main-window.c:361
+#: src/main-window.c:366
 msgid "Show _Location Pane"
 msgstr "_Orte anzeigen"
 
-#: src/main-window.c:362
+#: src/main-window.c:367
 msgid "Show _Directory Tree"
 msgstr "Or_dner anzeigen"
 
 #: src/main-window.c:368
+msgid "Show _Remote Drives"
+msgstr ""
+
+#: src/main-window.c:374
 msgid "_Refresh"
 msgstr "Aktualisie_ren"
 
-#: src/main-window.c:369
+#: src/main-window.c:375
 msgid "Side _Pane"
 msgstr "S_eitenleiste"
 
-#: src/main-window.c:372
+#: src/main-window.c:378
 msgid "Show _Hidden Files"
 msgstr "_Verborgene Dateien anzeigen"
 
-#: src/main-window.c:373
+#: src/main-window.c:379
 msgid "_Sort..."
 msgstr "_Sortieren..."
 
-#: src/main-window.c:375
+#: src/main-window.c:381
 msgid "View as _Icons"
 msgstr "Symbolans_icht"
 
-#: src/main-window.c:376
+#: src/main-window.c:382
+#, fuzzy
 msgid "View as _Compact List"
 msgstr "_Listenansicht"
 
-#: src/main-window.c:377
-msgid "View as Detailed _List"
-msgstr "_Detailansicht"
-
 #: src/main-window.c:383
+msgid "View as Detailed _List"
+msgstr "_Listenansicht"
+
+#: src/main-window.c:389
 msgid "Open _Terminal"
 msgstr "_Terminal öffnen"
 
-#: src/main-window.c:384
+#: src/main-window.c:390
 msgid "Open Current Folder as _Root"
 msgstr "Aktuellen Ordner als _root öffnen"
 
-#: src/main-window.c:392
+#: src/main-window.c:393
+#, fuzzy
+msgid "_Connect to Remote Drive"
+msgstr "Memory-Stick-Laufwerk"
+
+#: src/main-window.c:399
 msgid "_File"
 msgstr "_Datei"
 
-#: src/main-window.c:393
+#: src/main-window.c:400
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: src/main-window.c:395
+#: src/main-window.c:402
 msgid "_Go"
 msgstr "_Gehe zu"
 
-#: src/main-window.c:396
+#: src/main-window.c:403
 msgid "_Bookmark"
 msgstr "_Lesezeichen"
 
-#: src/main-window.c:397
+#: src/main-window.c:404
 msgid "_View"
 msgstr "_Ansicht"
 
-#: src/main-window.c:398
+#: src/main-window.c:405
 msgid "_Tool"
 msgstr "_Werkzeuge"
 
-#: src/main-window.c:399
+#: src/main-window.c:406
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: src/main-window.c:407
+#: src/main-window.c:414
 msgid "New Tab"
 msgstr "Neuer Reiter"
 
-#: src/main-window.c:408
+#: src/main-window.c:415
 msgid "Back"
 msgstr "Zurück"
 
-#: src/main-window.c:409
+#: src/main-window.c:416
 msgid "Forward"
 msgstr "Vorwärts"
 
-#: src/main-window.c:410
+#: src/main-window.c:417
 msgid "Parent Folder"
 msgstr "Übergeordneter Ordner"
 
-#: src/main-window.c:411
+#: src/main-window.c:418
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#: src/main-window.c:412
+#: src/main-window.c:419
 msgid "Home Directory"
 msgstr "Persönlicher Ordner"
 
-#: src/main-window.c:413
+#: src/main-window.c:420
 msgid "Open Side Pane"
 msgstr "Seitenleiste öffnen"
 
-#: src/main-window.c:419
+#: src/main-window.c:426
 msgid "Go"
 msgstr "Gehe zu"
 
-#: src/main-window.c:632
+#: src/main-window.c:640
 msgid "Warning: You are in super user mode"
 msgstr "Warnung: Sie arbeiten mit Superuser-Rechten"
 
-#: src/main-window.c:1562
+#: src/main-window.c:1587
 msgid "Terminal program has not been set"
 msgstr "Es wurde noch keine Terminal-Anwendung in den Einstellungen angegeben"
 
-#: src/main-window.c:1688
+#: src/main-window.c:1726
 msgid "_Add to Bookmarks"
 msgstr "_Lesezeichen hinzufügen"
 
-#: src/main-window.c:1689
+#: src/main-window.c:1727
 msgid "_Edit Bookmarks"
 msgstr "L_esezeichen bearbeiten"
 
-#: src/main-window.c:1766
+#: src/main-window.c:1804
 msgid "Loading..."
 msgstr "Lade..."
 
-#: src/main-window.c:1976
+#: src/main-window.c:2023
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr ", freier Speicherplatz: %s (Gesamt: %s )"
 
-#: src/main-window.c:1985
+#: src/main-window.c:2032
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
 msgstr[0] "%d Objekt ausgewählt (%s)%s"
 msgstr[1] "%d Objekte ausgewählt (%s)%s"
 
-#: src/main-window.c:1995
+#: src/main-window.c:2042
 #, c-format
 msgid "%d hidden"
 msgid_plural "%d hidden"
-msgstr[0] "%d verborgen"
-msgstr[1] "%d verborgen"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/main-window.c:1996
-#, c-format
+#: src/main-window.c:2043
+#, fuzzy, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
-msgstr[0] "%d Objekt angezeigt (%s)%s"
-msgstr[1] "%d Objekte angezeigt (%s)%s"
+msgstr[0] "%d Objekt angezeigt (%d veborgen)%s"
+msgstr[1] "%d Objekte angezeigt (%d veborgen)%s"
 
-#: src/ptk/ptk-file-browser.c:504
+#: src/ptk/ptk-file-browser.c:521
 msgid "Directory doesn't exist!"
 msgstr "Das Verzeichnis existiert nicht!"
 
-#: src/ptk/ptk-file-browser.c:1364 src/ptk/ptk-file-menu.c:142
+#: src/ptk/ptk-file-browser.c:1394 src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "In neuem Rei_ter öffnen"
 
-#: src/ptk/ptk-file-browser.c:1365 src/ptk/ptk-file-menu.c:143
+#: src/ptk/ptk-file-browser.c:1395 src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "In neuem _Fenster öffnen"
 
-#: src/ptk/ptk-file-browser.c:1623 src/edit-bookmarks.c:198
+#: src/ptk/ptk-file-browser.c:1687 src/edit-bookmarks.c:198
 msgid "Name"
 msgstr "Name"
 
-#: src/ptk/ptk-file-browser.c:1623
+#: src/ptk/ptk-file-browser.c:1687
 msgid "Size"
 msgstr "Größe"
 
-#: src/ptk/ptk-file-browser.c:1623
+#: src/ptk/ptk-file-browser.c:1687
 msgid "Type"
 msgstr "Typ"
 
-#: src/ptk/ptk-file-browser.c:1624
+#: src/ptk/ptk-file-browser.c:1688
 msgid "Permission"
 msgstr "Zugriffsrechte"
 
-#: src/ptk/ptk-file-browser.c:1624
+#: src/ptk/ptk-file-browser.c:1688
 msgid "Owner:Group"
 msgstr "Besitzer:Gruppe"
 
-#: src/ptk/ptk-file-browser.c:1624
+#: src/ptk/ptk-file-browser.c:1688
 msgid "Last Modification"
 msgstr "Änderungsdatum"
 
-#: src/ptk/ptk-file-browser.c:2831
+#: src/ptk/ptk-file-browser.c:2925
 msgid "Location"
 msgstr "Orte"
 
-#: src/ptk/ptk-file-browser.c:2832
+#: src/ptk/ptk-file-browser.c:2926
 msgid "Directory Tree"
 msgstr "Baum"
 
-#: src/ptk/ptk-location-view.c:197
+#: src/ptk/ptk-file-browser.c:2927
+#, fuzzy
+msgid "Remote Drives"
+msgstr "Memory-Stick-Laufwerk"
+
+#: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
 msgstr "Desktop"
 
-#: src/ptk/ptk-location-view.c:397 src/ptk/ptk-location-view.c:589
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
+#: src/ptk/ptk-remote-fs-view.c:332
 msgid "Unable to mount device"
 msgstr "Datenträger konnte nicht ins System eingebunden werden"
 
-#: src/ptk/ptk-location-view.c:604
+#: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
 msgstr "Datenträger konnte nicht ausgehängt werden"
 
-#: src/ptk/ptk-location-view.c:621
+#: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
 msgstr "Datenträger konnte nicht ausgeworfen werden"
 
-#: src/ptk/ptk-location-view.c:679
+#: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
 msgstr "_Dateisystem einbinden"
 
-#: src/ptk/ptk-location-view.c:689
+#: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
 msgstr "_Auswerfen"
 
-#: src/ptk/ptk-location-view.c:695
+#: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
 msgstr "_Dateisystem aushängen"
 
@@ -507,28 +531,28 @@ msgstr "Vorgang wird vorbereitet..."
 msgid "Progress:"
 msgstr "Fortschritt:"
 
-#: src/ptk/ptk-file-task.c:318
+#: src/ptk/ptk-file-task.c:317
 msgid "Cancel the operation?"
 msgstr "Vorgang abbrechen?"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:407
+#: src/ptk/ptk-file-task.c:406
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "Möchten Sie diesen Ordner und seinen Inhalt überschreiben?"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:412
+#: src/ptk/ptk-file-task.c:411
 msgid "Do you want to overwrite this file?"
 msgstr "Möchten Sie diese Datei überschreiben?"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:417
+#: src/ptk/ptk-file-task.c:416
 msgid "Please choose a new file name."
 msgstr "Neuen Dateinamen auswählen"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:425
+#: src/ptk/ptk-file-task.c:424
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -540,7 +564,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:430
+#: src/ptk/ptk-file-task.c:429
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -555,23 +579,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:447
+#: src/ptk/ptk-file-task.c:446
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/ptk/ptk-file-task.c:448
+#: src/ptk/ptk-file-task.c:447
 msgid "Overwrite All"
 msgstr "Alle überschreiben"
 
-#: src/ptk/ptk-file-task.c:453
+#: src/ptk/ptk-file-task.c:452
 msgid "Rename"
 msgstr "Umbenennen"
 
-#: src/ptk/ptk-file-task.c:454
+#: src/ptk/ptk-file-task.c:453
 msgid "Skip"
 msgstr "Überspringen"
 
-#: src/ptk/ptk-file-task.c:455
+#: src/ptk/ptk-file-task.c:454
 msgid "Skip All"
 msgstr "Alle überspringen"
 
@@ -745,6 +769,57 @@ msgstr ""
 "Möchten Sie diese Änderungen rekursiv auf alle Dateien und "
 "Unterverzeichnisse anwenden?"
 
+#: src/ptk/ptk-remote-fs-view.c:466
+#, fuzzy
+msgid "Unable to connect"
+msgstr "Datenträger konnte nicht ins System eingebunden werden"
+
+#: src/ptk/ptk-remote-fs-view.c:505
+#, fuzzy
+msgid "Unable to disconnect"
+msgstr "Datenträger konnte nicht ins System eingebunden werden"
+
+#: src/ptk/ptk-remote-fs-view.c:521
+msgid ""
+"Are you sure you want to remove this network drive?\n"
+"\n"
+"<b>Warning: Once deleted, it cannot be recovered.</b>"
+msgstr ""
+
+#: src/ptk/ptk-remote-fs-view.c:523
+msgid "Confirm"
+msgstr ""
+
+#: src/ptk/ptk-remote-fs-view.c:586
+msgid "_Connect"
+msgstr ""
+
+#: src/ptk/ptk-remote-fs-view.c:594
+msgid "_Disconnect"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:70
+msgid "FTP - File Transfer Protocol"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:71
+msgid "FTPS - FTP over implicit SSL/TLS"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:72
+msgid "SFTP - SSH File Transfer Protocol"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:163
+#, fuzzy
+msgid "Please give this network drive a name"
+msgstr "Dateiname eingeben:"
+
+#: src/ptk/ptk-remote-volume.c:171
+#, fuzzy
+msgid "Please input host address"
+msgstr "Dateiname eingeben:"
+
 #: src/edit-bookmarks.c:77
 msgid "New Item"
 msgstr "Neues Objekt"
@@ -871,7 +946,7 @@ msgstr "Laufwerk"
 #: src/vfs/vfs-volume-hal.c:591
 #, c-format
 msgid "External %s"
-msgstr "Externes %s"
+msgstr ""
 
 #: src/vfs/vfs-volume-hal.c:625
 msgid "CD-ROM Disc"
@@ -1043,17 +1118,38 @@ msgstr ""
 "Audio-CDs können nicht eingebunden werden. Verwenden Sie Ihren Musik-Player, "
 "um Musik abzuspielen."
 
-#: src/desktop/desktop-window.c:189
+#: src/vfs/vfs-remote-fs-mgr.c:41
+#, c-format
+msgid "This function requires program '%s', but it's not found on the system."
+msgstr ""
+
+#: src/vfs/vfs-remote-fs-mgr.c:246
+msgid "Network Neighbourhood"
+msgstr ""
+
+#: src/vfs/vfs-remote-fs-mgr.c:562
+#, c-format
+msgid "Unknown network protocol"
+msgstr ""
+
+#: src/vfs/vfs-remote-fs-mgr.c:602 src/vfs/vfs-remote-fs-mgr.c:615
+#, c-format
+msgid "Unknown error occured"
+msgstr ""
+
+#: src/desktop/desktop-window.c:164
+#, fuzzy
 msgid "_Icons"
-msgstr "S_ymbole"
+msgstr "Symbolans_icht"
 
-#: src/desktop/desktop-window.c:194
+#: src/desktop/desktop-window.c:169
+#, fuzzy
 msgid "_Desktop Settings"
-msgstr "_Desktopeinstellungen"
+msgstr "_Desktop"
 
-#: src/desktop/desktop-window.c:1741
+#: src/desktop/desktop-window.c:1106
 msgid "My Documents"
-msgstr "Eigene Dokumente"
+msgstr ""
 
 #: data/ui/prefdlg.glade:1
 msgid "Preference"
@@ -1114,8 +1210,9 @@ msgid "Please select an image file"
 msgstr "Bitte eine Bilddatei auswählen"
 
 #: data/ui/prefdlg.glade:16
+#, fuzzy
 msgid "Mode:"
-msgstr "Stil: "
+msgstr "Verschieben: "
 
 #: data/ui/prefdlg.glade:16
 msgid ""
@@ -1124,38 +1221,37 @@ msgid ""
 "Center on the screen\n"
 "Tile the image to fill the entire screen"
 msgstr ""
-"Bildschirm füllen\n"
-"Skalieren\n"
-"Zentrieren\n"
-"Kacheln"
 
 #: data/ui/prefdlg.glade:19
+#, fuzzy
 msgid "<b>Wallpaper</b>"
-msgstr "<b>Hintergrundbild</b>"
+msgstr "Desktop-Hintergrund:"
 
 #: data/ui/prefdlg.glade:19
+#, fuzzy
 msgid "Background"
-msgstr "Hintergrund"
+msgstr "Hintergrundfarbe"
 
 #: data/ui/prefdlg.glade:19
+#, fuzzy
 msgid "Text"
 msgstr "Text"
 
 #: data/ui/prefdlg.glade:19
 msgid "Shadow"
-msgstr "Schatten"
+msgstr ""
 
 #: data/ui/prefdlg.glade:19
 msgid "<b>Colors</b>"
-msgstr "<b>Farben</b>"
+msgstr ""
 
 #: data/ui/prefdlg.glade:19
 msgid "Show menus provided by WM when desktop is clicked"
-msgstr "Beim Klicken auf den Desktopbereich Menüs des Fenstermanagers anzeigen"
+msgstr ""
 
 #: data/ui/prefdlg.glade:19
 msgid "Advanced"
-msgstr "Erweitert"
+msgstr ""
 
 #: data/ui/prefdlg.glade:19
 msgid "_Desktop"
@@ -1262,6 +1358,7 @@ msgid "_All Applications"
 msgstr "_Alle Anwendungen"
 
 #: data/ui/appchooserdlg.glade:1
+#, fuzzy
 msgid "_Command Line:"
 msgstr "_Befehlszeile: "
 
@@ -1278,8 +1375,7 @@ msgid "Set selected application to default action"
 msgstr "Die ausgewählte Anwendung als Standard benutzen"
 
 #: data/ui/about-dlg.glade:1
-#, fuzzy
-msgid "Copyright (C) 2005 - 2008"
+msgid "Copyright (C) 2005 - 2006"
 msgstr "Copyright (C) 2005 - 2006"
 
 #: data/ui/about-dlg.glade:1
@@ -1336,6 +1432,73 @@ msgstr ""
 "von Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "Remote Host Settings"
+msgstr "_Desktop"
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "Use Passive Mode"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "<b>_Name:</b>"
+msgstr "Desktop-Hintergrund:"
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "_Password:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "_User:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "<b>_Server Type:</b>"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1 data/ui/remote-fs-dlg.glade:3
+msgid "<b>_Host:</b>"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1 data/ui/remote-fs-dlg.glade:3
+msgid "Port:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "_Encoding:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "Remote Dir:"
+msgstr "Memory-Stick-Laufwerk"
+
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "_Remote Host"
+msgstr "Memory-Stick-Laufwerk"
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid ""
+"HTTP Proxy\n"
+"SOCKS v4 Proxy\n"
+"SOCKS v5 Proxy"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:3
+msgid "Pro_xy"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:3
+msgid "Not implemented yet"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:3
+msgid "_Advanced"
+msgstr ""
+
 #~ msgid "gksu or kdesu is not found"
 #~ msgstr "gksu oder kdesu wurden nicht gefunden"
 
@@ -1351,9 +1514,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Der Datenträger \"%s\" ist nicht im System eingebunden.\n"
 #~ "Möchten Sie ihn jetzt einbinden?"
-
-#~ msgid "application"
-#~ msgstr "Anwendung"
 
 #~ msgid "audio"
 #~ msgstr "Audio"

@@ -39,8 +39,6 @@
 
 #include "ptk-utils.h"
 #include "ptk-app-chooser.h"
-#include "ptk-file-properties.h"
-#include "ptk-file-menu.h"
 
 #include "settings.h"
 
@@ -70,6 +68,9 @@ static gboolean new_tab = FALSE;
 static gboolean file_prop = FALSE;
 static gboolean file_menu = FALSE;
 
+/* for FUSE support, especially sshfs */
+static char* ask_pass = NULL;
+
 #ifdef HAVE_HAL
 static char* mount = NULL;
 static char* umount = NULL;
@@ -89,6 +90,7 @@ static GOptionEntry opt_entries[] =
     { "umount", 'u', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &umount, NULL, NULL },
     { "eject", 'e', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &eject, NULL, NULL },
 #endif
+    { "ask-pass", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &ask_pass, NULL, NULL },
     {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &files, NULL, N_("[FILE1, FILE2,...]")},
     { NULL }
 };
@@ -541,6 +543,40 @@ gboolean handle_parsed_commandline_args()
     return TRUE;
 }
 
+static int ask_for_password()
+{
+    int ret = 1;
+    GtkWidget* dlg = gtk_dialog_new_with_buttons( _("Authantication"), NULL,
+                                GTK_DIALOG_MODAL,
+                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                GTK_STOCK_OK, GTK_RESPONSE_OK, NULL );
+    GtkWidget* hbox = gtk_hbox_new( FALSE, 4 );
+    GtkWidget* img = gtk_image_new_from_stock( GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_DIALOG );
+    GtkWidget* label = gtk_label_new(_(ask_pass));
+    GtkWidget* entry = gtk_entry_new();
+#if 0
+    const char* default_prompt = _("Password: ");
+#endif
+
+    gtk_entry_set_visibility( (GtkEntry*)entry, FALSE );
+    gtk_entry_set_activates_default( entry, TRUE );
+    gtk_dialog_set_default_response( (GtkDialog*)dlg, GTK_RESPONSE_OK );
+
+    gtk_box_pack_start( (GtkBox*)hbox, img, FALSE, TRUE, 2 );
+    gtk_box_pack_start( (GtkBox*)hbox, label, FALSE, TRUE, 2 );
+    gtk_box_pack_start( (GtkBox*)hbox, entry, TRUE, TRUE, 2 );
+
+    gtk_box_pack_start( (GtkBox*)((GtkDialog*)dlg)->vbox, hbox, TRUE, TRUE, 2 );
+    gtk_widget_show_all( dlg );
+    if( gtk_dialog_run( (GtkDialog*)dlg ) == GTK_RESPONSE_OK )
+    {
+        printf( gtk_entry_get_text(entry) );
+        ret = 0;
+    }
+    gtk_widget_destroy( dlg );
+    return ret;
+}
+
 int main ( int argc, char *argv[] )
 {
     gboolean run = FALSE;
@@ -569,6 +605,10 @@ int main ( int argc, char *argv[] )
     if( G_UNLIKELY( mount || umount || eject ) )
         return handle_mount( argv );
 #endif
+
+    /* ask the user for password, used by sshfs */
+    if( G_UNLIKELY(ask_pass) )
+        return ask_for_password();
 
     /* ensure that there is only one instance of pcmanfm.
          if there is an existing instance, command line arguments

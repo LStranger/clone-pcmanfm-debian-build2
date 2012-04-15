@@ -304,7 +304,6 @@ gboolean on_vfs_file_task_state_cb( VFSFileTask* task,
             data->complete_notify( task, data->user_data );
         vfs_file_task_free( data->task );
         data->task = NULL;
-        ptk_file_task_destroy( data );
         break;
     case VFS_FILE_TASK_QUERY_OVERWRITE:
         new_dest = ( char** ) state_data;

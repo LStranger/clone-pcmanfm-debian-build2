@@ -32,6 +32,7 @@
 #include "edit-bookmarks.h"
 #include "ptk-file-properties.h"
 #include "ptk-path-entry.h"
+#include "ptk-remote-volume.h"
 
 #include "settings.h"
 
@@ -168,6 +169,8 @@ static void on_show_dir_tree ( GtkMenuItem *menuitem,
                                gpointer user_data );
 static void on_show_loation_pane ( GtkMenuItem *menuitem,
                                    gpointer user_data );
+static void on_show_remote_fs_pane ( GtkMenuItem *menuitem,
+                                     gpointer user_data );
 static void on_side_pane_toggled ( GtkToggleToolButton *toggletoolbutton,
                                    gpointer user_data );
 static void on_go_btn_clicked ( GtkToolButton *toolbutton,
@@ -176,6 +179,8 @@ static void on_open_terminal_activate ( GtkMenuItem *menuitem,
                                         gpointer user_data );
 static void on_open_current_folder_as_root ( GtkMenuItem *menuitem,
                                              gpointer user_data );
+static void on_connect_remote_drive_activate ( GtkMenuItem *menuitem,
+                                               gpointer user_data );
 static void on_file_properties_activate ( GtkMenuItem *menuitem,
                                           gpointer user_data );
 static void on_bookmark_item_activate ( GtkMenuItem* menu, gpointer user_data );
@@ -360,6 +365,7 @@ static PtkMenuItemEntry fm_side_pane_menu[] =
         PTK_SEPARATOR_MENU_ITEM,
         PTK_RADIO_MENU_ITEM( N_( "Show _Location Pane" ), on_show_loation_pane, 0, 0 ),
         PTK_RADIO_MENU_ITEM( N_( "Show _Directory Tree" ), on_show_dir_tree, 0, 0 ),
+        PTK_RADIO_MENU_ITEM( N_( "Show _Remote Drives" ), on_show_remote_fs_pane, 0, 0 ),
         PTK_MENU_END
     };
 
@@ -384,6 +390,7 @@ static PtkMenuItemEntry fm_tool_menu[] =
         PTK_IMG_MENU_ITEM( N_( "Open Current Folder as _Root" ),
                            GTK_STOCK_DIALOG_AUTHENTICATION,
                            on_open_current_folder_as_root, 0, 0 ),
+        PTK_IMG_MENU_ITEM( N_( "_Connect to Remote Drive" ), GTK_STOCK_NETWORK, on_connect_remote_drive_activate, 0, 0 ),
         PTK_MENU_END
     };
 
@@ -532,6 +539,7 @@ void fm_main_window_init( FMMainWindow* main_window )
     fm_side_pane_menu[ 0 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->open_side_pane_menu;
     fm_side_pane_menu[ 2 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->show_location_menu;
     fm_side_pane_menu[ 3 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->show_dir_tree_menu;
+    fm_side_pane_menu[ 4 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->show_remote_fs_menu;
     fm_view_menu[ 3 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->show_hidden_files_menu;
     fm_view_menu[ 6 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->view_as_icon;
     fm_view_menu[ 7 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->view_as_compact_list;
@@ -1356,6 +1364,23 @@ void on_show_loation_pane ( GtkMenuItem *menuitem, gpointer user_data )
     }
 }
 
+void on_show_remote_fs_pane ( GtkMenuItem *menuitem, gpointer user_data )
+{
+    FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
+    PtkFileBrowser* file_browser;
+    int i, n;
+    if ( ! GTK_CHECK_MENU_ITEM( menuitem ) ->active )
+        return ;
+    app_settings.side_pane_mode = PTK_FB_SIDE_PANE_REMOTE_FS;
+    n = gtk_notebook_get_n_pages( main_window->notebook );
+    for ( i = 0; i < n; ++i )
+    {
+        file_browser = PTK_FILE_BROWSER( gtk_notebook_get_nth_page(
+                                             main_window->notebook, i ) );
+        ptk_file_browser_set_side_pane_mode( file_browser, PTK_FB_SIDE_PANE_REMOTE_FS );
+    }
+}
+
 void
 on_show_hidden_activate ( GtkMenuItem *menuitem,
                           gpointer user_data )
@@ -1592,6 +1617,19 @@ void on_open_terminal_activate ( GtkMenuItem *menuitem,
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     PtkFileBrowser* file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
     ptk_file_browser_open_terminal( file_browser );
+}
+
+void on_connect_remote_drive_activate ( GtkMenuItem *menuitem,
+                                        gpointer user_data )
+{
+    FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
+    PtkFileBrowser* file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
+    VFSRemoteVolume* vol = ptk_remote_volume_add_new();
+    if( vol )
+    {
+        ptk_file_browser_set_side_pane_mode( file_browser, PTK_FB_SIDE_PANE_REMOTE_FS );
+        vfs_remote_volume_unref( vol );
+    }
 }
 
 void on_open_current_folder_as_root ( GtkMenuItem *menuitem,
@@ -1876,6 +1914,15 @@ void fm_main_window_update_command_ui( FMMainWindow* main_window,
                                            G_SIGNAL_MATCH_FUNC, 0, 0, NULL,
                                            on_show_dir_tree, NULL );
         break;
+    case PTK_FB_SIDE_PANE_REMOTE_FS:
+        g_signal_handlers_block_matched( main_window->show_remote_fs_menu,
+                                         G_SIGNAL_MATCH_FUNC, 0, 0, NULL,
+                                         on_show_remote_fs_pane, NULL );
+        gtk_check_menu_item_set_active( GTK_CHECK_MENU_ITEM( main_window->show_remote_fs_menu ), TRUE );
+        g_signal_handlers_unblock_matched( main_window->show_remote_fs_menu,
+                                           G_SIGNAL_MATCH_FUNC, 0, 0, NULL,
+                                           on_show_remote_fs_pane, NULL );
+        break;
     }
 
     switch ( file_browser->view_mode )
@@ -2035,6 +2082,9 @@ void on_file_browser_pane_mode_change( PtkFileBrowser* file_browser,
         break;
     case PTK_FB_SIDE_PANE_DIR_TREE:
         check = GTK_CHECK_MENU_ITEM( main_window->show_dir_tree_menu );
+        break;
+    case PTK_FB_SIDE_PANE_REMOTE_FS:
+        check = GTK_CHECK_MENU_ITEM( main_window->show_remote_fs_menu );
         break;
     }
     gtk_check_menu_item_set_active( check, TRUE );

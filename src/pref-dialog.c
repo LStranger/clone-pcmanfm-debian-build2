@@ -96,10 +96,7 @@ static gboolean show_preference_dialog( GtkWindow* parent, int page )
     int ibig_icon = -1, ismall_icon = -1;
     const char* terminal_programs[] =
         {
-            "aterm",
-	    "rxvt",
-	    "mrxvt",
-	    "xfce4-terminal",
+            "xfce4-terminal",
             "gnome-terminal",
             "konsole",
             "rxvt",

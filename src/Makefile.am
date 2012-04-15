@@ -56,7 +56,8 @@ VFS_SOURCES = \
     vfs/vfs-execute.c vfs/vfs-execute.h \
     vfs/vfs-async-task.c vfs/vfs-async-task.h \
     vfs/vfs-thumbnail-loader.c vfs/vfs-thumbnail-loader.h \
-    vfs/vfs-utils.c vfs/vfs-utils.h
+    vfs/vfs-utils.c vfs/vfs-utils.h \
+    vfs/vfs-remote-fs-mgr.c vfs/vfs-remote-fs-mgr.h
 
 if DESKTOP_INTEGRATION
 DESKTOP_SOURCES = \
@@ -77,6 +78,8 @@ PTK_SOURCES = \
     ptk/ptk-dir-tree-view.c ptk/ptk-dir-tree-view.h \
     ptk/ptk-dir-tree.c ptk/ptk-dir-tree.h \
     ptk/ptk-location-view.c ptk/ptk-location-view.h \
+    ptk/ptk-remote-fs-view.c ptk/ptk-remote-fs-view.h \
+    ptk/ptk-remote-volume.c ptk/ptk-remote-volume.h \
     ptk/ptk-bookmarks.c ptk/ptk-bookmarks.h \
     ptk/ptk-input-dialog.c ptk/ptk-input-dialog.h \
     ptk/ptk-file-task.c ptk/ptk-file-task.h \

@@ -14,6 +14,8 @@
 #include "vfs-thumbnail-loader.h"
 #include "glib-mem.h"
 
+#include "vfs-remote-fs-mgr.h"
+
 #include <string.h>
 
 #include <fcntl.h>  /* for open() */
@@ -60,6 +62,10 @@ static gboolean is_dir_desktop( const char* path );
 
 static void on_list_task_finished( VFSAsyncTask* task, gboolean is_cancelled, VFSDir* dir );
 
+static void on_remote_fs_mounted( VFSRemoteFSMgr* _mgr, VFSRemoteVolume* vol, VFSDir* dir );
+static void on_remote_fs_unmounted( VFSRemoteFSMgr* _mgr, VFSRemoteVolume* vol, VFSDir* dir );
+
+
 enum {
     FILE_CREATED_SIGNAL = 0,
     FILE_DELETED_SIGNAL,
@@ -79,6 +85,8 @@ static guint theme_change_notify = 0;
 
 static char* desktop_dir = NULL;
 static gboolean is_desktop_set = FALSE;
+
+static VFSRemoteFSMgr* mgr = NULL;
 
 GType vfs_dir_get_type()
 {
@@ -185,6 +193,10 @@ void vfs_dir_class_init( VFSDirClass* klass )
 void vfs_dir_init( VFSDir* dir )
 {
     dir->mutex = g_mutex_new();
+    if( G_UNLIKELY( ! mgr ) )
+        mgr = vfs_remote_fs_mgr_get();
+    g_signal_connect( mgr, "mount", G_CALLBACK(on_remote_fs_mounted), dir);
+    g_signal_connect( mgr, "unmount", G_CALLBACK(on_remote_fs_unmounted), dir);
 }
 
 /* destructor */
@@ -195,6 +207,8 @@ void vfs_dir_finalize( GObject *obj )
 
     do{}
     while( g_source_remove_by_user_data( dir ) );
+
+    g_signal_handlers_disconnect_matched( mgr, G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, dir );
 
     if( G_UNLIKELY( dir->task ) )
     {
@@ -906,3 +920,23 @@ void vfs_dir_unload_thumbnails( VFSDir* dir, gboolean is_big )
     }
     g_mutex_unlock( dir->mutex );
 }
+
+void on_remote_fs_mounted( VFSRemoteFSMgr* _mgr, VFSRemoteVolume* vol, VFSDir* dir )
+{
+    const char* mp = vfs_remote_volume_get_mount_point(vol);
+    if( g_str_has_prefix( dir->path, mp ) )
+    {
+        /* FIXME: notify that mounted files are added */
+    }
+}
+
+void on_remote_fs_unmounted( VFSRemoteFSMgr* _mgr, VFSRemoteVolume* vol, VFSDir* dir )
+{
+    const char* mp = vfs_remote_volume_get_mount_point(vol);
+    if( g_str_has_prefix( dir->path, mp ) )
+    {
+        /* notify that we are unmounted */
+        vfs_dir_emit_file_deleted( dir, dir->path, NULL );
+    }
+}
+

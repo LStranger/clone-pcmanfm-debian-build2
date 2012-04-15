@@ -223,12 +223,12 @@ gboolean  ptk_create_new_file( GtkWindow* parent_win,
         }
         if ( create_folder )
         {
-            result = mkdir( full_path, 0755 );
+            result = mkdir( full_path, S_IRWXU | S_IRUSR | S_IRGRP );
             ret = (result==0);
         }
         else
         {
-            result = open( full_path, O_CREAT, 0644 );
+            result = open( full_path, O_CREAT, S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH );
             if ( result != -1 )
             {
                 close( result );

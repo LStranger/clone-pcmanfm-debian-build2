@@ -2,6 +2,9 @@
 
 SUBDIRS = src po
 
+## for sshfs
+bin_SCRIPTS = pcmanfm-ask-pass
+
 desktopdir = $(datadir)/applications
 desktop_DATA = pcmanfm.desktop
 
@@ -24,7 +27,8 @@ ui_DATA= \
 	data/ui/prefdlg.glade \
 	data/ui/appchooserdlg.glade \
 	data/ui/file_properties.glade \
-	data/ui/about-dlg.glade
+	data/ui/about-dlg.glade \
+	data/ui/remote-fs-dlg.glade
 
 EXTRA_DIST = \
 	autogen.sh \
@@ -34,7 +38,8 @@ EXTRA_DIST = \
 	$(file_DATA) \
 	$(fallbackicon_DATA) \
 	$(ui_DATA) \
-	please_read_README_carefully_before_packaging
+	please_read_README_carefully_before_packaging \
+	pcmanfm-ask-pass.in
 
 ##install-data-hook:
 ##	update-mime-database $(datadir)/mime

@@ -24,7 +24,8 @@ typedef enum{
 
 typedef enum{
     PTK_FB_SIDE_PANE_BOOKMARKS,
-    PTK_FB_SIDE_PANE_DIR_TREE
+    PTK_FB_SIDE_PANE_DIR_TREE,
+    PTK_FB_SIDE_PANE_REMOTE_FS
 }PtkFBSidePaneMode;
 
 typedef enum{
@@ -65,6 +66,7 @@ struct _PtkFileBrowser
     /* side pane */
     GtkToggleToolButton* location_btn;
     GtkToggleToolButton* dir_tree_btn;
+    GtkToggleToolButton* remote_fs_btn;
 
     GtkSortType sort_type;
     PtkFBSidePaneMode side_pane_mode : 4;

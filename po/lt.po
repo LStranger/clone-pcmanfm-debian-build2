@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCManFM 0.3.9.98\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 21:33+0800\n"
+"POT-Creation-Date: 2008-05-21 22:29+0800\n"
 "PO-Revision-Date: 2008-04-11 19:02+0200\n"
 "Last-Translator: Joshas <joshas@freemail.lt>\n"
 "Language-Team: \n"
@@ -14,30 +14,30 @@ msgstr ""
 "X-Poedit-Language: Lithuanian\n"
 "X-Poedit-Country: LITHUANIA\n"
 
-#: src/main.c:81
+#: src/main.c:82
 msgid "Don't show desktop icons."
 msgstr "Nerodyti piktogramų ant darbalaukio."
 
-#: src/main.c:82
+#: src/main.c:83
 msgid "Run PCManFM as a daemon"
 msgstr "Paleisti PCManFM kaip tarnybą"
 
-#: src/main.c:83
+#: src/main.c:84
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
 msgstr ""
 "Nekurti naujų langų, aplankus atverti paskutinio naudoto lango kortelėse"
 
-#: src/main.c:92
+#: src/main.c:94
 msgid "[FILE1, FILE2,...]"
 msgstr "[FAILAS1, FAILAS2,...]"
 
-#: src/main.c:299
+#: src/main.c:301
 msgid "GTK+ icon theme is not properly set"
 msgstr "Neteisingai nustatyta GTK+ piktogramų tema"
 
-#: src/main.c:301
+#: src/main.c:303
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -77,16 +77,25 @@ msgstr ""
 "vieningo piktogramų standarto, bet ateityje šią problemą išspręs freedesktop."
 "org."
 
-#: src/main.c:583 src/main.c:665 src/main.c:716 src/main-window.c:1561
-#: src/main-window.c:1613 src/ptk/ptk-file-browser.c:503
-#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:330
+#: src/main.c:549
+msgid "Authantication"
+msgstr ""
+
+#: src/main.c:558
+msgid "Password: "
+msgstr ""
+
+#: src/main.c:623 src/main.c:705 src/main.c:756 src/main-window.c:1586
+#: src/main-window.c:1651 src/ptk/ptk-file-browser.c:520
+#: src/ptk/ptk-file-browser.c:537 src/ptk/ptk-file-task.c:329
 #: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
 #: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
 #: src/ptk/ptk-file-properties.c:693 src/ptk/ptk-file-properties.c:704
+#: src/ptk/ptk-remote-volume.c:163 src/ptk/ptk-remote-volume.c:171
 msgid "Error"
 msgstr "Klaida"
 
-#: src/main.c:583
+#: src/main.c:623
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -96,15 +105,15 @@ msgstr ""
 "\n"
 "Ar turite įdiegtą ir veikiantį „FAM“ arba „Gamin“ ?"
 
-#: src/main.c:665
+#: src/main.c:705
 msgid "File doesn't exist"
 msgstr "Failas neegzistuoja"
 
-#: src/main.c:712
+#: src/main.c:752
 msgid "Don't know how to open the file"
 msgstr "Nežinoma kaip atverti failą"
 
-#: src/main.c:714
+#: src/main.c:754
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -115,238 +124,247 @@ msgstr ""
 "„%s“\n"
 "%s"
 
-#: src/main-window.c:294 src/ptk/ptk-file-menu.c:109
-#: src/desktop/desktop-window.c:182
+#: src/main-window.c:299 src/ptk/ptk-file-menu.c:109
+#: src/desktop/desktop-window.c:157
 msgid "_Folder"
 msgstr "_aplanką"
 
-#: src/main-window.c:295 src/ptk/ptk-file-menu.c:110
-#: src/desktop/desktop-window.c:183
+#: src/main-window.c:300 src/ptk/ptk-file-menu.c:110
+#: src/desktop/desktop-window.c:158
 msgid "_Text File"
 msgstr "_tekstinį failą"
 
-#: src/main-window.c:301
+#: src/main-window.c:306
 msgid "New _Window"
 msgstr "Naujas _langas"
 
-#: src/main-window.c:302
+#: src/main-window.c:307
 msgid "New _Tab"
 msgstr "Nauja kor_telė"
 
-#: src/main-window.c:303
+#: src/main-window.c:308
 msgid "Close Tab"
 msgstr "Uždaryti kortelę"
 
-#: src/main-window.c:305 src/ptk/ptk-file-menu.c:133
-#: src/desktop/desktop-window.c:192
+#: src/main-window.c:310 src/ptk/ptk-file-menu.c:133
+#: src/desktop/desktop-window.c:167
 msgid "_Create New"
 msgstr "_Sukurti naują"
 
-#: src/main-window.c:306
+#: src/main-window.c:311
 msgid "File _Properties"
 msgstr "Failo _savybės"
 
-#: src/main-window.c:317 src/ptk/ptk-file-menu.c:128
+#: src/main-window.c:322 src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "Iš_trinti"
 
-#: src/main-window.c:318 src/ptk/ptk-file-browser.c:1368
+#: src/main-window.c:323 src/ptk/ptk-file-browser.c:1398
 #: src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "P_ervadinti"
 
-#: src/main-window.c:320
+#: src/main-window.c:325
 msgid "Select _All"
 msgstr "Pažymėti _viską"
 
-#: src/main-window.c:321
+#: src/main-window.c:326
 msgid "_Invert Selection"
 msgstr "Žymėti pr_iešingai"
 
-#: src/main-window.c:330
+#: src/main-window.c:335
 msgid "Go _Back"
 msgstr "Atgal"
 
-#: src/main-window.c:331
+#: src/main-window.c:336
 msgid "Go _Forward"
 msgstr "Pirmyn"
 
-#: src/main-window.c:332
+#: src/main-window.c:337
 msgid "Go to _Parent Folder"
 msgstr "Į viršaplankį"
 
-#: src/main-window.c:333
+#: src/main-window.c:338
 msgid "Go _Home"
 msgstr "Į _namų aplanką"
 
-#: src/main-window.c:345 src/desktop/desktop-window.c:169
+#: src/main-window.c:350 src/desktop/desktop-window.c:144
 msgid "Sort by _Name"
 msgstr "pagal pavadi_nimą"
 
-#: src/main-window.c:346 src/desktop/desktop-window.c:170
+#: src/main-window.c:351 src/desktop/desktop-window.c:145
 msgid "Sort by _Size"
 msgstr "pagal _dydį"
 
-#: src/main-window.c:347 src/desktop/desktop-window.c:172
+#: src/main-window.c:352 src/desktop/desktop-window.c:147
 msgid "Sort by _Modification Time"
 msgstr "pagal pakeitimo _laiką"
 
-#: src/main-window.c:348 src/desktop/desktop-window.c:171
+#: src/main-window.c:353 src/desktop/desktop-window.c:146
 msgid "Sort by _Type"
 msgstr "pagal _tipą"
 
-#: src/main-window.c:349
+#: src/main-window.c:354
 msgid "Sort by _Permission"
 msgstr "pagal _leidimą"
 
-#: src/main-window.c:350
+#: src/main-window.c:355
 msgid "Sort by _Owner"
 msgstr "pagal _savininką"
 
-#: src/main-window.c:352 src/desktop/desktop-window.c:175
+#: src/main-window.c:357 src/desktop/desktop-window.c:150
 msgid "Ascending"
 msgstr "didėjančiai"
 
-#: src/main-window.c:353 src/desktop/desktop-window.c:176
+#: src/main-window.c:358 src/desktop/desktop-window.c:151
 msgid "Descending"
 msgstr "mažėjančiai"
 
-#: src/main-window.c:359
+#: src/main-window.c:364
 msgid "_Open Side Pane"
 msgstr "R_odyti šoninį polangį"
 
-#: src/main-window.c:361
+#: src/main-window.c:366
 msgid "Show _Location Pane"
 msgstr "Rodyti vietos po_langį"
 
-#: src/main-window.c:362
+#: src/main-window.c:367
 msgid "Show _Directory Tree"
 msgstr "Rodyti aplankų me_dį"
 
 #: src/main-window.c:368
+msgid "Show _Remote Drives"
+msgstr ""
+
+#: src/main-window.c:374
 msgid "_Refresh"
 msgstr "_Atnaujinti"
 
-#: src/main-window.c:369
+#: src/main-window.c:375
 msgid "Side _Pane"
 msgstr "Šoninis _polangis"
 
-#: src/main-window.c:372
+#: src/main-window.c:378
 msgid "Show _Hidden Files"
 msgstr "Rod_yti paslėptus failus"
 
-#: src/main-window.c:373
+#: src/main-window.c:379
 msgid "_Sort..."
 msgstr "_Rikiuoti..."
 
-#: src/main-window.c:375
+#: src/main-window.c:381
 msgid "View as _Icons"
 msgstr "Rodyti p_iktogramas"
 
-#: src/main-window.c:376
+#: src/main-window.c:382
 #, fuzzy
 msgid "View as _Compact List"
 msgstr "Rodyti išsamų _sąrašą"
 
-#: src/main-window.c:377
+#: src/main-window.c:383
 msgid "View as Detailed _List"
 msgstr "Rodyti išsamų _sąrašą"
 
-#: src/main-window.c:383
+#: src/main-window.c:389
 msgid "Open _Terminal"
 msgstr "Atverti _terminalą"
 
-#: src/main-window.c:384
+#: src/main-window.c:390
 msgid "Open Current Folder as _Root"
 msgstr "Atverti aplanką pagrindinio va_rtotojo teisėmis"
 
-#: src/main-window.c:392
+#: src/main-window.c:393
+#, fuzzy
+msgid "_Connect to Remote Drive"
+msgstr "Memory Stick įrenginys"
+
+#: src/main-window.c:399
 msgid "_File"
 msgstr "_Failas"
 
-#: src/main-window.c:393
+#: src/main-window.c:400
 msgid "_Edit"
 msgstr "_Taisymas"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: src/main-window.c:395
+#: src/main-window.c:402
 msgid "_Go"
 msgstr "_Eiti"
 
-#: src/main-window.c:396
+#: src/main-window.c:403
 msgid "_Bookmark"
 msgstr "Ž_ymelės"
 
-#: src/main-window.c:397
+#: src/main-window.c:404
 msgid "_View"
 msgstr "R_odymas"
 
-#: src/main-window.c:398
+#: src/main-window.c:405
 msgid "_Tool"
 msgstr "_Priemonės"
 
-#: src/main-window.c:399
+#: src/main-window.c:406
 msgid "_Help"
 msgstr "_Pagalba"
 
-#: src/main-window.c:407
+#: src/main-window.c:414
 msgid "New Tab"
 msgstr "Nauja kortelė"
 
-#: src/main-window.c:408
+#: src/main-window.c:415
 msgid "Back"
 msgstr "Atgal"
 
-#: src/main-window.c:409
+#: src/main-window.c:416
 msgid "Forward"
 msgstr "Pirmyn"
 
-#: src/main-window.c:410
+#: src/main-window.c:417
 msgid "Parent Folder"
 msgstr "Viršaplankis"
 
-#: src/main-window.c:411
+#: src/main-window.c:418
 msgid "Refresh"
 msgstr "Atnaujinti"
 
-#: src/main-window.c:412
+#: src/main-window.c:419
 msgid "Home Directory"
 msgstr "Namų aplankas"
 
-#: src/main-window.c:413
+#: src/main-window.c:420
 msgid "Open Side Pane"
 msgstr "Rodyti šoninį polangį"
 
-#: src/main-window.c:419
+#: src/main-window.c:426
 msgid "Go"
 msgstr "Eiti"
 
-#: src/main-window.c:632
+#: src/main-window.c:640
 msgid "Warning: You are in super user mode"
 msgstr "Dėmesio: Jūs dirbate pagrindinio vartotojo teisėmis"
 
-#: src/main-window.c:1562
+#: src/main-window.c:1587
 msgid "Terminal program has not been set"
 msgstr "Nenurodyta terminalo programa"
 
-#: src/main-window.c:1688
+#: src/main-window.c:1726
 msgid "_Add to Bookmarks"
 msgstr "Įtraukti į žymeles"
 
-#: src/main-window.c:1689
+#: src/main-window.c:1727
 msgid "_Edit Bookmarks"
 msgstr "Re_daguoti žymeles"
 
-#: src/main-window.c:1766
+#: src/main-window.c:1804
 msgid "Loading..."
 msgstr "Įkeliama..."
 
-#: src/main-window.c:1976
+#: src/main-window.c:2023
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr ", laisvos vietos: %s (Viso: %s )"
 
-#: src/main-window.c:1985
+#: src/main-window.c:2032
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
@@ -354,7 +372,7 @@ msgstr[0] "Pažymėtas %d elementas (%s)%s"
 msgstr[1] "Pažymėti %d elementai (%s)%s"
 msgstr[2] "Pažymėta %d elementų (%s)%s"
 
-#: src/main-window.c:1995
+#: src/main-window.c:2042
 #, c-format
 msgid "%d hidden"
 msgid_plural "%d hidden"
@@ -362,7 +380,7 @@ msgstr[0] "%d paslėptas"
 msgstr[1] "%d paslėpti"
 msgstr[2] "%d paslėptų"
 
-#: src/main-window.c:1996
+#: src/main-window.c:2043
 #, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
@@ -370,75 +388,81 @@ msgstr[0] "%d matomas elementas (%s)%s"
 msgstr[1] "%d matomi elementai (%s)%s"
 msgstr[2] "%d matomų elementų (%s)%s"
 
-#: src/ptk/ptk-file-browser.c:504
+#: src/ptk/ptk-file-browser.c:521
 msgid "Directory doesn't exist!"
 msgstr "Aplankas neegzistuoja!"
 
-#: src/ptk/ptk-file-browser.c:1364 src/ptk/ptk-file-menu.c:142
+#: src/ptk/ptk-file-browser.c:1394 src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "Atverti naujoje kor_telėje"
 
-#: src/ptk/ptk-file-browser.c:1365 src/ptk/ptk-file-menu.c:143
+#: src/ptk/ptk-file-browser.c:1395 src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "Atverti naujame _lange"
 
-#: src/ptk/ptk-file-browser.c:1623 src/edit-bookmarks.c:198
+#: src/ptk/ptk-file-browser.c:1687 src/edit-bookmarks.c:198
 msgid "Name"
 msgstr "Vardas"
 
-#: src/ptk/ptk-file-browser.c:1623
+#: src/ptk/ptk-file-browser.c:1687
 msgid "Size"
 msgstr "Dydis"
 
-#: src/ptk/ptk-file-browser.c:1623
+#: src/ptk/ptk-file-browser.c:1687
 msgid "Type"
 msgstr "Tipas"
 
-#: src/ptk/ptk-file-browser.c:1624
+#: src/ptk/ptk-file-browser.c:1688
 msgid "Permission"
 msgstr "Leidimas"
 
-#: src/ptk/ptk-file-browser.c:1624
+#: src/ptk/ptk-file-browser.c:1688
 msgid "Owner:Group"
 msgstr "Savininkas:Grupė"
 
-#: src/ptk/ptk-file-browser.c:1624
+#: src/ptk/ptk-file-browser.c:1688
 msgid "Last Modification"
 msgstr "Paskutinis pakeitimas"
 
-#: src/ptk/ptk-file-browser.c:2831
+#: src/ptk/ptk-file-browser.c:2925
 msgid "Location"
 msgstr "Vieta"
 
-#: src/ptk/ptk-file-browser.c:2832
+#: src/ptk/ptk-file-browser.c:2926
 msgid "Directory Tree"
 msgstr "Aplankų medis"
 
-#: src/ptk/ptk-location-view.c:197
+#: src/ptk/ptk-file-browser.c:2927
+#, fuzzy
+msgid "Remote Drives"
+msgstr "Memory Stick įrenginys"
+
+#: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
 msgstr "Darbalaukis"
 
-#: src/ptk/ptk-location-view.c:397 src/ptk/ptk-location-view.c:589
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
+#: src/ptk/ptk-remote-fs-view.c:332
 msgid "Unable to mount device"
 msgstr "Nepavyko prijungti įrenginio"
 
-#: src/ptk/ptk-location-view.c:604
+#: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
 msgstr "Nepavyko atjungti įrenginio"
 
-#: src/ptk/ptk-location-view.c:621
+#: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
 msgstr "Nepavyko išimti įrenginio"
 
-#: src/ptk/ptk-location-view.c:679
+#: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
 msgstr "_Prijungti failų sistemą"
 
-#: src/ptk/ptk-location-view.c:689
+#: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
 msgstr "_Išimti"
 
-#: src/ptk/ptk-location-view.c:695
+#: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
 msgstr "_Atjungti failų sistemą"
 
@@ -504,28 +528,28 @@ msgstr "Ruošiamasi..."
 msgid "Progress:"
 msgstr "Eiga:"
 
-#: src/ptk/ptk-file-task.c:318
+#: src/ptk/ptk-file-task.c:317
 msgid "Cancel the operation?"
 msgstr "Nutraukti veiksmą?"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:407
+#: src/ptk/ptk-file-task.c:406
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "Ar norite pakeisti aplanką ir jo turinį?"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:412
+#: src/ptk/ptk-file-task.c:411
 msgid "Do you want to overwrite this file?"
 msgstr "Ar norite pakeisti šį failą?"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:417
+#: src/ptk/ptk-file-task.c:416
 msgid "Please choose a new file name."
 msgstr "Įveskite naują failo vardą."
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:425
+#: src/ptk/ptk-file-task.c:424
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -537,7 +561,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:430
+#: src/ptk/ptk-file-task.c:429
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -552,23 +576,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:447
+#: src/ptk/ptk-file-task.c:446
 msgid "Overwrite"
 msgstr "Pakeisti"
 
-#: src/ptk/ptk-file-task.c:448
+#: src/ptk/ptk-file-task.c:447
 msgid "Overwrite All"
 msgstr "Pakeisti visus"
 
-#: src/ptk/ptk-file-task.c:453
+#: src/ptk/ptk-file-task.c:452
 msgid "Rename"
 msgstr "Pervadinti"
 
-#: src/ptk/ptk-file-task.c:454
+#: src/ptk/ptk-file-task.c:453
 msgid "Skip"
 msgstr "Praleisti"
 
-#: src/ptk/ptk-file-task.c:455
+#: src/ptk/ptk-file-task.c:454
 msgid "Skip All"
 msgstr "Praleisti visus"
 
@@ -741,6 +765,57 @@ msgid ""
 msgstr ""
 "Ar norite rekursiškai pritaikyti šiuos pakeitimus visiems failams ir "
 "poaplankiams?"
+
+#: src/ptk/ptk-remote-fs-view.c:466
+#, fuzzy
+msgid "Unable to connect"
+msgstr "Nepavyko prijungti įrenginio"
+
+#: src/ptk/ptk-remote-fs-view.c:505
+#, fuzzy
+msgid "Unable to disconnect"
+msgstr "Nepavyko prijungti įrenginio"
+
+#: src/ptk/ptk-remote-fs-view.c:521
+msgid ""
+"Are you sure you want to remove this network drive?\n"
+"\n"
+"<b>Warning: Once deleted, it cannot be recovered.</b>"
+msgstr ""
+
+#: src/ptk/ptk-remote-fs-view.c:523
+msgid "Confirm"
+msgstr ""
+
+#: src/ptk/ptk-remote-fs-view.c:586
+msgid "_Connect"
+msgstr ""
+
+#: src/ptk/ptk-remote-fs-view.c:594
+msgid "_Disconnect"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:70
+msgid "FTP - File Transfer Protocol"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:71
+msgid "FTPS - FTP over implicit SSL/TLS"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:72
+msgid "SFTP - SSH File Transfer Protocol"
+msgstr ""
+
+#: src/ptk/ptk-remote-volume.c:163
+#, fuzzy
+msgid "Please give this network drive a name"
+msgstr "Įveskite naują failo vardą:"
+
+#: src/ptk/ptk-remote-volume.c:171
+#, fuzzy
+msgid "Please input host address"
+msgstr "Įveskite naują failo vardą:"
 
 #: src/edit-bookmarks.c:77
 msgid "New Item"
@@ -1030,15 +1105,34 @@ msgstr ""
 "Negalima prijungti Audio CD diskų. Jų klausymui naudokite muzikos grotuvo "
 "programą"
 
-#: src/desktop/desktop-window.c:189
+#: src/vfs/vfs-remote-fs-mgr.c:41
+#, c-format
+msgid "This function requires program '%s', but it's not found on the system."
+msgstr ""
+
+#: src/vfs/vfs-remote-fs-mgr.c:246
+msgid "Network Neighbourhood"
+msgstr ""
+
+#: src/vfs/vfs-remote-fs-mgr.c:562
+#, c-format
+msgid "Unknown network protocol"
+msgstr ""
+
+#: src/vfs/vfs-remote-fs-mgr.c:602 src/vfs/vfs-remote-fs-mgr.c:615
+#, c-format
+msgid "Unknown error occured"
+msgstr ""
+
+#: src/desktop/desktop-window.c:164
 msgid "_Icons"
 msgstr "Rikiuoti p_iktogramas..."
 
-#: src/desktop/desktop-window.c:194
+#: src/desktop/desktop-window.c:169
 msgid "_Desktop Settings"
 msgstr "_Darbalaukio nustatymai"
 
-#: src/desktop/desktop-window.c:1741
+#: src/desktop/desktop-window.c:1106
 msgid "My Documents"
 msgstr "Mano dokumentai"
 
@@ -1265,8 +1359,7 @@ msgid "Set selected application to default action"
 msgstr "Visada naudoti parinktą programą šio tipo failams atverti"
 
 #: data/ui/about-dlg.glade:1
-#, fuzzy
-msgid "Copyright (C) 2005 - 2008"
+msgid "Copyright (C) 2005 - 2006"
 msgstr "Autoriaus teisės (C) 2005 - 2006"
 
 #: data/ui/about-dlg.glade:1
@@ -1320,6 +1413,75 @@ msgstr ""
 "Piktograma pasiskolinta iš „nuoveXT 2“ piktogramų temos.\n"
 "Ją sukūrė Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "Remote Host Settings"
+msgstr "_Darbalaukio nustatymai"
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "Use Passive Mode"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "<b>_Name:</b>"
+msgstr "<b>Darbalaukio fonas</b>"
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "_Password:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "_User:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "<b>_Server Type:</b>"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1 data/ui/remote-fs-dlg.glade:3
+#, fuzzy
+msgid "<b>_Host:</b>"
+msgstr "<b>Spalvos</b>"
+
+#: data/ui/remote-fs-dlg.glade:1 data/ui/remote-fs-dlg.glade:3
+msgid "Port:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid "_Encoding:"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "Remote Dir:"
+msgstr "Memory Stick įrenginys"
+
+#: data/ui/remote-fs-dlg.glade:1
+#, fuzzy
+msgid "_Remote Host"
+msgstr "Memory Stick įrenginys"
+
+#: data/ui/remote-fs-dlg.glade:1
+msgid ""
+"HTTP Proxy\n"
+"SOCKS v4 Proxy\n"
+"SOCKS v5 Proxy"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:3
+msgid "Pro_xy"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:3
+msgid "Not implemented yet"
+msgstr ""
+
+#: data/ui/remote-fs-dlg.glade:3
+#, fuzzy
+msgid "_Advanced"
+msgstr "Papildomi"
 
 #~ msgid "gksu or kdesu is not found"
 #~ msgstr "Nerastas gksu arba kdesu"

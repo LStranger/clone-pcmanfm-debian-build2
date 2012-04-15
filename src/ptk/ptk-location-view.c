@@ -48,19 +48,6 @@ static void on_row_activated( GtkTreeView* view, GtkTreePath* tree_path,
 static gboolean on_button_press_event( GtkTreeView* view, GdkEventButton* evt,
                                        gpointer user_data );
 
-static gboolean update_drag_dest_row( GtkWidget *widget, GdkDragContext *drag_context,
-                                      gint x, gint y, guint time, gpointer user_data );
-
-static gboolean on_drag_motion( GtkWidget *widget, GdkDragContext *drag_context,
-                                gint x, gint y, guint time, gpointer user_data );
-
-static gboolean on_drag_drop( GtkWidget *widget, GdkDragContext *drag_context,
-                              gint x, gint y, guint time, gpointer user_data );
-
-static void on_drag_data_received( GtkWidget *widget, GdkDragContext *drag_context,
-                                   gint x, gint y, GtkSelectionData *data, guint info,
-                                   guint time, gpointer user_data);
-
 enum {
     COL_ICON = 0,
     COL_NAME,
@@ -71,8 +58,10 @@ enum {
 
 static gboolean has_desktop_dir = TRUE;
 
+#if 0
 /*  Drag & Drop/Clipboard targets  */
 static GtkTargetEntry drag_targets[] = { {"text/uri-list", 0 , 0 } };
+#endif
 
 static void show_busy( GtkWidget* view )
 {
@@ -317,19 +306,15 @@ GtkWidget* ptk_location_view_new()
 
     view = GTK_TREE_VIEW(gtk_tree_view_new_with_model( model ));
     g_object_unref( G_OBJECT( model ) );
-
+/*  FIXME: This should be enabled in future releases.
     gtk_tree_view_enable_model_drag_dest (
         GTK_TREE_VIEW( view ),
         drag_targets, G_N_ELEMENTS( drag_targets ), GDK_ACTION_LINK );
-
+*/
     gtk_tree_view_set_headers_visible( view, FALSE );
     gtk_tree_view_set_row_separator_func( view,
                                           ( GtkTreeViewRowSeparatorFunc ) view_sep_func,
                                           NULL, NULL );
-
-    g_signal_connect( view, "drag-motion", G_CALLBACK( on_drag_motion ), NULL );
-    g_signal_connect( view, "drag-drop", G_CALLBACK( on_drag_drop ), NULL );
-    g_signal_connect( view, "drag-data-received", G_CALLBACK( on_drag_data_received ), NULL );
 
     col = gtk_tree_view_column_new();
     renderer = gtk_cell_renderer_pixbuf_new();
@@ -772,104 +757,4 @@ VFSVolume* ptk_location_view_get_volume(  GtkTreeView* location_view, GtkTreeIte
     VFSVolume* vol = NULL;
     gtk_tree_model_get( model, it, COL_DATA, &vol, -1 );
     return vol;
-}
-
-gboolean update_drag_dest_row( GtkWidget *widget, GdkDragContext *drag_context,
-                               gint x, gint y, guint time, gpointer user_data )
-{
-    GtkTreeView* view = (GtkTreeView*)widget;
-    GtkTreePath* tree_path;
-    GtkTreeViewDropPosition pos;
-    gboolean ret = TRUE;
-
-    if( gtk_tree_view_get_dest_row_at_pos(view, x, y, &tree_path, &pos ) )
-    {
-        int row = gtk_tree_path_get_indices(tree_path)[0];
-
-        if( row <= sep_idx )
-        {
-            gtk_tree_path_get_indices(tree_path)[0] = sep_idx;
-            gtk_tree_view_set_drag_dest_row( view, tree_path, GTK_TREE_VIEW_DROP_AFTER );
-        }
-        else
-        {
-            if( pos == GTK_TREE_VIEW_DROP_BEFORE || pos == GTK_TREE_VIEW_DROP_AFTER )
-                gtk_tree_view_set_drag_dest_row( view, tree_path, pos );
-            else
-                ret = FALSE;
-        }
-    }
-    else
-    {
-        int n = gtk_tree_model_iter_n_children( model, NULL );
-        tree_path = gtk_tree_path_new_from_indices( n - 1, -1 );
-        gtk_tree_view_set_drag_dest_row( view, tree_path, GTK_TREE_VIEW_DROP_AFTER );
-    }
-    gtk_tree_path_free( tree_path );
-
-    if( ret )
-        gdk_drag_status( drag_context, GDK_ACTION_LINK, time );
-
-    return ret;
-}
-
-gboolean on_drag_motion( GtkWidget *widget, GdkDragContext *drag_context,
-                         gint x, gint y, guint time, gpointer user_data )
-{
-    /* stop the default handler of GtkTreeView */
-    g_signal_stop_emission_by_name( widget, "drag-motion" );
-    return update_drag_dest_row( widget, drag_context, x, y, time, user_data );
-}
-
-gboolean on_drag_drop( GtkWidget *widget, GdkDragContext *drag_context,
-                       gint x, gint y, guint time, gpointer user_data )
-{
-    GdkAtom target = gdk_atom_intern( "text/uri-list", FALSE );
-    update_drag_dest_row( widget, drag_context, x, y, time, user_data );
-    gtk_drag_get_data( widget, drag_context, target, time );
-    gtk_tree_view_set_drag_dest_row( (GtkTreeView*)widget, NULL, 0 );
-    return TRUE;
-}
-
-void on_drag_data_received( GtkWidget *widget, GdkDragContext *drag_context,
-                            gint x, gint y, GtkSelectionData *data, guint info,
-                            guint time, gpointer user_data)
-{
-    char** uris, **uri, *file, *name;
-    GtkTreeView* view;
-    GtkTreePath* tree_path;
-    GtkTreeViewDropPosition pos;
-    int idx;
-
-    if ((data->length >= 0) && (data->format == 8))
-    {
-        if( uris = gtk_selection_data_get_uris(data) )
-        {
-            view = (GtkTreeView*)widget;
-            gtk_tree_view_get_drag_dest_row( view, &tree_path, &pos );
-
-            if( tree_path )
-            {
-                idx = gtk_tree_path_get_indices(tree_path)[0];
-                idx -= sep_idx;
-
-                if( pos == GTK_TREE_VIEW_DROP_BEFORE )
-                    --idx;
-
-                for( uri = uris; *uri; ++uri, ++idx )
-                {
-                    file = g_filename_from_uri( *uri, NULL, NULL );
-                    if( g_file_test( file, G_FILE_TEST_IS_DIR ) )
-                    {
-                        name = g_filename_display_basename( file );
-                        ptk_bookmarks_insert( name, file, idx );
-                        g_free( name );
-                    }
-                    g_free( file );
-                }
-            }
-            g_strfreev( uris );
-        }
-    }
-    gtk_drag_finish (drag_context, FALSE, FALSE, time);
 }

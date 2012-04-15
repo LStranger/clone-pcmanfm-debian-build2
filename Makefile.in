@@ -14,6 +14,7 @@
 
 @SET_MAKE@
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
@@ -35,9 +36,10 @@ host_triplet = @host@
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
-	$(srcdir)/pcmanfm.desktop.in $(top_srcdir)/configure AUTHORS \
-	COPYING ChangeLog INSTALL NEWS TODO config.guess config.sub \
-	depcomp install-sh ltmain.sh missing mkinstalldirs
+	$(srcdir)/pcmanfm-ask-pass.in $(srcdir)/pcmanfm.desktop.in \
+	$(top_srcdir)/configure AUTHORS COPYING ChangeLog INSTALL NEWS \
+	TODO config.guess config.sub depcomp install-sh ltmain.sh \
+	missing mkinstalldirs
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -46,7 +48,13 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = pcmanfm.desktop
+CONFIG_CLEAN_FILES = pcmanfm.desktop pcmanfm-ask-pass
+am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(desktopdir)" \
+	"$(DESTDIR)$(fallbackicondir)" "$(DESTDIR)$(filedir)" \
+	"$(DESTDIR)$(icondir)" "$(DESTDIR)$(mimedir)" \
+	"$(DESTDIR)$(uidir)"
+binSCRIPT_INSTALL = $(INSTALL_SCRIPT)
+SCRIPTS = $(bin_SCRIPTS)
 SOURCES =
 DIST_SOURCES =
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
@@ -62,10 +70,6 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(desktopdir)" \
-	"$(DESTDIR)$(fallbackicondir)" "$(DESTDIR)$(filedir)" \
-	"$(DESTDIR)$(icondir)" "$(DESTDIR)$(mimedir)" \
-	"$(DESTDIR)$(uidir)"
 desktopDATA_INSTALL = $(INSTALL_DATA)
 fallbackiconDATA_INSTALL = $(INSTALL_DATA)
 fileDATA_INSTALL = $(INSTALL_DATA)
@@ -229,6 +233,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = src po
+bin_SCRIPTS = pcmanfm-ask-pass
 desktopdir = $(datadir)/applications
 desktop_DATA = pcmanfm.desktop
 mimedir = $(datadir)/mime/packages
@@ -249,7 +254,8 @@ ui_DATA = \
 	data/ui/prefdlg.glade \
 	data/ui/appchooserdlg.glade \
 	data/ui/file_properties.glade \
-	data/ui/about-dlg.glade
+	data/ui/about-dlg.glade \
+	data/ui/remote-fs-dlg.glade
 
 EXTRA_DIST = \
 	autogen.sh \
@@ -259,7 +265,8 @@ EXTRA_DIST = \
 	$(file_DATA) \
 	$(fallbackicon_DATA) \
 	$(ui_DATA) \
-	please_read_README_carefully_before_packaging
+	please_read_README_carefully_before_packaging \
+	pcmanfm-ask-pass.in
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
@@ -317,6 +324,27 @@ distclean-hdr:
 	-rm -f config.h stamp-h1
 pcmanfm.desktop: $(top_builddir)/config.status $(srcdir)/pcmanfm.desktop.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
+pcmanfm-ask-pass: $(top_builddir)/config.status $(srcdir)/pcmanfm-ask-pass.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+install-binSCRIPTS: $(bin_SCRIPTS)
+	@$(NORMAL_INSTALL)
+	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
+	@list='$(bin_SCRIPTS)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  if test -f $$d$$p; then \
+	    f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
+	    echo " $(binSCRIPT_INSTALL) '$$d$$p' '$(DESTDIR)$(bindir)/$$f'"; \
+	    $(binSCRIPT_INSTALL) "$$d$$p" "$(DESTDIR)$(bindir)/$$f"; \
+	  else :; fi; \
+	done
+
+uninstall-binSCRIPTS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_SCRIPTS)'; for p in $$list; do \
+	  f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
+	  echo " rm -f '$(DESTDIR)$(bindir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(bindir)/$$f"; \
+	done
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -712,10 +740,10 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(DATA) config.h
+all-am: Makefile $(SCRIPTS) $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(fallbackicondir)" "$(DESTDIR)$(filedir)" "$(DESTDIR)$(icondir)" "$(DESTDIR)$(mimedir)" "$(DESTDIR)$(uidir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(fallbackicondir)" "$(DESTDIR)$(filedir)" "$(DESTDIR)$(icondir)" "$(DESTDIR)$(mimedir)" "$(DESTDIR)$(uidir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -768,7 +796,7 @@ install-data-am: install-data-local install-desktopDATA \
 
 install-dvi: install-dvi-recursive
 
-install-exec-am:
+install-exec-am: install-binSCRIPTS
 
 install-html: install-html-recursive
 
@@ -800,9 +828,9 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-desktopDATA uninstall-fallbackiconDATA \
-	uninstall-fileDATA uninstall-iconDATA uninstall-mimeDATA \
-	uninstall-uiDATA
+uninstall-am: uninstall-binSCRIPTS uninstall-desktopDATA \
+	uninstall-fallbackiconDATA uninstall-fileDATA \
+	uninstall-iconDATA uninstall-mimeDATA uninstall-uiDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) install-am \
 	install-strip
@@ -814,9 +842,9 @@ uninstall-am: uninstall-desktopDATA uninstall-fallbackiconDATA \
 	distcheck distclean distclean-generic distclean-hdr \
 	distclean-libtool distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am html html-am info info-am \
-	install install-am install-data install-data-am \
-	install-data-local install-desktopDATA install-dvi \
-	install-dvi-am install-exec install-exec-am \
+	install install-am install-binSCRIPTS install-data \
+	install-data-am install-data-local install-desktopDATA \
+	install-dvi install-dvi-am install-exec install-exec-am \
 	install-fallbackiconDATA install-fileDATA install-html \
 	install-html-am install-iconDATA install-info install-info-am \
 	install-man install-mimeDATA install-pdf install-pdf-am \
@@ -825,9 +853,9 @@ uninstall-am: uninstall-desktopDATA uninstall-fallbackiconDATA \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags tags-recursive uninstall uninstall-am \
-	uninstall-desktopDATA uninstall-fallbackiconDATA \
-	uninstall-fileDATA uninstall-iconDATA uninstall-mimeDATA \
-	uninstall-uiDATA
+	uninstall-binSCRIPTS uninstall-desktopDATA \
+	uninstall-fallbackiconDATA uninstall-fileDATA \
+	uninstall-iconDATA uninstall-mimeDATA uninstall-uiDATA
 
 
 install-data-local:

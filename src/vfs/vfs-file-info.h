@@ -21,14 +21,6 @@
 
 #include <gtk/gtk.h>
 
-#ifdef __OpenBSD__
-    #ifdef CONFIG_LSF
-        typedef u64 blkcnt_t;
-    #else
-        typedef unsigned long blkcnt_t;
-    #endif
-#endif
-
 G_BEGIN_DECLS
 
 typedef enum

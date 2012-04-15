@@ -35,6 +35,7 @@
 #include "ptk-file-misc.h"
 
 #include "ptk-location-view.h"
+#include "ptk-remote-fs-view.h"
 #include "ptk-dir-tree-view.h"
 #include "ptk-dir-tree.h"
 
@@ -76,6 +77,8 @@ static void init_list_view( PtkFileBrowser* file_browser, GtkTreeView* list_view
 static GtkTreeView* ptk_file_browser_create_dir_tree( PtkFileBrowser* file_browser );
 
 static GtkTreeView* ptk_file_browser_create_location_view( PtkFileBrowser* file_browser );
+
+static GtkTreeView* ptk_file_browser_create_remote_fs_pane( PtkFileBrowser* file_browser );
 
 static GList* folder_view_get_selected_items( PtkFileBrowser* file_browser,
                                               GtkTreeModel** model );
@@ -167,9 +170,19 @@ on_location_view_row_activated ( GtkTreeView *tree_view,
                                  GtkTreePath *path,
                                  GtkTreeViewColumn *column,
                                  PtkFileBrowser* file_browser );
+static void
+on_remote_fs_view_row_activated ( GtkTreeView *tree_view,
+                                 GtkTreePath *path,
+                                 GtkTreeViewColumn *column,
+                                 PtkFileBrowser* file_browser );
 
 static gboolean
 on_location_view_button_press_event ( GtkTreeView* view,
+                                      GdkEventButton* evt,
+                                      PtkFileBrowser* file_browser );
+
+static gboolean
+on_remote_fs_view_button_press_event ( GtkTreeView* view,
                                       GdkEventButton* evt,
                                       PtkFileBrowser* file_browser );
 
@@ -460,6 +473,10 @@ static gboolean side_pane_chdir( PtkFileBrowser* file_browser,
     else if ( file_browser->side_pane_mode == PTK_FB_SIDE_PANE_DIR_TREE )
     {
         return ptk_dir_tree_view_chdir( file_browser->side_view, folder_path );
+    }
+    else if ( file_browser->side_pane_mode == PTK_FB_SIDE_PANE_REMOTE_FS )
+    {
+        return ptk_remote_fs_view_chdir( file_browser->side_view, folder_path );
     }
     return FALSE;
 }
@@ -1301,14 +1318,27 @@ on_location_view_row_activated ( GtkTreeView *tree_view,
                                  PtkFileBrowser* file_browser )
 {
     char * dir_path;
-
     dir_path = ptk_location_view_get_selected_dir( file_browser->side_view );
     if ( dir_path )
     {
         if ( strcmp( dir_path, ptk_file_browser_get_cwd( file_browser ) ) )
-        {
             ptk_file_browser_chdir( file_browser, dir_path, PTK_FB_CHDIR_ADD_HISTORY );
-        }
+        g_free( dir_path );
+    }
+}
+
+void
+on_remote_fs_view_row_activated ( GtkTreeView *tree_view,
+                                 GtkTreePath *path,
+                                 GtkTreeViewColumn *column,
+                                 PtkFileBrowser* file_browser )
+{
+    char * dir_path;
+    dir_path = ptk_remote_fs_view_get_selected_dir( file_browser->side_view );
+    if ( dir_path )
+    {
+        if ( strcmp( dir_path, ptk_file_browser_get_cwd( file_browser ) ) )
+            ptk_file_browser_chdir( file_browser, dir_path, PTK_FB_CHDIR_ADD_HISTORY );
         g_free( dir_path );
     }
 }
@@ -1413,6 +1443,40 @@ on_location_view_button_press_event ( GtkTreeView* view,
     return FALSE;
 }
 
+gboolean
+on_remote_fs_view_button_press_event ( GtkTreeView* view,
+                                      GdkEventButton* evt,
+                                      PtkFileBrowser* file_browser )
+{
+    GtkTreeIter it;
+    GtkTreeSelection* tree_sel;
+    GtkTreeModel* model;
+    GtkMenu* popup;
+    char * dir_path;
+
+    tree_sel = gtk_tree_view_get_selection( view );
+    if ( evt->button == 2 )
+    {
+        dir_path = ptk_remote_fs_view_get_selected_dir( file_browser->side_view );
+        if ( dir_path )
+        {
+            g_signal_emit( file_browser,
+                           signals[ OPEN_ITEM_SIGNAL ],
+                           0, dir_path, PTK_OPEN_NEW_TAB );
+            g_free( dir_path );
+        }
+        return FALSE;
+    }
+    if ( evt->button != 3 )
+        return FALSE;
+
+    if ( gtk_tree_selection_get_selected( tree_sel, &model, &it ) )
+    {
+        /* FIXME: Add popup menu here */
+    }
+    return FALSE;
+}
+
 static gboolean can_sel_change ( GtkTreeSelection *selection,
                                  GtkTreeModel *model,
                                  GtkTreePath *path,
@@ -1448,7 +1512,7 @@ static GtkWidget* create_folder_view( PtkFileBrowser* file_browser,
             exo_icon_view_set_column_spacing( EXO_ICON_VIEW( folder_view ), 4 );
             exo_icon_view_set_item_width ( EXO_ICON_VIEW( folder_view ), 110 );
         }
-
+        
         exo_icon_view_set_selection_mode ( EXO_ICON_VIEW( folder_view ),
                                            GTK_SELECTION_MULTIPLE );
 
@@ -1810,10 +1874,8 @@ void on_folder_view_drag_data_received ( GtkWidget *widget,
                         if( stat( file_path, &statbuf ) == 0 && statbuf.st_dev != dest_dev )
                         {
                             file_browser->drag_source_dev = statbuf.st_dev;
-                            g_free( file_path );
                             break;
                         }
-                        g_free( file_path );
                     }
                 }
 
@@ -1839,12 +1901,18 @@ void on_folder_view_drag_data_received ( GtkWidget *widget,
             while ( *puri )
             {
                 if ( **puri == '/' )
+                {
                     file_path = g_strdup( *puri );
+                }
                 else
+                {
                     file_path = g_filename_from_uri( *puri, NULL, NULL );
+                }
 
                 if ( file_path )
+                {
                     files = g_list_prepend( files, file_path );
+                }
                 ++puri;
             }
             g_strfreev( list );
@@ -2556,6 +2624,20 @@ GtkTreeView* ptk_file_browser_create_location_view( PtkFileBrowser* file_browser
     return location_view;
 }
 
+GtkTreeView* ptk_file_browser_create_remote_fs_pane( PtkFileBrowser* file_browser )
+{
+    GtkTreeView* view = ptk_remote_fs_view_new();
+
+    g_signal_connect ( view, "row-activated",
+                       G_CALLBACK ( on_remote_fs_view_row_activated ),
+                       file_browser );
+
+    g_signal_connect ( view, "button-press-event",
+                       G_CALLBACK ( on_remote_fs_view_button_press_event ),
+                       file_browser );
+    return view;
+}
+
 int file_list_order_from_sort_order( PtkFBSortOrder order )
 {
     int col;
@@ -2796,6 +2878,12 @@ void ptk_file_browser_set_side_pane_mode( PtkFileBrowser* file_browser,
         file_browser->side_view = ptk_file_browser_create_location_view( file_browser );
         gtk_toggle_tool_button_set_active ( file_browser->location_btn, TRUE );
         break;
+    case PTK_FB_SIDE_PANE_REMOTE_FS:
+        gtk_scrolled_window_set_policy( GTK_SCROLLED_WINDOW( file_browser->side_view_scroll ),
+                                        GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC );
+        file_browser->side_view = ptk_file_browser_create_remote_fs_pane( file_browser );
+        gtk_toggle_tool_button_set_active ( file_browser->remote_fs_btn, TRUE );
+        break;
     }
     gtk_container_add( GTK_CONTAINER( file_browser->side_view_scroll ),
                        GTK_WIDGET( file_browser->side_view ) );
@@ -2827,11 +2915,18 @@ static void on_show_dir_tree( GtkWidget* item, PtkFileBrowser* file_browser )
         ptk_file_browser_set_side_pane_mode( file_browser, PTK_FB_SIDE_PANE_DIR_TREE );
 }
 
+static void on_show_remote_fs_pane( GtkWidget* item, PtkFileBrowser* file_browser )
+{
+    if ( gtk_toggle_tool_button_get_active( GTK_TOGGLE_TOOL_BUTTON( item ) ) )
+        ptk_file_browser_set_side_pane_mode( file_browser, PTK_FB_SIDE_PANE_REMOTE_FS );
+}
+
 static PtkToolItemEntry side_pane_bar[] = {
-                                              PTK_RADIO_TOOL_ITEM( NULL, "gtk-harddisk", N_( "Location" ), on_show_location_view ),
-                                              PTK_RADIO_TOOL_ITEM( NULL, "gtk-open", N_( "Directory Tree" ), on_show_dir_tree ),
-                                              PTK_TOOL_END
-                                          };
+    PTK_RADIO_TOOL_ITEM( NULL, GTK_STOCK_HARDDISK, N_( "Location" ), on_show_location_view ),
+    PTK_RADIO_TOOL_ITEM( NULL, GTK_STOCK_OPEN, N_( "Directory Tree" ), on_show_dir_tree ),
+    PTK_RADIO_TOOL_ITEM( NULL, GTK_STOCK_NETWORK, N_( "Remote Drives" ), on_show_remote_fs_pane ),
+    PTK_TOOL_END
+};
 
 static void ptk_file_browser_create_side_pane( PtkFileBrowser* file_browser )
 {
@@ -2848,6 +2943,11 @@ static void ptk_file_browser_create_side_pane( PtkFileBrowser* file_browser )
         gtk_scrolled_window_set_policy( GTK_SCROLLED_WINDOW( file_browser->side_view_scroll ),
                                         GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC );
         file_browser->side_view = ptk_file_browser_create_dir_tree( file_browser );
+        break;
+    case PTK_FB_SIDE_PANE_REMOTE_FS:
+        gtk_scrolled_window_set_policy( GTK_SCROLLED_WINDOW( file_browser->side_view_scroll ),
+                                        GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC );
+        file_browser->side_view = ptk_file_browser_create_remote_fs_pane( file_browser );
         break;
     case PTK_FB_SIDE_PANE_BOOKMARKS:
     default:
@@ -2866,8 +2966,11 @@ static void ptk_file_browser_create_side_pane( PtkFileBrowser* file_browser )
     gtk_toolbar_set_style( GTK_TOOLBAR( toolbar ), GTK_TOOLBAR_ICONS );
     side_pane_bar[ 0 ].ret = ( GtkWidget** ) ( GtkWidget * ) & file_browser->location_btn;
     side_pane_bar[ 1 ].ret = ( GtkWidget** ) ( GtkWidget * ) & file_browser->dir_tree_btn;
+    side_pane_bar[ 2 ].ret = ( GtkWidget** ) ( GtkWidget * ) & file_browser->remote_fs_btn;
     ptk_toolbar_add_items_from_data( toolbar, side_pane_bar,
                                      file_browser, tooltips );
+    gtk_toolbar_set_show_arrow( toolbar, FALSE );
+    /* FIXME: is there any way to set min size of the pane? */
 
     gtk_box_pack_start( GTK_BOX( file_browser->side_pane ),
                         toolbar, FALSE, FALSE, 0 );
@@ -2896,6 +2999,9 @@ void ptk_file_browser_show_side_pane( PtkFileBrowser* file_browser,
             break;
         case PTK_FB_SIDE_PANE_DIR_TREE:
             gtk_toggle_tool_button_set_active( file_browser->dir_tree_btn, TRUE );
+            break;
+        case PTK_FB_SIDE_PANE_REMOTE_FS:
+            gtk_toggle_tool_button_set_active( file_browser->remote_fs_btn, TRUE );
             break;
         }
     }
