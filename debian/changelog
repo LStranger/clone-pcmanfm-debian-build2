@@ -1,3 +1,14 @@
+pcmanfm (0.9.7-1) unstable; urgency=low
+
+  * New upstream release
+    - Fixed middle-click shortcut on directory in bookmarks area
+    - Fixed desktop does not work with xrandr
+    - Updated translations
+  * Removed 01_binary_rename.patch. Included in upstream. 
+  * Applied libtool-fix.patch (Closes:#556054)
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Mon, 31 May 2010 11:23:06 +0800
+
 pcmanfm (0.9.5-2) unstable; urgency=low
 
   * Upload to sid. No new additional bug report since last upload into 
