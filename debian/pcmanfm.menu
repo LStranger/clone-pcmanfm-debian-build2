@@ -1,2 +1,4 @@
 ?package(pcmanfm):needs="X11" section="Applications/File Management"\
-  title="PCManFM" longtitle="Real Tabbed File Manager" hints="File manager" command="/usr/bin/pcmanfm"
+  title="PCManFM" longtitle="Real Tabbed File Manager"\
+  description="PCMan File Manager is an extremely fast and lightweight GTK+ based file manager."\
+  command="/usr/bin/pcmanfm" hints="File manager"
