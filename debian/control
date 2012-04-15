@@ -2,16 +2,16 @@ Source: pcmanfm
 Section: utils
 Priority: optional
 Maintainer: Andrew Lee <andrew@linux.org.tw>
-Build-Depends: debhelper (>= 5), dpatch, libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake1.9, autoconf, pkg-config, intltool, libstartup-notification0-dev, libhal-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386]
+Build-Depends: debhelper (>= 5), libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake, autoconf, pkg-config, intltool, libstartup-notification0-dev, libhal-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], python
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.8.0.0
+Standards-Version: 3.8.1
 DM-Upload-Allowed: yes
 Homepage: http://pcmanfm.sourceforge.net/
 
 Package: pcmanfm
 Architecture: linux-any
 Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, hal
-Recommends: gnome-icon-theme, gksu | kdesu
+Recommends: gnome-icon-theme, gksu | kdesu, ntfs-3g
 Conflicts: pcmanfm-nohal
 Description: an extremely fast and lightweight file manager for X
  PCMan File Manager is a gtk2 based file manager for the X Window System.
@@ -30,13 +30,11 @@ Description: an extremely fast and lightweight file manager for X
   * Standard compliant (Follows FreeDesktop.org)
   * Clean and user-friendly interface (GTK+ 2)
   * Support HAL for auto-mount handling on removable devices
- .
- Authors: 洪任諭 Hong Jen Yee (PCMan) from Taiwan <pcman.tw@gmail.com>
 
 Package: pcmanfm-nohal
 Architecture: any
 Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils
-Recommends: gnome-icon-theme, gksu | kdesu
+Recommends: gnome-icon-theme, gksu | kdesu, ntfs-3g
 Conflicts: pcmanfm
 Description: an extremely fast and lightweight file manager for X
  PCMan File Manager is a gtk2 based file manager for the X Window System.
@@ -54,5 +52,3 @@ Description: an extremely fast and lightweight file manager for X
   * Provide icon view and detailed list view
   * Standard compliant (Follows FreeDesktop.org)
   * Clean and user-friendly interface (GTK+ 2)
- .
- Authors: 洪任諭 Hong Jen Yee (PCMan) from Taiwan <pcman.tw@gmail.com>

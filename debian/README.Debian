@@ -1,6 +1,39 @@
                           pcmanfm README.Debian
 			  ---------------------
 
+-------------------
+Work with PolicyKit
+-------------------
+You may found you can't mount devices through the tab anymore after 
+installed policykit. Here are two work around solutions provided
+by Guillaume <giggzounet@gmail.com>.
+
+First solution:
+
+modify the /etc/Policykit/PolicyKit.conf with:
+<config version="0.1">
+  <match action="org.freedesktop.hal.storage.mount-removable">
+    <match user="myuser">
+      <return result="yes" />
+    </match>
+  </match>
+</config>
+
+then reboot...and it works again.
+
+
+Second solution:
+
+no modification of the /etc/Policykit/PolicyKit.conf
+install policykit-gnome
+run polkit-gnome-authorization under normal user and modify what we want...
+if X is launched with startx, there are some problem with policykit. we
+must unset XDG_SESSION_COOKIE. Then it works perfectly.
+
+Best regards,
+Guillaume
+
+
 -----------------------
 Set gtk-icon-theme-name
 -----------------------
