@@ -1,17 +1,19 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 02_desktop-entry-invalid-category.dpatch by  <andrew@linux.org.tw>
+## 02_desktop-entry-invalid-category.dpatch by Andrew Lee <andrew@linux.org.tw>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Refine Categories to fit debian menu structure
 
 @DPATCH@
-diff -urNad pcmanfm-0.3.2.2~/pcmanfm.desktop.in pcmanfm-0.3.2.2/pcmanfm.desktop.in
---- pcmanfm-0.3.2.2~/pcmanfm.desktop.in	2007-08-23 06:20:45.000000000 +0800
-+++ pcmanfm-0.3.2.2/pcmanfm.desktop.in	2007-08-23 06:21:04.000000000 +0800
-@@ -1,5 +1,5 @@
- [Desktop Entry]
--Categories=Application;System;Utility;Core;GTK;
-+Categories=System;Utility;Core;GTK;
+diff -urNad pcmanfm-0.3.5.4~/pcmanfm.desktop.in pcmanfm-0.3.5.4/pcmanfm.desktop.in
+--- pcmanfm-0.3.5.4~/pcmanfm.desktop.in	2008-01-26 15:00:45.000000000 +0800
++++ pcmanfm-0.3.5.4/pcmanfm.desktop.in	2008-01-26 15:02:48.000000000 +0800
+@@ -2,7 +2,7 @@
+ Version=1.0
  Encoding=UTF-8
  Name=PCMan File Manager
+-Categories=Application;System;Utility;Core;GTK;
++Categories=System;Utility;Core;GTK;
  Name[zh_TW]=PCMan 檔案管理程式
+ Name[pl]=Przeglądarka plików z zakładkami
+ Exec=pcmanfm %F

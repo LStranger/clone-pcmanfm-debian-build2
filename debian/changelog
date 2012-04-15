@@ -1,3 +1,64 @@
+pcmanfm (0.3.5.23-1) unstable; urgency=low
+
+  * New maintainer(Closes:#454278)
+  * New upstream release (Closes:#447229,#443988,#460574)
+    - Fix incorrect title of windows.
+    - Show icons of *.desktop files in every folder.
+    - Slightly improve path entry.
+    - Resolve paths with '~' and '.', '..' in command line arguments, if
+      they are not expanded by shell.
+    - Show lines in dir tree if gtk+ > 2.10.
+    - Add drop down menu for "back" and "forward" buttons.
+    - Open dir in new tab when middle clicking on dir tree.
+    - Thumbnail support is re-written, and both the speed and stability
+      are improved.
+    - Completely re-written volume management, can mount/umount/eject
+      volumes through HAL correctly now.
+    - The underlying mime-type system was completely re-designed and
+      re-written from scratch. Now it's faster, more robust, and more
+      standard compliant. The memory usage was reduced, too. By
+      installing a xml file to the shared-mime-database, mime-type
+      detection was enhanced.
+    - Add some new locales: tr, eu, ja
+    - Folder views are correctly updated when files get deleted or
+      created. Some FAM-related bugs were fixed.
+    - Command line arguments handling was improved. Now you can open
+      multiple files with pcmanfm through command line.
+    - Correctly handle desktop directory in the side pane. (Get the
+      path of desktop directory from ~/.config/user-dirs.dirs. Hide the
+      item if the directory didn't exist.)
+    - config files were moved to ~/.config/pcmanfm to follow the new
+      standard.
+    - Better-looking about dialog, a must-have for every program. :p
+    - Left click on the text of path bar with 'Ctrl' key held down now
+      brings you to parent folders quickly. Here is a DEMO on youtube.
+      http://tw.youtube.com/watch?v=aGUOvSMWm6c
+    - New shortcut keys are supported: Now both 'Alt+D' and 'Ctrl+L' can
+      focus the path bar, and 'Backspace' brings you to parent folder.
+    - Remove the useless "Address" label on the path bar.
+    - Fix segfault in app chooser dialog.
+    - Create dialog UI using new lightweight PtkUIXml system and
+      *.glade files "without" libglade.
+    - Decrease memory usage and size of executable file.
+  * debian/rules:
+    - Drop AFL-2.0
+    - use dh_installmime
+  * debian/copyright:
+    - Drop AFL-2.0 part(src/xdgmime has been removed from upstream).
+  * debian/README.Debian:
+    - XSETTINGS daemon and GTK+ icon theme settings issue
+    - pcmanfm specfic gtkrc-2.0 file
+  * debian/control:
+    - Build-depends on desktop-file-utils
+    - Make pcmanfm depends on dbus and hal
+      Resolve bug - Recommends on pmount (Closes:#452637)
+    - Homepage
+    - Minor changes in descriptions
+  * Minor fix in scripts/genconf.sh (Thanks to ex-maintainer Tetralet)
+  * New co-maintainer: Asho Yeh <asho@debian.org.tw>
+
+ -- Andrew Lee <andrew@linux.org.tw>  Mon, 18 Feb 2008 19:39:14 +0800
+
 pcmanfm (0.3.2.2-2) unstable; urgency=low
 
   * Depends on desktop-file-utils(Closes:#416173)
@@ -71,7 +132,7 @@ pcmanfm (0.3.2.1-1) unstable; urgency=low
     - Add missing GDK threading guards to prevent reentry. Greatly
       improve stability.
     - Disable all widgets in "Desktop" preference page when desktop
-      icon management is turned off.
+      icon management is turned off. (Closes:#457002)
     - Enable cancellation of VFSFileTask during preparation.
       (calculating total size)
     - Little but absolutely important fix. Reported by Temcat and

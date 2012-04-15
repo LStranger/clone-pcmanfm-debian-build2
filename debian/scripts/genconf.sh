@@ -20,8 +20,7 @@ then
     echo "wallpaper=$WALLPAPER"
 fi
 
-# Detect color setting (doesn't really work: I could not find 
-significant keys)
+# Detect color setting (doesn't really work: I could not find significant keys)
 #COLOR=`gconftool-2 --get /desktop/gnome/background/primary_color`
 #if ! [ -z "$COLOR" ]
 #then

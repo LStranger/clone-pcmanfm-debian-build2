@@ -2,7 +2,7 @@
 ## 01_implicit-pointer-conversion.dpatch by  <andrew@linux.org.tw>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: vfs_file_resolve_path() return pointer implicitly converted to integer 
 
 @DPATCH@
 diff -urNad pcmanfm-0.3.2.1~/src/vfs/vfs-file-monitor.c pcmanfm-0.3.2.1/src/vfs/vfs-file-monitor.c

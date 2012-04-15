@@ -1,2 +1,2 @@
 version=3
-http://sf.net/pcmanfm/pcmanfm-([\d.]*)\.tar\.gz
+http://sf.net/pcmanfm/pcmanfm-(.*)\.tar\.gz

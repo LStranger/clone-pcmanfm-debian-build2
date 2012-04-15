@@ -1,15 +1,16 @@
 Source: pcmanfm
 Section: utils
 Priority: optional
-Maintainer: Lu, Chao-Ming (Tetralet) <tetralet@debian.org.tw>
+Maintainer: Asho Yeh <asho@debian.org.tw>
 Uploaders: Andrew Lee <andrew@linux.org.tw>
-Build-Depends: debhelper (>= 5), dpatch, libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake1.9, autoconf, pkg-config, libstartup-notification0-dev, shared-mime-info, libhal-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386]
+Build-Depends: debhelper (>= 5), dpatch, libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake1.9, autoconf, pkg-config, libstartup-notification0-dev, libhal-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386]
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.7.2.2
+Standards-Version: 3.7.3.0
+Homepage: http://pcmanfm.sourceforge.net/
 
 Package: pcmanfm
 Architecture: linux-any
-Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils
+Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, hal
 Recommends: gnome-icon-theme
 Conflicts: pcmanfm-nohal
 Description: an extremely fast and lightweight file manager for X
@@ -28,8 +29,8 @@ Description: an extremely fast and lightweight file manager for X
   * Provide icon view and detailed list view
   * Standard compliant (Follows FreeDesktop.org)
   * Clean and user-friendly interface (GTK+ 2)
+  * Support HAL for auto-mount handling on removable devices
  .
- Home Page: http://pcmanfm.sourceforge.net/
  Authors: 洪任諭 Hong Jen Yee (PCMan) from Taiwan <pcman.tw@gmail.com>
 
 Package: pcmanfm-nohal
@@ -54,5 +55,4 @@ Description: an extremely fast and lightweight file manager for X
   * Standard compliant (Follows FreeDesktop.org)
   * Clean and user-friendly interface (GTK+ 2)
  .
- Home Page: http://pcmanfm.sourceforge.net/
  Authors: 洪任諭 Hong Jen Yee (PCMan) from Taiwan <pcman.tw@gmail.com>

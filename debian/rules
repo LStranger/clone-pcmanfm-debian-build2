@@ -25,6 +25,9 @@ ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 else
 	CFLAGS += -O2
 endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
 
 config-nohal: patch-stamp configure
 	dh_testdir
@@ -103,7 +106,7 @@ binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs
-	dh_installdocs -A debian/AFL-2.0
+	dh_installdocs -a
 	dh_installexamples -A debian/scripts
 #	dh_install
 	dh_installmenu
@@ -111,7 +114,7 @@ binary-arch: build install
 #	dh_installlogrotate
 #	dh_installemacsen
 #	dh_installpam
-#	dh_installmime
+	dh_installmime -a
 	dh_desktop -A pcmanfm.desktop
 #	dh_installinit
 #	dh_installcron

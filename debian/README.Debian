@@ -1,9 +1,31 @@
-These are taken from Enrico Zini's blog entry:
-http://www.enricozini.org/2006/tips/pcmanfm-nautilus.html
-====================================================================
+                          pcmanfm README.Debian
+			  ---------------------
 
+-----------------------
+Set gtk-icon-theme-name
+-----------------------
+pcmanfm needs GNOME compatible icons theme for icon display. This 
+usually handles *automatically* by XSETTINGS daemon, such as 
+gnome-settings-daemon, KDE and XFCE also provided XSETTINGS daemons.
+
+If your system does not have any XSETTINGS daemon running, you may get
+a warning message says pcmanfm cannot find usable gtk icon theme to use.
+
+You can either install a XSETTINGS daemon or specify gtk icon theme in
+following line in ~/gtkrc-2.0:
+    gtk-icon-theme-name="gnome"
+Note: You need have gnome-icon-theme package installed for this example.
+
+You may want to have a pcmanfm specfic gtkrc-2.0 file so that won't 
+change the behaviour of *all* your programs:
+     export GTK2_RC_FILES="~/.pcmanfm.gtkrc-2.0"
+
+-------------------------------
 Replacing nautilus with pcmanfm
---------------------------------
+-------------------------------
+Note: Below were taken from Enrico Zini's blog entry: 
+http://www.enricozini.org/2006/tips/pcmanfm-nautilus.html
+
 To have pcmanfm start instead of nautilus:
 
    1. Go to Desktop -> Preferences -> Session manager
@@ -80,6 +102,5 @@ It would also be cool to have a little program that registers pcmanfm as
 a 'Restart' entry with priority 40, just like nautilus.
 ________________________________________
 Last edited Tue Dec 26 15:32:40 2006 
-========================================================================
 
  -- Andrew Lee <andrew@linux.org.tw>
