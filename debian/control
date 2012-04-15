@@ -3,34 +3,21 @@ Section: utils
 Priority: optional
 Maintainer: Debian LXDE Packaging Team <pkg-lxde-maintainers@lists.alioth.debian.org>
 Uploaders: Andrew Lee (李健秋) <ajqlee@debian.org>
-Build-Depends: debhelper (>= 7.0.50~),
-               libgtk2.0-dev (>= 2.6.0),
-               libgamin-dev,
-               automake,
-               autoconf,
-               pkg-config,
-               intltool,
-               libstartup-notification0-dev,
-               libdbus-glib-1-dev,
-               python,
-               libfm-dev (>= 0.1.14),
-               libmenu-cache1-dev (>= 0.3.2),
-               libtool,
-               lsb-release
-Build-Conflicts: autoconf2.13, automake1.4
+Build-Depends:
+ debhelper (>= 8), autoconf, automake, intltool, libdbus-glib-1-dev,
+ libfm-dev (>= 0.1.17), libgamin-dev, libgtk2.0-dev (>= 2.16.0),
+ libmenu-cache1-dev (>= 0.3.2), libstartup-notification0-dev, libtool,
+ pkg-config, python
 Standards-Version: 3.9.2
 Homepage: http://pcmanfm.sourceforge.net/
-Vcs-Git: git://git.debian.org/git/collab-maint/pcmanfm.git
-Vcs-Browser: http://git.debian.org/?p=collab-maint/pcmanfm.git;a=summary
+Vcs-Git: git://git.debian.org/git/pkg-lxde/pcmanfm.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-lxde/pcmanfm.git;a=summary
 
 Package: pcmanfm
 Architecture: any
-Depends: ${shlibs:Depends},
-         ${misc:Depends}
-Recommends: lxde-icon-theme | gnome-icon-theme,
-            gvfs-backends,
-            gvfs-fuse
-Conflicts: pcmanfm-nohal
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends:
+ gvfs-backends, gvfs-fuse, lxde-icon-theme | gnome-icon-theme,
 Description: extremely fast and lightweight file manager
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
@@ -53,9 +40,7 @@ Package: pcmanfm-dbg
 Section: debug
 Priority: extra
 Architecture: any
-Depends: ${shlibs:Depends},
-         ${misc:Depends},
-         pcmanfm (= ${binary:Version})
+Depends: ${misc:Depends}, ${shlibs:Depends}, pcmanfm (= ${binary:Version})
 Description: extremely fast and lightweight file manager - debugging symbols
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
@@ -73,5 +58,5 @@ Description: extremely fast and lightweight file manager - debugging symbols
   * Standard compliant (Follows FreeDesktop.org)
   * Clean and user-friendly interface (GTK+ 2)
   * Support GVFS for auto-mount handling on removable devices
- . 
+ .
  This package contains the debugging symbols.

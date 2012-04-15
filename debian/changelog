@@ -1,3 +1,99 @@
+pcmanfm (0.9.10-1) unstable; urgency=low
+
+  [ Andrew Lee (李健秋) ]
+  A happy looooooooong(龍) year release.
+  * Merging upstream version 0.9.10:
+    (Closes: #501884, #583192, #588050, #588022, #587709, #585623, #537343,
+    #585701, #534923, #621770, #657559, #644235, #635655, #634238, #630396,
+    #624014, #624013, #607093, #605234, #603849, #600853, #614000, #613328,
+    #604818, #603045, #598273, #597812, #585692)
+  - Explicitly link to libfm.
+  - Fix SF#3094303: Regression: Dnd to add folder to bookmarks is broken.
+  - Focus folder view after switching page.
+  - Update to use latest libfm API. Fix SF#3300800: Deletion prompt has no
+    title.
+  - Fix untranslatable messages.
+  - Make "%d items selected" status message translatable.
+  - Fix SF#3308324: "~ in locatio bar cause pcmanfm crash".
+  - Fix SF#3286157: "Entering path with two initial slashes // crashes".
+  - Fix SF#3284001: "Crash when entering path with trailing slash". This
+    is related to GTK+ bug 650114, which is already fixed.
+  - Add "Reload folder" to "View" menu.
+  - Apply patch SF#3135578: Problems with the selection and opening a file.
+  - Apply patch SF#3163496: "Menu key to call context menu" with some
+    modifications.
+  - Apply patch SF#3301636: Make slash and tilde activate location bar.
+  - Close tab page when the folder which it shows is deleted or unmounted.
+  - Use a less problematic way to show "root mode" warnings.
+  - Update statusbar text, volume info, and window title correctly for every
+    pages.
+  - Use enum values instead of integer values for bookmark open methods.
+  - Use new API: fm_folder_model_get_is_loaded().
+  - Rework tabbed-browsing again and create one separate GtkHPaned widget
+    for every page.
+  - Save side pane mode.
+  - Fix free disk space display. Fix SF#3037825: Bottom bar not updated.
+  - Rework tabbed-browsing again and make the code cleaner.
+  - Add correct version checks for libraries in configure.ac.
+  - Deprecate fm_folder_get_for_path() API and use fm_folder_get() instead.
+  - Rename variables for consistency.
+  - Make status bar message more user-friendly and correct.
+  - Use new fm_path_entry_set_path() and fm_path_entry_get_path() APIs.
+  - Fix SF#3114626: PCManFM 0.9.9 Umount partitions problem.
+  - Prevent removing built ui files and fix #3181001 – data/ui/*.glade
+    files missing in tarball.
+  - Set a proper default desktop font if the config value is lacking.
+  - Add a new config value tab_max_chars to limit the maximum width of tabs.
+  - Rework tab browsing so we can have more tabs in available space just
+    like the old pcmanfm 0.5 series.
+  - Fix SF#3139753: Create New asks for name of new “file” even for a new
+    folder.
+  - Add "Create New" popup menu to "File" main menu. Close bug SF#3107416.
+  - Fix SF#3095516: PCManFM does not write preferences from main menu.
+  - Add checks for invalid enum values when loading config files.
+  - Fix SF#3112447: Daemon mode opens window.
+  - Update translations and fix SF#3114640: PCManFM 0.9.9 Right-clic on
+    desktop partly hard coded.
+  - Escape strings while passing through IPC.
+  - Handle string arguments with prefix –.
+  - Reimplement a simpler yet cleaner IPC mechanism again.
+  - Support mouse button 8 and 9 for back and forward.
+  - Fix SF#3094187: Icons file no change when “Stick to Positon” is unchecked.
+  - Improve handling of backward compatibility for old config files.
+  - Fix SF#3085503: always_show_tabs=1 don’t work.
+  - Bump version number to 0.9.9. Fix SF#3071296: pcman windows always
+    show up on first desktop.
+  - Apply patch SF#3089346: Re-enbale fake transparency when using
+    pcmanfm 0.9.X.
+  - Use our own round() implementation to avoid using C99 only function.
+  - Add missing file to data/Makefile.am
+
+  [ Sergey Slipchenko ]
+  * Drop all patches.
+  * Added missing etc/ directory in pcmanfm.install.
+
+  [ Andrew Lee (李健秋) ]
+  * Using debhelper 8.
+  * Updating Vcs tags.
+  * Sorting build-depends.
+  * Warpping build-depends.
+  * Sorting and warpping depends.
+  * Sorting and warpping recommends.
+  * Drop Build-Conflicts.
+  * Drop Conflicts: since pcmanfm-nohal isn't ship with previous release.
+  * Remove useless docs.
+  * Drop #/usr/bin/autoreconf in rules.
+  * Drop LDFLAGS in rules.
+  * Compacting rules file.
+  * Droping lsb-releases in build-depends.
+  * Drop uesless README.Debian and debian/scripts from earlier series.
+  * Removing useless whitespaces at EOL and EOF.
+  * Build-depends on libfm-dev (>= 0.1.17).
+  * Build-depends on libgtk2.0-dev (>= 2.16.0).
+  * Correct url for vcs-Browser tag.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Wed, 01 Feb 2012 03:48:01 +0800
+
 pcmanfm (0.9.8-2) unstable; urgency=low
 
   * Apply revert-new-IPC.patch(from Arch Linux). (Closes: #605760)
@@ -42,21 +138,21 @@ pcmanfm (0.9.7-1) unstable; urgency=low
     - Fixed middle-click shortcut on directory in bookmarks area
     - Fixed desktop does not work with xrandr
     - Updated translations
-  * Removed 01_binary_rename.patch. Included in upstream. 
+  * Removed 01_binary_rename.patch. Included in upstream.
   * Applied libtool-fix.patch (Closes:#556054)
 
  -- Andrew Lee (李健秋) <ajqlee@debian.org>  Mon, 31 May 2010 11:23:06 +0800
 
 pcmanfm (0.9.5-2) unstable; urgency=low
 
-  * Upload to sid. No new additional bug report since last upload into 
-    experimental. (Closes:#506243, #509257, #532973, #502225, #535810, 
+  * Upload to sid. No new additional bug report since last upload into
+    experimental. (Closes:#506243, #509257, #532973, #502225, #535810,
     #570114, #581033, #518683)
   * debian/control:
     Adjusted depends/recommends for people who doesn't want to have gvfs
-    on their system. Without gvfs installed, pcmanfm would still works 
+    on their system. Without gvfs installed, pcmanfm would still works
     but lose volume management and trashcan support.
-    - Drop depends on gamin, shared-mime-info, desktop-file-utils, dbus, 
+    - Drop depends on gamin, shared-mime-info, desktop-file-utils, dbus,
       xdg-user-dirs
     - Recommends on lxde-icon-theme | gnome-icon-theme, gvfs-backends,
       gvfs-fuse
@@ -75,11 +171,11 @@ pcmanfm (0.9.5-1) experimental; urgency=low
   * Use debhelper 7
   * Switch to dpkg-source 3.0 (quilt) format
   * debian/control:
-    - build-depends on libfm-dev (>= 0.1.10), libmenu-cache1-dev (>= 0.3.2)   
+    - build-depends on libfm-dev (>= 0.1.10), libmenu-cache1-dev (>= 0.3.2)
     - Droped hal related build-depends
     - Droped pcmanfm-nohal binary package
     - Added pcmanfm-dbg binary package
-    - Added pcmanfm depends on gvfs-backends, xdg-user-dirs 
+    - Added pcmanfm depends on gvfs-backends, xdg-user-dirs
     - Adjust package description
     - Added depends on (= ${binary:Version) to pcmanfm-dbg
     - Set priority "extra" to pcmanfm-dbg
@@ -104,10 +200,10 @@ pcmanfm (0.5.2+svn20091029-1) unstable; urgency=low
 
   * New upstream release+translation update from SVN
     - Fix compatibility issue with shared-mime-info 0.70
-  * debian/watch: 
+  * debian/watch:
     - s/gz/bz2/
   * debian/rules:
-    - Remove deprecated dh_desktop 
+    - Remove deprecated dh_desktop
   * Bumped Standard-version to 3.8.3
 
  -- Andrew Lee (李健秋) <ajqlee@debian.org>  Sat, 31 Oct 2009 17:27:15 +0800
@@ -128,17 +224,17 @@ pcmanfm (0.5.1+svn20090607-1) unstable; urgency=low
 
 pcmanfm (0.5-3) unstable; urgency=low
 
-  * Correct spellings,  03_correct_spelling.dpatch (Closes:498794) 
+  * Correct spellings,  03_correct_spelling.dpatch (Closes:498794)
   * Code in some files are taken from other projects, added these
     informations into copyright file. (Closes:499678)
   * Applied 04_defaut_terminal.dpatch to support x-terminal-emulator
-    alternative. (Closes:497494) 
+    alternative. (Closes:497494)
 
  -- Andrew Lee <andrew@linux.org.tw>  Fri, 26 Sep 2008 10:19:20 +0800
 
 pcmanfm (0.5-2) unstable; urgency=low
 
-  * Solve strange Xorg errors problem. (Closes:#494185) 
+  * Solve strange Xorg errors problem. (Closes:#494185)
 
  -- Andrew Lee <andrew@linux.org.tw>  Tue, 12 Aug 2008 04:24:15 +0800
 
@@ -147,22 +243,22 @@ pcmanfm (0.5-1) unstable; urgency=low
   * New upstream release
     - Single click to open items (optional, finally we have it!).
     - UI adjustment: The preference dialog is now GNOME HIG compliant.
-    - The preference dialog will use a non-GNOME HIG compliant, more 
+    - The preference dialog will use a non-GNOME HIG compliant, more
       compact layout under small screens.
-    - Support calling preference dialog via command line with 
+    - Support calling preference dialog via command line with
       --show-pref.
-    - Support changing wallpaper desktop window via command line with 
+    - Support changing wallpaper desktop window via command line with
       --set-wallpaper.
-    - Open preference dialog no longer blocks the desktop window and 
+    - Open preference dialog no longer blocks the desktop window and
       other folder windows.
     - Improve the usability of detailed list view (better selection
       handling).
-    - Add a basic but user-friendly "Find Files" utility.This can 
+    - Add a basic but user-friendly "Find Files" utility.This can
       completely replace the simple find tool provided by GNOME.
-      (Can be launched from command line, too). 
-    - Fix folder handler problems previously interfering nautilus 
+      (Can be launched from command line, too).
+    - Fix folder handler problems previously interfering nautilus
       under GNOME.
-    - Rename the menu item showed in the system menu from 
+    - Rename the menu item showed in the system menu from
       "PCMan File Manager" to "File Manager" for better usability.
 
  -- Andrew Lee <andrew@linux.org.tw>  Thu, 17 Jul 2008 13:31:07 +0800
@@ -187,7 +283,7 @@ pcmanfm (0.4.3-1) unstable; urgency=low
   previous releases. GTK+ has very few supports for those things and its
   default behavior isn't suitable for more complicated applications. So,
   those listed features are coded by the author of PCManFM line by line,
-  which is very time-consuming... 
+  which is very time-consuming...
   However, after endless hacking, we got them. Cheers!
 
  -- Andrew Lee <andrew@linux.org.tw>  Wed, 18 Jun 2008 04:40:48 +0800
@@ -202,12 +298,12 @@ pcmanfm (0.4.1.1-1) unstable; urgency=low
     - Able to use the desktop root menu provided by window manager (This
       option can be turned on from the preference dialog).
     - Drop shadow on desktop item text.
-    - Totally rewrite the wallpaper support. Now there are several 
+    - Totally rewrite the wallpaper support. Now there are several
       different modes: extend, tile, or center the image.
-    - Daemon mode support. Run pcmanfm with -d argument can run 
+    - Daemon mode support. Run pcmanfm with -d argument can run
       pcmanfm as daemon, and it will start much faster later.
     - Image preview is shown in "Open File" dialog when selecting
-      wallpaper.  
+      wallpaper.
     - Handle mount/umount/eject much more gracefully. If root access is
       needed, now gksu will be called automatically, and the volumes can
       be mounted correctly after typing the password.
@@ -325,7 +421,7 @@ pcmanfm (0.3.2.2-1) unstable; urgency=low
   * New upstream release 0.3.2.2.
     - Block unnecessary signal handlers to fix the performance problem
       caused when doing invert selection.
-    - Fix a segfault in on_file_propertiesDlg_response triggered on 
+    - Fix a segfault in on_file_propertiesDlg_response triggered on
       chown.
     - Fix let to avoid SegFault when file monitoring.
     - Mark some functions as static to avoid conflicts.
@@ -333,13 +429,13 @@ pcmanfm (0.3.2.2-1) unstable; urgency=low
     - Fix #ifdef EACCESS for FreeBSD.
     - Little fix for opening terminal with popup menu of desktop.
     - Skip desktop window in Alt+Tab.
-  * Applied a patch for "FTBFS on GNU/kFreeBSD (due to unsatisfied 
-    Build-Depends on libhal-dev)" by 
+  * Applied a patch for "FTBFS on GNU/kFreeBSD (due to unsatisfied
+    Build-Depends on libhal-dev)" by
     Petr Salinger <Petr.Salinger@seznam.cz> (Closes:#404050)
 
   [ Andrew Lee ]
   * Taken a entry from Enrico Zini's blog to README.Debian for how to
-    replace nautilus with pcmanfm and provide genconf.sh 
+    replace nautilus with pcmanfm and provide genconf.sh
 
  -- Andrew Lee <andrew@linux.org.tw>  Tue, 26 Dec 2006 23:28:33 +0800
 
@@ -417,7 +513,7 @@ pcmanfm (0.3.2.1-1) unstable; urgency=low
   * 01_implicit-pointer-conversion.dpatch is applied in upstream.
 
   [ Andrew Lee ]
-  * debian/controls: Recommends on gnome-icon-theme, so that icons 
+  * debian/controls: Recommends on gnome-icon-theme, so that icons
     display properly.
   * Update to policy version 3.7.2.2, no actual changes needed.
 
@@ -446,7 +542,7 @@ pcmanfm (0.3.0.2-1) unstable; urgency=low
 pcmanfm (0.2.4-2) unstable; urgency=low
 
   * Apply 01_implicit-pointer-conversion.dpatch by Dann Frazier
-    <dannf@debian.org> (Closes:#384369) 
+    <dannf@debian.org> (Closes:#384369)
 
  -- Andrew Lee <andrew@linux.org.tw>  Thu, 24 Aug 2006 21:01:45 +0800
 
