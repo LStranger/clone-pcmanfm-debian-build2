@@ -1,3 +1,10 @@
+pcmanfm (0.3.0.2-2) unstable; urgency=low
+
+  * Update 01_implicit-pointer-conversion.dpatch 
+    by Dann Frazier <dannf@debian.org> (Closes:#389515)
+
+ -- Andrew Lee <andrew@linux.org.tw>  Tue, 26 Sep 2006 14:15:08 +0800
+
 pcmanfm (0.3.0.2-1) unstable; urgency=low
 
   [ Lu, Chao-Ming (Tetralet) ]

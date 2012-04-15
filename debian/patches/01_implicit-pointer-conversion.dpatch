@@ -42,3 +42,14 @@ diff -uNr pcmanfm-0.3.0.2.orig/src/ptk/ptk-dir-tree-view.c pcmanfm-0.3.0.2/src/p
  
  #include <glib.h>
  #include <glib/gi18n.h>
+--- pcmanfm-0.3.0.2/src/main.c~	2006-08-14 05:09:14.000000000 -0600
++++ pcmanfm-0.3.0.2/src/main.c	2006-09-25 21:48:08.000000000 -0600
+@@ -26,6 +26,8 @@
+ #include "glade-support.h"
+ #include "settings.h"
+ 
++#include "app-chooser-dialog.h"
++
+ static char* init_path = NULL;
+ 
+ static int sock;
