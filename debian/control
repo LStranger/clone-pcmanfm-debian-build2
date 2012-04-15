@@ -5,7 +5,7 @@ Maintainer: Debian LXDE Maintainers <lxde-debian@lists.lxde.org>
 Uploaders:
  Andrew Lee (李健秋) <ajqlee@debian.org>, Daniel Baumann <daniel@debian.org>
 Build-Depends:
- debhelper (>= 8), autoconf, automake, intltool, libdbus-glib-1-dev,
+ debhelper (>= 9), autoconf, automake, intltool, libdbus-glib-1-dev,
  libfm-dev (>= 0.1.17), libgamin-dev, libgtk2.0-dev (>= 2.16.0),
  libmenu-cache1-dev (>= 0.3.2), libstartup-notification0-dev, libtool,
  pkg-config, python
