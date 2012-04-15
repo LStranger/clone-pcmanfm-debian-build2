@@ -40,7 +40,10 @@ typedef struct _FMMainWindow
 
   GtkCheckMenuItem* sort_by_name;
   GtkCheckMenuItem* sort_by_size;
-  GtkCheckMenuItem* sort_by_time;
+  GtkCheckMenuItem* sort_by_mtime;
+  GtkCheckMenuItem* sort_by_type;
+  GtkCheckMenuItem* sort_by_perm;
+  GtkCheckMenuItem* sort_by_owner;
   GtkCheckMenuItem* sort_ascending;
   GtkCheckMenuItem* sort_descending;
 

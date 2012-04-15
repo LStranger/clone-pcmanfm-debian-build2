@@ -25,6 +25,11 @@ gboolean ptk_location_view_chdir( GtkTreeView* location_view, const char* path )
 
 char* ptk_location_view_get_selected_dir( GtkTreeView* location_view );
 
+gboolean ptk_location_view_is_item_bookmark( GtkTreeView* location_view,
+                                             GtkTreeIter* it );
+
+void ptk_location_view_rename_selected_bookmark( GtkTreeView* location_view );
+
 G_END_DECLS
 
 #endif

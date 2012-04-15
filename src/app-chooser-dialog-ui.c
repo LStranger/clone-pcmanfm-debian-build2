@@ -100,7 +100,7 @@ create_app_chooser_dlg (void)
   gtk_container_add (GTK_CONTAINER (scrolledwindow1), recommended_apps);
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (recommended_apps), FALSE);
 
-  label3 = gtk_label_new (_("Recommended Applications"));
+  label3 = gtk_label_new_with_mnemonic (_("_Recommended Applications"));
   gtk_widget_show (label3);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 0), label3);
 
@@ -115,7 +115,7 @@ create_app_chooser_dlg (void)
   gtk_container_add (GTK_CONTAINER (scrolledwindow2), all_apps);
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (all_apps), FALSE);
 
-  label2 = gtk_label_new (_("All Applications"));
+  label2 = gtk_label_new_with_mnemonic (_("_All Applications"));
   gtk_widget_show (label2);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label2);
 
@@ -124,7 +124,7 @@ create_app_chooser_dlg (void)
   gtk_box_pack_start (GTK_BOX (dialog_vbox), hbox1, FALSE, TRUE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (hbox1), 4);
 
-  label5 = gtk_label_new (_("Command Line: "));
+  label5 = gtk_label_new_with_mnemonic (_("_Command Line: "));
   gtk_widget_show (label5);
   gtk_box_pack_start (GTK_BOX (hbox1), label5, FALSE, FALSE, 0);
 
@@ -159,7 +159,6 @@ create_app_chooser_dlg (void)
   gtk_container_set_border_width (GTK_CONTAINER (hbox2), 4);
 
   open_in_terminal = gtk_check_button_new_with_mnemonic (_("Opened in Terminal"));
-  gtk_widget_show (open_in_terminal);
   gtk_box_pack_start (GTK_BOX (hbox2), open_in_terminal, FALSE, FALSE, 0);
   gtk_widget_set_sensitive (open_in_terminal, FALSE);
 
@@ -187,6 +186,8 @@ create_app_chooser_dlg (void)
   g_signal_connect_swapped ((gpointer) browse_btn, "clicked",
                             G_CALLBACK (on_browse_btn_clicked),
                             GTK_OBJECT (app_chooser_dlg));
+
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label5), cmdline);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (app_chooser_dlg, app_chooser_dlg, "app_chooser_dlg");

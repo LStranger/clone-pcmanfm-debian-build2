@@ -4,12 +4,18 @@ src/main.c
 src/main-window.c
 src/ptk/ptk-file-browser.c
 src/ptk/ptk-location-view.c
+src/ptk/ptk-file-task.c
+src/ptk/ptk-file-archiver.c
+src/ptk/ptk-console-output.c
+src/ptk/ptk-dir-tree.c
 src/file-properties-ui.c
 src/file-properties.c
-src/file-operation.c
-src/file-operation-ui.c
 src/pref-dialog-ui.c
 src/edit-bookmarks.c
 src/app-chooser-dialog.c
 src/app-chooser-dialog-ui.c
+src/file-assoc-dlg.c
+src/file-assoc-dlg-ui.c
+src/vfs/vfs-app-desktop.c
+src/vfs/vfs-file-task.c
 

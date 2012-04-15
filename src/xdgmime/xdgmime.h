@@ -16,7 +16,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -33,7 +33,8 @@
 #include <sys/stat.h>
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif /* __cplusplus */
 
 #ifdef XDG_PREFIX
@@ -42,8 +43,8 @@ extern "C" {
 #define _XDG_ENTRY3(prefix,func) prefix##_##func
 #endif
 
-typedef void (*XdgMimeCallback) (void *user_data);
-typedef void (*XdgMimeDestroy)  (void *user_data);
+  typedef void ( *XdgMimeCallback ) ( void * user_data );
+  typedef void ( *XdgMimeDestroy ) ( void * user_data );
 
 
 #ifdef XDG_PREFIX
@@ -65,52 +66,53 @@ typedef void (*XdgMimeDestroy)  (void *user_data);
 #define xdg_mime_type_unknown                 XDG_ENTRY(type_directory)
 #endif
 
-extern const char xdg_mime_type_unknown[];
+  extern const char xdg_mime_type_unknown[];
 #define XDG_MIME_TYPE_UNKNOWN xdg_mime_type_unknown
 
-/* 2005.01.16 added by Hong Jen Yee (PCMan) */
-extern const char xdg_mime_type_directory[];
+  /* 2005.01.16 added by Hong Jen Yee (PCMan) */
+  extern const char xdg_mime_type_directory[];
 #define XDG_MIME_TYPE_DIRECTORY xdg_mime_type_directory
 
-extern const char xdg_mime_type_executable[];
+  extern const char xdg_mime_type_executable[];
 #define XDG_MIME_TYPE_EXECUTABLE xdg_mime_type_executable
 
-extern const char xdg_mime_type_plain_text[];
+  extern const char xdg_mime_type_plain_text[];
 #define XDG_MIME_TYPE_PLAIN_TEXT xdg_mime_type_plain_text
 
 
-/* 2006.02.26 added by Hong Jen Yee */
-int xdg_mime_is_text_file( const char *file_path, const char* mime_type );
-int xdg_mime_is_executable_file( const char *file_path, const char* mime_type );
+  /* 2006.02.26 added by Hong Jen Yee */
+  int xdg_mime_is_text_file( const char * file_path, const char * mime_type );
+  int xdg_mime_is_executable_file( const char * file_path, const char * mime_type );
 
-const char  *xdg_mime_get_mime_type_for_data       (const void *data,
-						    size_t      len);
-const char  *xdg_mime_get_mime_type_for_file       (const char *file_name,
-                                                    const char *base_name,
-                                                    struct stat *statbuf);
-const char  *xdg_mime_get_mime_type_from_file_name (const char *file_name);
-int          xdg_mime_is_valid_mime_type           (const char *mime_type);
-int          xdg_mime_mime_type_equal              (const char *mime_a,
-						    const char *mime_b);
-int          xdg_mime_media_type_equal             (const char *mime_a,
-						    const char *mime_b);
-int          xdg_mime_mime_type_subclass           (const char *mime_a,
-						    const char *mime_b);
+  const char *xdg_mime_get_mime_type_for_data ( const void * data,
+          size_t len );
+  const char *xdg_mime_get_mime_type_for_file ( const char * file_name,
+          const char * base_name,
+          struct stat * statbuf );
+  const char *xdg_mime_get_mime_type_from_file_name ( const char * file_name );
+  int xdg_mime_is_valid_mime_type ( const char * mime_type );
+  int xdg_mime_mime_type_equal ( const char * mime_a,
+                                 const char * mime_b );
+  int xdg_mime_media_type_equal ( const char * mime_a,
+                                  const char * mime_b );
+  int xdg_mime_mime_type_subclass ( const char * mime_a,
+                                    const char * mime_b );
   /* xdg_mime_get_mime_parents() is deprecated since it does
    * not work correctly with caches. Use xdg_mime_list_parents()
    * instead, but notice that that function expects you to free
    * the array it returns.
    */
-const char **xdg_mime_get_mime_parents		   (const char *mime);
-char **      xdg_mime_list_mime_parents		   (const char *mime);
-const char  *xdg_mime_unalias_mime_type		   (const char *mime);
-int          xdg_mime_get_max_buffer_extents       (void);
-void         xdg_mime_shutdown                     (void);
-void         xdg_mime_dump                         (void);
-int          xdg_mime_register_reload_callback     (XdgMimeCallback  callback,
-						    void            *data,
-						    XdgMimeDestroy   destroy);
-void         xdg_mime_remove_callback              (int              callback_id);
+  const char **xdg_mime_get_mime_parents  ( const char * mime );
+  char ** xdg_mime_list_mime_parents  ( const char * mime );
+  const char *xdg_mime_unalias_mime_type  ( const char * mime );
+  int xdg_mime_get_max_buffer_extents ( void );
+  void xdg_mime_init ( void );
+  void xdg_mime_shutdown ( void );
+  void xdg_mime_dump ( void );
+  int xdg_mime_register_reload_callback ( XdgMimeCallback callback,
+                                          void * data,
+                                          XdgMimeDestroy destroy );
+  void xdg_mime_remove_callback ( int callback_id );
 
 #ifdef __cplusplus
 }

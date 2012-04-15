@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-31 16:22+0800\n"
+"POT-Creation-Date: 2006-08-20 22:46+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,357 +17,628 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: src/main-window.c:238 src/ptk/ptk-file-browser.c:2695
+#: src/main.c:174
+msgid "GTK+ icon theme is not properly set"
+msgstr ""
+
+#: src/main.c:176
+#, c-format
+msgid ""
+"<big><b>%s</b></big>\n"
+"\n"
+"This usually means you don't have an XSETTINGS manager running.  Desktop "
+"environment like GNOME or XFCE automatically execute their XSETTING managers "
+"like gnome-settings-daemon or xfce-mcs-manager.\n"
+"\n"
+"<b>If you don't use these desktop environments, you have two choices:\n"
+"1. run an XSETTINGS manager, or\n"
+"2. simply specify an icon theme in ~/.gtkrc-2.0.</b>\n"
+"For example to use the Tango icon theme add a line:\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it "
+"if no such file)\n"
+"\n"
+"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the "
+"file icons cannot be displayed correctly.</b>  Due to the differences in "
+"icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
+"no standard for this, but it will be solved by freedesktop.org in the future."
+msgstr ""
+
+#: src/main.c:306
+msgid "File doesn't exist"
+msgstr ""
+
+#: src/main.c:352
+msgid "Don't know how to open the file"
+msgstr ""
+
+#: src/main.c:354
+#, c-format
+msgid ""
+"Unable to open file:\n"
+"\"%s\"\n"
+"%s"
+msgstr ""
+
+#: src/main-window.c:254 src/ptk/ptk-file-browser.c:2366
 msgid "_Folder"
 msgstr ""
 
-#: src/main-window.c:239 src/ptk/ptk-file-browser.c:2696
+#: src/main-window.c:255 src/ptk/ptk-file-browser.c:2367
 msgid "_Text File"
 msgstr ""
 
-#: src/main-window.c:244
+#: src/main-window.c:261
 msgid "New _Window"
 msgstr ""
 
-#: src/main-window.c:245
+#: src/main-window.c:262
 msgid "New _Tab"
 msgstr ""
 
-#: src/main-window.c:246
+#: src/main-window.c:263
 msgid "Close Tab"
 msgstr ""
 
-#: src/main-window.c:248 src/ptk/ptk-file-browser.c:2709
+#: src/main-window.c:265 src/ptk/ptk-file-browser.c:2390
 msgid "_Create New"
 msgstr ""
 
-#: src/main-window.c:249
+#: src/main-window.c:266
 msgid "File _Properties"
 msgstr ""
 
-#: src/main-window.c:259 src/ptk/ptk-file-browser.c:2706
+#: src/main-window.c:277 src/ptk/ptk-file-browser.c:2385
 msgid "_Delete"
 msgstr ""
 
-#: src/main-window.c:260 src/ptk/ptk-file-browser.c:2707
+#: src/main-window.c:278 src/ptk/ptk-file-browser.c:1170
+#: src/ptk/ptk-file-browser.c:2386
 msgid "_Rename"
 msgstr ""
 
-#: src/main-window.c:262
+#: src/main-window.c:280
 msgid "Select _All"
 msgstr ""
 
-#: src/main-window.c:263
+#: src/main-window.c:281
 msgid "_Invert Selection"
 msgstr ""
 
-#: src/main-window.c:270
+#: src/main-window.c:290
 msgid "Go _Back"
 msgstr ""
 
-#: src/main-window.c:271
+#: src/main-window.c:291
 msgid "Go _Forward"
 msgstr ""
 
-#: src/main-window.c:272
+#: src/main-window.c:292
 msgid "Go to _Parent Folder"
 msgstr ""
 
-#: src/main-window.c:273
+#: src/main-window.c:293
 msgid "Go _Home"
 msgstr ""
 
-#: src/main-window.c:283
+#: src/main-window.c:305
 msgid "Sort by _Name"
 msgstr ""
 
-#: src/main-window.c:284
+#: src/main-window.c:306
 msgid "Sort by _Size"
 msgstr ""
 
-#: src/main-window.c:285
-msgid "Sort by _Time"
-msgstr ""
-
-#: src/main-window.c:287
-msgid "Ascending"
-msgstr ""
-
-#: src/main-window.c:288
-msgid "Descending"
-msgstr ""
-
-#: src/main-window.c:293
-msgid "_Open Side Pane"
-msgstr ""
-
-#: src/main-window.c:295
-msgid "Show _Location Pane"
-msgstr ""
-
-#: src/main-window.c:296
-msgid "Show _Directory Tree"
-msgstr ""
-
-#: src/main-window.c:301
-msgid "_Refresh"
-msgstr ""
-
-#: src/main-window.c:302
-msgid "Side _Pane"
-msgstr ""
-
-#: src/main-window.c:303
-msgid "_Full Screen"
-msgstr ""
-
-#: src/main-window.c:305
-msgid "Show _Hidden Files"
-msgstr ""
-
-#: src/main-window.c:306
-msgid "_Sort..."
+#: src/main-window.c:307
+msgid "Sort by _Modification Time"
 msgstr ""
 
 #: src/main-window.c:308
-msgid "View as _Icons"
+msgid "Sort by _Type"
 msgstr ""
 
 #: src/main-window.c:309
-msgid "View as Detailed _List"
+msgid "Sort by _Permission"
 msgstr ""
 
-#: src/main-window.c:314
-msgid "Open _Terminal"
+#: src/main-window.c:310
+msgid "Sort by _Owner"
+msgstr ""
+
+#: src/main-window.c:312
+msgid "Ascending"
+msgstr ""
+
+#: src/main-window.c:313
+msgid "Descending"
+msgstr ""
+
+#: src/main-window.c:319
+msgid "_Open Side Pane"
+msgstr ""
+
+#: src/main-window.c:321
+msgid "Show _Location Pane"
 msgstr ""
 
 #: src/main-window.c:322
-msgid "_File"
-msgstr ""
-
-#: src/main-window.c:323
-msgid "_Edit"
-msgstr ""
-
-#: src/main-window.c:324
-msgid "_Go"
-msgstr ""
-
-#: src/main-window.c:325
-msgid "_Bookmark"
-msgstr ""
-
-#: src/main-window.c:326
-msgid "_View"
-msgstr ""
-
-#: src/main-window.c:327
-msgid "_Tool"
+msgid "Show _Directory Tree"
 msgstr ""
 
 #: src/main-window.c:328
-msgid "_Help"
+msgid "_Refresh"
+msgstr ""
+
+#: src/main-window.c:329
+msgid "Side _Pane"
+msgstr ""
+
+#: src/main-window.c:332
+msgid "Show _Hidden Files"
+msgstr ""
+
+#: src/main-window.c:333
+msgid "_Sort..."
 msgstr ""
 
 #: src/main-window.c:335
-msgid "New Tab"
+msgid "View as _Icons"
 msgstr ""
 
 #: src/main-window.c:336
+msgid "View as Detailed _List"
+msgstr ""
+
+#: src/main-window.c:342
+msgid "Open _Terminal"
+msgstr ""
+
+#: src/main-window.c:343
+msgid "Open Current Folder as _Root"
+msgstr ""
+
+#: src/main-window.c:351
+msgid "_File"
+msgstr ""
+
+#: src/main-window.c:352
+msgid "_Edit"
+msgstr ""
+
+#: src/main-window.c:353
+msgid "_Go"
+msgstr ""
+
+#: src/main-window.c:354
+msgid "_Bookmark"
+msgstr ""
+
+#: src/main-window.c:355
+msgid "_View"
+msgstr ""
+
+#: src/main-window.c:356
+msgid "_Tool"
+msgstr ""
+
+#: src/main-window.c:357
+msgid "_Help"
+msgstr ""
+
+#: src/main-window.c:365
+msgid "New Tab"
+msgstr ""
+
+#: src/main-window.c:366
 msgid "Back"
 msgstr ""
 
-#: src/main-window.c:337
+#: src/main-window.c:367
 msgid "Forward"
 msgstr ""
 
-#: src/main-window.c:338
+#: src/main-window.c:368
 msgid "Parent Folder"
 msgstr ""
 
-#: src/main-window.c:339
+#: src/main-window.c:369
 msgid "Refresh"
 msgstr ""
 
-#: src/main-window.c:340
+#: src/main-window.c:370
 msgid "Home Directory"
 msgstr ""
 
-#: src/main-window.c:341
+#: src/main-window.c:371
 msgid "Open Side Pane"
 msgstr ""
 
-#: src/main-window.c:346
+#: src/main-window.c:377
 msgid "Go"
 msgstr ""
 
-#: src/main-window.c:419
+#. FIXME: Is this label required? What about the hotkey?
+#: src/main-window.c:460
 msgid "A_ddress:"
 msgstr ""
 
-#: src/main-window.c:442
+#: src/main-window.c:488
 msgid "Warning: You are in super user mode"
 msgstr ""
 
 #. TRANSLATORS: Replace this string with your names, one name per line.
-#: src/main-window.c:772
+#: src/main-window.c:861
 msgid "translator-credits"
 msgstr ""
 
-#: src/main-window.c:777
+#: src/main-window.c:866
 msgid "PCMan File Manager"
 msgstr ""
 
-#: src/main-window.c:778
+#: src/main-window.c:867
 msgid "Copyright (C) 2005 - 2006"
 msgstr ""
 
-#: src/main-window.c:779
+#: src/main-window.c:868
 msgid ""
 "Lightweight file manager\n"
 "\n"
 "Developed by Hon Jen Yee (PCMan)"
 msgstr ""
 
-#: src/main-window.c:1266
+#: src/main-window.c:1406
 msgid "Terminal program has not been set"
 msgstr ""
 
-#: src/main-window.c:1354
+#: src/main-window.c:1448
+msgid "gksu or kdesu is not found"
+msgstr ""
+
+#: src/main-window.c:1525
 msgid "_Add to Bookmarks"
 msgstr ""
 
-#: src/main-window.c:1355
+#: src/main-window.c:1526
 msgid "_Edit Bookmarks"
 msgstr ""
 
-#: src/main-window.c:1434
+#: src/main-window.c:1606
 msgid "Loading..."
 msgstr ""
 
-#: src/main-window.c:1629
+#: src/main-window.c:1786
 #, c-format
 msgid "%d item selected (%s)"
 msgid_plural "%d items selected (%s)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main-window.c:1636
+#: src/main-window.c:1794
 #, c-format
 msgid "%d visible item (%d hidden)"
 msgid_plural "%d visible items (%d hidden)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/ptk/ptk-file-browser.c:561
+#: src/ptk/ptk-file-browser.c:532
 msgid "Directory does'nt exist!"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1743 src/edit-bookmarks.c:160
+#: src/ptk/ptk-file-browser.c:1166 src/ptk/ptk-file-browser.c:2478
+msgid "Open in New _Tab"
+msgstr ""
+
+#: src/ptk/ptk-file-browser.c:1167 src/ptk/ptk-file-browser.c:2485
+msgid "Open in New _Window"
+msgstr ""
+
+#: src/ptk/ptk-file-browser.c:1412 src/edit-bookmarks.c:173
 msgid "Name"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1743
+#: src/ptk/ptk-file-browser.c:1412
 msgid "Size"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1743
+#: src/ptk/ptk-file-browser.c:1412
 msgid "Type"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1744
+#: src/ptk/ptk-file-browser.c:1413
 msgid "Permission"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1744
+#: src/ptk/ptk-file-browser.c:1413
 msgid "Owner:Group"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:1744
+#: src/ptk/ptk-file-browser.c:1413
 msgid "Last Modification"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2250
+#: src/ptk/ptk-file-browser.c:1927
 msgid "Rename File"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2251
+#: src/ptk/ptk-file-browser.c:1928
 msgid "Please input new file name:"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2269 src/ptk/ptk-file-browser.c:3364
+#: src/ptk/ptk-file-browser.c:1957 src/ptk/ptk-file-browser.c:1975
+#: src/ptk/ptk-file-browser.c:3196
 msgid ""
 "The file name you specified has existed.\n"
 "Please input a new one:"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2488
+#: src/ptk/ptk-file-browser.c:2112
 msgid "Really delete selected files?"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2701
+#: src/ptk/ptk-file-browser.c:2373
+msgid "E_xtract Here"
+msgstr ""
+
+#: src/ptk/ptk-file-browser.c:2374
+msgid "Extract _To"
+msgstr ""
+
+#: src/ptk/ptk-file-browser.c:2380
 msgid "Open _with..."
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2710
+#: src/ptk/ptk-file-browser.c:2388
+msgid "Compress"
+msgstr ""
+
+#: src/ptk/ptk-file-browser.c:2389
+msgid "E_xtract"
+msgstr ""
+
+#: src/ptk/ptk-file-browser.c:2392
 msgid "_Properties"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2788
-msgid "Open in New _Tab"
-msgstr ""
-
-#: src/ptk/ptk-file-browser.c:2796
-msgid "Open in New Window"
-msgstr ""
-
-#: src/ptk/ptk-file-browser.c:2804
+#: src/ptk/ptk-file-browser.c:2492
 msgid "Open in Terminal"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2893
+#: src/ptk/ptk-file-browser.c:2588
 msgid "_Open with another program"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2905
+#: src/ptk/ptk-file-browser.c:2602
 msgid "E_xecute"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2911
+#: src/ptk/ptk-file-browser.c:2611
 #, c-format
 msgid "_Open with \"%s\""
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:2917 src/ptk/ptk-file-browser.c:2926
+#: src/ptk/ptk-file-browser.c:2622 src/ptk/ptk-file-browser.c:2628
 msgid "_Open"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:3338 src/ptk/ptk-file-browser.c:3340
+#: src/ptk/ptk-file-browser.c:3169 src/ptk/ptk-file-browser.c:3171
 msgid "New Folder"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:3339
+#: src/ptk/ptk-file-browser.c:3170
 msgid "Input a name for the new folder:"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:3344 src/ptk/ptk-file-browser.c:3346
+#: src/ptk/ptk-file-browser.c:3176 src/ptk/ptk-file-browser.c:3178
 msgid "New File"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:3345
+#: src/ptk/ptk-file-browser.c:3177
 msgid "Input a name for the new file:"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:3485
+#: src/ptk/ptk-file-browser.c:3313
 msgid "Location"
 msgstr ""
 
-#: src/ptk/ptk-file-browser.c:3486
+#: src/ptk/ptk-file-browser.c:3314
 msgid "Directory Tree"
 msgstr ""
 
-#: src/ptk/ptk-location-view.c:229
+#: src/ptk/ptk-location-view.c:138
 msgid "Desktop"
+msgstr ""
+
+#: src/ptk/ptk-location-view.c:465 src/ptk/ptk-location-view.c:475
+msgid "Unable to mount device"
+msgstr ""
+
+#: src/ptk/ptk-location-view.c:481
+msgid "Unable to unmount device"
+msgstr ""
+
+#: src/ptk/ptk-location-view.c:491
+msgid "Unable to eject device"
+msgstr ""
+
+#: src/ptk/ptk-location-view.c:543
+msgid "_Mount File System"
+msgstr ""
+
+#: src/ptk/ptk-location-view.c:552
+msgid "_Eject"
+msgstr ""
+
+#: src/ptk/ptk-location-view.c:557
+msgid "_Unmount File System"
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:106
+msgid "Move: "
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:107
+msgid "Copy: "
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:108
+msgid "Delete: "
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:109
+msgid "Link: "
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:110
+msgid "Change Properties: "
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:114
+msgid "Moving..."
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:115
+msgid "Copying..."
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:116
+msgid "Deleting..."
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:117
+msgid "Linking..."
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:118
+msgid "Changing Properties"
+msgstr ""
+
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: src/ptk/ptk-file-task.c:155
+msgid "To:"
+msgstr ""
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: src/ptk/ptk-file-task.c:170
+msgid "Processing:"
+msgstr ""
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: src/ptk/ptk-file-task.c:177
+msgid "Preparing..."
+msgstr ""
+
+#. Progress:
+#: src/ptk/ptk-file-task.c:185
+msgid "Progress:"
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:320
+msgid "Cancel the operation?"
+msgstr ""
+
+#. Ask the user whether to overwrite dir content or not
+#: src/ptk/ptk-file-task.c:404
+msgid "Do you want to overwrite the folder and its content?"
+msgstr ""
+
+#. Ask the user whether to overwrite the file or not
+#: src/ptk/ptk-file-task.c:409
+msgid "Do you want to overwrite this file?"
+msgstr ""
+
+#. Rename is required
+#: src/ptk/ptk-file-task.c:414
+msgid "Please choose a new file name."
+msgstr ""
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
+#: src/ptk/ptk-file-task.c:422
+#, c-format
+msgid ""
+"\"%s\" has existed.\n"
+"\n"
+"%s"
+msgstr ""
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#: src/ptk/ptk-file-task.c:427
+#, c-format
+msgid ""
+"\"%s\"\n"
+"\n"
+"Destination and source are the same file.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:444
+msgid "Overwrite"
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:445
+msgid "Overwrite All"
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:450
+msgid "Rename"
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:451
+msgid "Skip"
+msgstr ""
+
+#: src/ptk/ptk-file-task.c:452
+msgid "Skip All"
+msgstr ""
+
+#: src/ptk/ptk-file-archiver.c:116
+msgid "Save Compressd Files to..."
+msgstr ""
+
+#: src/ptk/ptk-file-archiver.c:124
+msgid "Format of compressed File:"
+msgstr ""
+
+#: src/ptk/ptk-file-archiver.c:195
+#, c-format
+msgid "Creating Compressed File: %s"
+msgstr ""
+
+#: src/ptk/ptk-file-archiver.c:198
+msgid "Compress Files"
+msgstr ""
+
+#: src/ptk/ptk-file-archiver.c:229
+msgid "Extract File to..."
+msgstr ""
+
+#: src/ptk/ptk-file-archiver.c:278
+#, c-format
+msgid "Extracting Files to: %s"
+msgstr ""
+
+#: src/ptk/ptk-file-archiver.c:280
+msgid "Extract Files"
+msgstr ""
+
+#: src/ptk/ptk-console-output.c:59
+msgid ""
+"\n"
+"Complete!"
+msgstr ""
+
+#: src/ptk/ptk-console-output.c:156
+msgid "Command:"
+msgstr ""
+
+#: src/ptk/ptk-dir-tree.c:172
+msgid "File System"
+msgstr ""
+
+#: src/ptk/ptk-dir-tree.c:396
+msgid "No Sub Folder"
 msgstr ""
 
 #: src/file-properties-ui.c:81
@@ -402,7 +673,7 @@ msgstr ""
 msgid "Size on Disk:"
 msgstr ""
 
-#: src/file-properties-ui.c:208 src/pref-dialog-ui.c:157
+#: src/file-properties-ui.c:208 src/pref-dialog-ui.c:198
 msgid "_General"
 msgstr ""
 
@@ -452,219 +723,94 @@ msgstr ""
 msgid "_Permissions"
 msgstr ""
 
-#: src/file-properties.c:163
+#: src/file-properties.c:180
 msgid "Multiple files are selected"
 msgstr ""
 
-#: src/file-properties.c:229
+#: src/file-properties.c:257
 msgid "Multiple files of different types"
 msgstr ""
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: src/file-properties.c:309
+#: src/file-properties.c:328
 msgid "Calculating..."
 msgstr ""
 
-#: src/file-properties.c:454
+#: src/file-properties.c:447
 msgid "Invalid User"
 msgstr ""
 
-#: src/file-properties.c:462
+#: src/file-properties.c:457
 msgid "Invalid Group"
 msgstr ""
 
-#: src/file-properties.c:494
+#: src/file-properties.c:505
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
 
-#: src/file-operation.c:127
-msgid "Cancel the operation?"
-msgstr ""
-
-#. Ask the user whether to overwrite dir content or not
-#: src/file-operation.c:214
-msgid "Do you want to overwrite the folder and its content?"
-msgstr ""
-
-#. Ask the user whether to overwrite the file or not
-#: src/file-operation.c:218
-msgid "Do you want to overwrite this file?"
-msgstr ""
-
-#. Rename is required
-#: src/file-operation.c:222
-msgid "Please choose a new file name."
-msgstr ""
-
-#. Ths first %s is a file name, and the second one represents followed message.
-#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/file-operation.c:229
-#, c-format
-msgid ""
-"\"%s\" has existed.\n"
-"\n"
-"%s"
-msgstr ""
-
-#. Ths first %s is a file name, and the second one represents followed message.
-#: src/file-operation.c:233
-#, c-format
-msgid ""
-"\"%s\"\n"
-"\n"
-"Destination and source are the same file.\n"
-"\n"
-"%s"
-msgstr ""
-
-#: src/file-operation.c:246
-msgid "Overwrite"
-msgstr ""
-
-#: src/file-operation.c:247
-msgid "Overwrite All"
-msgstr ""
-
-#: src/file-operation.c:252
-msgid "Rename"
-msgstr ""
-
-#: src/file-operation.c:253
-msgid "Skip"
-msgstr ""
-
-#: src/file-operation.c:254
-msgid "Skip All"
-msgstr ""
-
-#: src/file-operation.c:847
-msgid "Move: "
-msgstr ""
-
-#: src/file-operation.c:847
-msgid "Copy: "
-msgstr ""
-
-#: src/file-operation.c:847
-msgid "Delete: "
-msgstr ""
-
-#: src/file-operation.c:847
-msgid "Link: "
-msgstr ""
-
-#: src/file-operation.c:847
-msgid "Change Properties: "
-msgstr ""
-
-#: src/file-operation.c:848
-msgid "Moving..."
-msgstr ""
-
-#: src/file-operation.c:848
-msgid "Copying..."
-msgstr ""
-
-#: src/file-operation.c:848
-msgid "Deleting..."
-msgstr ""
-
-#: src/file-operation.c:848
-msgid "Linking..."
-msgstr ""
-
-#: src/file-operation.c:848
-msgid "Changing Properties"
-msgstr ""
-
-#. The first %s is file name, and the second is
-#. detailed error message.  Their order shouldn't be changed
-#: src/file-operation.c:1141
-#, c-format
-msgid ""
-"File operation failed.\n"
-"\n"
-"Unable to process \"%s\"\n"
-"\n"
-"%s"
-msgstr ""
-
-#: src/file-operation-ui.c:68
-msgid "Progress: "
-msgstr ""
-
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: src/file-operation-ui.c:77
-msgid "To: "
-msgstr ""
-
-#. Processing: <Name of currently proccesed file>
-#: src/file-operation-ui.c:85
-msgid "Processing: "
-msgstr ""
-
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#.
-#: src/file-operation-ui.c:101
-msgid "Preparing..."
-msgstr ""
-
-#: src/pref-dialog-ui.c:60
+#: src/pref-dialog-ui.c:65
 msgid "Preference"
 msgstr ""
 
-#: src/pref-dialog-ui.c:81
+#: src/pref-dialog-ui.c:86
 msgid "On-disk file name encoding:"
 msgstr ""
 
-#: src/pref-dialog-ui.c:97
+#: src/pref-dialog-ui.c:102
 msgid "Bookmarks:"
 msgstr ""
 
-#: src/pref-dialog-ui.c:104
+#: src/pref-dialog-ui.c:109
 msgid "Opened in Current Tab"
 msgstr ""
 
-#: src/pref-dialog-ui.c:105
+#: src/pref-dialog-ui.c:110
 msgid "Opened in New Tab"
 msgstr ""
 
-#: src/pref-dialog-ui.c:106
+#: src/pref-dialog-ui.c:111
 msgid "Opened in New Window"
 msgstr ""
 
-#: src/pref-dialog-ui.c:113
-msgid "Icon Theme (Need Restart):"
+#: src/pref-dialog-ui.c:118
+msgid "Icon Theme:"
 msgstr ""
 
-#: src/pref-dialog-ui.c:121
+#: src/pref-dialog-ui.c:131
+msgid "Size of Big Icons:"
+msgstr ""
+
+#: src/pref-dialog-ui.c:146
+msgid "Size of Small Icons:"
+msgstr ""
+
+#: src/pref-dialog-ui.c:162
 msgid "Display image files with supported format as thumbnails"
 msgstr ""
 
-#: src/pref-dialog-ui.c:130
+#: src/pref-dialog-ui.c:171
 msgid "Max size of files displayed as thumbnails:"
 msgstr ""
 
-#: src/pref-dialog-ui.c:149
+#: src/pref-dialog-ui.c:190
 msgid "Terminal:"
 msgstr ""
 
-#: src/edit-bookmarks.c:52
+#: src/edit-bookmarks.c:57
 msgid "New Item"
 msgstr ""
 
-#: src/edit-bookmarks.c:118
+#: src/edit-bookmarks.c:126
 msgid "Edit Bookmarks"
 msgstr ""
 
-#: src/edit-bookmarks.c:169
+#: src/edit-bookmarks.c:182
 msgid "Path"
 msgstr ""
 
-#: src/edit-bookmarks.c:192
+#: src/edit-bookmarks.c:205
 msgid "Use drag & drop to sort the items"
 msgstr ""
 
@@ -683,15 +829,15 @@ msgid ""
 msgstr ""
 
 #: src/app-chooser-dialog-ui.c:103
-msgid "Recommended Applications"
+msgid "_Recommended Applications"
 msgstr ""
 
 #: src/app-chooser-dialog-ui.c:118
-msgid "All Applications"
+msgid "_All Applications"
 msgstr ""
 
 #: src/app-chooser-dialog-ui.c:127
-msgid "Command Line: "
+msgid "_Command Line: "
 msgstr ""
 
 #: src/app-chooser-dialog-ui.c:152
@@ -702,6 +848,94 @@ msgstr ""
 msgid "Opened in Terminal"
 msgstr ""
 
-#: src/app-chooser-dialog-ui.c:166
+#: src/app-chooser-dialog-ui.c:165
 msgid "Set selected application to default action"
+msgstr ""
+
+#. mime-type: application
+#: src/file-assoc-dlg.c:35
+msgid "application"
+msgstr ""
+
+#. mime-type: audio
+#: src/file-assoc-dlg.c:38
+msgid "audio"
+msgstr ""
+
+#. mime-type: video
+#: src/file-assoc-dlg.c:41
+msgid "video"
+msgstr ""
+
+#. mime-type: text
+#: src/file-assoc-dlg.c:44
+msgid "text"
+msgstr ""
+
+#. mime-type: multipart
+#: src/file-assoc-dlg.c:47
+msgid "multipart"
+msgstr ""
+
+#. mime-type: image
+#: src/file-assoc-dlg.c:50
+msgid "image"
+msgstr ""
+
+#. mime-type: message
+#: src/file-assoc-dlg.c:53
+msgid "message"
+msgstr ""
+
+#. mime-type: model
+#: src/file-assoc-dlg.c:56
+msgid "model"
+msgstr ""
+
+#. mime-type: inode
+#: src/file-assoc-dlg.c:59
+msgid "inode"
+msgstr ""
+
+#. mime-type: packages
+#: src/file-assoc-dlg.c:62
+msgid "packages"
+msgstr ""
+
+#: src/file-assoc-dlg-ui.c:72
+msgid "File Associations"
+msgstr ""
+
+#: src/file-assoc-dlg-ui.c:90
+msgid "Known File Types:"
+msgstr ""
+
+#: src/file-assoc-dlg-ui.c:111
+msgid "Actions Showed in Popup Menus"
+msgstr ""
+
+#: src/file-assoc-dlg-ui.c:153
+msgid "Add _Application"
+msgstr ""
+
+#: src/file-assoc-dlg-ui.c:173
+msgid "Add _Custom Action"
+msgstr ""
+
+#: src/file-assoc-dlg-ui.c:201
+msgid "Move _Up"
+msgstr ""
+
+#: src/file-assoc-dlg-ui.c:221
+msgid "Move _Down"
+msgstr ""
+
+#: src/vfs/vfs-app-desktop.c:450
+#, c-format
+msgid "Command not found"
+msgstr ""
+
+#: src/vfs/vfs-file-task.c:696
+#, c-format
+msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr ""

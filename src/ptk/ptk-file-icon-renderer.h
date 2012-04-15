@@ -14,10 +14,8 @@
 #ifndef _PTK_FILE_ICON_RENDERER_H_
 #define _PTK_FILE_ICON_RENDERER_H_
 
-#include <sys/types.h>
-#include <sys/stat.h>
-
 #include <gtk/gtk.h>
+#include "vfs-file-info.h"
 
 G_BEGIN_DECLS
 
@@ -31,28 +29,20 @@ G_BEGIN_DECLS
 typedef struct _PtkFileIconRenderer PtkFileIconRenderer;
 typedef struct _PtkFileIconRendererClass PtkFileIconRendererClass;
 
-/*
-typedef enum
-{
-  PTK_FILE_ICON_LINK,
-  PTK_FILE_ICON_PERMISSION_DENIED,
-  PTK_FILE_ICON_LAST
-}PtkFileIconRendererFlags;
-*/
-
 struct _PtkFileIconRenderer
 {
-  GtkCellRendererPixbuf parent;
+    GtkCellRendererPixbuf parent;
 
-  /* Private */
-  struct stat* file_stat;
-  /* long flags; */
-  gboolean follow_state;
+    /* Private */
+    /* FIXME: draw some additional marks for symlinks */
+    VFSFileInfo* info;
+    /* long flags; */
+    gboolean follow_state;
 };
 
 struct _PtkFileIconRendererClass
 {
-  GtkCellRendererPixbufClass  parent_class;
+    GtkCellRendererPixbufClass  parent_class;
 };
 
 GType                ptk_file_icon_renderer_get_type (void);

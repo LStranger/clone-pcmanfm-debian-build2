@@ -4,11 +4,16 @@ Encoding=UTF-8
 Name=PCMan File Manager
 Name[zh_TW]=PCMan 檔案管理程式
 Name[pl]=Przeglądarka plików z zakładkami
-Exec=pcmanfm
+Exec=pcmanfm %f
 Icon=file-manager
+StartupNotify=true
 Type=Application
 Terminal=false
+MimeType=x-directory/normal;inode/directory;
+
 GenericName=File Manager 
 GenericName[zh_TW]=檔案管理程式
 Comment=Browse the file system with the file manager using tabbed interface
+Comment[zh_TW]=使用具有分頁的圖形介面來管理檔案系統
 Comment[pl]=Przegląda system plików za pomocą menedżera plików opartego o zakładki
+

@@ -5,12 +5,9 @@
 
 G_BEGIN_DECLS
 
-/* Convert file size in bytes to a human readable string */
-void file_size_to_string( char* buf, guint64 size );
-
 GtkWidget* file_properties_dlg_new( GtkWindow* parent,
-                                    GList* sel_files,
-                                    GList* sel_mime_types );
+                                    const char* dir_path,
+                                    GList* sel_files );
 
 void on_filePropertiesDlg_response          (GtkDialog       *dialog,
                                              gint             response_id,

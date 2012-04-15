@@ -42,6 +42,11 @@ create_prefdlg (void)
   GtkWidget *hbox5;
   GtkWidget *label6;
   GtkWidget *theme;
+  GtkWidget *hbox6;
+  GtkWidget *label7;
+  GtkWidget *big_icon_size;
+  GtkWidget *label8;
+  GtkWidget *small_icon_size;
   GtkWidget *show_thumbnail;
   GtkWidget *hbox3;
   GtkWidget *label3;
@@ -110,13 +115,49 @@ create_prefdlg (void)
   gtk_box_pack_start (GTK_BOX (vbox1), hbox5, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (hbox5), 4);
 
-  label6 = gtk_label_new (_("Icon Theme (Need Restart):"));
+  label6 = gtk_label_new (_("Icon Theme:"));
   gtk_widget_show (label6);
   gtk_box_pack_start (GTK_BOX (hbox5), label6, FALSE, FALSE, 0);
 
   theme = gtk_combo_box_new_text ();
   gtk_widget_show (theme);
   gtk_box_pack_start (GTK_BOX (hbox5), theme, TRUE, TRUE, 0);
+
+  hbox6 = gtk_hbox_new (FALSE, 4);
+  gtk_widget_show (hbox6);
+  gtk_box_pack_start (GTK_BOX (vbox1), hbox6, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (hbox6), 4);
+
+  label7 = gtk_label_new (_("Size of Big Icons:"));
+  gtk_widget_show (label7);
+  gtk_box_pack_start (GTK_BOX (hbox6), label7, FALSE, FALSE, 0);
+
+  big_icon_size = gtk_combo_box_new_text ();
+  gtk_widget_show (big_icon_size);
+  gtk_box_pack_start (GTK_BOX (hbox6), big_icon_size, TRUE, TRUE, 0);
+  gtk_combo_box_append_text (GTK_COMBO_BOX (big_icon_size), "96x96");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (big_icon_size), "72x72");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (big_icon_size), "48x48");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (big_icon_size), "36x36");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (big_icon_size), "32x32");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (big_icon_size), "24x24");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (big_icon_size), "20x20");
+
+  label8 = gtk_label_new (_("Size of Small Icons:"));
+  gtk_widget_show (label8);
+  gtk_box_pack_start (GTK_BOX (hbox6), label8, FALSE, FALSE, 0);
+
+  small_icon_size = gtk_combo_box_new_text ();
+  gtk_widget_show (small_icon_size);
+  gtk_box_pack_start (GTK_BOX (hbox6), small_icon_size, TRUE, TRUE, 0);
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "48x48");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "36x36");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "32x32");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "24x24");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "20x20");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "16x16");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "12x12");
+  gtk_combo_box_append_text (GTK_COMBO_BOX (small_icon_size), "");
 
   show_thumbnail = gtk_check_button_new_with_mnemonic (_("Display image files with supported format as thumbnails"));
   gtk_widget_show (show_thumbnail);
@@ -186,6 +227,11 @@ create_prefdlg (void)
   GLADE_HOOKUP_OBJECT (prefdlg, hbox5, "hbox5");
   GLADE_HOOKUP_OBJECT (prefdlg, label6, "label6");
   GLADE_HOOKUP_OBJECT (prefdlg, theme, "theme");
+  GLADE_HOOKUP_OBJECT (prefdlg, hbox6, "hbox6");
+  GLADE_HOOKUP_OBJECT (prefdlg, label7, "label7");
+  GLADE_HOOKUP_OBJECT (prefdlg, big_icon_size, "big_icon_size");
+  GLADE_HOOKUP_OBJECT (prefdlg, label8, "label8");
+  GLADE_HOOKUP_OBJECT (prefdlg, small_icon_size, "small_icon_size");
   GLADE_HOOKUP_OBJECT (prefdlg, show_thumbnail, "show_thumbnail");
   GLADE_HOOKUP_OBJECT (prefdlg, hbox3, "hbox3");
   GLADE_HOOKUP_OBJECT (prefdlg, label3, "label3");

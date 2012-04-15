@@ -14,17 +14,16 @@
 #define _APP_CHOOSER_DLG_H_
 
 #include <gtk/gtk.h>
+#include "vfs-mime-type.h"
 
 G_BEGIN_DECLS
 
-/*
-GtkWidget* app_chooser_dlg_for_all_mime_types_new();
-
-GtkWidget* app_chooser_dlg_new();
-*/
+/* Let the user choose a application */
+char* ptk_choose_app_for_mime_type( GtkWindow* parent,
+                                    VFSMimeType* mime_type );
 
 /* Let the user choose a application */
-GtkWidget* app_chooser_dialog_new( GtkWindow* parent, const char* mime_type );
+GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type );
 
 /*
 * Return selected application in a ``newly allocated'' string.

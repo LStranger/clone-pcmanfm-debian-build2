@@ -55,6 +55,8 @@ void ptk_bookmarks_append ( const char* name, const char* path );
 /* Remove an item from bookmarks */
 void ptk_bookmarks_remove ( const char* path );
 
+void ptk_bookmarks_rename ( const char* path, const char* new_name );
+
 /* Save the content of the bookmarks to "~/.gtk-bookmarks" */
 void ptk_bookmarks_save ();
 
