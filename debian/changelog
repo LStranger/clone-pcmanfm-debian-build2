@@ -1,0 +1,16 @@
+pcmanfm (0.2.4-1) unstable; urgency=low
+
+  [ Lu, Chao-Ming (Tetralet) ]
+  * Initial Release.(Closes:#355848)
+  * Added Menu item.
+  * Added .desktop item.
+  * Added a sample man page.
+
+  [ Andrew Lee ]
+  * Added watch file
+  * Refine Build-depends
+  * Added LGPL and Academic Free License v.2.0 informations into
+  copyright file, thanks to Joerg Jaspert <joerg@debian.org> and
+  Enrico Zini <enrico@debian.org>.
+
+ -- Andrew Lee <andrew@linux.org.tw>  Sun, 13 Aug 2006 20:11:20 +0800
