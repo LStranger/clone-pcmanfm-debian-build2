@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-28 02:32+0800\n"
+"POT-Creation-Date: 2010-05-25 23:58+0200\n"
 "PO-Revision-Date: 2010-02-04 19:17+0100\n"
 "Last-Translator: Yarema aka Knedlyk <yupadmin@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: Ukraine\n"
+"X-Poedit-Language: Ukrainian\n"
 
 #: ../data/ui/about.glade.in.h:1
 msgid "Copyright (C) 2009 - 2010"
@@ -309,7 +309,7 @@ msgstr "_Управління дисками"
 
 #: ../data/ui/autorun.glade.h:1
 msgid "<b>Removable medium is inserted</b>"
-msgstr "<b>Вставлено знімний пристрій</b>"
+msgstr "<b>Вставлено змінний пристрій</b>"
 
 #: ../data/ui/autorun.glade.h:2
 msgid "Detecting..."
@@ -481,7 +481,7 @@ msgstr "Програми"
 
 #: ../src/main-win-ui.c:158
 msgid "Installed Applications"
-msgstr "Інстальовані програми"
+msgstr "Встановлені програми"
 
 #: ../src/main-win-ui.c:160
 msgid "_Bookmarks"
@@ -497,11 +497,11 @@ msgstr "_Інструменти"
 
 #: ../src/main-win-ui.c:163
 msgid "Open Current Folder in _Terminal"
-msgstr "Відкрити поточний каталог в _терміналі"
+msgstr "Відкрити поточний каталог у _терміналі"
 
 #: ../src/main-win-ui.c:164
 msgid "Open Current Folder as _Root"
-msgstr "Відкрити поточний каталог з правами root-а"
+msgstr "Відкрити поточний каталог з правами root'а"
 
 #: ../src/main-win-ui.c:173
 msgid "Blank FIle"
@@ -527,20 +527,20 @@ msgstr "Вигляд мініа_тюрами"
 msgid "Detailed _List View"
 msgstr "Детальний вигляд _списком"
 
-#: ../src/main-win.c:524
+#: ../src/main-win.c:552
 msgid "You are in super user mode"
 msgstr "Ви в режимі супер-користувача"
 
-#: ../src/main-win.c:623
+#: ../src/main-win.c:651
 msgid "Switch user command is not set."
 msgstr "Команду зміни користувача не встановлено"
 
-#: ../src/main-win.c:930
+#: ../src/main-win.c:958
 #, c-format
 msgid "Free space: %s (Total: %s)"
 msgstr "Вільний простір: %s (Всього: %s )"
 
-#: ../src/main-win.c:1146
+#: ../src/main-win.c:1174
 #, c-format
 msgid ""
 "Add following folder to bookmarks:\n"
@@ -551,7 +551,7 @@ msgstr ""
 "'%s'\n"
 "Введіть назву для нової закладки:"
 
-#: ../src/main-win.c:1150
+#: ../src/main-win.c:1178
 msgid "Add to Bookmarks"
 msgstr "Додати до закладок"
 
@@ -605,25 +605,25 @@ msgstr ""
 #. { "find-files", 'f', 0, G_OPTION_ARG_NONE, &find_files, N_("Open Find Files utility"), NULL },
 #: ../src/pcmanfm.c:81
 msgid "No function. Just to be compatible with nautilus"
-msgstr "Немає функції. Тільки щоб було компатибільне з nautilus."
+msgstr "Немає функції. Тільки щоб було сумісно з nautilus."
 
 #: ../src/pcmanfm.c:82
 msgid "[FILE1, FILE2,...]"
 msgstr "[ФАЙЛ1, ФАЙЛ2,...]"
 
-#: ../src/pcmanfm.c:585
+#: ../src/pcmanfm.c:590
 msgid "Terminal emulator is not set."
 msgstr "Емулятор терміналу не встановлено"
 
-#: ../src/pcmanfm.c:628
+#: ../src/pcmanfm.c:633
 msgid "Create New..."
 msgstr "Створити новий..."
 
-#: ../src/pcmanfm.c:628
+#: ../src/pcmanfm.c:633
 msgid "Enter a name for the newly created file:"
 msgstr "Введіть назву новоствореного файлу:"
 
-#: ../src/pcmanfm.c:628
+#: ../src/pcmanfm.c:633
 msgid "New"
 msgstr "Новий"
 

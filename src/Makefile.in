@@ -34,7 +34,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = pcmanfm2$(EXEEXT)
+bin_PROGRAMS = pcmanfm$(EXEEXT)
 noinst_PROGRAMS = xml-purge$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -49,19 +49,19 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
 am__objects_1 =
-am_pcmanfm2_OBJECTS = pcmanfm2-pcmanfm.$(OBJEXT) \
-	pcmanfm2-app-config.$(OBJEXT) pcmanfm2-main-win.$(OBJEXT) \
-	pcmanfm2-desktop.$(OBJEXT) pcmanfm2-volume-manager.$(OBJEXT) \
-	pcmanfm2-pref.$(OBJEXT) pcmanfm2-utils.$(OBJEXT) \
+am_pcmanfm_OBJECTS = pcmanfm-pcmanfm.$(OBJEXT) \
+	pcmanfm-app-config.$(OBJEXT) pcmanfm-main-win.$(OBJEXT) \
+	pcmanfm-desktop.$(OBJEXT) pcmanfm-volume-manager.$(OBJEXT) \
+	pcmanfm-pref.$(OBJEXT) pcmanfm-utils.$(OBJEXT) \
 	$(am__objects_1)
-pcmanfm2_OBJECTS = $(am_pcmanfm2_OBJECTS)
+pcmanfm_OBJECTS = $(am_pcmanfm_OBJECTS)
 am__DEPENDENCIES_1 =
-pcmanfm2_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+pcmanfm_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
-pcmanfm2_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=link $(CCLD) $(pcmanfm2_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+pcmanfm_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(pcmanfm_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
 am_xml_purge_OBJECTS = xml_purge-xml-purge.$(OBJEXT)
 xml_purge_OBJECTS = $(am_xml_purge_OBJECTS)
@@ -82,8 +82,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(pcmanfm2_SOURCES) $(xml_purge_SOURCES)
-DIST_SOURCES = $(pcmanfm2_SOURCES) $(xml_purge_SOURCES)
+SOURCES = $(pcmanfm_SOURCES) $(xml_purge_SOURCES)
+DIST_SOURCES = $(pcmanfm_SOURCES) $(xml_purge_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -237,11 +237,11 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 NULL = 
 AM_CPPFLAGS = \
-	-DPACKAGE_DATA_DIR=\""$(datadir)/pcmanfm2"\" \
-	-DPACKAGE_UI_DIR=\""$(datadir)/pcmanfm2/ui"\" \
+	-DPACKAGE_DATA_DIR=\""$(datadir)/pcmanfm"\" \
+	-DPACKAGE_UI_DIR=\""$(datadir)/pcmanfm/ui"\" \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
-pcmanfm2_SOURCES = \
+pcmanfm_SOURCES = \
 	pcmanfm.c pcmanfm.h \
 	app-config.c app-config.h \
 	main-win.c main-win.h \
@@ -249,6 +249,7 @@ pcmanfm2_SOURCES = \
 	volume-manager.c volume-manager.h \
 	pref.c pref.h \
 	utils.c utils.h \
+	gseal-gtk-compat.h \
 	$(NULL)
 
 EXTRA_DIST = \
@@ -256,7 +257,7 @@ EXTRA_DIST = \
 	desktop-ui.c \
 	$(NULL)
 
-pcmanfm2_CFLAGS = \
+pcmanfm_CFLAGS = \
 	$(XLIB_CFLAGS) \
 	$(GTK_CFLAGS) \
 	$(GIO_CFLAGS) \
@@ -268,7 +269,7 @@ pcmanfm2_CFLAGS = \
 	-Werror-implicit-function-declaration \
 	$(NULL)
 
-pcmanfm2_LDADD = \
+pcmanfm_LDADD = \
 	$(XLIB_LIBS) \
 	$(GTK_LIBS) \
 	$(GIO_LIBS) \
@@ -366,9 +367,9 @@ clean-noinstPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-pcmanfm2$(EXEEXT): $(pcmanfm2_OBJECTS) $(pcmanfm2_DEPENDENCIES) 
-	@rm -f pcmanfm2$(EXEEXT)
-	$(pcmanfm2_LINK) $(pcmanfm2_OBJECTS) $(pcmanfm2_LDADD) $(LIBS)
+pcmanfm$(EXEEXT): $(pcmanfm_OBJECTS) $(pcmanfm_DEPENDENCIES) 
+	@rm -f pcmanfm$(EXEEXT)
+	$(pcmanfm_LINK) $(pcmanfm_OBJECTS) $(pcmanfm_LDADD) $(LIBS)
 xml-purge$(EXEEXT): $(xml_purge_OBJECTS) $(xml_purge_DEPENDENCIES) 
 	@rm -f xml-purge$(EXEEXT)
 	$(xml_purge_LINK) $(xml_purge_OBJECTS) $(xml_purge_LDADD) $(LIBS)
@@ -379,13 +380,13 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm2-app-config.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm2-desktop.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm2-main-win.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm2-pcmanfm.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm2-pref.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm2-utils.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm2-volume-manager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-app-config.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-desktop.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-main-win.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-pcmanfm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-pref.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-utils.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-volume-manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml_purge-xml-purge.Po@am__quote@
 
 .c.o:
@@ -409,103 +410,103 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
-pcmanfm2-pcmanfm.o: pcmanfm.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-pcmanfm.o -MD -MP -MF $(DEPDIR)/pcmanfm2-pcmanfm.Tpo -c -o pcmanfm2-pcmanfm.o `test -f 'pcmanfm.c' || echo '$(srcdir)/'`pcmanfm.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-pcmanfm.Tpo $(DEPDIR)/pcmanfm2-pcmanfm.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pcmanfm.c' object='pcmanfm2-pcmanfm.o' libtool=no @AMDEPBACKSLASH@
+pcmanfm-pcmanfm.o: pcmanfm.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-pcmanfm.o -MD -MP -MF $(DEPDIR)/pcmanfm-pcmanfm.Tpo -c -o pcmanfm-pcmanfm.o `test -f 'pcmanfm.c' || echo '$(srcdir)/'`pcmanfm.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-pcmanfm.Tpo $(DEPDIR)/pcmanfm-pcmanfm.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pcmanfm.c' object='pcmanfm-pcmanfm.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-pcmanfm.o `test -f 'pcmanfm.c' || echo '$(srcdir)/'`pcmanfm.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-pcmanfm.o `test -f 'pcmanfm.c' || echo '$(srcdir)/'`pcmanfm.c
 
-pcmanfm2-pcmanfm.obj: pcmanfm.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-pcmanfm.obj -MD -MP -MF $(DEPDIR)/pcmanfm2-pcmanfm.Tpo -c -o pcmanfm2-pcmanfm.obj `if test -f 'pcmanfm.c'; then $(CYGPATH_W) 'pcmanfm.c'; else $(CYGPATH_W) '$(srcdir)/pcmanfm.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-pcmanfm.Tpo $(DEPDIR)/pcmanfm2-pcmanfm.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pcmanfm.c' object='pcmanfm2-pcmanfm.obj' libtool=no @AMDEPBACKSLASH@
+pcmanfm-pcmanfm.obj: pcmanfm.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-pcmanfm.obj -MD -MP -MF $(DEPDIR)/pcmanfm-pcmanfm.Tpo -c -o pcmanfm-pcmanfm.obj `if test -f 'pcmanfm.c'; then $(CYGPATH_W) 'pcmanfm.c'; else $(CYGPATH_W) '$(srcdir)/pcmanfm.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-pcmanfm.Tpo $(DEPDIR)/pcmanfm-pcmanfm.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pcmanfm.c' object='pcmanfm-pcmanfm.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-pcmanfm.obj `if test -f 'pcmanfm.c'; then $(CYGPATH_W) 'pcmanfm.c'; else $(CYGPATH_W) '$(srcdir)/pcmanfm.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-pcmanfm.obj `if test -f 'pcmanfm.c'; then $(CYGPATH_W) 'pcmanfm.c'; else $(CYGPATH_W) '$(srcdir)/pcmanfm.c'; fi`
 
-pcmanfm2-app-config.o: app-config.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-app-config.o -MD -MP -MF $(DEPDIR)/pcmanfm2-app-config.Tpo -c -o pcmanfm2-app-config.o `test -f 'app-config.c' || echo '$(srcdir)/'`app-config.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-app-config.Tpo $(DEPDIR)/pcmanfm2-app-config.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app-config.c' object='pcmanfm2-app-config.o' libtool=no @AMDEPBACKSLASH@
+pcmanfm-app-config.o: app-config.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-app-config.o -MD -MP -MF $(DEPDIR)/pcmanfm-app-config.Tpo -c -o pcmanfm-app-config.o `test -f 'app-config.c' || echo '$(srcdir)/'`app-config.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-app-config.Tpo $(DEPDIR)/pcmanfm-app-config.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app-config.c' object='pcmanfm-app-config.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-app-config.o `test -f 'app-config.c' || echo '$(srcdir)/'`app-config.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-app-config.o `test -f 'app-config.c' || echo '$(srcdir)/'`app-config.c
 
-pcmanfm2-app-config.obj: app-config.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-app-config.obj -MD -MP -MF $(DEPDIR)/pcmanfm2-app-config.Tpo -c -o pcmanfm2-app-config.obj `if test -f 'app-config.c'; then $(CYGPATH_W) 'app-config.c'; else $(CYGPATH_W) '$(srcdir)/app-config.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-app-config.Tpo $(DEPDIR)/pcmanfm2-app-config.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app-config.c' object='pcmanfm2-app-config.obj' libtool=no @AMDEPBACKSLASH@
+pcmanfm-app-config.obj: app-config.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-app-config.obj -MD -MP -MF $(DEPDIR)/pcmanfm-app-config.Tpo -c -o pcmanfm-app-config.obj `if test -f 'app-config.c'; then $(CYGPATH_W) 'app-config.c'; else $(CYGPATH_W) '$(srcdir)/app-config.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-app-config.Tpo $(DEPDIR)/pcmanfm-app-config.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app-config.c' object='pcmanfm-app-config.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-app-config.obj `if test -f 'app-config.c'; then $(CYGPATH_W) 'app-config.c'; else $(CYGPATH_W) '$(srcdir)/app-config.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-app-config.obj `if test -f 'app-config.c'; then $(CYGPATH_W) 'app-config.c'; else $(CYGPATH_W) '$(srcdir)/app-config.c'; fi`
 
-pcmanfm2-main-win.o: main-win.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-main-win.o -MD -MP -MF $(DEPDIR)/pcmanfm2-main-win.Tpo -c -o pcmanfm2-main-win.o `test -f 'main-win.c' || echo '$(srcdir)/'`main-win.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-main-win.Tpo $(DEPDIR)/pcmanfm2-main-win.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main-win.c' object='pcmanfm2-main-win.o' libtool=no @AMDEPBACKSLASH@
+pcmanfm-main-win.o: main-win.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-main-win.o -MD -MP -MF $(DEPDIR)/pcmanfm-main-win.Tpo -c -o pcmanfm-main-win.o `test -f 'main-win.c' || echo '$(srcdir)/'`main-win.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-main-win.Tpo $(DEPDIR)/pcmanfm-main-win.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main-win.c' object='pcmanfm-main-win.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-main-win.o `test -f 'main-win.c' || echo '$(srcdir)/'`main-win.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-main-win.o `test -f 'main-win.c' || echo '$(srcdir)/'`main-win.c
 
-pcmanfm2-main-win.obj: main-win.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-main-win.obj -MD -MP -MF $(DEPDIR)/pcmanfm2-main-win.Tpo -c -o pcmanfm2-main-win.obj `if test -f 'main-win.c'; then $(CYGPATH_W) 'main-win.c'; else $(CYGPATH_W) '$(srcdir)/main-win.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-main-win.Tpo $(DEPDIR)/pcmanfm2-main-win.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main-win.c' object='pcmanfm2-main-win.obj' libtool=no @AMDEPBACKSLASH@
+pcmanfm-main-win.obj: main-win.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-main-win.obj -MD -MP -MF $(DEPDIR)/pcmanfm-main-win.Tpo -c -o pcmanfm-main-win.obj `if test -f 'main-win.c'; then $(CYGPATH_W) 'main-win.c'; else $(CYGPATH_W) '$(srcdir)/main-win.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-main-win.Tpo $(DEPDIR)/pcmanfm-main-win.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main-win.c' object='pcmanfm-main-win.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-main-win.obj `if test -f 'main-win.c'; then $(CYGPATH_W) 'main-win.c'; else $(CYGPATH_W) '$(srcdir)/main-win.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-main-win.obj `if test -f 'main-win.c'; then $(CYGPATH_W) 'main-win.c'; else $(CYGPATH_W) '$(srcdir)/main-win.c'; fi`
 
-pcmanfm2-desktop.o: desktop.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-desktop.o -MD -MP -MF $(DEPDIR)/pcmanfm2-desktop.Tpo -c -o pcmanfm2-desktop.o `test -f 'desktop.c' || echo '$(srcdir)/'`desktop.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-desktop.Tpo $(DEPDIR)/pcmanfm2-desktop.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop.c' object='pcmanfm2-desktop.o' libtool=no @AMDEPBACKSLASH@
+pcmanfm-desktop.o: desktop.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-desktop.o -MD -MP -MF $(DEPDIR)/pcmanfm-desktop.Tpo -c -o pcmanfm-desktop.o `test -f 'desktop.c' || echo '$(srcdir)/'`desktop.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-desktop.Tpo $(DEPDIR)/pcmanfm-desktop.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop.c' object='pcmanfm-desktop.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-desktop.o `test -f 'desktop.c' || echo '$(srcdir)/'`desktop.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-desktop.o `test -f 'desktop.c' || echo '$(srcdir)/'`desktop.c
 
-pcmanfm2-desktop.obj: desktop.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-desktop.obj -MD -MP -MF $(DEPDIR)/pcmanfm2-desktop.Tpo -c -o pcmanfm2-desktop.obj `if test -f 'desktop.c'; then $(CYGPATH_W) 'desktop.c'; else $(CYGPATH_W) '$(srcdir)/desktop.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-desktop.Tpo $(DEPDIR)/pcmanfm2-desktop.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop.c' object='pcmanfm2-desktop.obj' libtool=no @AMDEPBACKSLASH@
+pcmanfm-desktop.obj: desktop.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-desktop.obj -MD -MP -MF $(DEPDIR)/pcmanfm-desktop.Tpo -c -o pcmanfm-desktop.obj `if test -f 'desktop.c'; then $(CYGPATH_W) 'desktop.c'; else $(CYGPATH_W) '$(srcdir)/desktop.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-desktop.Tpo $(DEPDIR)/pcmanfm-desktop.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='desktop.c' object='pcmanfm-desktop.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-desktop.obj `if test -f 'desktop.c'; then $(CYGPATH_W) 'desktop.c'; else $(CYGPATH_W) '$(srcdir)/desktop.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-desktop.obj `if test -f 'desktop.c'; then $(CYGPATH_W) 'desktop.c'; else $(CYGPATH_W) '$(srcdir)/desktop.c'; fi`
 
-pcmanfm2-volume-manager.o: volume-manager.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-volume-manager.o -MD -MP -MF $(DEPDIR)/pcmanfm2-volume-manager.Tpo -c -o pcmanfm2-volume-manager.o `test -f 'volume-manager.c' || echo '$(srcdir)/'`volume-manager.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-volume-manager.Tpo $(DEPDIR)/pcmanfm2-volume-manager.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='volume-manager.c' object='pcmanfm2-volume-manager.o' libtool=no @AMDEPBACKSLASH@
+pcmanfm-volume-manager.o: volume-manager.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-volume-manager.o -MD -MP -MF $(DEPDIR)/pcmanfm-volume-manager.Tpo -c -o pcmanfm-volume-manager.o `test -f 'volume-manager.c' || echo '$(srcdir)/'`volume-manager.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-volume-manager.Tpo $(DEPDIR)/pcmanfm-volume-manager.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='volume-manager.c' object='pcmanfm-volume-manager.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-volume-manager.o `test -f 'volume-manager.c' || echo '$(srcdir)/'`volume-manager.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-volume-manager.o `test -f 'volume-manager.c' || echo '$(srcdir)/'`volume-manager.c
 
-pcmanfm2-volume-manager.obj: volume-manager.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-volume-manager.obj -MD -MP -MF $(DEPDIR)/pcmanfm2-volume-manager.Tpo -c -o pcmanfm2-volume-manager.obj `if test -f 'volume-manager.c'; then $(CYGPATH_W) 'volume-manager.c'; else $(CYGPATH_W) '$(srcdir)/volume-manager.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-volume-manager.Tpo $(DEPDIR)/pcmanfm2-volume-manager.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='volume-manager.c' object='pcmanfm2-volume-manager.obj' libtool=no @AMDEPBACKSLASH@
+pcmanfm-volume-manager.obj: volume-manager.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-volume-manager.obj -MD -MP -MF $(DEPDIR)/pcmanfm-volume-manager.Tpo -c -o pcmanfm-volume-manager.obj `if test -f 'volume-manager.c'; then $(CYGPATH_W) 'volume-manager.c'; else $(CYGPATH_W) '$(srcdir)/volume-manager.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-volume-manager.Tpo $(DEPDIR)/pcmanfm-volume-manager.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='volume-manager.c' object='pcmanfm-volume-manager.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-volume-manager.obj `if test -f 'volume-manager.c'; then $(CYGPATH_W) 'volume-manager.c'; else $(CYGPATH_W) '$(srcdir)/volume-manager.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-volume-manager.obj `if test -f 'volume-manager.c'; then $(CYGPATH_W) 'volume-manager.c'; else $(CYGPATH_W) '$(srcdir)/volume-manager.c'; fi`
 
-pcmanfm2-pref.o: pref.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-pref.o -MD -MP -MF $(DEPDIR)/pcmanfm2-pref.Tpo -c -o pcmanfm2-pref.o `test -f 'pref.c' || echo '$(srcdir)/'`pref.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-pref.Tpo $(DEPDIR)/pcmanfm2-pref.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pref.c' object='pcmanfm2-pref.o' libtool=no @AMDEPBACKSLASH@
+pcmanfm-pref.o: pref.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-pref.o -MD -MP -MF $(DEPDIR)/pcmanfm-pref.Tpo -c -o pcmanfm-pref.o `test -f 'pref.c' || echo '$(srcdir)/'`pref.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-pref.Tpo $(DEPDIR)/pcmanfm-pref.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pref.c' object='pcmanfm-pref.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-pref.o `test -f 'pref.c' || echo '$(srcdir)/'`pref.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-pref.o `test -f 'pref.c' || echo '$(srcdir)/'`pref.c
 
-pcmanfm2-pref.obj: pref.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-pref.obj -MD -MP -MF $(DEPDIR)/pcmanfm2-pref.Tpo -c -o pcmanfm2-pref.obj `if test -f 'pref.c'; then $(CYGPATH_W) 'pref.c'; else $(CYGPATH_W) '$(srcdir)/pref.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-pref.Tpo $(DEPDIR)/pcmanfm2-pref.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pref.c' object='pcmanfm2-pref.obj' libtool=no @AMDEPBACKSLASH@
+pcmanfm-pref.obj: pref.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-pref.obj -MD -MP -MF $(DEPDIR)/pcmanfm-pref.Tpo -c -o pcmanfm-pref.obj `if test -f 'pref.c'; then $(CYGPATH_W) 'pref.c'; else $(CYGPATH_W) '$(srcdir)/pref.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-pref.Tpo $(DEPDIR)/pcmanfm-pref.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pref.c' object='pcmanfm-pref.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-pref.obj `if test -f 'pref.c'; then $(CYGPATH_W) 'pref.c'; else $(CYGPATH_W) '$(srcdir)/pref.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-pref.obj `if test -f 'pref.c'; then $(CYGPATH_W) 'pref.c'; else $(CYGPATH_W) '$(srcdir)/pref.c'; fi`
 
-pcmanfm2-utils.o: utils.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-utils.o -MD -MP -MF $(DEPDIR)/pcmanfm2-utils.Tpo -c -o pcmanfm2-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-utils.Tpo $(DEPDIR)/pcmanfm2-utils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils.c' object='pcmanfm2-utils.o' libtool=no @AMDEPBACKSLASH@
+pcmanfm-utils.o: utils.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-utils.o -MD -MP -MF $(DEPDIR)/pcmanfm-utils.Tpo -c -o pcmanfm-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-utils.Tpo $(DEPDIR)/pcmanfm-utils.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils.c' object='pcmanfm-utils.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
 
-pcmanfm2-utils.obj: utils.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -MT pcmanfm2-utils.obj -MD -MP -MF $(DEPDIR)/pcmanfm2-utils.Tpo -c -o pcmanfm2-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm2-utils.Tpo $(DEPDIR)/pcmanfm2-utils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils.c' object='pcmanfm2-utils.obj' libtool=no @AMDEPBACKSLASH@
+pcmanfm-utils.obj: utils.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-utils.obj -MD -MP -MF $(DEPDIR)/pcmanfm-utils.Tpo -c -o pcmanfm-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-utils.Tpo $(DEPDIR)/pcmanfm-utils.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils.c' object='pcmanfm-utils.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm2_CFLAGS) $(CFLAGS) -c -o pcmanfm2-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
 
 xml_purge-xml-purge.o: xml-purge.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xml_purge_CFLAGS) $(CFLAGS) -MT xml_purge-xml-purge.o -MD -MP -MF $(DEPDIR)/xml_purge-xml-purge.Tpo -c -o xml_purge-xml-purge.o `test -f 'xml-purge.c' || echo '$(srcdir)/'`xml-purge.c

@@ -295,7 +295,7 @@ gboolean on_socket_event( GIOChannel* ioc, GIOCondition cond, gpointer data )
 void get_socket_name( char* buf, int len )
 {
     char* dpy = gdk_get_display();
-    g_snprintf( buf, len, "/tmp/.pcmanfm2-socket%s-%s", dpy, g_get_user_name() );
+    g_snprintf( buf, len, "/tmp/.pcmanfm-socket%s-%s", dpy, g_get_user_name() );
     g_free( dpy );
 }
 
@@ -375,12 +375,17 @@ void single_instance_finalize()
 
 static FmJobErrorAction on_file_info_job_error(FmFileInfoJob* job, GError* err, FmJobErrorSeverity severity, gpointer user_data)
 {
-    if(err->domain == G_IO_ERROR && err->code == G_IO_ERROR_NOT_MOUNTED)
+    if(err->domain == G_IO_ERROR)
     {
-        FmPath* current = fm_file_info_job_get_current(job);
-        if( fm_mount_path(NULL, current, TRUE) )
-            return FM_JOB_RETRY;
+        if(err->code == G_IO_ERROR_NOT_MOUNTED)
+        {
+            if(fm_mount_path(NULL, fm_file_info_job_get_current(job), TRUE))
+                return FM_JOB_RETRY;
+        }
+        else if(err->code == G_IO_ERROR_FAILED_HANDLED)
+            return FM_JOB_CONTINUE;
     }
+    fm_show_error(NULL, err->message);
     return FM_JOB_CONTINUE;
 }
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-28 02:32+0800\n"
-"PO-Revision-Date: 2010-04-18 00:03+0200\n"
+"POT-Creation-Date: 2010-05-25 23:58+0200\n"
+"PO-Revision-Date: 2010-05-04 12:46+0200\n"
 "Last-Translator: Gunleif <gunleif@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -104,9 +104,10 @@ msgstr "Vís \"Míni skjøl\" ímynd á skriviborðinum"
 msgid "Show \"Trash Bin\" icon on desktop"
 msgstr "Vís \"Ruskspann\" ímynd á skriviborðinum"
 
+# á enskum volume, á donskum arkiv
 #: ../data/ui/desktop-pref.glade.h:18
 msgid "Show icons of volumes on desktop"
-msgstr ""
+msgstr "Vís ímyndir av skjalasøvnum á skriviborðinum"
 
 #: ../data/ui/desktop-pref.glade.h:19
 msgid "Show menus provided by window managers when desktop is clicked"
@@ -170,7 +171,7 @@ msgstr "Bókamerki:"
 
 #: ../data/ui/pref.glade.h:11
 msgid "Compact View"
-msgstr ""
+msgstr "Stappað vísing"
 
 #: ../data/ui/pref.glade.h:12
 msgid "Confirm before deleting files"
@@ -199,11 +200,11 @@ msgstr "Fjal 'Sløkk teig' knappar"
 
 #: ../data/ui/pref.glade.h:19
 msgid "Hide folder content border"
-msgstr ""
+msgstr "Fjal skjáttu-innihaldsrammu"
 
 #: ../data/ui/pref.glade.h:20
 msgid "Hide side pane buttons"
-msgstr ""
+msgstr "Fjal síðupanelsknappar"
 
 #: ../data/ui/pref.glade.h:21
 msgid "Icon View"
@@ -211,7 +212,7 @@ msgstr "Ímyndavísan"
 
 #: ../data/ui/pref.glade.h:22
 msgid "Mount mountable volumes automatically on program startup"
-msgstr ""
+msgstr "Íset ísetilig skjalasøvn sjálvvirkandi við forritsbyrjan"
 
 #: ../data/ui/pref.glade.h:23
 msgid "Mount removable media automatically when they are inserted"
@@ -259,7 +260,7 @@ msgstr "Stødd á stórum ímyndum:"
 
 #: ../data/ui/pref.glade.h:34
 msgid "Size of side pane icons:"
-msgstr ""
+msgstr "Stødd á síðupanelsímyndum:"
 
 #: ../data/ui/pref.glade.h:35
 msgid "Size of small icons:"
@@ -370,9 +371,8 @@ msgid "Open in New Tab"
 msgstr "Lat upp í nýggjum teigi"
 
 #: ../src/desktop-ui.c:89 ../src/main-win-ui.c:219
-#, fuzzy
 msgid "Open in New Window"
-msgstr "Lat upp í nýggjum rúti"
+msgstr "Lat upp í nýggjum glugga"
 
 #: ../src/desktop-ui.c:91 ../src/main-win-ui.c:221
 msgid "Open in _Terminal"
@@ -529,20 +529,20 @@ msgstr "_Smámyndasýning"
 msgid "Detailed _List View"
 msgstr "Nágreinilig _listasýning"
 
-#: ../src/main-win.c:524
+#: ../src/main-win.c:552
 msgid "You are in super user mode"
 msgstr "Tú er í úrvalsbrúkara standi"
 
-#: ../src/main-win.c:623
+#: ../src/main-win.c:651
 msgid "Switch user command is not set."
 msgstr "Stýriboð til brúkaraskift er ikki sett"
 
-#: ../src/main-win.c:930
+#: ../src/main-win.c:958
 #, c-format
 msgid "Free space: %s (Total: %s)"
 msgstr "Tøkt pláss: %s (Í alt: %s)"
 
-#: ../src/main-win.c:1146
+#: ../src/main-win.c:1174
 #, c-format
 msgid ""
 "Add following folder to bookmarks:\n"
@@ -553,7 +553,7 @@ msgstr ""
 "'%s'\n"
 "Skriva eitt navn til nýggja bókamerkið:"
 
-#: ../src/main-win.c:1150
+#: ../src/main-win.c:1178
 msgid "Add to Bookmarks"
 msgstr "Legg til bókamerki"
 
@@ -610,20 +610,20 @@ msgstr "Einki ávirki. Einans til at verða samnýtandi við nautilus"
 msgid "[FILE1, FILE2,...]"
 msgstr "[FÍLA1, FÍLA2,...]"
 
-#: ../src/pcmanfm.c:585
+#: ../src/pcmanfm.c:590
 #, fuzzy
 msgid "Terminal emulator is not set."
 msgstr "Útstøðarhermari er ikki givin"
 
-#: ../src/pcmanfm.c:628
+#: ../src/pcmanfm.c:633
 msgid "Create New..."
 msgstr "Stovna nýggja..."
 
-#: ../src/pcmanfm.c:628
+#: ../src/pcmanfm.c:633
 msgid "Enter a name for the newly created file:"
 msgstr "Skriva navn á nýggju fíluni:"
 
-#: ../src/pcmanfm.c:628
+#: ../src/pcmanfm.c:633
 msgid "New"
 msgstr "Nýggj"
 
