@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm 0.3.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-11 18:15+0800\n"
+"POT-Creation-Date: 2008-06-17 21:33+0800\n"
 "PO-Revision-Date: 2008-01-11 03:46+0100\n"
 "Last-Translator: Inko I. A. <inkoia@gmail.com>\n"
 "Language-Team: \n"
@@ -18,29 +18,29 @@ msgstr ""
 "X-Poedit-Country: SPAIN\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/main.c:79
+#: src/main.c:81
 msgid "Don't show desktop icons."
 msgstr ""
 
-#: src/main.c:80
+#: src/main.c:82
 msgid "Run PCManFM as a daemon"
 msgstr ""
 
-#: src/main.c:81
+#: src/main.c:83
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
 msgstr ""
 
-#: src/main.c:90
+#: src/main.c:92
 msgid "[FILE1, FILE2,...]"
 msgstr ""
 
-#: src/main.c:297
+#: src/main.c:299
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ ikono gaia ez dago ongi ezarria"
 
-#: src/main.c:299
+#: src/main.c:301
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -81,31 +81,31 @@ msgstr ""
 "izango dira erabili. Momentuz ez dago honentzat estandarrik, baina "
 "freedesktop.org lanean ari da arazo honi erantzuna emateko."
 
-#: src/main.c:581 src/main.c:663 src/main.c:714 src/main-window.c:1561
+#: src/main.c:583 src/main.c:665 src/main.c:716 src/main-window.c:1561
 #: src/main-window.c:1613 src/ptk/ptk-file-browser.c:503
-#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:329
+#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:330
 #: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
 #: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
 #: src/ptk/ptk-file-properties.c:693 src/ptk/ptk-file-properties.c:704
 msgid "Error"
 msgstr ""
 
-#: src/main.c:581
+#: src/main.c:583
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
 "Do you have \"FAM\" or \"Gamin\" installed and running?"
 msgstr ""
 
-#: src/main.c:663
+#: src/main.c:665
 msgid "File doesn't exist"
 msgstr "Fitxategia ez da existitzen"
 
-#: src/main.c:710
+#: src/main.c:712
 msgid "Don't know how to open the file"
 msgstr "Ez da fitxategia irekitzeko modurik ezagutzen"
 
-#: src/main.c:712
+#: src/main.c:714
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -117,12 +117,12 @@ msgstr ""
 "%s"
 
 #: src/main-window.c:294 src/ptk/ptk-file-menu.c:109
-#: src/desktop/desktop-window.c:157
+#: src/desktop/desktop-window.c:182
 msgid "_Folder"
 msgstr "_Karpeta"
 
 #: src/main-window.c:295 src/ptk/ptk-file-menu.c:110
-#: src/desktop/desktop-window.c:158
+#: src/desktop/desktop-window.c:183
 msgid "_Text File"
 msgstr "_Testu Fitxategia"
 
@@ -139,7 +139,7 @@ msgid "Close Tab"
 msgstr "Fitxa It_xi"
 
 #: src/main-window.c:305 src/ptk/ptk-file-menu.c:133
-#: src/desktop/desktop-window.c:167
+#: src/desktop/desktop-window.c:192
 msgid "_Create New"
 msgstr "_Sortu Berria"
 
@@ -180,19 +180,19 @@ msgstr "_Guraso Karpetara Joan"
 msgid "Go _Home"
 msgstr "_Hasierara Joan"
 
-#: src/main-window.c:345 src/desktop/desktop-window.c:144
+#: src/main-window.c:345 src/desktop/desktop-window.c:169
 msgid "Sort by _Name"
 msgstr "_Izenaren Arabera Ordenatu"
 
-#: src/main-window.c:346 src/desktop/desktop-window.c:145
+#: src/main-window.c:346 src/desktop/desktop-window.c:170
 msgid "Sort by _Size"
 msgstr "_Tamainaren Arabera Ordenatu"
 
-#: src/main-window.c:347 src/desktop/desktop-window.c:147
+#: src/main-window.c:347 src/desktop/desktop-window.c:172
 msgid "Sort by _Modification Time"
 msgstr "_Aldatze Dataren Arabera Ordenatu"
 
-#: src/main-window.c:348 src/desktop/desktop-window.c:146
+#: src/main-window.c:348 src/desktop/desktop-window.c:171
 msgid "Sort by _Type"
 msgstr "_Motaren Arabera Ordenatu"
 
@@ -204,11 +204,11 @@ msgstr "_Baimenaren Arabera Ordenatu"
 msgid "Sort by _Owner"
 msgstr "_Jabearen Arabera Ordenatu"
 
-#: src/main-window.c:352 src/desktop/desktop-window.c:150
+#: src/main-window.c:352 src/desktop/desktop-window.c:175
 msgid "Ascending"
 msgstr "Goranzkoa"
 
-#: src/main-window.c:353 src/desktop/desktop-window.c:151
+#: src/main-window.c:353 src/desktop/desktop-window.c:176
 msgid "Descending"
 msgstr "Beheranzkoa"
 
@@ -404,39 +404,39 @@ msgstr "Jabea:Taldea"
 msgid "Last Modification"
 msgstr "Azken Aldaketa"
 
-#: src/ptk/ptk-file-browser.c:2835
+#: src/ptk/ptk-file-browser.c:2831
 msgid "Location"
 msgstr "Kokalekua"
 
-#: src/ptk/ptk-file-browser.c:2836
+#: src/ptk/ptk-file-browser.c:2832
 msgid "Directory Tree"
 msgstr "Direktorio Zuhaitza"
 
-#: src/ptk/ptk-location-view.c:186
+#: src/ptk/ptk-location-view.c:197
 msgid "Desktop"
 msgstr "Mahaigaina"
 
-#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
+#: src/ptk/ptk-location-view.c:397 src/ptk/ptk-location-view.c:589
 msgid "Unable to mount device"
 msgstr "Ezin izan da gailua muntatu"
 
-#: src/ptk/ptk-location-view.c:589
+#: src/ptk/ptk-location-view.c:604
 msgid "Unable to unmount device"
 msgstr "Ezin izan da gailua desmuntatu"
 
-#: src/ptk/ptk-location-view.c:606
+#: src/ptk/ptk-location-view.c:621
 msgid "Unable to eject device"
 msgstr "Ezin izan da gailua atera"
 
-#: src/ptk/ptk-location-view.c:664
+#: src/ptk/ptk-location-view.c:679
 msgid "_Mount File System"
 msgstr "_Muntatu Fitxategi Sistema"
 
-#: src/ptk/ptk-location-view.c:674
+#: src/ptk/ptk-location-view.c:689
 msgid "_Eject"
 msgstr "_Atera"
 
-#: src/ptk/ptk-location-view.c:680
+#: src/ptk/ptk-location-view.c:695
 msgid "_Unmount File System"
 msgstr "_Desmuntatu Fitxategi Sistema"
 
@@ -502,28 +502,28 @@ msgstr "Prestatzen..."
 msgid "Progress:"
 msgstr "Prozesuaren Egoera:"
 
-#: src/ptk/ptk-file-task.c:317
+#: src/ptk/ptk-file-task.c:318
 msgid "Cancel the operation?"
 msgstr "Eragiketa bertan behera utzi?"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:406
+#: src/ptk/ptk-file-task.c:407
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "Nahi al duzu karpeta eta bere edukiak gain-idaztea?"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:411
+#: src/ptk/ptk-file-task.c:412
 msgid "Do you want to overwrite this file?"
 msgstr "Fitxategi hau gain-idatzi nahi al duzu?"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:416
+#: src/ptk/ptk-file-task.c:417
 msgid "Please choose a new file name."
 msgstr "Mesedez, hautatu fitxategi izen berria."
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:424
+#: src/ptk/ptk-file-task.c:425
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -535,7 +535,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:429
+#: src/ptk/ptk-file-task.c:430
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -550,23 +550,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:446
+#: src/ptk/ptk-file-task.c:447
 msgid "Overwrite"
 msgstr "Gain-idatzi"
 
-#: src/ptk/ptk-file-task.c:447
+#: src/ptk/ptk-file-task.c:448
 msgid "Overwrite All"
 msgstr "Gain-idatzi Dena"
 
-#: src/ptk/ptk-file-task.c:452
+#: src/ptk/ptk-file-task.c:453
 msgid "Rename"
 msgstr "Berrizendatu"
 
-#: src/ptk/ptk-file-task.c:453
+#: src/ptk/ptk-file-task.c:454
 msgid "Skip"
 msgstr "Saltatu"
 
-#: src/ptk/ptk-file-task.c:454
+#: src/ptk/ptk-file-task.c:455
 msgid "Skip All"
 msgstr "Saltatu Dena"
 
@@ -1028,17 +1028,17 @@ msgstr ""
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr ""
 
-#: src/desktop/desktop-window.c:164
+#: src/desktop/desktop-window.c:189
 #, fuzzy
 msgid "_Icons"
 msgstr "Ikusi _Ikono Gisa"
 
-#: src/desktop/desktop-window.c:169
+#: src/desktop/desktop-window.c:194
 #, fuzzy
 msgid "_Desktop Settings"
 msgstr "_Mahaigaina"
 
-#: src/desktop/desktop-window.c:1106
+#: src/desktop/desktop-window.c:1741
 msgid "My Documents"
 msgstr ""
 
@@ -1262,7 +1262,8 @@ msgid "Set selected application to default action"
 msgstr "Hautatu aukeratutako aplikazioa lehenetsi gisa"
 
 #: data/ui/about-dlg.glade:1
-msgid "Copyright (C) 2005 - 2006"
+#, fuzzy
+msgid "Copyright (C) 2005 - 2008"
 msgstr "Copyright (C) 2005 - 2006"
 
 #: data/ui/about-dlg.glade:1

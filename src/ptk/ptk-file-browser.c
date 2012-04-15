@@ -1448,7 +1448,7 @@ static GtkWidget* create_folder_view( PtkFileBrowser* file_browser,
             exo_icon_view_set_column_spacing( EXO_ICON_VIEW( folder_view ), 4 );
             exo_icon_view_set_item_width ( EXO_ICON_VIEW( folder_view ), 110 );
         }
-        
+
         exo_icon_view_set_selection_mode ( EXO_ICON_VIEW( folder_view ),
                                            GTK_SELECTION_MULTIPLE );
 
@@ -1810,8 +1810,10 @@ void on_folder_view_drag_data_received ( GtkWidget *widget,
                         if( stat( file_path, &statbuf ) == 0 && statbuf.st_dev != dest_dev )
                         {
                             file_browser->drag_source_dev = statbuf.st_dev;
+                            g_free( file_path );
                             break;
                         }
+                        g_free( file_path );
                     }
                 }
 
@@ -1837,18 +1839,12 @@ void on_folder_view_drag_data_received ( GtkWidget *widget,
             while ( *puri )
             {
                 if ( **puri == '/' )
-                {
                     file_path = g_strdup( *puri );
-                }
                 else
-                {
                     file_path = g_filename_from_uri( *puri, NULL, NULL );
-                }
 
                 if ( file_path )
-                {
                     files = g_list_prepend( files, file_path );
-                }
                 ++puri;
             }
             g_strfreev( list );

@@ -1,17 +1,16 @@
-# European Portuguese translations for pcmanfm package
-# Traduções em Português para o pacote pcmanfm.
-# Copyright (C) 2006 THE pcmanfm'S COPYRIGHT HOLDER
+# Czech translation for pcmanfm package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pcmanfm package.
-# Nuno Miguel <nunis@netcabo.pt>, 2008
+# Radek Tříška <radek@fastlinux.eu>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pcmanfm 0.3.9\n"
+"Project-Id-Version: pcmanfm 0.4.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-17 21:33+0800\n"
-"PO-Revision-Date: 2008-04-09 15:40+0100\n"
-"Last-Translator: Nuno Miguel <nunis@netcabo.pt>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2008-06-04 22:21+0100\n"
+"Last-Translator: Radek Tříška <radek@fastlinux.eu>\n"
+"Language-Team: Czech <radek@fastlinux.eu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,28 +18,27 @@ msgstr ""
 
 #: src/main.c:81
 msgid "Don't show desktop icons."
-msgstr "Não mostrar ícones no desktop."
+msgstr "Nezobrazovat ikony na ploše"
 
 #: src/main.c:82
 msgid "Run PCManFM as a daemon"
-msgstr "Executar PcManFM como uma daemon"
+msgstr "Spustit PCManFM jako daemon"
 
 #: src/main.c:83
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
 msgstr ""
-"Abrir pastas em novos separadores da última janela usada em vez de criar "
-"novas janelasAbrir pastas em novos separadores da última janela usada em vez "
-"de criar novas janelas"
+"Otevírat adresáře v nových panelech naposled použitého okna místo vytváření "
+"nových oken"
 
 #: src/main.c:92
 msgid "[FILE1, FILE2,...]"
-msgstr "[FICHEIRO1, FICHEIRO2,...]"
+msgstr "[SOUBOR1, SOUBOR2,...]"
 
 #: src/main.c:299
 msgid "GTK+ icon theme is not properly set"
-msgstr "Tema de ícone GTK+ não definido correctamente"
+msgstr "GTK+ téma ikon není správně nastaveno"
 
 #: src/main.c:301
 #, c-format
@@ -65,21 +63,21 @@ msgid ""
 msgstr ""
 "<big><b>%s</b></big>\n"
 "\n"
-"Isto geralmente significa que não tem um gestor XSETTINGS em execução.  "
-"Ambientes como GNOME ou XFCE automaticamente executam o seu gestor XSETTINGS "
-"como gnome-settings-daemon ou xfce-mcs-manager.\n"
+"Toto obvykle znamená, že nemáte spuštěný XSETTINGS manager. Desktopová "
+"prostředí jako GNOME nebo XFCE automaticky spouští jejich XSETTING manager "
+"(gnome-settings-daemon nebo xfce-mcs-manager).\n"
 "\n"
-"<b>Se não usa estes ambientes, tem duas escolhas:\n"
-"1. executar um gestor XSETTINGS, ou\n"
-"2. simplesmente indicar um tema de ícones em ~/.gtkrc-2.0.</b>\n"
-"Por exemplo para usar o tema de ícones Tango adicione a linha:\n"
-"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> em ~/.gtkrc-2.0. (crie-o caso "
-"não exista)\n"
-"<b>AVISO: O tema de ícone que escolher deve ser compatível com GNOME, ou os "
-"ficheiro de ícones não podem ser mostrados correctamente.</b>  Devido a "
-"diferenças de nomes de ícones do GNOME e KDE, temas KDE não podem ser "
-"usados.  Actualmente não existe padrão para isto, mas será resolvido pela "
-"freedesktop.org no futuro."
+"<b>Jestliže nepoužíváte desktopová prostředí, máte dvě možnosti:\n"
+"1. spustit XSETTINGS manager, nebo\n"
+"2. jednoduše specifikovat téma ikon v souboru ~/.gtkrc-2.0.</b>\n"
+"Například pro použití Tango ikon vložte řádku:\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (jestliže "
+"neexistuje, vytvořte ji)\n"
+"\n"
+"<b>UPOZORNĚNÍ: Zvolené téma ikon musí být kompatibilní s GNOME nebo se ikony "
+"nezobrazí korektně.</b> KDE témata nemohou být použita, kvůli rozdílům v "
+"názvech ikon GNOME a KDE. Momentálně na toto neexistuje standard, ale v "
+"budoucnu bude vytvořen díky freedesktop.org"
 
 #: src/main.c:583 src/main.c:665 src/main.c:716 src/main-window.c:1561
 #: src/main-window.c:1613 src/ptk/ptk-file-browser.c:503
@@ -88,7 +86,7 @@ msgstr ""
 #: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
 #: src/ptk/ptk-file-properties.c:693 src/ptk/ptk-file-properties.c:704
 msgid "Error"
-msgstr "Erro"
+msgstr "Chyba"
 
 #: src/main.c:583
 msgid ""
@@ -96,18 +94,17 @@ msgid ""
 "\n"
 "Do you have \"FAM\" or \"Gamin\" installed and running?"
 msgstr ""
-"Erro: Incapaz de estabelecer ligação com FAM.\n"
+"Chyba: Nemohu navázat spojení s FAM.\n"
 "\n"
-"Tem o \"FAM\" ou \"Gamin\" instalado e em execução?"
+"Máte nainstalován a spuštěn \"FAM\" nebo \"Gamin\" ?"
 
 #: src/main.c:665
 msgid "File doesn't exist"
-msgstr "Ficheiro inexistente!"
+msgstr "Soubor neexistuje"
 
 #: src/main.c:712
-#, fuzzy
 msgid "Don't know how to open the file"
-msgstr "Quer substituir este ficheiro?"
+msgstr "Nevím jak otevřít soubor"
 
 #: src/main.c:714
 #, c-format
@@ -116,416 +113,413 @@ msgid ""
 "\"%s\"\n"
 "%s"
 msgstr ""
-"Impossível abrir ficheiro:\n"
+"Nemohu otevřít soubor:\n"
 "\"%s\"\n"
 "%s"
 
 #: src/main-window.c:294 src/ptk/ptk-file-menu.c:109
 #: src/desktop/desktop-window.c:182
 msgid "_Folder"
-msgstr "_Pasta"
+msgstr "Adresář"
 
 #: src/main-window.c:295 src/ptk/ptk-file-menu.c:110
 #: src/desktop/desktop-window.c:183
 msgid "_Text File"
-msgstr "_Ficheiro de texto"
+msgstr "_Textový Soubor"
 
 #: src/main-window.c:301
 msgid "New _Window"
-msgstr "Nova _Janela"
+msgstr "Nové _Okno"
 
 #: src/main-window.c:302
 msgid "New _Tab"
-msgstr "Novo _Separador"
+msgstr "Nový _Panel"
 
 #: src/main-window.c:303
 msgid "Close Tab"
-msgstr "Fechar Separador"
+msgstr "Zavřít Panel"
 
 #: src/main-window.c:305 src/ptk/ptk-file-menu.c:133
 #: src/desktop/desktop-window.c:192
 msgid "_Create New"
-msgstr "_Criar Novo"
+msgstr "Vytvořit Nový"
 
 #: src/main-window.c:306
 msgid "File _Properties"
-msgstr "_Propriedades do Ficheiro"
+msgstr "Vlastnosti Souboru"
 
 #: src/main-window.c:317 src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
-msgstr "_Apagar"
+msgstr "_Smazat"
 
 #: src/main-window.c:318 src/ptk/ptk-file-browser.c:1368
 #: src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
-msgstr "_Renomear"
+msgstr "_Přejmenovat"
 
 #: src/main-window.c:320
 msgid "Select _All"
-msgstr "Seleccionar _Tudo"
+msgstr "Vybrat Vše"
 
 #: src/main-window.c:321
 msgid "_Invert Selection"
-msgstr "_Inverter Selecção"
+msgstr "_Invertovat Výběr"
 
 #: src/main-window.c:330
 msgid "Go _Back"
-msgstr "Volta_r"
+msgstr "Zpět"
 
 #: src/main-window.c:331
-#, fuzzy
 msgid "Go _Forward"
-msgstr "Avançar"
+msgstr "_Vpřed"
 
 #: src/main-window.c:332
 msgid "Go to _Parent Folder"
-msgstr "Ir para Pasta _Pai"
+msgstr "Přejít do _Vyššího Adresáře"
 
 #: src/main-window.c:333
 msgid "Go _Home"
-msgstr "Ir para _Home"
+msgstr "Domů"
 
 #: src/main-window.c:345 src/desktop/desktop-window.c:169
 msgid "Sort by _Name"
-msgstr "Ordenar por _Nome"
+msgstr "Setřídit podle _Jména"
 
 #: src/main-window.c:346 src/desktop/desktop-window.c:170
 msgid "Sort by _Size"
-msgstr "Ordenar por _Tamanho"
+msgstr "Setřídit podle _Velikosti"
 
 #: src/main-window.c:347 src/desktop/desktop-window.c:172
 msgid "Sort by _Modification Time"
-msgstr "Ordenar por Data de _Modificação"
+msgstr "Setřídit podle _Času Modifikace"
 
 #: src/main-window.c:348 src/desktop/desktop-window.c:171
 msgid "Sort by _Type"
-msgstr "Ordenar por _Tipo"
+msgstr "Setřídit podle _Typu"
 
 #: src/main-window.c:349
 msgid "Sort by _Permission"
-msgstr "Ordenar por _Permissão"
+msgstr "Setřídit podle _Práv"
 
 #: src/main-window.c:350
 msgid "Sort by _Owner"
-msgstr "Ordenar por _Dono"
+msgstr "Setřídit podle _Vlastníka"
 
 #: src/main-window.c:352 src/desktop/desktop-window.c:175
 msgid "Ascending"
-msgstr "Ascendente"
+msgstr "Vzestupně"
 
 #: src/main-window.c:353 src/desktop/desktop-window.c:176
 msgid "Descending"
-msgstr "Descendente"
+msgstr "Sestupně"
 
 #: src/main-window.c:359
 msgid "_Open Side Pane"
-msgstr "_Abrir Painel Lateral"
+msgstr "_Otevřít Postranní Panel"
 
 #: src/main-window.c:361
 msgid "Show _Location Pane"
-msgstr "Mostrar Painel de _Localização"
+msgstr "Zobrazit Panel Umístění"
 
 #: src/main-window.c:362
 msgid "Show _Directory Tree"
-msgstr "Mostrar Árvore de _Directórios"
+msgstr "Zobrazit _Adresářový Strom"
 
 #: src/main-window.c:368
 msgid "_Refresh"
-msgstr "Ac_tualizar"
+msgstr "_Obnovit"
 
 #: src/main-window.c:369
 msgid "Side _Pane"
-msgstr "_Painel Lateral"
+msgstr "Postranní _Panel"
 
 #: src/main-window.c:372
 msgid "Show _Hidden Files"
-msgstr "Mostrar Ficheiros _Ocultos"
+msgstr "Zobrazit  _Skryté Soubory"
 
 #: src/main-window.c:373
 msgid "_Sort..."
-msgstr "_Ordenar..."
+msgstr "_Setřídit..."
 
 #: src/main-window.c:375
 msgid "View as _Icons"
-msgstr "Ver como Í_cones"
+msgstr "Zobrazit jako _Ikony"
 
 #: src/main-window.c:376
-#, fuzzy
 msgid "View as _Compact List"
-msgstr "Ver como _Lista Detalhada"
+msgstr "Zobrazit jako _Kompaktní Seznam"
 
 #: src/main-window.c:377
 msgid "View as Detailed _List"
-msgstr "Ver como _Lista Detalhada"
+msgstr "Zobrazit jako Detailní _Seznam"
 
 #: src/main-window.c:383
 msgid "Open _Terminal"
-msgstr "Abrir _Terminal"
+msgstr "Otevřít _Terminál"
 
 #: src/main-window.c:384
 msgid "Open Current Folder as _Root"
-msgstr "Abrir Pasta Actual como _Root"
+msgstr "Otevřít Současný Adresář jako _Root"
 
 #: src/main-window.c:392
 msgid "_File"
-msgstr "_Ficheiro"
+msgstr "_Soubor"
 
 #: src/main-window.c:393
 msgid "_Edit"
-msgstr "_Editar"
+msgstr "_Editovat"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
 #: src/main-window.c:395
 msgid "_Go"
-msgstr "_Ir"
+msgstr "_Přejít"
 
 #: src/main-window.c:396
 msgid "_Bookmark"
-msgstr "_Marcador"
+msgstr "_Záložky"
 
 #: src/main-window.c:397
 msgid "_View"
-msgstr "_Ver"
+msgstr "_Zobrazit"
 
 #: src/main-window.c:398
 msgid "_Tool"
-msgstr "Fer_ramenta"
+msgstr "_Nástroje"
 
 #: src/main-window.c:399
 msgid "_Help"
-msgstr "_Ajuda"
+msgstr "_Nápověda"
 
 #: src/main-window.c:407
 msgid "New Tab"
-msgstr "Novo Separador"
+msgstr "Nový Panel"
 
 #: src/main-window.c:408
 msgid "Back"
-msgstr "Recuar"
+msgstr "Zpět"
 
 #: src/main-window.c:409
 msgid "Forward"
-msgstr "Avançar"
+msgstr "Vpřed"
 
 #: src/main-window.c:410
 msgid "Parent Folder"
-msgstr "Pasta Pai"
+msgstr "Vyšší Adresář"
 
 #: src/main-window.c:411
 msgid "Refresh"
-msgstr "Actualizar"
+msgstr "Obnovit"
 
 #: src/main-window.c:412
-#, fuzzy
 msgid "Home Directory"
-msgstr "Mostrar Árvore de _Directórios"
+msgstr "Domovský Adresář"
 
 #: src/main-window.c:413
 msgid "Open Side Pane"
-msgstr "Abrir Painel Lateral"
+msgstr "Otevřít Postranní Panel"
 
 #: src/main-window.c:419
 msgid "Go"
-msgstr "Ir"
+msgstr "Přejít"
 
 #: src/main-window.c:632
 msgid "Warning: You are in super user mode"
-msgstr ""
+msgstr "Varování: Jste v módu superuživatele"
 
 #: src/main-window.c:1562
 msgid "Terminal program has not been set"
-msgstr "Programa de terminal não foi configurado"
+msgstr "Nebyl nastaven Terminálový program "
 
 #: src/main-window.c:1688
 msgid "_Add to Bookmarks"
-msgstr "_Adicionar a Marcadores"
+msgstr "_Přidat do Záložek"
 
 #: src/main-window.c:1689
 msgid "_Edit Bookmarks"
-msgstr "_Editar Marcadores"
+msgstr "_Upravit Záložky"
 
 #: src/main-window.c:1766
 msgid "Loading..."
-msgstr "Carregando..."
+msgstr "Nahrávám..."
 
 #: src/main-window.c:1976
 #, c-format
 msgid ", Free space: %s (Total: %s )"
-msgstr ", Espaço livre: %s (Total: %s )"
+msgstr ", Volné místo: %s (Celkem: %s )"
 
 #: src/main-window.c:1985
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
-msgstr[0] "%d item selecionado (%s)%s"
-msgstr[1] "%d itens selecionados (%s)%s"
+msgstr[0] "%d položka vybrána (%s)%s"
+msgstr[1] "%d položky vybrány (%s)%s"
 
 #: src/main-window.c:1995
 #, c-format
 msgid "%d hidden"
 msgid_plural "%d hidden"
-msgstr[0] "%d oculto"
-msgstr[1] "%d ocultos"
+msgstr[0] "%d skrytý"
+msgstr[1] "%d skryté"
 
 #: src/main-window.c:1996
 #, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
-msgstr[0] "%d item visível (%s)%s"
-msgstr[1] "%d itens visíveis (%s)%s"
+msgstr[0] "%d viditelná položka (%s)%s"
+msgstr[1] "%d viditelné položky (%s)%s"
 
 #: src/ptk/ptk-file-browser.c:504
 msgid "Directory doesn't exist!"
-msgstr "Directório não existe!"
+msgstr "Adresář neexistuje!"
 
 #: src/ptk/ptk-file-browser.c:1364 src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
-msgstr "Abrir em Novo _Separador"
+msgstr "Otevřít v Novém _Panelu"
 
 #: src/ptk/ptk-file-browser.c:1365 src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
-msgstr "Abrir em Nova _Janela"
+msgstr "Otevřít v Novém _Okně"
 
 #: src/ptk/ptk-file-browser.c:1623 src/edit-bookmarks.c:198
 msgid "Name"
-msgstr "Nome"
+msgstr "Jméno"
 
 #: src/ptk/ptk-file-browser.c:1623
 msgid "Size"
-msgstr "Tamanho"
+msgstr "Velikost"
 
 #: src/ptk/ptk-file-browser.c:1623
 msgid "Type"
-msgstr "Tipo"
+msgstr "Typ"
 
 #: src/ptk/ptk-file-browser.c:1624
 msgid "Permission"
-msgstr "Permissão"
+msgstr "Práva"
 
 #: src/ptk/ptk-file-browser.c:1624
 msgid "Owner:Group"
-msgstr "Dono:Grupo"
+msgstr "Vlastník:Skupina"
 
 #: src/ptk/ptk-file-browser.c:1624
 msgid "Last Modification"
-msgstr "Última Modificação"
+msgstr "Poslední Úprava"
 
 #: src/ptk/ptk-file-browser.c:2831
 msgid "Location"
-msgstr "Localização"
+msgstr "Lokace"
 
 #: src/ptk/ptk-file-browser.c:2832
 msgid "Directory Tree"
-msgstr "Árvore de Directório"
+msgstr "Adresářový Strom"
 
 #: src/ptk/ptk-location-view.c:197
 msgid "Desktop"
-msgstr "Desktop"
+msgstr "Plocha"
 
 #: src/ptk/ptk-location-view.c:397 src/ptk/ptk-location-view.c:589
 msgid "Unable to mount device"
-msgstr "Incapaz de montar dispositivo"
+msgstr "Nemohu připojit zařízení"
 
 #: src/ptk/ptk-location-view.c:604
 msgid "Unable to unmount device"
-msgstr "Incapaz de desmontar o dispositivo"
+msgstr "Nemohu odpojit zařízení"
 
 #: src/ptk/ptk-location-view.c:621
 msgid "Unable to eject device"
-msgstr "Incapaz de ejectar o dispositivo"
+msgstr "Nemohu vysunout zařízení"
 
 #: src/ptk/ptk-location-view.c:679
 msgid "_Mount File System"
-msgstr "_Montar Sistema de Ficheiros"
+msgstr "_Připojit Souborový Systém"
 
 #: src/ptk/ptk-location-view.c:689
 msgid "_Eject"
-msgstr "_Ejectar"
+msgstr "_Vysunout"
 
 #: src/ptk/ptk-location-view.c:695
 msgid "_Unmount File System"
-msgstr "_Desmontar Sistema de Ficheiros"
+msgstr "_Odpojit Souborový Systém"
 
 #: src/ptk/ptk-file-task.c:103
 msgid "Move: "
-msgstr "Mover:"
+msgstr "Přesunout:"
 
 #: src/ptk/ptk-file-task.c:104
 msgid "Copy: "
-msgstr "Copiar:"
+msgstr "Kopírovat:"
 
 #: src/ptk/ptk-file-task.c:105
 msgid "Delete: "
-msgstr "Apagar:"
+msgstr "Mazat:"
 
 #: src/ptk/ptk-file-task.c:106
 msgid "Link: "
-msgstr "Atalho:"
+msgstr "Odkaz:"
 
 #: src/ptk/ptk-file-task.c:107
 msgid "Change Properties: "
-msgstr "Modificar Propriedades: "
+msgstr "Změnit Vlastnosti:"
 
 #: src/ptk/ptk-file-task.c:111
 msgid "Moving..."
-msgstr "Movendo..."
+msgstr "Přesouvám..."
 
 #: src/ptk/ptk-file-task.c:112
 msgid "Copying..."
-msgstr "Copiando..."
+msgstr "Kopíruji..."
 
 #: src/ptk/ptk-file-task.c:113
 msgid "Deleting..."
-msgstr "Apagando..."
+msgstr "Mažu..."
 
 #: src/ptk/ptk-file-task.c:114
 msgid "Linking..."
-msgstr "Criando atalho..."
+msgstr "Propojuji..."
 
 #: src/ptk/ptk-file-task.c:115
 msgid "Changing Properties"
-msgstr "Modificando Propriedades"
+msgstr "Měním Vlastnosti"
 
 #. To: <Destination folder>
 #. ex. Copy file to..., Move file to...etc.
 #: src/ptk/ptk-file-task.c:152
 msgid "To:"
-msgstr "Para: "
+msgstr "Do:"
 
 #. Processing:
 #. Processing: <Name of currently proccesed file>
 #: src/ptk/ptk-file-task.c:167
 msgid "Processing:"
-msgstr "Processando: "
+msgstr "Zpracovávám:"
 
 #. Preparing to do some file operation (Copy, Move, Delete...)
 #: src/ptk/ptk-file-task.c:174
 msgid "Preparing..."
-msgstr "Preparando..."
+msgstr "Připravuji..."
 
 #. Progress:
 #: src/ptk/ptk-file-task.c:182
 msgid "Progress:"
-msgstr "Progresso: "
+msgstr "Průběh:"
 
 #: src/ptk/ptk-file-task.c:318
 msgid "Cancel the operation?"
-msgstr "Cancelar a operação?"
+msgstr "Zrušit operaci?"
 
 #. Ask the user whether to overwrite dir content or not
 #: src/ptk/ptk-file-task.c:407
 msgid "Do you want to overwrite the folder and its content?"
-msgstr "Quer substituir a pasta e o seu conteúdo?"
+msgstr "Opravdu chcete přepsat adresář i s jeho obsahem?"
 
 #. Ask the user whether to overwrite the file or not
 #: src/ptk/ptk-file-task.c:412
 msgid "Do you want to overwrite this file?"
-msgstr "Quer substituir este ficheiro?"
+msgstr "Opravdu chcete přepsat soubory?"
 
 #. Rename is required
 #: src/ptk/ptk-file-task.c:417
 msgid "Please choose a new file name."
-msgstr "Por favor, digite um novo nome para o ficheiro."
+msgstr "Prosím zvolte nové nové jméno souboru."
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
@@ -536,7 +530,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"\"%s\" já existe.\n"
+"\"%s\" již existuje.\n"
 "\n"
 "%s"
 
@@ -552,59 +546,59 @@ msgid ""
 msgstr ""
 "\"%s\"\n"
 "\n"
-"Destino e origem são o mesmo ficheiro.\n"
+"Zdrojová a cílová cesta souboru je stejná.\n"
 "\n"
 "%s"
 
 #: src/ptk/ptk-file-task.c:447
 msgid "Overwrite"
-msgstr "Substituir"
+msgstr "Přepsat"
 
 #: src/ptk/ptk-file-task.c:448
 msgid "Overwrite All"
-msgstr "Substituir Tudo"
+msgstr "Přepsat Vše"
 
 #: src/ptk/ptk-file-task.c:453
 msgid "Rename"
-msgstr "Renomear"
+msgstr "Přejmenovat"
 
 #: src/ptk/ptk-file-task.c:454
 msgid "Skip"
-msgstr "Ignorar"
+msgstr "Přeskočit"
 
 #: src/ptk/ptk-file-task.c:455
 msgid "Skip All"
-msgstr "Ignorar Tudo"
+msgstr "Přeskočit Vše"
 
 #: src/ptk/ptk-file-archiver.c:119
 msgid "Save Compressd Files to..."
-msgstr "Guardar Ficheiros Comprimidos para..."
+msgstr "Uložit Komprimované Soubory do..."
 
 #: src/ptk/ptk-file-archiver.c:127
 msgid "Format of compressed File:"
-msgstr "Formato do Ficheiro comprimido:"
+msgstr "Formát komprimovaného Souboru:"
 
 #: src/ptk/ptk-file-archiver.c:198
 #, c-format
 msgid "Creating Compressed File: %s"
-msgstr "Criando Ficheiro Comprimido: %s"
+msgstr "Vytvářím Komprimovaný Soubor: %s"
 
 #: src/ptk/ptk-file-archiver.c:201
 msgid "Compress Files"
-msgstr "Comprimir Ficheiros"
+msgstr "Zabalit Soubory"
 
 #: src/ptk/ptk-file-archiver.c:232
 msgid "Extract File to..."
-msgstr "Extrair Ficheiro para..."
+msgstr "Rozbalit Soubor do..."
 
 #: src/ptk/ptk-file-archiver.c:281
 #, c-format
 msgid "Extracting Files to: %s"
-msgstr "Extraindo Ficheiros para: %s"
+msgstr "Rozbaluji Soubory do: %s"
 
 #: src/ptk/ptk-file-archiver.c:283
 msgid "Extract Files"
-msgstr "Extrair Ficheiros"
+msgstr "Rozbalit Soubory"
 
 #: src/ptk/ptk-console-output.c:66
 msgid ""
@@ -612,77 +606,77 @@ msgid ""
 "Complete!"
 msgstr ""
 "\n"
-"Completo!"
+"Hotovo!"
 
 #: src/ptk/ptk-console-output.c:168
 msgid "Command:"
-msgstr "Comando: "
+msgstr "Příkaz:"
 
 #: src/ptk/ptk-dir-tree.c:174
 msgid "File System"
-msgstr "Sistema de Ficheiros"
+msgstr "Systém Souborů"
 
 #: src/ptk/ptk-dir-tree.c:397
 msgid "No Sub Folder"
-msgstr "Nenhuma Sub Pasta"
+msgstr "Není Podadresář"
 
 #: src/ptk/ptk-file-menu.c:116
 msgid "E_xtract Here"
-msgstr "E_xtrair aqui"
+msgstr "R_ozbalit Zde"
 
 #: src/ptk/ptk-file-menu.c:117
 msgid "Extract _To"
-msgstr "Extrair _Para"
+msgstr "Rozbalit _Do"
 
 #: src/ptk/ptk-file-menu.c:123
 msgid "Open _with..."
-msgstr "Abrir _com..."
+msgstr "Otevřít _v..."
 
 #: src/ptk/ptk-file-menu.c:131
 msgid "Compress"
-msgstr "Comprimir"
+msgstr "Komprimovat"
 
 #: src/ptk/ptk-file-menu.c:132
 msgid "E_xtract"
-msgstr "E_xtrair"
+msgstr "R_ozbalit"
 
 #: src/ptk/ptk-file-menu.c:135
 msgid "_Properties"
-msgstr "_Propriedades"
+msgstr "_Vlastnosti"
 
 #: src/ptk/ptk-file-menu.c:144
 msgid "Open in Terminal"
-msgstr "Abrir no Terminal"
+msgstr "Otevřít v Terminálu"
 
 #: src/ptk/ptk-file-menu.c:373
 msgid "_Open with another program"
-msgstr "_Abrir com outro programa"
+msgstr "_Otevřít v jiném programu"
 
 #: src/ptk/ptk-file-menu.c:388
 msgid "E_xecute"
-msgstr "E_xecutar"
+msgstr "S_pustit"
 
 #: src/ptk/ptk-file-menu.c:397
 #, c-format
 msgid "_Open with \"%s\""
-msgstr "_Abrir com \"%s\""
+msgstr "_Otevřít v \"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
 #: src/ptk/ptk-file-menu.c:408 src/ptk/ptk-file-menu.c:417
 msgid "_Open"
-msgstr "_Abrir"
+msgstr "_Otevřít"
 
 #: src/ptk/ptk-file-misc.c:55
 msgid "Really delete selected files?"
-msgstr "Apagar os ficheiros seleccionados?"
+msgstr "Opravdu vymazat označené soubory?"
 
 #: src/ptk/ptk-file-misc.c:115
 msgid "Rename File"
-msgstr "Renomear Ficheiro"
+msgstr "Přejmenovat Soubor"
 
 #: src/ptk/ptk-file-misc.c:116
 msgid "Please input new file name:"
-msgstr "Por favor, digite o novo nome do ficheiro:"
+msgstr "Prosím zadejte nové jméno souboru:"
 
 #: src/ptk/ptk-file-misc.c:145 src/ptk/ptk-file-misc.c:166
 #: src/ptk/ptk-file-misc.c:219
@@ -690,92 +684,91 @@ msgid ""
 "The file name you specified has existed.\n"
 "Please input a new one:"
 msgstr ""
-"O nome de ficheiro digitado existia.\n"
-"Por favor, digite outro:"
+"Vámi zadané jméno souboru existuje.\n"
+"Prosím zadejte nové:"
 
 #: src/ptk/ptk-file-misc.c:189 src/ptk/ptk-file-misc.c:191
 msgid "New Folder"
-msgstr "Nova Pasta"
+msgstr "Nový Adresář"
 
 #: src/ptk/ptk-file-misc.c:190
 msgid "Input a name for the new folder:"
-msgstr "Digite um nome para a nova pasta: "
+msgstr "Zadejte jméno nového adresáře:"
 
 #: src/ptk/ptk-file-misc.c:196 src/ptk/ptk-file-misc.c:198
 msgid "New File"
-msgstr "Novo Ficheiro"
+msgstr "Nový Soubor"
 
 #: src/ptk/ptk-file-misc.c:197
 msgid "Input a name for the new file:"
-msgstr "Digite um nome para o novo ficheiro: "
+msgstr "Zadejte jméno nového souboru:"
 
 #: src/ptk/ptk-file-misc.c:253
 msgid "The new file cannot be created!"
-msgstr "O novo ficheiro não pode ser criado!"
+msgstr "Nový soubor nejde vytvořit!"
 
 #: src/ptk/ptk-file-properties.c:304
 msgid "Multiple files are selected"
-msgstr "Múltiplos ficheiros foram seleccionados"
+msgstr "Vybráno více souborů"
 
 #: src/ptk/ptk-file-properties.c:380
 msgid "Multiple files of different types"
-msgstr "Múltiplos ficheiros de tipos diferentes"
+msgstr "Mnoho souborů různých typů"
 
 #: src/ptk/ptk-file-properties.c:448
 msgid "Other program..."
-msgstr "Outro programa..."
+msgstr "Jiný program..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
 #: src/ptk/ptk-file-properties.c:542
 msgid "Calculating..."
-msgstr "Calculando..."
+msgstr "Počítám..."
 
 #: src/ptk/ptk-file-properties.c:693
 msgid "Invalid User"
-msgstr "Utilizador Inválido"
+msgstr "Neplatný Uživatel"
 
 #: src/ptk/ptk-file-properties.c:704
 msgid "Invalid Group"
-msgstr "Grupo Inválido"
+msgstr "Neplatná Skupina"
 
 #: src/ptk/ptk-file-properties.c:752
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
-"Quer aplicar as modificações recursivamente a todos os ficheiros e sub-"
-"pastas?"
+"Chcete rekurzivně aplikovat tyto změny na všechny soubory a podadresáře?"
 
 #: src/edit-bookmarks.c:77
 msgid "New Item"
-msgstr "Novo Item"
+msgstr "Nová Položka"
 
 #: src/edit-bookmarks.c:151
 msgid "Edit Bookmarks"
-msgstr "Editar marcadores"
+msgstr "Editovat Záložky"
 
 #: src/edit-bookmarks.c:207
 msgid "Path"
-msgstr "Caminho"
+msgstr "Cesta"
 
 #: src/edit-bookmarks.c:230
 msgid "Use drag & drop to sort the items"
-msgstr "Usar arrastar & soltar para ordenar itens"
+msgstr "Použijte funkci drag & drop pro setřídění položek"
 
 #: src/vfs/vfs-app-desktop.c:445
 #, c-format
 msgid "Command not found"
-msgstr "Comando não encontrado"
+msgstr "Příkaz nenalezen"
 
 #: src/vfs/vfs-file-task.c:697
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
-msgstr "Directório destino \"%1$s\" está contido na fonte \"%2$s\""
+msgstr "Cílový adresář \"%1$s\" je obsažen ve zdroji \"%2$s\""
 
 #: src/vfs/vfs-volume-hal.c:475 src/vfs/vfs-volume-hal.c:698
 #, c-format
 msgid "%s Volume"
-msgstr "Volume %s"
+msgstr "%s Svazek"
 
 #: src/vfs/vfs-volume-hal.c:490
 msgid "CD-ROM"
@@ -816,180 +809,178 @@ msgstr "DVD-RAM"
 #: src/vfs/vfs-volume-hal.c:517
 #, c-format
 msgid "%s/%s Drive"
-msgstr "Dispositivo %s/%s"
+msgstr "%s/%s Jednotka"
 
 #: src/vfs/vfs-volume-hal.c:519
 #, c-format
 msgid "%s Drive"
-msgstr "Drive %s"
+msgstr "%s Jednotka"
 
 #: src/vfs/vfs-volume-hal.c:524
 msgid "Floppy Drive"
-msgstr "Drive de Disquete"
+msgstr "Disketová Jednotka"
 
 #: src/vfs/vfs-volume-hal.c:527
 msgid "Compact Flash Drive"
-msgstr "Compact Flash Drive"
+msgstr "Jednotka Compact Flash"
 
 #: src/vfs/vfs-volume-hal.c:529
 msgid "Memory Stick Drive"
-msgstr "Smart Memory Stick"
+msgstr "Jednotka Memory Stick"
 
 #: src/vfs/vfs-volume-hal.c:531
 msgid "Smart Media Drive"
-msgstr "Drive Smart Media"
+msgstr "Jednotka Smart Media"
 
 #: src/vfs/vfs-volume-hal.c:533
 msgid "SD/MMC Drive"
-msgstr "Drive SD/MMC"
+msgstr "Jednotka SD/MMC"
 
 #: src/vfs/vfs-volume-hal.c:535
 msgid "Zip Drive"
-msgstr "Drive Zip"
+msgstr "Jednotka Zip"
 
 #: src/vfs/vfs-volume-hal.c:538
 msgid "Jaz Drive"
-msgstr "Drive Jaz"
+msgstr "Jednotka Jaz"
 
 #: src/vfs/vfs-volume-hal.c:541
 msgid "Pen Drive"
-msgstr "Pen Drive"
+msgstr "Pen Disk"
 
 #: src/vfs/vfs-volume-hal.c:547
 #, c-format
 msgid "%s %s Music Player"
-msgstr "Reprodutor de Música %s %s"
+msgstr "%s %s Hudební Přehrávač"
 
 #: src/vfs/vfs-volume-hal.c:555
 #, c-format
 msgid "%s %s Digital Camera"
-msgstr "Câmara Digital %s %s"
+msgstr "%s %s Digitální Kamera"
 
 #: src/vfs/vfs-volume-hal.c:586
 msgid "Drive"
-msgstr "Drive"
+msgstr "Disk"
 
 #: src/vfs/vfs-volume-hal.c:591
 #, c-format
 msgid "External %s"
-msgstr "%s Externo"
+msgstr "Externí %s"
 
 #: src/vfs/vfs-volume-hal.c:625
 msgid "CD-ROM Disc"
-msgstr "Disco CD-ROM"
+msgstr "CD-ROM Disk"
 
 #: src/vfs/vfs-volume-hal.c:630
 msgid "Blank CD-R Disc"
-msgstr "Disco CD-R em Branco"
+msgstr "Prázdný CD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:632
 msgid "CD-R Disc"
-msgstr "Disco CD-R"
+msgstr "CD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:637
 msgid "Blank CD-RW Disc"
-msgstr "Disco CD-RW em Branco"
+msgstr "Prázdný CD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:639
 msgid "CD-RW Disc"
-msgstr "Disco CD-RW"
+msgstr "CD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:643
 msgid "DVD-ROM Disc"
-msgstr "Disco CVD-ROM"
+msgstr "DVD-ROM Disk"
 
 #: src/vfs/vfs-volume-hal.c:648
 msgid "Blank DVD-RAM Disc"
-msgstr "Disco DVD-RAM em Branco"
+msgstr "Prázdný DVD-RAM Disk"
 
 #: src/vfs/vfs-volume-hal.c:650
 msgid "DVD-RAM Disc"
-msgstr "Disco DVD-RAM"
+msgstr "DVD-RAM Disk"
 
 #: src/vfs/vfs-volume-hal.c:655
 msgid "Blank DVD-R Disc"
-msgstr "Disco DVD-R em Branco"
+msgstr "Prázdný DVD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:657
 msgid "DVD-R Disc"
-msgstr "Disco DVD-R"
+msgstr "DVD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:662
 msgid "Blank DVD-RW Disc"
-msgstr "Disco DVD-RW em Branco"
+msgstr "Prázdný DVD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:664
 msgid "DVD-RW Disc"
-msgstr "Disco DVD-RW"
+msgstr "DVD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:670
 msgid "Blank DVD+R Disc"
-msgstr "Disco DVD+R em Branco"
+msgstr "Prázdný DVD+R Disk"
 
 #: src/vfs/vfs-volume-hal.c:672
 msgid "DVD+R Disc"
-msgstr "Disco DVD+R"
+msgstr "DVD+R Disk"
 
 #: src/vfs/vfs-volume-hal.c:677
 msgid "Blank DVD+RW Disc"
-msgstr "Disco DVD+RW em  Branco"
+msgstr "Prázdný DVD+RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:679
 msgid "DVD+RW Disc"
-msgstr "Disco DVD+RW"
+msgstr "DVD+RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:686
 msgid "Audio Disc"
-msgstr "Disco Áudio"
+msgstr "Hudební Disk"
 
 #: src/vfs/vfs-volume-hal.c:696
 #, c-format
 msgid "%s Removable Volume"
-msgstr "Volume Removível %s"
+msgstr "%s Odpojitelný svazek"
 
 #: src/vfs/vfs-volume-hal.c:704
 msgid "Volume"
-msgstr "Volume"
+msgstr "Svazek"
 
 #: src/vfs/vfs-volume-hal.c:1100
 #, c-format
 msgid "Failed to connect to the HAL daemon: %s"
-msgstr "Falha ao conectar à daemon HAL: %s"
+msgstr "Chyba při spojeni s HAL démonem: %s"
 
 #. definitely not a device that we're able to mount, eject or unmount
 #: src/vfs/vfs-volume-hal.c:1941 src/vfs/vfs-volume-hal.c:1997
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
-msgstr "O dispositivo \"%s\" não é um volume ou drive"
+msgstr "Zařízení \"%s\" není svazek nebo jednotka"
 
 #. tell the caller that no matching device was found
 #: src/vfs/vfs-volume-hal.c:2073
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
-msgstr ""
-"Dispositivo \"%s\" não encontrado na tabela de dispositivos do sistema de "
-"ficheiros"
+msgstr "Zařízení \"%s\" nebylo nalezeno"
 
 #: src/vfs/vfs-volume-hal.c:2256
 #, c-format
 msgid "You are not privileged to mount the volume \"%s\""
-msgstr "Não tem privilégios para montar o volume \"%s\""
+msgstr "Nemáte oprávnění připojit svazek \"%s\""
 
 #: src/vfs/vfs-volume-hal.c:2257
 #, c-format
 msgid "You are not privileged to unmount the volume \"%s\""
-msgstr "Não tem privilégios para desmontar o volume \"%s\""
+msgstr "Nemáte oprávnění odpojit svazek \"%s\""
 
 #: src/vfs/vfs-volume-hal.c:2258
 #, c-format
 msgid "You are not privileged to eject the volume \"%s\""
-msgstr "Não tem privilégios para ejectar o volume \"%s\""
+msgstr "Nemáte oprávnění vysunout svazek \"%s\""
 
 #. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
 #: src/vfs/vfs-volume-hal.c:2270
 #, c-format
 msgid "Invalid mount option when attempting to mount the volume \"%s\""
-msgstr "Opção de montagem inválida ao tentar montar o volume \"%s\""
+msgstr "Chybné parametry při pokusu o připojení svazku \"%s\""
 
 #: src/vfs/vfs-volume-hal.c:2272
 #, c-format
@@ -997,30 +988,29 @@ msgid ""
 "The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
 "your system"
 msgstr ""
-"O volume \"%s\" usa o sistema de ficheiros <i>%s</i> que não é suportado "
-"pelo seu sistema"
+"Svazek \"%s\" používá <i>%s</i> systém souborů, který není podporován vaším "
+"systémem"
 
 #: src/vfs/vfs-volume-hal.c:2274
 #, c-format
 msgid "An application is preventing the volume \"%s\" from being unmounted"
-msgstr "Uma aplicação está impedindo que o volume \"%s\" seja desmontado"
+msgstr "Aplikace zabraňuje svazku \"%s\" v odpojení"
 
 #: src/vfs/vfs-volume-hal.c:2276
 #, c-format
 msgid "The volume \"%s\" is not mounted"
-msgstr "O volume \"%s\" não está montado"
+msgstr "Svazek \"%s\" není připojen"
 
 #: src/vfs/vfs-volume-hal.c:2278
 #, c-format
 msgid "Error <i>%s</i>"
-msgstr "Erro <i>%s</i>"
+msgstr "Chyba <i>%s</i>"
 
 #. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
 #: src/vfs/vfs-volume-hal.c:2281
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
-msgstr ""
-"O volume \"%s\" foi provavelmente montado manualmente na linha de comando"
+msgstr "Svazek \"%s\" byl pravděpodobně připojen ručně z příkazové řádky"
 
 #: src/vfs/vfs-volume-hal.c:2289
 #, c-format
@@ -1028,39 +1018,38 @@ msgid ""
 "Blank discs cannot be mounted, use a CD recording application to record "
 "audio or data on the disc"
 msgstr ""
-"Disco em branco não podem ser montados, use uma aplicação de gravação de CD "
-"para gravar áudio ou dados no disco"
+"Prázdné disky nemohou být připojeny, použijte vypalovací program pro zapsání "
+"dat."
 
 #: src/vfs/vfs-volume-hal.c:2300
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr ""
-"CDs Áudio não podem ser montados, use leitores de música para tocar pistas "
-"áudio"
+"Audio CD nemohou být připojena, použijte hudební přehrávač pro přehrátí "
 
 #: src/desktop/desktop-window.c:189
 msgid "_Icons"
-msgstr "Í_cones"
+msgstr "_Ikony"
 
 #: src/desktop/desktop-window.c:194
 msgid "_Desktop Settings"
-msgstr "Definições de _Desktop"
+msgstr "_Nastavení Pracovní Plochy"
 
 #: src/desktop/desktop-window.c:1741
 msgid "My Documents"
-msgstr "Meus Documentos"
+msgstr "Moje Dokumenty"
 
 #: data/ui/prefdlg.glade:1
 msgid "Preference"
-msgstr "Preferências"
+msgstr "Nastavení"
 
 #: data/ui/prefdlg.glade:1
 msgid "On-disk file name encoding:"
-msgstr "Codificação do ficheiro em disco:"
+msgstr "Kódování názvů souborů na disku:"
 
 #: data/ui/prefdlg.glade:1
 msgid "Bookmarks:"
-msgstr "Marcadores:"
+msgstr "Záložky:"
 
 #: data/ui/prefdlg.glade:1
 msgid ""
@@ -1068,49 +1057,49 @@ msgid ""
 "Opened in New Tab\n"
 "Opened in New Window"
 msgstr ""
-"Abrir em Separador Actual\n"
-"Abrir em Novo Separador\n"
-"Abrir em Nova Janela"
+"Otevřít v Současném Panelu\n"
+"Otevřít v Novém Panelu\n"
+"Otevřít v Novém Okně"
 
 #: data/ui/prefdlg.glade:3
 msgid "Size of Big Icons:"
-msgstr "Tamanho dos Ícones Grandes:"
+msgstr "Velikost velkých ikon"
 
 #: data/ui/prefdlg.glade:10
 msgid "Size of Small Icons:"
-msgstr "Tamanho dos Ícones Pequenos:"
+msgstr "Velikost malých ikon"
 
 #: data/ui/prefdlg.glade:16
 msgid "Display image files with supported format as thumbnails"
-msgstr "Mostrar ficheiros de formatos suportados como miniaturas"
+msgstr "Zobraz podporované obrázky jako náhledy"
 
 #: data/ui/prefdlg.glade:16
 msgid "Max size of files displayed as thumbnails:"
-msgstr "Tamanho máx dos ficheiros mostrados como miniaturas:"
+msgstr "Maximální velikost souborů zobrazených jako náhledy:"
 
 #: data/ui/prefdlg.glade:16
 msgid "Terminal:"
-msgstr "Terminal: "
+msgstr "Terminál:"
 
 #: data/ui/prefdlg.glade:16 data/ui/file_properties.glade:1
 msgid "_General"
-msgstr "_Geral"
+msgstr "_Hlavní"
 
 #: data/ui/prefdlg.glade:16
 msgid "Show file icons on desktop"
-msgstr "Mostrar ícones de ficheiros no desktop"
+msgstr "Zobraz ikony souborů na ploše"
 
 #: data/ui/prefdlg.glade:16
 msgid "Wallpaper:"
-msgstr "Papel de parede:"
+msgstr "Pozadí:"
 
 #: data/ui/prefdlg.glade:16
 msgid "Please select an image file"
-msgstr "Por favor, seleccione um ficheiro de imagem"
+msgstr "Prosím vyberte obrázek"
 
 #: data/ui/prefdlg.glade:16
 msgid "Mode:"
-msgstr "Modo:"
+msgstr "Mód:"
 
 #: data/ui/prefdlg.glade:16
 msgid ""
@@ -1119,86 +1108,86 @@ msgid ""
 "Center on the screen\n"
 "Tile the image to fill the entire screen"
 msgstr ""
-"Esticar para preencher todo o ecrã\n"
-"Esticar para ajustar ao ecrã\n"
-"Centrar no ecrã\n"
-"Imagem em mosaico para preencher todo o ecrã"
+"Roztáhnout na celou obrazovku\n"
+"Přizpůsobit obrazovce\n"
+"Vycentrovat na obrazovce\n"
+"Vydlaždicovat na celou obrazovku"
 
 #: data/ui/prefdlg.glade:19
 msgid "<b>Wallpaper</b>"
-msgstr "<b>Papel de parede</b>"
+msgstr "<b>Pozadí</b>"
 
 #: data/ui/prefdlg.glade:19
 msgid "Background"
-msgstr "Fundo"
+msgstr "Pozadí"
 
 #: data/ui/prefdlg.glade:19
 msgid "Text"
-msgstr "Texto"
+msgstr "Text"
 
 #: data/ui/prefdlg.glade:19
 msgid "Shadow"
-msgstr "Sombrear"
+msgstr "Stín"
 
 #: data/ui/prefdlg.glade:19
 msgid "<b>Colors</b>"
-msgstr "<b>Cores</b>"
+msgstr "<b>Barvy</b>"
 
 #: data/ui/prefdlg.glade:19
 msgid "Show menus provided by WM when desktop is clicked"
-msgstr "Mostrar menus oferecidos pelo WM quando o desktop é clicado"
+msgstr "Zobrazit menu poskytované Okenním Managerem při kliknutí na plochu"
 
 #: data/ui/prefdlg.glade:19
 msgid "Advanced"
-msgstr "Avançado"
+msgstr "Rozšířené"
 
 #: data/ui/prefdlg.glade:19
 msgid "_Desktop"
-msgstr "_Desktop"
+msgstr "_Plocha"
 
 #: data/ui/file_properties.glade:1
 msgid "File Properties"
-msgstr "Propriedades do ficheiro"
+msgstr "Vlastnosti Souboru"
 
 #: data/ui/file_properties.glade:1
 msgid "Open with:"
-msgstr "Abrir com:"
+msgstr "Otevřít v:"
 
 #: data/ui/file_properties.glade:1
 msgid "Size on Disk:"
-msgstr "Tamanho em Disco:"
+msgstr "Velikost na Disku:"
 
 #: data/ui/file_properties.glade:1
 msgid "Location:"
-msgstr "Localização:"
+msgstr "Lokace:"
 
 #: data/ui/file_properties.glade:1
 msgid "Last Access:"
-msgstr "Último acesso:"
+msgstr "Poslední Přístup:"
 
 #: data/ui/file_properties.glade:1
 msgid "Last Modification:"
-msgstr "Última Modificação:"
+msgstr "Poslední Modifikace:"
 
 #: data/ui/file_properties.glade:1
 msgid "Total Size of Files:"
-msgstr "Tamanho Total dos Ficheiros:"
+msgstr "Celková Velikost Souborů:"
 
 #: data/ui/file_properties.glade:1
 msgid "File Type:"
-msgstr "Tipo do ficheiro:"
+msgstr "Typ Souboru:"
 
 #: data/ui/file_properties.glade:1
 msgid "File Name:"
-msgstr "Nome do ficheiro:"
+msgstr "Jméno Souboru:"
 
 #: data/ui/file_properties.glade:1
 msgid "Group:"
-msgstr "Grupo:"
+msgstr "Skupina:"
 
 #: data/ui/file_properties.glade:1
 msgid "Owner:"
-msgstr "Dono:"
+msgstr "Vlastník:"
 
 #: data/ui/file_properties.glade:1
 msgid "Sticky"
@@ -1206,75 +1195,76 @@ msgstr "Sticky"
 
 #: data/ui/file_properties.glade:1
 msgid "Set GID"
-msgstr "Mudar GID"
+msgstr "Set GID"
 
 #: data/ui/file_properties.glade:1
 msgid "Set UID"
-msgstr "Mudar UID"
+msgstr "Set UID"
 
 #: data/ui/file_properties.glade:1
 msgid "Execute"
-msgstr "Execução"
+msgstr "Spouštěcí"
 
 #: data/ui/file_properties.glade:1
 msgid "Write"
-msgstr "Escrita"
+msgstr "Zapisovatelný"
 
 #: data/ui/file_properties.glade:1
 msgid "Read"
-msgstr "Leitura"
+msgstr "Pro čtení"
 
 #: data/ui/file_properties.glade:1
 msgid "Other Users:"
-msgstr "Outros utilizadores:"
+msgstr "Ostatní:"
 
 #: data/ui/file_properties.glade:1
 msgid "_Permissions"
-msgstr "_Permissões"
+msgstr "_Práva"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "Choose an Application"
-msgstr "Seleccione uma Aplicação"
+msgstr "Vyberte Aplikaci"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "File Type To be Opened:"
-msgstr "Tipo de Ficheiro a ser Aberto:"
+msgstr "Typ souboru pro Otevření:"
 
 #: data/ui/appchooserdlg.glade:1
 msgid ""
 "Please choose an application from following lists or enter the command line "
 "by hand:"
 msgstr ""
-"Por favor, escolha uma aplicação da lista ou digite o comando manualmente:"
+"Prosím vyberte aplikaci z následujícího seznamu nebo jí zadejte ručně z "
+"příkazové řádky:"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "_Recommended Applications"
-msgstr "Aplicações _Recomendadas"
+msgstr "_Doporučené Aplikace"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "_All Applications"
-msgstr "_Todas as Aplicações"
+msgstr "_Všechny Aplikace"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "_Command Line:"
-msgstr "Linha de _comando:"
+msgstr "_Příkazová Řádka:"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "_Browse"
-msgstr "_Navegar"
+msgstr "_Prohlížet"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "Opened in Terminal"
-msgstr "Abrir no Terminal"
+msgstr "Otevřeno v Terminálu"
 
 #: data/ui/appchooserdlg.glade:1
 msgid "Set selected application to default action"
-msgstr "Definir aplicação seleccionada para acção por omissão"
+msgstr "Nastavit výchozí akci vybrané aplikaci"
 
 #: data/ui/about-dlg.glade:1
 #, fuzzy
 msgid "Copyright (C) 2005 - 2008"
-msgstr "Copyright (C) 2005 - 2006"
+msgstr "Copyright (C) 2005 - 2008"
 
 #: data/ui/about-dlg.glade:1
 msgid ""
@@ -1282,9 +1272,9 @@ msgid ""
 "\n"
 "Developed by Hon Jen Yee (PCMan)"
 msgstr ""
-"Gestor de ficheiros leve\n"
+"Jednoduchý manažer souborů\n"
 "\n"
-"Desenvolvido por Hon Jen Yee (PCMan)"
+"Vyvinul Hon Jen Yee (PCMan)"
 
 #: data/ui/about-dlg.glade:19
 msgid ""
@@ -1303,20 +1293,21 @@ msgid ""
 msgstr ""
 "洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
 "\n"
-"Código fonte retirado de outros projectos:\n"
+"Převzatý zdrojový kód:\n"
 " * libmd5-rfc: Aladdin Enterprises\n"
-" * Detecção de área de trabalho: Gary Kramlich\n"
+" * Working area detection: Gary Kramlich\n"
 " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
-" * Texto e renderização de ícones usa código de Jonathan Blandford\n"
-" * Ícones de Desktop usa código de Brian Tarricone\n"
-" * Gestão de volume usa código dos seguintes projectos/autores:\n"
-"       * gnome-vfs: David Zeuthen\n"
+" * Text and icon renderer uese code from Jonathan Blandford\n"
+" * Desktop icons use code from Brian Tarricone\n"
+" * Volume management uses code from following projects/authors:\n"
+"     * gnome-vfs: David Zeuthen\n"
 "     * thunar-vfs and libexo: Benedikt Meurer\n"
 "     * gnome-mount: David Zeuthen"
 
 #: data/ui/about-dlg.glade:30
+#, fuzzy
 msgid "translator-credits"
-msgstr "Nuno Miguel <nunis@netcabo.pt>"
+msgstr "překladatelé"
 
 #: data/ui/about-dlg.glade:30
 msgid ""
@@ -1324,157 +1315,6 @@ msgid ""
 "created by Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 msgstr ""
-"O ícone foi retirado do tema de ícone de \"nuoveXT 2\"\n"
-"criado po Alexandre Moore (saki).\n"
+"Ikonka byla převzata z \"nuoveXT 2\" tématu\n"
+"tvůrce Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
-
-#~ msgid "Mode: "
-#~ msgstr "Modo:"
-
-#~ msgid "gksu or kdesu is not found"
-#~ msgstr "gksu ou kdesu não encontrados"
-
-#~ msgid "Error: %s\n"
-#~ msgstr "Erro: %s\n"
-
-#~ msgid "Text Color"
-#~ msgstr "Cor do Texto"
-
-#~ msgid ""
-#~ "The volume \"%s\" is not mounted.\n"
-#~ "Do you want to mount it?"
-#~ msgstr ""
-#~ "Volume \"%s\" não está montado.\n"
-#~ "Deseja montá-lo?"
-
-#~ msgid "application"
-#~ msgstr "aplicação"
-
-#~ msgid "audio"
-#~ msgstr "áudio"
-
-#~ msgid "video"
-#~ msgstr "vídeo"
-
-#~ msgid "multipart"
-#~ msgstr "multi parte"
-
-#~ msgid "image"
-#~ msgstr "imagem"
-
-#~ msgid "message"
-#~ msgstr "mensagem"
-
-#~ msgid "model"
-#~ msgstr "modelo"
-
-#~ msgid "inode"
-#~ msgstr "inode"
-
-#~ msgid "packages"
-#~ msgstr "pacotes"
-
-#~ msgid "File Associations"
-#~ msgstr "Associações de Ficheiros"
-
-#~ msgid "Known File Types:"
-#~ msgstr "Tipos de Ficheiros Conhecidos:"
-
-#~ msgid "Actions Showed in Popup Menus"
-#~ msgstr "Acções mostradas nos Menus Popup"
-
-#~ msgid "Add _Application"
-#~ msgstr "Adicionar _Aplicação"
-
-#~ msgid "Add _Custom Action"
-#~ msgstr "Adicionar Acção _Personalizada"
-
-#~ msgid "Move _Up"
-#~ msgstr "Move _Acima"
-
-#~ msgid "Move _Down"
-#~ msgstr "Move _Abaixo"
-
-#~ msgid "Source code taken from other projects:"
-#~ msgstr "Código fonte retirado de outros projectos:"
-
-#~ msgid " * libmd5-rfc: Aladdin Enterprises"
-#~ msgstr " * libmd5-rfc: Aladdin Enterprises"
-
-#~ msgid " * Working area detection: Gary Kramlich"
-#~ msgstr "  * Working area detection: Gary Kramlich"
-
-#~ msgid " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
-#~ msgstr ""
-#~ " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
-
-#~ msgid " * Text and icon renderer uese code from Jonathan Blandford"
-#~ msgstr " * Texto e renderização de ícone usa código de Jonathan Blandford"
-
-#~ msgid " * Desktop icons use code from Brian Tarricone"
-#~ msgstr " * ícones Desktop usa código de Brian Tarricone"
-
-#~ msgid ""
-#~ " * Volume management uses code from following projects/authors:\n"
-#~ "     * gnome-vfs: David Zeuthen,\n"
-#~ "     * thunar-vfs and libexo: Benedikt Meurer\n"
-#~ "     * gnome-mount: David Zeuthen"
-#~ msgstr ""
-#~ "Gestão de volumes usa código dos seguinste projectos/autores:\n"
-#~ "     * gnome-vfs: David Zeuthen,\n"
-#~ "     * thunar-vfs and libexo: Benedikt Meurer\n"
-#~ "     * gnome-mount: David Zeuthen"
-
-#~ msgid "PCMan File Manager"
-#~ msgstr "Gestor de Ficheiros PCMan"
-
-#~ msgid "Opened in Current Tab"
-#~ msgstr "Abrir no Separador Actual"
-
-#~ msgid "Opened in New Tab"
-#~ msgstr "Abrir em Novo Separador"
-
-#~ msgid "Opened in New Window"
-#~ msgstr "Abrir em Nova Janela"
-
-#~ msgid "Icon Theme:"
-#~ msgstr "Tema dos Ícones:"
-
-#~ msgid "A_ddress:"
-#~ msgstr "_Endereço:"
-
-#~ msgid " "
-#~ msgstr "O tema de icones GTK+ não está corretamente configurado"
-
-#~ msgid "Icon Theme (Need Restart):"
-#~ msgstr "Ícones (Precisa reiniciar):"
-
-#~ msgid "_Full Screen"
-#~ msgstr "Ecrã Inteiro"
-
-#~ msgid ""
-#~ "File operation failed.\n"
-#~ "\n"
-#~ "Unable to process \"%s\"\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Operação com arquivo falhou.\n"
-#~ "Não foi possível processar \"%s\"\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Edit Bookmark"
-#~ msgstr "Editar marcadores"
-
-#~ msgid "Add to Bookmarks"
-#~ msgstr "Adicionar a marcadores"
-
-#~ msgid "Enter new directory path:"
-#~ msgstr "Digite o nova localização da pasta:"
-
-#~ msgid "Open Directory _Tree"
-#~ msgstr "Abrir á_rvore de Pastas"
-
-#~ msgid "Open Terminal"
-#~ msgstr "Abrir terminal"

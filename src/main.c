@@ -39,6 +39,8 @@
 
 #include "ptk-utils.h"
 #include "ptk-app-chooser.h"
+#include "ptk-file-properties.h"
+#include "ptk-file-menu.h"
 
 #include "settings.h"
 

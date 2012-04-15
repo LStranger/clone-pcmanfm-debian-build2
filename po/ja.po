@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm 0.3.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-11 18:15+0800\n"
+"POT-Creation-Date: 2008-06-17 21:33+0800\n"
 "PO-Revision-Date: 2007-11-19 20:36+0800\n"
 "Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
 "Language-Team: Japanese <hironao@users.sourceforge.net>\n"
@@ -16,29 +16,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/main.c:79
+#: src/main.c:81
 msgid "Don't show desktop icons."
 msgstr ""
 
-#: src/main.c:80
+#: src/main.c:82
 msgid "Run PCManFM as a daemon"
 msgstr ""
 
-#: src/main.c:81
+#: src/main.c:83
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
 msgstr ""
 
-#: src/main.c:90
+#: src/main.c:92
 msgid "[FILE1, FILE2,...]"
 msgstr ""
 
-#: src/main.c:297
+#: src/main.c:299
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+のアイコンテーマが適切に設定されていません"
 
-#: src/main.c:299
+#: src/main.c:301
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -77,31 +77,31 @@ msgstr ""
 "きません。現時点ではアイコン名に関する規格はありませんが、将来freedesktop.org"
 "がこれを解決するでしょう。"
 
-#: src/main.c:581 src/main.c:663 src/main.c:714 src/main-window.c:1561
+#: src/main.c:583 src/main.c:665 src/main.c:716 src/main-window.c:1561
 #: src/main-window.c:1613 src/ptk/ptk-file-browser.c:503
-#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:329
+#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:330
 #: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
 #: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
 #: src/ptk/ptk-file-properties.c:693 src/ptk/ptk-file-properties.c:704
 msgid "Error"
 msgstr ""
 
-#: src/main.c:581
+#: src/main.c:583
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
 "Do you have \"FAM\" or \"Gamin\" installed and running?"
 msgstr ""
 
-#: src/main.c:663
+#: src/main.c:665
 msgid "File doesn't exist"
 msgstr "ファイルが存在しません"
 
-#: src/main.c:710
+#: src/main.c:712
 msgid "Don't know how to open the file"
 msgstr "ファイルが開く方法が不明です"
 
-#: src/main.c:712
+#: src/main.c:714
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -113,12 +113,12 @@ msgstr ""
 "%s"
 
 #: src/main-window.c:294 src/ptk/ptk-file-menu.c:109
-#: src/desktop/desktop-window.c:157
+#: src/desktop/desktop-window.c:182
 msgid "_Folder"
 msgstr "フォルダ(_F)"
 
 #: src/main-window.c:295 src/ptk/ptk-file-menu.c:110
-#: src/desktop/desktop-window.c:158
+#: src/desktop/desktop-window.c:183
 msgid "_Text File"
 msgstr "テキストファイル(_T)"
 
@@ -135,7 +135,7 @@ msgid "Close Tab"
 msgstr "タブを閉じる"
 
 #: src/main-window.c:305 src/ptk/ptk-file-menu.c:133
-#: src/desktop/desktop-window.c:167
+#: src/desktop/desktop-window.c:192
 msgid "_Create New"
 msgstr "新規作成(_C)"
 
@@ -176,19 +176,19 @@ msgstr "上へ(_P)"
 msgid "Go _Home"
 msgstr "ホーム(_H)"
 
-#: src/main-window.c:345 src/desktop/desktop-window.c:144
+#: src/main-window.c:345 src/desktop/desktop-window.c:169
 msgid "Sort by _Name"
 msgstr "名前順(_N)"
 
-#: src/main-window.c:346 src/desktop/desktop-window.c:145
+#: src/main-window.c:346 src/desktop/desktop-window.c:170
 msgid "Sort by _Size"
 msgstr "サイズ順(_S)"
 
-#: src/main-window.c:347 src/desktop/desktop-window.c:147
+#: src/main-window.c:347 src/desktop/desktop-window.c:172
 msgid "Sort by _Modification Time"
 msgstr "更新時刻順(_M)"
 
-#: src/main-window.c:348 src/desktop/desktop-window.c:146
+#: src/main-window.c:348 src/desktop/desktop-window.c:171
 msgid "Sort by _Type"
 msgstr "ファイルタイプ順(_T)"
 
@@ -200,11 +200,11 @@ msgstr "パーミッション順(_P)"
 msgid "Sort by _Owner"
 msgstr "所有者順(_O)"
 
-#: src/main-window.c:352 src/desktop/desktop-window.c:150
+#: src/main-window.c:352 src/desktop/desktop-window.c:175
 msgid "Ascending"
 msgstr "昇順"
 
-#: src/main-window.c:353 src/desktop/desktop-window.c:151
+#: src/main-window.c:353 src/desktop/desktop-window.c:176
 msgid "Descending"
 msgstr "降順"
 
@@ -397,39 +397,39 @@ msgstr "所有者:グループ"
 msgid "Last Modification"
 msgstr "最終更新時刻"
 
-#: src/ptk/ptk-file-browser.c:2835
+#: src/ptk/ptk-file-browser.c:2831
 msgid "Location"
 msgstr "場所"
 
-#: src/ptk/ptk-file-browser.c:2836
+#: src/ptk/ptk-file-browser.c:2832
 msgid "Directory Tree"
 msgstr "ディレクトリツリー"
 
-#: src/ptk/ptk-location-view.c:186
+#: src/ptk/ptk-location-view.c:197
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
+#: src/ptk/ptk-location-view.c:397 src/ptk/ptk-location-view.c:589
 msgid "Unable to mount device"
 msgstr "デバイスのマウントに失敗"
 
-#: src/ptk/ptk-location-view.c:589
+#: src/ptk/ptk-location-view.c:604
 msgid "Unable to unmount device"
 msgstr "デバイスのアンマウントに失敗"
 
-#: src/ptk/ptk-location-view.c:606
+#: src/ptk/ptk-location-view.c:621
 msgid "Unable to eject device"
 msgstr "デバイスの取り出しに失敗"
 
-#: src/ptk/ptk-location-view.c:664
+#: src/ptk/ptk-location-view.c:679
 msgid "_Mount File System"
 msgstr "ファイルシステムをマウントする(_M)"
 
-#: src/ptk/ptk-location-view.c:674
+#: src/ptk/ptk-location-view.c:689
 msgid "_Eject"
 msgstr "取り出し(_E)"
 
-#: src/ptk/ptk-location-view.c:680
+#: src/ptk/ptk-location-view.c:695
 msgid "_Unmount File System"
 msgstr "ファイルシステムをアンマウントする(_U)"
 
@@ -495,28 +495,28 @@ msgstr "準備中..."
 msgid "Progress:"
 msgstr "進行中:"
 
-#: src/ptk/ptk-file-task.c:317
+#: src/ptk/ptk-file-task.c:318
 msgid "Cancel the operation?"
 msgstr "キャンセルしますか?"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:406
+#: src/ptk/ptk-file-task.c:407
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "フォルダとその中を上書きしますか?"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:411
+#: src/ptk/ptk-file-task.c:412
 msgid "Do you want to overwrite this file?"
 msgstr "このファイルを上書きしますか?"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:416
+#: src/ptk/ptk-file-task.c:417
 msgid "Please choose a new file name."
 msgstr "新しいファイル名を選んでください。"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:424
+#: src/ptk/ptk-file-task.c:425
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -528,7 +528,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:429
+#: src/ptk/ptk-file-task.c:430
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -543,23 +543,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:446
+#: src/ptk/ptk-file-task.c:447
 msgid "Overwrite"
 msgstr "上書き"
 
-#: src/ptk/ptk-file-task.c:447
+#: src/ptk/ptk-file-task.c:448
 msgid "Overwrite All"
 msgstr "すべて上書き"
 
-#: src/ptk/ptk-file-task.c:452
+#: src/ptk/ptk-file-task.c:453
 msgid "Rename"
 msgstr "名前変更"
 
-#: src/ptk/ptk-file-task.c:453
+#: src/ptk/ptk-file-task.c:454
 msgid "Skip"
 msgstr "スキップ"
 
-#: src/ptk/ptk-file-task.c:454
+#: src/ptk/ptk-file-task.c:455
 msgid "Skip All"
 msgstr "すべてスキップ"
 
@@ -1019,17 +1019,17 @@ msgstr ""
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr ""
 
-#: src/desktop/desktop-window.c:164
+#: src/desktop/desktop-window.c:189
 #, fuzzy
 msgid "_Icons"
 msgstr "アイコン(_I)"
 
-#: src/desktop/desktop-window.c:169
+#: src/desktop/desktop-window.c:194
 #, fuzzy
 msgid "_Desktop Settings"
 msgstr "デスクトップ(_D)"
 
-#: src/desktop/desktop-window.c:1106
+#: src/desktop/desktop-window.c:1741
 msgid "My Documents"
 msgstr ""
 
@@ -1254,7 +1254,8 @@ msgid "Set selected application to default action"
 msgstr "このアプリケーションを標準にする"
 
 #: data/ui/about-dlg.glade:1
-msgid "Copyright (C) 2005 - 2006"
+#, fuzzy
+msgid "Copyright (C) 2005 - 2008"
 msgstr "Copyright (C) 2005 - 2006"
 
 #: data/ui/about-dlg.glade:1
