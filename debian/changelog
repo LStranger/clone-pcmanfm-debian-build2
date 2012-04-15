@@ -1,3 +1,21 @@
+pcmanfm (0.3.6.1-1) unstable; urgency=low
+
+  * New upstream release
+    - Going to another folder when the loading of current folder is not
+      finished works now.
+    - Crashes related to mounting removable devices is fixed. Many
+      thanks to the patch from Mamoru Tasaka. (Closes:#466560)
+    - Compiler warnings are fixed. (Closes:#466615)
+    - The drag & drop default behaviour is changed: (Closes:452696)
+      One the same partition, the drag&drop default behaviour does mv.
+      One different partition, the drag&drop default behaviour does cp.
+    - Added workarounds for gtk+ bug.
+  * Drop 01_implicit-pointer-conversion.dpatch, merged in upstream.
+  * debian/control:
+    - Recommends on gksu | kdesu for super user window
+
+ -- Andrew Lee <andrew@linux.org.tw>  Mon, 25 Feb 2008 19:36:27 +0800
+
 pcmanfm (0.3.5.23-1) unstable; urgency=low
 
   * New maintainer(Closes:#454278)

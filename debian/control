@@ -11,7 +11,7 @@ Homepage: http://pcmanfm.sourceforge.net/
 Package: pcmanfm
 Architecture: linux-any
 Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, hal
-Recommends: gnome-icon-theme
+Recommends: gnome-icon-theme, gksu | kdesu
 Conflicts: pcmanfm-nohal
 Description: an extremely fast and lightweight file manager for X
  PCMan File Manager is a gtk2 based file manager for the X Window System.
@@ -36,7 +36,7 @@ Description: an extremely fast and lightweight file manager for X
 Package: pcmanfm-nohal
 Architecture: any
 Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils
-Recommends: gnome-icon-theme
+Recommends: gnome-icon-theme, gksu | kdesu
 Conflicts: pcmanfm
 Description: an extremely fast and lightweight file manager for X
  PCMan File Manager is a gtk2 based file manager for the X Window System.
