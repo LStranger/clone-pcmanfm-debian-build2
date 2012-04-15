@@ -1,3 +1,34 @@
+pcmanfm (0.4.1.1-1) unstable; urgency=low
+
+  * New upstream release
+    - Totally rewrite the desktop icon support. It's much nicer and
+      also faster than the old one.
+    - Support hotkeys on the desktop
+    - Support sorting desktop icons by name, size, mtime, and file type.
+    - Able to use the desktop root menu provided by window manager (This
+      option can be turned on from the preference dialog).
+    - Drop shadow on desktop item text.
+    - Totally rewrite the wallpaper support. Now there are several 
+      different modes: extend, tile, or center the image.
+    - Daemon mode support. Run pcmanfm with -d argument can run 
+      pcmanfm as daemon, and it will start much faster later.
+    - Image preview is shown in "Open File" dialog when selecting
+      wallpaper.  
+    - Handle mount/umount/eject much more gracefully. If root access is
+      needed, now gksu will be called automatically, and the volumes can
+      be mounted correctly after typing the password.
+    - Fix memory leaks in desktop window.
+    - Fix crashes when gtk+ theme changes on the fly.
+    - Use separate config files under LXDE.
+    - Added "Create New" in desktop menu.
+    - Optimize xml files.
+    - Support "Compact List View".
+    - Update locales.
+  * Removed Asho Yeh <asho@debian.org.tw> from co-maintainer field due
+    no response for a long time.
+
+ -- Andrew Lee <andrew@linux.org.tw>  Fri, 16 May 2008 23:22:03 +0800
+
 pcmanfm (0.3.6.2-1) unstable; urgency=low
 
   * New upstream release
