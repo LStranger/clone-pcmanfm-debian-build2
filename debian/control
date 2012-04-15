@@ -1,15 +1,18 @@
 Source: pcmanfm
 Section: utils
 Priority: optional
-Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
-Build-Depends: debhelper (>= 5), libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake, autoconf, pkg-config, intltool, libstartup-notification0-dev, libhal-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], python
+Maintainer: Debian LXDE Packaging Team <pkg-lxde-maintainers@lists.alioth.debian.org>
+Uploaders: Andrew Lee (李健秋) <ajqlee@debian.org>
+Build-Depends: debhelper (>= 5), libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake, autoconf, pkg-config, intltool, libstartup-notification0-dev, libhal-dev [!hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!hurd-i386], python
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://pcmanfm.sourceforge.net/
+Vcs-Git: git://git.debian.org/git/collab-maint/pcmanfm.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/pcmanfm.git;a=summary
 
 Package: pcmanfm
 Architecture: linux-any
-Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, hal
+Depends: ${shlibs:Depends}, ${misc:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, hal
 Recommends: gnome-icon-theme, gksu | kdesu, ntfs-3g
 Conflicts: pcmanfm-nohal
 Description: an extremely fast and lightweight file manager for X
@@ -32,7 +35,7 @@ Description: an extremely fast and lightweight file manager for X
 
 Package: pcmanfm-nohal
 Architecture: any
-Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils
+Depends: ${shlibs:Depends}, ${misc:Depends}, gamin, shared-mime-info, desktop-file-utils
 Recommends: gnome-icon-theme, gksu | kdesu, ntfs-3g
 Conflicts: pcmanfm
 Description: an extremely fast and lightweight file manager for X

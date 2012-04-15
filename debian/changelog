@@ -1,3 +1,13 @@
+pcmanfm (0.5.2+svn20091029-2) unstable; urgency=low
+
+  * Building hal variant on kFreeBSD. (Closes: #544737)
+  * debian/control:
+    - Bumped Stand-Version to 3.8.4
+    - Use Debian LXDE Packaging Team address on alioth
+    - Added Vcs-Git and Vcs-Browser tags
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Sat, 20 Mar 2010 16:22:17 +0700
+
 pcmanfm (0.5.2+svn20091029-1) unstable; urgency=low
 
   * New upstream release+translation update from SVN
