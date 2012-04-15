@@ -1,0 +1,40 @@
+1. Ensure all broken file names which are not encoded in UTF-8 
+   can be used. (Save real filenames for file access instead convert
+   them between utf-8 and on-disk encoding to prevent possible data loss)
+2. Add file alteration monitor. (using gamin)	DONE
+3. Some nodes of dir tree are not updated if they contain no 
+   files initially, but contain files after some file operation.
+4. Symlinks cannot be correctly processed.   DONE
+5. Add "Find files" (using external tools: grep and find)
+6. Support user scripts for mime-type handling. (Add user 
+   extended options in popup menu for selected files)	PENDING
+7. Open in terminal support.  HIGHEST PRIORITY
+8. Fix some bugs in GtkTreeModelSort.  PENDING
+9. Extend icon view to be used as desktop icons.  PENDING
+10.VFS implementation. (different backends) LOWEST PRIORITY
+11.Bookmark side pane. (Like the one in GtkFileChooser)
+12.Make column headers of list view clickable.	PENDING
+13.Add "Find as you type" support in icon view.    DONE
+14.Update check menus on switching tab.  DONE
+15.Update file count in status bar.  DONE
+16.Implement File Properties dialog.  DONE
+17.Profiling and Optimization  LOWEST PRIORITY.
+18.Fix the strange bugs in GtkTreeView (100% CPU usage) and Open 
+   with another program dialog.  PENDING
+19.Try to prevent the problems caused by crashed FAM/gamin.
+20.Display uid/gid instead of user name/group name if names are 
+   not available.  DONE
+21.Re-design file association. Multiple selected files should be 
+   able to be opened at the same time instead of one by one.
+22.Re-write FileBrowser, use GObject system to derived FileBrowser from 
+   GtkPaned widget.   DONE
+23.Support open new instance as root (via gksu)
+24.Disk mounting support
+25.Display disk usage & available free space in file properties dialog.
+26.Popup a dialog to let the user choose their favorite program if there
+   is no file association for current selected file.
+27.Monitor any change of /usr/share/mime_info.cache, and update the cache
+   in our program.
+28.Support other directories specified by XDG_* enviroment variable.
+29.Enable single instance.
+30.Notify the user that selected files are opened with busy cursor.  DONE

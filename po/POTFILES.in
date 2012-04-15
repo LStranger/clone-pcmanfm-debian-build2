@@ -1,0 +1,15 @@
+# List of source files containing translatable strings.
+
+src/main.c
+src/main-window.c
+src/ptk/ptk-file-browser.c
+src/ptk/ptk-location-view.c
+src/file-properties-ui.c
+src/file-properties.c
+src/file-operation.c
+src/file-operation-ui.c
+src/pref-dialog-ui.c
+src/edit-bookmarks.c
+src/app-chooser-dialog.c
+src/app-chooser-dialog-ui.c
+

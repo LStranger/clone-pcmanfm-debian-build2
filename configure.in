@@ -1,0 +1,76 @@
+dnl Process this file with autoconf to produce a configure script.
+
+AC_INIT(configure.in)
+AM_INIT_AUTOMAKE(pcmanfm, 0.2.4)
+AM_CONFIG_HEADER(config.h)
+AM_MAINTAINER_MODE
+
+AC_ISC_POSIX
+AC_PROG_CC
+AM_PROG_CC_STDC
+AC_HEADER_STDC
+
+dnl HAL is not supported currently.
+dnl pkg_modules="gtk+-2.0 >= 2.8.0 gthread-2.0 dbus-glib-1 >= 0.31 hal >= 0.5.0"
+pkg_modules="gtk+-2.0 >= 2.8.0 gthread-2.0"
+
+PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+AC_SUBST(PACKAGE_CFLAGS)
+AC_SUBST(PACKAGE_LIBS)
+
+dnl ***************************
+dnl *** Check for Gamin/FAM ***
+dnl ***************************
+dnl *Modified from XFCE Thunar*
+
+FAM_CFLAGS=""
+FAM_LIBS=""
+have_libfam=no
+AC_CHECK_HEADERS([fam.h],
+[
+  AC_CHECK_LIB([fam], [FAMOpen], [have_libfam="yes" FAM_LIBS="-lfam"])
+])
+
+if test x"$have_libfam" = x"yes"; then
+  dnl Define appropriate symbols
+  AC_DEFINE([HAVE_FAM_H], [1], [Define to 1 if you have the <fam.h> header file.])
+  AC_DEFINE([HAVE_LIBFAM], [1], [Define to 1 if the File Alteration Monitor is available.])
+
+  dnl Check for FAMNoExists (currently Gamin only)
+  save_LIBS="$LIBS"
+  LIBS="$LIBS $FAM_LIBS"
+  AC_CHECK_FUNCS([FAMNoExists])
+  LIBS="$save_LIBS"
+else
+  AC_MSG_ERROR([Fatal Error: no fam or gamin detected.])
+fi
+
+AC_SUBST([FAM_CFLAGS])
+AC_SUBST([FAM_LIBS])
+
+AC_ARG_ENABLE([largefile],
+	AS_HELP_STRING([--enable-largefile],
+		[enable Large file support (default: yes)]),
+	largefile=$enableval, largefile="yes")
+
+if test x"$largefile" = x"yes"; then
+  CPPFLAGS="$CPPFLAGS -D_LARGEFILE_SOURCE -D_REENTRANT -D_FILE_OFFSET_BITS=64"
+  AC_DEFINE(_LARGEFILE64_SOURCE, 1, [Whether to enable large file support])
+  AC_DEFINE(_FILE_OFFSET_BITS, 64, [File offset bits])
+fi
+
+GETTEXT_PACKAGE=pcmanfm
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
+
+dnl Add the languages which your application supports here.
+ALL_LINGUAS="zh_TW zh_CN hu fr pl it es de sw ru pt_BR ca"
+AM_GLIB_GNU_GETTEXT
+
+AC_OUTPUT([
+Makefile
+src/Makefile
+po/Makefile.in
+pcmanfm.desktop
+])
+

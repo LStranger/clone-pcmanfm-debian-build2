@@ -1,0 +1,745 @@
+# translation of pl.po to Polish
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+#
+# mazdac <mazdac@gmail.com>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-03-31 16:22+0800\n"
+"PO-Revision-Date: 2006-04-02 16:45+0100\n"
+"Last-Translator: mazdac <mazdac@gmail.com>\n"
+"Language-Team: Polish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: kwrite\n"
+"X-Poedit-Bookmarks: 19,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+#: src/main-window.c:238 src/ptk/ptk-file-browser.c:2695
+msgid "_Folder"
+msgstr "Folder"
+
+#: src/main-window.c:239 src/ptk/ptk-file-browser.c:2696
+msgid "_Text File"
+msgstr "Plik tekstowy"
+
+#: src/main-window.c:244
+msgid "New _Window"
+msgstr "Nowe okno"
+
+#: src/main-window.c:245
+msgid "New _Tab"
+msgstr "Nowa karta"
+
+#: src/main-window.c:246
+msgid "Close Tab"
+msgstr "Zamknij kartę"
+
+#: src/main-window.c:248 src/ptk/ptk-file-browser.c:2709
+msgid "_Create New"
+msgstr "Utwórz nowy"
+
+#: src/main-window.c:249
+msgid "File _Properties"
+msgstr "Właściwości"
+
+#: src/main-window.c:259 src/ptk/ptk-file-browser.c:2706
+msgid "_Delete"
+msgstr "Usuń"
+
+#: src/main-window.c:260 src/ptk/ptk-file-browser.c:2707
+msgid "_Rename"
+msgstr "Zmień nazwę"
+
+#: src/main-window.c:262
+msgid "Select _All"
+msgstr "Zaznacz wszystko"
+
+#: src/main-window.c:263
+msgid "_Invert Selection"
+msgstr "Odwróć zaznaczenie"
+
+#: src/main-window.c:270
+msgid "Go _Back"
+msgstr "Do tyłu"
+
+#: src/main-window.c:271
+msgid "Go _Forward"
+msgstr "Do przodu"
+
+#: src/main-window.c:272
+msgid "Go to _Parent Folder"
+msgstr "Do katalogu nadrzędnego"
+
+#: src/main-window.c:273
+msgid "Go _Home"
+msgstr "Do folderu domowego"
+
+#: src/main-window.c:283
+msgid "Sort by _Name"
+msgstr "Według nazwy"
+
+#: src/main-window.c:284
+msgid "Sort by _Size"
+msgstr "Według rozmiaru"
+
+#: src/main-window.c:285
+msgid "Sort by _Time"
+msgstr "Według daty "
+
+#: src/main-window.c:287
+msgid "Ascending"
+msgstr "Rosnąco"
+
+#: src/main-window.c:288
+msgid "Descending"
+msgstr "Malejąco"
+
+#: src/main-window.c:293
+msgid "_Open Side Pane"
+msgstr "Otwórz panel boczny"
+
+#: src/main-window.c:295
+msgid "Show _Location Pane"
+msgstr "Pokaż miejsca"
+
+#: src/main-window.c:296
+msgid "Show _Directory Tree"
+msgstr "Pokaż drzewo folderu"
+
+#: src/main-window.c:301
+msgid "_Refresh"
+msgstr "Odśwież"
+
+#: src/main-window.c:302
+msgid "Side _Pane"
+msgstr "Panel boczny"
+
+#: src/main-window.c:303
+msgid "_Full Screen"
+msgstr "Pełny ekran"
+
+#: src/main-window.c:305
+msgid "Show _Hidden Files"
+msgstr "Pokaż ukryte pliki"
+
+#: src/main-window.c:306
+msgid "_Sort..."
+msgstr "Sortuj..."
+
+#: src/main-window.c:308
+msgid "View as _Icons"
+msgstr "Pokaż jako ikony"
+
+#: src/main-window.c:309
+msgid "View as Detailed _List"
+msgstr "Pokaż jako wyszczególnioną listę"
+
+#: src/main-window.c:314
+msgid "Open _Terminal"
+msgstr "Otwórz w konsoli"
+
+#: src/main-window.c:322
+msgid "_File"
+msgstr "Plik"
+
+#: src/main-window.c:323
+msgid "_Edit"
+msgstr "Edytuj"
+
+#: src/main-window.c:324
+msgid "_Go"
+msgstr "Idź"
+
+#: src/main-window.c:325
+msgid "_Bookmark"
+msgstr "Zakładki"
+
+#: src/main-window.c:326
+msgid "_View"
+msgstr "Widok"
+
+#: src/main-window.c:327
+msgid "_Tool"
+msgstr "Narzędzia"
+
+#: src/main-window.c:328
+msgid "_Help"
+msgstr "Pomoc"
+
+#: src/main-window.c:335
+msgid "New Tab"
+msgstr "Nowa karta"
+
+#: src/main-window.c:336
+msgid "Back"
+msgstr "Wstecz"
+
+#: src/main-window.c:337
+msgid "Forward"
+msgstr "Do przodu"
+
+#: src/main-window.c:338
+msgid "Parent Folder"
+msgstr "Folder nadrzędny"
+
+#: src/main-window.c:339
+msgid "Refresh"
+msgstr "Odśwież"
+
+#: src/main-window.c:340
+msgid "Home Directory"
+msgstr "Folder domowy"
+
+#: src/main-window.c:341
+msgid "Open Side Pane"
+msgstr "Otwórz w nowej karcie"
+
+#: src/main-window.c:346
+msgid "Go"
+msgstr "Idź"
+
+#: src/main-window.c:419
+msgid "A_ddress:"
+msgstr "Ścieżka:"
+
+#: src/main-window.c:442
+msgid "Warning: You are in super user mode"
+msgstr "Ostrzeżenie: Jesteś w trybie super użytkownika"
+
+#. TRANSLATORS: Replace this string with your names, one name per line.
+#: src/main-window.c:772
+msgid "translator-credits"
+msgstr "mazdac <mazdac@gmail.com>"
+
+#: src/main-window.c:777
+msgid "PCMan File Manager"
+msgstr "Menadżer plików PCMan"
+
+#: src/main-window.c:778
+msgid "Copyright (C) 2005 - 2006"
+msgstr "Copyright (C) 2005 - 2006"
+
+#: src/main-window.c:779
+msgid ""
+"Lightweight file manager\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+msgstr ""
+"Lekki menadżer plików\n"
+"\n"
+"Rozwijany przez Hon Jen Yee (PCMan)"
+
+#: src/main-window.c:1266
+msgid "Terminal program has not been set"
+msgstr "Program konsoli nie został jeszcze ustawiony"
+
+#: src/main-window.c:1354
+msgid "_Add to Bookmarks"
+msgstr "Dodaj do zakładek"
+
+#: src/main-window.c:1355
+msgid "_Edit Bookmarks"
+msgstr "Edytuj zakładki"
+
+#: src/main-window.c:1434
+msgid "Loading..."
+msgstr "Ładowanie..."
+
+#: src/main-window.c:1629
+#, c-format
+msgid "%d item selected (%s)"
+msgid_plural "%d items selected (%s)"
+msgstr[0] "%d zaznaczony (%s)"
+msgstr[1] "%d zaznaczone (%s)"
+msgstr[2] "%d zaznaczonych (%s)"
+
+#: src/main-window.c:1636
+#, c-format
+msgid "%d visible item (%d hidden)"
+msgid_plural "%d visible items (%d hidden)"
+msgstr[0] "%d widoczny (%d ukrytych)"
+msgstr[1] "%d widoczne (%d ukrytych)"
+msgstr[2] "%d widocznych (%d ukrytych)"
+
+#: src/ptk/ptk-file-browser.c:561
+msgid "Directory does'nt exist!"
+msgstr "Folder nie istnieje!"
+
+#: src/ptk/ptk-file-browser.c:1743 src/edit-bookmarks.c:160
+msgid "Name"
+msgstr "Nazwa"
+
+#: src/ptk/ptk-file-browser.c:1743
+msgid "Size"
+msgstr "Rozmiar"
+
+#: src/ptk/ptk-file-browser.c:1743
+msgid "Type"
+msgstr "Typ"
+
+#: src/ptk/ptk-file-browser.c:1744
+msgid "Permission"
+msgstr "Uprawnienia"
+
+#: src/ptk/ptk-file-browser.c:1744
+msgid "Owner:Group"
+msgstr "Właściciel:Grupa"
+
+#: src/ptk/ptk-file-browser.c:1744
+msgid "Last Modification"
+msgstr "Ostatnia modyfikacja"
+
+#: src/ptk/ptk-file-browser.c:2250
+msgid "Rename File"
+msgstr "Zmień nazwę pliku"
+
+#: src/ptk/ptk-file-browser.c:2251
+msgid "Please input new file name:"
+msgstr "Proszę wprowadzić nową nazwę pliku:"
+
+#: src/ptk/ptk-file-browser.c:2269 src/ptk/ptk-file-browser.c:3364
+msgid ""
+"The file name you specified has existed.\n"
+"Please input a new one:"
+msgstr ""
+"Nazwa którą wprowadziłeś już istnieje.\n"
+"Wprowadź nową nazwę:"
+
+#: src/ptk/ptk-file-browser.c:2488
+msgid "Really delete selected files?"
+msgstr "Na pewno chcesz usunąć zaznaczone pliki?"
+
+#: src/ptk/ptk-file-browser.c:2701
+msgid "Open _with..."
+msgstr "Otwórz w..."
+
+#: src/ptk/ptk-file-browser.c:2710
+msgid "_Properties"
+msgstr "Właściwości"
+
+#: src/ptk/ptk-file-browser.c:2788
+msgid "Open in New _Tab"
+msgstr "Otwórz w nowej karcie"
+
+#: src/ptk/ptk-file-browser.c:2796
+msgid "Open in New Window"
+msgstr "Otwórz w nowym oknie"
+
+#: src/ptk/ptk-file-browser.c:2804
+msgid "Open in Terminal"
+msgstr "Otwórz w konsoli"
+
+#: src/ptk/ptk-file-browser.c:2893
+msgid "_Open with another program"
+msgstr "Otwórz inną aplikacją"
+
+#: src/ptk/ptk-file-browser.c:2905
+msgid "E_xecute"
+msgstr "Wykonanie"
+
+#: src/ptk/ptk-file-browser.c:2911
+#, c-format
+msgid "_Open with \"%s\""
+msgstr "Otwórz w \"%s\""
+
+#: src/ptk/ptk-file-browser.c:2917 src/ptk/ptk-file-browser.c:2926
+msgid "_Open"
+msgstr "Otwórz"
+
+#: src/ptk/ptk-file-browser.c:3338 src/ptk/ptk-file-browser.c:3340
+msgid "New Folder"
+msgstr "Nowy folder"
+
+#: src/ptk/ptk-file-browser.c:3339
+msgid "Input a name for the new folder:"
+msgstr "Wprowadź nazwę dla nowego folderu:"
+
+#: src/ptk/ptk-file-browser.c:3344 src/ptk/ptk-file-browser.c:3346
+msgid "New File"
+msgstr "Nowy plik"
+
+#: src/ptk/ptk-file-browser.c:3345
+msgid "Input a name for the new file:"
+msgstr "Wprowadź nazwę dla nowego pliku:"
+
+#: src/ptk/ptk-file-browser.c:3485
+msgid "Location"
+msgstr "Miejsca"
+
+#: src/ptk/ptk-file-browser.c:3486
+msgid "Directory Tree"
+msgstr "Drzewo folderu"
+
+#: src/ptk/ptk-location-view.c:229
+msgid "Desktop"
+msgstr "Pulpit"
+
+#: src/file-properties-ui.c:81
+msgid "File Properties"
+msgstr "Właściwości:"
+
+#: src/file-properties-ui.c:101
+msgid "File Name:"
+msgstr "Nazwa pliku: "
+
+#: src/file-properties-ui.c:108
+msgid "File Type:"
+msgstr "Typ pliku: "
+
+#: src/file-properties-ui.c:115
+msgid "Total Size of Files:"
+msgstr "Całkowity rozmiar plików:"
+
+#: src/file-properties-ui.c:122
+msgid "Last Modification:"
+msgstr "Ostatnia modyfikacja:"
+
+#: src/file-properties-ui.c:156
+msgid "Last Access:"
+msgstr "Ostatni dostęp:"
+
+#: src/file-properties-ui.c:170
+msgid "Location:"
+msgstr "Położenie:"
+
+#: src/file-properties-ui.c:192
+msgid "Size on Disk:"
+msgstr "Rozmiar na dysku"
+
+#: src/file-properties-ui.c:208 src/pref-dialog-ui.c:157
+msgid "_General"
+msgstr "Ogólne"
+
+#: src/file-properties-ui.c:223 src/file-properties-ui.c:258
+msgid "Owner:"
+msgstr "Właściciel:"
+
+#: src/file-properties-ui.c:229 src/file-properties-ui.c:265
+msgid "Group:"
+msgstr "Grupa:"
+
+#: src/file-properties-ui.c:272
+msgid "Other Users:"
+msgstr "Inni użytkownicy:"
+
+#: src/file-properties-ui.c:279 src/file-properties-ui.c:286
+#: src/file-properties-ui.c:293
+msgid "Read"
+msgstr "Odczyt"
+
+#: src/file-properties-ui.c:300 src/file-properties-ui.c:307
+#: src/file-properties-ui.c:314
+msgid "Write"
+msgstr "Zapis"
+
+#: src/file-properties-ui.c:321 src/file-properties-ui.c:328
+#: src/file-properties-ui.c:335
+msgid "Execute"
+msgstr "Wykonanie"
+
+#. This is used in file attribute
+#: src/file-properties-ui.c:343
+msgid "Set UID"
+msgstr "Ustaw UID"
+
+#. This is used in file attribute
+#: src/file-properties-ui.c:351
+msgid "Set GID"
+msgstr "Ustaw GID"
+
+#. This is used in file attribute
+#: src/file-properties-ui.c:359
+msgid "Sticky"
+msgstr "Przyklejony"
+
+#: src/file-properties-ui.c:372
+msgid "_Permissions"
+msgstr "Uprawnienia"
+
+#: src/file-properties.c:163
+msgid "Multiple files are selected"
+msgstr "Zaznaczono wiele plików"
+
+#: src/file-properties.c:229
+msgid "Multiple files of different types"
+msgstr "Wiele plików różnych typów"
+
+#. The total file size displayed in "File Properties" is not
+#. completely calculated yet. So "Calculating..." is displayed.
+#: src/file-properties.c:309
+msgid "Calculating..."
+msgstr "Oblicznie..."
+
+#: src/file-properties.c:454
+msgid "Invalid User"
+msgstr "Niewłaściwy użytkownik"
+
+#: src/file-properties.c:462
+msgid "Invalid Group"
+msgstr "Niewłaściwa grupa"
+
+#: src/file-properties.c:494
+msgid ""
+"Do you want to recursively apply these changes to all files and sub-folders?"
+msgstr ""
+"Chcesz zastosować te zmiany rekursywnie do wszystkich podrzędnych plików i "
+"folderów?"
+
+#: src/file-operation.c:127
+msgid "Cancel the operation?"
+msgstr "Anulować operację?"
+
+#. Ask the user whether to overwrite dir content or not
+#: src/file-operation.c:214
+msgid "Do you want to overwrite the folder and its content?"
+msgstr "Chcesz zamienić folder i jego zawartość?"
+
+#. Ask the user whether to overwrite the file or not
+#: src/file-operation.c:218
+msgid "Do you want to overwrite this file?"
+msgstr "Chcesz zamienić ten plik?"
+
+#. Rename is required
+#: src/file-operation.c:222
+msgid "Please choose a new file name."
+msgstr "Proszę wybrać nową nazwę pliku"
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
+#: src/file-operation.c:229
+#, c-format
+msgid ""
+"\"%s\" has existed.\n"
+"\n"
+"%s"
+msgstr ""
+"\"%s\" istnieje.\n"
+"\n"
+"%s"
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#: src/file-operation.c:233
+#, c-format
+msgid ""
+"\"%s\"\n"
+"\n"
+"Destination and source are the same file.\n"
+"\n"
+"%s"
+msgstr ""
+"\"%s\"\n"
+"\n"
+"Plik źródłowy jest tym samym plikiem co docelowy.\n"
+"\n"
+"%s"
+
+#: src/file-operation.c:246
+msgid "Overwrite"
+msgstr "Zamień"
+
+#: src/file-operation.c:247
+msgid "Overwrite All"
+msgstr "Zamień wszystkie"
+
+#: src/file-operation.c:252
+msgid "Rename"
+msgstr "Zmień nazwę"
+
+#: src/file-operation.c:253
+msgid "Skip"
+msgstr "Pomiń"
+
+#: src/file-operation.c:254
+msgid "Skip All"
+msgstr "Pomiń wszystkie"
+
+#: src/file-operation.c:847
+msgid "Move: "
+msgstr "Przenieś: "
+
+#: src/file-operation.c:847
+msgid "Copy: "
+msgstr "Kopiuj: "
+
+#: src/file-operation.c:847
+msgid "Delete: "
+msgstr "Usuń: "
+
+#: src/file-operation.c:847
+msgid "Link: "
+msgstr "Dowiąż: "
+
+#: src/file-operation.c:847
+msgid "Change Properties: "
+msgstr "Zmień właściwości:"
+
+#: src/file-operation.c:848
+msgid "Moving..."
+msgstr "Przenoszenie..."
+
+#: src/file-operation.c:848
+msgid "Copying..."
+msgstr "Kopiowanie..."
+
+#: src/file-operation.c:848
+msgid "Deleting..."
+msgstr "Usuwanie..."
+
+#: src/file-operation.c:848
+msgid "Linking..."
+msgstr "Dowiązywanie..."
+
+#: src/file-operation.c:848
+msgid "Changing Properties"
+msgstr "Zmienianie właściwości"
+
+#. The first %s is file name, and the second is
+#. detailed error message.  Their order shouldn't be changed
+#: src/file-operation.c:1141
+#, c-format
+msgid ""
+"File operation failed.\n"
+"\n"
+"Unable to process \"%s\"\n"
+"\n"
+"%s"
+msgstr ""
+"Nie można przeprowadzić operacji na pliku.\n"
+"\n"
+"Nie można kontynuować \"%s\"\n"
+"\n"
+"%s"
+
+#: src/file-operation-ui.c:68
+msgid "Progress: "
+msgstr "Postęp :"
+
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: src/file-operation-ui.c:77
+msgid "To: "
+msgstr "Do :"
+
+#. Processing: <Name of currently proccesed file>
+#: src/file-operation-ui.c:85
+msgid "Processing: "
+msgstr "Przeprowadzanie operacji: "
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#.
+#: src/file-operation-ui.c:101
+msgid "Preparing..."
+msgstr "Przygotowywanie..."
+
+#: src/pref-dialog-ui.c:60
+msgid "Preference"
+msgstr "Preferencje"
+
+#: src/pref-dialog-ui.c:81
+msgid "On-disk file name encoding:"
+msgstr "Kodowanie nazw plików"
+
+#: src/pref-dialog-ui.c:97
+msgid "Bookmarks:"
+msgstr "Zakładki:"
+
+#: src/pref-dialog-ui.c:104
+msgid "Opened in Current Tab"
+msgstr "Otwórz w aktualnej karcie"
+
+#: src/pref-dialog-ui.c:105
+msgid "Opened in New Tab"
+msgstr "Otwórz w nowej karcie"
+
+#: src/pref-dialog-ui.c:106
+msgid "Opened in New Window"
+msgstr "Otwórz w nowym oknie"
+
+#: src/pref-dialog-ui.c:113
+msgid "Icon Theme (Need Restart):"
+msgstr "Motyw ikon (wymagany restart)"
+
+#: src/pref-dialog-ui.c:121
+msgid "Display image files with supported format as thumbnails"
+msgstr "Wyświetl obrazki obsługiwanych plików w miniaturkach"
+
+#: src/pref-dialog-ui.c:130
+msgid "Max size of files displayed as thumbnails:"
+msgstr "Maksymalny rozmiar plików wyświetlanych w miniaturkach"
+
+#: src/pref-dialog-ui.c:149
+msgid "Terminal:"
+msgstr "Konsola:"
+
+#: src/edit-bookmarks.c:52
+msgid "New Item"
+msgstr "Nowy plik"
+
+#: src/edit-bookmarks.c:118
+msgid "Edit Bookmarks"
+msgstr "Edytuj zakładki"
+
+#: src/edit-bookmarks.c:169
+msgid "Path"
+msgstr "Ścieżka"
+
+#: src/edit-bookmarks.c:192
+msgid "Use drag & drop to sort the items"
+msgstr "Użyj techniki \"podnieś i upuść\" aby posortować"
+
+#: src/app-chooser-dialog-ui.c:61
+msgid "Choose an Application"
+msgstr "Wybierz aplikację"
+
+#: src/app-chooser-dialog-ui.c:73
+msgid "File Type To be Opened:"
+msgstr "Typ pliku do otwarcia:"
+
+#: src/app-chooser-dialog-ui.c:82
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr ""
+"Proszę wybrać aplikację z lity lub wprowadzić ją ręcznie w linii komend"
+
+#: src/app-chooser-dialog-ui.c:103
+msgid "Recommended Applications"
+msgstr "Zalecane aplikacje"
+
+#: src/app-chooser-dialog-ui.c:118
+msgid "All Applications"
+msgstr "Wszystkie apliakcje"
+
+#: src/app-chooser-dialog-ui.c:127
+msgid "Command Line: "
+msgstr "Linia komend: "
+
+#: src/app-chooser-dialog-ui.c:152
+msgid "_Browse"
+msgstr "Przeglądaj"
+
+#: src/app-chooser-dialog-ui.c:161
+msgid "Opened in Terminal"
+msgstr "Otwórz w konsoli"
+
+#: src/app-chooser-dialog-ui.c:166
+msgid "Set selected application to default action"
+msgstr "Ustaw wybraną aplikację jako domyślną akcję"
+
+#~ msgid "Trash"
+#~ msgstr "Kosz"
+
+#~ msgid "Edit Bookmark"
+#~ msgstr "Edytuj zakładkę"
+
+#~ msgid "Add to Bookmarks"
+#~ msgstr "Dodaj do zakładek"
+
+#~ msgid "Enter new directory path:"
+#~ msgstr "Wprowadź ścieżkę nowego katalogu"

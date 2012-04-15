@@ -1,0 +1,741 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PCMan File Manager 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-03-31 16:22+0800\n"
+"PO-Revision-Date: 2006-03-05 10:30+0800\n"
+"Last-Translator: 洪任諭\n"
+"Language-Team: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: TAIWAN\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/main-window.c:238 src/ptk/ptk-file-browser.c:2695
+msgid "_Folder"
+msgstr "資料夾(_F)"
+
+#: src/main-window.c:239 src/ptk/ptk-file-browser.c:2696
+msgid "_Text File"
+msgstr "文字檔(_T)"
+
+#: src/main-window.c:244
+msgid "New _Window"
+msgstr "新視窗(_W)"
+
+#: src/main-window.c:245
+msgid "New _Tab"
+msgstr "新分頁(_T)"
+
+#: src/main-window.c:246
+msgid "Close Tab"
+msgstr "關閉分頁"
+
+#: src/main-window.c:248 src/ptk/ptk-file-browser.c:2709
+msgid "_Create New"
+msgstr "新建"
+
+#: src/main-window.c:249
+msgid "File _Properties"
+msgstr "檔案內容(_P)"
+
+#: src/main-window.c:259 src/ptk/ptk-file-browser.c:2706
+msgid "_Delete"
+msgstr "刪除(_D)"
+
+#: src/main-window.c:260 src/ptk/ptk-file-browser.c:2707
+msgid "_Rename"
+msgstr "重新命名"
+
+#: src/main-window.c:262
+msgid "Select _All"
+msgstr "全選(_A)"
+
+#: src/main-window.c:263
+msgid "_Invert Selection"
+msgstr "反相選取(_I)"
+
+#: src/main-window.c:270
+msgid "Go _Back"
+msgstr "上一頁(_B)"
+
+#: src/main-window.c:271
+msgid "Go _Forward"
+msgstr "下一頁(_F)"
+
+#: src/main-window.c:272
+msgid "Go to _Parent Folder"
+msgstr "上一層目錄(_P)"
+
+#: src/main-window.c:273
+msgid "Go _Home"
+msgstr "個人資料夾(_H)"
+
+#: src/main-window.c:283
+msgid "Sort by _Name"
+msgstr "依名稱排序(_N)"
+
+#: src/main-window.c:284
+msgid "Sort by _Size"
+msgstr "依檔案大小排序(_S)"
+
+#: src/main-window.c:285
+msgid "Sort by _Time"
+msgstr "依時間排序(_T)"
+
+#: src/main-window.c:287
+msgid "Ascending"
+msgstr "遞增"
+
+#: src/main-window.c:288
+msgid "Descending"
+msgstr "遞減"
+
+#: src/main-window.c:293
+msgid "_Open Side Pane"
+msgstr "開啟側邊欄(_O)"
+
+#: src/main-window.c:295
+msgid "Show _Location Pane"
+msgstr "顯示位置欄(_L)"
+
+#: src/main-window.c:296
+msgid "Show _Directory Tree"
+msgstr "顯示樹狀目錄"
+
+#: src/main-window.c:301
+msgid "_Refresh"
+msgstr "重新整理(_R)"
+
+#: src/main-window.c:302
+msgid "Side _Pane"
+msgstr "側邊欄(_P)"
+
+#: src/main-window.c:303
+msgid "_Full Screen"
+msgstr "全螢幕(_F)"
+
+#: src/main-window.c:305
+msgid "Show _Hidden Files"
+msgstr "顯示隱藏檔(_H)"
+
+#: src/main-window.c:306
+msgid "_Sort..."
+msgstr "排序...(_S)"
+
+#: src/main-window.c:308
+msgid "View as _Icons"
+msgstr "圖示檢視(_I)"
+
+#: src/main-window.c:309
+msgid "View as Detailed _List"
+msgstr "詳細清單檢視(_L)"
+
+#: src/main-window.c:314
+msgid "Open _Terminal"
+msgstr "開啟終端機(_T)"
+
+#: src/main-window.c:322
+msgid "_File"
+msgstr "檔案(_F)"
+
+#: src/main-window.c:323
+msgid "_Edit"
+msgstr "編輯(_E)"
+
+#: src/main-window.c:324
+msgid "_Go"
+msgstr "前往(_G)"
+
+#: src/main-window.c:325
+msgid "_Bookmark"
+msgstr "書籤(_B)"
+
+#: src/main-window.c:326
+msgid "_View"
+msgstr "檢視(_V)"
+
+#: src/main-window.c:327
+msgid "_Tool"
+msgstr "工具(_T)"
+
+#: src/main-window.c:328
+msgid "_Help"
+msgstr "說明(_H)"
+
+#: src/main-window.c:335
+msgid "New Tab"
+msgstr "新分頁"
+
+#: src/main-window.c:336
+msgid "Back"
+msgstr "上一頁"
+
+#: src/main-window.c:337
+msgid "Forward"
+msgstr "下一頁"
+
+#: src/main-window.c:338
+msgid "Parent Folder"
+msgstr "上一層"
+
+#: src/main-window.c:339
+msgid "Refresh"
+msgstr "重新整理"
+
+#: src/main-window.c:340
+msgid "Home Directory"
+msgstr "個人資料夾"
+
+#: src/main-window.c:341
+msgid "Open Side Pane"
+msgstr "開啟側邊欄"
+
+#: src/main-window.c:346
+msgid "Go"
+msgstr "前往"
+
+#: src/main-window.c:419
+msgid "A_ddress:"
+msgstr "位址(_D)"
+
+#: src/main-window.c:442
+msgid "Warning: You are in super user mode"
+msgstr "警告： 你正在以超級使用者模式 (root) 執行"
+
+#. TRANSLATORS: Replace this string with your names, one name per line.
+#: src/main-window.c:772
+msgid "translator-credits"
+msgstr "洪任諭 (PCMan) <pcman.tw@gmail.com>"
+
+#: src/main-window.c:777
+msgid "PCMan File Manager"
+msgstr "PCMan 檔案管理員"
+
+#: src/main-window.c:778
+msgid "Copyright (C) 2005 - 2006"
+msgstr "版權 (C) 2005 - 2006"
+
+#: src/main-window.c:779
+msgid ""
+"Lightweight file manager\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+msgstr ""
+"輕巧的檔案管理員\n"
+"\n"
+"由洪任諭 (PCMan) 開發"
+
+#: src/main-window.c:1266
+msgid "Terminal program has not been set"
+msgstr "終端機程式尚未設定"
+
+#: src/main-window.c:1354
+msgid "_Add to Bookmarks"
+msgstr "新增到書籤 (_A)"
+
+#: src/main-window.c:1355
+msgid "_Edit Bookmarks"
+msgstr "編輯書籤(_E)"
+
+#: src/main-window.c:1434
+msgid "Loading..."
+msgstr "載入中..."
+
+#: src/main-window.c:1629
+#, c-format
+msgid "%d item selected (%s)"
+msgid_plural "%d items selected (%s)"
+msgstr[0] "%d 個項目被選取 (%s)"
+
+#: src/main-window.c:1636
+#, c-format
+msgid "%d visible item (%d hidden)"
+msgid_plural "%d visible items (%d hidden)"
+msgstr[0] "%d 個可見的項目 (%d 個隱藏)"
+
+#: src/ptk/ptk-file-browser.c:561
+msgid "Directory does'nt exist!"
+msgstr "目錄不存在!"
+
+#: src/ptk/ptk-file-browser.c:1743 src/edit-bookmarks.c:160
+msgid "Name"
+msgstr "名稱"
+
+#: src/ptk/ptk-file-browser.c:1743
+msgid "Size"
+msgstr "大小"
+
+#: src/ptk/ptk-file-browser.c:1743
+msgid "Type"
+msgstr "型態"
+
+#: src/ptk/ptk-file-browser.c:1744
+msgid "Permission"
+msgstr "權限"
+
+#: src/ptk/ptk-file-browser.c:1744
+msgid "Owner:Group"
+msgstr "擁有者：群組"
+
+#: src/ptk/ptk-file-browser.c:1744
+msgid "Last Modification"
+msgstr "最後修改"
+
+#: src/ptk/ptk-file-browser.c:2250
+msgid "Rename File"
+msgstr "重新命名"
+
+#: src/ptk/ptk-file-browser.c:2251
+msgid "Please input new file name:"
+msgstr "請輸入新檔案的名稱："
+
+#: src/ptk/ptk-file-browser.c:2269 src/ptk/ptk-file-browser.c:3364
+msgid ""
+"The file name you specified has existed.\n"
+"Please input a new one:"
+msgstr ""
+"指定的檔案名稱已經存在\n"
+"請輸入一個新的名稱："
+
+#: src/ptk/ptk-file-browser.c:2488
+msgid "Really delete selected files?"
+msgstr "確定刪除檔案？"
+
+#: src/ptk/ptk-file-browser.c:2701
+msgid "Open _with..."
+msgstr "開啟檔案..."
+
+#: src/ptk/ptk-file-browser.c:2710
+msgid "_Properties"
+msgstr "內容(_P)"
+
+#: src/ptk/ptk-file-browser.c:2788
+msgid "Open in New _Tab"
+msgstr "在新分頁內開啟"
+
+#: src/ptk/ptk-file-browser.c:2796
+msgid "Open in New Window"
+msgstr "在新視窗內開啟"
+
+#: src/ptk/ptk-file-browser.c:2804
+msgid "Open in Terminal"
+msgstr "在終端機中開啟"
+
+#: src/ptk/ptk-file-browser.c:2893
+msgid "_Open with another program"
+msgstr "用其他程式開啟檔案..."
+
+#: src/ptk/ptk-file-browser.c:2905
+msgid "E_xecute"
+msgstr "執行(_X)"
+
+#: src/ptk/ptk-file-browser.c:2911
+#, c-format
+msgid "_Open with \"%s\""
+msgstr "以 \"%s\" 開啟(_O)"
+
+#: src/ptk/ptk-file-browser.c:2917 src/ptk/ptk-file-browser.c:2926
+msgid "_Open"
+msgstr "開啟(_O)"
+
+#: src/ptk/ptk-file-browser.c:3338 src/ptk/ptk-file-browser.c:3340
+msgid "New Folder"
+msgstr "新資料夾"
+
+#: src/ptk/ptk-file-browser.c:3339
+msgid "Input a name for the new folder:"
+msgstr "請輸入新資料夾的名稱："
+
+#: src/ptk/ptk-file-browser.c:3344 src/ptk/ptk-file-browser.c:3346
+msgid "New File"
+msgstr "新文字檔"
+
+#: src/ptk/ptk-file-browser.c:3345
+msgid "Input a name for the new file:"
+msgstr "請輸入新檔案的名稱："
+
+#: src/ptk/ptk-file-browser.c:3485
+msgid "Location"
+msgstr "位置"
+
+#: src/ptk/ptk-file-browser.c:3486
+msgid "Directory Tree"
+msgstr "樹狀目錄"
+
+#: src/ptk/ptk-location-view.c:229
+msgid "Desktop"
+msgstr "桌面"
+
+#: src/file-properties-ui.c:81
+msgid "File Properties"
+msgstr "檔案屬性"
+
+#: src/file-properties-ui.c:101
+msgid "File Name:"
+msgstr "檔案名稱："
+
+#: src/file-properties-ui.c:108
+msgid "File Type:"
+msgstr "檔案類型："
+
+#: src/file-properties-ui.c:115
+msgid "Total Size of Files:"
+msgstr "檔案大小總計："
+
+#: src/file-properties-ui.c:122
+msgid "Last Modification:"
+msgstr "最後修改："
+
+#: src/file-properties-ui.c:156
+msgid "Last Access:"
+msgstr "最後存取："
+
+#: src/file-properties-ui.c:170
+msgid "Location:"
+msgstr "位置："
+
+#: src/file-properties-ui.c:192
+msgid "Size on Disk:"
+msgstr "磁碟上的大小："
+
+#: src/file-properties-ui.c:208 src/pref-dialog-ui.c:157
+msgid "_General"
+msgstr "一般(_G)"
+
+#: src/file-properties-ui.c:223 src/file-properties-ui.c:258
+msgid "Owner:"
+msgstr "擁有者："
+
+#: src/file-properties-ui.c:229 src/file-properties-ui.c:265
+msgid "Group:"
+msgstr "群組："
+
+#: src/file-properties-ui.c:272
+msgid "Other Users:"
+msgstr "其他使用者："
+
+#: src/file-properties-ui.c:279 src/file-properties-ui.c:286
+#: src/file-properties-ui.c:293
+msgid "Read"
+msgstr "讀取"
+
+#: src/file-properties-ui.c:300 src/file-properties-ui.c:307
+#: src/file-properties-ui.c:314
+msgid "Write"
+msgstr "寫入"
+
+#: src/file-properties-ui.c:321 src/file-properties-ui.c:328
+#: src/file-properties-ui.c:335
+msgid "Execute"
+msgstr "執行"
+
+#. This is used in file attribute
+#: src/file-properties-ui.c:343
+msgid "Set UID"
+msgstr ""
+
+#. This is used in file attribute
+#: src/file-properties-ui.c:351
+msgid "Set GID"
+msgstr ""
+
+#. This is used in file attribute
+#: src/file-properties-ui.c:359
+msgid "Sticky"
+msgstr ""
+
+#: src/file-properties-ui.c:372
+msgid "_Permissions"
+msgstr "權限(_P)"
+
+#: src/file-properties.c:163
+msgid "Multiple files are selected"
+msgstr "多個檔案同時被選取"
+
+#: src/file-properties.c:229
+msgid "Multiple files of different types"
+msgstr "多種不同類型的檔案"
+
+#. The total file size displayed in "File Properties" is not
+#. completely calculated yet. So "Calculating..." is displayed.
+#: src/file-properties.c:309
+msgid "Calculating..."
+msgstr "計算中..."
+
+#: src/file-properties.c:454
+msgid "Invalid User"
+msgstr "無效的使用者"
+
+#: src/file-properties.c:462
+msgid "Invalid Group"
+msgstr "無效的群組"
+
+#: src/file-properties.c:494
+msgid ""
+"Do you want to recursively apply these changes to all files and sub-folders?"
+msgstr "你是否要將變更套用到目錄下所有檔案和子目錄？"
+
+#: src/file-operation.c:127
+msgid "Cancel the operation?"
+msgstr "取消這項操作？"
+
+#. Ask the user whether to overwrite dir content or not
+#: src/file-operation.c:214
+msgid "Do you want to overwrite the folder and its content?"
+msgstr "你想要覆寫這個資料夾，以及資料夾內的所有內容嗎？"
+
+#. Ask the user whether to overwrite the file or not
+#: src/file-operation.c:218
+msgid "Do you want to overwrite this file?"
+msgstr "你想要覆寫這個檔案嗎？"
+
+#. Rename is required
+#: src/file-operation.c:222
+msgid "Please choose a new file name."
+msgstr "請輸入新的檔案名稱"
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
+#: src/file-operation.c:229
+#, c-format
+msgid ""
+"\"%s\" has existed.\n"
+"\n"
+"%s"
+msgstr ""
+"\"%s\" 已經存在\n"
+"\n"
+"%s"
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#: src/file-operation.c:233
+#, c-format
+msgid ""
+"\"%s\"\n"
+"\n"
+"Destination and source are the same file.\n"
+"\n"
+"%s"
+msgstr ""
+"\"%s\"\n"
+"\n"
+"目標和來源為同一檔案\n"
+"\n"
+"%s"
+
+#: src/file-operation.c:246
+msgid "Overwrite"
+msgstr "覆寫"
+
+#: src/file-operation.c:247
+msgid "Overwrite All"
+msgstr "全部覆寫"
+
+#: src/file-operation.c:252
+msgid "Rename"
+msgstr "重新命名"
+
+#: src/file-operation.c:253
+msgid "Skip"
+msgstr "略過"
+
+#: src/file-operation.c:254
+msgid "Skip All"
+msgstr "全部略過"
+
+#: src/file-operation.c:847
+msgid "Move: "
+msgstr "移動："
+
+#: src/file-operation.c:847
+msgid "Copy: "
+msgstr "複製："
+
+#: src/file-operation.c:847
+msgid "Delete: "
+msgstr "刪除："
+
+#: src/file-operation.c:847
+msgid "Link: "
+msgstr "建立連結："
+
+#: src/file-operation.c:847
+msgid "Change Properties: "
+msgstr "改變檔案屬性："
+
+#: src/file-operation.c:848
+msgid "Moving..."
+msgstr "正在移動..."
+
+#: src/file-operation.c:848
+msgid "Copying..."
+msgstr "正在複製..."
+
+#: src/file-operation.c:848
+msgid "Deleting..."
+msgstr "正在刪除..."
+
+#: src/file-operation.c:848
+msgid "Linking..."
+msgstr "正在建立連結..."
+
+#: src/file-operation.c:848
+msgid "Changing Properties"
+msgstr "改變檔案屬性"
+
+#. The first %s is file name, and the second is
+#. detailed error message.  Their order shouldn't be changed
+#: src/file-operation.c:1141
+#, c-format
+msgid ""
+"File operation failed.\n"
+"\n"
+"Unable to process \"%s\"\n"
+"\n"
+"%s"
+msgstr ""
+"檔案操作失敗\n"
+"\n"
+"無法處理 \"%s\"\n"
+"\n"
+"%s"
+
+#: src/file-operation-ui.c:68
+msgid "Progress: "
+msgstr "進度："
+
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: src/file-operation-ui.c:77
+msgid "To: "
+msgstr "到："
+
+#. Processing: <Name of currently proccesed file>
+#: src/file-operation-ui.c:85
+msgid "Processing: "
+msgstr "正在處理："
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#.
+#: src/file-operation-ui.c:101
+msgid "Preparing..."
+msgstr "準備中..."
+
+#: src/pref-dialog-ui.c:60
+msgid "Preference"
+msgstr "偏好設定"
+
+#: src/pref-dialog-ui.c:81
+msgid "On-disk file name encoding:"
+msgstr "磁碟上的檔案名稱編碼："
+
+#: src/pref-dialog-ui.c:97
+msgid "Bookmarks:"
+msgstr "書籤："
+
+#: src/pref-dialog-ui.c:104
+msgid "Opened in Current Tab"
+msgstr "在目前分頁內開啟"
+
+#: src/pref-dialog-ui.c:105
+msgid "Opened in New Tab"
+msgstr "在新分頁內開啟"
+
+#: src/pref-dialog-ui.c:106
+msgid "Opened in New Window"
+msgstr "在新視窗內開啟"
+
+#: src/pref-dialog-ui.c:113
+msgid "Icon Theme (Need Restart):"
+msgstr "圖示佈景主題 (需重新啟動)"
+
+#: src/pref-dialog-ui.c:121
+msgid "Display image files with supported format as thumbnails"
+msgstr "以縮圖顯示可支援的圖檔格式"
+
+#: src/pref-dialog-ui.c:130
+msgid "Max size of files displayed as thumbnails:"
+msgstr "可用縮圖顯示的最大檔案大小："
+
+#: src/pref-dialog-ui.c:149
+msgid "Terminal:"
+msgstr "終端機："
+
+#: src/edit-bookmarks.c:52
+#, fuzzy
+msgid "New Item"
+msgstr "新文字檔"
+
+#: src/edit-bookmarks.c:118
+msgid "Edit Bookmarks"
+msgstr "編輯書籤"
+
+#: src/edit-bookmarks.c:169
+msgid "Path"
+msgstr "路徑"
+
+#: src/edit-bookmarks.c:192
+msgid "Use drag & drop to sort the items"
+msgstr "使用滑鼠拖曳來排序書籤項目"
+
+#: src/app-chooser-dialog-ui.c:61
+msgid "Choose an Application"
+msgstr "選擇應用程式"
+
+#: src/app-chooser-dialog-ui.c:73
+msgid "File Type To be Opened:"
+msgstr "開啟的檔案類型："
+
+#: src/app-chooser-dialog-ui.c:82
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr "請從下列清單中選取一個應用程式，或是手動輸入命令列："
+
+#: src/app-chooser-dialog-ui.c:103
+msgid "Recommended Applications"
+msgstr "建議的應用程式"
+
+#: src/app-chooser-dialog-ui.c:118
+msgid "All Applications"
+msgstr "所有應用程式"
+
+#: src/app-chooser-dialog-ui.c:127
+msgid "Command Line: "
+msgstr "命令列："
+
+#: src/app-chooser-dialog-ui.c:152
+msgid "_Browse"
+msgstr "瀏覽(_B)"
+
+#: src/app-chooser-dialog-ui.c:161
+msgid "Opened in Terminal"
+msgstr "在終端機中開啟"
+
+#: src/app-chooser-dialog-ui.c:166
+msgid "Set selected application to default action"
+msgstr "預設用選擇的應用程式開啟"
+
+#~ msgid "Icon Theme:"
+#~ msgstr "圖示佈景主題："
+
+#~ msgid "Trash"
+#~ msgstr "垃圾桶"
+
+#~ msgid "Edit Bookmark"
+#~ msgstr "編輯書籤"
+
+#~ msgid "Add to Bookmarks"
+#~ msgstr "新增到書籤"
+
+#~ msgid "Enter new directory path:"
+#~ msgstr "輸入新的目錄路徑"

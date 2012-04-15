@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Application;System;Utility;Core;GTK;
+Encoding=UTF-8
+Name=PCMan File Manager
+Name[zh_TW]=PCMan 檔案管理程式
+Name[pl]=Przeglądarka plików z zakładkami
+Exec=pcmanfm
+Icon=file-manager
+Type=Application
+Terminal=false
+GenericName=File Manager 
+GenericName[zh_TW]=檔案管理程式
+Comment=Browse the file system with the file manager using tabbed interface
+Comment[pl]=Przegląda system plików za pomocą menedżera plików opartego o zakładki
