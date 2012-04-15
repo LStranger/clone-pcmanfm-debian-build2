@@ -9,21 +9,23 @@
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
 
+DISTRO = "$(shell lsb_release -si)"
+
 %:
 	dh $@
 
 override_dh_auto_configure:
-	/usr/bin/autoreconf -fiv
-	CFLAGS="$(CFLAGS)" ./configure \
-	--host=$(DEB_HOST_GNU_TYPE) \
-	--build=$(DEB_BUILD_GNU_TYPE) \
-	--prefix=/usr \
-	--mandir=\$${prefix}/share/man \
-	--infodir=\$${prefix}/share/info \
-	CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs -Wl,--as-needed"
+	#/usr/bin/autoreconf -fiv
+	dh_auto_configure -- LDFLAGS="-Wl,-z,defs -Wl,--as-needed"
 	
 override_dh_strip:
 	dh_strip --dbg-package=pcmanfm-dbg
+
+override_dh_link:
+	#Symlinks to libfm apport hook only on Ubuntu, until apport call it automaticly.
+ifeq ($(DISTRO),"Ubuntu")
+	dh_link -ppcmanfm usr/share/apport/package-hooks/source_libfm.py usr/share/apport/package-hooks/source_pcmanfm.py
+endif
 
 override_dh_auto_test:
 	:

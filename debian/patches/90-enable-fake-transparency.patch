@@ -1,0 +1,60 @@
+From 422e1061ffafc0b97ec31a99f86ddde890186ff5 Mon Sep 17 00:00:00 2001
+From: Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
+Date: Sat, 23 Oct 2010 16:31:11 +0800
+Subject: [PATCH] Apply patch #3089346 - Re-enbale fake transparency when using pcmanfm 0.9.X.
+
+---
+ src/desktop.c |   31 +++++++++++++++++++++++++++++++
+ 1 files changed, 31 insertions(+), 0 deletions(-)
+
+diff --git a/src/desktop.c b/src/desktop.c
+index b7a6836..109a12f 100644
+--- a/src/desktop.c
++++ b/src/desktop.c
+@@ -1676,6 +1676,10 @@ static void update_background(FmDesktop* desktop)
+     GdkWindow* root = gdk_screen_get_root_window(gtk_widget_get_screen(widget));
+     GdkWindow *window = gtk_widget_get_window(widget);
+ 
++    Display* xdisplay;
++    Pixmap xpixmap = 0;
++    Window xroot;
++
+     if(app_config->wallpaper_mode == FM_WP_COLOR
+        || !app_config->wallpaper
+        || !*app_config->wallpaper
+@@ -1763,6 +1767,33 @@ static void update_background(FmDesktop* desktop)
+     XChangeProperty(GDK_WINDOW_XDISPLAY(root), GDK_WINDOW_XID(root),
+                     XA_XROOTMAP_ID, XA_PIXMAP, 32, PropModeReplace, (guchar*)&pixmap_id, 1);
+ 
++    /* set root map here */
++    xdisplay = GDK_WINDOW_XDISPLAY(root);
++    xroot = GDK_WINDOW_XID(root);
++
++    XGrabServer (xdisplay);
++
++    if( pixmap )
++    {
++        xpixmap = GDK_WINDOW_XWINDOW(pixmap);
++
++        XChangeProperty( xdisplay,
++                    xroot,
++                    gdk_x11_get_xatom_by_name("_XROOTPMAP_ID"), XA_PIXMAP,
++                    32, PropModeReplace,
++                    (guchar *) &xpixmap, 1);
++
++        XSetWindowBackgroundPixmap( xdisplay, xroot, xpixmap );
++    }
++    else
++    {
++        /* FIXME: Anyone knows how to handle this correctly??? */
++    }
++    XClearWindow( xdisplay, xroot );
++
++    XUngrabServer( xdisplay );
++    XFlush( xdisplay );
++
+     g_object_unref(pixmap);
+     if(pix)
+         g_object_unref(pix);
+-- 
+1.7.0.1

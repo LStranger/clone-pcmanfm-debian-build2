@@ -3,17 +3,33 @@ Section: utils
 Priority: optional
 Maintainer: Debian LXDE Packaging Team <pkg-lxde-maintainers@lists.alioth.debian.org>
 Uploaders: Andrew Lee (李健秋) <ajqlee@debian.org>
-Build-Depends: debhelper (>= 7.0.50~), libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake, autoconf, pkg-config, intltool, libstartup-notification0-dev, libdbus-glib-1-dev, python, libfm-dev (>= 0.1.10), libmenu-cache1-dev (>= 0.3.2), libtool
+Build-Depends: debhelper (>= 7.0.50~),
+               libgtk2.0-dev (>= 2.6.0),
+               libgamin-dev,
+               automake,
+               autoconf,
+               pkg-config,
+               intltool,
+               libstartup-notification0-dev,
+               libdbus-glib-1-dev,
+               python,
+               libfm-dev (>= 0.1.14),
+               libmenu-cache1-dev (>= 0.3.2),
+               libtool,
+               lsb-release
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.8.4
+Standards-Version: 3.9.1
 Homepage: http://pcmanfm.sourceforge.net/
 Vcs-Git: git://git.debian.org/git/collab-maint/pcmanfm.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/pcmanfm.git;a=summary
 
 Package: pcmanfm
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: lxde-icon-theme | gnome-icon-theme, gvfs-backends, gvfs-fuse
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Recommends: lxde-icon-theme | gnome-icon-theme,
+            gvfs-backends,
+            gvfs-fuse
 Conflicts: pcmanfm-nohal
 Description: an extremely fast and lightweight file manager
  PCMan File Manager is a gtk2 based file manager for the X Window System.
@@ -37,7 +53,9 @@ Package: pcmanfm-dbg
 Section: debug
 Priority: extra
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, pcmanfm (= ${binary:Version})
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         pcmanfm (= ${binary:Version})
 Description: an extremely fast and lightweight file manager - debugging symbols
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:

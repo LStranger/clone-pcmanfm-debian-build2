@@ -1,1 +1,2 @@
-libtool-fix.patch
+01-libfm-0.1.14-API-changes.patch
+90-enable-fake-transparency.patch

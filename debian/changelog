@@ -1,3 +1,33 @@
+pcmanfm (0.9.8-1) unstable; urgency=low
+
+  [ Julien Lavergne ]
+  * debian/rules:
+   - Use libfm apport hook only on Ubuntu.
+   - Use directly dh_auto_configure instead of configure.
+  * debian/control:
+   - Build-depends on lsb-release, needed to detect the distribution.
+   - Wrap depends and build-depends.
+   - Build-depends on libfm-dev (0.1.14).
+  * debian/patches/01-libfm-0.1.14-API-changes.patch:
+   - Migrate from fm_path_new to fm_path_new_for_str to follow libfm API change
+     (Closes: #600391)
+  * debian/patches/90-enable-fake-transparency.patch
+   - From upstream, fix fake transparency (LP: #566056)
+
+  [ Andrew Lee (李健秋) ]
+  * Imported Upstream version 0.9.8
+   - Desktop icons are now movable (Closes: #535814) (LP: #644259)
+   - Broken Dnd from folder view to desktop (Closes: #534928)
+   - Fix crash with // in the address bar (Closes: #586368)
+   - Fix crash on right click (LP: #617655)
+   - Translation updates (LP: #565496)
+  * Bumped Standard-version to 3.9.1
+  * Drop 01_binary_rename.patch
+  * Drop libtool-fix.patch
+  * delete debian/patches/series
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Wed, 24 Nov 2010 22:51:44 +0800
+
 pcmanfm (0.9.7-1) unstable; urgency=low
 
   * New upstream release

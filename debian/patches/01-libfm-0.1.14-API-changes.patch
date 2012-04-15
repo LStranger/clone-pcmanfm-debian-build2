@@ -1,0 +1,71 @@
+Index: pcmanfm/src/main-win.c
+===================================================================
+--- pcmanfm.orig/src/main-win.c
++++ pcmanfm/src/main-win.c
+@@ -118,7 +118,7 @@ static void fm_main_win_class_init(FmMai
+ 
+ static void on_location_activate(GtkEntry* entry, FmMainWin* self)
+ {
+-    FmPath* path = fm_path_new( gtk_entry_get_text(entry) );
++    FmPath* path = fm_path_new_for_str( gtk_entry_get_text(entry) );
+     char* disp_path = fm_path_to_str(path);
+     char* disp_name = fm_path_display_basename(path);
+     GtkWidget* label = gtk_notebook_get_tab_label((GtkNotebook*)self->notebook, self->folder_view);
+@@ -201,7 +201,7 @@ static void on_file_clicked(FmFolderView
+         {
+             /* symlinks also has fi->target, but we only handle shortcuts here. */
+             FmFileInfo* target_fi;
+-            FmPath* real_path = fm_path_new(fm_file_info_get_target(fi));
++            FmPath* real_path = fm_path_new_for_str(fm_file_info_get_target(fi));
+             /* query the info of target */
+             FmJob* job = fm_file_info_job_new(NULL, 0);
+             fm_file_info_job_add(FM_FILE_INFO_JOB(job), real_path);
+@@ -875,7 +875,7 @@ void on_go_apps(GtkAction* act, FmMainWi
+ 
+ void fm_main_win_chdir_by_name(FmMainWin* win, const char* path_str)
+ {
+-    FmPath* path = fm_path_new(path_str);
++    FmPath* path = fm_path_new_for_str(path_str);
+     fm_main_win_chdir(win, path);
+     fm_path_unref(path);
+ }
+Index: pcmanfm/src/pcmanfm.c
+===================================================================
+--- pcmanfm.orig/src/pcmanfm.c
++++ pcmanfm/src/pcmanfm.c
+@@ -406,7 +406,7 @@ gboolean pcmanfm_run()
+             {
+                 FmPath* path;
+                 if( **filename == '/' || strstr(*filename, ":/") ) /* absolute path or URI */
+-                    path = fm_path_new(*filename);
++                    path = fm_path_new_for_str(*filename);
+                 else if( strcmp(*filename, "~") == 0 ) /* special case for home dir */
+                 {
+                     path = fm_path_get_home();
+@@ -419,7 +419,7 @@ gboolean pcmanfm_run()
+                     {
+                         /* FIXME: This won't work if those filenames are passed via IPC since the receiving process has different cwd. */
+                         char* cwd_str = g_get_current_dir();
+-                        cwd = fm_path_new(cwd_str);
++                        cwd = fm_path_new_for_str(cwd_str);
+                         g_free(cwd_str);
+                     }
+                     path = fm_path_new_relative(cwd, *filename);
+@@ -443,7 +443,7 @@ gboolean pcmanfm_run()
+         {
+             FmPath* path;
+             char* cwd = ipc_cwd ? ipc_cwd : g_get_current_dir();
+-            path = fm_path_new(cwd);
++            path = fm_path_new_for_str(cwd);
+             fm_main_win_add_win(NULL, path);
+             fm_path_unref(path);
+             g_free(cwd);
+@@ -609,7 +609,7 @@ _retry:
+     }
+     else /* templates in ~/Templates */
+     {
+-        FmPath* dir = fm_path_new(g_get_user_special_dir(G_USER_DIRECTORY_TEMPLATES));
++        FmPath* dir = fm_path_new_for_str(g_get_user_special_dir(G_USER_DIRECTORY_TEMPLATES));
+         FmPath* template = fm_path_new_child(dir, templ);
+         fm_copy_file(template, cwd);
+         fm_path_unref(template);
