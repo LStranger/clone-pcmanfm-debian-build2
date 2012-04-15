@@ -11,8 +11,8 @@ Build-Depends:
  pkg-config, python
 Standards-Version: 3.9.2
 Homepage: http://pcmanfm.sourceforge.net/
-Vcs-Git: git://git.debian.org/git/pkg-lxde/pcmanfm.git
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-lxde/pcmanfm.git;a=summary
+Vcs-Browser: http://git.lxde.org/gitweb/?p=debian/pcmanfm.git
+Vcs-Git: git://git.lxde.org/git/debian/pcmanfm.git
 
 Package: pcmanfm
 Architecture: any
