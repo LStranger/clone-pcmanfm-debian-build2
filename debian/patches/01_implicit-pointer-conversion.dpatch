@@ -1,0 +1,46 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01_implicit-pointer-conversion.dpatch by  <andrew@linux.org.tw>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad pcmanfm-0.2.4~/src/app-chooser-dialog.c pcmanfm-0.2.4/src/app-chooser-dialog.c
+--- pcmanfm-0.2.4~/src/app-chooser-dialog.c	2006-04-03 00:40:06.000000000 +0800
++++ pcmanfm-0.2.4/src/app-chooser-dialog.c	2006-08-24 20:58:59.000000000 +0800
+@@ -13,11 +13,13 @@
+ #include "app-chooser-dialog.h"
+ #include "app-chooser-dialog-ui.h"
+ #include "mime-action.h"
++#include "mime-description.h"
+ 
+ #include <gtk/gtk.h>
+ #include <glib.h>
+ 
+ #include "xdgmime.h"
++#include "glade-support.h"
+ 
+ enum{
+   COL_APP_ICON = 0,
+diff -urNad pcmanfm-0.2.4~/src/ptk/ptk-bookmarks.c pcmanfm-0.2.4/src/ptk/ptk-bookmarks.c
+--- pcmanfm-0.2.4~/src/ptk/ptk-bookmarks.c	2006-04-03 00:40:05.000000000 +0800
++++ pcmanfm-0.2.4/src/ptk/ptk-bookmarks.c	2006-08-24 20:59:21.000000000 +0800
+@@ -13,6 +13,7 @@
+ #include "ptk-bookmarks.h"
+ 
+ #include <stdio.h>
++#include <string.h>
+ 
+ const char bookmarks_file_name[] = ".gtk-bookmarks";
+ static PtkBookmarks bookmarks = {0};
+diff -urNad pcmanfm-0.2.4~/src/ptk/ptk-dir-tree-view.c pcmanfm-0.2.4/src/ptk/ptk-dir-tree-view.c
+--- pcmanfm-0.2.4~/src/ptk/ptk-dir-tree-view.c	2006-04-03 00:40:05.000000000 +0800
++++ pcmanfm-0.2.4/src/ptk/ptk-dir-tree-view.c	2006-08-24 20:59:59.000000000 +0800
+@@ -11,6 +11,7 @@
+ */
+ 
+ #include "ptk-dir-tree-view.h"
++#include "ptk-file-icon-renderer.h"
+ 
+ #include "folder-content.h"
+ 
