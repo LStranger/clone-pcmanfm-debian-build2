@@ -1,15 +1,7 @@
 #!/usr/bin/make -f
 
-UBUNTU = $(shell dpkg-vendor --derives-from Ubuntu && echo yes)
-
 %:
 	dh ${@}
-
-override_dh_link:
-	# Symlinks to libfm apport hook only on Ubuntu, until apport call it automaticly.
-ifeq ($(UBUNTU),"yes")
-	dh_link -ppcmanfm usr/share/apport/package-hooks/source_libfm.py usr/share/apport/package-hooks/source_pcmanfm.py
-endif
 
 override_dh_auto_test:
 	# disabled: fails with libtool version mismatch.
