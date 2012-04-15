@@ -485,6 +485,8 @@ void on_list_task_finished( VFSAsyncTask* task, gboolean is_cancelled, VFSDir* d
     g_object_unref( dir->task );
     dir->task = NULL;
     g_signal_emit( dir, signals[FILE_LISTED_SIGNAL], 0, is_cancelled );
+    dir->file_listed = 1;
+    dir->load_complete = 1;
 }
 
 void vfs_dir_load( VFSDir* dir )
@@ -554,8 +556,6 @@ gpointer vfs_dir_load_thread(  VFSAsyncTask* task, VFSDir* dir )
             }
             g_dir_close( dir_content );
         }
-        dir->file_listed = 1;
-        dir->load_complete = 1;
     }
     return NULL;
 }
@@ -725,11 +725,14 @@ VFSDir* vfs_dir_get_by_path( const char* path )
     if ( G_UNLIKELY( ! dir_hash ) )
     {
         dir_hash = g_hash_table_new_full( g_str_hash, g_str_equal, NULL, NULL );
-        theme_change_notify = g_signal_connect( gtk_icon_theme_get_default(), "changed",
-                                                                    G_CALLBACK( on_theme_changed ), NULL );
+        if( 0 == theme_change_notify )
+			theme_change_notify = g_signal_connect( gtk_icon_theme_get_default(), "changed",
+																		G_CALLBACK( on_theme_changed ), NULL );
     }
     else
+    {
         dir = g_hash_table_lookup( dir_hash, path );
+	}
 
     if( G_UNLIKELY( !mime_cb ) )
         mime_cb = vfs_mime_type_add_reload_cb( on_mime_type_reload, NULL );

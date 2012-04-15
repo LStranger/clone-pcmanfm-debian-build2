@@ -30,12 +30,10 @@
 #include "pref-dialog.h"
 #include "ptk-bookmarks.h"
 #include "edit-bookmarks.h"
-#include "file-properties.h"
+#include "ptk-file-properties.h"
 #include "ptk-path-entry.h"
 
 #include "settings.h"
-
-#include "fm-desktop.h"
 
 #ifdef HAVE_STATVFS
 /* FIXME: statvfs support should be moved to src/vfs */
@@ -44,6 +42,7 @@
 
 #include "vfs-app-desktop.h"
 #include "vfs-execute.h"
+#include "vfs-utils.h"  /* for vfs_sudo() */
 
 #include "ptk-ui-xml.h"
 
@@ -161,6 +160,8 @@ static void on_view_as_icon_activate ( GtkMenuItem *menuitem,
                                        gpointer user_data );
 static void on_view_as_list_activate ( GtkMenuItem *menuitem,
                                        gpointer user_data );
+static void on_view_as_compact_list_activate ( GtkMenuItem *menuitem,
+                                       gpointer user_data );
 static void on_open_side_pane_activate ( GtkMenuItem *menuitem,
                                          gpointer user_data );
 static void on_show_dir_tree ( GtkMenuItem *menuitem,
@@ -230,10 +231,14 @@ static void fm_main_window_start_busy_task( FMMainWindow* main_window );
 static gboolean fm_main_window_stop_busy_task( FMMainWindow* main_window );
 
 
+extern gboolean daemon_mode;    /* defined in main.c */
+
 static GtkWindowClass *parent_class = NULL;
 
 static int n_windows = 0;
 static GList* all_windows = NULL;
+
+static guint theme_change_notify = 0;
 
 /*  Drag & Drop/Clipboard targets  */
 static GtkTargetEntry drag_targets[] = {
@@ -368,6 +373,7 @@ static PtkMenuItemEntry fm_view_menu[] =
         PTK_POPUP_MENU( N_( "_Sort..." ), fm_sort_menu ),
         PTK_SEPARATOR_MENU_ITEM,
         PTK_RADIO_MENU_ITEM( N_( "View as _Icons" ), on_view_as_icon_activate, 0, 0 ),
+        PTK_RADIO_MENU_ITEM( N_( "View as _Compact List" ), on_view_as_compact_list_activate, 0, 0 ),
         PTK_RADIO_MENU_ITEM( N_( "View as Detailed _List" ), on_view_as_list_activate, 0, 0 ),
         PTK_MENU_END
     };
@@ -414,12 +420,17 @@ static PtkToolItemEntry fm_toolbar_jump_btn[] =
         PTK_TOOL_END
     };
 
-static void update_window_icon( GtkIconTheme* theme, GtkWindow* window )
+static void update_window_icon( GtkWindow* window, GtkIconTheme* theme )
 {
     GdkPixbuf* icon;
     icon = gtk_icon_theme_load_icon( theme, "gnome-fs-directory", 48, 0, NULL );
     gtk_window_set_icon( window, icon );
     g_object_unref( icon );
+}
+
+static void update_window_icons( GtkIconTheme* theme, GtkWindow* window )
+{
+	g_list_foreach( all_windows, (GFunc)update_window_icon, theme );
 }
 
 static void on_history_menu_item_activate( GtkWidget* menu_item, FMMainWindow* main_window )
@@ -500,14 +511,17 @@ void fm_main_window_init( FMMainWindow* main_window )
     NOTE: gtk_window_set_icon_name doesn't work under some WMs, such as IceWM.
     gtk_window_set_icon_name( GTK_WINDOW( main_window ),
                               "gnome-fs-directory" ); */
-    g_signal_connect( gtk_icon_theme_get_default(), "changed",
-                                    G_CALLBACK(update_window_icon), main_window );
-    update_window_icon( gtk_icon_theme_get_default(), GTK_WINDOW(main_window) );
+	if( 0 == theme_change_notify )
+	{
+		theme_change_notify = g_signal_connect( gtk_icon_theme_get_default(), "changed",
+										G_CALLBACK(update_window_icons), NULL );
+	}
+    update_window_icon( (GtkWindow*)main_window, gtk_icon_theme_get_default() );
 
     main_window->main_vbox = gtk_vbox_new ( FALSE, 0 );
     gtk_container_add ( GTK_CONTAINER ( main_window ), main_window->main_vbox );
 
-    main_window->splitter_pos = appSettings.splitterPos;
+    main_window->splitter_pos = app_settings.splitter_pos;
 
     /* Create menu bar */
     main_window->menu_bar = gtk_menu_bar_new ();
@@ -520,7 +534,8 @@ void fm_main_window_init( FMMainWindow* main_window )
     fm_side_pane_menu[ 3 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->show_dir_tree_menu;
     fm_view_menu[ 3 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->show_hidden_files_menu;
     fm_view_menu[ 6 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->view_as_icon;
-    fm_view_menu[ 7 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->view_as_list;
+    fm_view_menu[ 7 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->view_as_compact_list;
+    fm_view_menu[ 8 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->view_as_list;
     fm_sort_menu[ 0 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->sort_by_name;
     fm_sort_menu[ 1 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->sort_by_size;
     fm_sort_menu[ 2 ].ret = ( GtkWidget** ) (GtkWidget*) & main_window->sort_by_mtime;
@@ -650,8 +665,16 @@ void fm_main_window_finalize( GObject *obj )
 
     /* Remove the monitor for changes of the bookmarks */
     ptk_bookmarks_remove_callback( ( GFunc ) on_bookmarks_change, obj );
-    if ( 0 == n_windows && !appSettings.showDesktop )
-        gtk_main_quit();
+    if ( 0 == n_windows )
+    {
+    	g_signal_handler_disconnect( gtk_icon_theme_get_default(), theme_change_notify );
+		theme_change_notify = 0;
+		if( !app_settings.show_desktop )
+		{
+			if( ! daemon_mode )
+				gtk_main_quit();
+		}
+	}
     G_OBJECT_CLASS( parent_class ) ->finalize( obj );
 }
 
@@ -669,9 +692,9 @@ void fm_main_window_set_property ( GObject *obj,
 
 static void fm_main_window_close( GtkWidget* main_window )
 {
-    appSettings.width = GTK_WIDGET( main_window ) ->allocation.width;
-    appSettings.height = GTK_WIDGET( main_window ) ->allocation.height;
-    appSettings.splitterPos = FM_MAIN_WINDOW( main_window ) ->splitter_pos;
+    app_settings.width = GTK_WIDGET( main_window ) ->allocation.width;
+    app_settings.height = GTK_WIDGET( main_window ) ->allocation.height;
+    app_settings.splitter_pos = FM_MAIN_WINDOW( main_window ) ->splitter_pos;
     gtk_widget_destroy( main_window );
 }
 
@@ -686,7 +709,7 @@ fm_main_window_delete_event ( GtkWidget *widget,
 static gboolean fm_main_window_window_state_event ( GtkWidget *widget,
                                                     GdkEventWindowState *event )
 {
-    appSettings.maximized = ((event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0);
+    app_settings.maximized = ((event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0);
     return TRUE;
 }
 
@@ -761,12 +784,12 @@ void fm_main_window_add_new_tab( FMMainWindow* main_window,
     gint idx;
     GtkNotebook* notebook = GTK_NOTEBOOK( main_window->notebook );
     PtkFileBrowser* file_browser = (PtkFileBrowser*)ptk_file_browser_new ( GTK_WIDGET( main_window ),
-                                                                            appSettings.viewMode );
+                                                                            app_settings.view_mode );
     gtk_paned_set_position ( GTK_PANED ( file_browser ), main_window->splitter_pos );
     ptk_file_browser_show_hidden_files( file_browser,
-                                        appSettings.showHiddenFiles );
+                                        app_settings.show_hidden_files );
     ptk_file_browser_show_thumbnails( file_browser,
-                                      appSettings.showThumbnail ? appSettings.maxThumbSize : 0 );
+                                      app_settings.show_thumbnail ? app_settings.max_thumb_size : 0 );
     if ( open_side_pane )
     {
         ptk_file_browser_show_side_pane( file_browser, side_pane_mode );
@@ -775,8 +798,8 @@ void fm_main_window_add_new_tab( FMMainWindow* main_window,
     {
         ptk_file_browser_hide_side_pane( file_browser );
     }
-    ptk_file_browser_set_sort_order( file_browser, appSettings.sortOrder );
-    ptk_file_browser_set_sort_type( file_browser, appSettings.sortType );
+    ptk_file_browser_set_sort_order( file_browser, app_settings.sort_order );
+    ptk_file_browser_set_sort_type( file_browser, app_settings.sort_type );
 
     gtk_widget_show( GTK_WIDGET( file_browser ) );
 
@@ -940,105 +963,11 @@ on_preference_activate ( GtkMenuItem *menuitem,
     fm_main_window_preference( main_window );
 }
 
-static void
-dir_unload_thumbnails( const char* path, VFSDir* dir, gpointer user_data )
-{
-    vfs_dir_unload_thumbnails( dir, (gboolean)user_data );
-}
-
 void fm_main_window_preference( FMMainWindow* main_window )
 {
-    int max_thumb = appSettings.maxThumbSize;
-    gboolean show_thumbnails = appSettings.showThumbnail;
-    int big_icon = appSettings.bigIconSize;
-    int small_icon = appSettings.smallIconSize;
-    gboolean show_desktop = appSettings.showDesktop;
-    gboolean show_wallaper = appSettings.showWallpaper;
-    GdkColor bg1 = appSettings.desktopBg1;
-    GdkColor bg2 = appSettings.desktopBg2;
-    GdkColor text = appSettings.desktopText;
-    char* wallpaper;
-    int i, n;
-    GList* l;
-    PtkFileBrowser* file_browser;
-
-    if ( appSettings.wallpaper )
-        wallpaper = g_strdup( appSettings.wallpaper );
-    else
-        wallpaper = g_strdup( "" );
-
-    show_preference_dialog( GTK_WINDOW( main_window ) );
-
-    if ( show_thumbnails != appSettings.showThumbnail
-            || max_thumb != appSettings.maxThumbSize )
-    {
-        for ( l = all_windows; l; l = l->next )
-        {
-            main_window = FM_MAIN_WINDOW( l->data );
-            n = gtk_notebook_get_n_pages( main_window->notebook );
-            for ( i = 0; i < n; ++i )
-            {
-                file_browser = PTK_FILE_BROWSER( gtk_notebook_get_nth_page(
-                                                     main_window->notebook, i ) );
-                ptk_file_browser_show_thumbnails( file_browser,
-                                                  appSettings.showThumbnail ? appSettings.maxThumbSize : 0 );
-            }
-        }
-        if ( appSettings.showDesktop )
-            fm_desktop_update_thumbnails();
-    }
-    if ( big_icon != appSettings.bigIconSize
-            || small_icon != appSettings.smallIconSize )
-    {
-        vfs_mime_type_set_icon_size( appSettings.bigIconSize, appSettings.smallIconSize );
-        vfs_file_info_set_thumbnail_size( appSettings.bigIconSize, appSettings.smallIconSize );
-
-        /* unload old thumbnails (icons of *.desktop files will be unloaded here, too)  */
-        if( big_icon != appSettings.bigIconSize )
-            vfs_dir_foreach( (GHFunc)dir_unload_thumbnails, (gpointer)TRUE );
-        if( small_icon != appSettings.smallIconSize )
-            vfs_dir_foreach( (GHFunc)dir_unload_thumbnails, (gpointer)FALSE );
-
-        for ( l = all_windows; l; l = l->next )
-        {
-            main_window = FM_MAIN_WINDOW( l->data );
-            n = gtk_notebook_get_n_pages( main_window->notebook );
-            for ( i = 0; i < n; ++i )
-            {
-                file_browser = PTK_FILE_BROWSER( gtk_notebook_get_nth_page(
-                                                     main_window->notebook, i ) );
-                ptk_file_browser_update_display( file_browser );
-            }
-        }
-        if ( appSettings.showDesktop )
-            fm_desktop_update_view();
-    }
-
-    if ( show_desktop != appSettings.showDesktop )
-    {
-        if ( appSettings.showDesktop )
-            fm_desktop_init();
-        else
-            fm_desktop_cleanup();
-    }
-    else if ( appSettings.showDesktop )
-    {
-        if ( show_wallaper != appSettings.showWallpaper ||
-                ( appSettings.wallpaper &&
-                  strcmp( wallpaper, appSettings.wallpaper ) ) )
-        {
-            fm_desktop_update_wallpaper();
-        }
-        if ( !gdk_color_equal( &bg1, &appSettings.desktopBg1 ) ||
-                !gdk_color_equal( &bg2, &appSettings.desktopBg2 ) ||
-                !gdk_color_equal( &text, &appSettings.desktopText ) )
-        {
-            fm_desktop_update_colors();
-        }
-    }
-    g_free( wallpaper );
-    save_settings();
+    fm_edit_preference( (GtkWindow*)main_window, PREF_GENERAL );
 }
+
 
 #if 0
 void
@@ -1141,7 +1070,7 @@ on_new_window_activate ( GtkMenuItem *menuitem,
     file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
     path = file_browser ? ptk_file_browser_get_cwd( file_browser ) : g_get_home_dir();
     fm_main_window_add_new_window( main_window, path,
-                                   appSettings.showSidePane,
+                                   app_settings.show_side_pane,
                                    file_browser->side_pane_mode );
 }
 
@@ -1170,8 +1099,8 @@ on_new_tab_activate ( GtkMenuItem *menuitem,
     else
     {
         path = g_get_home_dir();
-        show_side_pane = appSettings.showSidePane;
-        side_pane_mode = appSettings.sidePaneMode;
+        show_side_pane = app_settings.show_side_pane;
+        side_pane_mode = app_settings.side_pane_mode;
     }
 
     fm_main_window_add_new_tab( main_window, path,
@@ -1305,7 +1234,7 @@ on_add_to_bookmark_activate ( GtkMenuItem *menuitem,
     const char* path = ptk_file_browser_get_cwd( PTK_FILE_BROWSER( file_browser ) );
     gchar* name;
 
-    if ( ! g_list_find_custom( appSettings.bookmarks->list,
+    if ( ! g_list_find_custom( app_settings.bookmarks->list,
                                path,
                                ( GCompareFunc ) bookmark_item_comp ) )
     {
@@ -1369,17 +1298,17 @@ on_open_side_pane_activate ( GtkMenuItem *menuitem,
     int i;
     int n = gtk_notebook_get_n_pages( nb );
 
-    appSettings.showSidePane = gtk_check_menu_item_get_active( check );
+    app_settings.show_side_pane = gtk_check_menu_item_get_active( check );
     g_signal_handlers_block_matched ( btn, G_SIGNAL_MATCH_FUNC,
                                       0, 0, NULL, on_side_pane_toggled, NULL );
-    gtk_toggle_tool_button_set_active( btn, appSettings.showSidePane );
+    gtk_toggle_tool_button_set_active( btn, app_settings.show_side_pane );
     g_signal_handlers_unblock_matched ( btn, G_SIGNAL_MATCH_FUNC,
                                         0, 0, NULL, on_side_pane_toggled, NULL );
 
     for ( i = 0; i < n; ++i )
     {
         file_browser = PTK_FILE_BROWSER( gtk_notebook_get_nth_page( nb, i ) );
-        if ( appSettings.showSidePane )
+        if ( app_settings.show_side_pane )
         {
             ptk_file_browser_show_side_pane( file_browser,
                                              file_browser->side_pane_mode );
@@ -1399,7 +1328,7 @@ void on_show_dir_tree ( GtkMenuItem *menuitem, gpointer user_data )
     int i, n;
     if ( ! GTK_CHECK_MENU_ITEM( menuitem ) ->active )
         return ;
-    appSettings.sidePaneMode = PTK_FB_SIDE_PANE_DIR_TREE;
+    app_settings.side_pane_mode = PTK_FB_SIDE_PANE_DIR_TREE;
 
     n = gtk_notebook_get_n_pages( main_window->notebook );
     for ( i = 0; i < n; ++i )
@@ -1417,7 +1346,7 @@ void on_show_loation_pane ( GtkMenuItem *menuitem, gpointer user_data )
     int i, n;
     if ( ! GTK_CHECK_MENU_ITEM( menuitem ) ->active )
         return ;
-    appSettings.sidePaneMode = PTK_FB_SIDE_PANE_BOOKMARKS;
+    app_settings.side_pane_mode = PTK_FB_SIDE_PANE_BOOKMARKS;
     n = gtk_notebook_get_n_pages( main_window->notebook );
     for ( i = 0; i < n; ++i )
     {
@@ -1433,10 +1362,10 @@ on_show_hidden_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     PtkFileBrowser* file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
-    appSettings.showHiddenFiles = gtk_check_menu_item_get_active( GTK_CHECK_MENU_ITEM( menuitem ) );
+    app_settings.show_hidden_files = gtk_check_menu_item_get_active( GTK_CHECK_MENU_ITEM( menuitem ) );
     if ( file_browser )
         ptk_file_browser_show_hidden_files( file_browser,
-                                            appSettings.showHiddenFiles );
+                                            app_settings.show_hidden_files );
 }
 
 
@@ -1446,9 +1375,9 @@ on_sort_by_name_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortOrder = PTK_FB_SORT_BY_NAME;
+    app_settings.sort_order = PTK_FB_SORT_BY_NAME;
     if ( file_browser )
-        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), appSettings.sortOrder );
+        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), app_settings.sort_order );
 }
 
 
@@ -1458,9 +1387,9 @@ on_sort_by_size_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortOrder = PTK_FB_SORT_BY_SIZE;
+    app_settings.sort_order = PTK_FB_SORT_BY_SIZE;
     if ( file_browser )
-        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), appSettings.sortOrder );
+        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), app_settings.sort_order );
 }
 
 
@@ -1470,9 +1399,9 @@ on_sort_by_mtime_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortOrder = PTK_FB_SORT_BY_MTIME;
+    app_settings.sort_order = PTK_FB_SORT_BY_MTIME;
     if ( file_browser )
-        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), appSettings.sortOrder );
+        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), app_settings.sort_order );
 }
 
 void on_sort_by_type_activate ( GtkMenuItem *menuitem,
@@ -1480,9 +1409,9 @@ void on_sort_by_type_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortOrder = PTK_FB_SORT_BY_TYPE;
+    app_settings.sort_order = PTK_FB_SORT_BY_TYPE;
     if ( file_browser )
-        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), appSettings.sortOrder );
+        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), app_settings.sort_order );
 }
 
 void on_sort_by_perm_activate ( GtkMenuItem *menuitem,
@@ -1490,9 +1419,9 @@ void on_sort_by_perm_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortOrder = PTK_FB_SORT_BY_PERM;
+    app_settings.sort_order = PTK_FB_SORT_BY_PERM;
     if ( file_browser )
-        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), appSettings.sortOrder );
+        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), app_settings.sort_order );
 }
 
 void on_sort_by_owner_activate ( GtkMenuItem *menuitem,
@@ -1500,9 +1429,9 @@ void on_sort_by_owner_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortOrder = PTK_FB_SORT_BY_OWNER;
+    app_settings.sort_order = PTK_FB_SORT_BY_OWNER;
     if ( file_browser )
-        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), appSettings.sortOrder );
+        ptk_file_browser_set_sort_order( PTK_FILE_BROWSER( file_browser ), app_settings.sort_order );
 }
 
 void
@@ -1511,9 +1440,9 @@ on_sort_ascending_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortType = GTK_SORT_ASCENDING;
+    app_settings.sort_type = GTK_SORT_ASCENDING;
     if ( file_browser )
-        ptk_file_browser_set_sort_type( PTK_FILE_BROWSER( file_browser ), appSettings.sortType );
+        ptk_file_browser_set_sort_type( PTK_FILE_BROWSER( file_browser ), app_settings.sort_type );
 }
 
 
@@ -1523,9 +1452,9 @@ on_sort_descending_activate ( GtkMenuItem *menuitem,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     GtkWidget* file_browser = fm_main_window_get_current_file_browser( main_window );
-    appSettings.sortType = GTK_SORT_DESCENDING;
+    app_settings.sort_type = GTK_SORT_DESCENDING;
     if ( file_browser )
-        ptk_file_browser_set_sort_type( PTK_FILE_BROWSER( file_browser ), appSettings.sortType );
+        ptk_file_browser_set_sort_type( PTK_FILE_BROWSER( file_browser ), app_settings.sort_type );
 }
 
 
@@ -1539,11 +1468,25 @@ on_view_as_icon_activate ( GtkMenuItem *menuitem,
     if ( ! check_menu->active )
         return ;
     file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
-    appSettings.viewMode = PTK_FB_ICON_VIEW;
+    app_settings.view_mode = PTK_FB_ICON_VIEW;
     if ( file_browser && GTK_CHECK_MENU_ITEM( menuitem ) ->active )
         ptk_file_browser_view_as_icons( file_browser );
 }
 
+void
+on_view_as_compact_list_activate ( GtkMenuItem *menuitem,
+                           gpointer user_data )
+{
+    FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
+    PtkFileBrowser* file_browser;
+    GtkCheckMenuItem* check_menu = GTK_CHECK_MENU_ITEM( menuitem );
+    if ( ! check_menu->active )
+        return ;
+    file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
+    app_settings.view_mode = PTK_FB_COMPACT_VIEW;
+    if ( file_browser && GTK_CHECK_MENU_ITEM( menuitem )->active )
+        ptk_file_browser_view_as_compact_list( file_browser );
+}
 
 void
 on_view_as_list_activate ( GtkMenuItem *menuitem,
@@ -1555,7 +1498,7 @@ on_view_as_list_activate ( GtkMenuItem *menuitem,
     if ( ! check_menu->active )
         return ;
     file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
-    appSettings.viewMode = PTK_FB_LIST_VIEW;
+    app_settings.view_mode = PTK_FB_LIST_VIEW;
     if ( file_browser )
         ptk_file_browser_view_as_list( file_browser );
 }
@@ -1567,7 +1510,7 @@ on_side_pane_toggled ( GtkToggleToolButton *toggletoolbutton,
 {
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     gtk_check_menu_item_set_active( main_window->open_side_pane_menu,
-                                    !appSettings.showSidePane );
+                                    !app_settings.show_side_pane );
 }
 
 void on_file_browser_open_item( PtkFileBrowser* file_browser,
@@ -1612,14 +1555,14 @@ void fm_main_window_open_terminal( GtkWindow* parent,
     char** argv = NULL;
     int argc = 0;
 
-    if ( !appSettings.terminal )
+    if ( !app_settings.terminal )
     {
         ptk_show_error( parent,
                         _("Error"),
                         _( "Terminal program has not been set" ) );
         fm_main_window_preference( (FMMainWindow*)parent );
     }
-    if ( appSettings.terminal )
+    if ( app_settings.terminal )
     {
 #if 0
         /* FIXME: This should be support in the future once
@@ -1627,12 +1570,12 @@ void fm_main_window_open_terminal( GtkWindow* parent,
                   This requires API change, and shouldn't be added now.
         */
         VFSAppDesktop* app = vfs_app_deaktop_new( NULL );
-        app->exec = appSettings.terminal;
+        app->exec = app_settings.terminal;
         vfs_app_desktop_execute( app, NULL );
         app->exec = NULL;
         vfs_app_desktop_unref( app );
 #endif
-        if ( g_shell_parse_argv( appSettings.terminal,
+        if ( g_shell_parse_argv( app_settings.terminal,
              &argc, &argv, NULL ) )
         {
             vfs_exec_on_screen( gtk_widget_get_screen(GTK_WIDGET(parent)),
@@ -1657,33 +1600,21 @@ void on_open_current_folder_as_root ( GtkMenuItem *menuitem,
     FMMainWindow * main_window = FM_MAIN_WINDOW( user_data );
     PtkFileBrowser* file_browser;
     const char* cwd;
-    char* argv[ 4 ];
-    char* su;
-#ifdef PREFERABLE_SUDO_PROG
-    su = g_find_program_in_path( PREFERABLE_SUDO_PROG );
-#else
-    /* Use default search rules */
-    su = g_find_program_in_path( "gksudo" );
-    if ( ! su )
-        su = g_find_program_in_path( "gksu" );
-    if ( ! su )
-        su = g_find_program_in_path( "kdesu" );
-#endif
-    if ( ! su )
-    {
-        ptk_show_error( GTK_WINDOW( main_window ), _("Error"), _( "gksu or kdesu is not found" ) );
-        return ;
-    }
+    char* cmd_line;
+    GError *err = NULL;
+
     file_browser = PTK_FILE_BROWSER( fm_main_window_get_current_file_browser( main_window ) );
     cwd = ptk_file_browser_get_cwd( file_browser );
-    argv[ 0 ] = su;
-    argv[ 1 ] = g_get_prgname();
-    argv[ 2 ] = (char *) cwd;
-    argv[ 3 ] = NULL;
-    g_spawn_async( NULL, argv, NULL,
-                   G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
-                   NULL, NULL, NULL, NULL );
-    g_free( su );
+
+    cmd_line = g_strdup_printf( "%s --no-desktop '%s'", g_get_prgname(), cwd );
+
+    if( ! vfs_sudo_cmd_async( cwd, cmd_line, &err ) )
+    {
+        ptk_show_error( GTK_WINDOW( main_window ), _("Error"), err->message );
+        g_error_free( err );
+    }
+
+    g_free( cmd_line );
 }
 
 void on_file_properties_activate ( GtkMenuItem *menuitem,
@@ -1703,20 +1634,20 @@ void on_bookmark_item_activate ( GtkMenuItem* menu, gpointer user_data )
     if ( !path )
         return ;
 
-    switch ( appSettings.openBookmarkMethod )
+    switch ( app_settings.open_bookmark_method )
     {
     case 1:                /* current tab */
         ptk_file_browser_chdir( PTK_FILE_BROWSER( file_browser ), path, PTK_FB_CHDIR_ADD_HISTORY );
         break;
     case 3:                /* new window */
         fm_main_window_add_new_window( main_window, path,
-                                       appSettings.showSidePane,
-                                       appSettings.sidePaneMode );
+                                       app_settings.show_side_pane,
+                                       app_settings.side_pane_mode );
         break;
     case 2:                /* new tab */
         fm_main_window_add_new_tab( main_window, path,
-                                    appSettings.showSidePane,
-                                    appSettings.sidePaneMode );
+                                    app_settings.show_side_pane,
+                                    app_settings.side_pane_mode );
         break;
     }
 }
@@ -1768,7 +1699,7 @@ GtkWidget* create_bookmarks_menu ( FMMainWindow* main_window )
 
     bookmark_menu = ptk_menu_new_from_data( fm_bookmarks_menu, main_window,
                                             main_window->accel_group );
-    for ( l = appSettings.bookmarks->list; l; l = l->next )
+    for ( l = app_settings.bookmarks->list; l; l = l->next )
     {
         menu_item = create_bookmarks_menu_item( main_window,
                                                 ( char* ) l->data );
@@ -1958,6 +1889,15 @@ void fm_main_window_update_command_ui( FMMainWindow* main_window,
                                            G_SIGNAL_MATCH_FUNC, 0, 0, NULL,
                                            on_view_as_icon_activate, NULL );
         break;
+    case PTK_FB_COMPACT_VIEW:
+        g_signal_handlers_block_matched( main_window->view_as_icon,
+                                         G_SIGNAL_MATCH_FUNC, 0, 0, NULL,
+                                         on_view_as_icon_activate, NULL );
+        gtk_check_menu_item_set_active( main_window->view_as_compact_list, TRUE );
+        g_signal_handlers_unblock_matched( main_window->view_as_icon,
+                                           G_SIGNAL_MATCH_FUNC, 0, 0, NULL,
+                                           on_view_as_icon_activate, NULL );
+        break;
     case PTK_FB_LIST_VIEW:
         g_signal_handlers_block_matched( main_window->view_as_list,
                                          G_SIGNAL_MATCH_FUNC, 0, 0, NULL,
@@ -2038,6 +1978,7 @@ void fm_main_window_update_status_bar( FMMainWindow* main_window,
 #endif
 
     n = ptk_file_browser_get_n_sel( file_browser, &total_size );
+
     if ( n > 0 )
     {
         vfs_file_size_to_string( size_str, total_size );
@@ -2047,10 +1988,13 @@ void fm_main_window_update_status_bar( FMMainWindow* main_window,
     }
     else
     {
+        /* "%d hidden" means there are %d hidden files in current folder */
+        char hidden[128];
         n = ptk_file_browser_get_n_visible_files( file_browser );
         hn = ptk_file_browser_get_n_all_files( file_browser ) - n;
-        msg = g_strdup_printf( ngettext( "%d visible item (%d hidden)%s",
-                                         "%d visible items (%d hidden)%s", n ), n, hn, free_space );
+        g_snprintf( hidden, 127, ngettext( "%d hidden", "%d hidden", hn), hn );
+        msg = g_strdup_printf( ngettext( "%d visible item (%s)%s",
+                                         "%d visible items (%s)%s", n ), n, hidden, free_space );
         gtk_statusbar_push( GTK_STATUSBAR( main_window->status_bar ), 0, msg );
     }
     g_free( msg );
@@ -2185,4 +2129,9 @@ gboolean on_main_window_focus( GtkWidget* main_window,
 FMMainWindow* fm_main_window_get_last_active()
 {
     return all_windows ? FM_MAIN_WINDOW( all_windows->data ) : NULL;
+}
+
+const GList* fm_main_window_get_all()
+{
+    return all_windows;
 }

@@ -14,7 +14,7 @@
 #  include <config.h>
 #endif
 
-#include "app-chooser-dialog.h"
+#include "ptk-app-chooser.h"
 #include "ptk-ui-xml.h"
 
 #include <gtk/gtk.h>

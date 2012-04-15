@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ur\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-05 03:06+0800\n"
+"POT-Creation-Date: 2008-05-11 18:15+0800\n"
 "PO-Revision-Date: 2008-02-16 22:56+0500\n"
 "Last-Translator: Muhammad Ali Makki <makki.ma@gmail.com>\n"
 "Language-Team: Urdu <makki.ma@gmail.com>\n"
@@ -21,19 +21,29 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/main.c:58
+#: src/main.c:79
 msgid "Don't show desktop icons."
 msgstr "ڈیسک ٹاپ کے آئکن مت دکھائیں."
 
-#: src/main.c:66
+#: src/main.c:80
+msgid "Run PCManFM as a daemon"
+msgstr ""
+
+#: src/main.c:81
+msgid ""
+"Open folders in new tabs of the last used window instead of creating new "
+"windows"
+msgstr ""
+
+#: src/main.c:90
 msgid "[FILE1, FILE2,...]"
 msgstr "[FILE1, FILE2,...]"
 
-#: src/main.c:245
+#: src/main.c:297
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ آئکن تھیم درست طور پر مرتب نہیں ہے"
 
-#: src/main.c:247
+#: src/main.c:299
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -72,21 +82,16 @@ msgstr ""
 "icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
 "no standard for this, but it will be solved by freedesktop.org in the future."
 
-#: src/main.c:373
-#, c-format
-msgid "Error: %s\n"
-msgstr "غلطی: %s\n"
-
-#: src/main.c:413 src/main.c:514 src/main.c:565 src/main-window.c:1618
-#: src/main-window.c:1674 src/ptk/ptk-file-browser.c:503
+#: src/main.c:581 src/main.c:663 src/main.c:714 src/main-window.c:1561
+#: src/main-window.c:1613 src/ptk/ptk-file-browser.c:503
 #: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:329
 #: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
 #: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
-#: src/file-properties.c:693 src/file-properties.c:704
+#: src/ptk/ptk-file-properties.c:693 src/ptk/ptk-file-properties.c:704
 msgid "Error"
 msgstr "غلطی"
 
-#: src/main.c:413
+#: src/main.c:581
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -96,15 +101,15 @@ msgstr ""
 "\n"
 "کیا آپ کے پاس \"FAM\" اور \"Gamin\" نصب ہیں اور چل رہے ہیں؟"
 
-#: src/main.c:514
+#: src/main.c:663
 msgid "File doesn't exist"
 msgstr "فائل وجود نہیں رکھتی"
 
-#: src/main.c:561
+#: src/main.c:710
 msgid "Don't know how to open the file"
 msgstr "نہیں معلوم کہ فائل کیسے کھولی جائے"
 
-#: src/main.c:563
+#: src/main.c:712
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -115,244 +120,255 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: src/main-window.c:289 src/ptk/ptk-file-menu.c:107
+#: src/main-window.c:294 src/ptk/ptk-file-menu.c:109
+#: src/desktop/desktop-window.c:157
 msgid "_Folder"
 msgstr "_فولڈر"
 
-#: src/main-window.c:290 src/ptk/ptk-file-menu.c:108
+#: src/main-window.c:295 src/ptk/ptk-file-menu.c:110
+#: src/desktop/desktop-window.c:158
 msgid "_Text File"
 msgstr "_متن فائل"
 
-#: src/main-window.c:296
+#: src/main-window.c:301
 msgid "New _Window"
 msgstr "نئی ونڈ_و"
 
-#: src/main-window.c:297
+#: src/main-window.c:302
 msgid "New _Tab"
 msgstr "_نیا ٹیب"
 
-#: src/main-window.c:298
+#: src/main-window.c:303
 msgid "Close Tab"
 msgstr "ٹیب بند کریں"
 
-#: src/main-window.c:300 src/ptk/ptk-file-menu.c:131
+#: src/main-window.c:305 src/ptk/ptk-file-menu.c:133
+#: src/desktop/desktop-window.c:167
 msgid "_Create New"
 msgstr "نیا _بنائیں"
 
-#: src/main-window.c:301
+#: src/main-window.c:306
 msgid "File _Properties"
 msgstr "فائل کی _خصوصیات"
 
-#: src/main-window.c:312 src/ptk/ptk-file-menu.c:126
+#: src/main-window.c:317 src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "_حذف"
 
-#: src/main-window.c:313 src/ptk/ptk-file-browser.c:1365
-#: src/ptk/ptk-file-menu.c:127
+#: src/main-window.c:318 src/ptk/ptk-file-browser.c:1368
+#: src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "نام _بدلیں"
 
-#: src/main-window.c:315
+#: src/main-window.c:320
 msgid "Select _All"
 msgstr "م_نتخب تمام"
 
-#: src/main-window.c:316
+#: src/main-window.c:321
 msgid "_Invert Selection"
 msgstr "انتخاب منعکس کریں"
 
-#: src/main-window.c:325
+#: src/main-window.c:330
 msgid "Go _Back"
 msgstr "_واپس جائیں"
 
-#: src/main-window.c:326
+#: src/main-window.c:331
 msgid "Go _Forward"
 msgstr "_آگے جائیں"
 
-#: src/main-window.c:327
+#: src/main-window.c:332
 msgid "Go to _Parent Folder"
 msgstr "آ_بائی فولڈر میں جائیں"
 
-#: src/main-window.c:328
+#: src/main-window.c:333
 msgid "Go _Home"
 msgstr "_مرکزی فولڈر میں جائیں"
 
-#: src/main-window.c:340
+#: src/main-window.c:345 src/desktop/desktop-window.c:144
 msgid "Sort by _Name"
 msgstr "_نام سے ترتیب دیں"
 
-#: src/main-window.c:341
+#: src/main-window.c:346 src/desktop/desktop-window.c:145
 msgid "Sort by _Size"
 msgstr "_حجم سے ترتیب دیں"
 
-#: src/main-window.c:342
+#: src/main-window.c:347 src/desktop/desktop-window.c:147
 msgid "Sort by _Modification Time"
 msgstr "_تبدیلی کے وقت سے ترتیب دیں"
 
-#: src/main-window.c:343
+#: src/main-window.c:348 src/desktop/desktop-window.c:146
 msgid "Sort by _Type"
 msgstr "_قسم سے ترتیب دیں"
 
-#: src/main-window.c:344
+#: src/main-window.c:349
 msgid "Sort by _Permission"
 msgstr "اجازوں سے ترتیب دیں"
 
-#: src/main-window.c:345
+#: src/main-window.c:350
 msgid "Sort by _Owner"
 msgstr "ملکیت سے ترتیب دیں"
 
-#: src/main-window.c:347
+#: src/main-window.c:352 src/desktop/desktop-window.c:150
 msgid "Ascending"
 msgstr "صعودی"
 
-#: src/main-window.c:348
+#: src/main-window.c:353 src/desktop/desktop-window.c:151
 msgid "Descending"
 msgstr "نزولی"
 
-#: src/main-window.c:354
+#: src/main-window.c:359
 msgid "_Open Side Pane"
 msgstr "بغلی پٹی _کھولیں"
 
-#: src/main-window.c:356
+#: src/main-window.c:361
 msgid "Show _Location Pane"
 msgstr "_مقام پٹی ظاہر کریں"
 
-#: src/main-window.c:357
+#: src/main-window.c:362
 msgid "Show _Directory Tree"
 msgstr "_ڈائریکٹری شجرہ ظاہر کریں"
 
-#: src/main-window.c:363
+#: src/main-window.c:368
 msgid "_Refresh"
 msgstr "_پھر تازہ"
 
-#: src/main-window.c:364
+#: src/main-window.c:369
 msgid "Side _Pane"
 msgstr "ب_غلی پٹی"
 
-#: src/main-window.c:367
+#: src/main-window.c:372
 msgid "Show _Hidden Files"
 msgstr "_خفیہ فائلیں ظاہر کریں"
 
-#: src/main-window.c:368
+#: src/main-window.c:373
 msgid "_Sort..."
 msgstr "_ترتیب دیں..."
 
-#: src/main-window.c:370
+#: src/main-window.c:375
 msgid "View as _Icons"
 msgstr "دکھائ_یں بطور آئکن"
 
-#: src/main-window.c:371
-msgid "View as Detailed _List"
+#: src/main-window.c:376
+#, fuzzy
+msgid "View as _Compact List"
 msgstr "دکھائیں ب_طور تفصیلی فہرست"
 
 #: src/main-window.c:377
+msgid "View as Detailed _List"
+msgstr "دکھائیں ب_طور تفصیلی فہرست"
+
+#: src/main-window.c:383
 msgid "Open _Terminal"
 msgstr "_ٹرمنل کھولیں"
 
-#: src/main-window.c:378
+#: src/main-window.c:384
 msgid "Open Current Folder as _Root"
 msgstr "حالیہ فوڈر بطور _روٹ کھولیں"
 
-#: src/main-window.c:386
+#: src/main-window.c:392
 msgid "_File"
 msgstr "_فائل"
 
-#: src/main-window.c:387
+#: src/main-window.c:393
 msgid "_Edit"
 msgstr "_تدوین"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: src/main-window.c:389
+#: src/main-window.c:395
 msgid "_Go"
 msgstr "_جائیں"
 
-#: src/main-window.c:390
+#: src/main-window.c:396
 msgid "_Bookmark"
 msgstr "_پسندیدہ"
 
-#: src/main-window.c:391
+#: src/main-window.c:397
 msgid "_View"
 msgstr "_منظر"
 
-#: src/main-window.c:392
+#: src/main-window.c:398
 msgid "_Tool"
 msgstr "_اوزار"
 
-#: src/main-window.c:393
+#: src/main-window.c:399
 msgid "_Help"
 msgstr "_ہدایات"
 
-#: src/main-window.c:401
+#: src/main-window.c:407
 msgid "New Tab"
 msgstr "نیا ٹیب"
 
-#: src/main-window.c:402
+#: src/main-window.c:408
 msgid "Back"
 msgstr "پیچھے"
 
-#: src/main-window.c:403
+#: src/main-window.c:409
 msgid "Forward"
 msgstr "آگے"
 
-#: src/main-window.c:404
+#: src/main-window.c:410
 msgid "Parent Folder"
 msgstr "آبائی فولڈر کھولیں"
 
-#: src/main-window.c:405
+#: src/main-window.c:411
 msgid "Refresh"
 msgstr "پھر تازہ"
 
-#: src/main-window.c:406
+#: src/main-window.c:412
 msgid "Home Directory"
 msgstr "مرکزی فولڈر"
 
-#: src/main-window.c:407
+#: src/main-window.c:413
 msgid "Open Side Pane"
 msgstr "بغلی پٹی کھولیں"
 
-#: src/main-window.c:413
+#: src/main-window.c:419
 msgid "Go"
 msgstr "جائیں"
 
-#: src/main-window.c:617
+#: src/main-window.c:632
 msgid "Warning: You are in super user mode"
 msgstr "انتباہ: آپ روٹ کا کھاتہ استعمال کر رہے ہیں"
 
-#: src/main-window.c:1619
+#: src/main-window.c:1562
 msgid "Terminal program has not been set"
 msgstr "ٹرمنل پروگرام مرتب نہیں ہے"
 
-#: src/main-window.c:1674
-msgid "gksu or kdesu is not found"
-msgstr "gksu یا kdesu نہیں پایا گیا"
-
-#: src/main-window.c:1757
+#: src/main-window.c:1688
 msgid "_Add to Bookmarks"
 msgstr "پسندیدہ میں _شامل کریں"
 
-#: src/main-window.c:1758
+#: src/main-window.c:1689
 msgid "_Edit Bookmarks"
 msgstr "_پسندیدہ مدون کریں"
 
-#: src/main-window.c:1835
+#: src/main-window.c:1766
 msgid "Loading..."
 msgstr "لوڈ کیا جارہا ہے..."
 
-#: src/main-window.c:2036
+#: src/main-window.c:1976
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr ", خالی جگہ: %s (کُل: %s )"
 
-#: src/main-window.c:2044
+#: src/main-window.c:1985
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
 msgstr[0] "%d عنصر منتخب کردہ (%s)%s"
 msgstr[1] "%d عناصر منتخب کردہ (%s)%s"
 
-#: src/main-window.c:2052
+#: src/main-window.c:1995
 #, c-format
-msgid "%d visible item (%d hidden)%s"
-msgid_plural "%d visible items (%d hidden)%s"
+msgid "%d hidden"
+msgid_plural "%d hidden"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/main-window.c:1996
+#, fuzzy, c-format
+msgid "%d visible item (%s)%s"
+msgid_plural "%d visible items (%s)%s"
 msgstr[0] "%d ظاہر عنصر (%d خفیہ)%s"
 msgstr[1] "%d ظاہر عناصر (%d خفیہ)%s"
 
@@ -360,43 +376,43 @@ msgstr[1] "%d ظاہر عناصر (%d خفیہ)%s"
 msgid "Directory doesn't exist!"
 msgstr "ڈائریکٹری موجود نہیں!"
 
-#: src/ptk/ptk-file-browser.c:1361 src/ptk/ptk-file-menu.c:140
+#: src/ptk/ptk-file-browser.c:1364 src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "نئے _ٹیب میں کھولیں"
 
-#: src/ptk/ptk-file-browser.c:1362 src/ptk/ptk-file-menu.c:141
+#: src/ptk/ptk-file-browser.c:1365 src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "_نئی ونڈو میں کھولیں"
 
-#: src/ptk/ptk-file-browser.c:1599 src/edit-bookmarks.c:198
+#: src/ptk/ptk-file-browser.c:1623 src/edit-bookmarks.c:198
 msgid "Name"
 msgstr "نام"
 
-#: src/ptk/ptk-file-browser.c:1599
+#: src/ptk/ptk-file-browser.c:1623
 msgid "Size"
 msgstr "حجم"
 
-#: src/ptk/ptk-file-browser.c:1599
+#: src/ptk/ptk-file-browser.c:1623
 msgid "Type"
 msgstr "قسم"
 
-#: src/ptk/ptk-file-browser.c:1600
+#: src/ptk/ptk-file-browser.c:1624
 msgid "Permission"
 msgstr "اجازہ"
 
-#: src/ptk/ptk-file-browser.c:1600
+#: src/ptk/ptk-file-browser.c:1624
 msgid "Owner:Group"
 msgstr "مالک:گروپ"
 
-#: src/ptk/ptk-file-browser.c:1600
+#: src/ptk/ptk-file-browser.c:1624
 msgid "Last Modification"
 msgstr "آخری تبدیلی"
 
-#: src/ptk/ptk-file-browser.c:2793
+#: src/ptk/ptk-file-browser.c:2835
 msgid "Location"
 msgstr "مقام"
 
-#: src/ptk/ptk-file-browser.c:2794
+#: src/ptk/ptk-file-browser.c:2836
 msgid "Directory Tree"
 msgstr "ڈائریکٹری شجرہ"
 
@@ -608,49 +624,49 @@ msgstr "فائل سسٹم"
 msgid "No Sub Folder"
 msgstr "کوئی ذیلی فولڈر نہیں"
 
-#: src/ptk/ptk-file-menu.c:114
+#: src/ptk/ptk-file-menu.c:116
 msgid "E_xtract Here"
 msgstr "یہی_ں کھولیں"
 
-#: src/ptk/ptk-file-menu.c:115
+#: src/ptk/ptk-file-menu.c:117
 msgid "Extract _To"
 msgstr "ک_ھولیں تا"
 
-#: src/ptk/ptk-file-menu.c:121
+#: src/ptk/ptk-file-menu.c:123
 msgid "Open _with..."
 msgstr "کھولیں _بذریعہ..."
 
-#: src/ptk/ptk-file-menu.c:129
+#: src/ptk/ptk-file-menu.c:131
 msgid "Compress"
 msgstr "دبائیں"
 
-#: src/ptk/ptk-file-menu.c:130
+#: src/ptk/ptk-file-menu.c:132
 msgid "E_xtract"
 msgstr "ک_ھولیں"
 
-#: src/ptk/ptk-file-menu.c:133
+#: src/ptk/ptk-file-menu.c:135
 msgid "_Properties"
 msgstr "_خصوصیات"
 
-#: src/ptk/ptk-file-menu.c:142
+#: src/ptk/ptk-file-menu.c:144
 msgid "Open in Terminal"
 msgstr "ٹرمنل یہیں کھولیں"
 
-#: src/ptk/ptk-file-menu.c:368
+#: src/ptk/ptk-file-menu.c:373
 msgid "_Open with another program"
 msgstr "دوسرے پروگرام میں _کھولیں"
 
-#: src/ptk/ptk-file-menu.c:383
+#: src/ptk/ptk-file-menu.c:388
 msgid "E_xecute"
 msgstr "ا_طلاق"
 
-#: src/ptk/ptk-file-menu.c:392
+#: src/ptk/ptk-file-menu.c:397
 #, c-format
 msgid "_Open with \"%s\""
 msgstr "_کھولیں بذریعہ \"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
-#: src/ptk/ptk-file-menu.c:403 src/ptk/ptk-file-menu.c:412
+#: src/ptk/ptk-file-menu.c:408 src/ptk/ptk-file-menu.c:417
 msgid "_Open"
 msgstr "ک_ھولیں"
 
@@ -695,33 +711,33 @@ msgstr "نئی فائل کا نام لکھیں:"
 msgid "The new file cannot be created!"
 msgstr "نئی فائل نہیں بنائی جاسکتی!"
 
-#: src/file-properties.c:304
+#: src/ptk/ptk-file-properties.c:304
 msgid "Multiple files are selected"
 msgstr "متعدد فائلیں منتخب ہیں"
 
-#: src/file-properties.c:380
+#: src/ptk/ptk-file-properties.c:380
 msgid "Multiple files of different types"
 msgstr "مختلف قسم کی متعدد فائلیں"
 
-#: src/file-properties.c:448
+#: src/ptk/ptk-file-properties.c:448
 msgid "Other program..."
 msgstr "دیگر پروگرام..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: src/file-properties.c:542
+#: src/ptk/ptk-file-properties.c:542
 msgid "Calculating..."
 msgstr "حساب لگایا جارہا ہے..."
 
-#: src/file-properties.c:693
+#: src/ptk/ptk-file-properties.c:693
 msgid "Invalid User"
 msgstr "غلط صارف"
 
-#: src/file-properties.c:704
+#: src/ptk/ptk-file-properties.c:704
 msgid "Invalid Group"
 msgstr "ناموزوں گروپ"
 
-#: src/file-properties.c:752
+#: src/ptk/ptk-file-properties.c:752
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
@@ -753,224 +769,224 @@ msgstr "کمانڈ نہیں پائی گئی"
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "سمت ڈائریکٹری \"%1$s\" مصدر \"%2$s\" میں ہے"
 
-#: src/vfs/vfs-volume-hal.c:459 src/vfs/vfs-volume-hal.c:682
+#: src/vfs/vfs-volume-hal.c:475 src/vfs/vfs-volume-hal.c:698
 #, c-format
 msgid "%s Volume"
 msgstr "والیم %s"
 
-#: src/vfs/vfs-volume-hal.c:474
+#: src/vfs/vfs-volume-hal.c:490
 msgid "CD-ROM"
 msgstr "CD-ROM"
 
-#: src/vfs/vfs-volume-hal.c:476
+#: src/vfs/vfs-volume-hal.c:492
 msgid "CD-R"
 msgstr "CD-R"
 
-#: src/vfs/vfs-volume-hal.c:478
+#: src/vfs/vfs-volume-hal.c:494
 msgid "CD-RW"
 msgstr "CD-RW"
 
-#: src/vfs/vfs-volume-hal.c:482
+#: src/vfs/vfs-volume-hal.c:498
 msgid "DVD-ROM"
 msgstr "DVD-ROM"
 
-#: src/vfs/vfs-volume-hal.c:484
+#: src/vfs/vfs-volume-hal.c:500
 msgid "DVD+R"
 msgstr "DVD+R"
 
-#: src/vfs/vfs-volume-hal.c:486
+#: src/vfs/vfs-volume-hal.c:502
 msgid "DVD+RW"
 msgstr "DVD+RW"
 
-#: src/vfs/vfs-volume-hal.c:488
+#: src/vfs/vfs-volume-hal.c:504
 msgid "DVD-R"
 msgstr "DVD-R"
 
-#: src/vfs/vfs-volume-hal.c:490
+#: src/vfs/vfs-volume-hal.c:506
 msgid "DVD-RW"
 msgstr "DVD-RW"
 
-#: src/vfs/vfs-volume-hal.c:492
+#: src/vfs/vfs-volume-hal.c:508
 msgid "DVD-RAM"
 msgstr "DVD-RAM"
 
-#: src/vfs/vfs-volume-hal.c:501
+#: src/vfs/vfs-volume-hal.c:517
 #, c-format
 msgid "%s/%s Drive"
 msgstr "%s/%s ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:503
+#: src/vfs/vfs-volume-hal.c:519
 #, c-format
 msgid "%s Drive"
 msgstr "%s ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:508
+#: src/vfs/vfs-volume-hal.c:524
 msgid "Floppy Drive"
 msgstr "فلاپی ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:511
+#: src/vfs/vfs-volume-hal.c:527
 msgid "Compact Flash Drive"
 msgstr "کومپیکٹ فلیش ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:513
+#: src/vfs/vfs-volume-hal.c:529
 msgid "Memory Stick Drive"
 msgstr "میموری سٹک ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:515
+#: src/vfs/vfs-volume-hal.c:531
 msgid "Smart Media Drive"
 msgstr "سمارٹ میڈیا ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:517
+#: src/vfs/vfs-volume-hal.c:533
 msgid "SD/MMC Drive"
 msgstr "SD/MMC ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:519
+#: src/vfs/vfs-volume-hal.c:535
 msgid "Zip Drive"
 msgstr "رِپ ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:522
+#: src/vfs/vfs-volume-hal.c:538
 msgid "Jaz Drive"
 msgstr "جیز ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:525
+#: src/vfs/vfs-volume-hal.c:541
 msgid "Pen Drive"
 msgstr "پِن ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:531
+#: src/vfs/vfs-volume-hal.c:547
 #, c-format
 msgid "%s %s Music Player"
 msgstr "%s %s موسیقی پلیئر"
 
-#: src/vfs/vfs-volume-hal.c:539
+#: src/vfs/vfs-volume-hal.c:555
 #, c-format
 msgid "%s %s Digital Camera"
 msgstr "%s %s رقمی کیمرا"
 
-#: src/vfs/vfs-volume-hal.c:570
+#: src/vfs/vfs-volume-hal.c:586
 msgid "Drive"
 msgstr "ڈرائیو"
 
-#: src/vfs/vfs-volume-hal.c:575
+#: src/vfs/vfs-volume-hal.c:591
 #, c-format
 msgid "External %s"
 msgstr "خارجی %s"
 
-#: src/vfs/vfs-volume-hal.c:609
+#: src/vfs/vfs-volume-hal.c:625
 msgid "CD-ROM Disc"
 msgstr "سی ڈی روم ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:614
+#: src/vfs/vfs-volume-hal.c:630
 msgid "Blank CD-R Disc"
 msgstr "خالی CD-R ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:616
+#: src/vfs/vfs-volume-hal.c:632
 msgid "CD-R Disc"
 msgstr "CD-R ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:621
+#: src/vfs/vfs-volume-hal.c:637
 msgid "Blank CD-RW Disc"
 msgstr "خالی CD-RW ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:623
+#: src/vfs/vfs-volume-hal.c:639
 msgid "CD-RW Disc"
 msgstr "CD-RW ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:627
+#: src/vfs/vfs-volume-hal.c:643
 msgid "DVD-ROM Disc"
 msgstr "DVD-ROM ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:632
+#: src/vfs/vfs-volume-hal.c:648
 msgid "Blank DVD-RAM Disc"
 msgstr "خالی DVD-RAM ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:634
+#: src/vfs/vfs-volume-hal.c:650
 msgid "DVD-RAM Disc"
 msgstr "DVD-RAM ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:639
+#: src/vfs/vfs-volume-hal.c:655
 msgid "Blank DVD-R Disc"
 msgstr "خالی DVD-R ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:641
+#: src/vfs/vfs-volume-hal.c:657
 msgid "DVD-R Disc"
 msgstr "DVD-R ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:646
+#: src/vfs/vfs-volume-hal.c:662
 msgid "Blank DVD-RW Disc"
 msgstr "خالی DVD-RW ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:648
+#: src/vfs/vfs-volume-hal.c:664
 msgid "DVD-RW Disc"
 msgstr "DVD-RW ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:654
+#: src/vfs/vfs-volume-hal.c:670
 msgid "Blank DVD+R Disc"
 msgstr "خالی DVD+R ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:656
+#: src/vfs/vfs-volume-hal.c:672
 msgid "DVD+R Disc"
 msgstr "DVD+R ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:661
+#: src/vfs/vfs-volume-hal.c:677
 msgid "Blank DVD+RW Disc"
 msgstr "خالی DVD+RW ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:663
+#: src/vfs/vfs-volume-hal.c:679
 msgid "DVD+RW Disc"
 msgstr "DVD+RW ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:670
+#: src/vfs/vfs-volume-hal.c:686
 msgid "Audio Disc"
 msgstr "آڈیو ڈسک"
 
-#: src/vfs/vfs-volume-hal.c:680
+#: src/vfs/vfs-volume-hal.c:696
 #, c-format
 msgid "%s Removable Volume"
 msgstr "%s قابلِ فصل والیم"
 
-#: src/vfs/vfs-volume-hal.c:688
+#: src/vfs/vfs-volume-hal.c:704
 msgid "Volume"
 msgstr "والیم"
 
-#: src/vfs/vfs-volume-hal.c:1084
+#: src/vfs/vfs-volume-hal.c:1100
 #, c-format
 msgid "Failed to connect to the HAL daemon: %s"
 msgstr "اتصال HAL ڈائمن سے نہیں ہوسکا: %s"
 
 #. definitely not a device that we're able to mount, eject or unmount
-#: src/vfs/vfs-volume-hal.c:1926 src/vfs/vfs-volume-hal.c:1982
+#: src/vfs/vfs-volume-hal.c:1941 src/vfs/vfs-volume-hal.c:1997
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
 msgstr "دی گئی ڈیوائس \"%s\" کوئی والیم یا ڈرائیو نہیں ہے"
 
 #. tell the caller that no matching device was found
-#: src/vfs/vfs-volume-hal.c:2058
+#: src/vfs/vfs-volume-hal.c:2073
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
 msgstr "ڈیوائس \"%s\" فائل سسٹم کی ڈیوائس ٹیبل میں نہیں پائی گئی"
 
-#: src/vfs/vfs-volume-hal.c:2228
+#: src/vfs/vfs-volume-hal.c:2256
 #, c-format
 msgid "You are not privileged to mount the volume \"%s\""
 msgstr "آپ کے پاس والیم \"%s\" کو ماؤنٹ کرنے کا استحقاق نہیں ہے"
 
-#: src/vfs/vfs-volume-hal.c:2229
+#: src/vfs/vfs-volume-hal.c:2257
 #, c-format
 msgid "You are not privileged to unmount the volume \"%s\""
 msgstr "آپ کے پاس والیم \"%s\" کو ان ماؤنٹ کرنے کا استحقاق نہیں ہے"
 
-#: src/vfs/vfs-volume-hal.c:2230
+#: src/vfs/vfs-volume-hal.c:2258
 #, c-format
 msgid "You are not privileged to eject the volume \"%s\""
 msgstr "آپ کے پاس والیم \"%s\" کو نکالنے کا استحقاق نہیں ہے"
 
 #. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
-#: src/vfs/vfs-volume-hal.c:2242
+#: src/vfs/vfs-volume-hal.c:2270
 #, c-format
 msgid "Invalid mount option when attempting to mount the volume \"%s\""
 msgstr "والیم \"%s\" کو ماؤنٹ کرنے کی کوشش میں ناموزوں آپشن دیا گیا"
 
-#: src/vfs/vfs-volume-hal.c:2244
+#: src/vfs/vfs-volume-hal.c:2272
 #, c-format
 msgid ""
 "The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
@@ -979,28 +995,28 @@ msgstr ""
 "والیم \"%s\" فائل سسٹم <i>%s</i> استعمال کرتا ہے جس کی آپ کے نظام میں معاونت "
 "نہیں ہے"
 
-#: src/vfs/vfs-volume-hal.c:2246
+#: src/vfs/vfs-volume-hal.c:2274
 #, c-format
 msgid "An application is preventing the volume \"%s\" from being unmounted"
 msgstr "کوئی اطلاقیہ والیم \"%s\" کو ان ماؤنٹ ہونے سے روک رہا ہے"
 
-#: src/vfs/vfs-volume-hal.c:2248
+#: src/vfs/vfs-volume-hal.c:2276
 #, c-format
 msgid "The volume \"%s\" is not mounted"
 msgstr "والیم \"%s\" ماؤنٹ نہیں کیا گیا"
 
-#: src/vfs/vfs-volume-hal.c:2250
+#: src/vfs/vfs-volume-hal.c:2278
 #, c-format
 msgid "Error <i>%s</i>"
 msgstr "غلطی <i>%s</i>"
 
 #. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
-#: src/vfs/vfs-volume-hal.c:2253
+#: src/vfs/vfs-volume-hal.c:2281
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
 msgstr "ممکنہ طور پر والیم \"%s\" کمانڈ لائن سے ماؤنٹ کیا گیا ہے"
 
-#: src/vfs/vfs-volume-hal.c:2261
+#: src/vfs/vfs-volume-hal.c:2289
 #, c-format
 msgid ""
 "Blank discs cannot be mounted, use a CD recording application to record "
@@ -1009,26 +1025,40 @@ msgstr ""
 "خالی سیڈیاں ماؤنٹ نہیں کی جاسکتیں، آڈیو یا کوئی ڈیٹا ریکارڈ کرنے کے لیے کوئی "
 "سی ڈی ریکارڈنگ اطلاقیہ استعمال کریں"
 
-#: src/vfs/vfs-volume-hal.c:2272
+#: src/vfs/vfs-volume-hal.c:2300
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr ""
 "آڈیو سیڈیاں ماؤنٹ نہیں کی جاسکتیں، آڈیو سی ڈی کو چلانے کے لیے کوئی آڈیو "
 "پلیئر استعمال کریں"
 
-#: data/ui/prefdlg.glade:7
+#: src/desktop/desktop-window.c:164
+#, fuzzy
+msgid "_Icons"
+msgstr "دکھائ_یں بطور آئکن"
+
+#: src/desktop/desktop-window.c:169
+#, fuzzy
+msgid "_Desktop Settings"
+msgstr "_ڈیسک ٹاپ"
+
+#: src/desktop/desktop-window.c:1106
+msgid "My Documents"
+msgstr ""
+
+#: data/ui/prefdlg.glade:1
 msgid "Preference"
 msgstr "ترجیحات"
 
-#: data/ui/prefdlg.glade:30
+#: data/ui/prefdlg.glade:1
 msgid "On-disk file name encoding:"
 msgstr "فائلوں کے نام کی انکوڈنگ:"
 
-#: data/ui/prefdlg.glade:62
+#: data/ui/prefdlg.glade:1
 msgid "Bookmarks:"
 msgstr "پسندیدہ:"
 
-#: data/ui/prefdlg.glade:72
+#: data/ui/prefdlg.glade:1
 msgid ""
 "Opened in Current Tab\n"
 "Opened in New Tab\n"
@@ -1038,176 +1068,210 @@ msgstr ""
 "نئے ٹیب میں کھولیں\n"
 "نئی ونڈو میں کھولیں"
 
-#: data/ui/prefdlg.glade:94
+#: data/ui/prefdlg.glade:3
 msgid "Size of Big Icons:"
 msgstr "بڑی آئکن کا حجم:"
 
-#: data/ui/prefdlg.glade:121
+#: data/ui/prefdlg.glade:10
 msgid "Size of Small Icons:"
 msgstr "چھوٹی آئکن کا حجم:"
 
-#: data/ui/prefdlg.glade:155
+#: data/ui/prefdlg.glade:16
 msgid "Display image files with supported format as thumbnails"
 msgstr "معاونت رکھنے والی تصاویر کا تھمبنیل دکھائیں"
 
-#: data/ui/prefdlg.glade:174
+#: data/ui/prefdlg.glade:16
 msgid "Max size of files displayed as thumbnails:"
 msgstr "تھمبنیل فائلوں کا زیادہ سے زیادہ حجم:"
 
-#: data/ui/prefdlg.glade:218
+#: data/ui/prefdlg.glade:16
 msgid "Terminal:"
 msgstr "ٹرمنل:"
 
-#: data/ui/prefdlg.glade:252 data/ui/file_properties.glade:254
+#: data/ui/prefdlg.glade:16 data/ui/file_properties.glade:1
 msgid "_General"
 msgstr "_عام"
 
-#: data/ui/prefdlg.glade:268
+#: data/ui/prefdlg.glade:16
 msgid "Show file icons on desktop"
 msgstr "ڈیسک ٹاپ پر فائلوں کے آئکن ظاہر کریں"
 
-#: data/ui/prefdlg.glade:287
+#: data/ui/prefdlg.glade:16
 msgid "Wallpaper:"
 msgstr "وال پیپر:"
 
-#: data/ui/prefdlg.glade:300
+#: data/ui/prefdlg.glade:16
 msgid "Please select an image file"
 msgstr "تصویر منتخب کریں"
 
-#: data/ui/prefdlg.glade:325
-msgid "Background Color"
+#: data/ui/prefdlg.glade:16
+#, fuzzy
+msgid "Mode:"
+msgstr "منتقل:"
+
+#: data/ui/prefdlg.glade:16
+msgid ""
+"Stretch to fill the entire screen\n"
+"Stretch to fit the screen\n"
+"Center on the screen\n"
+"Tile the image to fill the entire screen"
+msgstr ""
+
+#: data/ui/prefdlg.glade:19
+#, fuzzy
+msgid "<b>Wallpaper</b>"
+msgstr "وال پیپر:"
+
+#: data/ui/prefdlg.glade:19
+#, fuzzy
+msgid "Background"
 msgstr "پس منظر رنگ"
 
-#: data/ui/prefdlg.glade:357
-msgid "Text Color"
-msgstr "متن رنگ"
+#: data/ui/prefdlg.glade:19
+#, fuzzy
+msgid "Text"
+msgstr "متن"
 
-#: data/ui/prefdlg.glade:395
+#: data/ui/prefdlg.glade:19
+msgid "Shadow"
+msgstr ""
+
+#: data/ui/prefdlg.glade:19
+msgid "<b>Colors</b>"
+msgstr ""
+
+#: data/ui/prefdlg.glade:19
+msgid "Show menus provided by WM when desktop is clicked"
+msgstr ""
+
+#: data/ui/prefdlg.glade:19
+msgid "Advanced"
+msgstr ""
+
+#: data/ui/prefdlg.glade:19
 msgid "_Desktop"
 msgstr "_ڈیسک ٹاپ"
 
-#: data/ui/file_properties.glade:7
+#: data/ui/file_properties.glade:1
 msgid "File Properties"
 msgstr "فائل کی خصوصیات"
 
-#: data/ui/file_properties.glade:45
+#: data/ui/file_properties.glade:1
 msgid "Open with:"
 msgstr "کھولیں بذریعہ:"
 
-#: data/ui/file_properties.glade:74
+#: data/ui/file_properties.glade:1
 msgid "Size on Disk:"
 msgstr "ڈسک پر حجم:"
 
-#: data/ui/file_properties.glade:115
+#: data/ui/file_properties.glade:1
 msgid "Location:"
 msgstr "مقام:"
 
-#: data/ui/file_properties.glade:142
+#: data/ui/file_properties.glade:1
 msgid "Last Access:"
 msgstr "آخری رسائی:"
 
-#: data/ui/file_properties.glade:203
+#: data/ui/file_properties.glade:1
 msgid "Last Modification:"
 msgstr "آخری تبدیلی:"
 
-#: data/ui/file_properties.glade:216
+#: data/ui/file_properties.glade:1
 msgid "Total Size of Files:"
 msgstr "فائلوں کا کل حجم:"
 
-#: data/ui/file_properties.glade:229
+#: data/ui/file_properties.glade:1
 msgid "File Type:"
 msgstr "فائل قسم:"
 
-#: data/ui/file_properties.glade:242
+#: data/ui/file_properties.glade:1
 msgid "File Name:"
 msgstr "فائل کا نام:"
 
-#: data/ui/file_properties.glade:302 data/ui/file_properties.glade:594
+#: data/ui/file_properties.glade:1
 msgid "Group:"
 msgstr "گروپ:"
 
-#: data/ui/file_properties.glade:314 data/ui/file_properties.glade:607
+#: data/ui/file_properties.glade:1
 msgid "Owner:"
 msgstr "مالک:"
 
-#: data/ui/file_properties.glade:362
+#: data/ui/file_properties.glade:1
 msgid "Sticky"
 msgstr "چسپاں"
 
-#: data/ui/file_properties.glade:381
+#: data/ui/file_properties.glade:1
 msgid "Set GID"
 msgstr "مرتب GID"
 
-#: data/ui/file_properties.glade:400
+#: data/ui/file_properties.glade:1
 msgid "Set UID"
 msgstr "مرتب UID"
 
-#: data/ui/file_properties.glade:417 data/ui/file_properties.glade:436
-#: data/ui/file_properties.glade:455
+#: data/ui/file_properties.glade:1
 msgid "Execute"
 msgstr "اطلاق"
 
-#: data/ui/file_properties.glade:472 data/ui/file_properties.glade:491
-#: data/ui/file_properties.glade:510
+#: data/ui/file_properties.glade:1
 msgid "Write"
 msgstr "لکھیں"
 
-#: data/ui/file_properties.glade:527 data/ui/file_properties.glade:546
-#: data/ui/file_properties.glade:565
+#: data/ui/file_properties.glade:1
 msgid "Read"
 msgstr "پڑھیں"
 
-#: data/ui/file_properties.glade:581
+#: data/ui/file_properties.glade:1
 msgid "Other Users:"
 msgstr "دیگر صارفین:"
 
-#: data/ui/file_properties.glade:628
+#: data/ui/file_properties.glade:1
 msgid "_Permissions"
 msgstr "_اجازتیں"
 
-#: data/ui/appchooserdlg.glade:6
+#: data/ui/appchooserdlg.glade:1
 msgid "Choose an Application"
 msgstr "اطلاقیے منتخب کریں"
 
-#: data/ui/appchooserdlg.glade:23
+#: data/ui/appchooserdlg.glade:1
 msgid "File Type To be Opened:"
 msgstr "کھولنے کے لیے فائل کی قسم:"
 
-#: data/ui/appchooserdlg.glade:52
+#: data/ui/appchooserdlg.glade:1
 msgid ""
 "Please choose an application from following lists or enter the command line "
 "by hand:"
 msgstr "مندرجہ ذیل فہرست سے اطلاقیے منتخب کریں یا خود ہی کمانڈ لائن لکھیں:"
 
-#: data/ui/appchooserdlg.glade:87
+#: data/ui/appchooserdlg.glade:1
 msgid "_Recommended Applications"
 msgstr "_مجوزہ اطلاقیے"
 
-#: data/ui/appchooserdlg.glade:117
+#: data/ui/appchooserdlg.glade:1
 msgid "_All Applications"
 msgstr "_تمام اطلاقیے"
 
-#: data/ui/appchooserdlg.glade:139
-msgid "_Command Line: "
+#: data/ui/appchooserdlg.glade:1
+#, fuzzy
+msgid "_Command Line:"
 msgstr "_کمانڈ لائن:"
 
-#: data/ui/appchooserdlg.glade:186
+#: data/ui/appchooserdlg.glade:1
 msgid "_Browse"
 msgstr "_انتخاب"
 
-#: data/ui/appchooserdlg.glade:221
+#: data/ui/appchooserdlg.glade:1
 msgid "Opened in Terminal"
 msgstr "ٹرمنل میں چلائیں"
 
-#: data/ui/appchooserdlg.glade:235
+#: data/ui/appchooserdlg.glade:1
 msgid "Set selected application to default action"
 msgstr "اس قسم کی فائلوں کے لیے طے شدہ"
 
-#: data/ui/about-dlg.glade:11
+#: data/ui/about-dlg.glade:1
 msgid "Copyright (C) 2005 - 2006"
 msgstr "کاپی رائٹ  2005 - 2006 (C)"
 
-#: data/ui/about-dlg.glade:12
+#: data/ui/about-dlg.glade:1
 msgid ""
 "Lightweight file manager\n"
 "\n"
@@ -1217,7 +1281,7 @@ msgstr ""
 "\n"
 "تیار کردہ از ہون جین یی (PCMan)"
 
-#: data/ui/about-dlg.glade:33
+#: data/ui/about-dlg.glade:19
 msgid ""
 "洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
 "\n"
@@ -1245,7 +1309,7 @@ msgstr ""
 "     * thunar-vfs and libexo: Benedikt Meurer\n"
 "     * gnome-mount: David Zeuthen"
 
-#: data/ui/about-dlg.glade:45
+#: data/ui/about-dlg.glade:30
 msgid "translator-credits"
 msgstr ""
 "محمد علی مکی\n"
@@ -1253,7 +1317,7 @@ msgstr ""
 "اردو کوڈر لینکس فورم\n"
 "http://www.urducoder.com"
 
-#: data/ui/about-dlg.glade:46
+#: data/ui/about-dlg.glade:30
 msgid ""
 "The icon was taken from \"nuoveXT 2\" icon theme\n"
 "created by Alexandre Moore (saki).\n"
@@ -1262,6 +1326,15 @@ msgstr ""
 "آئکن \"nuoveXT 2\" آئکن تھیم سے لیے گئے ہیں\n"
 "تیار کردہ از الیگزینڈر مور (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+
+#~ msgid "gksu or kdesu is not found"
+#~ msgstr "gksu یا kdesu نہیں پایا گیا"
+
+#~ msgid "Error: %s\n"
+#~ msgstr "غلطی: %s\n"
+
+#~ msgid "Text Color"
+#~ msgstr "متن رنگ"
 
 #~ msgid ""
 #~ "The volume \"%s\" is not mounted.\n"
@@ -1278,9 +1351,6 @@ msgstr ""
 
 #~ msgid "video"
 #~ msgstr "وڈیو"
-
-#~ msgid "text"
-#~ msgstr "متن"
 
 #~ msgid "multipart"
 #~ msgstr "متعدد اجزاء"

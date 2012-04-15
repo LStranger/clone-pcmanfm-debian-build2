@@ -287,15 +287,22 @@ static const char* lookup_suffix_nodes( const char* buf, const char* nodes, guin
                 guint32 first_child_off;
                 if( uchar == 0 )
                     return NULL;
+
                 if( ! name || 0 == name[0] )
-                    return buf + VAL32(node, 4);
+                {
+                    guint32 offset = VAL32(node, 4);
+                    return offset ? buf + offset : NULL;
+                }
                 first_child_off = VAL32(node, 12);
                 return lookup_suffix_nodes( buf, (buf + first_child_off), n_children, name );
             }
             else
             {
                 if( ! name || 0 == name[0] )
-                    return buf + VAL32(node, 4);
+                {
+                    guint32 offset = VAL32(node, 4);
+                    return offset ? buf + offset : NULL;
+                }
                 return NULL;
             }
         }
@@ -322,6 +329,7 @@ const char* mime_cache_lookup_suffix( MimeCache* cache, const char* filename, co
         suffix = strchr( filename, ch );
         if( ! suffix )
             continue;
+
         first_child_off = VAL32( root, 12 );
         n = VAL32( root, 8 );
         do{

@@ -5,7 +5,12 @@
 
 G_BEGIN_DECLS
 
-gboolean show_preference_dialog( GtkWindow* parent );
+typedef enum {
+    PREF_GENERAL,
+    PREF_DESKTOP
+}PrefDlgPage;
+
+gboolean fm_edit_preference( GtkWindow* parent, int page );
 
 G_END_DECLS
 

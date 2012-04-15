@@ -19,6 +19,9 @@
  *      MA 02110-1301, USA.
  */
 
+#include <glib/gi18n.h>
+#include <string.h>
+
 #include "vfs-utils.h"
 
 GdkPixbuf* vfs_load_icon( GtkIconTheme* theme, const char* icon_name, int size )
@@ -65,3 +68,83 @@ GdkPixbuf* vfs_load_icon( GtkIconTheme* theme, const char* icon_name, int size )
     }
     return icon;
 }
+
+static char* find_su_program( GError** err )
+{
+    char* su;
+
+#ifdef PREFERABLE_SUDO_PROG
+    su = g_find_program_in_path( PREFERABLE_SUDO_PROG );
+#else
+    /* Use default search rules */
+    su = g_find_program_in_path( "gksudo" );
+    if ( ! su )
+        su = g_find_program_in_path( "gksu" );
+    if ( ! su )
+        su = g_find_program_in_path( "kdesu" );
+#endif
+
+    if ( ! su )
+        g_set_error( err, G_SPAWN_ERROR, G_SPAWN_ERROR_FAILED, _( "gksu or kdesu is not found" ) );
+
+    return su;
+}
+
+gboolean vfs_sudo_cmd_async( const char* cwd, char*cmd, GError** err )
+{
+    char *su, *argv[3];
+    gboolean ret;
+
+    if ( ! ( su = find_su_program( err ) ) )
+        return FALSE;
+
+    argv[0] = su;
+    argv[1] = cmd;
+    argv[2] = NULL;
+
+    ret = g_spawn_async( cwd, argv, NULL,
+                   G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
+                   NULL, NULL, NULL, err );
+
+    g_free( su );
+    return ret;
+}
+
+gboolean vfs_sudo_cmd_sync( const char* cwd, char*cmd,
+                                               int* exit_status,
+                                               char** pstdout, char** pstderr, GError** err )
+{
+    char *su, *argv[3];
+    gboolean ret;
+
+    if ( ! ( su = find_su_program( err ) ) )
+        return FALSE;
+
+    argv[0] = su;
+    argv[1] = cmd;
+    argv[2] = NULL;
+
+    ret = g_spawn_sync( cwd, argv, NULL,
+                   G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
+                   NULL, NULL,
+                   pstdout, pstderr, exit_status, err );
+
+    g_free( su );
+    return ret;
+}
+
+/*
+static char* argv_to_cmdline( char** argv )
+{
+    GString* cmd;
+    char* quoted;
+    cmd = g_string_new(NULL);
+    while( *argv )
+    {
+        quoted = g_shell_quote( *argv );
+        g_string_append( cmd, quoted );
+        g_free( quoted );
+    }
+    return g_string_free( cmd, FALSE );
+}
+*/

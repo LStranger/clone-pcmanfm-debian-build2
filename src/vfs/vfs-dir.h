@@ -79,9 +79,6 @@ gboolean vfs_dir_is_loading( VFSDir* dir );
 void vfs_dir_cancel_load( VFSDir* dir );
 gboolean vfs_dir_is_file_listed( VFSDir* dir );
 
-void vfs_dir_request_thumbnail( VFSDir* dir, VFSFileInfo* file, gboolean big );
-void vfs_dir_cancel_thumbnail_request( VFSDir* dir, VFSFileInfo* file,
-                                       gboolean big );
 void vfs_dir_unload_thumbnails( VFSDir* dir, gboolean is_big );
 
 /* emit signals */

@@ -5,6 +5,10 @@
 *
 */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include "settings.h"
 #include <stdio.h>
 #include <string.h>
@@ -12,34 +16,40 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
-
 #include "glib-utils.h" /* for g_mkdir_with_parents() */
 
 #include <gtk/gtk.h>
 #include "ptk-file-browser.h"
 
-AppSettings appSettings = {0};
-/* const gboolean singleInstanceDefault = TRUE; */
-const gboolean showHiddenFilesDefault = FALSE;
-const gboolean showSidePaneDefault = TRUE;
-const int sidePaneModeDefault = PTK_FB_SIDE_PANE_BOOKMARKS;
-const gboolean showThumbnailDefault = TRUE;
-const int maxThumbSizeDefault = 1 << 20;
-const int bigIconSizeDefault = 48;
-const int smallIconSizeDefault = 20;
-const int openBookmarkMethodDefault = 1;
-const int viewModeDefault = PTK_FB_ICON_VIEW;
-const int sortOrderDefault = PTK_FB_SORT_BY_NAME;
-const int sortTypeDefault = GTK_SORT_ASCENDING;
+#include "desktop.h"
 
-const gboolean showDesktopDefault = FALSE;
-const gboolean showWallpaperDefault = FALSE;
-const GdkColor desktopBg1Default={0};
-const GdkColor desktopBg2Default={0};
-const GdkColor desktopTextDefault={0, 65535, 65535, 65535};
+/* Dirty hack: check whether we are under LXDE or not */
+#define is_under_LXDE()     (g_getenv( "_LXSESSION_PID" ) != NULL)
+
+AppSettings app_settings = {0};
+/* const gboolean singleInstance_default = TRUE; */
+const gboolean show_hidden_files_default = FALSE;
+const gboolean show_side_pane_default = TRUE;
+const int side_pane_mode_default = PTK_FB_SIDE_PANE_BOOKMARKS;
+const gboolean show_thumbnail_default = TRUE;
+const int max_thumb_size_default = 1 << 20;
+const int big_icon_size_default = 48;
+const int small_icon_size_default = 20;
+const int open_bookmark_method_default = 1;
+const int view_mode_default = PTK_FB_ICON_VIEW;
+const int sort_order_default = PTK_FB_SORT_BY_NAME;
+const int sort_type_default = GTK_SORT_ASCENDING;
+
+gboolean show_desktop_default = FALSE;
+const gboolean show_wallpaper_default = FALSE;
+const WallpaperMode wallpaper_mode_default=WPM_STRETCH;
+const GdkColor desktop_bg1_default={0};
+const GdkColor desktop_bg2_default={0};
+const GdkColor desktop_text_default={0, 65535, 65535, 65535};
+const GdkColor desktop_shadow_default={0};
+const int desktop_sort_by_default = DW_SORT_BY_MTIME;
+const int desktop_sort_type_default = GTK_SORT_ASCENDING;
+const gboolean show_wm_menu_default = FALSE;
 
 typedef void ( *SettingsParseFunc ) ( char* line );
 
@@ -58,52 +68,52 @@ static void parse_general_settings( char* line )
     value = sep + 1;
     *sep = '\0';
     if ( 0 == strcmp( name, "encoding" ) )
-        strcpy( appSettings.encoding, value );
-    else if ( 0 == strcmp( name, "showHiddenFiles" ) )
-        appSettings.showHiddenFiles = atoi( value );
-    else if ( 0 == strcmp( name, "showSidePane" ) )
-        appSettings.showSidePane = atoi( value );
-    else if ( 0 == strcmp( name, "sidePaneMode" ) )
-        appSettings.sidePaneMode = atoi( value );
-    else if ( 0 == strcmp( name, "showThumbnail" ) )
-        appSettings.showThumbnail = atoi( value );
-    else if ( 0 == strcmp( name, "maxThumbSize" ) )
-        appSettings.maxThumbSize = atoi( value ) << 10;
-    else if ( 0 == strcmp( name, "bigIconSize" ) )
+        strcpy( app_settings.encoding, value );
+    else if ( 0 == strcmp( name, "show_hidden_files" ) )
+        app_settings.show_hidden_files = atoi( value );
+    else if ( 0 == strcmp( name, "show_side_pane" ) )
+        app_settings.show_side_pane = atoi( value );
+    else if ( 0 == strcmp( name, "side_pane_mode" ) )
+        app_settings.side_pane_mode = atoi( value );
+    else if ( 0 == strcmp( name, "show_thumbnail" ) )
+        app_settings.show_thumbnail = atoi( value );
+    else if ( 0 == strcmp( name, "max_thumb_size" ) )
+        app_settings.max_thumb_size = atoi( value ) << 10;
+    else if ( 0 == strcmp( name, "big_icon_size" ) )
     {
-        appSettings.bigIconSize = atoi( value );
-        if( appSettings.bigIconSize <= 0 || appSettings.bigIconSize > 128 )
-            appSettings.bigIconSize = bigIconSizeDefault;
+        app_settings.big_icon_size = atoi( value );
+        if( app_settings.big_icon_size <= 0 || app_settings.big_icon_size > 128 )
+            app_settings.big_icon_size = big_icon_size_default;
     }
-    else if ( 0 == strcmp( name, "smallIconSize" ) )
+    else if ( 0 == strcmp( name, "small_icon_size" ) )
     {
-        appSettings.smallIconSize = atoi( value );
-        if( appSettings.smallIconSize <= 0 || appSettings.smallIconSize > 128 )
-            appSettings.smallIconSize = smallIconSizeDefault;
+        app_settings.small_icon_size = atoi( value );
+        if( app_settings.small_icon_size <= 0 || app_settings.small_icon_size > 128 )
+            app_settings.small_icon_size = small_icon_size_default;
     }
-    else if ( 0 == strcmp( name, "viewMode" ) )
-        appSettings.viewMode = atoi( value );
-    else if ( 0 == strcmp( name, "sortOrder" ) )
-        appSettings.sortOrder = atoi( value );
-    else if ( 0 == strcmp( name, "sortType" ) )
-        appSettings.sortType = atoi( value );
-    else if ( 0 == strcmp( name, "openBookmarkMethod" ) )
-        appSettings.openBookmarkMethod = atoi( value );
+    else if ( 0 == strcmp( name, "view_mode" ) )
+        app_settings.view_mode = atoi( value );
+    else if ( 0 == strcmp( name, "sort_order" ) )
+        app_settings.sort_order = atoi( value );
+    else if ( 0 == strcmp( name, "sort_type" ) )
+        app_settings.sort_type = atoi( value );
+    else if ( 0 == strcmp( name, "open_bookmark_method" ) )
+        app_settings.open_bookmark_method = atoi( value );
 /*
     else if ( 0 == strcmp( name, "iconTheme" ) )
     {
         if ( value && *value )
-            appSettings.iconTheme = strdup( value );
+            app_settings.iconTheme = strdup( value );
     }
 */
     else if ( 0 == strcmp( name, "terminal" ) )
     {
         if ( value && *value )
-            appSettings.terminal = strdup( value );
+            app_settings.terminal = strdup( value );
     }
     /*
     else if ( 0 == strcmp( name, "singleInstance" ) )
-        appSettings.singleInstance = atoi( value );
+        app_settings.singleInstance = atoi( value );
     */
 }
 
@@ -130,24 +140,24 @@ static void parse_window_state( char* line )
     name = line;
     value = sep + 1;
     *sep = '\0';
-    if ( 0 == strcmp( name, "splitterPos" ) )
+    if ( 0 == strcmp( name, "splitter_pos" ) )
     {
         v = atoi( value );
-        appSettings.splitterPos = ( v > 0 ? v : 160 );
+        app_settings.splitter_pos = ( v > 0 ? v : 160 );
     }
     if ( 0 == strcmp( name, "width" ) )
     {
         v = atoi( value );
-        appSettings.width = ( v > 0 ? v : 640 );
+        app_settings.width = ( v > 0 ? v : 640 );
     }
     if ( 0 == strcmp( name, "height" ) )
     {
         v = atoi( value );
-        appSettings.height = ( v > 0 ? v : 480 );
+        app_settings.height = ( v > 0 ? v : 480 );
     }
     if ( 0 == strcmp( name, "maximized" ) )
     {
-        appSettings.maximized = atoi( value );
+        app_settings.maximized = atoi( value );
     }
 }
 
@@ -161,19 +171,28 @@ static void parse_desktop_settings( char* line )
     name = line;
     value = sep + 1;
     *sep = '\0';
-
-    if ( 0 == strcmp( name, "showDesktop" ) )
-        appSettings.showDesktop = atoi( value );
-    else if ( 0 == strcmp( name, "showWallpaper" ) )
-        appSettings.showWallpaper = atoi( value );
+    if ( 0 == strcmp( name, "show_desktop" ) )
+        app_settings.show_desktop = atoi( value );
+    else if ( 0 == strcmp( name, "show_wallpaper" ) )
+        app_settings.show_wallpaper = atoi( value );
     else if ( 0 == strcmp( name, "wallpaper" ) )
-        appSettings.wallpaper = g_strdup( value );
-    else if ( 0 == strcmp( name, "Bg1" ) )
-        color_from_str( &appSettings.desktopBg1, value );
-    else if ( 0 == strcmp( name, "Bg2" ) )
-        color_from_str( &appSettings.desktopBg2, value );
-    else if ( 0 == strcmp( name, "Text" ) )
-        color_from_str( &appSettings.desktopText, value );
+        app_settings.wallpaper = g_strdup( value );
+    else if ( 0 == strcmp( name, "wallpaper_mode" ) )
+        app_settings.wallpaper_mode = atoi( value );
+    else if ( 0 == strcmp( name, "bg1" ) )
+        color_from_str( &app_settings.desktop_bg1, value );
+    else if ( 0 == strcmp( name, "bg2" ) )
+        color_from_str( &app_settings.desktop_bg2, value );
+    else if ( 0 == strcmp( name, "text" ) )
+        color_from_str( &app_settings.desktop_text, value );
+    else if ( 0 == strcmp( name, "shadow" ) )
+        color_from_str( &app_settings.desktop_shadow, value );
+    else if ( 0 == strcmp( name, "sort_by" ) )
+        app_settings.desktop_sort_by = atoi( value );
+    else if ( 0 == strcmp( name, "sort_type" ) )
+        app_settings.desktop_sort_type = atoi( value );
+    else if ( 0 == strcmp( name, "show_wm_menu" ) )
+        app_settings.show_wm_menu = atoi( value );
 }
 
 void load_settings()
@@ -186,34 +205,48 @@ void load_settings()
 
     /* set default value */
     /* General */
-    /* appSettings.singleInstance = singleInstanceDefault; */
-    appSettings.showDesktop = showDesktopDefault;
-    appSettings.showWallpaper = showWallpaperDefault;
-    appSettings.wallpaper = NULL;
-    appSettings.desktopBg1 = desktopBg1Default;
-    appSettings.desktopBg2 = desktopBg2Default;
-    appSettings.desktopText = desktopTextDefault;
+    /* app_settings.show_desktop = show_desktop_default; */
+    app_settings.show_wallpaper = show_wallpaper_default;
+    app_settings.wallpaper = NULL;
+    app_settings.desktop_bg1 = desktop_bg1_default;
+    app_settings.desktop_bg2 = desktop_bg2_default;
+    app_settings.desktop_text = desktop_text_default;
+    app_settings.desktop_sort_by = desktop_sort_by_default;
+    app_settings.desktop_sort_type = desktop_sort_type_default;
+    app_settings.show_wm_menu = show_wm_menu_default;
 
-    appSettings.encoding[ 0 ] = '\0';
-    appSettings.showHiddenFiles = showHiddenFilesDefault;
-    appSettings.showSidePane = showSidePaneDefault;
-    appSettings.sidePaneMode = sidePaneModeDefault;
-    appSettings.showThumbnail = showThumbnailDefault;
-    appSettings.maxThumbSize = maxThumbSizeDefault;
-    appSettings.bigIconSize = bigIconSizeDefault;
-    appSettings.smallIconSize = smallIconSizeDefault;
-    appSettings.viewMode = viewModeDefault;
-    appSettings.openBookmarkMethod = openBookmarkMethodDefault;
-    /* appSettings.iconTheme = NULL; */
-    appSettings.terminal = NULL;
+    app_settings.encoding[ 0 ] = '\0';
+    app_settings.show_hidden_files = show_hidden_files_default;
+    app_settings.show_side_pane = show_side_pane_default;
+    app_settings.side_pane_mode = side_pane_mode_default;
+    app_settings.show_thumbnail = show_thumbnail_default;
+    app_settings.max_thumb_size = max_thumb_size_default;
+    app_settings.big_icon_size = big_icon_size_default;
+    app_settings.small_icon_size = small_icon_size_default;
+    app_settings.view_mode = view_mode_default;
+    app_settings.open_bookmark_method = open_bookmark_method_default;
+    /* app_settings.iconTheme = NULL; */
+    app_settings.terminal = NULL;
 
     /* Window State */
-    appSettings.splitterPos = 160;
-    appSettings.width = 640;
-    appSettings.height = 480;
+    app_settings.splitter_pos = 160;
+    app_settings.width = 640;
+    app_settings.height = 480;
 
     /* load settings */
-    path = g_build_filename( g_get_user_config_dir(), "pcmanfm/main", NULL );
+
+    /* Dirty hacks for LXDE */
+    if( is_under_LXDE() )
+    {
+        show_desktop_default = app_settings.show_desktop = TRUE;   /* show the desktop by default */
+        path = g_build_filename( g_get_user_config_dir(), "pcmanfm/main.lxde", NULL );
+    }
+    else
+    {
+        app_settings.show_desktop = show_desktop_default;
+        path = g_build_filename( g_get_user_config_dir(), "pcmanfm/main", NULL );
+    }
+
     file = fopen( path, "r" );
     g_free( path );
     if ( file )
@@ -242,14 +275,14 @@ void load_settings()
         fclose( file );
     }
 
-    if ( appSettings.encoding[ 0 ] )
+    if ( app_settings.encoding[ 0 ] )
     {
-        setenv( "G_FILENAME_ENCODING", appSettings.encoding, 1 );
+        setenv( "G_FILENAME_ENCODING", app_settings.encoding, 1 );
     }
 
     /* Load bookmarks */
     /* Don't load bookmarks here since we won't use it in some cases */
-    /* appSettings.bookmarks = ptk_bookmarks_get(); */
+    /* app_settings.bookmarks = ptk_bookmarks_get(); */
 }
 
 
@@ -257,7 +290,8 @@ void save_settings()
 {
     FILE * file;
     gchar* path;
-    /* load settings */
+
+    /* save settings */
     path = g_build_filename( g_get_user_config_dir(), "pcmanfm", NULL );
 
     if ( ! g_file_test( path, G_FILE_TEST_EXISTS ) )
@@ -265,89 +299,102 @@ void save_settings()
 
     chdir( path );
     g_free( path );
-    file = fopen( "main", "w" );
+
+    /* Dirty hacks for LXDE */
+    file = fopen( is_under_LXDE() ? "main.lxde" : "main", "w" );
+
     if ( file )
     {
         /* General */
         fputs( "[General]\n", file );
         /*
-        if ( appSettings.singleInstance != singleInstanceDefault )
-            fprintf( file, "singleInstance=%d\n", !!appSettings.singleInstance );
+        if ( app_settings.singleInstance != singleInstance_default )
+            fprintf( file, "singleInstance=%d\n", !!app_settings.singleInstance );
         */
-        if ( appSettings.encoding[ 0 ] )
-            fprintf( file, "encoding=%s\n", appSettings.encoding );
-        if ( appSettings.showHiddenFiles != showHiddenFilesDefault )
-            fprintf( file, "showHiddenFiles=%d\n", !!appSettings.showHiddenFiles );
-        if ( appSettings.showSidePane != showSidePaneDefault )
-            fprintf( file, "showSidePane=%d\n", appSettings.showSidePane );
-        if ( appSettings.sidePaneMode != sidePaneModeDefault )
-            fprintf( file, "sidePaneMode=%d\n", appSettings.sidePaneMode );
-        if ( appSettings.showThumbnail != showThumbnailDefault )
-            fprintf( file, "showThumbnail=%d\n", !!appSettings.showThumbnail );
-        if ( appSettings.maxThumbSize != maxThumbSizeDefault )
-            fprintf( file, "maxThumbSize=%d\n", appSettings.maxThumbSize >> 10 );
-        if ( appSettings.bigIconSize != bigIconSizeDefault )
-            fprintf( file, "bigIconSize=%d\n", appSettings.bigIconSize );
-        if ( appSettings.smallIconSize != smallIconSizeDefault )
-            fprintf( file, "smallIconSize=%d\n", appSettings.smallIconSize );
-        if ( appSettings.viewMode != viewModeDefault )
-            fprintf( file, "viewMode=%d\n", appSettings.viewMode );
-        if ( appSettings.sortOrder != sortOrderDefault )
-            fprintf( file, "sortOrder=%d\n", appSettings.sortOrder );
-        if ( appSettings.sortType != sortTypeDefault )
-            fprintf( file, "sortType=%d\n", appSettings.sortType );
-        if ( appSettings.openBookmarkMethod != openBookmarkMethodDefault )
-            fprintf( file, "openBookmarkMethod=%d\n", appSettings.openBookmarkMethod );
+        if ( app_settings.encoding[ 0 ] )
+            fprintf( file, "encoding=%s\n", app_settings.encoding );
+        if ( app_settings.show_hidden_files != show_hidden_files_default )
+            fprintf( file, "show_hidden_files=%d\n", !!app_settings.show_hidden_files );
+        if ( app_settings.show_side_pane != show_side_pane_default )
+            fprintf( file, "show_side_pane=%d\n", app_settings.show_side_pane );
+        if ( app_settings.side_pane_mode != side_pane_mode_default )
+            fprintf( file, "side_pane_mode=%d\n", app_settings.side_pane_mode );
+        if ( app_settings.show_thumbnail != show_thumbnail_default )
+            fprintf( file, "show_thumbnail=%d\n", !!app_settings.show_thumbnail );
+        if ( app_settings.max_thumb_size != max_thumb_size_default )
+            fprintf( file, "max_thumb_size=%d\n", app_settings.max_thumb_size >> 10 );
+        if ( app_settings.big_icon_size != big_icon_size_default )
+            fprintf( file, "big_icon_size=%d\n", app_settings.big_icon_size );
+        if ( app_settings.small_icon_size != small_icon_size_default )
+            fprintf( file, "small_icon_size=%d\n", app_settings.small_icon_size );
+        if ( app_settings.view_mode != view_mode_default )
+            fprintf( file, "view_mode=%d\n", app_settings.view_mode );
+        if ( app_settings.sort_order != sort_order_default )
+            fprintf( file, "sort_order=%d\n", app_settings.sort_order );
+        if ( app_settings.sort_type != sort_type_default )
+            fprintf( file, "sort_yype=%d\n", app_settings.sort_type );
+        if ( app_settings.open_bookmark_method != open_bookmark_method_default )
+            fprintf( file, "open_bookmark_method=%d\n", app_settings.open_bookmark_method );
         /*
-        if ( appSettings.iconTheme )
-            fprintf( file, "iconTheme=%s\n", appSettings.iconTheme );
+        if ( app_settings.iconTheme )
+            fprintf( file, "iconTheme=%s\n", app_settings.iconTheme );
         */
-        if ( appSettings.terminal )
-            fprintf( file, "terminal=%s\n", appSettings.terminal );
+        if ( app_settings.terminal )
+            fprintf( file, "terminal=%s\n", app_settings.terminal );
 
         fputs( "\n[Window]\n", file );
-        fprintf( file, "width=%d\n", appSettings.width );
-        fprintf( file, "height=%d\n", appSettings.height );
-        fprintf( file, "splitterPos=%d\n", appSettings.splitterPos );
-        fprintf( file, "maximized=%d\n", appSettings.maximized );
+        fprintf( file, "width=%d\n", app_settings.width );
+        fprintf( file, "height=%d\n", app_settings.height );
+        fprintf( file, "splitter_pos=%d\n", app_settings.splitter_pos );
+        fprintf( file, "maximized=%d\n", app_settings.maximized );
 
         /* Desktop */
         fputs( "\n[Desktop]\n", file );
-        if ( appSettings.showDesktop != showDesktopDefault )
-            fprintf( file, "showDesktop=%d\n", !!appSettings.showDesktop );
-        if ( appSettings.showWallpaper != showWallpaperDefault )
-            fprintf( file, "showWallpaper=%d\n", !!appSettings.showWallpaper );
-        if ( appSettings.wallpaper && appSettings.wallpaper[ 0 ] )
-            fprintf( file, "wallpaper=%s\n", appSettings.wallpaper );
-        if ( ! gdk_color_equal( &appSettings.desktopBg1,
-               &desktopBg1Default ) )
-            save_color( file, "Bg1",
-                        &appSettings.desktopBg1 );
-        if ( ! gdk_color_equal( &appSettings.desktopBg2,
-               &desktopBg2Default ) )
-            save_color( file, "Bg2",
-                        &appSettings.desktopBg2 );
-        if ( ! gdk_color_equal( &appSettings.desktopText,
-               &desktopTextDefault ) )
-            save_color( file, "Text",
-                        &appSettings.desktopText );
+        if ( app_settings.show_desktop != show_desktop_default )
+            fprintf( file, "show_desktop=%d\n", !!app_settings.show_desktop );
+        if ( app_settings.show_wallpaper != show_wallpaper_default )
+            fprintf( file, "show_wallpaper=%d\n", !!app_settings.show_wallpaper );
+        if ( app_settings.wallpaper && app_settings.wallpaper[ 0 ] )
+            fprintf( file, "wallpaper=%s\n", app_settings.wallpaper );
+        if ( app_settings.wallpaper_mode != wallpaper_mode_default )
+            fprintf( file, "wallpaper_mode=%d\n", app_settings.wallpaper_mode );
+        if ( app_settings.desktop_sort_by != desktop_sort_by_default )
+            fprintf( file, "sort_by=%d\n", app_settings.desktop_sort_by );
+        if ( app_settings.desktop_sort_type != desktop_sort_type_default )
+            fprintf( file, "sort_type=%d\n", app_settings.desktop_sort_type );
+        if ( app_settings.show_wm_menu != show_wm_menu_default )
+            fprintf( file, "show_wm_menu=%d\n", app_settings.show_wm_menu );
+        if ( ! gdk_color_equal( &app_settings.desktop_bg1,
+               &desktop_bg1_default ) )
+            save_color( file, "bg1",
+                        &app_settings.desktop_bg1 );
+        if ( ! gdk_color_equal( &app_settings.desktop_bg2,
+               &desktop_bg2_default ) )
+            save_color( file, "bg2",
+                        &app_settings.desktop_bg2 );
+        if ( ! gdk_color_equal( &app_settings.desktop_text,
+               &desktop_text_default ) )
+            save_color( file, "text",
+                        &app_settings.desktop_text );
+        if ( ! gdk_color_equal( &app_settings.desktop_shadow,
+               &desktop_shadow_default ) )
+            save_color( file, "shadow",
+                        &app_settings.desktop_shadow );
         fclose( file );
     }
 
     /* Save bookmarks */
     ptk_bookmarks_save();
-
-    /* FIXME: save_mime_action(); */
 }
 
 void free_settings()
 {
 /*
-    if ( appSettings.iconTheme )
-        g_free( appSettings.iconTheme );
+    if ( app_settings.iconTheme )
+        g_free( app_settings.iconTheme );
 */
-    g_free( appSettings.terminal );
-    g_free( appSettings.wallpaper );
+    g_free( app_settings.terminal );
+    g_free( app_settings.wallpaper );
 
     ptk_bookmarks_unref();
 }

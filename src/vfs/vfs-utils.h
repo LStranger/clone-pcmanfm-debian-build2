@@ -26,4 +26,12 @@
 
 GdkPixbuf* vfs_load_icon( GtkIconTheme* theme, const char* icon_name, int size );
 
+/* execute programs with sudo */
+gboolean vfs_sudo_cmd_sync( const char* cwd, char*cmd,
+                                               int* exit_status,
+                                               char** pstdout, char** pstderr, GError** err );
+
+gboolean vfs_sudo_cmd_async( const char* cwd, char*cmd, GError** err );
+
+
 #endif

@@ -5,7 +5,7 @@
 #include "vfs-dir.h"
 #include <sys/types.h>
 
-#include "ptk-icon-view.h"
+#include "exo-icon-view.h"
 
 G_BEGIN_DECLS
 
@@ -18,7 +18,8 @@ G_BEGIN_DECLS
 
 typedef enum{
     PTK_FB_ICON_VIEW,
-    PTK_FB_LIST_VIEW
+    PTK_FB_LIST_VIEW,
+    PTK_FB_COMPACT_VIEW
 }PtkFBViewMode;
 
 typedef enum{
@@ -205,6 +206,7 @@ void ptk_file_browser_rename_selected_file( PtkFileBrowser* file_browser );
 void ptk_file_browser_file_properties( PtkFileBrowser* file_browser );
 
 void ptk_file_browser_view_as_icons( PtkFileBrowser* file_browser );
+void ptk_file_browser_view_as_compact_list ( PtkFileBrowser* file_browser );
 void ptk_file_browser_view_as_list ( PtkFileBrowser* file_browser );
 
 void ptk_file_browser_create_new_file( PtkFileBrowser* file_browser,

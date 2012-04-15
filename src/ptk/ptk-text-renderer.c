@@ -920,9 +920,19 @@ ptk_text_renderer_render ( GtkCellRenderer *cell,
     GtkStateType state;
     gint x_offset;
     gint y_offset;
+    gint width, height;
+    gint focus_pad, focus_width;
+    gint x, y;
 
+    /* get focus width and padding */
+    gtk_widget_style_get ( widget,
+                           "focus-line-width", &focus_width,
+                           "focus-padding", &focus_pad,
+                           NULL );
+
+    /* get text extent */
     layout = get_layout ( celltext, widget, TRUE, flags );
-    get_size ( cell, widget, cell_area, layout, &x_offset, &y_offset, NULL, NULL );
+    get_size ( cell, widget, cell_area, layout, &x_offset, &y_offset, &width, &height );
 
     if ( !cell->sensitive )
     {
@@ -948,28 +958,28 @@ ptk_text_renderer_render ( GtkCellRenderer *cell,
             state = GTK_STATE_NORMAL;
     }
 
-#if 0
-    if ( celltext->background_set &&
-            ( flags & GTK_CELL_RENDERER_SELECTED ) == 0 )
+    if(flags & (GTK_CELL_RENDERER_FOCUSED|GTK_CELL_RENDERER_SELECTED))
     {
-        cairo_t * cr = gdk_cairo_create ( window );
-
-        if ( expose_area )
+        /* draw background color for selected state if needed */
+        if( flags & GTK_CELL_RENDERER_SELECTED )
         {
-            gdk_cairo_rectangle ( cr, expose_area );
-            cairo_clip ( cr );
+            gdk_draw_rectangle ( window,
+                                 widget->style->base_gc[ state ], TRUE,
+                                 cell_area->x + x_offset, cell_area->y + y_offset,
+                                 width, height );
         }
 
-        gdk_cairo_rectangle ( cr, background_area );
-        cairo_set_source_rgb ( cr,
-                               celltext->background.red / 65535.,
-                               celltext->background.green / 65535.,
-                               celltext->background.blue / 65535. );
-        cairo_fill ( cr );
-
-        cairo_destroy ( cr );
+        /* draw the focus */
+        if(flags & GTK_CELL_RENDERER_FOCUSED)
+        {
+            gtk_paint_focus( widget->style, window, GTK_WIDGET_STATE (widget),
+                           NULL, widget, "icon_view",
+                           cell_area->x + x_offset - focus_width,
+                           cell_area->y + y_offset - focus_width,
+                           width + focus_width * 2, height + focus_width * 2);
+            flags &= ~GTK_CELL_RENDERER_FOCUSED;
+        }
     }
-#endif
 
     if ( celltext->ellipsize_set )
         pango_layout_set_width ( layout,

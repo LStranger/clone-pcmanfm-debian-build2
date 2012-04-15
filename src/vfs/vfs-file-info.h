@@ -30,7 +30,8 @@ typedef enum
     VFS_FILE_INFO_DESKTOP_DIR = (1 << 1),
     VFS_FILE_INFO_DESKTOP_ENTRY = (1 << 2),
     VFS_FILE_INFO_MOUNT_POINT = (1 << 3),
-    VFS_FILE_INFO_REMOTE = (1 << 4)
+    VFS_FILE_INFO_REMOTE = (1 << 4),
+    VFS_FILE_INFO_VIRTUAL = (1 << 5)
 }VFSFileInfoFlag;   /* For future use, not all supported now */
 
 typedef struct _VFSFileInfo VFSFileInfo;

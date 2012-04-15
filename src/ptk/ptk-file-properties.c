@@ -19,7 +19,7 @@
 #include <gtk/gtk.h>
 #include "glib-mem.h"
 
-#include "file-properties.h"
+#include "ptk-file-properties.h"
 #include "ptk-ui-xml.h"
 
 #include "mime-type/mime-type.h"
@@ -34,7 +34,7 @@
 
 #include "vfs-file-info.h"
 #include "vfs-app-desktop.h"
-#include "app-chooser-dialog.h"
+#include "ptk-app-chooser.h"
 
 const char* chmod_names[] =
     {

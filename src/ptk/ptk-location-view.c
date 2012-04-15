@@ -284,7 +284,7 @@ GtkWidget* ptk_location_view_new()
     GtkListStore* list;
     GtkIconTheme* icon_theme;
 
-    if ( !model )
+    if ( ! model )
     {
         list = gtk_list_store_new( N_COLS,
                                    GDK_TYPE_PIXBUF,
@@ -297,7 +297,7 @@ GtkWidget* ptk_location_view_new()
         ptk_bookmarks_add_callback( on_bookmark_changed, NULL );
         icon_theme = gtk_icon_theme_get_default();
         theme_changed = g_signal_connect( icon_theme, "changed",
-                                          G_CALLBACK( update_icons ), NULL );
+                                         G_CALLBACK( update_icons ), NULL );
     }
     else
     {

@@ -9,10 +9,14 @@ INCLUDES = \
     -I$(top_srcdir)/src/libmd5-rfc \
     -I$(top_srcdir)/src/desktop \
     -I$(top_srcdir)/src/inotify \
+    -I$(top_srcdir)/src/exo-icon-view \
     -DPACKAGE_DATA_DIR=\""$(datadir)/pcmanfm"\" \
     -DPACKAGE_UI_DIR=\""$(datadir)/pcmanfm/ui"\" \
     -DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
-    @PACKAGE_CFLAGS@ @HAL_CFLAGS@ @G_CAST_CHECKS@
+    @GTK_CFLAGS@ \
+    @SN_CFLAGS@ \
+    @HAL_CFLAGS@ \
+    @G_CAST_CHECKS@
 
 bin_PROGRAMS = pcmanfm
 
@@ -54,14 +58,20 @@ VFS_SOURCES = \
     vfs/vfs-thumbnail-loader.c vfs/vfs-thumbnail-loader.h \
     vfs/vfs-utils.c vfs/vfs-utils.h
 
+if DESKTOP_INTEGRATION
+DESKTOP_SOURCES = \
+    desktop/desktop-window.c desktop/desktop-window.h \
+    desktop/working-area.c desktop/working-area.h \
+    desktop/desktop.c desktop/desktop.h
+else
+DESKTOP_SOURCES = desktop/desktop.c desktop/desktop.h
+endif
+
 PTK_SOURCES = \
     ptk/ptk-file-browser.c ptk/ptk-file-browser.h \
     ptk/ptk-file-list.c ptk/ptk-file-list.h \
-    ptk/ptk-icon-view.c ptk/ptk-icon-view.h \
     ptk/ptk-path-entry.c ptk/ptk-path-entry.h \
     ptk/ptk-text-renderer.c ptk/ptk-text-renderer.h \
-    ptk/exo-marshal.c ptk/exo-marshal.h \
-    ptk/exo-string.c ptk/exo-string.h \
     ptk/ptk-file-icon-renderer.c ptk/ptk-file-icon-renderer.h \
     ptk/ptk-utils.c ptk/ptk-utils.h \
     ptk/ptk-dir-tree-view.c ptk/ptk-dir-tree-view.h \
@@ -74,24 +84,23 @@ PTK_SOURCES = \
     ptk/ptk-console-output.c ptk/ptk-console-output.h \
     ptk/ptk-clipboard.c ptk/ptk-clipboard.h \
     ptk/ptk-file-menu.c ptk/ptk-file-menu.h \
-    ptk/ptk-file-misc.c ptk/ptk-file-misc.h
+    ptk/ptk-file-misc.c ptk/ptk-file-misc.h \
+    ptk/ptk-file-properties.c ptk/ptk-file-properties.h \
+    ptk/ptk-app-chooser.c ptk/ptk-app-chooser.h
 
 PTK_UI_XML_SOURCES= \
     ptk-ui-xml/ptk-ui-xml.c ptk-ui-xml/ptk-ui-xml.h \
     ptk-ui-xml/ptk-xml-tree.c ptk-ui-xml/ptk-xml-tree.h
 
-if DESKTOP_INTEGRATION
-DESKTOP_SOURCES = \
-    desktop/fm-desktop.c desktop/fm-desktop.h \
-    desktop/working-area.c desktop/working-area.h
-else
-DESKTOP_SOURCES = \
-    desktop/fm-desktop.c desktop/fm-desktop.h
-endif
-
 INOTIFY_SOURCES = \
     inotify/inotify-syscalls.h \
     inotify/linux-inotify.h
+
+EXO_ICON_VIEW_SOURCES = \
+    exo-icon-view/exo-icon-view.c exo-icon-view/exo-icon-view.h \
+    exo-icon-view/exo-private.c exo-icon-view/exo-private.h \
+    exo-icon-view/exo-string.c exo-icon-view/exo-string.h \
+    exo-icon-view/exo-marshal.c exo-icon-view/exo-marshal.h
 
 COMPAT_SOURCES = \
     compat/glib-mem.h \
@@ -100,21 +109,20 @@ COMPAT_SOURCES = \
 
 pcmanfm_SOURCES = \
     $(MIMETYE_SOURCES) \
-    $(PTK_SOURCES) \
-    $(PTK_UI_XML_SOURCES) \
     $(INOTIFY_SOURCES) \
     $(VFS_SOURCES) \
     $(MD5_SOURCES) \
-    $(DESKTOP_SOURCES) \
     $(COMPAT_SOURCES) \
+    $(PTK_SOURCES) \
+    $(PTK_UI_XML_SOURCES) \
+    $(EXO_ICON_VIEW_SOURCES) \
+    $(DESKTOP_SOURCES) \
     private.h \
     main.c \
     main-window.c main-window.h \
-    file-properties.c file-properties.h \
     settings.c settings.h \
     pref-dialog.c pref-dialog.h \
-    edit-bookmarks.c edit-bookmarks.h \
-    app-chooser-dialog.c app-chooser-dialog.h
+    edit-bookmarks.c edit-bookmarks.h
 
-pcmanfm_LDADD = @PACKAGE_LIBS@ $(INTLLIBS) @FAM_LIBS@ @HAL_LIBS@
+pcmanfm_LDADD = @GTK_LIBS@ $(INTLLIBS) @FAM_LIBS@ @HAL_LIBS@ @SN_LIBS@
 

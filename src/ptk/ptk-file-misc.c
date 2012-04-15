@@ -26,12 +26,12 @@
 #include "ptk-utils.h"
 #include "ptk-file-task.h"
 #include "vfs-file-task.h"
-#include "file-properties.h"
+#include "ptk-file-properties.h"
 #include "ptk-input-dialog.h"
 #include "ptk-file-browser.h"
 #include "vfs-app-desktop.h"
 #include "vfs-execute.h"
-#include "app-chooser-dialog.h"
+#include "ptk-app-chooser.h"
 
 void ptk_delete_files( GtkWindow* parent_win,
                        const char* cwd,

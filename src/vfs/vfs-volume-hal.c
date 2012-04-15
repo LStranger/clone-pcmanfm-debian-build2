@@ -75,6 +75,7 @@
 #include "glib-mem.h"
 #include "vfs-file-info.h"
 #include "vfs-volume-hal-options.h"
+#include "vfs-utils.h"  /* for vfs_sudo_cmd() */
 
 #include <glib/gi18n.h>
 #include <errno.h>
@@ -239,6 +240,17 @@ static const HalIconPair hal_icon_mapping[] = {
     {0x00, NULL}
 };
 
+const char ERR_BUSY[] = "org.freedesktop.Hal.Device.Volume.Busy";
+const char ERR_PERM_DENIED[] = "org.freedesktop.Hal.Device.Volume.PermissionDenied";
+const char ERR_UNKNOWN_FAILURE[] = "org.freedesktop.Hal.Device.Volume.UnknownFailure";
+const char ERR_INVALID_MOUNT_OPT[] = "org.freedesktop.Hal.Device.Volume.InvalidMountOption";
+const char ERR_UNKNOWN_FS[] = "org.freedesktop.Hal.Device.Volume.UnknownFilesystemType";
+const char ERR_NOT_MOUNTED[] = "org.freedesktop.Hal.Device.Volume.NotMounted";
+const char ERR_NOT_MOUNTED_BY_HAL[] = "org.freedesktop.Hal.Device.Volume.NotMountedByHal";
+const char ERR_ALREADY_MOUNTED[] = "org.freedesktop.Hal.Device.Volume.AlreadyMounted";
+const char ERR_INVALID_MOUNT_POINT[] = "org.freedesktop.Hal.Device.Volume.InvalidMountpoint";
+const char ERR_MOUNT_POINT_NOT_AVAILABLE[] = "org.freedesktop.Hal.Device.Volume.MountPointNotAvailable";
+
 struct _VFSVolume
 {
     char* udi;
@@ -291,6 +303,10 @@ static void                vfs_volume_device_condition         (LibHalContext   
                                                                                    const gchar                    *name,
                                                                                    const gchar                    *details);
 
+
+static gboolean vfs_volume_mount_by_udi_as_root( const char* udi );
+static gboolean vfs_volume_umount_by_udi_as_root( const char* udi );
+static gboolean vfs_volume_eject_by_udi_as_root( const char* udi );
 
 static void call_callbacks( VFSVolume* vol, VFSVolumeState state )
 {
@@ -1180,7 +1196,6 @@ vfs_volume_device_added (LibHalContext *context,
   LibHalVolume              *hv;
   LibHalDrive               *hd;
   const gchar               *drive_udi;
-
   /* check if we have a volume here */
   hv = libhal_volume_from_udi (context, udi);
 
@@ -1742,13 +1757,13 @@ is_in_fstab (const char *device_file, const char *label, const char *uuid, char 
 
                         mounted_vol_device_file = libhal_volume_get_device_file (mounted_vol);
                         /* no need to resolve symlinks, hal uses the canonical device file */
-                        g_debug ("device_file = '%s'", device_file);
-                        g_debug ("mounted_vol_device_file = '%s'", mounted_vol_device_file);
+                        /* g_debug ("device_file = '%s'", device_file); */
+                        /* g_debug ("mounted_vol_device_file = '%s'", mounted_vol_device_file); */
                         if (mounted_vol_device_file != NULL &&
                             strcmp (mounted_vol_device_file, device_file) !=0) {
 
-                            g_debug ("Wanting to mount %s that has label %s, but /etc/fstab says LABEL=%s is to be mounted at mount point '%s'. However %s (that also has label %s), is already mounted at said mount point. So, skipping said /etc/fstab entry.\n",
-                                   device_file, label, label, _mount_point, mounted_vol_device_file, _mount_point);
+                            /* g_debug ("Wanting to mount %s that has label %s, but /etc/fstab says LABEL=%s is to be mounted at mount point '%s'. However %s (that also has label %s), is already mounted at said mount point. So, skipping said /etc/fstab entry.\n",
+                                   device_file, label, label, _mount_point, mounted_vol_device_file, _mount_point); */
                             skip_fstab_entry = TRUE;
                         }
                         libhal_volume_free (mounted_vol);
@@ -2153,11 +2168,15 @@ vfs_volume_hal_eject (VFSVolume* volume,
                  /* g_warning ("%s said error %d, stdout='%s', stderr='%s'\n",
                        "eject", exit_status, sout, serr); */
                 if (strstr (serr, "is busy") != NULL) {
-                    translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.Busy", VA_EJECT);
+                    translate_hal_error( error, device, ERR_BUSY, VA_EJECT);
                 } else if (strstr (serr, "only root") != NULL|| strstr (serr, "unable to open") != NULL ) {
-                    translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.PermissionDenied", VA_EJECT);
+                    /* Let's try to do it as root */
+                    if( vfs_volume_eject_by_udi_as_root( volume->udi ) )
+                        ret = TRUE;
+                    else
+                        translate_hal_error( error, device, ERR_PERM_DENIED, VA_EJECT);
                 } else {
-                    translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.UnknownFailure", VA_EJECT);
+                    translate_hal_error( error, device, ERR_UNKNOWN_FAILURE, VA_EJECT);
                 }
                 goto out;
             }
@@ -2209,6 +2228,15 @@ oom:  g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOMEM))
   /* check if we failed */
   if (G_UNLIKELY (dbus_error_is_set (&derror)))
     {
+        if( 0 == strcmp( derror.name, ERR_PERM_DENIED ) ) /* permission denied */
+        {
+            if( vfs_volume_eject_by_udi_as_root( volume->udi ) ) /* try to eject as root */
+            {
+              dbus_error_free (&derror);
+              vfs_volume_hal_free( device );
+              return TRUE;
+            }
+        }
       /* try to translate the error appropriately */
       if( ! translate_hal_error( error, device, derror.name, VA_EJECT ) )
         {
@@ -2233,22 +2261,22 @@ static const char* not_privileged[]={
 gboolean translate_hal_error( GError** error, ExoMountHalDevice *device, const char* hal_err, VolumnAction action )
 {
     /* try to translate the error appropriately */
-    if (strcmp (hal_err, "org.freedesktop.Hal.Device.Volume.PermissionDenied") == 0)
+    if (strcmp (hal_err, ERR_PERM_DENIED) == 0)
     {
         /* TRANSLATORS: User tried to mount a volume, but is not privileged to do so. */
             g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED, _(not_privileged[action]), device->name);
-    } else if (strcmp (hal_err, "org.freedesktop.Hal.Device.Volume.InvalidMountOption") == 0) {
+    } else if (strcmp (hal_err, ERR_INVALID_MOUNT_OPT) == 0) {
         /* TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options */
         g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED, _("Invalid mount option when attempting to mount the volume \"%s\""), device->name);
-    } else if (strcmp (hal_err, "org.freedesktop.Hal.Device.Volume.UnknownFilesystemType") == 0) {
+    } else if (strcmp (hal_err, ERR_UNKNOWN_FS) == 0) {
         g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED, _("The volume \"%s\" uses the <i>%s</i> file system which is not supported by your system"), device->name, device->fstype);
-    } else if( strcmp(hal_err, "org.freedesktop.Hal.Device.Volume.Busy") == 0 ) {
+    } else if( strcmp(hal_err, ERR_BUSY) == 0 ) {
         g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED, _("An application is preventing the volume \"%s\" from being unmounted"), device->name);
-    } else if( strcmp( hal_err, "org.freedesktop.Hal.Device.Volume.NotMounted" ) == 0 ) {
+    } else if( strcmp( hal_err, ERR_NOT_MOUNTED ) == 0 ) {
         g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED, _("The volume \"%s\" is not mounted"), device->name);
-    } else if( strcmp (hal_err, "org.freedesktop.Hal.Device.Volume.UnknownFailure" ) == 0 ) {
+    } else if( strcmp (hal_err, ERR_UNKNOWN_FAILURE ) == 0 ) {
         g_set_error( error, G_FILE_ERROR, G_FILE_ERROR_FAILED, _("Error <i>%s</i>"), hal_err );
-    } else if(strcmp ( hal_err, "org.freedesktop.Hal.Device.Volume.NotMountedByHal" ) == 0 ) {
+    } else if(strcmp ( hal_err, ERR_NOT_MOUNTED_BY_HAL ) == 0 ) {
           /* TRANSLATORS: HAL can only unmount volumes that were mounted via HAL. */
         g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED, _("The volume \"%s\" was probably mounted manually on the command line"), device->name);
     } else {
@@ -2341,16 +2369,23 @@ vfs_volume_hal_mount (ExoMountHalDevice *device,
                    MOUNT, exit_status, sout, serr);
             */
             if (strstr (serr, "unknown filesystem type") != NULL) {
-                translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.UnknownFilesystemType", VA_MOUNT );
+                translate_hal_error( error, device, ERR_UNKNOWN_FS, VA_MOUNT );
             } else if (strstr (serr, "already mounted") != NULL) {
                 g_free( mount_point );
                 return TRUE;
             } else if (strstr (serr, "only root") != NULL) {
-                translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.PermissionDenied", VA_MOUNT );
+                /* Let's try to do it as root */
+                if( vfs_volume_mount_by_udi_as_root( device->udi ) )
+                {
+                    g_free( mount_point );
+                    return TRUE;
+                }
+                else
+                    translate_hal_error( error, device, ERR_PERM_DENIED, VA_MOUNT );
             } else if (strstr (serr, "bad option") != NULL) {
-                 translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.InvalidMountOption", VA_MOUNT);
+                 translate_hal_error( error, device, ERR_INVALID_MOUNT_OPT, VA_MOUNT);
             } else {
-                 translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.UnknownFailure", VA_MOUNT);
+                 translate_hal_error( error, device, ERR_UNKNOWN_FAILURE, VA_MOUNT);
             }
             g_free (mount_point);
             return FALSE;
@@ -2525,14 +2560,14 @@ oom:      g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOM
         break;
 
       /* check if the device was already mounted */
-      if (strcmp (derror.name, "org.freedesktop.Hal.Device.Volume.AlreadyMounted") == 0)
+      if (strcmp (derror.name, ERR_ALREADY_MOUNTED) == 0)
         {
           dbus_error_free (&derror);
           break;
         }
 
       /* check if the specified mount point was invalid */
-      if (strcmp (derror.name, "org.freedesktop.Hal.Device.Volume.InvalidMountpoint") == 0 && *mount_point != '\0')
+      if (strcmp (derror.name, ERR_INVALID_MOUNT_POINT) == 0 && *mount_point != '\0')
         {
           /* try again without a mount point */
           g_free (mount_point);
@@ -2544,7 +2579,7 @@ oom:      g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOM
         }
 
       /* check if the specified mount point is not available */
-      if (strcmp (derror.name, "org.freedesktop.Hal.Device.Volume.MountPointNotAvailable") == 0 && *mount_point != '\0')
+      if (strcmp (derror.name, ERR_MOUNT_POINT_NOT_AVAILABLE) == 0 && *mount_point != '\0')
         {
           /* try again with a new mount point */
           s = g_strconcat (mount_point, "_", NULL);
@@ -2601,13 +2636,23 @@ oom:      g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOM
   /* check if we failed */
   if (dbus_error_is_set (&derror))
     {
-        if (strcmp (derror.name, "org.freedesktop.Hal.Device.Volume.AlreadyMounted") == 0)
+        if (strcmp (derror.name, ERR_ALREADY_MOUNTED) == 0)
         {
           /* Ups, already mounted, we succeed! */
           dbus_error_free (&derror);
           return TRUE;
         }
-        else if( ! translate_hal_error( error, device, derror.name, VA_MOUNT ) )
+
+        if( 0 == strcmp( derror.name, ERR_PERM_DENIED ) ) /* permission denied */
+        {
+            if( vfs_volume_mount_by_udi_as_root( device->udi ) ) /* try to eject as root */
+            {
+              dbus_error_free (&derror);
+              return TRUE;
+            }
+        }
+
+        if( ! translate_hal_error( error, device, derror.name, VA_MOUNT ) )
         {
           /* unknown error, use HAL's message */
           exo_mount_hal_propagate_error (error, &derror);
@@ -2683,13 +2728,17 @@ vfs_volume_hal_unmount (VFSVolume* volume,
                        UMOUNT, exit_status, sout, serr); */
 
                 if (strstr (serr, "is busy") != NULL) {
-                    translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.Busy", VA_UMOUNT);
+                    translate_hal_error( error, device, ERR_BUSY, VA_UMOUNT);
                 } else if (strstr (serr, "not mounted") != NULL) {
-                    translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.NotMounted", VA_UMOUNT);
+                    translate_hal_error( error, device, ERR_NOT_MOUNTED, VA_UMOUNT);
                 } else if (strstr (serr, "only root") != NULL) {
-                    translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.PermissionDenied", VA_UMOUNT);
+                    /* Let's try to do it as root */
+                    if( vfs_volume_umount_by_udi_as_root( volume->udi ) )
+                        ret = TRUE;
+                    else
+                        translate_hal_error( error, device, ERR_PERM_DENIED, VA_UMOUNT);
                 } else {
-                    translate_hal_error( error, device, "org.freedesktop.Hal.Device.Volume.UnknownFailure", VA_UMOUNT);
+                    translate_hal_error( error, device, ERR_UNKNOWN_FAILURE, VA_UMOUNT);
                 }
                 goto out;
             }
@@ -2742,14 +2791,25 @@ oom:  g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOMEM))
   if (G_UNLIKELY (dbus_error_is_set (&derror)))
     {
         /* try to translate the error appropriately */
-        if (strcmp (derror.name, "org.freedesktop.Hal.Device.Volume.NotMounted") == 0)
+        if (strcmp (derror.name, ERR_NOT_MOUNTED) == 0)
         {
           /* Ups, volume not mounted, we succeed! */
           dbus_error_free (&derror);
           vfs_volume_hal_free( device );
           return TRUE;
         }
-        else if( ! translate_hal_error( error, device, derror.name, VA_UMOUNT ) )
+
+        if( 0 == strcmp( derror.name, ERR_PERM_DENIED ) ) /* permission denied */
+        {
+            if( vfs_volume_umount_by_udi_as_root( device->udi ) ) /* try to eject as root */
+            {
+              dbus_error_free (&derror);
+              vfs_volume_hal_free( device );
+              return TRUE;
+            }
+        }
+
+        if( ! translate_hal_error( error, device, derror.name, VA_UMOUNT ) )
         {
           /* unknown error, use the HAL one */
           exo_mount_hal_propagate_error (error, &derror);
@@ -2788,8 +2848,15 @@ gboolean vfs_volume_eject( VFSVolume *vol, GError** err )
 
 gboolean vfs_volume_mount_by_udi( const char* udi, GError** err )
 {
-    VFSVolume* volume = vfs_volume_get_volume_by_udi( udi );
-    return volume ? vfs_volume_hal_mount( (ExoMountHalDevice*) volume, err ) : FALSE;
+    ExoMountHalDevice* device;
+    gboolean ret = FALSE;
+    device = vfs_volume_hal_from_udi( udi, err );
+    if( device )
+    {
+        ret = vfs_volume_hal_mount( device, err );
+        vfs_volume_hal_free( device );
+    }
+    return ret;
 }
 
 gboolean vfs_volume_umount_by_udi( const char* udi, GError** err )
@@ -2803,4 +2870,48 @@ gboolean vfs_volume_eject_by_udi( const char* udi, GError** err )
     VFSVolume* volume = vfs_volume_get_volume_by_udi( udi );
     return volume ? vfs_volume_hal_eject( volume, err ) : FALSE;
 }
+
+/* helper functions to mount/umount/eject devices as root */
+gboolean vfs_volume_mount_by_udi_as_root( const char* udi )
+{
+    int ret;
+    char* cmd;
+
+    if ( G_UNLIKELY( geteuid() == 0 ) )  /* we are already root */
+        return FALSE;
+
+    cmd = g_strdup_printf( "%s --mount '%s'", g_get_prgname(), udi );
+    vfs_sudo_cmd_sync( NULL, cmd, &ret, NULL,NULL, NULL );
+    g_free( cmd );
+    return (ret == 0);
+}
+
+gboolean vfs_volume_umount_by_udi_as_root( const char* udi )
+{
+    int ret;
+    char* cmd;
+
+    if ( G_UNLIKELY( geteuid() == 0 ) )  /* we are already root */
+        return FALSE;
+
+    cmd = g_strdup_printf( "%s --umount '%s'", g_get_prgname(), udi );
+    vfs_sudo_cmd_sync( NULL, cmd, &ret, NULL,NULL, NULL );
+    g_free( cmd );
+    return (ret == 0);
+}
+
+gboolean vfs_volume_eject_by_udi_as_root( const char* udi )
+{
+    int ret;
+    char* cmd;
+
+    if ( G_UNLIKELY( geteuid() == 0 ) )  /* we are already root */
+        return FALSE;
+
+    cmd = g_strdup_printf( "%s --eject '%s'", g_get_prgname(), udi );
+    vfs_sudo_cmd_sync( NULL, cmd, &ret, NULL,NULL, NULL );
+    g_free( cmd );
+    return (ret == 0);
+}
+
 #endif /* HAVE_HAL */

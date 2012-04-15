@@ -1,0 +1,1324 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PCManFM 0.3.9.98\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-05-11 18:15+0800\n"
+"PO-Revision-Date: 2008-04-11 19:02+0200\n"
+"Last-Translator: Joshas <joshas@freemail.lt>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Lithuanian\n"
+"X-Poedit-Country: LITHUANIA\n"
+
+#: src/main.c:79
+msgid "Don't show desktop icons."
+msgstr "Nerodyti piktogramų ant darbalaukio."
+
+#: src/main.c:80
+msgid "Run PCManFM as a daemon"
+msgstr "Paleisti PCManFM kaip tarnybą"
+
+#: src/main.c:81
+msgid ""
+"Open folders in new tabs of the last used window instead of creating new "
+"windows"
+msgstr ""
+"Nekurti naujų langų, aplankus atverti paskutinio naudoto lango kortelėse"
+
+#: src/main.c:90
+msgid "[FILE1, FILE2,...]"
+msgstr "[FAILAS1, FAILAS2,...]"
+
+#: src/main.c:297
+msgid "GTK+ icon theme is not properly set"
+msgstr "Neteisingai nustatyta GTK+ piktogramų tema"
+
+#: src/main.c:299
+#, c-format
+msgid ""
+"<big><b>%s</b></big>\n"
+"\n"
+"This usually means you don't have an XSETTINGS manager running.  Desktop "
+"environment like GNOME or XFCE automatically execute their XSETTING managers "
+"like gnome-settings-daemon or xfce-mcs-manager.\n"
+"\n"
+"<b>If you don't use these desktop environments, you have two choices:\n"
+"1. run an XSETTINGS manager, or\n"
+"2. simply specify an icon theme in ~/.gtkrc-2.0.</b>\n"
+"For example to use the Tango icon theme add a line:\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it "
+"if no such file)\n"
+"\n"
+"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the "
+"file icons cannot be displayed correctly.</b>  Due to the differences in "
+"icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
+"no standard for this, but it will be solved by freedesktop.org in the future."
+msgstr ""
+"<big><b>%s</b></big>\n"
+"\n"
+"Tai reiškia, kad neturite veikiančios XSETTINGS tarnybos. GNOME, XFCE ir "
+"kitos darbalaukio aplinkos automatiškai paleidžia savo XSETTING tarnybas  "
+"gnome-settings-daemon, xfce-mcs-manager ar kt.\n"
+"\n"
+"<b>Jei nenaudojate darbalaukio aplinkos, yra dvi išeitys:\n"
+"1. paleisti XSETTINGS tarnybą, arba\n"
+"2. nurodyti piktogramų temą faile „~/.gtkrc-2.0“.</b>\n"
+"Pavyzdžiui, norėdami naudoti piktogramų temą „Tango“,\n"
+"faile „~/.gtkrc-2.0“ įrašykite tokią eilutę:\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> .\n"
+"\n"
+"<b>Pastaba: piktogramų tema turi būti suderinama su GNOME, kitu atveju "
+"piktogramos bus rodomos neteisingai.</b>  Dėl skirtumų tarp GNOME ir KDE "
+"piktogramų pavadinimų, KDE piktogramų naudoti nepavyks. Kol kas nėra "
+"vieningo piktogramų standarto, bet ateityje šią problemą išspręs freedesktop."
+"org."
+
+#: src/main.c:581 src/main.c:663 src/main.c:714 src/main-window.c:1561
+#: src/main-window.c:1613 src/ptk/ptk-file-browser.c:503
+#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:329
+#: src/ptk/ptk-console-output.c:222 src/ptk/ptk-file-misc.c:252
+#: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
+#: src/ptk/ptk-file-properties.c:693 src/ptk/ptk-file-properties.c:704
+msgid "Error"
+msgstr "Klaida"
+
+#: src/main.c:581
+msgid ""
+"Error: Unable to establish connection with FAM.\n"
+"\n"
+"Do you have \"FAM\" or \"Gamin\" installed and running?"
+msgstr ""
+"Klaida: nepavyko prisijungti prie FAM.\n"
+"\n"
+"Ar turite įdiegtą ir veikiantį „FAM“ arba „Gamin“ ?"
+
+#: src/main.c:663
+msgid "File doesn't exist"
+msgstr "Failas neegzistuoja"
+
+#: src/main.c:710
+msgid "Don't know how to open the file"
+msgstr "Nežinoma kaip atverti failą"
+
+#: src/main.c:712
+#, c-format
+msgid ""
+"Unable to open file:\n"
+"\"%s\"\n"
+"%s"
+msgstr ""
+"Nepavyko atidaryti failo:\n"
+"„%s“\n"
+"%s"
+
+#: src/main-window.c:294 src/ptk/ptk-file-menu.c:109
+#: src/desktop/desktop-window.c:157
+msgid "_Folder"
+msgstr "_aplanką"
+
+#: src/main-window.c:295 src/ptk/ptk-file-menu.c:110
+#: src/desktop/desktop-window.c:158
+msgid "_Text File"
+msgstr "_tekstinį failą"
+
+#: src/main-window.c:301
+msgid "New _Window"
+msgstr "Naujas _langas"
+
+#: src/main-window.c:302
+msgid "New _Tab"
+msgstr "Nauja kor_telė"
+
+#: src/main-window.c:303
+msgid "Close Tab"
+msgstr "Uždaryti kortelę"
+
+#: src/main-window.c:305 src/ptk/ptk-file-menu.c:133
+#: src/desktop/desktop-window.c:167
+msgid "_Create New"
+msgstr "_Sukurti naują"
+
+#: src/main-window.c:306
+msgid "File _Properties"
+msgstr "Failo _savybės"
+
+#: src/main-window.c:317 src/ptk/ptk-file-menu.c:128
+msgid "_Delete"
+msgstr "Iš_trinti"
+
+#: src/main-window.c:318 src/ptk/ptk-file-browser.c:1368
+#: src/ptk/ptk-file-menu.c:129
+msgid "_Rename"
+msgstr "P_ervadinti"
+
+#: src/main-window.c:320
+msgid "Select _All"
+msgstr "Pažymėti _viską"
+
+#: src/main-window.c:321
+msgid "_Invert Selection"
+msgstr "Žymėti pr_iešingai"
+
+#: src/main-window.c:330
+msgid "Go _Back"
+msgstr "Atgal"
+
+#: src/main-window.c:331
+msgid "Go _Forward"
+msgstr "Pirmyn"
+
+#: src/main-window.c:332
+msgid "Go to _Parent Folder"
+msgstr "Į viršaplankį"
+
+#: src/main-window.c:333
+msgid "Go _Home"
+msgstr "Į _namų aplanką"
+
+#: src/main-window.c:345 src/desktop/desktop-window.c:144
+msgid "Sort by _Name"
+msgstr "pagal pavadi_nimą"
+
+#: src/main-window.c:346 src/desktop/desktop-window.c:145
+msgid "Sort by _Size"
+msgstr "pagal _dydį"
+
+#: src/main-window.c:347 src/desktop/desktop-window.c:147
+msgid "Sort by _Modification Time"
+msgstr "pagal pakeitimo _laiką"
+
+#: src/main-window.c:348 src/desktop/desktop-window.c:146
+msgid "Sort by _Type"
+msgstr "pagal _tipą"
+
+#: src/main-window.c:349
+msgid "Sort by _Permission"
+msgstr "pagal _leidimą"
+
+#: src/main-window.c:350
+msgid "Sort by _Owner"
+msgstr "pagal _savininką"
+
+#: src/main-window.c:352 src/desktop/desktop-window.c:150
+msgid "Ascending"
+msgstr "didėjančiai"
+
+#: src/main-window.c:353 src/desktop/desktop-window.c:151
+msgid "Descending"
+msgstr "mažėjančiai"
+
+#: src/main-window.c:359
+msgid "_Open Side Pane"
+msgstr "R_odyti šoninį polangį"
+
+#: src/main-window.c:361
+msgid "Show _Location Pane"
+msgstr "Rodyti vietos po_langį"
+
+#: src/main-window.c:362
+msgid "Show _Directory Tree"
+msgstr "Rodyti aplankų me_dį"
+
+#: src/main-window.c:368
+msgid "_Refresh"
+msgstr "_Atnaujinti"
+
+#: src/main-window.c:369
+msgid "Side _Pane"
+msgstr "Šoninis _polangis"
+
+#: src/main-window.c:372
+msgid "Show _Hidden Files"
+msgstr "Rod_yti paslėptus failus"
+
+#: src/main-window.c:373
+msgid "_Sort..."
+msgstr "_Rikiuoti..."
+
+#: src/main-window.c:375
+msgid "View as _Icons"
+msgstr "Rodyti p_iktogramas"
+
+#: src/main-window.c:376
+#, fuzzy
+msgid "View as _Compact List"
+msgstr "Rodyti išsamų _sąrašą"
+
+#: src/main-window.c:377
+msgid "View as Detailed _List"
+msgstr "Rodyti išsamų _sąrašą"
+
+#: src/main-window.c:383
+msgid "Open _Terminal"
+msgstr "Atverti _terminalą"
+
+#: src/main-window.c:384
+msgid "Open Current Folder as _Root"
+msgstr "Atverti aplanką pagrindinio va_rtotojo teisėmis"
+
+#: src/main-window.c:392
+msgid "_File"
+msgstr "_Failas"
+
+#: src/main-window.c:393
+msgid "_Edit"
+msgstr "_Taisymas"
+
+#. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
+#: src/main-window.c:395
+msgid "_Go"
+msgstr "_Eiti"
+
+#: src/main-window.c:396
+msgid "_Bookmark"
+msgstr "Ž_ymelės"
+
+#: src/main-window.c:397
+msgid "_View"
+msgstr "R_odymas"
+
+#: src/main-window.c:398
+msgid "_Tool"
+msgstr "_Priemonės"
+
+#: src/main-window.c:399
+msgid "_Help"
+msgstr "_Pagalba"
+
+#: src/main-window.c:407
+msgid "New Tab"
+msgstr "Nauja kortelė"
+
+#: src/main-window.c:408
+msgid "Back"
+msgstr "Atgal"
+
+#: src/main-window.c:409
+msgid "Forward"
+msgstr "Pirmyn"
+
+#: src/main-window.c:410
+msgid "Parent Folder"
+msgstr "Viršaplankis"
+
+#: src/main-window.c:411
+msgid "Refresh"
+msgstr "Atnaujinti"
+
+#: src/main-window.c:412
+msgid "Home Directory"
+msgstr "Namų aplankas"
+
+#: src/main-window.c:413
+msgid "Open Side Pane"
+msgstr "Rodyti šoninį polangį"
+
+#: src/main-window.c:419
+msgid "Go"
+msgstr "Eiti"
+
+#: src/main-window.c:632
+msgid "Warning: You are in super user mode"
+msgstr "Dėmesio: Jūs dirbate pagrindinio vartotojo teisėmis"
+
+#: src/main-window.c:1562
+msgid "Terminal program has not been set"
+msgstr "Nenurodyta terminalo programa"
+
+#: src/main-window.c:1688
+msgid "_Add to Bookmarks"
+msgstr "Įtraukti į žymeles"
+
+#: src/main-window.c:1689
+msgid "_Edit Bookmarks"
+msgstr "Re_daguoti žymeles"
+
+#: src/main-window.c:1766
+msgid "Loading..."
+msgstr "Įkeliama..."
+
+#: src/main-window.c:1976
+#, c-format
+msgid ", Free space: %s (Total: %s )"
+msgstr ", laisvos vietos: %s (Viso: %s )"
+
+#: src/main-window.c:1985
+#, c-format
+msgid "%d item selected (%s)%s"
+msgid_plural "%d items selected (%s)%s"
+msgstr[0] "Pažymėtas %d elementas (%s)%s"
+msgstr[1] "Pažymėti %d elementai (%s)%s"
+msgstr[2] "Pažymėta %d elementų (%s)%s"
+
+#: src/main-window.c:1995
+#, c-format
+msgid "%d hidden"
+msgid_plural "%d hidden"
+msgstr[0] "%d paslėptas"
+msgstr[1] "%d paslėpti"
+msgstr[2] "%d paslėptų"
+
+#: src/main-window.c:1996
+#, c-format
+msgid "%d visible item (%s)%s"
+msgid_plural "%d visible items (%s)%s"
+msgstr[0] "%d matomas elementas (%s)%s"
+msgstr[1] "%d matomi elementai (%s)%s"
+msgstr[2] "%d matomų elementų (%s)%s"
+
+#: src/ptk/ptk-file-browser.c:504
+msgid "Directory doesn't exist!"
+msgstr "Aplankas neegzistuoja!"
+
+#: src/ptk/ptk-file-browser.c:1364 src/ptk/ptk-file-menu.c:142
+msgid "Open in New _Tab"
+msgstr "Atverti naujoje kor_telėje"
+
+#: src/ptk/ptk-file-browser.c:1365 src/ptk/ptk-file-menu.c:143
+msgid "Open in New _Window"
+msgstr "Atverti naujame _lange"
+
+#: src/ptk/ptk-file-browser.c:1623 src/edit-bookmarks.c:198
+msgid "Name"
+msgstr "Vardas"
+
+#: src/ptk/ptk-file-browser.c:1623
+msgid "Size"
+msgstr "Dydis"
+
+#: src/ptk/ptk-file-browser.c:1623
+msgid "Type"
+msgstr "Tipas"
+
+#: src/ptk/ptk-file-browser.c:1624
+msgid "Permission"
+msgstr "Leidimas"
+
+#: src/ptk/ptk-file-browser.c:1624
+msgid "Owner:Group"
+msgstr "Savininkas:Grupė"
+
+#: src/ptk/ptk-file-browser.c:1624
+msgid "Last Modification"
+msgstr "Paskutinis pakeitimas"
+
+#: src/ptk/ptk-file-browser.c:2835
+msgid "Location"
+msgstr "Vieta"
+
+#: src/ptk/ptk-file-browser.c:2836
+msgid "Directory Tree"
+msgstr "Aplankų medis"
+
+#: src/ptk/ptk-location-view.c:186
+msgid "Desktop"
+msgstr "Darbalaukis"
+
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
+msgid "Unable to mount device"
+msgstr "Nepavyko prijungti įrenginio"
+
+#: src/ptk/ptk-location-view.c:589
+msgid "Unable to unmount device"
+msgstr "Nepavyko atjungti įrenginio"
+
+#: src/ptk/ptk-location-view.c:606
+msgid "Unable to eject device"
+msgstr "Nepavyko išimti įrenginio"
+
+#: src/ptk/ptk-location-view.c:664
+msgid "_Mount File System"
+msgstr "_Prijungti failų sistemą"
+
+#: src/ptk/ptk-location-view.c:674
+msgid "_Eject"
+msgstr "_Išimti"
+
+#: src/ptk/ptk-location-view.c:680
+msgid "_Unmount File System"
+msgstr "_Atjungti failų sistemą"
+
+#: src/ptk/ptk-file-task.c:103
+msgid "Move: "
+msgstr "Perkelti:"
+
+#: src/ptk/ptk-file-task.c:104
+msgid "Copy: "
+msgstr "Kopijuoti:"
+
+#: src/ptk/ptk-file-task.c:105
+msgid "Delete: "
+msgstr "Ištrinti:"
+
+#: src/ptk/ptk-file-task.c:106
+msgid "Link: "
+msgstr "Nuoroda:"
+
+#: src/ptk/ptk-file-task.c:107
+msgid "Change Properties: "
+msgstr "Keisti savybes:"
+
+#: src/ptk/ptk-file-task.c:111
+msgid "Moving..."
+msgstr "Perkeliama..."
+
+#: src/ptk/ptk-file-task.c:112
+msgid "Copying..."
+msgstr "Kopijuojama..."
+
+#: src/ptk/ptk-file-task.c:113
+msgid "Deleting..."
+msgstr "Trinama..."
+
+#: src/ptk/ptk-file-task.c:114
+msgid "Linking..."
+msgstr "Siejama..."
+
+#: src/ptk/ptk-file-task.c:115
+msgid "Changing Properties"
+msgstr "Keičiamos savybės"
+
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: src/ptk/ptk-file-task.c:152
+msgid "To:"
+msgstr "Į:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: src/ptk/ptk-file-task.c:167
+msgid "Processing:"
+msgstr "Apdorojama:"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: src/ptk/ptk-file-task.c:174
+msgid "Preparing..."
+msgstr "Ruošiamasi..."
+
+#. Progress:
+#: src/ptk/ptk-file-task.c:182
+msgid "Progress:"
+msgstr "Eiga:"
+
+#: src/ptk/ptk-file-task.c:317
+msgid "Cancel the operation?"
+msgstr "Nutraukti veiksmą?"
+
+#. Ask the user whether to overwrite dir content or not
+#: src/ptk/ptk-file-task.c:406
+msgid "Do you want to overwrite the folder and its content?"
+msgstr "Ar norite pakeisti aplanką ir jo turinį?"
+
+#. Ask the user whether to overwrite the file or not
+#: src/ptk/ptk-file-task.c:411
+msgid "Do you want to overwrite this file?"
+msgstr "Ar norite pakeisti šį failą?"
+
+#. Rename is required
+#: src/ptk/ptk-file-task.c:416
+msgid "Please choose a new file name."
+msgstr "Įveskite naują failo vardą."
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
+#: src/ptk/ptk-file-task.c:424
+#, c-format
+msgid ""
+"\"%s\" has existed.\n"
+"\n"
+"%s"
+msgstr ""
+"Failas „%s“ jau yra.\n"
+"\n"
+"%s"
+
+#. Ths first %s is a file name, and the second one represents followed message.
+#: src/ptk/ptk-file-task.c:429
+#, c-format
+msgid ""
+"\"%s\"\n"
+"\n"
+"Destination and source are the same file.\n"
+"\n"
+"%s"
+msgstr ""
+"„%s“\n"
+"\n"
+"Paskirties ir pirminis failas yra vienodi.\n"
+"\n"
+"%s"
+
+#: src/ptk/ptk-file-task.c:446
+msgid "Overwrite"
+msgstr "Pakeisti"
+
+#: src/ptk/ptk-file-task.c:447
+msgid "Overwrite All"
+msgstr "Pakeisti visus"
+
+#: src/ptk/ptk-file-task.c:452
+msgid "Rename"
+msgstr "Pervadinti"
+
+#: src/ptk/ptk-file-task.c:453
+msgid "Skip"
+msgstr "Praleisti"
+
+#: src/ptk/ptk-file-task.c:454
+msgid "Skip All"
+msgstr "Praleisti visus"
+
+#: src/ptk/ptk-file-archiver.c:119
+msgid "Save Compressd Files to..."
+msgstr "Įrašyti supakuotus failus į..."
+
+#: src/ptk/ptk-file-archiver.c:127
+msgid "Format of compressed File:"
+msgstr "Supakuoto failo formatas:"
+
+#: src/ptk/ptk-file-archiver.c:198
+#, c-format
+msgid "Creating Compressed File: %s"
+msgstr "Failai pakuojami į: %s"
+
+#: src/ptk/ptk-file-archiver.c:201
+msgid "Compress Files"
+msgstr "Supakuoti failus"
+
+#: src/ptk/ptk-file-archiver.c:232
+msgid "Extract File to..."
+msgstr "Išpakuoti failą į..."
+
+#: src/ptk/ptk-file-archiver.c:281
+#, c-format
+msgid "Extracting Files to: %s"
+msgstr "Failai išpakuojami į: %s"
+
+#: src/ptk/ptk-file-archiver.c:283
+msgid "Extract Files"
+msgstr "Išpakuoti failus"
+
+#: src/ptk/ptk-console-output.c:66
+msgid ""
+"\n"
+"Complete!"
+msgstr ""
+"\n"
+"Baigta!"
+
+#: src/ptk/ptk-console-output.c:168
+msgid "Command:"
+msgstr "Komanda:"
+
+#: src/ptk/ptk-dir-tree.c:174
+msgid "File System"
+msgstr "Failų sistema"
+
+#: src/ptk/ptk-dir-tree.c:397
+msgid "No Sub Folder"
+msgstr "Poaplankis neegzistuoja"
+
+#: src/ptk/ptk-file-menu.c:116
+msgid "E_xtract Here"
+msgstr "_Išpakuoti čia"
+
+#: src/ptk/ptk-file-menu.c:117
+msgid "Extract _To"
+msgstr "Išpakuo_ti į"
+
+#: src/ptk/ptk-file-menu.c:123
+msgid "Open _with..."
+msgstr "Atver_ti su..."
+
+#: src/ptk/ptk-file-menu.c:131
+msgid "Compress"
+msgstr "Supakuoti"
+
+#: src/ptk/ptk-file-menu.c:132
+msgid "E_xtract"
+msgstr "Išpakuoti"
+
+#: src/ptk/ptk-file-menu.c:135
+msgid "_Properties"
+msgstr "_Savybės"
+
+#: src/ptk/ptk-file-menu.c:144
+msgid "Open in Terminal"
+msgstr "Paleisti _terminale"
+
+#: src/ptk/ptk-file-menu.c:373
+msgid "_Open with another program"
+msgstr "kita programa..."
+
+#: src/ptk/ptk-file-menu.c:388
+msgid "E_xecute"
+msgstr "Vy_kdyti"
+
+#: src/ptk/ptk-file-menu.c:397
+#, c-format
+msgid "_Open with \"%s\""
+msgstr "_Atverti su „%s“"
+
+#. delete some confusing menu item if this menu is for current folder
+#: src/ptk/ptk-file-menu.c:408 src/ptk/ptk-file-menu.c:417
+msgid "_Open"
+msgstr "_Atverti"
+
+#: src/ptk/ptk-file-misc.c:55
+msgid "Really delete selected files?"
+msgstr "Ar tikrai ištrinti pažymėtus failus?"
+
+#: src/ptk/ptk-file-misc.c:115
+msgid "Rename File"
+msgstr "Pervadinti failą"
+
+#: src/ptk/ptk-file-misc.c:116
+msgid "Please input new file name:"
+msgstr "Įveskite naują failo vardą:"
+
+#: src/ptk/ptk-file-misc.c:145 src/ptk/ptk-file-misc.c:166
+#: src/ptk/ptk-file-misc.c:219
+msgid ""
+"The file name you specified has existed.\n"
+"Please input a new one:"
+msgstr ""
+"Jau egzistuoja failas su nurodytu vardu.\n"
+"Įveskite naują vardą:"
+
+#: src/ptk/ptk-file-misc.c:189 src/ptk/ptk-file-misc.c:191
+msgid "New Folder"
+msgstr "Naujas aplankas"
+
+#: src/ptk/ptk-file-misc.c:190
+msgid "Input a name for the new folder:"
+msgstr "Įveskite naujo aplanko vardą:"
+
+#: src/ptk/ptk-file-misc.c:196 src/ptk/ptk-file-misc.c:198
+msgid "New File"
+msgstr "Naujas failas"
+
+#: src/ptk/ptk-file-misc.c:197
+msgid "Input a name for the new file:"
+msgstr "Įveskite naujo failo vardą:"
+
+#: src/ptk/ptk-file-misc.c:253
+msgid "The new file cannot be created!"
+msgstr "Neįmanoma sukurti naujo failo!"
+
+#: src/ptk/ptk-file-properties.c:304
+msgid "Multiple files are selected"
+msgstr "Pažymėta keletas failų"
+
+#: src/ptk/ptk-file-properties.c:380
+msgid "Multiple files of different types"
+msgstr "Keletas skirtingų tipų failų"
+
+#: src/ptk/ptk-file-properties.c:448
+msgid "Other program..."
+msgstr "Kita programa..."
+
+#. The total file size displayed in "File Properties" is not
+#. completely calculated yet. So "Calculating..." is displayed.
+#: src/ptk/ptk-file-properties.c:542
+msgid "Calculating..."
+msgstr "Skaičiuojama..."
+
+#: src/ptk/ptk-file-properties.c:693
+msgid "Invalid User"
+msgstr "Neteisingas vartotojas"
+
+#: src/ptk/ptk-file-properties.c:704
+msgid "Invalid Group"
+msgstr "Neteisinga grupė"
+
+#: src/ptk/ptk-file-properties.c:752
+msgid ""
+"Do you want to recursively apply these changes to all files and sub-folders?"
+msgstr ""
+"Ar norite rekursiškai pritaikyti šiuos pakeitimus visiems failams ir "
+"poaplankiams?"
+
+#: src/edit-bookmarks.c:77
+msgid "New Item"
+msgstr "Naujas elementas"
+
+#: src/edit-bookmarks.c:151
+msgid "Edit Bookmarks"
+msgstr "Taisyti žymeles"
+
+#: src/edit-bookmarks.c:207
+msgid "Path"
+msgstr "Kelias"
+
+#: src/edit-bookmarks.c:230
+msgid "Use drag & drop to sort the items"
+msgstr "Elementus surikiuosite vilkdami pele"
+
+#: src/vfs/vfs-app-desktop.c:445
+#, c-format
+msgid "Command not found"
+msgstr "Komanda nerasta"
+
+#: src/vfs/vfs-file-task.c:697
+#, c-format
+msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
+msgstr "Paskirties aplankas  „%1$s“ jau yra pirminiame aplanke „%2$s“"
+
+#: src/vfs/vfs-volume-hal.c:475 src/vfs/vfs-volume-hal.c:698
+#, c-format
+msgid "%s Volume"
+msgstr "%s tomas"
+
+#: src/vfs/vfs-volume-hal.c:490
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: src/vfs/vfs-volume-hal.c:492
+msgid "CD-R"
+msgstr "CD-R"
+
+#: src/vfs/vfs-volume-hal.c:494
+msgid "CD-RW"
+msgstr "CD-RW"
+
+#: src/vfs/vfs-volume-hal.c:498
+msgid "DVD-ROM"
+msgstr "DVD-ROM"
+
+#: src/vfs/vfs-volume-hal.c:500
+msgid "DVD+R"
+msgstr "DVD+R"
+
+#: src/vfs/vfs-volume-hal.c:502
+msgid "DVD+RW"
+msgstr "DVD+RW"
+
+#: src/vfs/vfs-volume-hal.c:504
+msgid "DVD-R"
+msgstr "DVD-R"
+
+#: src/vfs/vfs-volume-hal.c:506
+msgid "DVD-RW"
+msgstr "DVD-RW"
+
+#: src/vfs/vfs-volume-hal.c:508
+msgid "DVD-RAM"
+msgstr "DVD-RAM"
+
+#: src/vfs/vfs-volume-hal.c:517
+#, c-format
+msgid "%s/%s Drive"
+msgstr "%s/%s įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:519
+#, c-format
+msgid "%s Drive"
+msgstr "%s įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:524
+msgid "Floppy Drive"
+msgstr "Diskelių įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:527
+msgid "Compact Flash Drive"
+msgstr "Compact Flash įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:529
+msgid "Memory Stick Drive"
+msgstr "Memory Stick įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:531
+msgid "Smart Media Drive"
+msgstr "Smart Media įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:533
+msgid "SD/MMC Drive"
+msgstr "SD/MMC įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:535
+msgid "Zip Drive"
+msgstr "Zip įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:538
+msgid "Jaz Drive"
+msgstr "Jaz įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:541
+msgid "Pen Drive"
+msgstr "Atmintukas"
+
+#: src/vfs/vfs-volume-hal.c:547
+#, c-format
+msgid "%s %s Music Player"
+msgstr "%s %s muzikos grotuvas"
+
+#: src/vfs/vfs-volume-hal.c:555
+#, c-format
+msgid "%s %s Digital Camera"
+msgstr "%s %s fotoaparatas"
+
+#: src/vfs/vfs-volume-hal.c:586
+msgid "Drive"
+msgstr "Įrenginys"
+
+#: src/vfs/vfs-volume-hal.c:591
+#, c-format
+msgid "External %s"
+msgstr "Išorinis %s"
+
+#: src/vfs/vfs-volume-hal.c:625
+msgid "CD-ROM Disc"
+msgstr "CD-ROM diskas"
+
+#: src/vfs/vfs-volume-hal.c:630
+msgid "Blank CD-R Disc"
+msgstr "Tuščias CD-R diskas"
+
+#: src/vfs/vfs-volume-hal.c:632
+msgid "CD-R Disc"
+msgstr "CD-R diskas"
+
+#: src/vfs/vfs-volume-hal.c:637
+msgid "Blank CD-RW Disc"
+msgstr "Tuščias CD-RW diskas"
+
+#: src/vfs/vfs-volume-hal.c:639
+msgid "CD-RW Disc"
+msgstr "CD-RW diskas"
+
+#: src/vfs/vfs-volume-hal.c:643
+msgid "DVD-ROM Disc"
+msgstr "DVD-ROM diskas"
+
+#: src/vfs/vfs-volume-hal.c:648
+msgid "Blank DVD-RAM Disc"
+msgstr "Tuščias DVD-RAM diskas"
+
+#: src/vfs/vfs-volume-hal.c:650
+msgid "DVD-RAM Disc"
+msgstr "DVD-RAM diskas"
+
+#: src/vfs/vfs-volume-hal.c:655
+msgid "Blank DVD-R Disc"
+msgstr "Tuščias DVD-R diskas"
+
+#: src/vfs/vfs-volume-hal.c:657
+msgid "DVD-R Disc"
+msgstr "DVD-R diskas"
+
+#: src/vfs/vfs-volume-hal.c:662
+msgid "Blank DVD-RW Disc"
+msgstr "Tuščias DVD-RW diskas"
+
+#: src/vfs/vfs-volume-hal.c:664
+msgid "DVD-RW Disc"
+msgstr "DVD-RW diskas"
+
+#: src/vfs/vfs-volume-hal.c:670
+msgid "Blank DVD+R Disc"
+msgstr "Tuščias DVD+R diskas"
+
+#: src/vfs/vfs-volume-hal.c:672
+msgid "DVD+R Disc"
+msgstr "DVD+R diskas"
+
+#: src/vfs/vfs-volume-hal.c:677
+msgid "Blank DVD+RW Disc"
+msgstr "Tuščias DVD+RW diskas"
+
+#: src/vfs/vfs-volume-hal.c:679
+msgid "DVD+RW Disc"
+msgstr "DVD+RW diskas"
+
+#: src/vfs/vfs-volume-hal.c:686
+msgid "Audio Disc"
+msgstr "Audio diskas"
+
+#: src/vfs/vfs-volume-hal.c:696
+#, c-format
+msgid "%s Removable Volume"
+msgstr "%s keičiamasis tomas"
+
+#: src/vfs/vfs-volume-hal.c:704
+msgid "Volume"
+msgstr "Tomas"
+
+#: src/vfs/vfs-volume-hal.c:1100
+#, c-format
+msgid "Failed to connect to the HAL daemon: %s"
+msgstr "Nepavyko prisijungti prie HAL tarnybos: %s"
+
+#. definitely not a device that we're able to mount, eject or unmount
+#: src/vfs/vfs-volume-hal.c:1941 src/vfs/vfs-volume-hal.c:1997
+#, c-format
+msgid "Given device \"%s\" is not a volume or drive"
+msgstr "Įrenginys „%s“ nėra nei tomas, nei diskas"
+
+#. tell the caller that no matching device was found
+#: src/vfs/vfs-volume-hal.c:2073
+#, c-format
+msgid "Device \"%s\" not found in file system device table"
+msgstr "Įrenginys „%s“ nerastas failų sistemos įrenginių lentelėje"
+
+#: src/vfs/vfs-volume-hal.c:2256
+#, c-format
+msgid "You are not privileged to mount the volume \"%s\""
+msgstr "Jūs neturite leidimo prijungti tomą „%s“"
+
+#: src/vfs/vfs-volume-hal.c:2257
+#, c-format
+msgid "You are not privileged to unmount the volume \"%s\""
+msgstr "Jūs neturite leidimo atjungti tomą  „%s“"
+
+#: src/vfs/vfs-volume-hal.c:2258
+#, c-format
+msgid "You are not privileged to eject the volume \"%s\""
+msgstr "Jūs neturite leidimo išimti tomo  „%s“"
+
+#. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
+#: src/vfs/vfs-volume-hal.c:2270
+#, c-format
+msgid "Invalid mount option when attempting to mount the volume \"%s\""
+msgstr "Neteisingas prijungimo parametras bandant prijungti tomą „%s“"
+
+#: src/vfs/vfs-volume-hal.c:2272
+#, c-format
+msgid ""
+"The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
+"your system"
+msgstr "Sistema nepalaiko tomo „%s“ naudojamos <i>%s</i> failų sistemos"
+
+#: src/vfs/vfs-volume-hal.c:2274
+#, c-format
+msgid "An application is preventing the volume \"%s\" from being unmounted"
+msgstr "Programa trukdo atjungti tomą „%s“"
+
+#: src/vfs/vfs-volume-hal.c:2276
+#, c-format
+msgid "The volume \"%s\" is not mounted"
+msgstr "Tomas „%s“ neprijungtas"
+
+#: src/vfs/vfs-volume-hal.c:2278
+#, c-format
+msgid "Error <i>%s</i>"
+msgstr "Klaida <i>%s</i>"
+
+#. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
+#: src/vfs/vfs-volume-hal.c:2281
+#, c-format
+msgid "The volume \"%s\" was probably mounted manually on the command line"
+msgstr ""
+"Tomas „%s“ greičiausiai buvo prijungtas rankiniu būdu iš komandinės eilutės"
+
+#: src/vfs/vfs-volume-hal.c:2289
+#, c-format
+msgid ""
+"Blank discs cannot be mounted, use a CD recording application to record "
+"audio or data on the disc"
+msgstr ""
+"Negalima prijungti tuščių diskų. Norėdami įrašyti duomenis į diską, "
+"naudokite diskų įrašymo programą"
+
+#: src/vfs/vfs-volume-hal.c:2300
+#, c-format
+msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
+msgstr ""
+"Negalima prijungti Audio CD diskų. Jų klausymui naudokite muzikos grotuvo "
+"programą"
+
+#: src/desktop/desktop-window.c:164
+msgid "_Icons"
+msgstr "Rikiuoti p_iktogramas..."
+
+#: src/desktop/desktop-window.c:169
+msgid "_Desktop Settings"
+msgstr "_Darbalaukio nustatymai"
+
+#: src/desktop/desktop-window.c:1106
+msgid "My Documents"
+msgstr "Mano dokumentai"
+
+#: data/ui/prefdlg.glade:1
+msgid "Preference"
+msgstr "Nustatymai"
+
+#: data/ui/prefdlg.glade:1
+msgid "On-disk file name encoding:"
+msgstr "Diske esančių failų vardų koduotė:"
+
+#: data/ui/prefdlg.glade:1
+msgid "Bookmarks:"
+msgstr "Žymeles"
+
+#: data/ui/prefdlg.glade:1
+msgid ""
+"Opened in Current Tab\n"
+"Opened in New Tab\n"
+"Opened in New Window"
+msgstr ""
+"atverti dabartinėje kortelėje\n"
+"atverti naujoje kortelėje\n"
+"atverti naujame lange"
+
+#: data/ui/prefdlg.glade:3
+msgid "Size of Big Icons:"
+msgstr "Didelių piktogramų dydis:"
+
+#: data/ui/prefdlg.glade:10
+msgid "Size of Small Icons:"
+msgstr "Mažų piktogramų dydis:"
+
+#: data/ui/prefdlg.glade:16
+msgid "Display image files with supported format as thumbnails"
+msgstr "Rodyti paveikslėlių failų miniatiūras"
+
+#: data/ui/prefdlg.glade:16
+msgid "Max size of files displayed as thumbnails:"
+msgstr "Didžiausias failų, rodomų kaip miniatiūra, dydis:"
+
+#: data/ui/prefdlg.glade:16
+msgid "Terminal:"
+msgstr "Terminalo programa:"
+
+#: data/ui/prefdlg.glade:16 data/ui/file_properties.glade:1
+msgid "_General"
+msgstr "_Bendri"
+
+#: data/ui/prefdlg.glade:16
+msgid "Show file icons on desktop"
+msgstr "Darbalaukyje rodyti piktogramas"
+
+#: data/ui/prefdlg.glade:16
+msgid "Wallpaper:"
+msgstr "Darbalaukio fonas:"
+
+#: data/ui/prefdlg.glade:16
+msgid "Please select an image file"
+msgstr "Pasirinkite paveikslėlio failą"
+
+#: data/ui/prefdlg.glade:16
+#, fuzzy
+msgid "Mode:"
+msgstr "Foną "
+
+#: data/ui/prefdlg.glade:16
+msgid ""
+"Stretch to fill the entire screen\n"
+"Stretch to fit the screen\n"
+"Center on the screen\n"
+"Tile the image to fill the entire screen"
+msgstr ""
+"ištempti užpildant visą ekraną\n"
+"ištempti priderinat prie ekrano matmenų\n"
+"rodyti ekrano centre\n"
+"iškloti visame ekrane"
+
+#: data/ui/prefdlg.glade:19
+msgid "<b>Wallpaper</b>"
+msgstr "<b>Darbalaukio fonas</b>"
+
+#: data/ui/prefdlg.glade:19
+msgid "Background"
+msgstr "Fono "
+
+#: data/ui/prefdlg.glade:19
+msgid "Text"
+msgstr "Teksto "
+
+#: data/ui/prefdlg.glade:19
+msgid "Shadow"
+msgstr "Šešėlio "
+
+#: data/ui/prefdlg.glade:19
+msgid "<b>Colors</b>"
+msgstr "<b>Spalvos</b>"
+
+#: data/ui/prefdlg.glade:19
+msgid "Show menus provided by WM when desktop is clicked"
+msgstr "Spragtelėjus ant darbalaukio rodyti langų tvarkytuvės meniu"
+
+#: data/ui/prefdlg.glade:19
+msgid "Advanced"
+msgstr "Papildomi"
+
+#: data/ui/prefdlg.glade:19
+msgid "_Desktop"
+msgstr "_Darbalaukio"
+
+#: data/ui/file_properties.glade:1
+msgid "File Properties"
+msgstr "Failo savybės"
+
+#: data/ui/file_properties.glade:1
+msgid "Open with:"
+msgstr "Atverti su:"
+
+#: data/ui/file_properties.glade:1
+msgid "Size on Disk:"
+msgstr "Dydis diske:"
+
+#: data/ui/file_properties.glade:1
+msgid "Location:"
+msgstr "Vieta:"
+
+#: data/ui/file_properties.glade:1
+msgid "Last Access:"
+msgstr "Paskutinė kreiptis:"
+
+#: data/ui/file_properties.glade:1
+msgid "Last Modification:"
+msgstr "Paskutinis pakeitimas:"
+
+#: data/ui/file_properties.glade:1
+msgid "Total Size of Files:"
+msgstr "Visų failų dydis:"
+
+#: data/ui/file_properties.glade:1
+msgid "File Type:"
+msgstr "Failo tipas:"
+
+#: data/ui/file_properties.glade:1
+msgid "File Name:"
+msgstr "Failo vardas:"
+
+#: data/ui/file_properties.glade:1
+msgid "Group:"
+msgstr "Grupė:"
+
+#: data/ui/file_properties.glade:1
+msgid "Owner:"
+msgstr "Savininkas:"
+
+#: data/ui/file_properties.glade:1
+msgid "Sticky"
+msgstr "Kibus"
+
+#: data/ui/file_properties.glade:1
+msgid "Set GID"
+msgstr "Nustatyti GID"
+
+#: data/ui/file_properties.glade:1
+msgid "Set UID"
+msgstr "Nustatyti UID"
+
+#: data/ui/file_properties.glade:1
+msgid "Execute"
+msgstr "Vykdyti"
+
+#: data/ui/file_properties.glade:1
+msgid "Write"
+msgstr "Rašyti"
+
+#: data/ui/file_properties.glade:1
+msgid "Read"
+msgstr "Skaityti"
+
+#: data/ui/file_properties.glade:1
+msgid "Other Users:"
+msgstr "Kiti vartotojai:"
+
+#: data/ui/file_properties.glade:1
+msgid "_Permissions"
+msgstr "_Leidimai"
+
+#: data/ui/appchooserdlg.glade:1
+msgid "Choose an Application"
+msgstr "Pasirinkite programą"
+
+#: data/ui/appchooserdlg.glade:1
+msgid "File Type To be Opened:"
+msgstr "Atveriamo failo tipas:"
+
+#: data/ui/appchooserdlg.glade:1
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr "Parinkite programą iš duoto sąrašo arba įveskite komandą:"
+
+#: data/ui/appchooserdlg.glade:1
+msgid "_Recommended Applications"
+msgstr "_Rekomenduojamos programos"
+
+#: data/ui/appchooserdlg.glade:1
+msgid "_All Applications"
+msgstr "_Visos programos"
+
+#: data/ui/appchooserdlg.glade:1
+#, fuzzy
+msgid "_Command Line:"
+msgstr "_Komandos eilutė:"
+
+#: data/ui/appchooserdlg.glade:1
+msgid "_Browse"
+msgstr "_Naršyti"
+
+#: data/ui/appchooserdlg.glade:1
+msgid "Opened in Terminal"
+msgstr "Atverti terminale"
+
+#: data/ui/appchooserdlg.glade:1
+msgid "Set selected application to default action"
+msgstr "Visada naudoti parinktą programą šio tipo failams atverti"
+
+#: data/ui/about-dlg.glade:1
+msgid "Copyright (C) 2005 - 2006"
+msgstr "Autoriaus teisės (C) 2005 - 2006"
+
+#: data/ui/about-dlg.glade:1
+msgid ""
+"Lightweight file manager\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+msgstr ""
+"Lengvasvorė failų tvarkytuvė\n"
+"\n"
+"Kūrėjas Hon Jen Yee (PCMan)"
+
+#: data/ui/about-dlg.glade:19
+msgid ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Source code taken from other projects:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Working area detection: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Text and icon renderer uese code from Jonathan Blandford\n"
+" * Desktop icons use code from Brian Tarricone\n"
+" * Volume management uses code from following projects/authors:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs and libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+msgstr ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Panaudotas atviras kodas iš šių projektų:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Working area detection: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Text and icon renderer uese code from Jonathan Blandford\n"
+" * Desktop icons use code from Brian Tarricone\n"
+" * Volume management uses code from following projects/authors:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs and libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+
+#: data/ui/about-dlg.glade:30
+msgid "translator-credits"
+msgstr "Joshas (joshas@freemail.lt)"
+
+#: data/ui/about-dlg.glade:30
+msgid ""
+"The icon was taken from \"nuoveXT 2\" icon theme\n"
+"created by Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+msgstr ""
+"Piktograma pasiskolinta iš „nuoveXT 2“ piktogramų temos.\n"
+"Ją sukūrė Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+
+#~ msgid "gksu or kdesu is not found"
+#~ msgstr "Nerastas gksu arba kdesu"

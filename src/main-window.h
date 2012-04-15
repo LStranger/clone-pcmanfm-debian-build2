@@ -36,6 +36,7 @@ typedef struct _FMMainWindow
   GtkCheckMenuItem* show_hidden_files_menu;
 
   GtkCheckMenuItem* view_as_icon;
+  GtkCheckMenuItem* view_as_compact_list;
   GtkCheckMenuItem* view_as_list;
 
   GtkCheckMenuItem* sort_by_name;
@@ -77,7 +78,14 @@ void fm_main_window_add_new_tab( FMMainWindow* mainWindow,
 
 void fm_main_window_preference( FMMainWindow* main_window );
 
+/* get last active window */
 FMMainWindow* fm_main_window_get_last_active();
+
+/* get all windows
+ * The returned GList is owned and used internally by FMMainWindow, and
+ * should not be freed.
+*/
+const GList* fm_main_window_get_all();
 
 void fm_main_window_open_terminal( GtkWindow* parent,
                                    const char* path );

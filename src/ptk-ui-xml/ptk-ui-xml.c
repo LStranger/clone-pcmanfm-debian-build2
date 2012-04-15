@@ -156,8 +156,8 @@ set_widget_special_property( GtkWidget* widget,
             {
                 GtkTextBuffer* buf = gtk_text_buffer_new( NULL );
                 const char* text = NULL;
-	       	if (is_translatable( prop_node ))
-			text = _(text);
+            if (is_translatable( prop_node ))
+            text = _(text);
                 gtk_text_buffer_set_text( buf, text, strlen(text) );
                 gtk_text_view_set_buffer( GTK_TEXT_VIEW(widget), buf );
                 g_object_unref( buf );
@@ -469,6 +469,8 @@ static gboolean pack_widget( GtkWidget* parent,
         {
             if( GTK_IS_EXPANDER( parent ) )
                 gtk_expander_set_label_widget(  (GtkExpander*)parent, widget );
+            else if( GTK_IS_FRAME( parent ) )
+                gtk_frame_set_label_widget(  (GtkFrame*)parent, widget );
         }
     }
 
