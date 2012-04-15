@@ -3,11 +3,16 @@
 %:
 	dh ${@}
 
-override_dh_auto_test:
-	# disabled: fails with libtool version mismatch.
+override_dh_auto_configure:
+	autoreconf -i
+
+	dh_auto_configure
 
 override_dh_auto_install:
 	$(MAKE) DESTDIR=$(CURDIR)/debian/pcmanfm install
+
+override_dh_auto_test:
+	# disabled: test fails in po directory
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9
