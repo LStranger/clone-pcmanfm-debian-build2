@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Debian LXDE Packaging Team <pkg-lxde-maintainers@lists.alioth.debian.org>
 Uploaders: Andrew Lee (李健秋) <ajqlee@debian.org>
-Build-Depends: debhelper (>= 5), libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake, autoconf, pkg-config, intltool, libstartup-notification0-dev, libhal-dev [!hurd-i386], libdbus-glib-1-dev, libhal-storage-dev [!hurd-i386], python
+Build-Depends: debhelper (>= 7.0.50~), libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake, autoconf, pkg-config, intltool, libstartup-notification0-dev, libdbus-glib-1-dev, python, libfm-dev (>= 0.1.10), libmenu-cache1-dev (>= 0.3.2), libtool
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.8.4
 Homepage: http://pcmanfm.sourceforge.net/
@@ -11,11 +11,11 @@ Vcs-Git: git://git.debian.org/git/collab-maint/pcmanfm.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/pcmanfm.git;a=summary
 
 Package: pcmanfm
-Architecture: linux-any
-Depends: ${shlibs:Depends}, ${misc:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, hal
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, gamin, shared-mime-info, desktop-file-utils, dbus, gvfs-backends, xdg-user-dirs 
 Recommends: gnome-icon-theme, gksu | kdesu, ntfs-3g
 Conflicts: pcmanfm-nohal
-Description: an extremely fast and lightweight file manager for X
+Description: an extremely fast and lightweight file manager
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
   * Extremly fast and lightweight
@@ -31,14 +31,14 @@ Description: an extremely fast and lightweight file manager for X
   * Provide icon view and detailed list view
   * Standard compliant (Follows FreeDesktop.org)
   * Clean and user-friendly interface (GTK+ 2)
-  * Support HAL for auto-mount handling on removable devices
+  * Support GVFS for auto-mount handling on removable devices
 
-Package: pcmanfm-nohal
+Package: pcmanfm-dbg
+Section: debug
+Priority: extra
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, gamin, shared-mime-info, desktop-file-utils
-Recommends: gnome-icon-theme, gksu | kdesu, ntfs-3g
-Conflicts: pcmanfm
-Description: an extremely fast and lightweight file manager for X
+Depends: ${shlibs:Depends}, ${misc:Depends}, pcmanfm (= ${binary:Version}), gamin, shared-mime-info, desktop-file-utils
+Description: an extremely fast and lightweight file manager - debugging symbols
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
   * Extremly fast and lightweight
@@ -54,3 +54,6 @@ Description: an extremely fast and lightweight file manager for X
   * Provide icon view and detailed list view
   * Standard compliant (Follows FreeDesktop.org)
   * Clean and user-friendly interface (GTK+ 2)
+  * Support GVFS for auto-mount handling on removable devices
+ . 
+ This package contains the debugging symbols.

@@ -1,3 +1,30 @@
+pcmanfm (0.9.5-1) experimental; urgency=low
+
+  * New upstream experimental release
+    - Reusable design with the core functions separated out to
+      simplify porting to other GUIs.
+    - Added Trash support and access to remote file systems
+    - Supports both Drag-and-Drop, and the X Direct Save protocol
+    - Clipboard operations are compatible with GTK+/GNOME and Qt/KDE
+    (Closes:#579912, #534919, #535811, #576368, #524742)
+  * Use debhelper 7
+  * Switch to dpkg-source 3.0 (quilt) format
+  * debian/control:
+    - build-depends on libfm-dev (>= 0.1.10), libmenu-cache1-dev (>= 0.3.2)   
+    - Droped hal related build-depends
+    - Droped pcmanfm-nohal binary package
+    - Added pcmanfm-dbg binary package
+    - Added pcmanfm depends on gvfs-backends, xdg-user-dirs 
+    - Adjust package description
+    - Added depends on (= ${binary:Version) to pcmanfm-dbg
+    - Set priority "extra" to pcmanfm-dbg
+  * Updated copyright file
+  * Applied 01_binary_rename.patch from OpenSuSE (Thanks Andrea Florio)
+    - Added build-depends on libtool
+    - Added '/usr/bin/autoreconf -fiv' to debian/rules
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 11 May 2010 00:56:09 +0800
+
 pcmanfm (0.5.2+svn20091029-2) unstable; urgency=low
 
   * Building hal variant on kFreeBSD. (Closes: #544737)
