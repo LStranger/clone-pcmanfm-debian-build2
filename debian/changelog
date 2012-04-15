@@ -1,22 +1,79 @@
-pcmanfm (0.3.0.2-2) unstable; urgency=low
+pcmanfm (0.3.2.1-1) unstable; urgency=low
 
-  * Update 01_implicit-pointer-conversion.dpatch 
-    by Dann Frazier <dannf@debian.org> (Closes:#389515)
+  [ Lu, Chao-Ming (Tetralet) ]
+  * New upstream release 0.3.2.1.
+    - Support auto-completion for path entry.
+    - Support choosing custom application to open selected file from
+      file properties dialog.
+    - Support popup menus for dir tree.
+    - Support showing popup menu via shortcut key (Shift+F10).
+    - Support cut/copy/paste/delete/rename in dir tree.
+    - Add euidaccess & eaccess support to check access permission
+      before chdir.
+    - Preserve file times when copying/moving.
+    - Sync with working copy.
+    - Improve volume-mounting support.
+    - Passing current working directory when executing apps.
+    - Add experimental desktop support.
+    - Add basic desktop wallpaper support.
+    - Greatly improve desktop wallpaper display.
+    - Add color settings for desktop.
+    - Add open terminal support to desktop window.
+    - Add a simple desktop session - LiteDE.
+    - Add missing GDK threading guards to prevent reentry. Greatly
+      improve stability.
+    - Disable all widgets in "Desktop" preference page when desktop
+      icon management is turned off.
+    - Enable cancellation of VFSFileTask during preparation.
+      (calculating total size)
+    - Little but absolutely important fix. Reported by Temcat and
+      other users: "Segfaults on choosing list view".
+    - Delay the update with an interval of 5 seconds if a file get
+      changed too frequently.
+    - Fix a serious bug caused by gdk_pixbuf_unref() an uninitialized
+      pointer in vfs_mime_type_unref.
+    - Fix some problems with shortcut keys of folder view.
+    - Fix a critical bug causing dir tree not updated when sub dirs
+      change.
+    - Fix a critical bug in VFSFileMonitor.
+    - Fix a segmentation fault error in hal volume management.
+    - Fix file properties dialog segmentation fault error when right
+      clicking list view directly without selecting file first, and
+      then choose properties.
+    - Fix a segmentation fault error when using right click to view the
+      properties of a file.
+    - Fix a serious bug when click a non-access-right folder in tree
+      view.
+    - Fix some problems with on_folder_view_key_press().
+    - Fix crashes caused by doing rubber bending selection on changing
+      files.
+    - Fix window activation issue under metacity.
+    - Resolve the path passed in command line and address bar.
+      (~, ., and .. can be recognized now)
+    - Fix the bug in following symlinks in file-alteration.
+    - Fix memory leaks cause by auto-completion.
+    - Some po files had been updated.
+  * 01_implicit-pointer-conversion.dpatch is applied in upstream.
 
- -- Andrew Lee <andrew@linux.org.tw>  Tue, 26 Sep 2006 14:15:08 +0800
+  [ Andrew Lee ]
+  * debian/controls: Recommends on gnome-icon-theme, so that icons 
+    display properly.
+  * Update to policy version 3.7.2.2, no actual changes needed.
+
+ -- Andrew Lee <andrew@linux.org.tw>  Mon, 16 Oct 2006 16:47:04 +0800
 
 pcmanfm (0.3.0.2-1) unstable; urgency=low
 
   [ Lu, Chao-Ming (Tetralet) ]
   * New upstream version.
   * HAL is disabled by default.
-  * debian/control: s/X Window/X/ (Closes:#385040)
-  * debian/control: s/extamly/extremely/ (Closes:#385042)
+  * debian/control: replace "X Window" with "X". (Closes:#385040)
+  * debian/control: replace "extamly" with "an extremely". (Closes:#385042)
 
   [ Andrew Lee ]
   * Minor correction in copyright file.
 
- -- Andrew Lee <andrew@linux.org.tw>  Fri, 22 Sep 2006 18:24:37 +0800
+ -- Andrew Lee <andrew@linux.org.tw>  Thu, 14 Sep 2006 01:04:49 +0800
 
 pcmanfm (0.2.4-2) unstable; urgency=low
 

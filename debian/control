@@ -5,12 +5,13 @@ Maintainer: Lu, Chao-Ming (Tetralet) <tetralet@debian.org.tw>
 Uploaders: Andrew Lee <andrew@linux.org.tw>
 Build-Depends: debhelper (>= 5.0.0), dpatch, libgtk2.0-dev (>= 2.6.0), libgamin-dev, automake1.9, autoconf, pkg-config, libstartup-notification0-dev, shared-mime-info
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.7.2.0
+Standards-Version: 3.7.2.2
 
 Package: pcmanfm
 Architecture: any
 Depends: ${shlibs:Depends}, gamin, shared-mime-info
-Description: extremely fast and lightweight file manager for X
+Recommends: gnome-icon-theme
+Description: an extremely fast and lightweight file manager for X
  PCMan File Manager is a gtk2 based file manager for the X Window System.
  Features:
   * Extremly fast and lightweight

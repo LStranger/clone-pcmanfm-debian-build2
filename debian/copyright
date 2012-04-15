@@ -29,16 +29,11 @@ Copyright:
     On Debian GNU/Linux systems, the complete text of the GNU General
     Public License may be found in /usr/share/common-licenses/GPL.
 
-Files src/ptk/exo-string.c
-      src/ptk/exo-string.h
-      src/ptk/ptk-icon-view.c
-      src/ptk/ptk-icon-view.h
-      src/ptk/ptk-text-renderer.c
-      src/ptk/ptk-text-renderer.h
+Directory src/ptk/
 
     Those files are distributed under the GNU Lesser General Public 
-    Licence (LGPL). This library is distributed in the hope that it 
-    will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    Licence (LGPL). This library is distributed in the hope that it will
+    be useful, but WITHOUT ANY WARRANTY; without even the implied 
     warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
     See the GNU Lesser General Public Licence for more details.
 
@@ -64,11 +59,6 @@ Directory src/xdgmime
     found in /usr/share/common-licenses/LGPL.
 
 Directory src/libmd5-rfc
-
-    Those files are an independent implementation of MD5 (RFC 1321).
-    The original and principal author of these files are by L. Peter 
-    Deutsch <ghost@aladdin.com>. These files are distributed under
-    a BSD-like license, you can see the complete statements bwlow:
 
     Copyright (C) 1999, 2000, 2002 Aladdin Enterprises.  All rights 
     reserved.
