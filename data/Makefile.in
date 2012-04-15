@@ -35,15 +35,14 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 subdir = data
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/pcmanfm.desktop.in
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = pcmanfm.desktop
+CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 SOURCES =
 DIST_SOURCES =
@@ -75,8 +74,8 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(desktopdir)"
-DATA = $(desktop_DATA)
+am__installdirs = "$(DESTDIR)$(defconfdir)" "$(DESTDIR)$(desktopdir)"
+DATA = $(defconf_DATA) $(desktop_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -262,8 +261,19 @@ top_srcdir = @top_srcdir@
 NULL = 
 SUBDIRS = ui
 desktopdir = $(datadir)/applications
-desktop_DATA = \
-	pcmanfm.desktop \
+desktop_in_files = \
+	pcmanfm.desktop.in \
+	$(NULL)
+
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+defconfdir = $(sysconfdir)/xdg/pcmanfm/default
+defconf_DATA = \
+	pcmanfm.conf \
+	$(NULL)
+
+EXTRA_DIST = \
+	$(desktop_DATA) \
+	$(defconf_DATA) \
 	$(NULL)
 
 all: all-recursive
@@ -299,14 +309,32 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-pcmanfm.desktop: $(top_builddir)/config.status $(srcdir)/pcmanfm.desktop.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-defconfDATA: $(defconf_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(defconfdir)" || $(MKDIR_P) "$(DESTDIR)$(defconfdir)"
+	@list='$(defconf_DATA)'; test -n "$(defconfdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(defconfdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(defconfdir)" || exit $$?; \
+	done
+
+uninstall-defconfDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(defconf_DATA)'; test -n "$(defconfdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(defconfdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(defconfdir)" && rm -f $$files
 install-desktopDATA: $(desktop_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(desktopdir)" || $(MKDIR_P) "$(DESTDIR)$(desktopdir)"
@@ -526,7 +554,7 @@ check: check-recursive
 all-am: Makefile $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(desktopdir)"; do \
+	for dir in "$(DESTDIR)$(defconfdir)" "$(DESTDIR)$(desktopdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -574,7 +602,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-desktopDATA
+install-data-am: install-defconfDATA install-desktopDATA
 
 install-dvi: install-dvi-recursive
 
@@ -618,7 +646,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-desktopDATA
+uninstall-am: uninstall-defconfDATA uninstall-desktopDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
 	install-am install-strip tags-recursive
@@ -628,16 +656,18 @@ uninstall-am: uninstall-desktopDATA
 	ctags ctags-recursive distclean distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
-	install-data-am install-desktopDATA install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs installdirs-am \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
+	install-data-am install-defconfDATA install-desktopDATA \
+	install-dvi install-dvi-am install-exec install-exec-am \
+	install-html install-html-am install-info install-info-am \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
+	uninstall uninstall-am uninstall-defconfDATA \
 	uninstall-desktopDATA
 
+@INTLTOOL_DESKTOP_RULE@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

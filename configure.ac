@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.63])
-AC_INIT([pcmanfm], [0.9.7], [http://pcmanfm.sf.net/])
+AC_INIT([pcmanfm], [0.9.8], [http://pcmanfm.sf.net/])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 AC_CONFIG_HEADERS([config.h])
@@ -45,10 +45,10 @@ fi
 AC_SUBST(G_CAST_CHECKS)
 
 AC_ARG_ENABLE(debug,
-	[AC_HELP_STRING([--enable-debug],
-		[build pcmanfm with debug support @<:@default=no@:>@])],
-	[enable_debug="${enableval}"],
-	[enable_debug=no]
+    [AC_HELP_STRING([--enable-debug],
+        [build pcmanfm with debug support @<:@default=no@:>@])],
+    [enable_debug="${enableval}"],
+    [enable_debug=no]
 )
 if test "$enable_debug" = "yes"; then
     # turn on debug and disable optimization
@@ -116,7 +116,6 @@ AC_CONFIG_FILES([
     data/Makefile
     data/ui/Makefile
     data/ui/about.glade
-    data/pcmanfm.desktop
 ])
 
 AC_OUTPUT

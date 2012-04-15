@@ -53,7 +53,7 @@ am_pcmanfm_OBJECTS = pcmanfm-pcmanfm.$(OBJEXT) \
 	pcmanfm-app-config.$(OBJEXT) pcmanfm-main-win.$(OBJEXT) \
 	pcmanfm-desktop.$(OBJEXT) pcmanfm-volume-manager.$(OBJEXT) \
 	pcmanfm-pref.$(OBJEXT) pcmanfm-utils.$(OBJEXT) \
-	$(am__objects_1)
+	pcmanfm-single-inst.$(OBJEXT) $(am__objects_1)
 pcmanfm_OBJECTS = $(am_pcmanfm_OBJECTS)
 am__DEPENDENCIES_1 =
 pcmanfm_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -250,6 +250,7 @@ pcmanfm_SOURCES = \
 	pref.c pref.h \
 	utils.c utils.h \
 	gseal-gtk-compat.h \
+	single-inst.c single-inst.h \
 	$(NULL)
 
 EXTRA_DIST = \
@@ -385,6 +386,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-main-win.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-pcmanfm.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-pref.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-single-inst.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcmanfm-volume-manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml_purge-xml-purge.Po@am__quote@
@@ -507,6 +509,20 @@ pcmanfm-utils.obj: utils.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils.c' object='pcmanfm-utils.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
+
+pcmanfm-single-inst.o: single-inst.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-single-inst.o -MD -MP -MF $(DEPDIR)/pcmanfm-single-inst.Tpo -c -o pcmanfm-single-inst.o `test -f 'single-inst.c' || echo '$(srcdir)/'`single-inst.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-single-inst.Tpo $(DEPDIR)/pcmanfm-single-inst.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='single-inst.c' object='pcmanfm-single-inst.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-single-inst.o `test -f 'single-inst.c' || echo '$(srcdir)/'`single-inst.c
+
+pcmanfm-single-inst.obj: single-inst.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -MT pcmanfm-single-inst.obj -MD -MP -MF $(DEPDIR)/pcmanfm-single-inst.Tpo -c -o pcmanfm-single-inst.obj `if test -f 'single-inst.c'; then $(CYGPATH_W) 'single-inst.c'; else $(CYGPATH_W) '$(srcdir)/single-inst.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/pcmanfm-single-inst.Tpo $(DEPDIR)/pcmanfm-single-inst.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='single-inst.c' object='pcmanfm-single-inst.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcmanfm_CFLAGS) $(CFLAGS) -c -o pcmanfm-single-inst.obj `if test -f 'single-inst.c'; then $(CYGPATH_W) 'single-inst.c'; else $(CYGPATH_W) '$(srcdir)/single-inst.c'; fi`
 
 xml_purge-xml-purge.o: xml-purge.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xml_purge_CFLAGS) $(CFLAGS) -MT xml_purge-xml-purge.o -MD -MP -MF $(DEPDIR)/xml_purge-xml-purge.Tpo -c -o xml_purge-xml-purge.o `test -f 'xml-purge.c' || echo '$(srcdir)/'`xml-purge.c

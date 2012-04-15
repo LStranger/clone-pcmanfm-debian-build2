@@ -52,8 +52,8 @@ static const GtkActionEntry desktop_actions[]=
     {"SelAll", GTK_STOCK_SELECT_ALL, NULL, NULL, NULL, G_CALLBACK(on_select_all)},
     {"InvSel", NULL, N_("_Invert Selection"), "<Ctrl>I", NULL, G_CALLBACK(on_invert_select)},
     {"Sort", NULL, N_("_Sort Files"), NULL, NULL, NULL},
-    {"CreateNew", GTK_STOCK_NEW, NULL, NULL, NULL, NULL},
-    {"NewFolder", "folder", N_("Folder"), NULL, NULL, G_CALLBACK(on_create_new)},
+    {"CreateNew", GTK_STOCK_NEW, N_("_New"), "", NULL, NULL},
+    {"NewFolder", "folder", N_("Folder"), "<Ctrl><Shift>N", NULL, G_CALLBACK(on_create_new)},
     {"NewBlank", "text-x-generic", N_("Blank File"), NULL, NULL, G_CALLBACK(on_create_new)},
     {"Prop", GTK_STOCK_PROPERTIES, N_("Desktop Preferences"), "<Alt>Return", NULL, G_CALLBACK(fm_desktop_preference)}
 };
@@ -91,3 +91,23 @@ static const GtkActionEntry folder_menu_actions[]=
     {"Term", "utilities-terminal", N_("Open in _Terminal"), NULL, NULL, G_CALLBACK(on_open_folder_in_terminal)}
 };
 
+/* xml definition for desktop item placement */
+static const char desktop_icon_menu_xml[]=
+"<popup>"
+  "<placeholder name='ph2'>"
+    "<separator/>"
+    "<menuitem action='Fix'/>"
+    "<menuitem action='Snap'/>"
+  "</placeholder>"
+"</popup>";
+
+/* action entries for desktop item placement */
+static GtkToggleActionEntry desktop_icon_toggle_actions[]=
+{
+    {"Fix", NULL, N_("Stick to Current Position"), NULL, NULL, G_CALLBACK(on_fix_pos), FALSE}
+};
+
+static const GtkActionEntry desktop_icon_actions[]=
+{
+    {"Snap", NULL, N_("Snap to Grid"), NULL, NULL, G_CALLBACK(on_snap_to_grid)}
+};

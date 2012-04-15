@@ -29,6 +29,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <math.h>
 
 #include "pref.h"
 #include "main-win.h"
@@ -52,7 +53,7 @@ struct _FmDesktopItem
     gboolean is_mount : 1; /* is this a mounted volume*/
     gboolean is_selected : 1;
     gboolean is_prelight : 1;
-    gboolean custom_pos : 1;
+    gboolean fixed_pos : 1;
 };
 
 /* static void fm_desktop_finalize              (GObject *object); */
@@ -78,6 +79,7 @@ static void deselect_all(FmDesktop* desktop);
 
 static FmDesktopItem* desktop_item_new(GtkTreeIter* it);
 static void desktop_item_free(FmDesktopItem* item);
+static void move_item(FmDesktop* desktop, FmDesktopItem* item, int x, int y, gboolean redraw);
 
 static gboolean on_expose( GtkWidget* w, GdkEventExpose* evt );
 static void on_size_allocate( GtkWidget* w, GtkAllocation* alloc );
@@ -92,7 +94,6 @@ static void on_direction_changed( GtkWidget* w, GtkTextDirection prev );
 static void on_realize( GtkWidget* w );
 static gboolean on_focus_in( GtkWidget* w, GdkEventFocus* evt );
 static gboolean on_focus_out( GtkWidget* w, GdkEventFocus* evt );
-static void on_drag_leave(GtkWidget* w, GdkDragContext* drag_ctx, guint time);
 
 static void on_wallpaper_changed(FmConfig* cfg, gpointer user_data);
 static void on_desktop_text_changed(FmConfig* cfg, gpointer user_data);
@@ -107,11 +108,9 @@ static void on_row_changed(GtkTreeModel* mod, GtkTreePath* tp, GtkTreeIter* it, 
 static void on_rows_reordered(GtkTreeModel* mod, GtkTreePath* parent_tp, GtkTreeIter* parent_it, gpointer arg3, FmDesktop* desktop);
 
 static void on_dnd_src_data_get(FmDndSrc* ds, FmDesktop* desktop);
-static gboolean on_dnd_dest_query_info(FmDndDest* dd, int x, int y,
-                            			GdkDragAction* action, FmDesktop* desktop);
-static void on_dnd_dest_files_dropped(FmDndDest* dd, GdkDragAction action,
-                                       int info_type, FmList* files, FmDesktop* desktop);
-
+static void on_drag_data_get(GtkWidget *src_widget, GdkDragContext *drag_context,
+                             GtkSelectionData *sel_data, guint info,
+                             guint time, gpointer user_data);
 
 static GdkFilterReturn on_root_event(GdkXEvent *xevent, GdkEvent *event, gpointer data);
 static void on_screen_size_changed(GdkScreen* screen, FmDesktop* desktop);
@@ -128,9 +127,11 @@ static void on_open_in_new_tab(GtkAction* act, gpointer user_data);
 static void on_open_in_new_win(GtkAction* act, gpointer user_data);
 static void on_open_folder_in_terminal(GtkAction* act, gpointer user_data);
 
+static void on_fix_pos(GtkToggleAction* act, gpointer user_data);
+static void on_snap_to_grid(GtkAction* act, gpointer user_data);
+
 /* for desktop menu provided by window manager */
 static void forward_event_to_rootwin( GdkScreen *gscreen, GdkEvent *event );
-
 
 G_DEFINE_TYPE(FmDesktop, fm_desktop, GTK_TYPE_WINDOW);
 
@@ -172,46 +173,6 @@ static GtkWidget* desktop_popup = NULL;
 /* insert GtkUIManager XML definitions */
 #include "desktop-ui.c"
 
-
-static void fm_desktop_class_init(FmDesktopClass *klass)
-{
-    GtkObjectClass *gtk_object_class;
-    GtkWidgetClass* wc;
-	typedef gboolean (*DeleteEvtHandler) (GtkWidget*, GdkEvent*);
-    const char* atom_names[] = {"_NET_WORKAREA", "_NET_NUMBER_OF_DESKTOPS", "_NET_CURRENT_DESKTOP", "_XROOTMAP_ID"};
-    Atom atoms[G_N_ELEMENTS(atom_names)] = {0};
-
-    /* g_object_class = G_OBJECT_CLASS(klass);
-       g_object_class->finalize = fm_desktop_finalize; */
-    gtk_object_class = GTK_OBJECT_CLASS(klass);
-    gtk_object_class->destroy = fm_desktop_destroy;
-
-    wc = GTK_WIDGET_CLASS(klass);
-    wc->expose_event = on_expose;
-    wc->size_allocate = on_size_allocate;
-    wc->size_request = on_size_request;
-    wc->button_press_event = on_button_press;
-    wc->button_release_event = on_button_release;
-    wc->motion_notify_event = on_motion_notify;
-    wc->leave_notify_event = on_leave_notify;
-    wc->key_press_event = on_key_press;
-    wc->style_set = on_style_set;
-    wc->direction_changed = on_direction_changed;
-    wc->realize = on_realize;
-    wc->focus_in_event = on_focus_in;
-    wc->focus_out_event = on_focus_out;
-    /* wc->scroll_event = on_scroll; */
-    wc->delete_event = (DeleteEvtHandler)gtk_true;
-    wc->drag_leave = on_drag_leave;
-
-    if(XInternAtoms(GDK_DISPLAY(), atom_names, G_N_ELEMENTS(atom_names), False, atoms))
-    {
-        XA_NET_WORKAREA = atoms[0];
-        XA_NET_NUMBER_OF_DESKTOPS = atoms[1];
-        XA_NET_CURRENT_DESKTOP = atoms[2];
-        XA_XROOTMAP_ID= atoms[3];
-    }
-}
 
 static void desktop_item_free(FmDesktopItem* item)
 {
@@ -299,6 +260,8 @@ static void fm_desktop_init(FmDesktop *self)
     targets = gtk_drag_source_get_target_list((GtkWidget*)self);
     /* add our own targets */
     gtk_target_list_add_table(targets, dnd_targets, G_N_ELEMENTS(dnd_targets));
+    /* a dirty way to override FmDndSrc. */
+    g_signal_connect(self, "drag-data-get", G_CALLBACK(on_drag_data_get), NULL);
     self->dnd_src = fm_dnd_src_new((GtkWidget*)self);
     g_signal_connect(self->dnd_src, "data-get", G_CALLBACK(on_dnd_src_data_get), self);
 
@@ -307,9 +270,6 @@ static void fm_desktop_init(FmDesktop *self)
     gtk_drag_dest_set_target_list(GTK_WIDGET(self), targets);
 
     self->dnd_dest = fm_dnd_dest_new((GtkWidget*)self);
-    g_signal_connect(self->dnd_dest, "query-info", G_CALLBACK(on_dnd_dest_query_info), self);
-    g_signal_connect(self->dnd_dest, "files_dropped", G_CALLBACK(on_dnd_dest_files_dropped), self);
-
     /* add items */
     if(gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &it))
     {
@@ -327,6 +287,51 @@ GtkWidget *fm_desktop_new(void)
     return (GtkWidget*)g_object_new(FM_TYPE_DESKTOP, NULL);
 }
 
+static char* get_config_file(FmDesktop* desktop, gboolean create_dir)
+{
+    char* dir = pcmanfm_get_profile_dir(create_dir);
+    GdkScreen* scr = gtk_widget_get_screen(GTK_WIDGET(desktop));
+    int n = gdk_screen_get_number(scr);
+    char* path = g_strdup_printf("%s/desktop-items-%d.conf", dir, n);
+    g_free(dir);
+    return path;
+}
+
+static inline void load_item_pos(FmDesktop* desktop, GKeyFile* kf)
+{
+    char* path = get_config_file(desktop, FALSE);
+    if(g_key_file_load_from_file(kf, path, 0, NULL))
+    {
+        GList* l;
+        for(l = desktop->items; l; l=l->next)
+        {
+            FmDesktopItem* item = (FmDesktopItem*)l->data;
+            const char* name = fm_path_get_basename(item->fi->path);
+            if(g_key_file_has_group(kf, name))
+            {
+                desktop->fixed_items = g_list_prepend(desktop->fixed_items, item);
+                item->fixed_pos = TRUE;
+                item->x = g_key_file_get_integer(kf, name, "x", NULL);
+                item->y = g_key_file_get_integer(kf, name, "y", NULL);
+                calc_item_size(desktop, item);
+            }
+        }
+    }
+    g_free(path);
+}
+
+static void on_model_loaded(FmFolderModel* model, gpointer user_data)
+{
+    int i;
+    /* the desktop folder is just loaded, apply desktop item positions */
+    GKeyFile* kf = g_key_file_new();
+    for( i = 0; i < n_screens; i++ )
+    {
+        FmDesktop* desktop = FM_DESKTOP(desktops[i]);
+        load_item_pos(desktop, kf);
+    }
+    g_key_file_free(kf);
+}
 
 void fm_desktop_manager_init()
 {
@@ -334,9 +339,16 @@ void fm_desktop_manager_init()
     gint i;
     GtkUIManager* ui;
     GtkActionGroup* act_grp;
+    const char* desktop_path;
 
     if( ! win_group )
         win_group = gtk_window_group_new();
+
+    /* create the ~/Desktop folder if it doesn't exist. */
+    desktop_path = g_get_user_special_dir(G_USER_DIRECTORY_DESKTOP);
+    /* FIXME: should we use a localized folder name instead? */
+    g_mkdir_with_parents(desktop_path, 0700); /* ensure the existance of Desktop folder. */
+    /* FIXME: should we store the desktop folder path in the annoying ~/.config/user-dirs.dirs file? */
 
     if(!model)
     {
@@ -365,6 +377,14 @@ void fm_desktop_manager_init()
         gtk_window_group_add_window( GTK_WINDOW_GROUP(win_group), desktop );
     }
 
+    /* do some special handling when all files on desktop are loaded. */
+    if(model)
+    {
+        g_signal_connect(model, "loaded", G_CALLBACK(on_model_loaded), NULL);
+        if(!fm_folder_model_get_is_loading(model))
+            on_model_loaded(model, NULL);
+    }
+
     wallpaper_changed = g_signal_connect(app_config, "changed::wallpaper", G_CALLBACK(on_wallpaper_changed), NULL);
     desktop_text_changed = g_signal_connect(app_config, "changed::desktop_text", G_CALLBACK(on_desktop_text_changed), NULL);
     desktop_font_changed = g_signal_connect(app_config, "changed::desktop_font", G_CALLBACK(on_desktop_font_changed), NULL);
@@ -391,10 +411,50 @@ void fm_desktop_manager_init()
 
     hand_cursor = gdk_cursor_new(GDK_HAND2);
 
-    g_object_unref(act_grp);
     g_object_unref(ui);
 
     pcmanfm_ref();
+}
+
+/* save position of desktop icons */
+static void save_item_pos(FmDesktop* desktop)
+{
+    GList* l;
+    GString* buf;
+    char* path;
+    buf = g_string_sized_new(1024);
+    for(l = desktop->fixed_items; l; l=l->next)
+    {
+        FmDesktopItem* item = (FmDesktopItem*)l->data;
+        const char* p;
+        /* write the file basename as group name */
+        g_string_append_c(buf, '[');
+        for(p = item->fi->path->name; *p; ++p)
+        {
+            switch(*p)
+            {
+            case '\r':
+                g_string_append(buf, "\\r");
+                break;
+            case '\n':
+                g_string_append(buf, "\\n");
+                break;
+            case '\\':
+                g_string_append(buf, "\\\\");
+                break;
+            default:
+                g_string_append_c(buf, *p);
+            }
+        }
+        g_string_append(buf, "]\n");
+        g_string_append_printf(buf, "x=%d\n"
+                                    "y=%d\n\n",
+                                    item->x, item->y);
+    }
+    path = get_config_file(desktop, TRUE);
+    g_file_set_contents(path, buf->str, buf->len, NULL);
+    g_free(path);
+    g_string_free(buf, TRUE);
 }
 
 void fm_desktop_manager_finalize()
@@ -402,6 +462,7 @@ void fm_desktop_manager_finalize()
     int i;
     for( i = 0; i < n_screens; i++ )
     {
+        save_item_pos(FM_DESKTOP(desktops[i]));
         gtk_widget_destroy(desktops[i]);
     }
     g_free(desktops);
@@ -498,7 +559,65 @@ static void deselect_all(FmDesktop* desktop)
     }
 }
 
+static inline void popup_menu(FmDesktop* desktop, GdkEventButton* evt)
+{
+    FmFileMenu* menu;
+    GtkMenu* popup;
+    FmFileInfo* fi;
+    GList* sel_items, *l;
+    FmFileInfoList* files;
+    GtkUIManager* ui;
+    GtkActionGroup* act_grp;
+    GtkAction* act;
+    gboolean all_fixed = TRUE, has_fixed = FALSE;
 
+    files = fm_file_info_list_new();
+    sel_items = get_selected_items(desktop, NULL);
+    for(l = sel_items; l; l=l->next)
+    {
+        FmDesktopItem* item = (FmDesktopItem*)l->data;
+        fm_list_push_tail(files, item->fi);
+        if(item->fixed_pos)
+            has_fixed = TRUE;
+        else
+            all_fixed = FALSE;
+    }
+    g_list_free(sel_items);
+
+    fi = (FmFileInfo*)fm_list_peek_head(files);
+    menu = fm_file_menu_new_for_files(files, fm_path_get_desktop(), TRUE);
+    fm_file_menu_set_folder_func(menu, pcmanfm_open_folder, desktop);
+    fm_list_unref(files);
+
+    ui = fm_file_menu_get_ui(menu);
+    act_grp = fm_file_menu_get_action_group(menu);
+    /* merge some specific menu items for folders */
+    if(fm_file_menu_is_single_file_type(menu) && fm_file_info_is_dir(fi))
+    {
+        gtk_action_group_add_actions(act_grp, folder_menu_actions,
+            G_N_ELEMENTS(folder_menu_actions), menu);
+        gtk_ui_manager_add_ui_from_string(ui, folder_menu_xml, -1, NULL);
+    }
+
+    /* merge desktop icon specific items */
+    gtk_action_group_add_actions(act_grp, desktop_icon_actions,
+        G_N_ELEMENTS(desktop_icon_actions), desktop);
+
+    desktop_icon_toggle_actions[0].is_active = all_fixed;
+    gtk_action_group_add_toggle_actions(act_grp,
+        desktop_icon_toggle_actions,
+        G_N_ELEMENTS(desktop_icon_toggle_actions), desktop);
+
+    if(!has_fixed) /* snap to grid */
+    {
+        act = gtk_action_group_get_action(act_grp, "Snap");
+        gtk_action_set_sensitive(act, FALSE);
+    }
+    gtk_ui_manager_add_ui_from_string(ui, desktop_icon_menu_xml, -1, NULL);
+
+    popup = fm_file_menu_get_menu(menu);
+    gtk_menu_popup(popup, NULL, NULL, NULL, fi, 3, evt->time);
+}
 
 gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
 {
@@ -536,44 +655,13 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
                 FmDesktopItem* old_focus = self->focus;
                 self->focus = NULL;
                 if( old_focus )
-        		    redraw_item( FM_DESKTOP(w), old_focus );
+                    redraw_item( FM_DESKTOP(w), old_focus );
             }
             self->focus = clicked_item;
             redraw_item( self, clicked_item );
 
             if( evt->button == 3 )  /* right click, context menu */
-            {
-                FmFileMenu* menu;
-                GtkMenu* popup;
-                FmFileInfo* fi;
-                FmFileInfoList* files;
-                /*
-                int n_sels;
-                GList* items = get_selected_items(self, &n_sels);
-                if( items )
-                {
-                    GList* sel;
-
-                }
-                */
-                files = fm_desktop_get_selected_files(self);
-                fi = (FmFileInfo*)fm_list_peek_head(files);
-                menu = fm_file_menu_new_for_files(files, fm_path_get_desktop(), TRUE);
-                fm_file_menu_set_folder_func(menu, pcmanfm_open_folder, NULL);
-                fm_list_unref(files);
-
-                /* merge some specific menu items for folders */
-                if(fm_file_menu_is_single_file_type(menu) && fm_file_info_is_dir(fi))
-                {
-                    GtkUIManager* ui = fm_file_menu_get_ui(menu);
-                    GtkActionGroup* act_grp = fm_file_menu_get_action_group(menu);
-                    gtk_action_group_add_actions(act_grp, folder_menu_actions, G_N_ELEMENTS(folder_menu_actions), menu);
-                    gtk_ui_manager_add_ui_from_string(ui, folder_menu_xml, -1, NULL);
-                }
-
-                popup = fm_file_menu_get_menu(menu);
-                gtk_menu_popup(popup, NULL, NULL, NULL, fi, 3, gtk_get_current_event_time());
-            }
+                popup_menu(self, evt);
             goto out;
         }
         else /* no item is clicked */
@@ -581,7 +669,7 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
             if( evt->button == 3 )  /* right click on the blank area => desktop popup menu */
             {
                 if(! app_config->show_wm_menu)
-                    gtk_menu_popup(GTK_MENU(desktop_popup), NULL, NULL, NULL, NULL, 3, gtk_get_current_event_time());
+                    gtk_menu_popup(GTK_MENU(desktop_popup), NULL, NULL, NULL, NULL, 3, evt->time);
             }
             else if( evt->button == 1 )
             {
@@ -703,9 +791,9 @@ gboolean on_motion_notify( GtkWidget* w, GdkEventMotion* evt )
                 /* FIXME: timeout should be customizable */
                 if( self->single_click_timeout_handler == 0)
                     self->single_click_timeout_handler = g_timeout_add( 400, on_single_click_timeout, self ); //400 ms
-					/* Making a loop to aviod the selection of the item */
-					/* on_single_click_timeout( self ); */
-			}
+                    /* Making a loop to aviod the selection of the item */
+                    /* on_single_click_timeout( self ); */
+            }
             else
             {
                 gdk_window_set_cursor( window, NULL );
@@ -944,16 +1032,6 @@ gboolean on_focus_out( GtkWidget* w, GdkEventFocus* evt )
     return FALSE;
 }
 
-void on_drag_leave(GtkWidget* w, GdkDragContext* drag_ctx, guint time)
-{
-    FmDesktop* desktop = (FmDesktop*)w;
-    if(desktop->drop_hilight)
-    {
-        FmDesktopItem* old_drop = desktop->drop_hilight;
-        desktop->drop_hilight = NULL;
-        redraw_item(desktop, old_drop);
-    }
-}
 
 gboolean on_expose( GtkWidget* w, GdkEventExpose* evt )
 {
@@ -1022,6 +1100,13 @@ void on_size_allocate( GtkWidget* w, GtkAllocation* alloc )
 
     update_working_area(self);
     /* queue_layout_items(self); this is called in update_working_area */
+
+    /* scale the wallpaper */
+    if(GTK_WIDGET_REALIZED(self))
+    {
+        if(app_config->wallpaper_mode != FM_WP_COLOR && app_config->wallpaper_mode != FM_WP_TILE)
+            update_background(self);
+    }
 
     GTK_WIDGET_CLASS(fm_desktop_parent_class)->size_allocate( w, alloc );
 }
@@ -1174,7 +1259,7 @@ FmDesktopItem* get_nearest_item(FmDesktop* desktop, FmDesktopItem* item,  GtkDir
     return ret;
 }
 
-inline FmDesktopItem* desktop_item_new(GtkTreeIter* it)
+static inline FmDesktopItem* desktop_item_new(GtkTreeIter* it)
 {
     FmDesktopItem* item = g_slice_new0(FmDesktopItem);
     item->it = *it;
@@ -1266,7 +1351,7 @@ void on_rows_reordered(GtkTreeModel* mod, GtkTreePath* parent_tp, GtkTreeIter* p
 
 void calc_item_size(FmDesktop* desktop, FmDesktopItem* item)
 {
-    //int text_x, text_y, text_w, text_h;	 /* Probably goes along with the FIXME in this function */
+    //int text_x, text_y, text_w, text_h;    /* Probably goes along with the FIXME in this function */
     PangoRectangle rc, rc2;
 
     /* icon rect */
@@ -1303,6 +1388,26 @@ void calc_item_size(FmDesktop* desktop, FmDesktopItem* item)
     item->text_rect.height = rc2.height + 4;
 }
 
+static inline void get_item_rect(FmDesktopItem* item, GdkRectangle* rect)
+{
+    gdk_rectangle_union(&item->icon_rect, &item->text_rect, rect);
+}
+
+static gboolean is_pos_occupied(FmDesktop* desktop, FmDesktopItem* item)
+{
+    GList* l;
+    for(l = desktop->fixed_items; l; l=l->next)
+    {
+        FmDesktopItem* fixed = (FmDesktopItem*)l->data;
+        GdkRectangle rect;
+        get_item_rect(fixed, &rect);
+        if(gdk_rectangle_intersect(&rect, &item->icon_rect, NULL)
+         ||gdk_rectangle_intersect(&rect, &item->text_rect, NULL))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 void layout_items(FmDesktop* self)
 {
     GList* l;
@@ -1319,31 +1424,49 @@ void layout_items(FmDesktop* self)
         for( l = self->items; l; l = l->next )
         {
             item = (FmDesktopItem*)l->data;
-            item->x = x;
-            item->y = y;
-            calc_item_size(self, item);
-            y += self->cell_h;
-            if(y > bottom)
+            if(item->fixed_pos)
+                calc_item_size(self, item);
+            else
             {
-                x += self->cell_w;
-                y = self->working_area.y + self->ymargin;
+            _next_position:
+                item->x = x;
+                item->y = y;
+                calc_item_size(self, item);
+                y += self->cell_h;
+                if(y > bottom)
+                {
+                    x += self->cell_w;
+                    y = self->working_area.y + self->ymargin;
+                }
+                /* check if this position is occupied by a fixed item */
+                if(is_pos_occupied(self, item))
+                    goto _next_position;
             }
         }
     }
     else /* RTL */
     {
-        x = self->working_area.x + self->working_area.width - self->xmargin;
+        x = self->working_area.x + self->working_area.width - self->xmargin - self->cell_w;
         for( l = self->items; l; l = l->next )
         {
             item = (FmDesktopItem*)l->data;
-            item->x = x;
-            item->y = y;
-            calc_item_size(self, item);
-            y += self->cell_h;
-            if(y > bottom)
+            if(item->fixed_pos)
+                calc_item_size(self, item);
+            else
             {
-                x -= self->cell_w;
-                y = self->working_area.y + self->ymargin;
+            _next_position_rtl:
+                item->x = x;
+                item->y = y;
+                calc_item_size(self, item);
+                y += self->cell_h;
+                if(y > bottom)
+                {
+                    x -= self->cell_w;
+                    y = self->working_area.y + self->ymargin;
+                }
+                /* check if this position is occupied by a fixed item */
+                if(is_pos_occupied(self, item))
+                    goto _next_position_rtl;
             }
         }
     }
@@ -1700,7 +1823,7 @@ void update_working_area(FmDesktop* desktop)
                        XA_NET_WORKAREA, 0, 4 * 32, False, AnyPropertyType, &ret_type,
                        &format, &len, &after, &prop) != Success)
         goto _out;
-	if(ret_type == None || format == 0 || len != n_desktops*4 )
+    if(ret_type == None || format == 0 || len != n_desktops*4 )
     {
         if(prop)
             XFree(prop);
@@ -1732,40 +1855,6 @@ void on_dnd_src_data_get(FmDndSrc* ds, FmDesktop* desktop)
         fm_dnd_src_set_files(ds, files);
         fm_list_unref(files);
     }
-}
-
-gboolean on_dnd_dest_query_info(FmDndDest* dd, int x, int y,
-                    			GdkDragAction* action, FmDesktop* desktop)
-{
-    FmDesktopItem* item = hit_test(desktop, x, y);
-    if(item)
-    {
-        *action = GDK_ACTION_COPY;
-        fm_dnd_dest_set_dest_file(dd, item->fi);
-    }
-    else
-    {
-        *action = GDK_ACTION_COPY;
-        /* FIXME: prevent direct access to data member */
-        fm_dnd_dest_set_dest_file(dd, model->dir->dir_fi);
-    }
-
-    if(desktop->drop_hilight != item)
-    {
-        FmDesktopItem* old_drop = desktop->drop_hilight;
-        desktop->drop_hilight = item;
-        if(old_drop)
-            redraw_item(desktop, old_drop);
-        if(item)
-            redraw_item(desktop, item);
-    }
-    return TRUE;
-}
-
-void on_dnd_dest_files_dropped(FmDndDest* dd, GdkDragAction action,
-                               int info_type, FmList* files, FmDesktop* desktop)
-{
-
 }
 
 void on_wallpaper_changed(FmConfig* cfg, gpointer user_data)
@@ -1939,6 +2028,69 @@ void on_open_folder_in_terminal(GtkAction* act, gpointer user_data)
     fm_list_unref(files);
 }
 
+static void on_fix_pos(GtkToggleAction* act, gpointer user_data)
+{
+    FmDesktop* desktop = FM_DESKTOP(user_data);
+    GList* items = get_selected_items(desktop, NULL);
+    GList* l;
+    if(gtk_toggle_action_get_active(act))
+    {
+        for(l = items; l; l=l->next)
+        {
+            FmDesktopItem* item = (FmDesktopItem*)l->data;
+            if(!item->fixed_pos)
+            {
+                item->fixed_pos = TRUE;
+                desktop->fixed_items = g_list_prepend(desktop->fixed_items, item);
+            }
+        }
+    }
+    else
+    {
+        for(l = items; l; l=l->next)
+        {
+            FmDesktopItem* item = (FmDesktopItem*)l->data;
+            item->fixed_pos = FALSE;
+            desktop->fixed_items = g_list_remove(desktop->fixed_items, item);
+        }
+        layout_items(desktop);
+    }
+    g_list_free(items);
+}
+
+static void on_snap_to_grid(GtkAction* act, gpointer user_data)
+{
+    FmDesktop* desktop = FM_DESKTOP(user_data);
+    FmDesktopItem* item;
+    GList* items = get_selected_items(desktop, NULL);
+    GList* l;
+    int x, y, bottom;
+    GtkTextDirection direction = gtk_widget_get_direction(GTK_WIDGET(desktop));
+
+    y = desktop->working_area.y + desktop->ymargin;
+    bottom = desktop->working_area.y + desktop->working_area.height - desktop->ymargin - desktop->cell_h;
+
+    if(direction != GTK_TEXT_DIR_RTL) /* LTR or NONE */
+        x = desktop->working_area.x + desktop->xmargin;
+    else /* RTL */
+        x = desktop->working_area.x + desktop->working_area.width - desktop->xmargin - desktop->cell_w;
+
+    for( l = items; l; l = l->next )
+    {
+        int new_x, new_y;
+        item = (FmDesktopItem*)l->data;
+        if(!item->fixed_pos)
+            continue;
+        new_x = x + round((double)(item->x - x) / desktop->cell_w) * desktop->cell_w;
+        new_y = y + round((double)(item->y - y) / desktop->cell_h) * desktop->cell_h;
+        move_item(desktop, item, new_x, new_y, FALSE);
+    }
+    g_list_free(items);
+
+    queue_layout_items(desktop);
+}
+
+
 GList* get_selected_items(FmDesktop* desktop, int* n_items)
 {
     GList* items = NULL;
@@ -2077,4 +2229,296 @@ void forward_event_to_rootwin( GdkScreen *gscreen, GdkEvent *event )
 
     XSendEvent( dpy, xev2.window, False, ButtonPressMask | ButtonReleaseMask,
                 ( XEvent * ) & xev2 );
+}
+
+static inline gboolean is_atom_in_targets(GList* targets, const char* name)
+{
+    GList* l;
+    for(l = targets; l; l=l->next)
+    {
+        GdkAtom atom = (GdkAtom)l->data;
+        if(gdk_atom_intern(name, FALSE))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static gboolean on_drag_motion ( GtkWidget *dest_widget,
+                    GdkDragContext *drag_context,
+                    gint x,
+                    gint y,
+                    guint time)
+{
+    GdkAtom target;
+    gboolean ret = FALSE;
+    GdkDragAction action = 0;
+    FmDesktop* desktop = FM_DESKTOP(dest_widget);
+    FmDesktopItem* item;
+
+    /* check if we're dragging over an item */
+    item = hit_test(desktop, x, y);
+    /* we can only allow dropping on desktop entry file, folder, or executable files */
+    if(item)
+    {
+        if(!fm_file_info_is_dir(item->fi) &&
+           /* FIXME: libfm cannot detect if the file is executable! */
+           /* !fm_file_info_is_executable_type(item->fi) && */
+           !fm_file_info_is_desktop_entry(item->fi))
+           item = NULL;
+    }
+
+    /* handle moving desktop items */
+    if(!item)
+    {
+        target = gdk_atom_intern_static_string(dnd_targets[0].target);
+        if(fm_drag_context_has_target(drag_context, target)
+           && (drag_context->actions & GDK_ACTION_MOVE))
+        {
+            /* desktop item is being dragged */
+            fm_dnd_dest_set_dest_file(desktop->dnd_dest, NULL);
+            action = GDK_ACTION_MOVE; /* move desktop items */
+            ret = TRUE;
+        }
+    }
+
+    if(!ret)
+    {
+        target = fm_dnd_dest_find_target(desktop->dnd_dest, drag_context);
+        /* try FmDndDest */
+        if(target != GDK_NONE)
+        {
+            FmFileInfo* dest_file;
+            if(item && item->fi)
+            {
+                /* if(fm_file_info_is_dir(item->fi)) */
+                dest_file = item->fi;
+            }
+            else /* FIXME: prevent direct access to data member */
+                dest_file = model->dir->dir_fi;
+
+            fm_dnd_dest_set_dest_file(desktop->dnd_dest, dest_file);
+            action = fm_dnd_dest_get_default_action(desktop->dnd_dest, drag_context, target);
+            ret = action != 0;
+        }
+        else
+        {
+            ret = FALSE;
+            action = 0;
+        }
+    }
+    gdk_drag_status(drag_context, action, time);
+
+    if(desktop->drop_hilight != item)
+    {
+        FmDesktopItem* old_drop = desktop->drop_hilight;
+        desktop->drop_hilight = item;
+        if(old_drop)
+            redraw_item(desktop, old_drop);
+        if(item)
+            redraw_item(desktop, item);
+    }
+
+    return ret;
+}
+
+static gboolean on_drag_leave ( GtkWidget *dest_widget,
+                    GdkDragContext *drag_context,
+                    guint time)
+{
+    FmDesktop* desktop = FM_DESKTOP(dest_widget);
+
+    fm_dnd_dest_drag_leave(desktop->dnd_dest, drag_context, time);
+
+    if(desktop->drop_hilight)
+    {
+        FmDesktopItem* old_drop = desktop->drop_hilight;
+        desktop->drop_hilight = NULL;
+        redraw_item(desktop, old_drop);
+    }
+
+    return TRUE;
+}
+
+static void move_item(FmDesktop* desktop, FmDesktopItem* item, int x, int y, gboolean redraw)
+{
+    GList* l;
+    int dx, dy;
+    /* this call invalid the area occupied by the item and a redraw
+     * is queued. */
+    if(redraw)
+        redraw_item(desktop, item);
+
+    dx = x - item->x;
+    dy = y - item->y;
+
+    item->x = x;
+    item->y = y;
+
+    /* calc_item_size(desktop, item); */
+    item->icon_rect.x += dx;
+    item->icon_rect.y += dy;
+    item->text_rect.x += dx;
+    item->text_rect.y += dy;
+
+    /* make the item use customized fixed position. */
+    if(!item->fixed_pos)
+    {
+        item->fixed_pos = TRUE;
+        desktop->fixed_items = g_list_prepend(desktop->fixed_items, item);
+    }
+
+    /* move the item to a new place, and queue a redraw for the new rect. */
+    if(redraw)
+        redraw_item(desktop, item);
+
+#if 0
+    /* check if the item is overlapped with another item */
+    for(l = desktop->items; l; l=l->next)
+    {
+        FmDesktopItem* item2 = (FmDesktopItem*)l->data;
+    }
+#endif
+}
+
+static gboolean on_drag_drop ( GtkWidget *dest_widget,
+                    GdkDragContext *drag_context,
+                    gint x,
+                    gint y,
+                    guint time)
+{
+    FmDesktop* desktop = FM_DESKTOP(dest_widget);
+    GtkTreeViewDropPosition pos;
+    gboolean ret = FALSE;
+    GdkAtom target;
+    FmDesktopItem* item;
+
+    /* check if we're dragging over an item */
+    item = hit_test(desktop, x, y);
+    /* we can only allow dropping on desktop entry file, folder, or executable files */
+    if(item)
+    {
+        if(!fm_file_info_is_dir(item->fi) &&
+           /* FIXME: libfm cannot detect if the file is executable! */
+           /* !fm_file_info_is_executable_type(item->fi) && */
+           !fm_file_info_is_desktop_entry(item->fi))
+           item = NULL;
+    }
+
+    /* handle moving desktop items */
+    if(!item)
+    {
+        target = gdk_atom_intern_static_string(dnd_targets[0].target);
+        if(fm_drag_context_has_target(drag_context, target)
+           && (drag_context->actions & GDK_ACTION_MOVE))
+        {
+            /* desktop items are being dragged */
+            GList* items = get_selected_items(desktop, NULL);
+            GList* l;
+            int offset_x = x - desktop->drag_start_x;
+            int offset_y = y - desktop->drag_start_y;
+            for(l = items; l; l=l->next)
+            {
+                FmDesktopItem* item = (FmDesktopItem*)l->data;
+                move_item(desktop, item, item->x + offset_x, item->y + offset_y, FALSE);
+            }
+            ret = TRUE;
+            gtk_drag_finish(drag_context, TRUE, FALSE, time);
+
+            /* FIXME: save position of desktop icons everytime is
+             * extremely inefficient, but currently inevitable. */
+            save_item_pos(desktop);
+
+            queue_layout_items(desktop);
+        }
+    }
+
+    if(!ret)
+    {
+        target = fm_dnd_dest_find_target(desktop->dnd_dest, drag_context);
+        /* try FmDndDest */
+        ret = fm_dnd_dest_drag_drop(desktop->dnd_dest, drag_context, target, time);
+        if(!ret)
+            gtk_drag_finish(drag_context, FALSE, FALSE, time);
+    }
+    return ret;
+}
+
+static void on_drag_data_received ( GtkWidget *dest_widget,
+                GdkDragContext *drag_context,
+                gint x,
+                gint y,
+                GtkSelectionData *sel_data,
+                guint info,
+                guint time)
+{
+    FmDesktop* desktop = FM_DESKTOP(dest_widget);
+    GtkTreePath* dest_tp = NULL;
+    GtkTreeViewDropPosition pos;
+    gboolean ret = FALSE;
+
+    switch(info)
+    {
+    case FM_DND_DEST_DESKTOP_ITEM:
+        /* This shouldn't happen since we handled everything in drag-drop handler already. */
+        break;
+    default:
+        /* check if files are received. */
+        fm_dnd_dest_drag_data_received(desktop->dnd_dest, drag_context, x, y, sel_data, info, time);
+        break;
+    }
+}
+
+static void on_drag_data_get(GtkWidget *src_widget, GdkDragContext *drag_context,
+                             GtkSelectionData *sel_data, guint info,
+                             guint time, gpointer user_data)
+{
+    FmDesktop* desktop = FM_DESKTOP(src_widget);
+    /* desktop items are being dragged */
+    if(info == FM_DND_DEST_DESKTOP_ITEM)
+        g_signal_stop_emission_by_name( src_widget, "drag-data-get" );
+}
+
+
+static void fm_desktop_class_init(FmDesktopClass *klass)
+{
+    GtkObjectClass *gtk_object_class;
+    GtkWidgetClass* wc;
+    typedef gboolean (*DeleteEvtHandler) (GtkWidget*, GdkEvent*);
+    const char* atom_names[] = {"_NET_WORKAREA", "_NET_NUMBER_OF_DESKTOPS", "_NET_CURRENT_DESKTOP", "_XROOTMAP_ID"};
+    Atom atoms[G_N_ELEMENTS(atom_names)] = {0};
+
+    /* g_object_class = G_OBJECT_CLASS(klass);
+       g_object_class->finalize = fm_desktop_finalize; */
+    gtk_object_class = GTK_OBJECT_CLASS(klass);
+    gtk_object_class->destroy = fm_desktop_destroy;
+
+    wc = GTK_WIDGET_CLASS(klass);
+    wc->expose_event = on_expose;
+    wc->size_allocate = on_size_allocate;
+    wc->size_request = on_size_request;
+    wc->button_press_event = on_button_press;
+    wc->button_release_event = on_button_release;
+    wc->motion_notify_event = on_motion_notify;
+    wc->leave_notify_event = on_leave_notify;
+    wc->key_press_event = on_key_press;
+    wc->style_set = on_style_set;
+    wc->direction_changed = on_direction_changed;
+    wc->realize = on_realize;
+    wc->focus_in_event = on_focus_in;
+    wc->focus_out_event = on_focus_out;
+    /* wc->scroll_event = on_scroll; */
+    wc->delete_event = (DeleteEvtHandler)gtk_true;
+
+    wc->drag_motion = on_drag_motion;
+    wc->drag_drop = on_drag_drop;
+    wc->drag_data_received = on_drag_data_received;
+    wc->drag_leave = on_drag_leave;
+
+    if(XInternAtoms(GDK_DISPLAY(), atom_names, G_N_ELEMENTS(atom_names), False, atoms))
+    {
+        XA_NET_WORKAREA = atoms[0];
+        XA_NET_NUMBER_OF_DESKTOPS = atoms[1];
+        XA_NET_CURRENT_DESKTOP = atoms[2];
+        XA_XROOTMAP_ID= atoms[3];
+    }
 }
