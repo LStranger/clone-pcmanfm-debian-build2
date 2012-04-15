@@ -36,12 +36,11 @@
 #include "ptk-input-dialog.h"
 #include "ptk-file-task.h"
 #include "ptk-file-misc.h"
+#include "ptk-bookmarks.h"
 
 #include "ptk-location-view.h"
 #include "ptk-dir-tree-view.h"
 #include "ptk-dir-tree.h"
-
-#include "settings.h"
 
 #include "vfs-dir.h"
 #include "vfs-file-info.h"
@@ -93,6 +92,9 @@ ptk_file_browser_cut_or_copy( PtkFileBrowser* file_browser,
 
 static void
 ptk_file_browser_update_model( PtkFileBrowser* file_browser );
+
+static gboolean
+is_latin_shortcut_key( guint keyval );
 
 /* Get GtkTreePath of the item at coordinate x, y */
 static GtkTreePath*
@@ -385,8 +387,6 @@ void ptk_file_browser_init( PtkFileBrowser* file_browser )
                       file_browser->folder_view_scroll, TRUE, TRUE );
     gtk_scrolled_window_set_policy ( GTK_SCROLLED_WINDOW ( file_browser->folder_view_scroll ),
                                      GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC );
-    gtk_scrolled_window_set_shadow_type ( GTK_SCROLLED_WINDOW ( file_browser->folder_view_scroll ),
-                                          GTK_SHADOW_IN );
 }
 
 void ptk_file_browser_finalize( GObject *obj )
@@ -464,6 +464,23 @@ static gboolean side_pane_chdir( PtkFileBrowser* file_browser,
     return FALSE;
 }
 
+gboolean ptk_file_restrict_homedir( const char* folder_path ) {
+    const char *homedir = NULL;
+    int ret=(1==0);
+    
+    homedir = g_getenv("HOME");
+    if (!homedir) {
+      homedir = g_get_home_dir();
+    }
+    if (g_str_has_prefix(folder_path,homedir)) {
+      ret=(1==1);
+    }
+    if (g_str_has_prefix(folder_path,"/media")) {
+      ret=(1==1);
+    }
+    return ret;
+}
+
 gboolean ptk_file_browser_chdir( PtkFileBrowser* file_browser,
                                  const char* folder_path,
                                  PtkFBChdirMode mode )
@@ -516,9 +533,11 @@ gboolean ptk_file_browser_chdir( PtkFileBrowser* file_browser,
 
     if ( test_access == -1 )
     {
+        char* msg = g_markup_escape_text(g_strerror( errno ), -1);
         ptk_show_error( GTK_WINDOW( gtk_widget_get_toplevel( GTK_WIDGET( file_browser ) ) ),
                         _("Error"),
-                        g_strerror( errno ) );
+                        msg );
+        g_free(msg);
         return FALSE;
     }
 
@@ -966,6 +985,13 @@ void on_folder_view_item_sel_change ( ExoIconView *iconview,
     g_signal_emit( file_browser, signals[ SEL_CHANGE_SIGNAL ], 0 );
 }
 
+static gboolean
+is_latin_shortcut_key ( guint keyval )
+{
+    return ((GDK_0 <= keyval && keyval <= GDK_9) ||
+            (GDK_A <= keyval && keyval <= GDK_Z) ||
+            (GDK_a <= keyval && keyval <= GDK_z));
+}
 
 gboolean
 on_folder_view_key_press_event ( GtkWidget *widget,
@@ -975,6 +1001,45 @@ on_folder_view_key_press_event ( GtkWidget *widget,
     int modifier = ( event->state & ( GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK ) );
     if ( ! gtk_widget_is_focus( widget ) )
         return FALSE;
+
+    // Make key bindings work when the current keyboard layout is not latin
+    if ( modifier != 0 && !is_latin_shortcut_key( event->keyval ) ) {
+        // We have a non-latin char, try other keyboard groups
+        GdkKeymapKey *keys;
+        guint *keyvals;
+        gint n_entries;
+        gint level;
+
+        if ( gdk_keymap_translate_keyboard_state( NULL,
+                                                  event->hardware_keycode,
+                                                  (GdkModifierType)event->state,
+                                                  event->group,
+                                                  NULL, NULL, &level, NULL )
+            && gdk_keymap_get_entries_for_keycode( NULL,
+                                                   event->hardware_keycode,
+                                                   &keys, &keyvals,
+                                                   &n_entries ) ) {
+            gint n;
+            for ( n=0; n<n_entries; n++ ) {
+                if ( keys[n].group == event->group ) {
+                    // Skip keys from the same group
+                    continue;
+                }
+                if ( keys[n].level != level ) {
+                    // Allow only same level keys
+                    continue;
+                }
+                if ( is_latin_shortcut_key( keyvals[n] ) ) {
+                    // Latin character found
+                    event->keyval = keyvals[n];
+                    break;
+                }
+            }
+            g_free( keys );
+            g_free( keyvals );
+        }
+    }
+
     if ( modifier == GDK_CONTROL_MASK )
     {
         switch ( event->keyval )
@@ -1010,6 +1075,17 @@ on_folder_view_key_press_event ( GtkWidget *widget,
         {
         case GDK_Return:
             ptk_file_browser_file_properties( file_browser );
+            break;
+        default:
+            return FALSE;
+        }
+    }
+    else if ( modifier == GDK_SHIFT_MASK )
+    {
+        switch ( event->keyval )
+        {
+        case GDK_Delete:
+            ptk_file_browser_delete( file_browser );
             break;
         default:
             return FALSE;
@@ -2784,8 +2860,9 @@ static PtkToolItemEntry side_pane_bar[] = {
 
 static void ptk_file_browser_create_side_pane( PtkFileBrowser* file_browser )
 {
-    GtkWidget * toolbar = gtk_toolbar_new ();
-    GtkTooltips* tooltips = gtk_tooltips_new ();
+    GtkTooltips* tooltips = gtk_tooltips_new();
+    file_browser->side_pane_buttons = gtk_toolbar_new();
+    
     file_browser->side_pane = gtk_vbox_new( FALSE, 0 );
     file_browser->side_view_scroll = gtk_scrolled_window_new( NULL, NULL );
     gtk_scrolled_window_set_shadow_type( GTK_SCROLLED_WINDOW( file_browser->side_view_scroll ),
@@ -2805,22 +2882,26 @@ static void ptk_file_browser_create_side_pane( PtkFileBrowser* file_browser )
         file_browser->side_view = ptk_file_browser_create_location_view( file_browser );
         break;
     }
-
     gtk_container_add( GTK_CONTAINER( file_browser->side_view_scroll ),
                        GTK_WIDGET( file_browser->side_view ) );
     gtk_box_pack_start( GTK_BOX( file_browser->side_pane ),
                         GTK_WIDGET( file_browser->side_view_scroll ),
                         TRUE, TRUE, 0 );
-
-    gtk_toolbar_set_style( GTK_TOOLBAR( toolbar ), GTK_TOOLBAR_ICONS );
+    
+    gtk_toolbar_set_style( GTK_TOOLBAR( file_browser->side_pane_buttons ), GTK_TOOLBAR_ICONS );
     side_pane_bar[ 0 ].ret = ( GtkWidget** ) ( GtkWidget * ) & file_browser->location_btn;
     side_pane_bar[ 1 ].ret = ( GtkWidget** ) ( GtkWidget * ) & file_browser->dir_tree_btn;
-    ptk_toolbar_add_items_from_data( toolbar, side_pane_bar,
-                                     file_browser, tooltips );
-
+    ptk_toolbar_add_items_from_data( file_browser->side_pane_buttons,
+                                     side_pane_bar, file_browser, tooltips );
     gtk_box_pack_start( GTK_BOX( file_browser->side_pane ),
-                        toolbar, FALSE, FALSE, 0 );
+                        file_browser->side_pane_buttons, FALSE, FALSE, 0 );
+                        
     gtk_widget_show_all( file_browser->side_pane );
+    if ( !file_browser->show_side_pane_buttons )
+    {
+        gtk_widget_hide( file_browser->side_pane_buttons );
+    }
+    
     gtk_paned_pack1( GTK_PANED( file_browser ),
                      file_browser->side_pane, FALSE, TRUE );
 }
@@ -2861,12 +2942,46 @@ void ptk_file_browser_hide_side_pane( PtkFileBrowser* file_browser )
         file_browser->side_pane = NULL;
         file_browser->side_view = NULL;
         file_browser->side_view_scroll = NULL;
+        
+        file_browser->side_pane_buttons = NULL;
+        file_browser->location_btn = NULL;
+        file_browser->dir_tree_btn = NULL;
     }
 }
 
 gboolean ptk_file_browser_is_side_pane_visible( PtkFileBrowser* file_browser )
 {
     return file_browser->show_side_pane;
+}
+
+void ptk_file_browser_show_side_pane_buttons( PtkFileBrowser* file_browser )
+{
+    file_browser->show_side_pane_buttons = TRUE;
+    if ( file_browser->side_pane )
+    {
+        gtk_widget_show( file_browser->side_pane_buttons );
+    }
+}
+
+void ptk_file_browser_hide_side_pane_buttons( PtkFileBrowser* file_browser )
+{
+    file_browser->show_side_pane_buttons = FALSE;
+    if ( file_browser->side_pane )
+    {
+        gtk_widget_hide( file_browser->side_pane_buttons );
+    }
+}
+
+void ptk_file_browser_show_shadow( PtkFileBrowser* file_browser )
+{
+    gtk_scrolled_window_set_shadow_type ( GTK_SCROLLED_WINDOW ( file_browser->folder_view_scroll ),
+                                          GTK_SHADOW_IN );
+}
+
+void ptk_file_browser_hide_shadow( PtkFileBrowser* file_browser )
+{
+    gtk_scrolled_window_set_shadow_type ( GTK_SCROLLED_WINDOW ( file_browser->folder_view_scroll ),
+                                          GTK_SHADOW_NONE );
 }
 
 void ptk_file_browser_show_thumbnails( PtkFileBrowser* file_browser,

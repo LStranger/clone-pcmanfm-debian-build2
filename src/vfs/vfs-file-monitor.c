@@ -183,13 +183,13 @@ VFSFileMonitor* vfs_file_monitor_add( char* path,
 
 #ifdef USE_INOTIFY /* Linux inotify */
         monitor->wd = inotify_add_watch ( inotify_fd, real_path ? real_path : path,
-                                            IN_MODIFY | IN_CREATE | IN_DELETE | IN_DELETE_SELF | IN_MOVE | IN_MOVE_SELF | IN_UNMOUNT | IN_ATTRIB | IN_ALL_EVENTS);
+                                            IN_MODIFY | IN_CREATE | IN_DELETE | IN_DELETE_SELF | IN_MOVE | IN_MOVE_SELF | IN_UNMOUNT | IN_ATTRIB);
         if ( monitor->wd < 0 )
         {
             g_warning ( "Failed to add monitor on '%s': %s",
                         path,
                         g_strerror ( errno ) );
-            return ;
+            return NULL;
         }
 #else /* Use FAM|gamin */
         if ( is_dir )
@@ -231,7 +231,7 @@ void vfs_file_monitor_remove( VFSFileMonitor * fm,
     int i;
     VFSFileMonitorCallbackEntry* callbacks;
 
-    if ( cb && fm->callbacks )
+    if ( cb && fm && fm->callbacks )
     {
         callbacks = ( VFSFileMonitorCallbackEntry* ) fm->callbacks->data;
         for ( i = 0; i < fm->callbacks->len; ++i )

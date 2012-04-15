@@ -101,6 +101,8 @@ void ptk_dialog_fit_small_screen( GtkDialog* dlg );
  */
 int ptk_dialog_run_modaless( GtkDialog* dlg );
 
+GtkBuilder* _gtk_builder_new_from_file( const char* file, GError** err );
+
 G_END_DECLS
 
 #endif

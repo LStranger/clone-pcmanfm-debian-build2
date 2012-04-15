@@ -15,7 +15,6 @@
 #endif
 
 #include "ptk-app-chooser.h"
-#include "ptk-ui-xml.h"
 #include "ptk-utils.h"
 
 #include <gtk/gtk.h>
@@ -125,14 +124,17 @@ static GtkTreeModel* create_model_from_mime_type( VFSMimeType* mime_type )
 
 GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type )
 {
-    GtkWidget * dlg = ptk_ui_xml_create_widget_from_file( PACKAGE_UI_DIR "/appchooserdlg.glade" );
-    GtkWidget* file_type = ptk_ui_xml_get_widget( dlg, "file_type" );
+    GtkBuilder* builder = _gtk_builder_new_from_file( PACKAGE_UI_DIR "/appchooserdlg.ui", NULL );
+    GtkWidget * dlg = (GtkWidget*)gtk_builder_get_object( builder, "dlg" );
+    GtkWidget* file_type = (GtkWidget*)gtk_builder_get_object( builder, "file_type" );
     const char* mime_desc;
     GtkTreeView* view;
     GtkTreeModel* model;
 
-    gtk_dialog_set_alternative_button_order( dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
-    ptk_dialog_fit_small_screen( dlg );
+    g_object_set_data_full( G_OBJECT(dlg), "builder", builder, (GDestroyNotify)g_object_unref );
+
+    gtk_dialog_set_alternative_button_order( GTK_DIALOG(dlg), GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
+    ptk_dialog_fit_small_screen( GTK_DIALOG(dlg) );
 
     mime_desc = vfs_mime_type_get_description( mime_type );
     if ( mime_desc )
@@ -142,10 +144,10 @@ GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type )
     if ( 0 == strcmp( vfs_mime_type_get_type( mime_type ), XDG_MIME_TYPE_UNKNOWN ) ||
          0 == strcmp( vfs_mime_type_get_type( mime_type ), XDG_MIME_TYPE_DIRECTORY ) )
     {
-        gtk_widget_hide( ptk_ui_xml_get_widget( dlg, "set_default" ) );
+        gtk_widget_hide( (GtkWidget*)gtk_builder_get_object( builder, "set_default" ) );
     }
 
-    view = GTK_TREE_VIEW( ptk_ui_xml_get_widget( dlg, "recommended_apps" ) );
+    view = GTK_TREE_VIEW( (GtkWidget*)gtk_builder_get_object( builder, "recommended_apps" ) );
 
     model = create_model_from_mime_type( mime_type );
     gtk_tree_view_set_model( view, model );
@@ -153,10 +155,10 @@ GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type )
     init_list_view( view );
     gtk_widget_grab_focus( GTK_WIDGET( view ) );
 
-    g_signal_connect( ptk_ui_xml_get_widget( dlg, "notebook"),
+    g_signal_connect( (GtkWidget*)gtk_builder_get_object( builder, "notebook"),
                                     "switch_page",
                                     G_CALLBACK(on_notebook_switch_page), dlg );
-    g_signal_connect( ptk_ui_xml_get_widget( dlg, "browse_btn"),
+    g_signal_connect( (GtkWidget*)gtk_builder_get_object( builder, "browse_btn"),
                                     "clicked",
                                     G_CALLBACK(on_browse_btn_clicked), dlg );
 
@@ -198,10 +200,12 @@ on_notebook_switch_page ( GtkNotebook *notebook,
     GtkWidget * dlg = ( GtkWidget* ) user_data;
     GtkTreeView* view;
 
+    GtkBuilder* builder = (GtkBuilder*)g_object_get_data(G_OBJECT(dlg), "builder");
+
     /* Load all known apps installed on the system */
     if ( page_num == 1 )
     {
-        view = GTK_TREE_VIEW( ptk_ui_xml_get_widget( dlg, "all_apps" ) );
+        view = GTK_TREE_VIEW( (GtkWidget*)gtk_builder_get_object( builder, "all_apps" ) );
         if ( ! gtk_tree_view_get_model( view ) )
         {
             GdkCursor* busy;
@@ -230,10 +234,11 @@ on_notebook_switch_page ( GtkNotebook *notebook,
 * These two can be separated by check if the returned string is ended
 * with ".desktop" postfix.
 */
-const gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg )
+gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg )
 {
     const gchar * app = NULL;
-    GtkEntry* entry = GTK_ENTRY( ptk_ui_xml_get_widget( dlg, "cmdline" ) );
+    GtkBuilder* builder = (GtkBuilder*)g_object_get_data(G_OBJECT(dlg), "builder");
+    GtkEntry* entry = GTK_ENTRY( (GtkWidget*)gtk_builder_get_object( builder, "cmdline" ) );
     GtkNotebook* notebook;
     int idx;
     GtkBin* scroll;
@@ -248,7 +253,7 @@ const gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg )
         return g_strdup( app );
     }
 
-    notebook = GTK_NOTEBOOK( ptk_ui_xml_get_widget( dlg, "notebook" ) );
+    notebook = GTK_NOTEBOOK( (GtkWidget*)gtk_builder_get_object( builder, "notebook" ) );
     idx = gtk_notebook_get_current_page ( notebook );
     scroll = GTK_BIN( gtk_notebook_get_nth_page( notebook, idx ) );
     view = GTK_TREE_VIEW(gtk_bin_get_child( scroll ));
@@ -268,7 +273,8 @@ const gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg )
 */
 gboolean app_chooser_dialog_get_set_default( GtkWidget* dlg )
 {
-    GtkWidget * check = ptk_ui_xml_get_widget( dlg, "set_default" );
+    GtkBuilder* builder = (GtkBuilder*)g_object_get_data(G_OBJECT(dlg), "builder");
+    GtkWidget * check = (GtkWidget*)gtk_builder_get_object( builder, "set_default" );
     return gtk_toggle_button_get_active ( GTK_TOGGLE_BUTTON( check ) );
 }
 
@@ -289,6 +295,8 @@ on_browse_btn_clicked ( GtkButton *button,
                                                   GTK_STOCK_CANCEL,
                                                   GTK_RESPONSE_CANCEL,
                                                   NULL );
+    GtkBuilder* builder = (GtkBuilder*)g_object_get_data(G_OBJECT(dlg), "builder");
+
     gtk_file_chooser_set_current_folder ( GTK_FILE_CHOOSER ( dlg ),
                                           "/usr/bin" );
     if ( gtk_dialog_run( GTK_DIALOG( dlg ) ) == GTK_RESPONSE_OK )
@@ -296,7 +304,7 @@ on_browse_btn_clicked ( GtkButton *button,
         filename = gtk_file_chooser_get_filename ( GTK_FILE_CHOOSER ( dlg ) );
         if( filename )
         {
-            entry = GTK_ENTRY( ptk_ui_xml_get_widget( dlg, "cmdline" ) );
+            entry = GTK_ENTRY( (GtkWidget*)gtk_builder_get_object( builder, "cmdline" ) );
             /* FIXME: path shouldn't be hard-coded */
             if( g_str_has_prefix( filename, app_path )
                 && g_str_has_suffix( filename, ".desktop" ) )
@@ -335,7 +343,7 @@ static void on_dlg_response( GtkDialog* dlg, int id, gpointer user_data )
     }
 }
 
-const gchar* ptk_choose_app_for_mime_type( GtkWindow* parent,
+gchar* ptk_choose_app_for_mime_type( GtkWindow* parent,
                                            VFSMimeType* mime_type )
 {
     GtkWidget * dlg;

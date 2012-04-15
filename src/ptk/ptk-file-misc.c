@@ -148,7 +148,7 @@ gboolean  ptk_rename_file( GtkWindow* parent_win,
             if ( g_file_test( to_path, G_FILE_TEST_EXISTS ) )
             {
                 gtk_label_set_text( prompt,
-                                    _( "The file name you specified has existed.\n"
+                                    _( "The file name you specified already exists.\n"
                                        "Please input a new one:" ) );
             }
             else
@@ -169,7 +169,7 @@ gboolean  ptk_rename_file( GtkWindow* parent_win,
         else
         {
             gtk_label_set_text( prompt,
-                                _( "The file name you specified has existed.\n"
+                                _( "The file name you specified already exists.\n"
                                    "Please input a new one:" ) );
         }
     }
@@ -222,7 +222,7 @@ gboolean  ptk_create_new_file( GtkWindow* parent_win,
         {
             prompt = GTK_LABEL( ptk_input_dialog_get_label( dlg ) );
             gtk_label_set_text( prompt,
-                                _( "The file name you specified has existed.\n"
+                                _( "The file name you specified already exists.\n"
                                    "Please input a new one:" ) );
             g_free( full_path );
             continue;
@@ -321,9 +321,11 @@ static gboolean open_files_with_app( const char* cwd,
     if ( ! vfs_app_desktop_open_files( screen, cwd, app, files, &err ) )
     {
         GtkWidget * toplevel = file_browser ? gtk_widget_get_toplevel( GTK_WIDGET( file_browser ) ) : NULL;
+        char* msg = g_markup_escape_text(err->message, -1);
         ptk_show_error( GTK_WINDOW( toplevel ),
                         _("Error"),
-                        err->message );
+                        msg );
+        g_free(msg);
         g_error_free( err );
     }
     vfs_app_desktop_unref( app );
@@ -407,10 +409,12 @@ void ptk_open_files_with_app( const char* cwd,
                                                 vfs_file_info_get_disp_name( file ),
                                                 VFS_EXEC_DEFAULT_FLAGS, &err ) )
                     {
+                        char* msg = g_markup_escape_text(err->message, -1);
                         toplevel = file_browser ? gtk_widget_get_toplevel( GTK_WIDGET( file_browser ) ) : NULL;
                         ptk_show_error( ( GtkWindow* ) toplevel,
                                         _("Error"),
-                                        err->message );
+                                        msg );
+                        g_free(msg);
                         g_error_free( err );
                     }
                     else

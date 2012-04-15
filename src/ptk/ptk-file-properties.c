@@ -20,7 +20,6 @@
 #include "glib-mem.h"
 
 #include "ptk-file-properties.h"
-#include "ptk-ui-xml.h"
 
 #include "mime-type/mime-type.h"
 
@@ -293,7 +292,9 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
                                     const char* dir_path,
                                     GList* sel_files )
 {
-    GtkWidget * dlg = ptk_ui_xml_create_widget_from_file( PACKAGE_UI_DIR "/file_properties.glade" );
+    GtkBuilder* builder = _gtk_builder_new_from_file( PACKAGE_UI_DIR "/file_properties.ui", NULL );
+
+    GtkWidget * dlg = (GtkWidget*)gtk_builder_get_object( builder, "dlg" );
 
     FilePropertiesDialogData* data;
     gboolean need_calc_size = TRUE;
@@ -303,13 +304,13 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
 
     const char* multiple_files = _( "Multiple files are selected" );
     const char* calculating;
-    GtkWidget* name = ptk_ui_xml_get_widget( dlg, "file_name" );
-    GtkWidget* location = ptk_ui_xml_get_widget( dlg, "location" );
-    GtkWidget* mime_type = ptk_ui_xml_get_widget( dlg, "mime_type" );
-    GtkWidget* open_with = ptk_ui_xml_get_widget( dlg, "open_with" );
+    GtkWidget* name = (GtkWidget*)gtk_builder_get_object( builder, "file_name" );
+    GtkWidget* location = (GtkWidget*)gtk_builder_get_object( builder, "location" );
+    GtkWidget* mime_type = (GtkWidget*)gtk_builder_get_object( builder, "mime_type" );
+    GtkWidget* open_with = (GtkWidget*)gtk_builder_get_object( builder, "open_with" );
 
-    GtkWidget* mtime = ptk_ui_xml_get_widget( dlg, "mtime" );
-    GtkWidget* atime = ptk_ui_xml_get_widget( dlg, "atime" );
+    GtkWidget* mtime = (GtkWidget*)gtk_builder_get_object( builder, "mtime" );
+    GtkWidget* atime = (GtkWidget*)gtk_builder_get_object( builder, "atime" );
 
     char buf[ 64 ];
     char buf2[ 32 ];
@@ -323,7 +324,9 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
     gboolean same_type = TRUE;
     char *owner_group, *tmp;
 
-    gtk_dialog_set_alternative_button_order( dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
+    g_object_set_data( G_OBJECT(dlg), "open_with", open_with );
+
+    gtk_dialog_set_alternative_button_order( GTK_DIALOG(dlg), GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
     gtk_window_set_transient_for( GTK_WINDOW( dlg ), parent );
 
     data = g_slice_new0( FilePropertiesDialogData );
@@ -337,14 +340,14 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
     gtk_label_set_text( GTK_LABEL( location ), disp_path );
     g_free( disp_path );
 
-    data->total_size_label = GTK_LABEL( ptk_ui_xml_get_widget( dlg, "total_size" ) );
-    data->size_on_disk_label = GTK_LABEL( ptk_ui_xml_get_widget( dlg, "size_on_disk" ) );
-    data->owner = GTK_ENTRY( ptk_ui_xml_get_widget( dlg, "owner" ) );
-    data->group = GTK_ENTRY( ptk_ui_xml_get_widget( dlg, "group" ) );
+    data->total_size_label = GTK_LABEL( (GtkWidget*)gtk_builder_get_object( builder, "total_size" ) );
+    data->size_on_disk_label = GTK_LABEL( (GtkWidget*)gtk_builder_get_object( builder, "size_on_disk" ) );
+    data->owner = GTK_ENTRY( (GtkWidget*)gtk_builder_get_object( builder, "owner" ) );
+    data->group = GTK_ENTRY( (GtkWidget*)gtk_builder_get_object( builder, "group" ) );
 
     for ( i = 0; i < N_CHMOD_ACTIONS; ++i )
     {
-        data->chmod_btns[ i ] = GTK_TOGGLE_BUTTON( ptk_ui_xml_get_widget( dlg, chmod_names[ i ] ) );
+        data->chmod_btns[ i ] = GTK_TOGGLE_BUTTON( (GtkWidget*)gtk_builder_get_object( builder, chmod_names[ i ] ) );
     }
 
     for ( l = sel_files; l && l->next; l = l->next )
@@ -393,7 +396,7 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
     {
         /* if open with shouldn't show, destroy it. */
         gtk_widget_destroy( open_with );
-        gtk_widget_destroy( ptk_ui_xml_get_widget( dlg, "open_with_label" ) );
+        gtk_widget_destroy( (GtkWidget*)gtk_builder_get_object( builder, "open_with_label" ) );
     }
     else /* Add available actions to the option menu */
     {
@@ -554,14 +557,17 @@ GtkWidget* file_properties_dlg_new( GtkWindow* parent,
 
     g_signal_connect( dlg, "response",
                         G_CALLBACK(on_dlg_response), dlg );
-    g_signal_connect_swapped( ptk_ui_xml_get_widget(dlg, "ok_button"),
+    g_signal_connect_swapped( gtk_builder_get_object(builder, "ok_button"),
                         "clicked",
                         G_CALLBACK(gtk_widget_destroy), dlg );
-    g_signal_connect_swapped( ptk_ui_xml_get_widget(dlg, "cancel_button"),
+    g_signal_connect_swapped( gtk_builder_get_object(builder, "cancel_button"),
                         "clicked",
                         G_CALLBACK(gtk_widget_destroy), dlg );
 
-    ptk_dialog_fit_small_screen( dlg );
+    ptk_dialog_fit_small_screen( GTK_DIALOG(dlg) );
+
+    g_object_unref( builder );
+
     return dlg;
 }
 
@@ -664,7 +670,7 @@ on_dlg_response ( GtkDialog *dialog,
             GtkWidget* open_with;
 
             /* Set default action for mimetype */
-            if( ( open_with = ptk_ui_xml_get_widget( GTK_WIDGET(dialog), "open_with" ) ) )
+            if( ( open_with = (GtkWidget*)g_object_get_data( G_OBJECT(dialog), "open_with" ) ) )
             {
                 GtkTreeModel* model = gtk_combo_box_get_model( GTK_COMBO_BOX(open_with) );
                 GtkTreeIter it;

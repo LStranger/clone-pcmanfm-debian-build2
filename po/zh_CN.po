@@ -1,58 +1,822 @@
 # Simplified Chinese translation of PCMan File Manager.
-# Copyright (C) 2006
+# Copyright (C) 2006-2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the PCMan File Manager package.
 # Haifeng Chen <optical.dlz@gmail.com>, 2006.
+# Careone <zzbusagain@yahoo.com.cn>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PCMan File Manager 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-16 18:11+0800\n"
-"PO-Revision-Date: 2008-02-14 19:57+0800\n"
-"Last-Translator: 陈海峰 <optical.dlz@gmail.com>\n"
+"POT-Creation-Date: 2009-04-27 21:31-0400\n"
+"PO-Revision-Date: 2009-06-05 22:57+0800\n"
+"Last-Translator: Careone <zzbusagain@yahoo.com.cn>\n"
 "Language-Team: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1;plural=0;\n"
 
-#: ../src/main.c:90
-msgid "Don't show desktop icons."
-msgstr "不显示桌面图标"
+#
+#: ../data/ui/about-dlg.glade.h:1
+msgid "Copyright (C) 2005 - 2008"
+msgstr "版权所有 (C) 2005 - 2008"
 
-#: ../src/main.c:91
-msgid "Run PCManFM as a daemon"
+#: ../data/ui/about-dlg.glade.h:2
+msgid ""
+"Lightweight file manager\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+msgstr ""
+"轻量级文件管理器\n"
+"\n"
+"由洪任谕 (PCMan) 开发"
+
+#: ../data/ui/about-dlg.glade.h:5
+msgid ""
+"The icon was taken from \"nuoveXT 2\" icon theme\n"
+"created by Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 msgstr ""
 
+#. Please replace this line with your own names, one name per line.
+#: ../data/ui/about-dlg.glade.h:9
+msgid "translator-credits"
+msgstr ""
+"陈海峰 Haifeng Chen <optical.dlz@gmail.com>\n"
+"Careone <zzbusagain@yahoo.com.cn>"
+
+#: ../data/ui/about-dlg.glade.h:10
+msgid ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Source code taken from other projects:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Working area detection: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Text and icon renderer uses code from Jonathan Blandford\n"
+" * Desktop icons use code from Brian Tarricone\n"
+" * Volume management uses code from following projects/authors:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs and libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+msgstr ""
+
+#: ../data/ui/appchooserdlg.glade.h:1
+msgid "Choose an Application"
+msgstr "选择一个程序"
+
+#: ../data/ui/appchooserdlg.glade.h:2
+msgid "File Type To be Opened:"
+msgstr "要打开的文件类型："
+
+#: ../data/ui/appchooserdlg.glade.h:3
+msgid "Opened in Terminal"
+msgstr "在终端中打开"
+
+#: ../data/ui/appchooserdlg.glade.h:4
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr "请从列表中选择一个程序，或者手动输入命令："
+
+#: ../data/ui/appchooserdlg.glade.h:5
+msgid "Set selected application to default action"
+msgstr "默认使用选择的应用程序打开"
+
+#: ../data/ui/appchooserdlg.glade.h:6
+msgid "_All Applications"
+msgstr "所有程序(_A)"
+
+#: ../data/ui/appchooserdlg.glade.h:7
+msgid "_Browse"
+msgstr "浏览(_B)"
+
+#: ../data/ui/appchooserdlg.glade.h:8
+msgid "_Command Line:"
+msgstr "命令行(_C)："
+
+#: ../data/ui/appchooserdlg.glade.h:9
+msgid "_Recommended Applications"
+msgstr "推荐的程序(_R)"
+
+#: ../data/ui/file-assoc-dlg.glade.h:1
+msgid "Actions Showed in Popup Menus"
+msgstr "在弹出窗口中显示的动作"
+
+#: ../data/ui/file-assoc-dlg.glade.h:2
+msgid "Add _Application"
+msgstr "添加程序(_A)"
+
+#: ../data/ui/file-assoc-dlg.glade.h:3
+msgid "Add _Custom Action"
+msgstr "添加自定义动作(_C)"
+
+#
+#: ../data/ui/file-assoc-dlg.glade.h:4
+msgid "File Associations"
+msgstr "文件关联："
+
+#: ../data/ui/file-assoc-dlg.glade.h:5
+msgid "Known File Types:"
+msgstr "已知的文件类型："
+
+#: ../data/ui/file-assoc-dlg.glade.h:6
+msgid "Move _Down"
+msgstr "向下移动(_D)"
+
+#: ../data/ui/file-assoc-dlg.glade.h:7
+msgid "Move _Up"
+msgstr "向上移动(_U)"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "准备中..."
+
+#. Processing: <Name of currently proccesed file>
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "正在处理："
+
+#. Progress:
+#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "进度："
+
+#. To: <Destination folder> ex. Copy file to..., Move file to...etc.
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "到："
+
+#
+#: ../data/ui/file_properties.glade.h:1
+msgid "<b>File Type:</b>"
+msgstr "<b>文件类型：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:2
+msgid "<b>File _Name:</b>"
+msgstr "<b>文件名：(_N)</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:3
+msgid "<b>Group:</b>"
+msgstr "<b>群组：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:4
+msgid "<b>Last Access:</b>"
+msgstr "<b>最后访问：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:5
+msgid "<b>Last Modification:</b>"
+msgstr "<b>最后修改：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:6
+msgid "<b>Location:</b>"
+msgstr "<b>位置：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:7
+msgid "<b>Open _with:</b>"
+msgstr "<b>打开方式：(_W)</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:8
+msgid "<b>Other Users:</b>"
+msgstr "<b>其他用户：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:9
+msgid "<b>Owner:</b>"
+msgstr "<b>所有者：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:10
+msgid "<b>Size on Disk:</b>"
+msgstr "<b>占用的磁盘空间：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:11
+msgid "<b>Total Size of Files:</b>"
+msgstr "<b>文件总大小：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:12
+msgid "<b>_Group:</b>"
+msgstr "<b>群组(_G)：</b>"
+
+#
+#: ../data/ui/file_properties.glade.h:13
+msgid "<b>_Owner:</b>"
+msgstr "<b>所有者(_O)：</b>"
+
+#: ../data/ui/file_properties.glade.h:14
+msgid "Execute"
+msgstr "执行"
+
+#: ../data/ui/file_properties.glade.h:15
+msgid "File Properties"
+msgstr "文件属性"
+
+#: ../data/ui/file_properties.glade.h:16
+msgid "Read"
+msgstr "读取"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:18
+msgid "Set GID"
+msgstr "设置群组 ID"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:20
+msgid "Set UID"
+msgstr "设置用户 ID"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:22
+msgid "Sticky"
+msgstr "粘附"
+
+#: ../data/ui/file_properties.glade.h:23
+msgid "Write"
+msgstr "写入"
+
+#: ../data/ui/file_properties.glade.h:24 ../data/ui/prefdlg.glade.h:41
+msgid "_General"
+msgstr "一般(_G)"
+
+#: ../data/ui/file_properties.glade.h:25
+msgid "_Permissions"
+msgstr "权限(_P)"
+
+#: ../data/ui/find-files.glade.h:1
+msgid "<b>File Content</b>"
+msgstr "<b>文件内容</b>"
+
+#: ../data/ui/find-files.glade.h:2
+msgid "<b>File Name Contains:</b>"
+msgstr "<b>文件名包含：</b>"
+
+#: ../data/ui/find-files.glade.h:3
+msgid "<b>File Size</b>"
+msgstr "<b>文件大小</b>"
+
+#: ../data/ui/find-files.glade.h:4
+msgid "<b>File Types to Search</b>"
+msgstr "<b>搜索指定类型的文件</b>"
+
+#: ../data/ui/find-files.glade.h:5
+msgid "<b>Last Modified</b>"
+msgstr "<b>最后修改</b>"
+
+#
+#: ../data/ui/find-files.glade.h:6
+msgid "<b>Places to Search</b>"
+msgstr "<b>搜索的位置</b>"
+
+#: ../data/ui/find-files.glade.h:7
+msgid "<b>Search Result:</b>"
+msgstr "<b>搜索结果：</b>"
+
+#: ../data/ui/find-files.glade.h:8
+msgid "All Files and Folders"
+msgstr "所有文件和文件夹"
+
+#: ../data/ui/find-files.glade.h:9
+msgid ""
+"Any\n"
+"Within One Day\n"
+"Within One Week\n"
+"Within One Month\n"
+"Within One Year\n"
+"Within Selected Date Range"
+msgstr ""
+"任意\n"
+"一天之内的文件\n"
+"一周之内的文件\n"
+"一个月之内的文件\n"
+"一年之内的文件\n"
+"选择日期范围"
+
+#: ../data/ui/find-files.glade.h:15
+msgid "Audio Files (mp3, ogg,...)"
+msgstr "音频文件 (mp3, ogg,...)"
+
+#: ../data/ui/find-files.glade.h:16
+msgid ""
+"Bytes\n"
+"KB\n"
+"MB\n"
+"GB"
+msgstr ""
+"字节\n"
+"K\n"
+"M\n"
+"G"
+
+#: ../data/ui/find-files.glade.h:20
+msgid "Case Sensitive"
+msgstr "区分字母大小写"
+
+#: ../data/ui/find-files.glade.h:21
+msgid "Content"
+msgstr "内容"
+
+#: ../data/ui/find-files.glade.h:22
+msgid "File Contains:"
+msgstr "文件包含："
+
+#: ../data/ui/find-files.glade.h:23
+msgid "Find Files"
+msgstr "查找文件"
+
+#: ../data/ui/find-files.glade.h:24
+msgid "General"
+msgstr "一般"
+
+# msgid "Greater Than:"
+# 但编译时只有写成以下才能使翻译生效
+#: ../data/ui/find-files.glade.h:25
+#, fuzzy
+msgid "Greater Than:"
+msgstr "大于："
+
+#: ../data/ui/find-files.glade.h:26
+msgid "Image Files (jpg, png,...)"
+msgstr "图像文件 (jpg, png,...)"
+
+#
+#: ../data/ui/find-files.glade.h:27
+msgid "Plain Text Files"
+msgstr "文本文件"
+
+#: ../data/ui/find-files.glade.h:28
+msgid "Search Again"
+msgstr "继续搜索"
+
+#
+#: ../data/ui/find-files.glade.h:29
+msgid "Search Hidden Files"
+msgstr "搜索隐藏文件"
+
+#: ../data/ui/find-files.glade.h:30
+msgid "Search in Sub Directories"
+msgstr "搜索子目录"
+
+#: ../data/ui/find-files.glade.h:31
+msgid "Size & Date"
+msgstr "大小和日期"
+
+#: ../data/ui/find-files.glade.h:32
+msgid "Smaller Than:"
+msgstr "小于："
+
+#: ../data/ui/find-files.glade.h:33
+msgid "Use Regular Expression"
+msgstr "使用正则表达式"
+
+#: ../data/ui/find-files.glade.h:34
+msgid "Video Files (avi, mpg,...)"
+msgstr "视频文件 (avi, mpg,...)"
+
+#
+#: ../data/ui/godlg.glade.h:1
+msgid "Go to folder"
+msgstr "向上(_P)"
+
+#
+#: ../data/ui/prefdlg.glade.h:1
+msgid "<b>Behavior</b>"
+msgstr "<b>行为</b>"
+
+#
+#: ../data/ui/prefdlg.glade.h:2
+msgid "<b>Colors</b>"
+msgstr "<b>颜色</b>"
+
+#
+#: ../data/ui/prefdlg.glade.h:3
+msgid "<b>Display</b>"
+msgstr "<b>显示</b>"
+
+#
+#: ../data/ui/prefdlg.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>一般</b>"
+
+#
+#: ../data/ui/prefdlg.glade.h:5
+msgid "<b>Wallpaper</b>"
+msgstr "<b>壁纸</b>"
+
+#: ../data/ui/prefdlg.glade.h:6
+msgid "Always show the tab bar"
+msgstr "总是显示标签"
+
+#
+#: ../data/ui/prefdlg.glade.h:7
+msgid "Background:"
+msgstr "背景颜色："
+
+#: ../data/ui/prefdlg.glade.h:8
+msgid "Bookmarks:"
+msgstr "书签："
+
+#: ../data/ui/prefdlg.glade.h:9
+msgid "Disable \"Trash Can\" and delete files from disk directly"
+msgstr "禁用“回收站”(直接从硬盘删除文件)"
+
+#: ../data/ui/prefdlg.glade.h:10
+msgid "Display image files with supported format as thumbnails"
+msgstr "对于支持的图像格式使用缩略图显示"
+
+#: ../data/ui/prefdlg.glade.h:11
+msgid "Hide 'Close tab' buttons"
+msgstr "隐藏“关闭标签页”按钮"
+
+#: ../data/ui/prefdlg.glade.h:12
+msgid "Hide folder content border"
+msgstr "隐藏文件夹内容边框"
+
+#: ../data/ui/prefdlg.glade.h:13
+msgid "Hide side pane buttons"
+msgstr "隐藏侧边栏按钮"
+
+#: ../data/ui/prefdlg.glade.h:14
+msgid "I_nterface"
+msgstr "界面(_N)"
+
+#: ../data/ui/prefdlg.glade.h:15
+msgid "Manage the desktop and show file icons"
+msgstr "管理桌面并显示文件图标"
+
+#: ../data/ui/prefdlg.glade.h:16
+msgid "Max size of files displayed as thumbnails:"
+msgstr "显示为缩略图的最大文件大小："
+
+#
+#: ../data/ui/prefdlg.glade.h:17
+msgid "Mode:"
+msgstr "模式："
+
+#: ../data/ui/prefdlg.glade.h:18
+msgid "On-disk file name encoding:"
+msgstr "磁盘上文件名的编码："
+
+#: ../data/ui/prefdlg.glade.h:19
+msgid "Open files with single click"
+msgstr "单击打开文件"
+
+#: ../data/ui/prefdlg.glade.h:20
+msgid ""
+"Opened in Current Tab\n"
+"Opened in New Tab\n"
+"Opened in New Window"
+msgstr ""
+"在当前标签页打开\n"
+"在新标签页中打开\n"
+"在新窗口中打开"
+
+#: ../data/ui/prefdlg.glade.h:23
+msgid "Please select an image file"
+msgstr "请选择图像文件"
+
+#
+#: ../data/ui/prefdlg.glade.h:24
+msgid "Preferences"
+msgstr "首选项"
+
+#: ../data/ui/prefdlg.glade.h:25
+msgid "Shadow:"
+msgstr "阴影："
+
+#
+#: ../data/ui/prefdlg.glade.h:26
+msgid "Show \"My Documents\" icon on desktop"
+msgstr "在桌面上显示“我的文档”"
+
+#
+#: ../data/ui/prefdlg.glade.h:27
+msgid "Show icons of volumes on desktop"
+msgstr "在桌面上显示磁盘图标"
+
+#: ../data/ui/prefdlg.glade.h:28
+msgid "Show menus provided by WM when desktop is clicked"
+msgstr "点击桌面时显示窗口管理器的菜单"
+
+#: ../data/ui/prefdlg.glade.h:29
+msgid "Size of Big Icons:"
+msgstr "大图标大小："
+
+#: ../data/ui/prefdlg.glade.h:30
+msgid "Size of Small Icons:"
+msgstr "小图标大小"
+
+#: ../data/ui/prefdlg.glade.h:31
+msgid ""
+"Stretch to fill the entire screen\n"
+"Stretch to fit the screen\n"
+"Center on the screen\n"
+"Tile the image to fill the entire screen"
+msgstr ""
+"填充屏幕(拉伸)\n"
+"填充屏幕(最佳比例)\n"
+"屏幕居中\n"
+"平铺"
+
+#: ../data/ui/prefdlg.glade.h:35
+msgid "Terminal:"
+msgstr "终端："
+
+#
+#: ../data/ui/prefdlg.glade.h:36
+msgid "Text:"
+msgstr "文字："
+
+#: ../data/ui/prefdlg.glade.h:37
+msgid "Use SI decimal prefixes instead of IEC binary prefixes"
+msgstr "使用十进制权限，而不是IEC二进制权限"
+
+#: ../data/ui/prefdlg.glade.h:38
+msgid "Wallpaper:"
+msgstr "壁纸："
+
+#: ../data/ui/prefdlg.glade.h:39
+msgid "_Advanced"
+msgstr "高级(_A)"
+
+#: ../data/ui/prefdlg.glade.h:40
+msgid "_Desktop"
+msgstr "桌面(_D)"
+
+#: ../data/ui/prefdlg.glade.h:42
+msgid "_Volume Management"
+msgstr "磁盘管理(_V)"
+
+#: ../src/exo/exo-icon-view.c:696
+msgid "Column Spacing"
+msgstr "分栏空间"
+
+#: ../src/exo/exo-icon-view.c:697
+msgid "Space which is inserted between grid column"
+msgstr "栏与栏中间的间隔"
+
+#: ../src/exo/exo-icon-view.c:713
+msgid "Number of columns"
+msgstr "栏数"
+
+#: ../src/exo/exo-icon-view.c:714
+msgid "Number of columns to display"
+msgstr "显示的栏数"
+
+#: ../src/exo/exo-icon-view.c:728
+msgid "Enable Search"
+msgstr "启用搜索"
+
+#: ../src/exo/exo-icon-view.c:729
+msgid "View allows user to search through columns interactively"
+msgstr "查看时，允许通过交互式分栏进行查找"
+
+#: ../src/exo/exo-icon-view.c:746
+msgid "Width for each item"
+msgstr "每个项目的宽度"
+
+#: ../src/exo/exo-icon-view.c:747
+msgid "The width used for each item"
+msgstr "每个项目使用的宽度"
+
+#: ../src/exo/exo-icon-view.c:765
+msgid "Layout mode"
+msgstr "布局模式"
+
+#: ../src/exo/exo-icon-view.c:766
+msgid "The layout mode"
+msgstr "布局模式"
+
+#: ../src/exo/exo-icon-view.c:782
+msgid "Margin"
+msgstr "边距"
+
+#: ../src/exo/exo-icon-view.c:783
+msgid "Space which is inserted at the edges of the icon view"
+msgstr "图标查看模式时，四周的间隔"
+
+#: ../src/exo/exo-icon-view.c:799
+msgid "Markup column"
+msgstr "标记栏"
+
+#: ../src/exo/exo-icon-view.c:800
+msgid "Model column used to retrieve the text if using Pango markup"
+msgstr "使用Pango标记时，文字的模型栏"
+
+#: ../src/exo/exo-icon-view.c:814
+msgid "Icon View Model"
+msgstr "图标查看模式"
+
+#: ../src/exo/exo-icon-view.c:815
+msgid "The model for the icon view"
+msgstr "图标查看的模式"
+
+#: ../src/exo/exo-icon-view.c:828
+msgid "Orientation"
+msgstr "方向"
+
+#: ../src/exo/exo-icon-view.c:829
+msgid ""
+"How the text and icon of each item are positioned relative to each other"
+msgstr "文字和图标的布局"
+
+#: ../src/exo/exo-icon-view.c:845
+msgid "Pixbuf column"
+msgstr "缩略图栏"
+
+#: ../src/exo/exo-icon-view.c:846
+msgid "Model column used to retrieve the icon pixbuf from"
+msgstr "用于图片缩略图的模型栏"
+
+#: ../src/exo/exo-icon-view.c:861
+msgid "Reorderable"
+msgstr "可以重新排序"
+
+#: ../src/exo/exo-icon-view.c:862
+msgid "View is reorderable"
+msgstr "查看时可以重新排序"
+
+#: ../src/exo/exo-icon-view.c:877
+msgid "Row Spacing"
+msgstr "行距"
+
+#: ../src/exo/exo-icon-view.c:878
+msgid "Space which is inserted between grid rows"
+msgstr "行与行之间的间隔"
+
+#
+#: ../src/exo/exo-icon-view.c:892
+msgid "Search Column"
+msgstr "搜索栏目"
+
+#: ../src/exo/exo-icon-view.c:893
+msgid "Model column to search through when searching through item"
+msgstr "查找时，要查找的栏目模型"
+
+#
+#: ../src/exo/exo-icon-view.c:907
+msgid "Selection mode"
+msgstr "选择模式"
+
+#: ../src/exo/exo-icon-view.c:908
+msgid "The selection mode"
+msgstr "选择模式的设置"
+
+#: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
+msgid "Single Click"
+msgstr "单击"
+
+#: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
+msgid "Whether the items in the view can be activated with single clicks"
+msgstr "查看时，单击是否可以打开"
+
+#: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
+msgid "Single Click Timeout"
+msgstr "单击延时"
+
+#: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
+msgid ""
+"The amount of time after which the item under the mouse cursor will be "
+"selected automatically in single click mode"
+msgstr "单击模式下，鼠标光标悬停多长时间后，视为选中该项目"
+
+#: ../src/exo/exo-icon-view.c:956
+msgid "Spacing"
+msgstr "间隔"
+
+#: ../src/exo/exo-icon-view.c:957
+msgid "Space which is inserted between cells of an item"
+msgstr "项目各单元之前的间隔"
+
+#
+#: ../src/exo/exo-icon-view.c:972
+msgid "Text column"
+msgstr "文字颜色"
+
+#: ../src/exo/exo-icon-view.c:973
+msgid "Model column used to retrieve the text from"
+msgstr "显示信息的模型栏"
+
+#
+#: ../src/exo/exo-icon-view.c:980
+msgid "Selection Box Color"
+msgstr "选区颜色"
+
+#: ../src/exo/exo-icon-view.c:981
+msgid "Color of the selection box"
+msgstr "选中区域的颜色"
+
+#
+#: ../src/exo/exo-icon-view.c:987
+msgid "Selection Box Alpha"
+msgstr "选中区域的透明度"
+
+#: ../src/exo/exo-icon-view.c:988
+msgid "Opacity of the selection box"
+msgstr "选中区域的透明度"
+
+#. mime-type: application
+#: ../src/file-assoc-dlg.c:34
+msgid "application"
+msgstr "程序"
+
+#. mime-type: audio
+#: ../src/file-assoc-dlg.c:37
+msgid "audio"
+msgstr "音乐"
+
+#. mime-type: video
+#: ../src/file-assoc-dlg.c:40
+msgid "video"
+msgstr "视频"
+
+#
+#. mime-type: text
+#: ../src/file-assoc-dlg.c:43
+msgid "text"
+msgstr "文字："
+
+#. mime-type: multipart
+#: ../src/file-assoc-dlg.c:46
+msgid "multipart"
+msgstr "多段"
+
+#. mime-type: image
+#: ../src/file-assoc-dlg.c:49
+msgid "image"
+msgstr "图片"
+
+#. mime-type: message
+#: ../src/file-assoc-dlg.c:52
+msgid "message"
+msgstr "消息"
+
+#. mime-type: model
+#: ../src/file-assoc-dlg.c:55
+msgid "model"
+msgstr "模型"
+
+#. mime-type: inode
+#: ../src/file-assoc-dlg.c:58
+msgid "inode"
+msgstr "节点"
+
+#. mime-type: packages
+#: ../src/file-assoc-dlg.c:61
+msgid "packages"
+msgstr "软件包"
+
 #: ../src/main.c:92
+msgid "Don't show desktop icons."
+msgstr "不显示桌面图标。"
+
+#: ../src/main.c:93
+msgid "Run PCManFM as a daemon"
+msgstr "将 PCManFM 作为守护进程运行"
+
+#: ../src/main.c:94
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
-msgstr ""
+msgstr "在上次使用的窗口中打开新标签，不创建新窗口"
 
-#: ../src/main.c:93
+#: ../src/main.c:95
 msgid ""
 "Open preference dialog. 'n' is the number of page you want to show (1, 2, "
 "3...)."
-msgstr ""
+msgstr "打开首选项对话框。 n 代表你要查看的是第几页 (1, 2, 3...)。"
 
-#: ../src/main.c:94
+#: ../src/main.c:96
 msgid "Find Files with PCManFM"
-msgstr ""
+msgstr "通过 PCManFM 查找文件"
 
-#: ../src/main.c:101
+#: ../src/main.c:103
 msgid "Set desktop wallpaper"
-msgstr ""
+msgstr "设置桌面壁纸"
 
-#: ../src/main.c:110
+#: ../src/main.c:112
 msgid "[FILE1, FILE2,...]"
 msgstr "[文件1，文件2，...]"
 
-#: ../src/main.c:330
+#: ../src/main.c:332
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ 图标主题未正确设置"
 
-#: ../src/main.c:332
+#: ../src/main.c:334
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -87,19 +851,19 @@ msgstr ""
 "<i><b>gtk-icon-theme-name=\"Tango\"</b></i>\n"
 "<b>注意：您所选择的图标主题必须和 GNOME 兼容，否则文件图标将无法正确显示。</"
 "b>由于 GNOME 和 KDE 图标的命名机制不同，KDE 主题将无法使用。现在还没有这种标"
-"准，将来 freedesktop.org 会解决这个问题。 "
+"准，将来 freedesktop.org 会解决这个问题。"
 
-#: ../src/main.c:650 ../src/main.c:719 ../src/main.c:770
-#: ../src/main-window.c:1581 ../src/main-window.c:1648
-#: ../src/ptk/ptk-file-browser.c:503 ../src/ptk/ptk-file-browser.c:520
-#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:224
-#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:325
-#: ../src/ptk/ptk-file-misc.c:412 ../src/ptk/ptk-file-properties.c:695
-#: ../src/ptk/ptk-file-properties.c:706
+#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main-window.c:1704 ../src/main-window.c:1771
+#: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
+#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
+#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:326
+#: ../src/ptk/ptk-file-misc.c:415 ../src/ptk/ptk-file-properties.c:701
+#: ../src/ptk/ptk-file-properties.c:712
 msgid "Error"
 msgstr "错误"
 
-#: ../src/main.c:650
+#: ../src/main.c:662
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -109,15 +873,15 @@ msgstr ""
 "\n"
 "您是否已安装 \"FAM\" 或 \"Gamin\" 并正确运行？"
 
-#: ../src/main.c:719
+#: ../src/main.c:731
 msgid "File doesn't exist"
 msgstr "文件不存在"
 
-#: ../src/main.c:766
+#: ../src/main.c:778
 msgid "Don't know how to open the file"
 msgstr "不知道如何打开这个文件"
 
-#: ../src/main.c:768
+#: ../src/main.c:780
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -128,341 +892,347 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: ../src/main-window.c:296 ../src/ptk/ptk-file-menu.c:109
+#: ../src/main-window.c:304 ../src/ptk/ptk-file-menu.c:109
 #: ../src/desktop/desktop-window.c:186
 msgid "_Folder"
 msgstr "文件夹(_F)"
 
-#: ../src/main-window.c:297 ../src/ptk/ptk-file-menu.c:110
+#: ../src/main-window.c:305 ../src/ptk/ptk-file-menu.c:110
 #: ../src/desktop/desktop-window.c:187
 msgid "_Text File"
 msgstr "文本文件(_T)"
 
-#: ../src/main-window.c:303
+#: ../src/main-window.c:311
 msgid "New _Window"
 msgstr "新窗口(_W)"
 
-#: ../src/main-window.c:304
+#: ../src/main-window.c:312
 msgid "New _Tab"
 msgstr "新标签(_T)"
 
-#: ../src/main-window.c:306 ../src/ptk/ptk-file-menu.c:133
+#: ../src/main-window.c:314 ../src/ptk/ptk-file-menu.c:133
 #: ../src/desktop/desktop-window.c:196
 msgid "_Create New"
 msgstr "新建(_C)"
 
-#: ../src/main-window.c:307
+#: ../src/main-window.c:315
 msgid "File _Properties"
 msgstr "文件属性(_P)"
 
-#: ../src/main-window.c:309
+#: ../src/main-window.c:317
 msgid "Close Tab"
 msgstr "关闭标签"
 
-#: ../src/main-window.c:310
-#, fuzzy
+#
+#: ../src/main-window.c:318
 msgid "_Close Window"
-msgstr "新窗口(_W)"
+msgstr "关闭窗口(_C)"
 
-#: ../src/main-window.c:319 ../src/ptk/ptk-file-menu.c:128
+#: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "删除(_D)"
 
-#: ../src/main-window.c:320 ../src/ptk/ptk-file-browser.c:1320
+#: ../src/main-window.c:328 ../src/ptk/ptk-file-browser.c:1396
 #: ../src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "重命名(_R)"
 
-#: ../src/main-window.c:322
+#: ../src/main-window.c:330
 msgid "Select _All"
 msgstr "全选(_A)"
 
-#: ../src/main-window.c:323
+#: ../src/main-window.c:331
 msgid "_Invert Selection"
 msgstr "反向选择(_I)"
 
-#: ../src/main-window.c:332
+#: ../src/main-window.c:340
 msgid "Go _Back"
 msgstr "后退(_B)"
 
-#: ../src/main-window.c:333
+#: ../src/main-window.c:341
 msgid "Go _Forward"
 msgstr "前进(_F)"
 
-#: ../src/main-window.c:334
+#: ../src/main-window.c:342
 msgid "Go to _Parent Folder"
 msgstr "向上(_P)"
 
-#: ../src/main-window.c:335
+#: ../src/main-window.c:343
 msgid "Go _Home"
 msgstr "转到主文件夹(_H)"
 
-#: ../src/main-window.c:347 ../src/desktop/desktop-window.c:173
+#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:173
 msgid "Sort by _Name"
-msgstr "按名称排列(_N)"
+msgstr "按文件名排序(_N)"
 
-#: ../src/main-window.c:348 ../src/desktop/desktop-window.c:174
+#: ../src/main-window.c:356 ../src/desktop/desktop-window.c:174
 msgid "Sort by _Size"
-msgstr "按大小排列(_S)"
+msgstr "按大小排序(_S)"
 
-#: ../src/main-window.c:349 ../src/desktop/desktop-window.c:176
+#: ../src/main-window.c:357 ../src/desktop/desktop-window.c:176
 msgid "Sort by _Modification Time"
-msgstr "按修改时间排列(_M)"
+msgstr "按修改时间排序(_M)"
 
-#: ../src/main-window.c:350 ../src/desktop/desktop-window.c:175
+#: ../src/main-window.c:358 ../src/desktop/desktop-window.c:175
 msgid "Sort by _Type"
-msgstr "按文件类型排列(_T)"
+msgstr "按文件类型排序(_T)"
 
-#: ../src/main-window.c:351
+#: ../src/main-window.c:359
 msgid "Sort by _Permission"
-msgstr "按权限排列(_P)"
+msgstr "按权限排序(_P)"
 
-#: ../src/main-window.c:352
+#: ../src/main-window.c:360
 msgid "Sort by _Owner"
-msgstr "按所有者排列(_O)"
+msgstr "按所有者排序(_O)"
 
-#: ../src/main-window.c:354 ../src/desktop/desktop-window.c:179
+#: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
-msgstr "顺序"
+msgstr "升顺"
 
-#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:180
+#: ../src/main-window.c:363 ../src/desktop/desktop-window.c:180
 msgid "Descending"
 msgstr "逆序"
 
-#: ../src/main-window.c:361
+#: ../src/main-window.c:369
 msgid "_Open Side Pane"
 msgstr "打开侧边栏(_O)"
 
-#: ../src/main-window.c:363
+#: ../src/main-window.c:371
 msgid "Show _Location Pane"
 msgstr "显示位置栏(_L)"
 
-#: ../src/main-window.c:364
+#: ../src/main-window.c:372
 msgid "Show _Directory Tree"
 msgstr "显示树状目录(_D)"
 
-#: ../src/main-window.c:370
+#: ../src/main-window.c:378
 msgid "_Refresh"
 msgstr "刷新(_R)"
 
-#: ../src/main-window.c:371
+#: ../src/main-window.c:379
 msgid "Side _Pane"
 msgstr "侧边栏(_P)"
 
-#: ../src/main-window.c:374
+#
+#. PTK_CHECK_MENU_ITEM( N_( "_Full Screen" ), on_fullscreen_activate, GDK_F11, 0 ),
+#: ../src/main-window.c:381
+msgid "L_ocation Bar"
+msgstr "位置： (_O)"
+
+#: ../src/main-window.c:383
 msgid "Show _Hidden Files"
 msgstr "显示隐藏文件(_H)"
 
-#: ../src/main-window.c:375
+#: ../src/main-window.c:384
 msgid "_Sort..."
 msgstr "排列项目...(_S)"
 
-#: ../src/main-window.c:377
+#: ../src/main-window.c:386
 msgid "View as _Icons"
-msgstr "以图标视图查看(_I)"
+msgstr "图标查看(_I)"
 
-#: ../src/main-window.c:378
-#, fuzzy
+#
+#: ../src/main-window.c:387
 msgid "View as _Compact List"
-msgstr "以列表视图查看(_L)"
+msgstr "紧凑列表查看(_C)"
 
-#: ../src/main-window.c:379
+#: ../src/main-window.c:388
 msgid "View as Detailed _List"
-msgstr "以列表视图查看(_L)"
+msgstr "列表查看(_L)"
 
-#: ../src/main-window.c:385
+#: ../src/main-window.c:394
 msgid "Open _Terminal"
 msgstr "打开终端(_T)"
 
-#: ../src/main-window.c:386
+#: ../src/main-window.c:395
 msgid "Open Current Folder as _Root"
 msgstr "以 Root 权限打开当前文件夹(_R)"
 
-#: ../src/main-window.c:390
-#, fuzzy
+#
+#: ../src/main-window.c:399
 msgid "_Find Files"
-msgstr "文件(_F)"
+msgstr "查找文件(_F)"
 
-#: ../src/main-window.c:396
+#: ../src/main-window.c:405
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../src/main-window.c:397
+#: ../src/main-window.c:406
 msgid "_Edit"
 msgstr "编辑(_E)"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: ../src/main-window.c:399
+#: ../src/main-window.c:408
 msgid "_Go"
 msgstr "转到(_G)"
 
-#: ../src/main-window.c:400
+#: ../src/main-window.c:409
 msgid "_Bookmark"
 msgstr "书签(_B)"
 
-#: ../src/main-window.c:401
+#: ../src/main-window.c:410
 msgid "_View"
-msgstr "视图(_V)"
+msgstr "查看(_V)"
 
-#: ../src/main-window.c:402
+#: ../src/main-window.c:411
 msgid "_Tool"
 msgstr "工具(_T)"
 
-#: ../src/main-window.c:403
+#: ../src/main-window.c:412
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../src/main-window.c:411
+#: ../src/main-window.c:420
 msgid "New Tab"
 msgstr "新标签"
 
-#: ../src/main-window.c:412
+#: ../src/main-window.c:421
 msgid "Back"
 msgstr "上一页"
 
-#: ../src/main-window.c:413
+#: ../src/main-window.c:422
 msgid "Forward"
 msgstr "下一页"
 
-#: ../src/main-window.c:414
+#: ../src/main-window.c:423
 msgid "Parent Folder"
 msgstr "向上"
 
-#: ../src/main-window.c:415
+#: ../src/main-window.c:424
 msgid "Refresh"
 msgstr "刷新"
 
-#: ../src/main-window.c:416
+#: ../src/main-window.c:425
 msgid "Home Directory"
 msgstr "主目录"
 
-#: ../src/main-window.c:417
+#: ../src/main-window.c:426
 msgid "Open Side Pane"
 msgstr "在侧边栏中打开"
 
-#: ../src/main-window.c:423
+#: ../src/main-window.c:432
 msgid "Go"
 msgstr "转到"
 
-#: ../src/main-window.c:642
+#: ../src/main-window.c:664
 msgid "Warning: You are in super user mode"
 msgstr "警告：您现在处于超级用户的状态"
 
-#: ../src/main-window.c:1582
+#: ../src/main-window.c:1705
 msgid "Terminal program has not been set"
 msgstr "终端程序未设定"
 
-#: ../src/main-window.c:1723
+#: ../src/main-window.c:1846
 msgid "_Add to Bookmarks"
 msgstr "添加书签 (_A)"
 
-#: ../src/main-window.c:1724
+#: ../src/main-window.c:1847
 msgid "_Edit Bookmarks"
 msgstr "编辑书签(_E)"
 
-#: ../src/main-window.c:1801
+#: ../src/main-window.c:1918
 msgid "Loading..."
 msgstr "下载中..."
 
-#: ../src/main-window.c:2011
+#: ../src/main-window.c:2103
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr "，剩余空间：%s (总共：%s)"
 
-#: ../src/main-window.c:2020
+#: ../src/main-window.c:2112
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
 msgstr[0] "选中了 %d 项 (%s)%s"
 
-#: ../src/main-window.c:2030
+#: ../src/main-window.c:2122
 #, c-format
 msgid "%d hidden"
 msgid_plural "%d hidden"
-msgstr[0] ""
+msgstr[0] "%d 个隐藏"
 
-#: ../src/main-window.c:2031
-#, fuzzy, c-format
+#: ../src/main-window.c:2123
+#, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
-msgstr[0] "%d 项可见 (%d 项隐藏)%s"
+msgstr[0] "%d 个可见项 (%s)%s"
 
-#: ../src/ptk/ptk-file-browser.c:504
+#: ../src/ptk/ptk-file-browser.c:521
 msgid "Directory doesn't exist!"
 msgstr "目录不存在！"
 
-#: ../src/ptk/ptk-file-browser.c:1316 ../src/ptk/ptk-file-menu.c:142
+#: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "在新标签中打开(_T)"
 
-#: ../src/ptk/ptk-file-browser.c:1317 ../src/ptk/ptk-file-menu.c:143
+#: ../src/ptk/ptk-file-browser.c:1393 ../src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "在新窗口中打开(_W)"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/edit-bookmarks.c:201
-#: ../src/find-files.c:746
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/edit-bookmarks.c:201
+#: ../src/find-files.c:799
 msgid "Name"
 msgstr "名称"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/find-files.c:767
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:820
 msgid "Size"
 msgstr "大小"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/find-files.c:771
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:824
 msgid "Type"
 msgstr "类型"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Permission"
 msgstr "权限"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Owner:Group"
 msgstr "所有者：群组"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Last Modification"
 msgstr "最后修改"
 
-#: ../src/ptk/ptk-file-browser.c:2780
+#: ../src/ptk/ptk-file-browser.c:2856
 msgid "Location"
 msgstr "位置："
 
-#: ../src/ptk/ptk-file-browser.c:2781
+#: ../src/ptk/ptk-file-browser.c:2857
 msgid "Directory Tree"
 msgstr "树状目录"
 
 #: ../src/ptk/ptk-location-view.c:207
 msgid "Trash"
-msgstr ""
+msgstr "回收站"
 
 #: ../src/ptk/ptk-location-view.c:250
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../src/ptk/ptk-location-view.c:440 ../src/ptk/ptk-location-view.c:632
+#: ../src/ptk/ptk-location-view.c:441 ../src/ptk/ptk-location-view.c:635
 msgid "Unable to mount device"
 msgstr "无法挂载设备"
 
-#: ../src/ptk/ptk-location-view.c:647
+#: ../src/ptk/ptk-location-view.c:652
 msgid "Unable to unmount device"
 msgstr "无法卸载设备"
 
-#: ../src/ptk/ptk-location-view.c:664
+#: ../src/ptk/ptk-location-view.c:671
 msgid "Unable to eject device"
 msgstr "无法弹出设备"
 
-#: ../src/ptk/ptk-location-view.c:722
+#: ../src/ptk/ptk-location-view.c:730
 msgid "_Mount File System"
 msgstr "挂载文件系统(_M)"
 
-#: ../src/ptk/ptk-location-view.c:732
+#: ../src/ptk/ptk-location-view.c:740
 msgid "_Eject"
 msgstr "弹出(_E)"
 
-#: ../src/ptk/ptk-location-view.c:738
+#: ../src/ptk/ptk-location-view.c:746
 msgid "_Unmount File System"
-msgstr "卸载文件系统(_F)"
+msgstr "卸载文件系统(_U)"
 
 #: ../src/ptk/ptk-file-task.c:103
 msgid "Move: "
@@ -474,7 +1244,7 @@ msgstr "复制："
 
 #: ../src/ptk/ptk-file-task.c:105
 msgid "Move to Trash: "
-msgstr ""
+msgstr "移动到回收站："
 
 #: ../src/ptk/ptk-file-task.c:106
 msgid "Delete: "
@@ -496,10 +1266,10 @@ msgstr "移动中..."
 msgid "Copying..."
 msgstr "复制中..."
 
+#
 #: ../src/ptk/ptk-file-task.c:114
-#, fuzzy
 msgid "Moving to Trash..."
-msgstr "移动中..."
+msgstr "移动到回收站..."
 
 #: ../src/ptk/ptk-file-task.c:115
 msgid "Deleting..."
@@ -512,28 +1282,6 @@ msgstr "正在创建链接..."
 #: ../src/ptk/ptk-file-task.c:117
 msgid "Changing Properties"
 msgstr "修改属性"
-
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "到："
-
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
-msgstr "正在处理："
-
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "准备中..."
-
-#. Progress:
-#: ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
-msgstr "进度："
 
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
@@ -552,18 +1300,18 @@ msgstr "您想要覆盖这个文件吗？"
 #. Rename is required
 #: ../src/ptk/ptk-file-task.c:419
 msgid "Please choose a new file name."
-msgstr "请输入新文件名"
+msgstr "请输入新文件名。"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
+#. ex: "/home/pcman/some_file" already exists.\n\nDo you want to overwrite existing file?"
 #: ../src/ptk/ptk-file-task.c:427
 #, c-format
 msgid ""
-"\"%s\" has existed.\n"
+"\"%s\" already exists.\n"
 "\n"
 "%s"
 msgstr ""
-"\"%s\" 已经存在\n"
+"\"%s\" 已经存在。\n"
 "\n"
 "%s"
 
@@ -603,37 +1351,37 @@ msgstr "跳过"
 msgid "Skip All"
 msgstr "全部跳过"
 
-#: ../src/ptk/ptk-file-archiver.c:119
-msgid "Save Compressd Files to..."
+#: ../src/ptk/ptk-file-archiver.c:125
+msgid "Save Compressed Files to..."
 msgstr "将压缩文件保存到..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "压缩文件的格式为："
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "创建压缩文件：%s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "压缩文件"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "解压缩到..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "解压缩到：%s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "解压缩文件"
 
-#: ../src/ptk/ptk-console-output.c:66
+#: ../src/ptk/ptk-console-output.c:67
 msgid ""
 "\n"
 "Complete!"
@@ -641,7 +1389,7 @@ msgstr ""
 "\n"
 "完成！"
 
-#: ../src/ptk/ptk-console-output.c:170
+#: ../src/ptk/ptk-console-output.c:171
 msgid "Command:"
 msgstr "命令行："
 
@@ -655,7 +1403,7 @@ msgstr "没有子文件夹"
 
 #: ../src/ptk/ptk-file-menu.c:116
 msgid "E_xtract Here"
-msgstr "解压缩到此处(_x)"
+msgstr "解压缩到这里(_X)"
 
 #: ../src/ptk/ptk-file-menu.c:117
 msgid "Extract _To"
@@ -663,7 +1411,7 @@ msgstr "解压缩到(_T)"
 
 #: ../src/ptk/ptk-file-menu.c:123
 msgid "Open _with..."
-msgstr "打开文件..."
+msgstr "打开文件... (_W)"
 
 #: ../src/ptk/ptk-file-menu.c:131
 msgid "Compress"
@@ -671,7 +1419,7 @@ msgstr "压缩"
 
 #: ../src/ptk/ptk-file-menu.c:132
 msgid "E_xtract"
-msgstr "解压(_x)"
+msgstr "解压(_X)"
 
 #: ../src/ptk/ptk-file-menu.c:135
 msgid "_Properties"
@@ -687,7 +1435,7 @@ msgstr "使用其他程序打开(_O)"
 
 #: ../src/ptk/ptk-file-menu.c:388
 msgid "E_xecute"
-msgstr "执行(_x)"
+msgstr "执行(_X)"
 
 #: ../src/ptk/ptk-file-menu.c:397
 #, c-format
@@ -696,7 +1444,7 @@ msgstr "用\"%s\"打开(_O)"
 
 #. delete some confusing menu item if this menu is for current folder
 #: ../src/ptk/ptk-file-menu.c:408 ../src/ptk/ptk-file-menu.c:417
-#: ../src/find-files.c:228
+#: ../src/find-files.c:229
 msgid "_Open"
 msgstr "打开(_O)"
 
@@ -712,10 +1460,11 @@ msgstr "重命名"
 msgid "Please input new file name:"
 msgstr "请输入新文件名："
 
+#
 #: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
 msgid ""
-"The file name you specified has existed.\n"
+"The file name you specified already exists.\n"
 "Please input a new one:"
 msgstr ""
 "指定的文件名已经存在\n"
@@ -727,7 +1476,7 @@ msgstr "创建文件夹"
 
 #: ../src/ptk/ptk-file-misc.c:196
 msgid "Input a name for the new folder:"
-msgstr "请输入新建文件夹的名称："
+msgstr "请输入新文件夹的名称："
 
 #: ../src/ptk/ptk-file-misc.c:202 ../src/ptk/ptk-file-misc.c:204
 msgid "New File"
@@ -735,42 +1484,42 @@ msgstr "创建文件"
 
 #: ../src/ptk/ptk-file-misc.c:203
 msgid "Input a name for the new file:"
-msgstr "请输入新建文件的名称："
+msgstr "请输入新文件的文件名："
 
 #: ../src/ptk/ptk-file-misc.c:259
 msgid "The new file cannot be created!"
 msgstr "无法创建新文件！"
 
-#: ../src/ptk/ptk-file-properties.c:304
+#: ../src/ptk/ptk-file-properties.c:305
 msgid "Multiple files are selected"
 msgstr "多个文件被选中"
 
-#: ../src/ptk/ptk-file-properties.c:381
+#: ../src/ptk/ptk-file-properties.c:384
 msgid "Multiple files of different types"
 msgstr "多个不同类型文件"
 
-#: ../src/ptk/ptk-file-properties.c:449
+#: ../src/ptk/ptk-file-properties.c:452
 msgid "Other program..."
 msgstr "使用其他程序打开..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: ../src/ptk/ptk-file-properties.c:543
+#: ../src/ptk/ptk-file-properties.c:546
 msgid "Calculating..."
 msgstr "统计中..."
 
-#: ../src/ptk/ptk-file-properties.c:695
+#: ../src/ptk/ptk-file-properties.c:701
 msgid "Invalid User"
-msgstr "无效用户"
+msgstr "无效的用户"
 
-#: ../src/ptk/ptk-file-properties.c:706
+#: ../src/ptk/ptk-file-properties.c:712
 msgid "Invalid Group"
-msgstr "无效群组"
+msgstr "无效的群组"
 
-#: ../src/ptk/ptk-file-properties.c:754
+#: ../src/ptk/ptk-file-properties.c:760
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
-msgstr "将改变应用于所有文件夹和子文件夹？"
+msgstr "将改变应用到所有文件夹和子文件夹？"
 
 #: ../src/edit-bookmarks.c:79
 msgid "New Item"
@@ -786,7 +1535,7 @@ msgstr "路径"
 
 #: ../src/edit-bookmarks.c:233
 msgid "Use drag & drop to sort the items"
-msgstr "使用鼠标拖拽来排列书签"
+msgstr "使用鼠标拖放来整理书签"
 
 #: ../src/vfs/vfs-app-desktop.c:445
 #, c-format
@@ -891,8 +1640,8 @@ msgstr "%s %s 音乐播放器"
 msgid "%s %s Digital Camera"
 msgstr "%s %s 数码相机"
 
+#
 #: ../src/vfs/vfs-volume-hal.c:586
-#, fuzzy
 msgid "Drive"
 msgstr "驱动器"
 
@@ -993,7 +1742,7 @@ msgstr "设备 \"%s\" 不是磁盘"
 #: ../src/vfs/vfs-volume-hal.c:2073
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
-msgstr "文件系统设备表中没有设备 \"%s\""
+msgstr "文件系统设备表中找不到设备 \"%s\""
 
 #: ../src/vfs/vfs-volume-hal.c:2256
 #, c-format
@@ -1031,7 +1780,7 @@ msgstr "其他程序正在访问磁盘 \"%s\"，无法卸载"
 #: ../src/vfs/vfs-volume-hal.c:2276
 #, c-format
 msgid "The volume \"%s\" is not mounted"
-msgstr "磁盘 \"%s\" 尚未挂载"
+msgstr "磁盘 \"%s\" 还没有被挂载"
 
 #: ../src/vfs/vfs-volume-hal.c:2278
 #, c-format
@@ -1049,495 +1798,69 @@ msgstr "磁盘 \"%s\" 很有可能是通过命令行手动挂载的"
 msgid ""
 "Blank discs cannot be mounted, use a CD recording application to record "
 "audio or data on the disc"
-msgstr "无法挂在空白碟片，请使用刻录程序往碟片里添加音频或数据"
+msgstr "无法挂载空白碟片，请使用刻录程序往碟片里写入音频或数据"
 
 #: ../src/vfs/vfs-volume-hal.c:2300
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr "无法挂载音频 CD，请使用音乐播放器来播放音轨"
 
+#
 #: ../src/desktop/desktop-window.c:193
-#, fuzzy
 msgid "_Icons"
-msgstr "以图标视图查看(_I)"
+msgstr "图标(_I)"
 
+#
 #: ../src/desktop/desktop-window.c:198
-#, fuzzy
 msgid "_Desktop Settings"
-msgstr "桌面(_D)"
+msgstr "桌面设置(_D)"
 
-#: ../src/desktop/desktop-window.c:1832
+#: ../src/desktop/desktop-window.c:1842
 msgid "My Documents"
-msgstr ""
+msgstr "我的文档"
 
-#: ../src/find-files.c:229
+#: ../src/find-files.c:230
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "打开文件所在的文件夹(_F)"
 
-#: ../src/find-files.c:673
-#, fuzzy
+#
+#: ../src/find-files.c:677
+msgid "Select a folder"
+msgstr "选择文件夹"
+
+#
+#: ../src/find-files.c:722
 msgid "Browse..."
-msgstr "浏览(_B)"
+msgstr "浏览..."
 
-#: ../src/find-files.c:692
+#: ../src/find-files.c:744
 msgid "All Local Disk Partitions"
-msgstr ""
+msgstr "所有本地磁盘分区"
 
-#: ../src/find-files.c:761
-#, fuzzy
+#
+#: ../src/find-files.c:814
 msgid "Folder"
-msgstr "文件夹(_F)"
+msgstr "文件夹"
 
-#: ../src/find-files.c:777
-#, fuzzy
+#
+#: ../src/find-files.c:830
 msgid "Last Modified"
 msgstr "最后修改"
 
-#: ../data/ui/prefdlg.glade.h:1
-msgid "<b>Behavior</b>"
-msgstr ""
+#~ msgid "Opened in Current Tab"
+#~ msgstr "在当前标签中打开"
 
-#: ../data/ui/prefdlg.glade.h:2
-msgid "<b>Colors</b>"
-msgstr ""
+#~ msgid "Opened in New Tab"
+#~ msgstr "在新标签中打开"
 
-#: ../data/ui/prefdlg.glade.h:3
-#, fuzzy
-msgid "<b>Display</b>"
-msgstr "壁纸："
+#~ msgid "Opened in New Window"
+#~ msgstr "在窗口中打开"
 
-#: ../data/ui/prefdlg.glade.h:4
-#, fuzzy
-msgid "<b>General</b>"
-msgstr "一般(_G)"
+#~ msgid "Stretch to fill the entire screen"
+#~ msgstr "缩放到填充整个屏幕"
 
-#: ../data/ui/prefdlg.glade.h:5
-#, fuzzy
-msgid "<b>Wallpaper</b>"
-msgstr "壁纸："
-
-#: ../data/ui/prefdlg.glade.h:6
-#, fuzzy
-msgid "Background:"
-msgstr "背景颜色"
-
-#: ../data/ui/prefdlg.glade.h:7
-msgid "Bookmarks:"
-msgstr "书签:"
-
-#: ../data/ui/prefdlg.glade.h:8
-msgid "Disable \"Trash Can\" and delete files from disk directly"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:9
-msgid "Display image files with supported format as thumbnails"
-msgstr "对于支持的图像格式使用缩略图显示"
-
-#: ../data/ui/prefdlg.glade.h:10
-msgid "Manage the desktop and show file icons"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:11
-msgid "Max size of files displayed as thumbnails:"
-msgstr "显示为缩略图的最大文件大小："
-
-#: ../data/ui/prefdlg.glade.h:12
-#, fuzzy
-msgid "Mode:"
-msgstr "移动："
-
-#: ../data/ui/prefdlg.glade.h:13
-msgid "On-disk file name encoding:"
-msgstr "磁盘上文件名的编码："
-
-#: ../data/ui/prefdlg.glade.h:14
-msgid "Open files with single click"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:15
-msgid ""
-"Opened in Current Tab\n"
-"Opened in New Tab\n"
-"Opened in New Window"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:18
-msgid "Please select an image file"
-msgstr "请选择图像文件"
-
-#: ../data/ui/prefdlg.glade.h:19
-#, fuzzy
-msgid "Preferences"
-msgstr "首选项"
-
-#: ../data/ui/prefdlg.glade.h:20
-msgid "Shadow:"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:21
-#, fuzzy
-msgid "Show \"My Documents\" icon on desktop"
-msgstr "在桌面上显示文件的图标"
-
-#: ../data/ui/prefdlg.glade.h:22
-#, fuzzy
-msgid "Show icons of volumes on desktop"
-msgstr "在桌面上显示文件的图标"
-
-#: ../data/ui/prefdlg.glade.h:23
-msgid "Show menus provided by WM when desktop is clicked"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:24
-msgid "Size of Big Icons:"
-msgstr "大图标大小："
-
-#: ../data/ui/prefdlg.glade.h:25
-msgid "Size of Small Icons:"
-msgstr "小图标大小"
-
-#: ../data/ui/prefdlg.glade.h:26
-msgid ""
-"Stretch to fill the entire screen\n"
-"Stretch to fit the screen\n"
-"Center on the screen\n"
-"Tile the image to fill the entire screen"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:30
-msgid "Terminal:"
-msgstr "终端："
-
-#: ../data/ui/prefdlg.glade.h:31
-#, fuzzy
-msgid "Text:"
-msgstr "文档"
-
-#: ../data/ui/prefdlg.glade.h:32
-msgid "Wallpaper:"
-msgstr "壁纸："
-
-#: ../data/ui/prefdlg.glade.h:33
-msgid "_Advanced"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:34
-msgid "_Desktop"
-msgstr "桌面(_D)"
-
-#: ../data/ui/prefdlg.glade.h:35 ../data/ui/file_properties.glade.h:24
-msgid "_General"
-msgstr "一般(_G)"
-
-#: ../data/ui/prefdlg.glade.h:36
-msgid "_Volume Management"
-msgstr ""
-
-#: ../data/ui/file_properties.glade.h:1
-#, fuzzy
-msgid "<b>File Type:</b>"
-msgstr "文件类型："
-
-#: ../data/ui/file_properties.glade.h:2
-#, fuzzy
-msgid "<b>File _Name:</b>"
-msgstr "文件名："
-
-#: ../data/ui/file_properties.glade.h:3
-#, fuzzy
-msgid "<b>Group:</b>"
-msgstr "群组："
-
-#: ../data/ui/file_properties.glade.h:4
-#, fuzzy
-msgid "<b>Last Access:</b>"
-msgstr "最后访问："
-
-#: ../data/ui/file_properties.glade.h:5
-#, fuzzy
-msgid "<b>Last Modification:</b>"
-msgstr "最后修改："
-
-#: ../data/ui/file_properties.glade.h:6
-#, fuzzy
-msgid "<b>Location:</b>"
-msgstr "位置："
-
-#: ../data/ui/file_properties.glade.h:7
-#, fuzzy
-msgid "<b>Open _with:</b>"
-msgstr "打开方式："
-
-#: ../data/ui/file_properties.glade.h:8
-#, fuzzy
-msgid "<b>Other Users:</b>"
-msgstr "其他使用者："
-
-#: ../data/ui/file_properties.glade.h:9
-#, fuzzy
-msgid "<b>Owner:</b>"
-msgstr "所有者："
-
-#: ../data/ui/file_properties.glade.h:10
-#, fuzzy
-msgid "<b>Size on Disk:</b>"
-msgstr "占用的磁盘空间："
-
-#: ../data/ui/file_properties.glade.h:11
-#, fuzzy
-msgid "<b>Total Size of Files:</b>"
-msgstr "文件总大小："
-
-#: ../data/ui/file_properties.glade.h:12
-#, fuzzy
-msgid "<b>_Group:</b>"
-msgstr "群组："
-
-#: ../data/ui/file_properties.glade.h:13
-#, fuzzy
-msgid "<b>_Owner:</b>"
-msgstr "壁纸："
-
-#: ../data/ui/file_properties.glade.h:14
-msgid "Execute"
-msgstr "执行"
-
-#: ../data/ui/file_properties.glade.h:15
-msgid "File Properties"
-msgstr "文件属性"
-
-#: ../data/ui/file_properties.glade.h:16
-msgid "Read"
-msgstr "读取"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:18
-msgid "Set GID"
-msgstr "设置群组 ID"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:20
-msgid "Set UID"
-msgstr "设置用户 ID"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:22
-msgid "Sticky"
-msgstr "粘附"
-
-#: ../data/ui/file_properties.glade.h:23
-msgid "Write"
-msgstr "写入"
-
-#: ../data/ui/file_properties.glade.h:25
-msgid "_Permissions"
-msgstr "权限(_P)"
-
-#: ../data/ui/appchooserdlg.glade.h:1
-msgid "Choose an Application"
-msgstr "选择一个应用程序"
-
-#: ../data/ui/appchooserdlg.glade.h:2
-msgid "File Type To be Opened:"
-msgstr "将要打开的文件类型："
-
-#: ../data/ui/appchooserdlg.glade.h:3
-msgid "Opened in Terminal"
-msgstr "在终端中打开"
-
-#: ../data/ui/appchooserdlg.glade.h:4
-msgid ""
-"Please choose an application from following lists or enter the command line "
-"by hand:"
-msgstr "请从列表中选择一个应用程序，或是手动输入命令行："
-
-#: ../data/ui/appchooserdlg.glade.h:5
-msgid "Set selected application to default action"
-msgstr "默认使用选择的应用程序打开"
-
-#: ../data/ui/appchooserdlg.glade.h:6
-msgid "_All Applications"
-msgstr "所有应用程式(_A)"
-
-#: ../data/ui/appchooserdlg.glade.h:7
-msgid "_Browse"
-msgstr "浏览(_B)"
-
-#: ../data/ui/appchooserdlg.glade.h:8
-#, fuzzy
-msgid "_Command Line:"
-msgstr "命令行：(_C)"
-
-#: ../data/ui/appchooserdlg.glade.h:9
-msgid "_Recommended Applications"
-msgstr "推荐的应用程序(_R)"
-
-#: ../data/ui/about-dlg.glade.h:1
-#, fuzzy
-msgid "Copyright (C) 2005 - 2008"
-msgstr "版权 (C) 2005 - 2006"
-
-#: ../data/ui/about-dlg.glade.h:2
-msgid ""
-"Lightweight file manager\n"
-"\n"
-"Developed by Hon Jen Yee (PCMan)"
-msgstr ""
-"轻量级文件管理器\n"
-"\n"
-"由洪任谕 (PCMan) 开发"
-
-#: ../data/ui/about-dlg.glade.h:5
-msgid ""
-"The icon was taken from \"nuoveXT 2\" icon theme\n"
-"created by Alexandre Moore (saki).\n"
-"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
-msgstr ""
-
-#. Please replace this line with your own names, one name per line.
-#: ../data/ui/about-dlg.glade.h:9
-msgid "translator-credits"
-msgstr "陈海峰"
-
-#: ../data/ui/about-dlg.glade.h:10
-msgid ""
-"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
-"\n"
-"Source code taken from other projects:\n"
-" * libmd5-rfc: Aladdin Enterprises\n"
-" * Working area detection: Gary Kramlich\n"
-" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
-" * Text and icon renderer uese code from Jonathan Blandford\n"
-" * Desktop icons use code from Brian Tarricone\n"
-" * Volume management uses code from following projects/authors:\n"
-"     * gnome-vfs: David Zeuthen\n"
-"     * thunar-vfs and libexo: Benedikt Meurer\n"
-"     * gnome-mount: David Zeuthen"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:1
-#, fuzzy
-msgid "<b>File Content</b>"
-msgstr "文件类型："
-
-#: ../data/ui/find-files.glade.h:2
-#, fuzzy
-msgid "<b>File Name Contains:</b>"
-msgstr "文件名："
-
-#: ../data/ui/find-files.glade.h:3
-#, fuzzy
-msgid "<b>File Size</b>"
-msgstr "文件类型："
-
-#: ../data/ui/find-files.glade.h:4
-#, fuzzy
-msgid "<b>File Types to Search</b>"
-msgstr "文件类型："
-
-#: ../data/ui/find-files.glade.h:5
-#, fuzzy
-msgid "<b>Last Modified</b>"
-msgstr "最后修改："
-
-#: ../data/ui/find-files.glade.h:6
-msgid "<b>Places to Search</b>"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:7
-#, fuzzy
-msgid "<b>Search Result:</b>"
-msgstr "其他使用者："
-
-#: ../data/ui/find-files.glade.h:8
-msgid "All Files and Folders"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:9
-msgid ""
-"Any\n"
-"Within One Day\n"
-"Within One Week\n"
-"Within One Month\n"
-"Within One Year\n"
-"Within Selected Date Range"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:15
-msgid "Audio Files (mp3, ogg,...)"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:16
-msgid ""
-"Bytes\n"
-"KB\n"
-"MB\n"
-"GB"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:20
-msgid "Case Sensitive"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:21
-msgid "Content"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:22
-#, fuzzy
-msgid "File Contains:"
-msgstr "文件关联"
-
-#: ../data/ui/find-files.glade.h:23
-msgid "Find Files"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:24
-#, fuzzy
-msgid "General"
-msgstr "一般(_G)"
-
-#: ../data/ui/find-files.glade.h:25
-msgid "Grater Than:"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:26
-msgid "Image Files (jpg, png,...)"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:27
-#, fuzzy
-msgid "Plain Text Files"
-msgstr "文本文件(_T)"
-
-#: ../data/ui/find-files.glade.h:28
-msgid "Search Again"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:29
-#, fuzzy
-msgid "Search Hidden Files"
-msgstr "显示隐藏文件(_H)"
-
-#: ../data/ui/find-files.glade.h:30
-msgid "Search in Sub Directories"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:31
-msgid "Size & Date"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:32
-msgid "Smaller Than:"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:33
-msgid "Use Regular Expression"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:34
-msgid "Video Files (avi, mpg,...)"
-msgstr ""
+#~ msgid "Stretch to fit the screen"
+#~ msgstr "缩放到适合屏幕尺寸"
 
 #~ msgid "gksu or kdesu is not found"
 #~ msgstr "没有发现 gksu 或者 kdesu"
@@ -1545,60 +1868,12 @@ msgstr ""
 #~ msgid "Error: %s\n"
 #~ msgstr "错误：%s\n"
 
-#~ msgid "Text Color"
-#~ msgstr "文字颜色"
-
 #~ msgid ""
 #~ "The volume \"%s\" is not mounted.\n"
 #~ "Do you want to mount it?"
 #~ msgstr ""
 #~ "磁盘 \"%s\" 尚未挂载\n"
 #~ "您是否想挂载这个磁盘？"
-
-#~ msgid "application"
-#~ msgstr "应用程式"
-
-#~ msgid "audio"
-#~ msgstr "音乐"
-
-#~ msgid "video"
-#~ msgstr "视频"
-
-#~ msgid "multipart"
-#~ msgstr "multipart"
-
-#~ msgid "image"
-#~ msgstr "图片"
-
-#~ msgid "message"
-#~ msgstr "消息"
-
-#~ msgid "model"
-#~ msgstr "模式"
-
-#~ msgid "inode"
-#~ msgstr "节点"
-
-#~ msgid "packages"
-#~ msgstr "软件包"
-
-#~ msgid "Known File Types:"
-#~ msgstr "已知文件类型："
-
-#~ msgid "Actions Showed in Popup Menus"
-#~ msgstr "在弹出窗口中显示的动作"
-
-#~ msgid "Add _Application"
-#~ msgstr "添加应用程序(_A)"
-
-#~ msgid "Add _Custom Action"
-#~ msgstr "添加自定义动作(_C)"
-
-#~ msgid "Move _Up"
-#~ msgstr "向上移动(_U)"
-
-#~ msgid "Move _Down"
-#~ msgstr "向下移动(_D)"
 
 #~ msgid "Source code taken from other projects:"
 #~ msgstr "从其他项目借鉴的代码："
@@ -1632,15 +1907,6 @@ msgstr ""
 
 #~ msgid "PCMan File Manager"
 #~ msgstr "PCMan 文件管理器"
-
-#~ msgid "Opened in Current Tab"
-#~ msgstr "在当前标签中打开"
-
-#~ msgid "Opened in New Tab"
-#~ msgstr "在新标签中打开"
-
-#~ msgid "Opened in New Window"
-#~ msgstr "在窗口中打开"
 
 #~ msgid "Icon Theme:"
 #~ msgstr "图标主题"
@@ -1681,3 +1947,5 @@ msgstr ""
 
 #~ msgid "Open Terminal"
 #~ msgstr "打开终端"
+
+ 	  	 

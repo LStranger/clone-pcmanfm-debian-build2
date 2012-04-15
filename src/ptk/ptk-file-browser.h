@@ -61,6 +61,7 @@ struct _PtkFileBrowser
     off_t sel_size;
 
     /* side pane */
+    GtkWidget* side_pane_buttons;
     GtkToggleToolButton* location_btn;
     GtkToggleToolButton* dir_tree_btn;
 
@@ -71,6 +72,7 @@ struct _PtkFileBrowser
 
     gboolean single_click : 1;
     gboolean show_side_pane : 1;
+    gboolean show_side_pane_buttons : 1;
     gboolean show_hidden_files : 1;
     gboolean busy : 1;
     gboolean pending_drag_status : 1;
@@ -171,9 +173,13 @@ PtkFBSidePaneMode ptk_file_browser_get_side_pane_mode( PtkFileBrowser* file_brow
 void ptk_file_browser_show_side_pane( PtkFileBrowser* file_browser,
                                       PtkFBSidePaneMode mode );
 void ptk_file_browser_hide_side_pane( PtkFileBrowser* file_browser );
-
 gboolean ptk_file_browser_is_side_pane_visible( PtkFileBrowser* file_browser );
 
+void ptk_file_browser_show_shadow( PtkFileBrowser* file_browser );
+void ptk_file_browser_hide_shadow( PtkFileBrowser* file_browser );
+
+void ptk_file_browser_show_side_pane_buttons( PtkFileBrowser* file_browser );
+void ptk_file_browser_hide_side_pane_buttons( PtkFileBrowser* file_browser );
 
 /* Sorting files */
 void ptk_file_browser_set_sort_order( PtkFileBrowser* file_browser,

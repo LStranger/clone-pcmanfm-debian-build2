@@ -26,7 +26,6 @@
 
 #include "pref-dialog.h"
 #include "settings.h"
-#include "ptk-ui-xml.h"
 #include "ptk-utils.h"
 #include "main-window.h"
 #include "ptk-file-browser.h"
@@ -45,6 +44,13 @@ struct _FMPrefDlg
     GtkWidget* big_icon_size;
     GtkWidget* small_icon_size;
     GtkWidget* single_click;
+    GtkWidget* use_si_prefix;
+
+    /* Interface tab */
+    GtkWidget* always_show_tabs;
+    GtkWidget* hide_close_tab_buttons;
+    GtkWidget* hide_side_pane_buttons;
+    GtkWidget* hide_folder_content_border;
 
     GtkWidget* show_desktop;
     GtkWidget* show_wallpaper;
@@ -66,6 +72,7 @@ static const int big_icon_sizes[] = { 96, 72, 64, 48, 36, 32, 24, 20 };
 static const int small_icon_sizes[] = { 48, 36, 32, 24, 20, 16, 12 };
 static const char* terminal_programs[] =
 {
+    "x-terminal-emulator",
     "lxterminal",
     "aterm",
     "urxvt",
@@ -81,9 +88,8 @@ static const char* terminal_programs[] =
 };
 
 static void
-on_show_desktop_toggled( GtkToggleButton* show_desktop, GtkWidget* dlg )
+on_show_desktop_toggled( GtkToggleButton* show_desktop, GtkWidget* desktop_page )
 {
-    GtkWidget* desktop_page = ptk_ui_xml_get_widget( dlg, "desktop_page" );
     gtk_container_foreach( GTK_CONTAINER(desktop_page),
                            (GtkCallback) gtk_widget_set_sensitive,
                            (gpointer) gtk_toggle_button_get_active( show_desktop ) );
@@ -141,8 +147,20 @@ static void on_response( GtkDialog* dlg, int response, FMPrefDlg* user_data )
     GdkColor text;
     GdkColor shadow;
     char* wallpaper;
-    GList* l;
+    const GList* l;
     PtkFileBrowser* file_browser;
+    gboolean use_si_prefix;
+
+    GtkWidget * tab_label;
+    /* interface settings */
+    gboolean always_show_tabs;
+    gboolean hide_close_tab_buttons;
+    gboolean hide_side_pane_buttons;
+    gboolean hide_folder_content_border;
+
+    /* built-in response codes of GTK+ are all negative */
+    if( response >= 0 )
+        return;
 
     if ( response == GTK_RESPONSE_OK )
     {
@@ -164,6 +182,95 @@ static void on_response( GtkDialog* dlg, int response, FMPrefDlg* user_data )
 
         show_thumbnail = gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( data->show_thumbnail ) );
         max_thumb = ( ( int ) gtk_spin_button_get_value( GTK_SPIN_BUTTON( data->max_thumb_size ) ) ) << 10;
+
+        /* interface settings */
+
+        always_show_tabs = gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( data->always_show_tabs ) );
+        if ( always_show_tabs != app_settings.always_show_tabs )
+        {
+            app_settings.always_show_tabs = always_show_tabs;
+            for ( l = fm_main_window_get_all(); l; l = l->next )
+            {
+                FMMainWindow* main_window = FM_MAIN_WINDOW( l->data );
+                GtkNotebook* notebook = main_window->notebook;
+                n = gtk_notebook_get_n_pages( notebook );
+
+                if ( always_show_tabs)
+                  gtk_notebook_set_show_tabs( notebook, TRUE );
+                else if (n == 1)
+                  gtk_notebook_set_show_tabs( notebook, FALSE );
+            }
+        }
+
+        hide_close_tab_buttons = gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( data->hide_close_tab_buttons ) );
+        if ( hide_close_tab_buttons != app_settings.hide_close_tab_buttons )
+        {
+            app_settings.hide_close_tab_buttons = hide_close_tab_buttons;
+            for ( l = fm_main_window_get_all(); l; l = l->next )
+            {
+                FMMainWindow* main_window = FM_MAIN_WINDOW( l->data );
+                GtkNotebook* notebook = main_window->notebook;
+                n = gtk_notebook_get_n_pages( notebook );
+
+                for ( i = 0; i < n; ++i )
+                {
+                  file_browser = PTK_FILE_BROWSER( gtk_notebook_get_nth_page( notebook, i ) );
+                  tab_label = fm_main_window_create_tab_label( main_window, file_browser );
+                  gtk_notebook_set_tab_label( notebook, GTK_WIDGET(file_browser), tab_label );
+                  fm_main_window_update_tab_label( main_window, file_browser, file_browser->dir->disp_path );
+                }
+            }
+        }
+
+        hide_folder_content_border = gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( data->hide_folder_content_border ) );
+        if ( hide_folder_content_border != app_settings.hide_folder_content_border )
+        {
+            app_settings.hide_folder_content_border = hide_folder_content_border;
+            for ( l = fm_main_window_get_all(); l; l = l->next )
+            {
+                FMMainWindow* main_window = FM_MAIN_WINDOW( l->data );
+                GtkNotebook* notebook = main_window->notebook;
+                n = gtk_notebook_get_n_pages( notebook );
+
+                for ( i = 0; i < n; ++i )
+                {
+                  file_browser = PTK_FILE_BROWSER( gtk_notebook_get_nth_page( notebook, i ) );
+                  if ( hide_folder_content_border)
+                  {
+                    ptk_file_browser_hide_shadow( file_browser );
+                  }
+                  else
+                  {
+                    ptk_file_browser_show_shadow( file_browser );
+                  }
+                }
+            }
+        }
+
+        hide_side_pane_buttons = gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( data->hide_side_pane_buttons ) );
+        if ( hide_side_pane_buttons != app_settings.hide_side_pane_buttons )
+        {
+            app_settings.hide_side_pane_buttons = hide_side_pane_buttons;
+            for ( l = fm_main_window_get_all(); l; l = l->next )
+            {
+                FMMainWindow* main_window = FM_MAIN_WINDOW( l->data );
+                GtkNotebook* notebook = main_window->notebook;
+                n = gtk_notebook_get_n_pages( notebook );
+
+                for ( i = 0; i < n; ++i )
+                {
+                  file_browser = PTK_FILE_BROWSER( gtk_notebook_get_nth_page( notebook, i ) );
+                  if ( hide_side_pane_buttons)
+                  {
+                    ptk_file_browser_hide_side_pane_buttons( file_browser );
+                  }
+                  else
+                  {
+                    ptk_file_browser_show_side_pane_buttons( file_browser );
+                  }
+                }
+            }
+        }
 
         /* desktpo settings */
         show_desktop = gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( data->show_desktop ) );
@@ -299,6 +406,11 @@ static void on_response( GtkDialog* dlg, int response, FMPrefDlg* user_data )
             app_settings.terminal = NULL;
         }
 
+	    /* unit settings changed? */
+	    use_si_prefix = gtk_toggle_button_get_active( GTK_TOGGLE_BUTTON( data->use_si_prefix ) );
+        if( use_si_prefix != app_settings.use_si_prefix )
+            app_settings.use_si_prefix = use_si_prefix;
+
         /* single click changed? */
         single_click = gtk_toggle_button_get_active( (GtkToggleButton*)data->single_click );
         if( single_click != app_settings.single_click )
@@ -322,7 +434,7 @@ static void on_response( GtkDialog* dlg, int response, FMPrefDlg* user_data )
         /* save to config file */
         save_settings();
     }
-    gtk_widget_destroy( dlg );
+    gtk_widget_destroy( GTK_WIDGET( dlg ) );
     g_free( data );
     data = NULL;
 
@@ -339,24 +451,34 @@ gboolean fm_edit_preference( GtkWindow* parent, int page )
 
     if( ! data )
     {
+        GtkTreeModel* model;
+        GtkBuilder* builder = _gtk_builder_new_from_file( PACKAGE_UI_DIR "/prefdlg.ui", NULL );
         pcmanfm_ref();
 
         data = g_new0( FMPrefDlg, 1 );
-        dlg = ptk_ui_xml_create_widget_from_file( PACKAGE_UI_DIR "/prefdlg.glade" );
+        dlg = (GtkWidget*)gtk_builder_get_object( builder, "dlg" );
 
-        ptk_dialog_fit_small_screen( dlg );
+        ptk_dialog_fit_small_screen( GTK_DIALOG( dlg ) );
         data->dlg = dlg;
-        data->notebook = ptk_ui_xml_get_widget( dlg, "notebook" );
-        gtk_dialog_set_alternative_button_order( dlg, GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
+        data->notebook = (GtkWidget*)gtk_builder_get_object( builder, "notebook" );
+        gtk_dialog_set_alternative_button_order( GTK_DIALOG( dlg ), GTK_RESPONSE_OK, GTK_RESPONSE_CANCEL, -1 );
 
-        data->encoding = ptk_ui_xml_get_widget( dlg,  "filename_encoding" );
-        data->bm_open_method = ptk_ui_xml_get_widget( dlg,  "bm_open_method" );
-        data->show_thumbnail = ptk_ui_xml_get_widget( dlg,  "show_thumbnail" );
-        data->max_thumb_size = ptk_ui_xml_get_widget( dlg,  "max_thumb_size" );
-        data->terminal = ptk_ui_xml_get_widget( dlg,  "terminal" );
-        data->big_icon_size = ptk_ui_xml_get_widget( dlg,  "big_icon_size" );
-        data->small_icon_size = ptk_ui_xml_get_widget( dlg,  "small_icon_size" );
-        data->single_click = ptk_ui_xml_get_widget( dlg,  "single_click" );
+        /* Setup 'General' tab */
+
+        data->encoding = (GtkWidget*)gtk_builder_get_object( builder, "filename_encoding" );
+        data->bm_open_method = (GtkWidget*)gtk_builder_get_object( builder, "bm_open_method" );
+        data->show_thumbnail = (GtkWidget*)gtk_builder_get_object( builder, "show_thumbnail" );
+        data->max_thumb_size = (GtkWidget*)gtk_builder_get_object( builder, "max_thumb_size" );
+        data->terminal = (GtkWidget*)gtk_builder_get_object( builder, "terminal" );
+        data->big_icon_size = (GtkWidget*)gtk_builder_get_object( builder, "big_icon_size" );
+        data->small_icon_size = (GtkWidget*)gtk_builder_get_object( builder, "small_icon_size" );
+        data->single_click = (GtkWidget*)gtk_builder_get_object( builder, "single_click" );
+	    data->use_si_prefix = (GtkWidget*)gtk_builder_get_object( builder, "use_si_prefix" );
+
+        model = GTK_TREE_MODEL( gtk_list_store_new( 1, G_TYPE_STRING ) );
+        gtk_combo_box_set_model( GTK_COMBO_BOX( data->terminal ), model );
+        gtk_combo_box_entry_set_text_column( GTK_COMBO_BOX_ENTRY( data->terminal ), 0 );
+        g_object_unref( model );
 
         if ( '\0' == ( char ) app_settings.encoding[ 0 ] )
             gtk_entry_set_text( GTK_ENTRY( data->encoding ), "UTF-8" );
@@ -422,17 +544,39 @@ gboolean fm_edit_preference( GtkWindow* parent, int page )
 
         gtk_toggle_button_set_active( (GtkToggleButton*)data->single_click, app_settings.single_click );
 
-        data->show_desktop = ptk_ui_xml_get_widget( dlg,  "show_desktop" );
+        /* Setup 'Interface' tab */
+
+        data->always_show_tabs = (GtkWidget*)gtk_builder_get_object( builder, "always_show_tabs" );
+        gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON( data->always_show_tabs ),
+                                       app_settings.always_show_tabs );
+
+        data->hide_close_tab_buttons = (GtkWidget*)gtk_builder_get_object( builder, "hide_close_tab_buttons" );
+        gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON( data->hide_close_tab_buttons ),
+                                       app_settings.hide_close_tab_buttons );
+
+        data->hide_side_pane_buttons = (GtkWidget*)gtk_builder_get_object( builder, "hide_side_pane_buttons" );
+        gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON( data->hide_side_pane_buttons ),
+                                       app_settings.hide_side_pane_buttons );
+
+        data->hide_folder_content_border = (GtkWidget*)gtk_builder_get_object( builder, "hide_folder_content_border" );
+        gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON( data->hide_folder_content_border ),
+                                       app_settings.hide_folder_content_border );
+
+        /* Setup 'Desktop' tab */
+
+    	gtk_toggle_button_set_active( (GtkToggleButton*)data->use_si_prefix, app_settings.use_si_prefix );
+
+        data->show_desktop = (GtkWidget*)gtk_builder_get_object( builder, "show_desktop" );
         g_signal_connect( data->show_desktop, "toggled",
-                          G_CALLBACK(on_show_desktop_toggled), dlg );
+                          G_CALLBACK(on_show_desktop_toggled), gtk_builder_get_object( builder, "desktop_page" ) );
         gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( data->show_desktop ),
                                       app_settings.show_desktop );
 
-        data->show_wallpaper = ptk_ui_xml_get_widget( dlg,  "show_wallpaper" );
+        data->show_wallpaper = (GtkWidget*)gtk_builder_get_object( builder, "show_wallpaper" );
         gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( data->show_wallpaper ),
                                       app_settings.show_wallpaper );
 
-        data->wallpaper = ptk_ui_xml_get_widget( dlg,  "wallpaper" );
+        data->wallpaper = (GtkWidget*)gtk_builder_get_object( builder, "wallpaper" );
 
         img_preview = gtk_image_new();
         gtk_widget_set_size_request( img_preview, 128, 128 );
@@ -442,20 +586,20 @@ gboolean fm_edit_preference( GtkWindow* parent, int page )
         if ( app_settings.wallpaper )
         {
             /* FIXME: GTK+ has a known bug here. Sometimes it doesn't update the preview... */
-            set_preview_image( img_preview, app_settings.wallpaper ); /* so, we do it manually */
+            set_preview_image( GTK_IMAGE( img_preview ), app_settings.wallpaper ); /* so, we do it manually */
             gtk_file_chooser_set_filename( GTK_FILE_CHOOSER( data->wallpaper ),
                                            app_settings.wallpaper );
         }
-        data->wallpaper_mode = ptk_ui_xml_get_widget( dlg,  "wallpaper_mode" );
+        data->wallpaper_mode = (GtkWidget*)gtk_builder_get_object( builder, "wallpaper_mode" );
         gtk_combo_box_set_active( (GtkComboBox*)data->wallpaper_mode, app_settings.wallpaper_mode );
 
-        data->show_wm_menu = ptk_ui_xml_get_widget( dlg,  "show_wm_menu" );
+        data->show_wm_menu = (GtkWidget*)gtk_builder_get_object( builder, "show_wm_menu" );
         gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( data->show_wm_menu ),
                                       app_settings.show_wm_menu );
 
-        data->bg_color1 = ptk_ui_xml_get_widget( dlg,  "bg_color1" );
-        data->text_color = ptk_ui_xml_get_widget( dlg,  "text_color" );
-        data->shadow_color = ptk_ui_xml_get_widget( dlg,  "shadow_color" );
+        data->bg_color1 = (GtkWidget*)gtk_builder_get_object( builder, "bg_color1" );
+        data->text_color = (GtkWidget*)gtk_builder_get_object( builder, "text_color" );
+        data->shadow_color = (GtkWidget*)gtk_builder_get_object( builder, "shadow_color" );
         gtk_color_button_set_color(GTK_COLOR_BUTTON(data->bg_color1),
                                    &app_settings.desktop_bg1);
         gtk_color_button_set_color(GTK_COLOR_BUTTON(data->text_color),
@@ -464,11 +608,14 @@ gboolean fm_edit_preference( GtkWindow* parent, int page )
                                    &app_settings.desktop_shadow);
 
         g_signal_connect( dlg, "response", G_CALLBACK(on_response), data );
+
+        g_object_unref( builder );
     }
 
     if( parent )
         gtk_window_set_transient_for( GTK_WINDOW( data->dlg ), parent );
     gtk_notebook_set_current_page( (GtkNotebook*)data->notebook, page );
+
     gtk_window_present( (GtkWindow*)data->dlg );
 }
 

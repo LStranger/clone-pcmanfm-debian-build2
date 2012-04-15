@@ -44,6 +44,12 @@ const ArchiveHandler handlers[]=
             ".tar.gz", TRUE
         },
         {
+            "application/x-gzip",
+            "gzip",
+            "gunzip",
+            ".gz", TRUE
+        },
+        {
             "application/zip",
             "zip -r",
             "unzip",
@@ -116,7 +122,7 @@ void ptk_file_archiver_create( GtkWindow* parent_win,
     char* udest_file;
     char* desc;
 
-    dlg = gtk_file_chooser_dialog_new( _("Save Compressd Files to..."),
+    dlg = gtk_file_chooser_dialog_new( _("Save Compressed Files to..."),
                                        parent_win,
                                        GTK_FILE_CHOOSER_ACTION_SAVE,
                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,

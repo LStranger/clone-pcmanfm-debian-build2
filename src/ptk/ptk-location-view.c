@@ -216,7 +216,7 @@ void ptk_location_view_show_trash_can( gboolean show )
     {
         if( gtk_tree_model_iter_nth_child( model, &it, NULL, sep_idx - 1 ) )
         {
-            gtk_list_store_remove( model, &it );
+	    gtk_list_store_remove( GTK_LIST_STORE(model), &it );
             --sep_idx;
             --first_vol_idx;
         }
@@ -436,9 +436,11 @@ static gboolean try_mount( GtkTreeView* view, VFSVolume* vol )
 
     if ( ! vfs_volume_mount( vol, &err ) )
     {
+        char* msg = g_markup_escape_text(err->message, -1);
         ptk_show_error( GTK_WINDOW( toplevel ),
                         _( "Unable to mount device" ),
-                        err->message);
+                        msg);
+        g_free(msg);
         g_error_free( err );
         ret = FALSE;
     }
@@ -628,8 +630,10 @@ static void on_mount( GtkMenuItem* item, VFSVolume* vol )
     show_busy( view );
     if( ! vfs_volume_mount( vol, &err ) )
     {
+        char* msg = g_markup_escape_text(err->message, -1);
         show_ready( view );
-        ptk_show_error( NULL, _("Unable to mount device"), err->message );
+        ptk_show_error( NULL, _("Unable to mount device"), msg );
+        g_free(msg);
         g_error_free( err );
     }
     else
@@ -643,8 +647,10 @@ static void on_umount( GtkMenuItem* item, VFSVolume* vol )
     show_busy( view );
     if( ! vfs_volume_umount( vol, &err ) )
     {
+        char* msg = g_markup_escape_text(err->message, -1);
         show_ready( view );
-        ptk_show_error( NULL, _("Unable to unmount device"), err->message );
+        ptk_show_error( NULL, _("Unable to unmount device"), msg );
+        g_free(msg);
         g_error_free( err );
     }
     else
@@ -660,8 +666,10 @@ static void on_eject( GtkMenuItem* item, VFSVolume* vol )
         show_busy( view );
         if( ! vfs_volume_umount( vol, &err ) || ! vfs_volume_eject( vol, &err ) )
         {
+            char* msg = g_markup_escape_text(err->message, -1);
             show_ready( view );
-            ptk_show_error( NULL, _("Unable to eject device"), err->message );
+            ptk_show_error( NULL, _("Unable to eject device"), msg );
+            g_free(msg);
             g_error_free( err );
         }
         else

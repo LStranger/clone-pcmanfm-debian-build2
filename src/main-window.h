@@ -33,6 +33,7 @@ typedef struct _FMMainWindow
   GtkCheckMenuItem* open_side_pane_menu;
   GtkCheckMenuItem* show_location_menu;
   GtkCheckMenuItem* show_dir_tree_menu;
+  GtkCheckMenuItem* show_location_bar_menu;
   GtkCheckMenuItem* show_hidden_files_menu;
 
   GtkCheckMenuItem* view_as_icon;
@@ -76,6 +77,13 @@ void fm_main_window_add_new_tab( FMMainWindow* mainWindow,
                                  const char* folder_path,
                                  gboolean open_dir_tree,
                                  PtkFBSidePaneMode side_pane_mode );
+                                 
+GtkWidget* fm_main_window_create_tab_label( FMMainWindow* main_window,
+                                            PtkFileBrowser* file_browser );
+
+void fm_main_window_update_tab_label( FMMainWindow* main_window,
+                                      PtkFileBrowser* file_browser,
+                                      const char * path );
 
 void fm_main_window_preference( FMMainWindow* main_window );
 

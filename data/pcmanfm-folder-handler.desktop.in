@@ -1,6 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Open Folder
+Name[ru]=Открыть Папку
+Name[fi]=Avaa kansio
 TryExec=pcmanfm
 Exec=pcmanfm %U
 NoDisplay=true
@@ -9,5 +11,5 @@ Icon=folder-open
 StartupNotify=true
 Type=Application
 MimeType=x-directory/gnome-default-handler;x-directory/normal;inode/directory;
-NotShowIn=GNOME;
+#NotShowIn=GNOME;
 

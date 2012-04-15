@@ -51,6 +51,10 @@
   1999-05-03 lpd Original version.
  */
 
+/* Add by Hong Jen Yee on 2008-12-17 */
+#include <glib.h>
+#if ! GLIB_CHECK_VERSION(2, 16, 0) /* since glib 2.16, md5 is provided */
+
 #include "md5.h"
 #include <string.h>
 
@@ -379,3 +383,5 @@ md5_finish(md5_state_t *pms, md5_byte_t digest[16])
     for (i = 0; i < 16; ++i)
 	digest[i] = (md5_byte_t)(pms->abcd[i >> 2] >> ((i & 3) << 3));
 }
+
+#endif /* GTK_CHECK_VERSION(2, 16, 0) */

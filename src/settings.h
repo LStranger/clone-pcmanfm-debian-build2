@@ -31,6 +31,8 @@ typedef struct
     /* char* iconTheme; */
     char* terminal;
 
+    gboolean show_location_bar;
+
     int open_bookmark_method; /* 1: current tab, 2: new tab, 3: new window */
     int view_mode; /* icon view or detailed list view */
     int sort_order; /* Sort by name, size, time */
@@ -55,8 +57,16 @@ typedef struct
     GdkColor desktop_text;
     GdkColor desktop_shadow;
 
+    /* Interface */
+    gboolean always_show_tabs;
+    gboolean hide_close_tab_buttons;
+    gboolean hide_side_pane_buttons;
+    gboolean hide_folder_content_border;
+
     /* Bookmarks */
     PtkBookmarks* bookmarks;
+    /* Units */
+    gboolean use_si_prefix;
 }
 AppSettings;
 

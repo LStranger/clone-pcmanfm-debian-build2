@@ -3,51 +3,796 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm-0.3.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-16 18:11+0800\n"
-"PO-Revision-Date: 2008-04-18 01:55+0100\n"
+"POT-Creation-Date: 2009-04-21 02:21+0800\n"
+"PO-Revision-Date: 2009-04-23 16:27+0200\n"
 "Last-Translator: Vidar Jon Bauge <vidarjb@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.1.0\n"
 
-#: ../src/main.c:90
+#: ../data/ui/about-dlg.glade.h:1
+msgid "Copyright (C) 2005 - 2008"
+msgstr "Copyright (C) 2005 - 2008"
+
+#: ../data/ui/about-dlg.glade.h:2
+msgid ""
+"Lightweight file manager\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+msgstr ""
+"Letvægts filbehandler\n"
+"\n"
+"Udviklet af Hon Jen Yee (PCMan)"
+
+#: ../data/ui/about-dlg.glade.h:5
+msgid ""
+"The icon was taken from \"nuoveXT 2\" icon theme\n"
+"created by Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+msgstr ""
+"Ikonet er hentet fra \"nuoveXT 2\" ikon temaet\n"
+"lavet af Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+
+#. Please replace this line with your own names, one name per line.
+#: ../data/ui/about-dlg.glade.h:9
+msgid "translator-credits"
+msgstr ""
+"Vidar Jon Bauge <vidarjb@gmail.com>\n"
+"Charlie Tyrrestrup <chalze06@gmail.com>"
+
+#: ../data/ui/about-dlg.glade.h:10
+msgid ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Source code taken from other projects:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Working area detection: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Text and icon renderer uses code from Jonathan Blandford\n"
+" * Desktop icons use code from Brian Tarricone\n"
+" * Volume management uses code from following projects/authors:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs and libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+msgstr ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Kildekode fra andre projekter:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Opdatering af arbejdsområde: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Rendering af tekst og ikoner anvender kode fra Jonathan Blandford\n"
+" * Visning af ikoner på skriveborder anvender kode fra Brian Tarricone\n"
+" * Enhedshåndtering  anvender kode fra følgende projekter/udviklere:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs og libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+
+#: ../data/ui/appchooserdlg.glade.h:1
+msgid "Choose an Application"
+msgstr "Vælg et program"
+
+#: ../data/ui/appchooserdlg.glade.h:2
+msgid "File Type To be Opened:"
+msgstr "Filtype som skal åbnes:"
+
+#: ../data/ui/appchooserdlg.glade.h:3
+msgid "Opened in Terminal"
+msgstr "Åbnes i terminal"
+
+#: ../data/ui/appchooserdlg.glade.h:4
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr "Vælg et program fra listen, eller skriv kommandoen nedenfor, ind:"
+
+#: ../data/ui/appchooserdlg.glade.h:5
+msgid "Set selected application to default action"
+msgstr "Sæt det valgte program til forvalgt handling"
+
+#: ../data/ui/appchooserdlg.glade.h:6
+msgid "_All Applications"
+msgstr "_Alle programmer"
+
+#: ../data/ui/appchooserdlg.glade.h:7
+msgid "_Browse"
+msgstr "_Gennemse"
+
+#: ../data/ui/appchooserdlg.glade.h:8
+msgid "_Command Line:"
+msgstr "_Kommandolinje"
+
+#: ../data/ui/appchooserdlg.glade.h:9
+msgid "_Recommended Applications"
+msgstr "Anbefalede programme_r"
+
+#: ../data/ui/file-assoc-dlg.glade.h:1
+msgid "Actions Showed in Popup Menus"
+msgstr "Handlinger der vises i popup menuer"
+
+#: ../data/ui/file-assoc-dlg.glade.h:2
+msgid "Add _Application"
+msgstr "Tilføj _program"
+
+#: ../data/ui/file-assoc-dlg.glade.h:3
+msgid "Add _Custom Action"
+msgstr "Tilføj tilpasset handling"
+
+#: ../data/ui/file-assoc-dlg.glade.h:4
+msgid "File Associations"
+msgstr "Fil tilknytninger"
+
+#: ../data/ui/file-assoc-dlg.glade.h:5
+msgid "Known File Types:"
+msgstr "Kendte filtyper:"
+
+#: ../data/ui/file-assoc-dlg.glade.h:6
+msgid "Move _Down"
+msgstr "Flyt _ned"
+
+#: ../data/ui/file-assoc-dlg.glade.h:7
+msgid "Move _Up"
+msgstr "Flyt _op"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Forbereder..."
+
+#. Processing: <Name of currently proccesed file>
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Behandler:"
+
+#. Progress:
+#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Fremgang:"
+
+#. To: <Destination folder> ex. Copy file to..., Move file to...etc.
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "Til:"
+
+#: ../data/ui/file_properties.glade.h:1
+msgid "<b>File Type:</b>"
+msgstr "<b>Filtype:</b>"
+
+#: ../data/ui/file_properties.glade.h:2
+msgid "<b>File _Name:</b>"
+msgstr "<b>Filnavn:</b>"
+
+#: ../data/ui/file_properties.glade.h:3
+msgid "<b>Group:</b>"
+msgstr "<b>Gruppe:</b>"
+
+#: ../data/ui/file_properties.glade.h:4
+msgid "<b>Last Access:</b>"
+msgstr "<b>Sidst tilgået:</b>"
+
+#: ../data/ui/file_properties.glade.h:5
+msgid "<b>Last Modification:</b>"
+msgstr "<b>Sidst ændret:</b>"
+
+#: ../data/ui/file_properties.glade.h:6
+msgid "<b>Location:</b>"
+msgstr "<b>Placering:</b>"
+
+#: ../data/ui/file_properties.glade.h:7
+msgid "<b>Open _with:</b>"
+msgstr "<b>Åbn _med:</b>"
+
+#: ../data/ui/file_properties.glade.h:8
+msgid "<b>Other Users:</b>"
+msgstr "<b>Andre brugere:</b>"
+
+#: ../data/ui/file_properties.glade.h:9
+msgid "<b>Owner:</b>"
+msgstr "<b>Ejer:</b>"
+
+#: ../data/ui/file_properties.glade.h:10
+msgid "<b>Size on Disk:</b>"
+msgstr "<b>Diskstørrelse:</b>"
+
+#: ../data/ui/file_properties.glade.h:11
+msgid "<b>Total Size of Files:</b>"
+msgstr "<b>Total filstørrelse:</b>"
+
+#: ../data/ui/file_properties.glade.h:12
+msgid "<b>_Group:</b>"
+msgstr "<b>Gruppe:</b>"
+
+#: ../data/ui/file_properties.glade.h:13
+msgid "<b>_Owner:</b>"
+msgstr "<b>_Ejer:</b>"
+
+#: ../data/ui/file_properties.glade.h:14
+msgid "Execute"
+msgstr "Kør"
+
+#: ../data/ui/file_properties.glade.h:15
+msgid "File Properties"
+msgstr "Fil Egenskaber"
+
+#: ../data/ui/file_properties.glade.h:16
+msgid "Read"
+msgstr "Læs"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:18
+msgid "Set GID"
+msgstr "Sæt GID"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:20
+msgid "Set UID"
+msgstr "Sæt UID"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:22
+msgid "Sticky"
+msgstr "Klæbrig"
+
+#: ../data/ui/file_properties.glade.h:23
+msgid "Write"
+msgstr "Skriv"
+
+#: ../data/ui/file_properties.glade.h:24 ../data/ui/prefdlg.glade.h:41
+msgid "_General"
+msgstr "_Generelt"
+
+#: ../data/ui/file_properties.glade.h:25
+msgid "_Permissions"
+msgstr "Rettigheder"
+
+#: ../data/ui/find-files.glade.h:1
+msgid "<b>File Content</b>"
+msgstr "<b>Fil indhold</b>"
+
+#: ../data/ui/find-files.glade.h:2
+msgid "<b>File Name Contains:</b>"
+msgstr "<b>Filnavnet indeholder:</b>"
+
+#: ../data/ui/find-files.glade.h:3
+msgid "<b>File Size</b>"
+msgstr "<b>Filens størrelse</b>"
+
+#: ../data/ui/find-files.glade.h:4
+msgid "<b>File Types to Search</b>"
+msgstr "<b>Søg efter filtype</b>"
+
+#: ../data/ui/find-files.glade.h:5
+msgid "<b>Last Modified</b>"
+msgstr "<b>Sidst ændret</b>"
+
+#: ../data/ui/find-files.glade.h:6
+msgid "<b>Places to Search</b>"
+msgstr "<b>Placeringer at søge på</b>"
+
+#: ../data/ui/find-files.glade.h:7
+msgid "<b>Search Result:</b>"
+msgstr "<b>Søgeresultat:</b>"
+
+#: ../data/ui/find-files.glade.h:8
+msgid "All Files and Folders"
+msgstr "Alle filer og mapper"
+
+#: ../data/ui/find-files.glade.h:9
+msgid ""
+"Any\n"
+"Within One Day\n"
+"Within One Week\n"
+"Within One Month\n"
+"Within One Year\n"
+"Within Selected Date Range"
+msgstr ""
+"Alle\n"
+"Inden for et døgn\n"
+"Inden for en uge\n"
+"Inden for en måned\n"
+"Inden for et år\n"
+"Inden for valgte tidsinterval"
+
+#: ../data/ui/find-files.glade.h:15
+msgid "Audio Files (mp3, ogg,...)"
+msgstr "Lydfiler (mp3, ogg,...)"
+
+#: ../data/ui/find-files.glade.h:16
+msgid ""
+"Bytes\n"
+"KB\n"
+"MB\n"
+"GB"
+msgstr ""
+"Bytes\n"
+"KB\n"
+"MB\n"
+"GB"
+
+#: ../data/ui/find-files.glade.h:20
+msgid "Case Sensitive"
+msgstr "Forskel på små og store bogstaver"
+
+#: ../data/ui/find-files.glade.h:21
+msgid "Content"
+msgstr "Indhold"
+
+#: ../data/ui/find-files.glade.h:22
+msgid "File Contains:"
+msgstr "Filen indeholder:"
+
+#: ../data/ui/find-files.glade.h:23
+msgid "Find Files"
+msgstr "Find filer"
+
+#: ../data/ui/find-files.glade.h:24
+msgid "General"
+msgstr "Generelt"
+
+#: ../data/ui/find-files.glade.h:25
+msgid "Greater Than:"
+msgstr "Større end:"
+
+#: ../data/ui/find-files.glade.h:26
+msgid "Image Files (jpg, png,...)"
+msgstr "Billedfiler (jpg, png,...)"
+
+#: ../data/ui/find-files.glade.h:27
+msgid "Plain Text Files"
+msgstr "Simple tekstfiler"
+
+#: ../data/ui/find-files.glade.h:28
+msgid "Search Again"
+msgstr "Søg igen"
+
+#: ../data/ui/find-files.glade.h:29
+msgid "Search Hidden Files"
+msgstr "Søg i skjulte filer"
+
+#: ../data/ui/find-files.glade.h:30
+msgid "Search in Sub Directories"
+msgstr "Søg i undermapper"
+
+#: ../data/ui/find-files.glade.h:31
+msgid "Size & Date"
+msgstr "Dato & størrelse"
+
+#: ../data/ui/find-files.glade.h:32
+msgid "Smaller Than:"
+msgstr "Mindre end:"
+
+#: ../data/ui/find-files.glade.h:33
+msgid "Use Regular Expression"
+msgstr "Brug regulært udtryk"
+
+#: ../data/ui/find-files.glade.h:34
+msgid "Video Files (avi, mpg,...)"
+msgstr "Videofiler (avi, mpg,...)"
+
+#: ../data/ui/godlg.glade.h:1
+msgid "Go to folder"
+msgstr "Gå til mappe"
+
+#: ../data/ui/prefdlg.glade.h:1
+msgid "<b>Behavior</b>"
+msgstr "<b>Opførsel</b>"
+
+#: ../data/ui/prefdlg.glade.h:2
+msgid "<b>Colors</b>"
+msgstr "<b>Farver</b>"
+
+#: ../data/ui/prefdlg.glade.h:3
+msgid "<b>Display</b>"
+msgstr "<b>Skærm</b>"
+
+#: ../data/ui/prefdlg.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>Generelt</b>"
+
+#: ../data/ui/prefdlg.glade.h:5
+msgid "<b>Wallpaper</b>"
+msgstr "<b>Baggrundsbillede</b>"
+
+#: ../data/ui/prefdlg.glade.h:6
+msgid "Always show the tab bar"
+msgstr "Vis altid faneblade"
+
+#: ../data/ui/prefdlg.glade.h:7
+msgid "Background:"
+msgstr "Baggrund:"
+
+#: ../data/ui/prefdlg.glade.h:8
+msgid "Bookmarks:"
+msgstr "Bogmærker:"
+
+#: ../data/ui/prefdlg.glade.h:9
+msgid "Disable \"Trash Can\" and delete files from disk directly"
+msgstr "Anvend ikke \"Papirkurven\". Slet filer direkte."
+
+#: ../data/ui/prefdlg.glade.h:10
+msgid "Display image files with supported format as thumbnails"
+msgstr "Vis understøttede billedfiler som thumbnails"
+
+#: ../data/ui/prefdlg.glade.h:11
+msgid "Hide 'Close tab' buttons"
+msgstr "Skjul 'Luk faneblad' knapperne"
+
+#: ../data/ui/prefdlg.glade.h:12
+msgid "Hide folder content border"
+msgstr "Skjul kantlinjen på mapper"
+
+#: ../data/ui/prefdlg.glade.h:13
+msgid "Hide side pane buttons"
+msgstr "Skjul knapperne på sidepanelet"
+
+#: ../data/ui/prefdlg.glade.h:14
+msgid "I_nterface"
+msgstr "Græ_nseflade"
+
+#: ../data/ui/prefdlg.glade.h:15
+msgid "Manage the desktop and show file icons"
+msgstr "Administrér skrivebordet og vis fil-ikoner"
+
+#: ../data/ui/prefdlg.glade.h:16
+msgid "Max size of files displayed as thumbnails:"
+msgstr "Maksimum størrelse på filer som vises som miniature:"
+
+#: ../data/ui/prefdlg.glade.h:17
+msgid "Mode:"
+msgstr "Tilstand:"
+
+#: ../data/ui/prefdlg.glade.h:18
+msgid "On-disk file name encoding:"
+msgstr "Filnavnenes kodning på disken:"
+
+#: ../data/ui/prefdlg.glade.h:19
+msgid "Open files with single click"
+msgstr "Åben filer med ét enkelt klik"
+
+#: ../data/ui/prefdlg.glade.h:20
+msgid ""
+"Opened in Current Tab\n"
+"Opened in New Tab\n"
+"Opened in New Window"
+msgstr ""
+"Åbnes i det aktuelle faneblad\n"
+"Åbnes i en nyt faneblad\n"
+"Åbnes i et nyt vindue"
+
+#: ../data/ui/prefdlg.glade.h:23
+msgid "Please select an image file"
+msgstr "Vælg en billedfil"
+
+#: ../data/ui/prefdlg.glade.h:24
+msgid "Preferences"
+msgstr "Indstillinger"
+
+#: ../data/ui/prefdlg.glade.h:25
+msgid "Shadow:"
+msgstr "Skygge:"
+
+#: ../data/ui/prefdlg.glade.h:26
+msgid "Show \"My Documents\" icon on desktop"
+msgstr "Vis \"Mine Dokumenter\" på skrivebordet"
+
+#: ../data/ui/prefdlg.glade.h:27
+msgid "Show icons of volumes on desktop"
+msgstr "Vis aftagbare medier på skrivebordet"
+
+#: ../data/ui/prefdlg.glade.h:28
+msgid "Show menus provided by WM when desktop is clicked"
+msgstr "Vis WM menuer når der klikkes på skrivebordet"
+
+#: ../data/ui/prefdlg.glade.h:29
+msgid "Size of Big Icons:"
+msgstr "Størrelse af store ikoner:"
+
+#: ../data/ui/prefdlg.glade.h:30
+msgid "Size of Small Icons:"
+msgstr "Størrelse af små ikoner:"
+
+#: ../data/ui/prefdlg.glade.h:31
+msgid ""
+"Stretch to fill the entire screen\n"
+"Stretch to fit the screen\n"
+"Center on the screen\n"
+"Tile the image to fill the entire screen"
+msgstr ""
+"Hele skærmen\n"
+"Tilpas til skærmen\n"
+"Centrer\n"
+"Side om side"
+
+#: ../data/ui/prefdlg.glade.h:35
+msgid "Terminal:"
+msgstr "Terminal:"
+
+#: ../data/ui/prefdlg.glade.h:36
+msgid "Text:"
+msgstr "Tekst:"
+
+#: ../data/ui/prefdlg.glade.h:37
+msgid "Use SI decimal prefixes instead of IEC binary prefixes"
+msgstr "Anvend SI decimale præfikser i stedet for IEC binære præfikser"
+
+#: ../data/ui/prefdlg.glade.h:38
+msgid "Wallpaper:"
+msgstr "Skrivebordsbaggrund:"
+
+#: ../data/ui/prefdlg.glade.h:39
+msgid "_Advanced"
+msgstr "_Avanceret"
+
+#: ../data/ui/prefdlg.glade.h:40
+msgid "_Desktop"
+msgstr "Skrivebor_d"
+
+#: ../data/ui/prefdlg.glade.h:42
+msgid "_Volume Management"
+msgstr "_Håndtering af medier"
+
+#: ../src/exo/exo-icon-view.c:696
+msgid "Column Spacing"
+msgstr "Kolonneafstand"
+
+#: ../src/exo/exo-icon-view.c:697
+msgid "Space which is inserted between grid column"
+msgstr "Mellemrum mellem kolonner"
+
+#: ../src/exo/exo-icon-view.c:713
+msgid "Number of columns"
+msgstr "Antal kolonner"
+
+#: ../src/exo/exo-icon-view.c:714
+msgid "Number of columns to display"
+msgstr "Antal kolonner der skal vises"
+
+#: ../src/exo/exo-icon-view.c:728
+msgid "Enable Search"
+msgstr "Aktiver søg"
+
+#: ../src/exo/exo-icon-view.c:729
+msgid "View allows user to search through columns interactively"
+msgstr "Interaktiv søgning i kolonner"
+
+#: ../src/exo/exo-icon-view.c:746
+msgid "Width for each item"
+msgstr "Bredde til opføringer"
+
+#: ../src/exo/exo-icon-view.c:747
+msgid "The width used for each item"
+msgstr "Bredde der anvendes for hver opføring"
+
+#: ../src/exo/exo-icon-view.c:765
+msgid "Layout mode"
+msgstr "Layout mode"
+
+#: ../src/exo/exo-icon-view.c:766
+msgid "The layout mode"
+msgstr "Layout moden"
+
+#: ../src/exo/exo-icon-view.c:782
+msgid "Margin"
+msgstr "Margin"
+
+#: ../src/exo/exo-icon-view.c:783
+msgid "Space which is inserted at the edges of the icon view"
+msgstr "Plads langs kanterne af ikon visning"
+
+#: ../src/exo/exo-icon-view.c:799
+msgid "Markup column"
+msgstr "Markør kolonne"
+
+#: ../src/exo/exo-icon-view.c:800
+msgid "Model column used to retrieve the text if using Pango markup"
+msgstr "Model kolonne der viser tekstvisning ved anvendelse af Pango markup"
+
+#: ../src/exo/exo-icon-view.c:814
+msgid "Icon View Model"
+msgstr "Ikon visning"
+
+#: ../src/exo/exo-icon-view.c:815
+msgid "The model for the icon view"
+msgstr "Model til ikon visning"
+
+#: ../src/exo/exo-icon-view.c:828
+msgid "Orientation"
+msgstr "Orientering"
+
+#: ../src/exo/exo-icon-view.c:829
+msgid ""
+"How the text and icon of each item are positioned relative to each other"
+msgstr "Indbyrdes placering af tekst og ikoner"
+
+#: ../src/exo/exo-icon-view.c:845
+msgid "Pixbuf column"
+msgstr "Pixbuf kolonne"
+
+#: ../src/exo/exo-icon-view.c:846
+msgid "Model column used to retrieve the icon pixbuf from"
+msgstr "Kolonne der anvendes til hentning af ikoner"
+
+#: ../src/exo/exo-icon-view.c:861
+msgid "Reorderable"
+msgstr "Kan omarrangeres"
+
+#: ../src/exo/exo-icon-view.c:862
+msgid "View is reorderable"
+msgstr "Visning kan omarrangeres"
+
+#: ../src/exo/exo-icon-view.c:877
+msgid "Row Spacing"
+msgstr "Afstand mellem rækker"
+
+#: ../src/exo/exo-icon-view.c:878
+msgid "Space which is inserted between grid rows"
+msgstr "Afstand mellem rækker i tabellvisningen"
+
+#: ../src/exo/exo-icon-view.c:892
+msgid "Search Column"
+msgstr "Søgekolonne"
+
+#: ../src/exo/exo-icon-view.c:893
+msgid "Model column to search through when searching through item"
+msgstr "Kolonne der anvendes til søgning i opføringer"
+
+#: ../src/exo/exo-icon-view.c:907
+msgid "Selection mode"
+msgstr "Markering ved hjælp af "
+
+#: ../src/exo/exo-icon-view.c:908
+msgid "The selection mode"
+msgstr "Metode til at markere opføringer"
+
+#: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
+msgid "Single Click"
+msgstr "Enkelt klik"
+
+#: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
+msgid "Whether the items in the view can be activated with single clicks"
+msgstr "Om opføringer kan markeres med et enkelt klik"
+
+#: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
+msgid "Single Click Timeout"
+msgstr "Timeout af enkelt klik"
+
+#: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
+msgid ""
+"The amount of time after which the item under the mouse cursor will be "
+"selected automatically in single click mode"
+msgstr ""
+"Den tid det tager for opføringer under muse markøren at blive markeret "
+"automatisk i enkelt klik tilstand"
+
+#: ../src/exo/exo-icon-view.c:956
+msgid "Spacing"
+msgstr "Mellemrum"
+
+#: ../src/exo/exo-icon-view.c:957
+msgid "Space which is inserted between cells of an item"
+msgstr "Afstanden mellem den enkelte opføring"
+
+#: ../src/exo/exo-icon-view.c:972
+msgid "Text column"
+msgstr "Tekst kolonne "
+
+#: ../src/exo/exo-icon-view.c:973
+msgid "Model column used to retrieve the text from"
+msgstr "Kolonne der anvendes ved hentning af tekst"
+
+#: ../src/exo/exo-icon-view.c:980
+msgid "Selection Box Color"
+msgstr "Vælg en farve til boks"
+
+#: ../src/exo/exo-icon-view.c:981
+msgid "Color of the selection box"
+msgstr "Farve på udvælgelsesboks"
+
+#: ../src/exo/exo-icon-view.c:987
+msgid "Selection Box Alpha"
+msgstr "Udvælgelsesboks Alfa"
+
+#: ../src/exo/exo-icon-view.c:988
+msgid "Opacity of the selection box"
+msgstr "Gennemsigtighed til udvælgelsesboks"
+
+#. mime-type: application
+#: ../src/file-assoc-dlg.c:34
+msgid "application"
+msgstr "applikation"
+
+#. mime-type: audio
+#: ../src/file-assoc-dlg.c:37
+msgid "audio"
+msgstr "audio"
+
+#. mime-type: video
+#: ../src/file-assoc-dlg.c:40
+msgid "video"
+msgstr "video"
+
+#. mime-type: text
+#: ../src/file-assoc-dlg.c:43
+msgid "text"
+msgstr "tekst"
+
+#. mime-type: multipart
+#: ../src/file-assoc-dlg.c:46
+msgid "multipart"
+msgstr "multipart"
+
+#. mime-type: image
+#: ../src/file-assoc-dlg.c:49
+msgid "image"
+msgstr "billede"
+
+#. mime-type: message
+#: ../src/file-assoc-dlg.c:52
+msgid "message"
+msgstr "besked"
+
+#. mime-type: model
+#: ../src/file-assoc-dlg.c:55
+msgid "model"
+msgstr "model"
+
+#. mime-type: inode
+#: ../src/file-assoc-dlg.c:58
+msgid "inode"
+msgstr "inode"
+
+#. mime-type: packages
+#: ../src/file-assoc-dlg.c:61
+msgid "packages"
+msgstr "pakker"
+
+#: ../src/main.c:92
 msgid "Don't show desktop icons."
 msgstr "Ikke vis ikoner på skrivebordet"
 
-#: ../src/main.c:91
+#: ../src/main.c:93
 msgid "Run PCManFM as a daemon"
-msgstr ""
+msgstr "Kør PCManFM i baggrunden"
 
-#: ../src/main.c:92
+#: ../src/main.c:94
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
 msgstr ""
+"Åbne mapper i nye tabs i det sidst brugte vinduet, i stedet for et nyt "
+"vindue."
 
-#: ../src/main.c:93
+#: ../src/main.c:95
 msgid ""
 "Open preference dialog. 'n' is the number of page you want to show (1, 2, "
 "3...)."
-msgstr ""
+msgstr "Åbne Indstillinger. 'n' er den side der skal vises (1, 2, 3...)."
 
-#: ../src/main.c:94
+#: ../src/main.c:96
 msgid "Find Files with PCManFM"
-msgstr ""
+msgstr "Find Filer med PCManFM"
 
-#: ../src/main.c:101
+#: ../src/main.c:103
 msgid "Set desktop wallpaper"
-msgstr ""
+msgstr "Vælg baggrundsbillede på skrivebordet"
 
-#: ../src/main.c:110
+#: ../src/main.c:112
 msgid "[FILE1, FILE2,...]"
 msgstr "[FIL1, FIL2,...]"
 
-#: ../src/main.c:330
+#: ../src/main.c:332
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ ikon tema er ikke rigtig konfigureret"
 
-#: ../src/main.c:332
+#: ../src/main.c:334
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -86,17 +831,17 @@ msgstr ""
 "kan KDE temaer ikke bruges. Der er ingen standard for dette, men freedesktop."
 "org arbejder med at løse dette."
 
-#: ../src/main.c:650 ../src/main.c:719 ../src/main.c:770
-#: ../src/main-window.c:1581 ../src/main-window.c:1648
-#: ../src/ptk/ptk-file-browser.c:503 ../src/ptk/ptk-file-browser.c:520
-#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:224
-#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:325
-#: ../src/ptk/ptk-file-misc.c:412 ../src/ptk/ptk-file-properties.c:695
-#: ../src/ptk/ptk-file-properties.c:706
+#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main-window.c:1704 ../src/main-window.c:1771
+#: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
+#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
+#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:326
+#: ../src/ptk/ptk-file-misc.c:415 ../src/ptk/ptk-file-properties.c:701
+#: ../src/ptk/ptk-file-properties.c:712
 msgid "Error"
 msgstr "Fejl"
 
-#: ../src/main.c:650
+#: ../src/main.c:662
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -106,15 +851,15 @@ msgstr ""
 "\n"
 "Er \"FAM\" eller \"Gamin\" installeret og kørende?"
 
-#: ../src/main.c:719
+#: ../src/main.c:731
 msgid "File doesn't exist"
 msgstr "Filen findes ikke"
 
-#: ../src/main.c:766
+#: ../src/main.c:778
 msgid "Don't know how to open the file"
 msgstr "Ved ikke hvordan filen skal åbnes"
 
-#: ../src/main.c:768
+#: ../src/main.c:780
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -125,342 +870,344 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: ../src/main-window.c:296 ../src/ptk/ptk-file-menu.c:109
+#: ../src/main-window.c:304 ../src/ptk/ptk-file-menu.c:109
 #: ../src/desktop/desktop-window.c:186
 msgid "_Folder"
 msgstr "Mappe"
 
-#: ../src/main-window.c:297 ../src/ptk/ptk-file-menu.c:110
+#: ../src/main-window.c:305 ../src/ptk/ptk-file-menu.c:110
 #: ../src/desktop/desktop-window.c:187
 msgid "_Text File"
 msgstr "_Tekst fil"
 
-#: ../src/main-window.c:303
+#: ../src/main-window.c:311
 msgid "New _Window"
 msgstr "Nyt Vindue"
 
-#: ../src/main-window.c:304
+#: ../src/main-window.c:312
 msgid "New _Tab"
 msgstr "Ny _Tab"
 
-#: ../src/main-window.c:306 ../src/ptk/ptk-file-menu.c:133
+#: ../src/main-window.c:314 ../src/ptk/ptk-file-menu.c:133
 #: ../src/desktop/desktop-window.c:196
 msgid "_Create New"
 msgstr "Opret Ny"
 
-#: ../src/main-window.c:307
+#: ../src/main-window.c:315
 msgid "File _Properties"
 msgstr "Fil Egenskaber"
 
-#: ../src/main-window.c:309
+#: ../src/main-window.c:317
 msgid "Close Tab"
 msgstr "Luk Tab"
 
-#: ../src/main-window.c:310
-#, fuzzy
+#: ../src/main-window.c:318
 msgid "_Close Window"
-msgstr "Nyt Vindue"
+msgstr "_Luk Vindue"
 
-#: ../src/main-window.c:319 ../src/ptk/ptk-file-menu.c:128
+#: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "Slet"
 
-#: ../src/main-window.c:320 ../src/ptk/ptk-file-browser.c:1320
+#: ../src/main-window.c:328 ../src/ptk/ptk-file-browser.c:1396
 #: ../src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "Omdøb"
 
-#: ../src/main-window.c:322
+#: ../src/main-window.c:330
 msgid "Select _All"
 msgstr "Vælg _alle"
 
-#: ../src/main-window.c:323
+#: ../src/main-window.c:331
 msgid "_Invert Selection"
 msgstr "_Inverter Udvalg"
 
-#: ../src/main-window.c:332
+#: ../src/main-window.c:340
 msgid "Go _Back"
 msgstr "Til_bage"
 
-#: ../src/main-window.c:333
+#: ../src/main-window.c:341
 msgid "Go _Forward"
 msgstr "Gå _Frem"
 
-#: ../src/main-window.c:334
+#: ../src/main-window.c:342
 msgid "Go to _Parent Folder"
 msgstr "Gå til Ma_ppen Over"
 
-#: ../src/main-window.c:335
+#: ../src/main-window.c:343
 msgid "Go _Home"
 msgstr "Gå til _Hjemmemappen"
 
-#: ../src/main-window.c:347 ../src/desktop/desktop-window.c:173
+#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:173
 msgid "Sort by _Name"
 msgstr "Sorter efter _Navn"
 
-#: ../src/main-window.c:348 ../src/desktop/desktop-window.c:174
+#: ../src/main-window.c:356 ../src/desktop/desktop-window.c:174
 msgid "Sort by _Size"
 msgstr "Sorter efter _Størrelse"
 
-#: ../src/main-window.c:349 ../src/desktop/desktop-window.c:176
+#: ../src/main-window.c:357 ../src/desktop/desktop-window.c:176
 msgid "Sort by _Modification Time"
 msgstr "Sorter efter _Modifikations tidspunkt"
 
-#: ../src/main-window.c:350 ../src/desktop/desktop-window.c:175
+#: ../src/main-window.c:358 ../src/desktop/desktop-window.c:175
 msgid "Sort by _Type"
 msgstr "Sorter efter _Type"
 
-#: ../src/main-window.c:351
+#: ../src/main-window.c:359
 msgid "Sort by _Permission"
 msgstr "Sorter efter Rettigheder"
 
-#: ../src/main-window.c:352
+#: ../src/main-window.c:360
 msgid "Sort by _Owner"
 msgstr "S_orter efter Ejer"
 
-#: ../src/main-window.c:354 ../src/desktop/desktop-window.c:179
+#: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
 msgstr "Stigende"
 
-#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:180
+#: ../src/main-window.c:363 ../src/desktop/desktop-window.c:180
 msgid "Descending"
 msgstr "Faldende"
 
-#: ../src/main-window.c:361
+#: ../src/main-window.c:369
 msgid "_Open Side Pane"
 msgstr "Åbn Sidepanel"
 
-#: ../src/main-window.c:363
+#: ../src/main-window.c:371
 msgid "Show _Location Pane"
-msgstr "Vis Adresse_linje"
+msgstr "Vis Adresse Panel"
 
-#: ../src/main-window.c:364
+#: ../src/main-window.c:372
 msgid "Show _Directory Tree"
 msgstr "Vis Mappe Tre"
 
-#: ../src/main-window.c:370
+#: ../src/main-window.c:378
 msgid "_Refresh"
 msgstr "Opdate_r"
 
-#: ../src/main-window.c:371
+#: ../src/main-window.c:379
 msgid "Side _Pane"
 msgstr "Side_panel"
 
-#: ../src/main-window.c:374
+#. PTK_CHECK_MENU_ITEM( N_( "_Full Screen" ), on_fullscreen_activate, GDK_F11, 0 ),
+#: ../src/main-window.c:381
+msgid "L_ocation Bar"
+msgstr "Vis Adresselinje"
+
+#: ../src/main-window.c:383
 msgid "Show _Hidden Files"
 msgstr "Vis Skjulte filer"
 
-#: ../src/main-window.c:375
+#: ../src/main-window.c:384
 msgid "_Sort..."
 msgstr "_Sorter..."
 
-#: ../src/main-window.c:377
+#: ../src/main-window.c:386
 msgid "View as _Icons"
 msgstr "Vis som _Ikoner"
 
-#: ../src/main-window.c:378
-#, fuzzy
+#: ../src/main-window.c:387
 msgid "View as _Compact List"
-msgstr "Detaljeret _Listevisning"
+msgstr "_Listevisning"
 
-#: ../src/main-window.c:379
+#: ../src/main-window.c:388
 msgid "View as Detailed _List"
 msgstr "Detaljeret _Listevisning"
 
-#: ../src/main-window.c:385
+#: ../src/main-window.c:394
 msgid "Open _Terminal"
 msgstr "Åbn _Terminal"
 
-#: ../src/main-window.c:386
+#: ../src/main-window.c:395
 msgid "Open Current Folder as _Root"
 msgstr "Åbn aktuel mappe som _Root"
 
-#: ../src/main-window.c:390
-#, fuzzy
+#: ../src/main-window.c:399
 msgid "_Find Files"
-msgstr "_Fil"
+msgstr "_Find Filer"
 
-#: ../src/main-window.c:396
+#: ../src/main-window.c:405
 msgid "_File"
 msgstr "_Fil"
 
-#: ../src/main-window.c:397
+#: ../src/main-window.c:406
 msgid "_Edit"
 msgstr "R_ediger"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: ../src/main-window.c:399
+#: ../src/main-window.c:408
 msgid "_Go"
 msgstr "_Gå"
 
-#: ../src/main-window.c:400
+#: ../src/main-window.c:409
 msgid "_Bookmark"
 msgstr "_Bogmærke"
 
-#: ../src/main-window.c:401
+#: ../src/main-window.c:410
 msgid "_View"
 msgstr "_Vis"
 
-#: ../src/main-window.c:402
+#: ../src/main-window.c:411
 msgid "_Tool"
 msgstr "Værk_tøj"
 
-#: ../src/main-window.c:403
+#: ../src/main-window.c:412
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../src/main-window.c:411
+#: ../src/main-window.c:420
 msgid "New Tab"
 msgstr "Ny Tab"
 
-#: ../src/main-window.c:412
+#: ../src/main-window.c:421
 msgid "Back"
 msgstr "Tilbage"
 
-#: ../src/main-window.c:413
+#: ../src/main-window.c:422
 msgid "Forward"
 msgstr "Frem"
 
-#: ../src/main-window.c:414
+#: ../src/main-window.c:423
 msgid "Parent Folder"
 msgstr "Mappen Over"
 
-#: ../src/main-window.c:415
+#: ../src/main-window.c:424
 msgid "Refresh"
 msgstr "Opdater"
 
-#: ../src/main-window.c:416
+#: ../src/main-window.c:425
 msgid "Home Directory"
 msgstr "Hjemmemappe"
 
-#: ../src/main-window.c:417
+#: ../src/main-window.c:426
 msgid "Open Side Pane"
 msgstr "Åbn Sidepanel"
 
-#: ../src/main-window.c:423
+#: ../src/main-window.c:432
 msgid "Go"
 msgstr "Gå"
 
-#: ../src/main-window.c:642
+#: ../src/main-window.c:664
 msgid "Warning: You are in super user mode"
 msgstr "Advarsel: Du er logget på som root"
 
-#: ../src/main-window.c:1582
+#: ../src/main-window.c:1705
 msgid "Terminal program has not been set"
 msgstr "Terminal program er ikke valgt"
 
-#: ../src/main-window.c:1723
+#: ../src/main-window.c:1846
 msgid "_Add to Bookmarks"
 msgstr "Tilføj til bogmærker"
 
-#: ../src/main-window.c:1724
+#: ../src/main-window.c:1847
 msgid "_Edit Bookmarks"
 msgstr "R_ediger bogmærker"
 
-#: ../src/main-window.c:1801
+#: ../src/main-window.c:1918
 msgid "Loading..."
 msgstr "Henter..."
 
-#: ../src/main-window.c:2011
+#: ../src/main-window.c:2103
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr ", Ledig plads: %s (Total: %s )"
 
-#: ../src/main-window.c:2020
-#, fuzzy, c-format
+#: ../src/main-window.c:2112
+#, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
-msgstr[0] "%d markeret (%s)%s"
-msgstr[1] "%d markeret (%s)%s"
+msgstr[0] "%d objekt valgt (%s)%s"
+msgstr[1] "%d objekter valgt (%s)%s"
 
-#: ../src/main-window.c:2030
+#: ../src/main-window.c:2122
 #, c-format
 msgid "%d hidden"
 msgid_plural "%d hidden"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d skjult"
+msgstr[1] "%d skjulte"
 
-#: ../src/main-window.c:2031
-#, fuzzy, c-format
+#: ../src/main-window.c:2123
+#, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
-msgstr[0] "%d synlige (%d hidden)%s"
-msgstr[1] "%d synlige (%d hidden)%s"
+msgstr[0] "%d synligt objekt (%s)%s"
+msgstr[1] "%d synlige objekter (%s)%s"
 
-#: ../src/ptk/ptk-file-browser.c:504
+#: ../src/ptk/ptk-file-browser.c:521
 msgid "Directory doesn't exist!"
 msgstr "Mappen findes ikke!"
 
-#: ../src/ptk/ptk-file-browser.c:1316 ../src/ptk/ptk-file-menu.c:142
+#: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "Åbn i Ny _Tab"
 
-#: ../src/ptk/ptk-file-browser.c:1317 ../src/ptk/ptk-file-menu.c:143
+#: ../src/ptk/ptk-file-browser.c:1393 ../src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "Åbn i Nyt _Vindue"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/edit-bookmarks.c:201
-#: ../src/find-files.c:746
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/edit-bookmarks.c:201
+#: ../src/find-files.c:799
 msgid "Name"
 msgstr "Navn"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/find-files.c:767
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:820
 msgid "Size"
 msgstr "Størrelse"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/find-files.c:771
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:824
 msgid "Type"
 msgstr "Type"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Permission"
 msgstr "Rettighed"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Owner:Group"
 msgstr "Ejer:Gruppe"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Last Modification"
 msgstr "Sidst Ændret"
 
-#: ../src/ptk/ptk-file-browser.c:2780
+#: ../src/ptk/ptk-file-browser.c:2856
 msgid "Location"
 msgstr "Placering"
 
-#: ../src/ptk/ptk-file-browser.c:2781
+#: ../src/ptk/ptk-file-browser.c:2857
 msgid "Directory Tree"
 msgstr "Mappe Tre"
 
 #: ../src/ptk/ptk-location-view.c:207
 msgid "Trash"
-msgstr ""
+msgstr "Papirkurv"
 
 #: ../src/ptk/ptk-location-view.c:250
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: ../src/ptk/ptk-location-view.c:440 ../src/ptk/ptk-location-view.c:632
+#: ../src/ptk/ptk-location-view.c:441 ../src/ptk/ptk-location-view.c:635
 msgid "Unable to mount device"
 msgstr "Kan ikke montere enhed"
 
-#: ../src/ptk/ptk-location-view.c:647
+#: ../src/ptk/ptk-location-view.c:652
 msgid "Unable to unmount device"
 msgstr "Kan ikke afmontere enhed"
 
-#: ../src/ptk/ptk-location-view.c:664
+#: ../src/ptk/ptk-location-view.c:671
 msgid "Unable to eject device"
 msgstr "Kan ikke skubbe enhed ud"
 
-#: ../src/ptk/ptk-location-view.c:722
+#: ../src/ptk/ptk-location-view.c:730
 msgid "_Mount File System"
 msgstr "_Monter Filsystem"
 
-#: ../src/ptk/ptk-location-view.c:732
+#: ../src/ptk/ptk-location-view.c:740
 msgid "_Eject"
 msgstr "Skub ud"
 
-#: ../src/ptk/ptk-location-view.c:738
+#: ../src/ptk/ptk-location-view.c:746
 msgid "_Unmount File System"
 msgstr "Afmonter Filsystem"
 
@@ -474,7 +1221,7 @@ msgstr "Kopier: "
 
 #: ../src/ptk/ptk-file-task.c:105
 msgid "Move to Trash: "
-msgstr ""
+msgstr "Fly til Papirkurven:"
 
 #: ../src/ptk/ptk-file-task.c:106
 msgid "Delete: "
@@ -497,9 +1244,8 @@ msgid "Copying..."
 msgstr "Kopierer..."
 
 #: ../src/ptk/ptk-file-task.c:114
-#, fuzzy
 msgid "Moving to Trash..."
-msgstr "Flytter..."
+msgstr "Flytter til Papirkurven..."
 
 #: ../src/ptk/ptk-file-task.c:115
 msgid "Deleting..."
@@ -512,28 +1258,6 @@ msgstr "Lænker..."
 #: ../src/ptk/ptk-file-task.c:117
 msgid "Changing Properties"
 msgstr "Ændrer Rettigheder"
-
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "Til:"
-
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
-msgstr "Behandler:"
-
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Forbereder..."
-
-#. Progress:
-#: ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
-msgstr "Fremgang:"
 
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
@@ -555,15 +1279,15 @@ msgid "Please choose a new file name."
 msgstr "Vælg nyt filnavn"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
+#. ex: "/home/pcman/some_file" already exists.\n\nDo you want to overwrite existing file?"
 #: ../src/ptk/ptk-file-task.c:427
 #, c-format
 msgid ""
-"\"%s\" has existed.\n"
+"\"%s\" already exists.\n"
 "\n"
 "%s"
 msgstr ""
-"\"%s\" eksisterer.\n"
+"\"%s\" findes allerede.\n"
 "\n"
 "%s"
 
@@ -604,7 +1328,7 @@ msgid "Skip All"
 msgstr "Hop Over Alle"
 
 #: ../src/ptk/ptk-file-archiver.c:119
-msgid "Save Compressd Files to..."
+msgid "Save Compressed Files to..."
 msgstr "Gem Komprimerede Filer i..."
 
 #: ../src/ptk/ptk-file-archiver.c:127
@@ -633,7 +1357,7 @@ msgstr "Pakker ud Filer til: %s"
 msgid "Extract Files"
 msgstr "Pak Ud Filer"
 
-#: ../src/ptk/ptk-console-output.c:66
+#: ../src/ptk/ptk-console-output.c:67
 msgid ""
 "\n"
 "Complete!"
@@ -641,7 +1365,7 @@ msgstr ""
 "\n"
 "Færdig!"
 
-#: ../src/ptk/ptk-console-output.c:170
+#: ../src/ptk/ptk-console-output.c:171
 msgid "Command:"
 msgstr "Kommando:"
 
@@ -696,7 +1420,7 @@ msgstr "Åbne med \"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
 #: ../src/ptk/ptk-file-menu.c:408 ../src/ptk/ptk-file-menu.c:417
-#: ../src/find-files.c:228
+#: ../src/find-files.c:229
 msgid "_Open"
 msgstr "Åbn"
 
@@ -715,11 +1439,11 @@ msgstr "Nyt Filnavn:"
 #: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
 msgid ""
-"The file name you specified has existed.\n"
+"The file name you specified already exists.\n"
 "Please input a new one:"
 msgstr ""
-"Det indtastede filnavn eksisterer.\n"
-"Skriv ind et nyt filnavn:"
+"Det indtastede filnavn eksisterer allerede.\n"
+"Indtast et nyt filnavn:"
 
 #: ../src/ptk/ptk-file-misc.c:195 ../src/ptk/ptk-file-misc.c:197
 msgid "New Folder"
@@ -741,33 +1465,33 @@ msgstr "Navn til Ny Fil:"
 msgid "The new file cannot be created!"
 msgstr "Den nye filen kan ikke oprettes!"
 
-#: ../src/ptk/ptk-file-properties.c:304
+#: ../src/ptk/ptk-file-properties.c:305
 msgid "Multiple files are selected"
 msgstr "Flere end en fil er valgt"
 
-#: ../src/ptk/ptk-file-properties.c:381
+#: ../src/ptk/ptk-file-properties.c:384
 msgid "Multiple files of different types"
 msgstr "Flere filer af forskellig type"
 
-#: ../src/ptk/ptk-file-properties.c:449
+#: ../src/ptk/ptk-file-properties.c:452
 msgid "Other program..."
 msgstr "Andre programmer..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: ../src/ptk/ptk-file-properties.c:543
+#: ../src/ptk/ptk-file-properties.c:546
 msgid "Calculating..."
 msgstr "Beregner..."
 
-#: ../src/ptk/ptk-file-properties.c:695
+#: ../src/ptk/ptk-file-properties.c:701
 msgid "Invalid User"
 msgstr "Ugyldig Bruger"
 
-#: ../src/ptk/ptk-file-properties.c:706
+#: ../src/ptk/ptk-file-properties.c:712
 msgid "Invalid Group"
 msgstr "Ugyldig Gruppe"
 
-#: ../src/ptk/ptk-file-properties.c:754
+#: ../src/ptk/ptk-file-properties.c:760
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr "Vil du skrive disse ændringene rekursivt i alle undermapper?"
@@ -1061,510 +1785,94 @@ msgstr ""
 "Lyd CD kan ikke monteres. Brug en musik afspiller til at afspille indholdet"
 
 #: ../src/desktop/desktop-window.c:193
-#, fuzzy
 msgid "_Icons"
-msgstr "Vis som _Ikoner"
+msgstr "_Ikoner"
 
 #: ../src/desktop/desktop-window.c:198
-#, fuzzy
 msgid "_Desktop Settings"
-msgstr "Skrivebor_d"
+msgstr "_Skrivebordsindstillinger"
 
-#: ../src/desktop/desktop-window.c:1832
+#: ../src/desktop/desktop-window.c:1842
 msgid "My Documents"
-msgstr ""
+msgstr "Mine Dokumenter"
 
-#: ../src/find-files.c:229
+#: ../src/find-files.c:230
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "_Åbne overordnet Mappe"
 
-#: ../src/find-files.c:673
-#, fuzzy
+#: ../src/find-files.c:677
+msgid "Select a folder"
+msgstr "Vælg en mappe"
+
+#: ../src/find-files.c:722
 msgid "Browse..."
-msgstr "Gennemse"
+msgstr "Gennemse..."
 
-#: ../src/find-files.c:692
+#: ../src/find-files.c:744
 msgid "All Local Disk Partitions"
-msgstr ""
+msgstr "Alle Lokale Disk Partitioner"
 
-#: ../src/find-files.c:761
-#, fuzzy
+#: ../src/find-files.c:814
 msgid "Folder"
 msgstr "Mappe"
 
-#: ../src/find-files.c:777
-#, fuzzy
+#: ../src/find-files.c:830
 msgid "Last Modified"
 msgstr "Sidst Ændret"
 
-#: ../data/ui/prefdlg.glade.h:1
-msgid "<b>Behavior</b>"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:2
-msgid "<b>Colors</b>"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:3
-#, fuzzy
-msgid "<b>Display</b>"
-msgstr "Skrivebordsbaggrund:"
-
-#: ../data/ui/prefdlg.glade.h:4
-#, fuzzy
-msgid "<b>General</b>"
-msgstr "_Generelt"
-
-#: ../data/ui/prefdlg.glade.h:5
-#, fuzzy
-msgid "<b>Wallpaper</b>"
-msgstr "Skrivebordsbaggrund:"
-
-#: ../data/ui/prefdlg.glade.h:6
-#, fuzzy
-msgid "Background:"
-msgstr "Baggrundsfarve"
-
-#: ../data/ui/prefdlg.glade.h:7
-msgid "Bookmarks:"
-msgstr "Bogmærker:"
-
-#: ../data/ui/prefdlg.glade.h:8
-msgid "Disable \"Trash Can\" and delete files from disk directly"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:9
-msgid "Display image files with supported format as thumbnails"
-msgstr "Vis understøtte billedfiler som thumbnails"
-
-#: ../data/ui/prefdlg.glade.h:10
-msgid "Manage the desktop and show file icons"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:11
-msgid "Max size of files displayed as thumbnails:"
-msgstr "Max størrelse på filer som vises som thumbnails"
-
-#: ../data/ui/prefdlg.glade.h:12
-#, fuzzy
-msgid "Mode:"
-msgstr "Flyt: "
-
-#: ../data/ui/prefdlg.glade.h:13
-msgid "On-disk file name encoding:"
-msgstr "Filnavnenes kodning på disken"
-
-#: ../data/ui/prefdlg.glade.h:14
-msgid "Open files with single click"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:15
-msgid ""
-"Opened in Current Tab\n"
-"Opened in New Tab\n"
-"Opened in New Window"
-msgstr ""
-"Åbnes i den aktuelle Tab\n"
-"Åbnes i en ny Tab\n"
-"Åbnes i et nyt vindue"
-
-#: ../data/ui/prefdlg.glade.h:18
-msgid "Please select an image file"
-msgstr "Vælg en billedfil"
-
-#: ../data/ui/prefdlg.glade.h:19
-#, fuzzy
-msgid "Preferences"
-msgstr "Brugervalg"
-
-#: ../data/ui/prefdlg.glade.h:20
-msgid "Shadow:"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:21
-#, fuzzy
-msgid "Show \"My Documents\" icon on desktop"
-msgstr "Vis ikoner på skrivebordet"
-
-#: ../data/ui/prefdlg.glade.h:22
-#, fuzzy
-msgid "Show icons of volumes on desktop"
-msgstr "Vis ikoner på skrivebordet"
-
-#: ../data/ui/prefdlg.glade.h:23
-msgid "Show menus provided by WM when desktop is clicked"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:24
-msgid "Size of Big Icons:"
-msgstr "Størrelse til store ikoner"
-
-#: ../data/ui/prefdlg.glade.h:25
-msgid "Size of Small Icons:"
-msgstr "Størrelse til små ikoner"
-
-#: ../data/ui/prefdlg.glade.h:26
-msgid ""
-"Stretch to fill the entire screen\n"
-"Stretch to fit the screen\n"
-"Center on the screen\n"
-"Tile the image to fill the entire screen"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:30
-msgid "Terminal:"
-msgstr "Terminal:"
-
-#: ../data/ui/prefdlg.glade.h:31
-msgid "Text:"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:32
-msgid "Wallpaper:"
-msgstr "Skrivebordsbaggrund:"
-
-#: ../data/ui/prefdlg.glade.h:33
-msgid "_Advanced"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:34
-msgid "_Desktop"
-msgstr "Skrivebor_d"
-
-#: ../data/ui/prefdlg.glade.h:35 ../data/ui/file_properties.glade.h:24
-msgid "_General"
-msgstr "_Generelt"
-
-#: ../data/ui/prefdlg.glade.h:36
-msgid "_Volume Management"
-msgstr ""
-
-#: ../data/ui/file_properties.glade.h:1
-#, fuzzy
-msgid "<b>File Type:</b>"
-msgstr "Filtype:"
-
-#: ../data/ui/file_properties.glade.h:2
-#, fuzzy
-msgid "<b>File _Name:</b>"
-msgstr "Filnavn:"
-
-#: ../data/ui/file_properties.glade.h:3
-#, fuzzy
-msgid "<b>Group:</b>"
-msgstr "Gruppe:"
-
-#: ../data/ui/file_properties.glade.h:4
-#, fuzzy
-msgid "<b>Last Access:</b>"
-msgstr "Sidst Åbnet:"
-
-#: ../data/ui/file_properties.glade.h:5
-#, fuzzy
-msgid "<b>Last Modification:</b>"
-msgstr "Sidst Ændret"
-
-#: ../data/ui/file_properties.glade.h:6
-#, fuzzy
-msgid "<b>Location:</b>"
-msgstr "Placering"
-
-#: ../data/ui/file_properties.glade.h:7
-#, fuzzy
-msgid "<b>Open _with:</b>"
-msgstr "Åbn med:"
-
-#: ../data/ui/file_properties.glade.h:8
-#, fuzzy
-msgid "<b>Other Users:</b>"
-msgstr "Andre Brugere:"
-
-#: ../data/ui/file_properties.glade.h:9
-#, fuzzy
-msgid "<b>Owner:</b>"
-msgstr "Ejer:"
-
-#: ../data/ui/file_properties.glade.h:10
-#, fuzzy
-msgid "<b>Size on Disk:</b>"
-msgstr "Diskforbrug:"
-
-#: ../data/ui/file_properties.glade.h:11
-#, fuzzy
-msgid "<b>Total Size of Files:</b>"
-msgstr "Total Filstørrelse:"
-
-#: ../data/ui/file_properties.glade.h:12
-#, fuzzy
-msgid "<b>_Group:</b>"
-msgstr "Gruppe:"
-
-#: ../data/ui/file_properties.glade.h:13
-#, fuzzy
-msgid "<b>_Owner:</b>"
-msgstr "Skrivebordsbaggrund:"
-
-#: ../data/ui/file_properties.glade.h:14
-msgid "Execute"
-msgstr "Kør"
-
-#: ../data/ui/file_properties.glade.h:15
-msgid "File Properties"
-msgstr "Fil Egenskaber"
-
-#: ../data/ui/file_properties.glade.h:16
-msgid "Read"
-msgstr "Læs"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:18
-msgid "Set GID"
-msgstr "Sæt GID"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:20
-msgid "Set UID"
-msgstr "Sæt UID"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:22
-msgid "Sticky"
-msgstr "Sticky"
-
-#: ../data/ui/file_properties.glade.h:23
-msgid "Write"
-msgstr "Skriv"
-
-#: ../data/ui/file_properties.glade.h:25
-msgid "_Permissions"
-msgstr "Rettigheder"
-
-#: ../data/ui/appchooserdlg.glade.h:1
-msgid "Choose an Application"
-msgstr "Vælg en Applikation"
-
-#: ../data/ui/appchooserdlg.glade.h:2
-msgid "File Type To be Opened:"
-msgstr "Filtype som skal Åbnes:"
-
-#: ../data/ui/appchooserdlg.glade.h:3
-msgid "Opened in Terminal"
-msgstr "Åbnes i Terminal"
-
-#: ../data/ui/appchooserdlg.glade.h:4
-msgid ""
-"Please choose an application from following lists or enter the command line "
-"by hand:"
-msgstr "Vælg en applikation fra listen, eller skriv ind kommandoen nedenfor:"
-
-#: ../data/ui/appchooserdlg.glade.h:5
-msgid "Set selected application to default action"
-msgstr "Sæt den valgte applikation til forvalgt handling"
-
-#: ../data/ui/appchooserdlg.glade.h:6
-msgid "_All Applications"
-msgstr "_Alle Applikationer"
-
-#: ../data/ui/appchooserdlg.glade.h:7
-msgid "_Browse"
-msgstr "Gennemse"
-
-#: ../data/ui/appchooserdlg.glade.h:8
-#, fuzzy
-msgid "_Command Line:"
-msgstr "Kommando Linje"
-
-#: ../data/ui/appchooserdlg.glade.h:9
-msgid "_Recommended Applications"
-msgstr "Anbefalede Applikatione_r"
-
-#: ../data/ui/about-dlg.glade.h:1
-#, fuzzy
-msgid "Copyright (C) 2005 - 2008"
-msgstr "Copyright (C) 2005 - 2006"
-
-#: ../data/ui/about-dlg.glade.h:2
-msgid ""
-"Lightweight file manager\n"
-"\n"
-"Developed by Hon Jen Yee (PCMan)"
-msgstr ""
-"Letvægts filbehandler\n"
-"\n"
-"Udviklet af Hon Jen Yee (PCMan)"
-
-#: ../data/ui/about-dlg.glade.h:5
-msgid ""
-"The icon was taken from \"nuoveXT 2\" icon theme\n"
-"created by Alexandre Moore (saki).\n"
-"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
-msgstr ""
-"Ikonet er hentet fra \"nuoveXT 2\" ikon temaet\n"
-"lavet af Alexandre Moore (saki).\n"
-"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
-
-#. Please replace this line with your own names, one name per line.
-#: ../data/ui/about-dlg.glade.h:9
-msgid "translator-credits"
-msgstr "Vidar Jon Bauge <vidarjb@gmail.com>"
-
-#: ../data/ui/about-dlg.glade.h:10
-msgid ""
-"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
-"\n"
-"Source code taken from other projects:\n"
-" * libmd5-rfc: Aladdin Enterprises\n"
-" * Working area detection: Gary Kramlich\n"
-" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
-" * Text and icon renderer uese code from Jonathan Blandford\n"
-" * Desktop icons use code from Brian Tarricone\n"
-" * Volume management uses code from following projects/authors:\n"
-"     * gnome-vfs: David Zeuthen\n"
-"     * thunar-vfs and libexo: Benedikt Meurer\n"
-"     * gnome-mount: David Zeuthen"
-msgstr ""
-"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
-"\n"
-"Kildekode fra andre projekter:\n"
-" * libmd5-rfc: Aladdin Enterprises\n"
-" * Opdatering af arbejdsområde: Gary Kramlich\n"
-" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
-" * Rendering af tekst og ikoner anvender kode fra Jonathan Blandford\n"
-" * Visning af ikoner på skriveborder anvender kode fra Brian Tarricone\n"
-" * Enhedshåndtering  anvender kode fra følgende projekter/udviklere:\n"
-"     * gnome-vfs: David Zeuthen\n"
-"     * thunar-vfs and libexo: Benedikt Meurer\n"
-"     * gnome-mount: David Zeuthen"
-
-#: ../data/ui/find-files.glade.h:1
-#, fuzzy
-msgid "<b>File Content</b>"
-msgstr "Filtype:"
-
-#: ../data/ui/find-files.glade.h:2
-#, fuzzy
-msgid "<b>File Name Contains:</b>"
-msgstr "Filnavn:"
-
-#: ../data/ui/find-files.glade.h:3
-#, fuzzy
-msgid "<b>File Size</b>"
-msgstr "Filtype:"
-
-#: ../data/ui/find-files.glade.h:4
-#, fuzzy
-msgid "<b>File Types to Search</b>"
-msgstr "Filtype:"
-
-#: ../data/ui/find-files.glade.h:5
-#, fuzzy
-msgid "<b>Last Modified</b>"
-msgstr "Sidst Ændret"
-
-#: ../data/ui/find-files.glade.h:6
-msgid "<b>Places to Search</b>"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:7
-#, fuzzy
-msgid "<b>Search Result:</b>"
-msgstr "Andre Brugere:"
-
-#: ../data/ui/find-files.glade.h:8
-msgid "All Files and Folders"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:9
-msgid ""
-"Any\n"
-"Within One Day\n"
-"Within One Week\n"
-"Within One Month\n"
-"Within One Year\n"
-"Within Selected Date Range"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:15
-msgid "Audio Files (mp3, ogg,...)"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:16
-msgid ""
-"Bytes\n"
-"KB\n"
-"MB\n"
-"GB"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:20
-msgid "Case Sensitive"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:21
-msgid "Content"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:22
-#, fuzzy
-msgid "File Contains:"
-msgstr "Filen findes ikke"
-
-#: ../data/ui/find-files.glade.h:23
-msgid "Find Files"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:24
-#, fuzzy
-msgid "General"
-msgstr "_Generelt"
-
-#: ../data/ui/find-files.glade.h:25
-msgid "Grater Than:"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:26
-msgid "Image Files (jpg, png,...)"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:27
-#, fuzzy
-msgid "Plain Text Files"
-msgstr "_Tekst fil"
-
-#: ../data/ui/find-files.glade.h:28
-msgid "Search Again"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:29
-#, fuzzy
-msgid "Search Hidden Files"
-msgstr "Vis Skjulte filer"
-
-#: ../data/ui/find-files.glade.h:30
-msgid "Search in Sub Directories"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:31
-msgid "Size & Date"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:32
-msgid "Smaller Than:"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:33
-msgid "Use Regular Expression"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:34
-msgid "Video Files (avi, mpg,...)"
-msgstr ""
+#~ msgid "Center on the screen"
+#~ msgstr "Centrer på skærmen"
+
+#~ msgid "Opened in Current Tab"
+#~ msgstr "Åbn i Ny Aktuel Tab"
+
+#~ msgid "Opened in New Tab"
+#~ msgstr "Åbn i Ny Tab"
+
+#~ msgid "Opened in New Window"
+#~ msgstr "Åbn i Nyt Vindue"
+
+#~ msgid "Stretch to fill the entire screen"
+#~ msgstr "Stræk"
+
+#~ msgid "Stretch to fit the screen"
+#~ msgstr "Tilpas til skærmen"
+
+#~ msgid "Tile the image to fill the entire screen"
+#~ msgstr "Side om Side"
+
+#~ msgid "Any"
+#~ msgstr "Alle"
+
+#~ msgid "Bytes"
+#~ msgstr "Bytes"
+
+#~ msgid "GB"
+#~ msgstr "GB"
+
+#~ msgid "KB"
+#~ msgstr "KB"
+
+#~ msgid "MB"
+#~ msgstr "MB"
+
+#~ msgid "Within One Day"
+#~ msgstr "Inden et døgn"
+
+#~ msgid "Within One Month"
+#~ msgstr "Inden en Måned"
+
+#~ msgid "Within One Week"
+#~ msgstr "Inden en Uge"
+
+#~ msgid "Within One Year"
+#~ msgstr "Inden et År"
+
+#~ msgid "Within Selected Date Range"
+#~ msgstr "I En Bestemt Periode"
 
 #~ msgid "Error: %s\n"
 #~ msgstr "Fejl: %s\n"
 
 #~ msgid "gksu or kdesu is not found"
 #~ msgstr "gksu or kdesu ikke fundet"
-
-#~ msgid "Text Color"
-#~ msgstr "Tekst Farve"

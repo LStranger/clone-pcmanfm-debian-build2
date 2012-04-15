@@ -421,7 +421,7 @@ void on_size_allocate( GtkWidget* w, GtkAllocation* alloc )
     GdkRectangle wa;
 
     get_working_area( gtk_widget_get_screen(w), &self->wa );
-    layout_items( w );
+    layout_items( DESKTOP_WINDOW(w) );
 
     GTK_WIDGET_CLASS(parent_class)->size_allocate( w, alloc );
 }
@@ -919,7 +919,7 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
     DesktopItem *item, *clicked_item = NULL;
     GList* l;
 
-    clicked_item = hit_test( w, (int)evt->x, (int)evt->y );
+    clicked_item = hit_test( DESKTOP_WINDOW(w), (int)evt->x, (int)evt->y );
 
     if( evt->type == GDK_BUTTON_PRESS )
     {
@@ -959,7 +959,7 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
             {
                 DesktopItem* old_focus = self->focus;
                 if( old_focus )
-                    redraw_item( w, old_focus );
+		    redraw_item( DESKTOP_WINDOW(w), old_focus );
             }
             self->focus = clicked_item;
             redraw_item( self, clicked_item );
@@ -976,7 +976,7 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
                     /* FIXME: show popup menu for files */
                     for( l = sel; l; l = l->next )
                         l->data = vfs_file_info_ref( ((DesktopItem*)l->data)->fi );
-                    popup = ptk_file_menu_new( file_path, item->fi, vfs_get_desktop_dir(), sel, NULL );
+                    popup = GTK_MENU(ptk_file_menu_new( file_path, item->fi, vfs_get_desktop_dir(), sel, NULL ));
                     g_free( file_path );
 
                     gtk_menu_popup( popup, NULL, NULL, NULL, NULL, evt->button, evt->time );
@@ -1003,7 +1003,7 @@ gboolean on_button_press( GtkWidget* w, GdkEventButton* evt )
                     gtk_widget_show_all(popup);
                     g_signal_connect( popup, "selection-done", G_CALLBACK(gtk_widget_destroy), NULL );
 
-                    gtk_menu_popup( popup, NULL, NULL, NULL, NULL, evt->button, evt->time );
+                    gtk_menu_popup( GTK_MENU(popup), NULL, NULL, NULL, NULL, evt->button, evt->time );
                     goto out;   /* don't forward the event to root win */
                 }
             }
@@ -1090,7 +1090,7 @@ static gboolean on_single_click_timeout( DesktopWindow* self )
     evt.y = y;
     evt.state |= GDK_BUTTON_PRESS_MASK;
     evt.state &= ~GDK_BUTTON_MOTION_MASK;
-    on_button_press( self, &evt );
+    on_button_press( GTK_WIDGET(self), &evt );
 
     return FALSE;
 }
@@ -1543,6 +1543,16 @@ gboolean on_key_press( GtkWidget* w, GdkEventKey* evt )
             break;
         }
     }
+    else if ( modifier == GDK_SHIFT_MASK )
+    {
+        switch ( evt->keyval )
+        {
+        case GDK_Delete:
+            if( sels )
+                ptk_delete_files( NULL, vfs_get_desktop_dir(), sels );
+            break;
+        }
+    }
     else if ( modifier == 0 )
     {
         switch ( evt->keyval )
@@ -1799,7 +1809,7 @@ void layout_items( DesktopWindow* self )
         item->text_rect.x = item->box.x + self->x_pad;
         item->text_rect.y = item->box.y + self->y_pad + self->icon_size + self->spacing;
     }
-    gtk_widget_queue_draw( self );
+    gtk_widget_queue_draw( GTK_WIDGET(self) );
 }
 
 void on_file_listed( VFSDir* dir, gboolean is_cancelled, DesktopWindow* self )
@@ -2104,12 +2114,12 @@ DesktopItem* hit_test( DesktopWindow* self, int x, int y )
  *  We really need better and cleaner APIs for this */
 void open_folders( GList* folders )
 {
-    FMMainWindow* main_window = fm_main_window_new();
+    FMMainWindow* main_window = FM_MAIN_WINDOW(fm_main_window_new());
     FM_MAIN_WINDOW( main_window ) ->splitter_pos = app_settings.splitter_pos;
     gtk_window_set_default_size( GTK_WINDOW( main_window ),
                                  app_settings.width,
                                  app_settings.height );
-    gtk_widget_show( main_window );
+    gtk_widget_show( GTK_WIDGET(main_window) );
     while( folders )
     {
         VFSFileInfo* fi = (VFSFileInfo*)folders->data;
@@ -2426,7 +2436,7 @@ void desktop_window_set_single_click( DesktopWindow* win, gboolean single_click 
     win->single_click = single_click;
     if( single_click )
     {
-        win->hand_cursor = gdk_cursor_new_for_display( gtk_widget_get_display(win), GDK_HAND2 );
+      win->hand_cursor = gdk_cursor_new_for_display( gtk_widget_get_display(GTK_WIDGET(win)), GDK_HAND2 );
     }
     else
     {

@@ -27,6 +27,8 @@
 
 #include <signal.h>
 
+#include <unistd.h> /* for getcwd */
+
 #include "main-window.h"
 
 #include "vfs-file-info.h"
@@ -126,6 +128,7 @@ static FMMainWindow* create_main_window();
 static void open_file( const char* path );
 
 static GList* get_file_info_list( char** files );
+static char* dup_to_absolute_file_path( char** file );
 
 gboolean on_socket_event( GIOChannel* ioc, GIOCondition cond, gpointer data )
 {
@@ -256,7 +259,13 @@ gboolean single_instance_check()
             {
                 for( file = files; *file; ++file )
                 {
-                    write( sock, *file, strlen( *file ) );
+                    char *real_path;
+
+                    /* We send absolute paths because with different
+                       $PWDs resolution would not work. */
+                    real_path = dup_to_absolute_file_path( file );
+                    write( sock, real_path, strlen( real_path ) );
+                    g_free( real_path );
                     write( sock, "\n", 1 );
                 }
             }
@@ -478,6 +487,33 @@ static void init_desktop_or_daemon()
     desktop_or_deamon_initialized = TRUE;
 }
 
+char* dup_to_absolute_file_path(char** file)
+{
+    char* file_path, *real_path, *cwd_path;
+    const size_t cwd_size = PATH_MAX;
+
+    if( g_str_has_prefix( *file, "file:" ) ) /* It's a URI */
+    {
+        file_path = g_filename_from_uri( *file, NULL, NULL );
+        g_free( *file );
+        *file = file_path;
+    }
+    else
+        file_path = *file;
+
+    cwd_path = malloc( cwd_size );
+    if( cwd_path )
+    {
+        getcwd( cwd_path, cwd_size );
+    }
+
+    real_path = vfs_file_resolve_path( cwd_path, file_path );
+    free( cwd_path );
+    cwd_path = NULL;
+
+    return real_path; /* To free with g_free */
+}
+
 gboolean handle_parsed_commandline_args()
 {
     FMMainWindow * main_window = NULL;
@@ -504,7 +540,7 @@ gboolean handle_parsed_commandline_args()
          * in the pref dialog, the newly loaded desktop will be uninitialized.
          */
         init_desktop_or_daemon();
-        fm_edit_preference( main_window, show_pref - 1 );
+        fm_edit_preference( GTK_WINDOW( main_window ), show_pref - 1 );
         show_pref = 0;
     }
     else if( find_files ) /* find files */
@@ -560,21 +596,13 @@ gboolean handle_parsed_commandline_args()
             /* open files passed in command line arguments */
             for( file = files; *file; ++file )
             {
-                char* file_path, *real_path;
+                char *real_path;
 
                 if( ! **file )  /* skip empty string */
                     continue;
 
-                if( g_str_has_prefix( *file, "file:" ) ) /* It's a URI */
-                {
-                    file_path = g_filename_from_uri( *file, NULL, NULL );
-                    g_free( *file );
-                    *file = file_path;
-                }
-                else
-                    file_path = *file;
+                real_path = dup_to_absolute_file_path( file );
 
-                real_path = vfs_file_resolve_path( NULL, file_path );
                 if( g_file_test( real_path, G_FILE_TEST_IS_DIR ) )
                 {
                     if( G_UNLIKELY( ! main_window ) )   /* create main window if needed */
@@ -587,7 +615,7 @@ gboolean handle_parsed_commandline_args()
                     fm_main_window_add_new_tab( main_window, real_path,
                                                 app_settings.show_side_pane,
                                                 app_settings.side_pane_mode );
-                    gtk_window_present( main_window );
+                    gtk_window_present( GTK_WINDOW( main_window ) );
                 }
                 else
                 {
@@ -640,7 +668,7 @@ int main ( int argc, char *argv[] )
     /* ensure that there is only one instance of pcmanfm.
          if there is an existing instance, command line arguments
          will be passed to the existing instance, and exit() will be called here.  */
-    single_instance_check( argc - 1, argv + 1 );
+    single_instance_check();
 
     load_settings();    /* load config file */
 

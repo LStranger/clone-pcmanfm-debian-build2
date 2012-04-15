@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd"><glade-interface><widget class="GtkAboutDialog" id="aboutdialog"><property name="border_width">5</property><property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property><property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property><property name="has_separator">False</property><property name="program_name">PCMan File Manager</property><property name="copyright" translatable="yes">Copyright (C) 2005 - 2008</property><property name="comments" translatable="yes">Lightweight file manager
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd"><glade-interface><widget class="GtkAboutDialog" id="dlg"><property name="border_width">5</property><property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property><property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property><property name="has_separator">False</property><property name="program_name">PCMan File Manager</property><property name="copyright" translatable="yes">Copyright (C) 2005 - 2008</property><property name="comments" translatable="yes">Lightweight file manager
 
 Developed by Hon Jen Yee (PCMan)</property><property name="website">http://pcmanfm.sourceforge.net/</property><property name="license">PCMan File Manager
 
@@ -22,7 +22,7 @@ Source code taken from other projects:
  * libmd5-rfc: Aladdin Enterprises
  * Working area detection: Gary Kramlich
  * ExoIconView: os-cillation e.K, Anders Carlsson, &amp; Benedikt Meurer
- * Text and icon renderer uese code from Jonathan Blandford
+ * Text and icon renderer uses code from Jonathan Blandford
  * Desktop icons use code from Brian Tarricone
  * Volume management uses code from following projects/authors:
      * gnome-vfs: David Zeuthen

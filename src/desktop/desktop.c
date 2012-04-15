@@ -88,7 +88,7 @@ void fm_turn_on_desktop_icons()
         gtk_widget_show_all( desktops[ i ] );
         gdk_window_lower( desktops[ i ] ->window );
 
-        gtk_window_group_add_window( group, desktops[i] );
+        gtk_window_group_add_window( GTK_WINDOW_GROUP(group), desktops[i] );
     }
     fm_desktop_update_colors();
     fm_desktop_update_wallpaper();
@@ -154,7 +154,7 @@ void fm_desktop_update_wallpaper()
     }
 
     for ( i = 0; i < n_screens; i++ )
-        desktop_window_set_background( desktops[ i ], pix, type );
+        desktop_window_set_background( DESKTOP_WINDOW(desktops[ i ]), pix, type );
 
     if( pix )
         g_object_unref( pix );
@@ -165,8 +165,8 @@ void fm_desktop_update_colors()
     int i;
     for ( i = 0; i < n_screens; i++ )
     {
-        desktop_window_set_bg_color( desktops[ i ], &app_settings.desktop_bg1 );
-        desktop_window_set_text_color( desktops[ i ], &app_settings.desktop_text, &app_settings.desktop_shadow );
+        desktop_window_set_bg_color( DESKTOP_WINDOW(desktops[ i ]), &app_settings.desktop_bg1 );
+        desktop_window_set_text_color( DESKTOP_WINDOW(desktops[ i ]), &app_settings.desktop_text, &app_settings.desktop_shadow );
     }
 }
 

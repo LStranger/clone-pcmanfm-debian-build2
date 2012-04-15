@@ -1,14 +1,14 @@
 # Japanese translations for pcmanfm package
-# Copyright (C) 2007-2008 THE pcmanfm'S COPYRIGHT HOLDER
+# Copyright (C) 2007-2009 THE pcmanfm'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pcmanfm package.
-# Hironao Komatsu <hironao@users.sourceforge.net>, 2007-2008.
+# Hironao Komatsu <hironao@users.sourceforge.net>, 2007-2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pcmanfm 0.4.5\n"
+"Project-Id-Version: pcmanfm 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-16 18:11+0800\n"
-"PO-Revision-Date: 2008-07-05 22:42+0900\n"
+"POT-Creation-Date: 2009-04-28 19:48+0900\n"
+"PO-Revision-Date: 2009-04-21 16:06+0900\n"
 "Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
 "Language-Team: Japanese <hironao@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,43 +16,786 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../src/main.c:90
+#: ../data/ui/about-dlg.glade.h:1
+msgid "Copyright (C) 2005 - 2008"
+msgstr "Copyright (C) 2005 - 2008"
+
+#: ../data/ui/about-dlg.glade.h:2
+msgid ""
+"Lightweight file manager\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+msgstr ""
+"軽量ファイルマネージャ\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+
+#: ../data/ui/about-dlg.glade.h:5
+msgid ""
+"The icon was taken from \"nuoveXT 2\" icon theme\n"
+"created by Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+msgstr ""
+"Alexandre Moore (saki) 氏による \"nuoveXT 2\" アイコンテーマを使用していま"
+"す。\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+
+#. Please replace this line with your own names, one name per line.
+#: ../data/ui/about-dlg.glade.h:9
+msgid "translator-credits"
+msgstr "Hironao Komatsu <hironao@users.sourceforge.net>"
+
+#: ../data/ui/about-dlg.glade.h:10
+msgid ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Source code taken from other projects:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Working area detection: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Text and icon renderer uses code from Jonathan Blandford\n"
+" * Desktop icons use code from Brian Tarricone\n"
+" * Volume management uses code from following projects/authors:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs and libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+msgstr ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"以下のプロジェクトからソースコードを利用しています:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * 作業領域の検出: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * テキストとアイコンのレンダリング: Jonathan Blandford\n"
+" * デスクトップアイコン関連: Brian Tarricone\n"
+" * ボリューム管理のコードは以下の作者/プロジェクトから:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs および libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+
+#: ../data/ui/appchooserdlg.glade.h:1
+msgid "Choose an Application"
+msgstr "アプリケーションを選んでください"
+
+#: ../data/ui/appchooserdlg.glade.h:2
+msgid "File Type To be Opened:"
+msgstr "開くファイルタイプ:"
+
+#: ../data/ui/appchooserdlg.glade.h:3
+msgid "Opened in Terminal"
+msgstr "端末で開く"
+
+#: ../data/ui/appchooserdlg.glade.h:4
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr ""
+"以下のリストからアプリケーションを選んでください。あるいはコマンドラインを手"
+"入力してください:"
+
+#: ../data/ui/appchooserdlg.glade.h:5
+msgid "Set selected application to default action"
+msgstr "このアプリケーションを標準にする"
+
+#: ../data/ui/appchooserdlg.glade.h:6
+msgid "_All Applications"
+msgstr "すべてのアプリケーション(_A)"
+
+#: ../data/ui/appchooserdlg.glade.h:7
+msgid "_Browse"
+msgstr "ダイアログから選ぶ(_B)"
+
+#: ../data/ui/appchooserdlg.glade.h:8
+msgid "_Command Line:"
+msgstr "コマンドライン(_C):"
+
+#: ../data/ui/appchooserdlg.glade.h:9
+msgid "_Recommended Applications"
+msgstr "推奨アプリケーション(_R)"
+
+#: ../data/ui/file-assoc-dlg.glade.h:1
+msgid "Actions Showed in Popup Menus"
+msgstr "ポップアップメニューに表示するアクション"
+
+#: ../data/ui/file-assoc-dlg.glade.h:2
+msgid "Add _Application"
+msgstr "アプリケーションの追加(_A)"
+
+#: ../data/ui/file-assoc-dlg.glade.h:3
+msgid "Add _Custom Action"
+msgstr "アクションを独自に追加する(_C)"
+
+#: ../data/ui/file-assoc-dlg.glade.h:4
+msgid "File Associations"
+msgstr "ファイルの関連付け"
+
+#: ../data/ui/file-assoc-dlg.glade.h:5
+msgid "Known File Types:"
+msgstr "登録されているファイルタイプ:"
+
+#: ../data/ui/file-assoc-dlg.glade.h:6
+msgid "Move _Down"
+msgstr "下へ(_D)"
+
+#: ../data/ui/file-assoc-dlg.glade.h:7
+msgid "Move _Up"
+msgstr "上へ(_U)"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "準備中..."
+
+#. Processing: <Name of currently proccesed file>
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "処理中:"
+
+#. Progress:
+#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "進行中:"
+
+#. To: <Destination folder> ex. Copy file to..., Move file to...etc.
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "送り先:"
+
+#: ../data/ui/file_properties.glade.h:1
+msgid "<b>File Type:</b>"
+msgstr "<b>ファイルタイプ:</b>"
+
+#: ../data/ui/file_properties.glade.h:2
+msgid "<b>File _Name:</b>"
+msgstr "<b>ファイル名(_N):</b>"
+
+#: ../data/ui/file_properties.glade.h:3
+msgid "<b>Group:</b>"
+msgstr "<b>グループ:</b>"
+
+#: ../data/ui/file_properties.glade.h:4
+msgid "<b>Last Access:</b>"
+msgstr "<b>最終アクセス時刻:</b>"
+
+#: ../data/ui/file_properties.glade.h:5
+msgid "<b>Last Modification:</b>"
+msgstr "<b>最終更新時刻:</b>"
+
+#: ../data/ui/file_properties.glade.h:6
+msgid "<b>Location:</b>"
+msgstr "<b>場所:</b>"
+
+#: ../data/ui/file_properties.glade.h:7
+msgid "<b>Open _with:</b>"
+msgstr "<b>開くアプリケーション:</b>"
+
+#: ../data/ui/file_properties.glade.h:8
+msgid "<b>Other Users:</b>"
+msgstr "<b>他のユーザ:</b>"
+
+#: ../data/ui/file_properties.glade.h:9
+msgid "<b>Owner:</b>"
+msgstr "<b>所有者:</b>"
+
+#: ../data/ui/file_properties.glade.h:10
+msgid "<b>Size on Disk:</b>"
+msgstr "<b>ディスク上のサイズ:</b>"
+
+#: ../data/ui/file_properties.glade.h:11
+msgid "<b>Total Size of Files:</b>"
+msgstr "<b>ファイルの合計サイズ:</b>"
+
+#: ../data/ui/file_properties.glade.h:12
+msgid "<b>_Group:</b>"
+msgstr "<b>グループ(_G)</b>:"
+
+#: ../data/ui/file_properties.glade.h:13
+msgid "<b>_Owner:</b>"
+msgstr "<b>所有者(_O):</b>"
+
+#: ../data/ui/file_properties.glade.h:14
+msgid "Execute"
+msgstr "実行"
+
+#: ../data/ui/file_properties.glade.h:15
+msgid "File Properties"
+msgstr "ファイルのプロパティ"
+
+#: ../data/ui/file_properties.glade.h:16
+msgid "Read"
+msgstr "読み込み"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:18
+msgid "Set GID"
+msgstr "Set GID"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:20
+msgid "Set UID"
+msgstr "Set UID"
+
+#. This is used in file attribute
+#: ../data/ui/file_properties.glade.h:22
+msgid "Sticky"
+msgstr "スティッキー"
+
+#: ../data/ui/file_properties.glade.h:23
+msgid "Write"
+msgstr "書き込み"
+
+#: ../data/ui/file_properties.glade.h:24 ../data/ui/prefdlg.glade.h:41
+msgid "_General"
+msgstr "一般(_G)"
+
+#: ../data/ui/file_properties.glade.h:25
+msgid "_Permissions"
+msgstr "パーミッション(_P)"
+
+#: ../data/ui/find-files.glade.h:1
+msgid "<b>File Content</b>"
+msgstr "<b>ファイルの内容</b>"
+
+#: ../data/ui/find-files.glade.h:2
+msgid "<b>File Name Contains:</b>"
+msgstr "<b>ファイル名に含む:</b>"
+
+#: ../data/ui/find-files.glade.h:3
+msgid "<b>File Size</b>"
+msgstr "<b>ファイルのサイズ:</b>"
+
+#: ../data/ui/find-files.glade.h:4
+msgid "<b>File Types to Search</b>"
+msgstr "<b>検索するファイルタイプ</b>"
+
+#: ../data/ui/find-files.glade.h:5
+msgid "<b>Last Modified</b>"
+msgstr "<b>最終更新時刻</b>"
+
+#: ../data/ui/find-files.glade.h:6
+msgid "<b>Places to Search</b>"
+msgstr "<b>検索する場所</b>"
+
+#: ../data/ui/find-files.glade.h:7
+msgid "<b>Search Result:</b>"
+msgstr "<b>検索結果:</b>"
+
+#: ../data/ui/find-files.glade.h:8
+msgid "All Files and Folders"
+msgstr "すべてのファイルとフォルダ"
+
+#: ../data/ui/find-files.glade.h:9
+msgid ""
+"Any\n"
+"Within One Day\n"
+"Within One Week\n"
+"Within One Month\n"
+"Within One Year\n"
+"Within Selected Date Range"
+msgstr ""
+"任意\n"
+"一日以内\n"
+"一週間以内\n"
+"一月以内\n"
+"一年以内\n"
+"選択した範囲で"
+
+#: ../data/ui/find-files.glade.h:15
+msgid "Audio Files (mp3, ogg,...)"
+msgstr "音声ファイル (mp3, ogg,...)"
+
+#: ../data/ui/find-files.glade.h:16
+msgid ""
+"Bytes\n"
+"KB\n"
+"MB\n"
+"GB"
+msgstr ""
+"バイト\n"
+"KB\n"
+"MB\n"
+"GB"
+
+#: ../data/ui/find-files.glade.h:20
+msgid "Case Sensitive"
+msgstr "大文字・小文字を区別する"
+
+#: ../data/ui/find-files.glade.h:21
+msgid "Content"
+msgstr "内容"
+
+#: ../data/ui/find-files.glade.h:22
+msgid "File Contains:"
+msgstr "ファイルに含む:"
+
+#: ../data/ui/find-files.glade.h:23
+msgid "Find Files"
+msgstr "ファイルの検索"
+
+#: ../data/ui/find-files.glade.h:24
+msgid "General"
+msgstr "一般"
+
+#: ../data/ui/find-files.glade.h:25
+msgid "Greater Than:"
+msgstr "〜より大きい:"
+
+#: ../data/ui/find-files.glade.h:26
+msgid "Image Files (jpg, png,...)"
+msgstr "画像ファイル (jpg, png,...)"
+
+#: ../data/ui/find-files.glade.h:27
+msgid "Plain Text Files"
+msgstr "プレーンテキストファイル"
+
+#: ../data/ui/find-files.glade.h:28
+msgid "Search Again"
+msgstr "もう一度検索"
+
+#: ../data/ui/find-files.glade.h:29
+msgid "Search Hidden Files"
+msgstr "隠しファイルも検索する"
+
+#: ../data/ui/find-files.glade.h:30
+msgid "Search in Sub Directories"
+msgstr "サブディレクトリも検索する"
+
+#: ../data/ui/find-files.glade.h:31
+msgid "Size & Date"
+msgstr "サイズと日付"
+
+#: ../data/ui/find-files.glade.h:32
+msgid "Smaller Than:"
+msgstr "〜より小さい:"
+
+#: ../data/ui/find-files.glade.h:33
+msgid "Use Regular Expression"
+msgstr "正規表現を使用する"
+
+#: ../data/ui/find-files.glade.h:34
+msgid "Video Files (avi, mpg,...)"
+msgstr "動画ファイル (avi, mpg,...)"
+
+#: ../data/ui/godlg.glade.h:1
+msgid "Go to folder"
+msgstr "フォルダへ移動"
+
+#: ../data/ui/prefdlg.glade.h:1
+msgid "<b>Behavior</b>"
+msgstr "<b>動作</b>"
+
+#: ../data/ui/prefdlg.glade.h:2
+msgid "<b>Colors</b>"
+msgstr "<b>配色</b>"
+
+#: ../data/ui/prefdlg.glade.h:3
+msgid "<b>Display</b>"
+msgstr "<b>画面</b>"
+
+#: ../data/ui/prefdlg.glade.h:4
+msgid "<b>General</b>"
+msgstr "<b>一般</b>"
+
+#: ../data/ui/prefdlg.glade.h:5
+msgid "<b>Wallpaper</b>"
+msgstr "<b>壁紙</b>"
+
+#: ../data/ui/prefdlg.glade.h:6
+msgid "Always show the tab bar"
+msgstr "タブバーを常に表示する"
+
+#: ../data/ui/prefdlg.glade.h:7
+msgid "Background:"
+msgstr "背景:"
+
+#: ../data/ui/prefdlg.glade.h:8
+msgid "Bookmarks:"
+msgstr "ブックマーク:"
+
+#: ../data/ui/prefdlg.glade.h:9
+msgid "Disable \"Trash Can\" and delete files from disk directly"
+msgstr "\"ごみ箱\" を無効にしてファイルをディスクから直接削除する"
+
+#: ../data/ui/prefdlg.glade.h:10
+msgid "Display image files with supported format as thumbnails"
+msgstr "画像ファイルはサポートされている場合サムネイルで表示する"
+
+#: ../data/ui/prefdlg.glade.h:11
+msgid "Hide 'Close tab' buttons"
+msgstr "'タブを閉じる' ボタンを隠す"
+
+#: ../data/ui/prefdlg.glade.h:12
+msgid "Hide folder content border"
+msgstr "フォルダ内容の境界を隠す"
+
+#: ../data/ui/prefdlg.glade.h:13
+msgid "Hide side pane buttons"
+msgstr "サイドペインボタンを隠す"
+
+#: ../data/ui/prefdlg.glade.h:14
+msgid "I_nterface"
+msgstr "インタフェース(_I)"
+
+#: ../data/ui/prefdlg.glade.h:15
+msgid "Manage the desktop and show file icons"
+msgstr "デスクトップを制御下に置き、ファイルアイコンを表示する"
+
+#: ../data/ui/prefdlg.glade.h:16
+msgid "Max size of files displayed as thumbnails:"
+msgstr "サムネイル表示する画像の最大サイズ:"
+
+#: ../data/ui/prefdlg.glade.h:17
+msgid "Mode:"
+msgstr "モード:"
+
+#: ../data/ui/prefdlg.glade.h:18
+msgid "On-disk file name encoding:"
+msgstr "ディスク上のファイル名のエンコーディング:"
+
+#: ../data/ui/prefdlg.glade.h:19
+msgid "Open files with single click"
+msgstr "ファイルはシングルクリックで開く"
+
+#: ../data/ui/prefdlg.glade.h:20
+msgid ""
+"Opened in Current Tab\n"
+"Opened in New Tab\n"
+"Opened in New Window"
+msgstr ""
+"現在のタブで開く\n"
+"新規タブで開く\n"
+"新規ウィンドウで開く"
+
+#: ../data/ui/prefdlg.glade.h:23
+msgid "Please select an image file"
+msgstr "画像ファイルを選んでください"
+
+#: ../data/ui/prefdlg.glade.h:24
+msgid "Preferences"
+msgstr "設定"
+
+#: ../data/ui/prefdlg.glade.h:25
+msgid "Shadow:"
+msgstr "影:"
+
+#: ../data/ui/prefdlg.glade.h:26
+msgid "Show \"My Documents\" icon on desktop"
+msgstr "\"マイドキュメント\" アイコンをデスクトップに表示"
+
+#: ../data/ui/prefdlg.glade.h:27
+msgid "Show icons of volumes on desktop"
+msgstr "ボリュームのアイコンをデスクトップに表示"
+
+#: ../data/ui/prefdlg.glade.h:28
+msgid "Show menus provided by WM when desktop is clicked"
+msgstr ""
+"デスクトップをクリックしたとき、ウィンドウマネージャのメニューを表示する"
+
+#: ../data/ui/prefdlg.glade.h:29
+msgid "Size of Big Icons:"
+msgstr "大きいアイコンのサイズ:"
+
+#: ../data/ui/prefdlg.glade.h:30
+msgid "Size of Small Icons:"
+msgstr "小さいアイコンのサイズ:"
+
+#: ../data/ui/prefdlg.glade.h:31
+msgid ""
+"Stretch to fill the entire screen\n"
+"Stretch to fit the screen\n"
+"Center on the screen\n"
+"Tile the image to fill the entire screen"
+msgstr ""
+"画面いっぱいに伸ばす\n"
+"縦横比を維持して伸ばす\n"
+"画面の中央に\n"
+"画面にタイル状に並べる"
+
+#: ../data/ui/prefdlg.glade.h:35
+msgid "Terminal:"
+msgstr "端末:"
+
+#: ../data/ui/prefdlg.glade.h:36
+msgid "Text:"
+msgstr "テキスト:"
+
+#: ../data/ui/prefdlg.glade.h:37
+msgid "Use SI decimal prefixes instead of IEC binary prefixes"
+msgstr "SIの10進プリフィクスをIECの2進プリフィクスに代えて使用する"
+
+#: ../data/ui/prefdlg.glade.h:38
+msgid "Wallpaper:"
+msgstr "壁紙:"
+
+#: ../data/ui/prefdlg.glade.h:39
+msgid "_Advanced"
+msgstr "高度な設定(_A)"
+
+#: ../data/ui/prefdlg.glade.h:40
+msgid "_Desktop"
+msgstr "デスクトップ(_D)"
+
+#: ../data/ui/prefdlg.glade.h:42
+msgid "_Volume Management"
+msgstr "ボリューム管理(_V)"
+
+#: ../src/exo/exo-icon-view.c:696
+msgid "Column Spacing"
+msgstr "カラムの空白"
+
+#: ../src/exo/exo-icon-view.c:697
+msgid "Space which is inserted between grid column"
+msgstr "カラムの間に挿入される空白"
+
+#: ../src/exo/exo-icon-view.c:713
+msgid "Number of columns"
+msgstr "カラムの数"
+
+#: ../src/exo/exo-icon-view.c:714
+msgid "Number of columns to display"
+msgstr "表示するカラムの数"
+
+#: ../src/exo/exo-icon-view.c:728
+msgid "Enable Search"
+msgstr "検索を有効にする"
+
+#: ../src/exo/exo-icon-view.c:729
+msgid "View allows user to search through columns interactively"
+msgstr "ユーザが対話的にカラムを検索できるようにする"
+
+#: ../src/exo/exo-icon-view.c:746
+msgid "Width for each item"
+msgstr "各項目の幅"
+
+#: ../src/exo/exo-icon-view.c:747
+msgid "The width used for each item"
+msgstr "各項目の幅"
+
+#: ../src/exo/exo-icon-view.c:765
+msgid "Layout mode"
+msgstr "レイアウトモード"
+
+#: ../src/exo/exo-icon-view.c:766
+msgid "The layout mode"
+msgstr "レイアウトモード"
+
+#: ../src/exo/exo-icon-view.c:782
+msgid "Margin"
+msgstr "余白"
+
+#: ../src/exo/exo-icon-view.c:783
+msgid "Space which is inserted at the edges of the icon view"
+msgstr "アイコンビューの四隅に挿入される空白"
+
+#: ../src/exo/exo-icon-view.c:799
+msgid "Markup column"
+msgstr "マークアップするカラム"
+
+#: ../src/exo/exo-icon-view.c:800
+msgid "Model column used to retrieve the text if using Pango markup"
+msgstr "Pango マークアップを利用するとき、そのテキストを取得するカラム"
+
+#: ../src/exo/exo-icon-view.c:814
+msgid "Icon View Model"
+msgstr "アイコンビューモデル"
+
+#: ../src/exo/exo-icon-view.c:815
+msgid "The model for the icon view"
+msgstr "アイコンビューのモデル"
+
+#: ../src/exo/exo-icon-view.c:828
+msgid "Orientation"
+msgstr "オリエンテーション"
+
+#: ../src/exo/exo-icon-view.c:829
+msgid ""
+"How the text and icon of each item are positioned relative to each other"
+msgstr "各項目のテキストとアイコンが互いにどう位置するか"
+
+#: ../src/exo/exo-icon-view.c:845
+msgid "Pixbuf column"
+msgstr "Pixbuf カラム"
+
+#: ../src/exo/exo-icon-view.c:846
+msgid "Model column used to retrieve the icon pixbuf from"
+msgstr "アイコンの pixbuf を取得するモデルのカラム"
+
+#: ../src/exo/exo-icon-view.c:861
+msgid "Reorderable"
+msgstr "並び替え可能か"
+
+#: ../src/exo/exo-icon-view.c:862
+msgid "View is reorderable"
+msgstr "ビューが並び替え可能であるか"
+
+#: ../src/exo/exo-icon-view.c:877
+msgid "Row Spacing"
+msgstr "行の空白"
+
+#: ../src/exo/exo-icon-view.c:878
+msgid "Space which is inserted between grid rows"
+msgstr "行と行の間に挿入される空白"
+
+#: ../src/exo/exo-icon-view.c:892
+msgid "Search Column"
+msgstr "検索するカラム"
+
+#: ../src/exo/exo-icon-view.c:893
+msgid "Model column to search through when searching through item"
+msgstr "モデルから項目を検索する時に使うカラム"
+
+#: ../src/exo/exo-icon-view.c:907
+msgid "Selection mode"
+msgstr "選択モード"
+
+#: ../src/exo/exo-icon-view.c:908
+msgid "The selection mode"
+msgstr "選択時のモード"
+
+#: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
+msgid "Single Click"
+msgstr "シングルクリック"
+
+#: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
+msgid "Whether the items in the view can be activated with single clicks"
+msgstr "ビュー中の項目をシングルクリックでアクティベートできるようにするか"
+
+#: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
+msgid "Single Click Timeout"
+msgstr "シングルクリック・タイムアウト"
+
+#: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
+msgid ""
+"The amount of time after which the item under the mouse cursor will be "
+"selected automatically in single click mode"
+msgstr ""
+"シングルクリックモードにおいて、項目にマウスカーソルを置いてからそれを選択す"
+"るまでの時間"
+
+#: ../src/exo/exo-icon-view.c:956
+msgid "Spacing"
+msgstr "空白"
+
+#: ../src/exo/exo-icon-view.c:957
+msgid "Space which is inserted between cells of an item"
+msgstr "項目のセル間に挿入される空白"
+
+#: ../src/exo/exo-icon-view.c:972
+msgid "Text column"
+msgstr "テキストカラム"
+
+#: ../src/exo/exo-icon-view.c:973
+msgid "Model column used to retrieve the text from"
+msgstr "モデル中のどのカラムからテキストを得るか"
+
+#: ../src/exo/exo-icon-view.c:980
+msgid "Selection Box Color"
+msgstr "選択ボックスの色"
+
+#: ../src/exo/exo-icon-view.c:981
+msgid "Color of the selection box"
+msgstr "選択ボックスの色"
+
+#: ../src/exo/exo-icon-view.c:987
+msgid "Selection Box Alpha"
+msgstr "選択ボックスのアルファ値"
+
+#: ../src/exo/exo-icon-view.c:988
+msgid "Opacity of the selection box"
+msgstr "選択ボックスの透明度"
+
+#. mime-type: application
+#: ../src/file-assoc-dlg.c:34
+msgid "application"
+msgstr "アプリケーション"
+
+#. mime-type: audio
+#: ../src/file-assoc-dlg.c:37
+msgid "audio"
+msgstr "オーディオ"
+
+#. mime-type: video
+#: ../src/file-assoc-dlg.c:40
+msgid "video"
+msgstr "ビデオ"
+
+#. mime-type: text
+#: ../src/file-assoc-dlg.c:43
+msgid "text"
+msgstr "テキスト"
+
+#. mime-type: multipart
+#: ../src/file-assoc-dlg.c:46
+msgid "multipart"
+msgstr "マルチパート"
+
+#. mime-type: image
+#: ../src/file-assoc-dlg.c:49
+msgid "image"
+msgstr "画像"
+
+#. mime-type: message
+#: ../src/file-assoc-dlg.c:52
+msgid "message"
+msgstr "メッセージ"
+
+#. mime-type: model
+#: ../src/file-assoc-dlg.c:55
+msgid "model"
+msgstr "モデル"
+
+#. mime-type: inode
+#: ../src/file-assoc-dlg.c:58
+msgid "inode"
+msgstr "iノード"
+
+#. mime-type: packages
+#: ../src/file-assoc-dlg.c:61
+msgid "packages"
+msgstr "パッケージ"
+
+#: ../src/main.c:92
 msgid "Don't show desktop icons."
 msgstr "デスクトップアイコンを表示しない"
 
-#: ../src/main.c:91
+#: ../src/main.c:93
 msgid "Run PCManFM as a daemon"
 msgstr "PCmanFM をデーモンとして実行"
 
-#: ../src/main.c:92
+#: ../src/main.c:94
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
-msgstr "フォルダは新規ウィンドウではなく直前のウィンドウにつくる新規タブで開く"
+msgstr ""
+"フォルダは新規ウィンドウではなく、直前のウィンドウにつくる新規タブで開く"
 
-#: ../src/main.c:93
+#: ../src/main.c:95
 msgid ""
 "Open preference dialog. 'n' is the number of page you want to show (1, 2, "
 "3...)."
-msgstr ""
+msgstr "設定ダイアログを開く。'n' は表示するページ番号 (1, 2, 3...)"
 
-#: ../src/main.c:94
+#: ../src/main.c:96
 msgid "Find Files with PCManFM"
-msgstr ""
+msgstr "PCmanFMでファイルを検索する"
 
-#: ../src/main.c:101
+#: ../src/main.c:103
 msgid "Set desktop wallpaper"
-msgstr ""
+msgstr "デスクトップに壁紙を設定する"
 
-#: ../src/main.c:110
+#: ../src/main.c:112
 msgid "[FILE1, FILE2,...]"
 msgstr "[ファイル1, ファイル2,...]"
 
-#: ../src/main.c:330
+#: ../src/main.c:332
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+のアイコンテーマが適切に設定されていません"
 
-#: ../src/main.c:332
+#: ../src/main.c:334
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -91,17 +834,17 @@ msgstr ""
 "きません。現時点ではアイコン名に関する規格はありませんが、将来freedesktop.org"
 "がこれを解決するでしょう。"
 
-#: ../src/main.c:650 ../src/main.c:719 ../src/main.c:770
-#: ../src/main-window.c:1581 ../src/main-window.c:1648
-#: ../src/ptk/ptk-file-browser.c:503 ../src/ptk/ptk-file-browser.c:520
-#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:224
-#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:325
-#: ../src/ptk/ptk-file-misc.c:412 ../src/ptk/ptk-file-properties.c:695
-#: ../src/ptk/ptk-file-properties.c:706
+#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main-window.c:1704 ../src/main-window.c:1771
+#: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
+#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
+#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:326
+#: ../src/ptk/ptk-file-misc.c:415 ../src/ptk/ptk-file-properties.c:701
+#: ../src/ptk/ptk-file-properties.c:712
 msgid "Error"
 msgstr "エラー"
 
-#: ../src/main.c:650
+#: ../src/main.c:662
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -111,15 +854,15 @@ msgstr ""
 "\n"
 "\"FAM\" ないし \"Gamin\" はインストールされ実行されていますか?"
 
-#: ../src/main.c:719
+#: ../src/main.c:731
 msgid "File doesn't exist"
 msgstr "ファイルが存在しません"
 
-#: ../src/main.c:766
+#: ../src/main.c:778
 msgid "Don't know how to open the file"
 msgstr "ファイルが開く方法が不明です"
 
-#: ../src/main.c:768
+#: ../src/main.c:780
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -130,306 +873,309 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: ../src/main-window.c:296 ../src/ptk/ptk-file-menu.c:109
+#: ../src/main-window.c:304 ../src/ptk/ptk-file-menu.c:109
 #: ../src/desktop/desktop-window.c:186
 msgid "_Folder"
 msgstr "フォルダ(_F)"
 
-#: ../src/main-window.c:297 ../src/ptk/ptk-file-menu.c:110
+#: ../src/main-window.c:305 ../src/ptk/ptk-file-menu.c:110
 #: ../src/desktop/desktop-window.c:187
 msgid "_Text File"
 msgstr "テキストファイル(_T)"
 
-#: ../src/main-window.c:303
+#: ../src/main-window.c:311
 msgid "New _Window"
 msgstr "新規ウィンドウ(_W)"
 
-#: ../src/main-window.c:304
+#: ../src/main-window.c:312
 msgid "New _Tab"
 msgstr "新規タブ(_T)"
 
-#: ../src/main-window.c:306 ../src/ptk/ptk-file-menu.c:133
+#: ../src/main-window.c:314 ../src/ptk/ptk-file-menu.c:133
 #: ../src/desktop/desktop-window.c:196
 msgid "_Create New"
 msgstr "新規作成(_C)"
 
-#: ../src/main-window.c:307
+#: ../src/main-window.c:315
 msgid "File _Properties"
 msgstr "プロパティ(_P)"
 
-#: ../src/main-window.c:309
+#: ../src/main-window.c:317
 msgid "Close Tab"
 msgstr "タブを閉じる"
 
-#: ../src/main-window.c:310
-#, fuzzy
+#: ../src/main-window.c:318
 msgid "_Close Window"
-msgstr "新規ウィンドウ(_W)"
+msgstr "ウィンドウを閉じる(_C)"
 
-#: ../src/main-window.c:319 ../src/ptk/ptk-file-menu.c:128
+#: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "削除(_D)"
 
-#: ../src/main-window.c:320 ../src/ptk/ptk-file-browser.c:1320
+#: ../src/main-window.c:328 ../src/ptk/ptk-file-browser.c:1396
 #: ../src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "名前の変更(_R)"
 
-#: ../src/main-window.c:322
+#: ../src/main-window.c:330
 msgid "Select _All"
 msgstr "すべて選択(_A)"
 
-#: ../src/main-window.c:323
+#: ../src/main-window.c:331
 msgid "_Invert Selection"
 msgstr "選択の反転(_I)"
 
-#: ../src/main-window.c:332
+#: ../src/main-window.c:340
 msgid "Go _Back"
 msgstr "戻る(_B)"
 
-#: ../src/main-window.c:333
+#: ../src/main-window.c:341
 msgid "Go _Forward"
 msgstr "進む(_F)"
 
-#: ../src/main-window.c:334
+#: ../src/main-window.c:342
 msgid "Go to _Parent Folder"
 msgstr "上へ(_P)"
 
-#: ../src/main-window.c:335
+#: ../src/main-window.c:343
 msgid "Go _Home"
 msgstr "ホーム(_H)"
 
-#: ../src/main-window.c:347 ../src/desktop/desktop-window.c:173
+#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:173
 msgid "Sort by _Name"
 msgstr "名前順(_N)"
 
-#: ../src/main-window.c:348 ../src/desktop/desktop-window.c:174
+#: ../src/main-window.c:356 ../src/desktop/desktop-window.c:174
 msgid "Sort by _Size"
 msgstr "サイズ順(_S)"
 
-#: ../src/main-window.c:349 ../src/desktop/desktop-window.c:176
+#: ../src/main-window.c:357 ../src/desktop/desktop-window.c:176
 msgid "Sort by _Modification Time"
 msgstr "更新時刻順(_M)"
 
-#: ../src/main-window.c:350 ../src/desktop/desktop-window.c:175
+#: ../src/main-window.c:358 ../src/desktop/desktop-window.c:175
 msgid "Sort by _Type"
 msgstr "ファイルタイプ順(_T)"
 
-#: ../src/main-window.c:351
+#: ../src/main-window.c:359
 msgid "Sort by _Permission"
 msgstr "パーミッション順(_P)"
 
-#: ../src/main-window.c:352
+#: ../src/main-window.c:360
 msgid "Sort by _Owner"
 msgstr "所有者順(_O)"
 
-#: ../src/main-window.c:354 ../src/desktop/desktop-window.c:179
+#: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
 msgstr "昇順"
 
-#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:180
+#: ../src/main-window.c:363 ../src/desktop/desktop-window.c:180
 msgid "Descending"
 msgstr "降順"
 
-#: ../src/main-window.c:361
+#: ../src/main-window.c:369
 msgid "_Open Side Pane"
 msgstr "サイドペインを開く(_O)"
 
-#: ../src/main-window.c:363
+#: ../src/main-window.c:371
 msgid "Show _Location Pane"
 msgstr "場所(_L)"
 
-#: ../src/main-window.c:364
+#: ../src/main-window.c:372
 msgid "Show _Directory Tree"
 msgstr "ディレクトリツリー(_D)"
 
-#: ../src/main-window.c:370
+#: ../src/main-window.c:378
 msgid "_Refresh"
 msgstr "更新(_R)"
 
-#: ../src/main-window.c:371
+#: ../src/main-window.c:379
 msgid "Side _Pane"
 msgstr "サイドペイン(_P)"
 
-#: ../src/main-window.c:374
+#. PTK_CHECK_MENU_ITEM( N_( "_Full Screen" ), on_fullscreen_activate, GDK_F11, 0 ),
+#: ../src/main-window.c:381
+msgid "L_ocation Bar"
+msgstr "ロケーションバー(_L)"
+
+#: ../src/main-window.c:383
 msgid "Show _Hidden Files"
 msgstr "隠しファイルを表示する(_H)"
 
-#: ../src/main-window.c:375
+#: ../src/main-window.c:384
 msgid "_Sort..."
 msgstr "整列(_S)"
 
-#: ../src/main-window.c:377
+#: ../src/main-window.c:386
 msgid "View as _Icons"
 msgstr "アイコン(_I)"
 
-#: ../src/main-window.c:378
+#: ../src/main-window.c:387
 msgid "View as _Compact List"
 msgstr "簡易リスト(_C)"
 
-#: ../src/main-window.c:379
+#: ../src/main-window.c:388
 msgid "View as Detailed _List"
 msgstr "詳細(_L)"
 
-#: ../src/main-window.c:385
+#: ../src/main-window.c:394
 msgid "Open _Terminal"
 msgstr "端末を開く(_T)"
 
-#: ../src/main-window.c:386
+#: ../src/main-window.c:395
 msgid "Open Current Folder as _Root"
-msgstr "Root権限で現在のフォルダを開く(_R)"
+msgstr "rootユーザとして現在のフォルダを開く(_R)"
 
-#: ../src/main-window.c:390
-#, fuzzy
+#: ../src/main-window.c:399
 msgid "_Find Files"
-msgstr "ファイル(_F)"
+msgstr "ファイルを検索(_F)"
 
-#: ../src/main-window.c:396
+#: ../src/main-window.c:405
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: ../src/main-window.c:397
+#: ../src/main-window.c:406
 msgid "_Edit"
 msgstr "編集(_E)"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: ../src/main-window.c:399
+#: ../src/main-window.c:408
 msgid "_Go"
 msgstr "移動(_G)"
 
-#: ../src/main-window.c:400
+#: ../src/main-window.c:409
 msgid "_Bookmark"
 msgstr "ブックマーク(_B)"
 
-#: ../src/main-window.c:401
+#: ../src/main-window.c:410
 msgid "_View"
 msgstr "表示(_V)"
 
-#: ../src/main-window.c:402
+#: ../src/main-window.c:411
 msgid "_Tool"
 msgstr "ツール(_T)"
 
-#: ../src/main-window.c:403
+#: ../src/main-window.c:412
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../src/main-window.c:411
+#: ../src/main-window.c:420
 msgid "New Tab"
 msgstr "新規タブ"
 
-#: ../src/main-window.c:412
+#: ../src/main-window.c:421
 msgid "Back"
 msgstr "戻る"
 
-#: ../src/main-window.c:413
+#: ../src/main-window.c:422
 msgid "Forward"
 msgstr "進む"
 
-#: ../src/main-window.c:414
+#: ../src/main-window.c:423
 msgid "Parent Folder"
 msgstr "上へ"
 
-#: ../src/main-window.c:415
+#: ../src/main-window.c:424
 msgid "Refresh"
 msgstr "更新"
 
-#: ../src/main-window.c:416
+#: ../src/main-window.c:425
 msgid "Home Directory"
 msgstr "ホーム"
 
-#: ../src/main-window.c:417
+#: ../src/main-window.c:426
 msgid "Open Side Pane"
 msgstr "サイドペインを開く"
 
-#: ../src/main-window.c:423
+#: ../src/main-window.c:432
 msgid "Go"
 msgstr "移動"
 
-#: ../src/main-window.c:642
+#: ../src/main-window.c:664
 msgid "Warning: You are in super user mode"
 msgstr "警告: 現在あなたはroot権限で操作しています"
 
-#: ../src/main-window.c:1582
+#: ../src/main-window.c:1705
 msgid "Terminal program has not been set"
 msgstr "端末プログラムが未設定です"
 
-#: ../src/main-window.c:1723
+#: ../src/main-window.c:1846
 msgid "_Add to Bookmarks"
 msgstr "ブックマークに追加(_A)"
 
-#: ../src/main-window.c:1724
+#: ../src/main-window.c:1847
 msgid "_Edit Bookmarks"
 msgstr "ブックマークの編集(_E)"
 
-#: ../src/main-window.c:1801
+#: ../src/main-window.c:1918
 msgid "Loading..."
 msgstr "読み込み中..."
 
-#: ../src/main-window.c:2011
+#: ../src/main-window.c:2103
 #, c-format
 msgid ", Free space: %s (Total: %s )"
 msgstr ", 空き容量: %s (合計: %s )"
 
-#: ../src/main-window.c:2020
+#: ../src/main-window.c:2112
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
 msgstr[0] "%d 個のアイテムを選択 (%s)%s"
 
-#: ../src/main-window.c:2030
+#: ../src/main-window.c:2122
 #, c-format
 msgid "%d hidden"
 msgid_plural "%d hidden"
 msgstr[0] "隠しアイテム %d 個"
 
-#: ../src/main-window.c:2031
+#: ../src/main-window.c:2123
 #, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
 msgstr[0] "%d 個の可視アイテム (%s)%s"
 
-#: ../src/ptk/ptk-file-browser.c:504
+#: ../src/ptk/ptk-file-browser.c:521
 msgid "Directory doesn't exist!"
 msgstr "ディレクトリがありません!"
 
-#: ../src/ptk/ptk-file-browser.c:1316 ../src/ptk/ptk-file-menu.c:142
+#: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "新規タブで開く(_T)"
 
-#: ../src/ptk/ptk-file-browser.c:1317 ../src/ptk/ptk-file-menu.c:143
+#: ../src/ptk/ptk-file-browser.c:1393 ../src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "新規ウィンドウで開く(_W)"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/edit-bookmarks.c:201
-#: ../src/find-files.c:746
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/edit-bookmarks.c:201
+#: ../src/find-files.c:799
 msgid "Name"
 msgstr "名前"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/find-files.c:767
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:820
 msgid "Size"
 msgstr "サイズ"
 
-#: ../src/ptk/ptk-file-browser.c:1570 ../src/find-files.c:771
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:824
 msgid "Type"
 msgstr "ファイルタイプ"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Permission"
 msgstr "パーミッション"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Owner:Group"
 msgstr "所有者:グループ"
 
-#: ../src/ptk/ptk-file-browser.c:1571
+#: ../src/ptk/ptk-file-browser.c:1647
 msgid "Last Modification"
 msgstr "最終更新時刻"
 
-#: ../src/ptk/ptk-file-browser.c:2780
+#: ../src/ptk/ptk-file-browser.c:2856
 msgid "Location"
 msgstr "場所"
 
-#: ../src/ptk/ptk-file-browser.c:2781
+#: ../src/ptk/ptk-file-browser.c:2857
 msgid "Directory Tree"
 msgstr "ディレクトリツリー"
 
@@ -441,27 +1187,27 @@ msgstr "ごみ箱"
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: ../src/ptk/ptk-location-view.c:440 ../src/ptk/ptk-location-view.c:632
+#: ../src/ptk/ptk-location-view.c:441 ../src/ptk/ptk-location-view.c:635
 msgid "Unable to mount device"
 msgstr "デバイスがマウントできません"
 
-#: ../src/ptk/ptk-location-view.c:647
+#: ../src/ptk/ptk-location-view.c:652
 msgid "Unable to unmount device"
 msgstr "デバイスがアンマウントできません"
 
-#: ../src/ptk/ptk-location-view.c:664
+#: ../src/ptk/ptk-location-view.c:671
 msgid "Unable to eject device"
 msgstr "デバイスが取り出せません"
 
-#: ../src/ptk/ptk-location-view.c:722
+#: ../src/ptk/ptk-location-view.c:730
 msgid "_Mount File System"
 msgstr "ファイルシステムをマウントする(_M)"
 
-#: ../src/ptk/ptk-location-view.c:732
+#: ../src/ptk/ptk-location-view.c:740
 msgid "_Eject"
 msgstr "取り出し(_E)"
 
-#: ../src/ptk/ptk-location-view.c:738
+#: ../src/ptk/ptk-location-view.c:746
 msgid "_Unmount File System"
 msgstr "ファイルシステムをアンマウントする(_U)"
 
@@ -513,28 +1259,6 @@ msgstr "リンクしています..."
 msgid "Changing Properties"
 msgstr "プロパティを変更しています"
 
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "送り先:"
-
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
-msgstr "処理中:"
-
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "準備中..."
-
-#. Progress:
-#: ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
-msgstr "進行中:"
-
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "キャンセルしますか?"
@@ -555,15 +1279,15 @@ msgid "Please choose a new file name."
 msgstr "新しいファイル名を選んでください。"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
+#. ex: "/home/pcman/some_file" already exists.\n\nDo you want to overwrite existing file?"
 #: ../src/ptk/ptk-file-task.c:427
 #, c-format
 msgid ""
-"\"%s\" has existed.\n"
+"\"%s\" already exists.\n"
 "\n"
 "%s"
 msgstr ""
-"\"%s\" がありました。\n"
+"\"%s\" は既に存在します。\n"
 "\n"
 "%s"
 
@@ -603,37 +1327,37 @@ msgstr "スキップ"
 msgid "Skip All"
 msgstr "すべてスキップ"
 
-#: ../src/ptk/ptk-file-archiver.c:119
-msgid "Save Compressd Files to..."
+#: ../src/ptk/ptk-file-archiver.c:125
+msgid "Save Compressed Files to..."
 msgstr "圧縮ファイルの保存..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "圧縮フォーマット:"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "圧縮ファイル %s を作成中"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "圧縮ファイル"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "ファイルの展開先"
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "ファイルを %s に展開しています"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "ファイルを展開"
 
-#: ../src/ptk/ptk-console-output.c:66
+#: ../src/ptk/ptk-console-output.c:67
 msgid ""
 "\n"
 "Complete!"
@@ -641,7 +1365,7 @@ msgstr ""
 "\n"
 "完了!"
 
-#: ../src/ptk/ptk-console-output.c:170
+#: ../src/ptk/ptk-console-output.c:171
 msgid "Command:"
 msgstr "コマンド:"
 
@@ -696,7 +1420,7 @@ msgstr "\"%s\" で開く(_O)"
 
 #. delete some confusing menu item if this menu is for current folder
 #: ../src/ptk/ptk-file-menu.c:408 ../src/ptk/ptk-file-menu.c:417
-#: ../src/find-files.c:228
+#: ../src/find-files.c:229
 msgid "_Open"
 msgstr "開く(_O)"
 
@@ -715,10 +1439,10 @@ msgstr "新しい名前を入力してください:"
 #: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
 msgid ""
-"The file name you specified has existed.\n"
+"The file name you specified already exists.\n"
 "Please input a new one:"
 msgstr ""
-"その名前のファイルはすでにあります。\n"
+"そのファイル名はすでに存在します。\n"
 "別の名前を入力してください:"
 
 #: ../src/ptk/ptk-file-misc.c:195 ../src/ptk/ptk-file-misc.c:197
@@ -741,33 +1465,33 @@ msgstr "作成するファイルの名前を入力してください:"
 msgid "The new file cannot be created!"
 msgstr "ファイルの作成に失敗しました!"
 
-#: ../src/ptk/ptk-file-properties.c:304
+#: ../src/ptk/ptk-file-properties.c:305
 msgid "Multiple files are selected"
 msgstr "複数ファイルが選択されています"
 
-#: ../src/ptk/ptk-file-properties.c:381
+#: ../src/ptk/ptk-file-properties.c:384
 msgid "Multiple files of different types"
 msgstr "ファイル形式がそれぞれ異なります"
 
-#: ../src/ptk/ptk-file-properties.c:449
+#: ../src/ptk/ptk-file-properties.c:452
 msgid "Other program..."
 msgstr "他のプログラム..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: ../src/ptk/ptk-file-properties.c:543
+#: ../src/ptk/ptk-file-properties.c:546
 msgid "Calculating..."
 msgstr "計算中..."
 
-#: ../src/ptk/ptk-file-properties.c:695
+#: ../src/ptk/ptk-file-properties.c:701
 msgid "Invalid User"
 msgstr "不正なユーザ"
 
-#: ../src/ptk/ptk-file-properties.c:706
+#: ../src/ptk/ptk-file-properties.c:712
 msgid "Invalid Group"
 msgstr "不正なグループ"
 
-#: ../src/ptk/ptk-file-properties.c:754
+#: ../src/ptk/ptk-file-properties.c:760
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr "変更をサブツリー全体に適用しますか?"
@@ -971,7 +1695,7 @@ msgstr "オーディオディスク"
 #: ../src/vfs/vfs-volume-hal.c:696
 #, c-format
 msgid "%s Removable Volume"
-msgstr "%s 個のリムーバルボリューム"
+msgstr "%s のリムーバルボリューム"
 
 #: ../src/vfs/vfs-volume-hal.c:704
 msgid "Volume"
@@ -1021,7 +1745,7 @@ msgid ""
 "The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
 "your system"
 msgstr ""
-"ボリューム \"%s\" はこのシステムが非対応の <i>%s</i> ファイルシステムです"
+"ボリューム \"%s\" は、このシステムが非対応の <i>%s</i> ファイルシステムです"
 
 #: ../src/vfs/vfs-volume-hal.c:2274
 #, c-format
@@ -1043,7 +1767,7 @@ msgstr "エラー <i>%s</i>"
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
 msgstr ""
-"ボリューム \"%s\" はおそらくコマンドラインで手動でマウントされたものです"
+"ボリューム \"%s\" は、おそらくコマンドラインで手動でマウントされたものです"
 
 #: ../src/vfs/vfs-volume-hal.c:2289
 #, c-format
@@ -1068,499 +1792,30 @@ msgstr "アイコン(_I)"
 msgid "_Desktop Settings"
 msgstr "デスクトップ設定(_D)"
 
-#: ../src/desktop/desktop-window.c:1832
+#: ../src/desktop/desktop-window.c:1842
 msgid "My Documents"
 msgstr "マイドキュメント"
 
-#: ../src/find-files.c:229
+#: ../src/find-files.c:230
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "所属するフォルダを開く(_F)"
 
-#: ../src/find-files.c:673
-#, fuzzy
+#: ../src/find-files.c:677
+msgid "Select a folder"
+msgstr "フォルダの選択"
+
+#: ../src/find-files.c:722
 msgid "Browse..."
-msgstr "ダイアログで選ぶ(_B)"
+msgstr "ダイアログから選択"
 
-#: ../src/find-files.c:692
+#: ../src/find-files.c:744
 msgid "All Local Disk Partitions"
-msgstr ""
+msgstr "すべてのローカルディスクのパーティション"
 
-#: ../src/find-files.c:761
-#, fuzzy
+#: ../src/find-files.c:814
 msgid "Folder"
-msgstr "フォルダ(_F)"
+msgstr "フォルダ"
 
-#: ../src/find-files.c:777
-#, fuzzy
+#: ../src/find-files.c:830
 msgid "Last Modified"
 msgstr "最終更新時刻"
-
-#: ../data/ui/prefdlg.glade.h:1
-msgid "<b>Behavior</b>"
-msgstr "<b>動作</b>"
-
-#: ../data/ui/prefdlg.glade.h:2
-msgid "<b>Colors</b>"
-msgstr "<b>配色</b>"
-
-#: ../data/ui/prefdlg.glade.h:3
-msgid "<b>Display</b>"
-msgstr "<b>画面</b>"
-
-#: ../data/ui/prefdlg.glade.h:4
-#, fuzzy
-msgid "<b>General</b>"
-msgstr "一般(_G)"
-
-#: ../data/ui/prefdlg.glade.h:5
-msgid "<b>Wallpaper</b>"
-msgstr "<b>壁紙</b>"
-
-#: ../data/ui/prefdlg.glade.h:6
-#, fuzzy
-msgid "Background:"
-msgstr "背景"
-
-#: ../data/ui/prefdlg.glade.h:7
-msgid "Bookmarks:"
-msgstr "ブックマーク:"
-
-#: ../data/ui/prefdlg.glade.h:8
-msgid "Disable \"Trash Can\" and delete files from disk directly"
-msgstr "\"ごみ箱\" を無効にしてファイルをディスクから直接削除する"
-
-#: ../data/ui/prefdlg.glade.h:9
-msgid "Display image files with supported format as thumbnails"
-msgstr "サポートされている形式の画像ファイルはサムネイルで表示"
-
-#: ../data/ui/prefdlg.glade.h:10
-msgid "Manage the desktop and show file icons"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:11
-msgid "Max size of files displayed as thumbnails:"
-msgstr "サムネイル表示する画像の最大サイズ:"
-
-#: ../data/ui/prefdlg.glade.h:12
-msgid "Mode:"
-msgstr "モード:"
-
-#: ../data/ui/prefdlg.glade.h:13
-msgid "On-disk file name encoding:"
-msgstr "ディスク上のファイル名エンコーディング:"
-
-#: ../data/ui/prefdlg.glade.h:14
-msgid "Open files with single click"
-msgstr ""
-
-#: ../data/ui/prefdlg.glade.h:15
-msgid ""
-"Opened in Current Tab\n"
-"Opened in New Tab\n"
-"Opened in New Window"
-msgstr ""
-"現在のタブで開く\n"
-"新規タブで開く\n"
-"新規ウィンドウで開く"
-
-#: ../data/ui/prefdlg.glade.h:18
-msgid "Please select an image file"
-msgstr "画像ファイルを選んでください"
-
-#: ../data/ui/prefdlg.glade.h:19
-#, fuzzy
-msgid "Preferences"
-msgstr "設定"
-
-#: ../data/ui/prefdlg.glade.h:20
-#, fuzzy
-msgid "Shadow:"
-msgstr "影"
-
-#: ../data/ui/prefdlg.glade.h:21
-#, fuzzy
-msgid "Show \"My Documents\" icon on desktop"
-msgstr "ファイルアイコンをデスクトップに表示"
-
-#: ../data/ui/prefdlg.glade.h:22
-#, fuzzy
-msgid "Show icons of volumes on desktop"
-msgstr "ファイルアイコンをデスクトップに表示"
-
-#: ../data/ui/prefdlg.glade.h:23
-msgid "Show menus provided by WM when desktop is clicked"
-msgstr ""
-"デスクトップをクリックしたとき、ウィンドウマネージャのメニューを表示する"
-
-#: ../data/ui/prefdlg.glade.h:24
-msgid "Size of Big Icons:"
-msgstr "大きいアイコンのサイズ:"
-
-#: ../data/ui/prefdlg.glade.h:25
-msgid "Size of Small Icons:"
-msgstr "小さいアイコンのサイズ:"
-
-#: ../data/ui/prefdlg.glade.h:26
-msgid ""
-"Stretch to fill the entire screen\n"
-"Stretch to fit the screen\n"
-"Center on the screen\n"
-"Tile the image to fill the entire screen"
-msgstr ""
-"画面いっぱいに引き伸ばす\n"
-"画面サイズに合わせて引き伸ばす\n"
-"画面中央に配置\n"
-"画面全体に敷き詰める"
-
-#: ../data/ui/prefdlg.glade.h:30
-msgid "Terminal:"
-msgstr "端末:"
-
-#: ../data/ui/prefdlg.glade.h:31
-#, fuzzy
-msgid "Text:"
-msgstr "テキスト"
-
-#: ../data/ui/prefdlg.glade.h:32
-msgid "Wallpaper:"
-msgstr "壁紙:"
-
-#: ../data/ui/prefdlg.glade.h:33
-msgid "_Advanced"
-msgstr "上級者向け(_A)"
-
-#: ../data/ui/prefdlg.glade.h:34
-msgid "_Desktop"
-msgstr "デスクトップ(_D)"
-
-#: ../data/ui/prefdlg.glade.h:35 ../data/ui/file_properties.glade.h:24
-msgid "_General"
-msgstr "一般(_G)"
-
-#: ../data/ui/prefdlg.glade.h:36
-msgid "_Volume Management"
-msgstr "ボリューム管理(_V)"
-
-#: ../data/ui/file_properties.glade.h:1
-#, fuzzy
-msgid "<b>File Type:</b>"
-msgstr "ファイルタイプ:"
-
-#: ../data/ui/file_properties.glade.h:2
-#, fuzzy
-msgid "<b>File _Name:</b>"
-msgstr "ファイル名:"
-
-#: ../data/ui/file_properties.glade.h:3
-#, fuzzy
-msgid "<b>Group:</b>"
-msgstr "グループ:"
-
-#: ../data/ui/file_properties.glade.h:4
-#, fuzzy
-msgid "<b>Last Access:</b>"
-msgstr "最終アクセス時刻:"
-
-#: ../data/ui/file_properties.glade.h:5
-#, fuzzy
-msgid "<b>Last Modification:</b>"
-msgstr "最終更新時刻:"
-
-#: ../data/ui/file_properties.glade.h:6
-#, fuzzy
-msgid "<b>Location:</b>"
-msgstr "場所:"
-
-#: ../data/ui/file_properties.glade.h:7
-#, fuzzy
-msgid "<b>Open _with:</b>"
-msgstr "開くアプリケーション:"
-
-#: ../data/ui/file_properties.glade.h:8
-#, fuzzy
-msgid "<b>Other Users:</b>"
-msgstr "他のユーザ:"
-
-#: ../data/ui/file_properties.glade.h:9
-#, fuzzy
-msgid "<b>Owner:</b>"
-msgstr "<b>動作</b>"
-
-#: ../data/ui/file_properties.glade.h:10
-#, fuzzy
-msgid "<b>Size on Disk:</b>"
-msgstr "ディスク上のサイズ:"
-
-#: ../data/ui/file_properties.glade.h:11
-#, fuzzy
-msgid "<b>Total Size of Files:</b>"
-msgstr "ファイルの合計サイズ:"
-
-#: ../data/ui/file_properties.glade.h:12
-#, fuzzy
-msgid "<b>_Group:</b>"
-msgstr "グループ:"
-
-#: ../data/ui/file_properties.glade.h:13
-#, fuzzy
-msgid "<b>_Owner:</b>"
-msgstr "<b>動作</b>"
-
-#: ../data/ui/file_properties.glade.h:14
-msgid "Execute"
-msgstr "実行"
-
-#: ../data/ui/file_properties.glade.h:15
-msgid "File Properties"
-msgstr "ファイルのプロパティ"
-
-#: ../data/ui/file_properties.glade.h:16
-msgid "Read"
-msgstr "読み込み"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:18
-msgid "Set GID"
-msgstr "Set GID"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:20
-msgid "Set UID"
-msgstr "Set UID"
-
-#. This is used in file attribute
-#: ../data/ui/file_properties.glade.h:22
-msgid "Sticky"
-msgstr "スティッキー"
-
-#: ../data/ui/file_properties.glade.h:23
-msgid "Write"
-msgstr "書き込み"
-
-#: ../data/ui/file_properties.glade.h:25
-msgid "_Permissions"
-msgstr "パーミッション(_P)"
-
-#: ../data/ui/appchooserdlg.glade.h:1
-msgid "Choose an Application"
-msgstr "アプリケーションを選んでください"
-
-#: ../data/ui/appchooserdlg.glade.h:2
-msgid "File Type To be Opened:"
-msgstr "開くファイルタイプ"
-
-#: ../data/ui/appchooserdlg.glade.h:3
-msgid "Opened in Terminal"
-msgstr "端末で開く"
-
-#: ../data/ui/appchooserdlg.glade.h:4
-msgid ""
-"Please choose an application from following lists or enter the command line "
-"by hand:"
-msgstr ""
-"以下のリストからアプリケーションを選んでください。あるいはコマンドラインを手"
-"入力してください:"
-
-#: ../data/ui/appchooserdlg.glade.h:5
-msgid "Set selected application to default action"
-msgstr "このアプリケーションを標準にする"
-
-#: ../data/ui/appchooserdlg.glade.h:6
-msgid "_All Applications"
-msgstr "すべてのアプリケーション(_A)"
-
-#: ../data/ui/appchooserdlg.glade.h:7
-msgid "_Browse"
-msgstr "ダイアログで選ぶ(_B)"
-
-#: ../data/ui/appchooserdlg.glade.h:8
-msgid "_Command Line:"
-msgstr "コマンドライン(_C):"
-
-#: ../data/ui/appchooserdlg.glade.h:9
-msgid "_Recommended Applications"
-msgstr "推奨アプリケーション(_R)"
-
-#: ../data/ui/about-dlg.glade.h:1
-msgid "Copyright (C) 2005 - 2008"
-msgstr "Copyright (C) 2005 - 2008"
-
-#: ../data/ui/about-dlg.glade.h:2
-msgid ""
-"Lightweight file manager\n"
-"\n"
-"Developed by Hon Jen Yee (PCMan)"
-msgstr ""
-"軽量ファイルマネージャ\n"
-"\n"
-"Developed by Hon Jen Yee (PCMan)"
-
-#: ../data/ui/about-dlg.glade.h:5
-msgid ""
-"The icon was taken from \"nuoveXT 2\" icon theme\n"
-"created by Alexandre Moore (saki).\n"
-"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
-msgstr ""
-"Alexandre Moore (saki) 氏による \"nuoveXT 2\" アイコンテーマを使用しまし"
-"た。\n"
-"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
-
-#. Please replace this line with your own names, one name per line.
-#: ../data/ui/about-dlg.glade.h:9
-msgid "translator-credits"
-msgstr "Hironao Komatsu <hironao@users.sourceforge.net>"
-
-#: ../data/ui/about-dlg.glade.h:10
-msgid ""
-"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
-"\n"
-"Source code taken from other projects:\n"
-" * libmd5-rfc: Aladdin Enterprises\n"
-" * Working area detection: Gary Kramlich\n"
-" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
-" * Text and icon renderer uese code from Jonathan Blandford\n"
-" * Desktop icons use code from Brian Tarricone\n"
-" * Volume management uses code from following projects/authors:\n"
-"     * gnome-vfs: David Zeuthen\n"
-"     * thunar-vfs and libexo: Benedikt Meurer\n"
-"     * gnome-mount: David Zeuthen"
-msgstr ""
-"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
-"\n"
-"他のプロジェクトから流用したソースコード:\n"
-" * libmd5-rfc: Aladdin Enterprises\n"
-" * 作業領域の検出: Gary Kramlich\n"
-" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
-" * テキストとアイコンのレンダリング: Jonathan Blandford\n"
-" * デスクトップアイコン関連: Brian Tarricone\n"
-" * ボリューム管理のコードは以下の作者/プロジェクトから:\n"
-"     * gnome-vfs: David Zeuthen\n"
-"     * thunar-vfs および libexo: Benedikt Meurer\n"
-"     * gnome-mount: David Zeuthen"
-
-#: ../data/ui/find-files.glade.h:1
-#, fuzzy
-msgid "<b>File Content</b>"
-msgstr "ファイルタイプ:"
-
-#: ../data/ui/find-files.glade.h:2
-#, fuzzy
-msgid "<b>File Name Contains:</b>"
-msgstr "ファイル名:"
-
-#: ../data/ui/find-files.glade.h:3
-#, fuzzy
-msgid "<b>File Size</b>"
-msgstr "ファイルタイプ:"
-
-#: ../data/ui/find-files.glade.h:4
-#, fuzzy
-msgid "<b>File Types to Search</b>"
-msgstr "ファイルタイプ:"
-
-#: ../data/ui/find-files.glade.h:5
-#, fuzzy
-msgid "<b>Last Modified</b>"
-msgstr "最終更新時刻:"
-
-#: ../data/ui/find-files.glade.h:6
-msgid "<b>Places to Search</b>"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:7
-#, fuzzy
-msgid "<b>Search Result:</b>"
-msgstr "他のユーザ:"
-
-#: ../data/ui/find-files.glade.h:8
-msgid "All Files and Folders"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:9
-msgid ""
-"Any\n"
-"Within One Day\n"
-"Within One Week\n"
-"Within One Month\n"
-"Within One Year\n"
-"Within Selected Date Range"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:15
-msgid "Audio Files (mp3, ogg,...)"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:16
-msgid ""
-"Bytes\n"
-"KB\n"
-"MB\n"
-"GB"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:20
-msgid "Case Sensitive"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:21
-msgid "Content"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:22
-#, fuzzy
-msgid "File Contains:"
-msgstr "ファイルが存在しません"
-
-#: ../data/ui/find-files.glade.h:23
-msgid "Find Files"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:24
-#, fuzzy
-msgid "General"
-msgstr "一般(_G)"
-
-#: ../data/ui/find-files.glade.h:25
-msgid "Grater Than:"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:26
-msgid "Image Files (jpg, png,...)"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:27
-#, fuzzy
-msgid "Plain Text Files"
-msgstr "テキストファイル(_T)"
-
-#: ../data/ui/find-files.glade.h:28
-msgid "Search Again"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:29
-#, fuzzy
-msgid "Search Hidden Files"
-msgstr "隠しファイルを表示する(_H)"
-
-#: ../data/ui/find-files.glade.h:30
-msgid "Search in Sub Directories"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:31
-msgid "Size & Date"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:32
-msgid "Smaller Than:"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:33
-msgid "Use Regular Expression"
-msgstr ""
-
-#: ../data/ui/find-files.glade.h:34
-msgid "Video Files (avi, mpg,...)"
-msgstr ""
-
-#~ msgid "Owner:"
-#~ msgstr "所有者:"

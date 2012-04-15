@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <gtk/gtk.h>
 
 const char bookmarks_file_name[] = ".gtk-bookmarks";
@@ -27,6 +28,48 @@ typedef struct
     gpointer user_data;
 }
 BookmarksCallback;
+
+typedef struct unparsedLineO
+{
+    int lineNum;
+    char *line;
+} unparsedLine;
+
+/**
+ * malloc a unparsedLine structure
+ *
+ * @ret return the pointer of newly allocate structure
+ */
+static unparsedLine* unparsedLine_new() {
+  unparsedLine* ret;
+  ret = (unparsedLine*) malloc(sizeof(unparsedLine));
+  if (ret!=NULL) {
+    memset(ret,0,sizeof(unparsedLine));
+  }
+  return ret;
+}
+
+/**
+ * free a unparsedLine structure
+ * 
+ * @param data the pointer of the structure to be free
+ * @param user_data the pointer of a boolean value. If it's true, this
+ *                  function will also free the data->line. If it's NULL or
+ *                  false this function will only free the strcture.
+ */
+static void unparsedLine_delete( gpointer *data, gpointer *user_data) {
+  unparsedLine *d;
+  int *flag;
+  d = (unparsedLine*)(data);
+  flag = (int*)(user_data);
+  if (d!=NULL) {
+    if (flag && (*flag) && (d->line)) {
+      free(d->line);
+      d->line=NULL;
+    }
+    free(d);
+  }
+}
 
 /* Notify all callbacks that the bookmarks are changed. */
 static void ptk_bookmarks_notify()
@@ -52,19 +95,32 @@ static void load( const char* path )
     gchar* item;
     gchar* name;
     gchar* basename;
-    char line[1024];
+    char line_buf[1024];
+    char *line=NULL;
+    int lineNum=0;
+    unparsedLine *unusedLine=NULL;
     gsize name_len, upath_len;
 
     file = fopen( path, "r" );
     if( file )
     {
-        while( fgets( line, sizeof(line), file ) )
+        for(lineNum=0; fgets( line_buf, sizeof(line_buf), file ); lineNum++)
         {
             /* Every line is an URI containing no space charactetrs
                with its name appended (optional) */
+            line = strdup(line_buf);
             uri = strtok( line, " \r\n" );
             if( ! uri || !*uri )
+            {
+                unusedLine = unparsedLine_new();
+                unusedLine->lineNum = lineNum;
+                unusedLine->line = strdup(line_buf);
+                bookmarks.unparsedLines = g_list_append( 
+                                          bookmarks.unparsedLines, unusedLine);
+                free(line);
+                line=NULL;
                 continue;
+            }
             path = g_filename_from_uri(uri, NULL, NULL);
             if( path )
             {
@@ -90,7 +146,15 @@ static void load( const char* path )
                     g_free(upath);
                     g_free( basename );
                 }
+            } else {
+                unusedLine = unparsedLine_new();
+                unusedLine->lineNum = lineNum;
+                unusedLine->line = strdup(line_buf);
+                bookmarks.unparsedLines = g_list_append( 
+                                          bookmarks.unparsedLines, unusedLine);
             }
+            free(line);
+            line=NULL;
         }
         fclose( file );
     }
@@ -107,6 +171,12 @@ static void on_bookmark_file_changed( VFSFileMonitor* fm,
     g_list_foreach( bookmarks.list, (GFunc)g_free, NULL );
     g_list_free( bookmarks.list );
     bookmarks.list = 0;
+    if (bookmarks.unparsedLines != NULL) {
+      int flag=1;
+      g_list_foreach( bookmarks.unparsedLines, (GFunc)unparsedLine_delete, &flag );
+      g_list_free(bookmarks.unparsedLines);
+      bookmarks.unparsedLines=NULL;
+    }
 
     load( file_name );
 
@@ -248,6 +318,9 @@ void ptk_bookmarks_save ()
     FILE* file;
     gchar* path;
     GList* l;
+    GList* ul;
+    
+    int lineNum=0;
 
     path = g_build_filename( g_get_home_dir(), bookmarks_file_name, NULL );
     file = fopen( path, "w" );
@@ -255,9 +328,23 @@ void ptk_bookmarks_save ()
 
     if( file )
     {
+        lineNum=0;
+        ul = bookmarks.unparsedLines;
         for( l = bookmarks.list; l; l = l->next )
         {
+            while (ul != NULL && ul->data != NULL 
+                && ((unparsedLine*)ul->data)->lineNum==lineNum) {
+              fputs(((unparsedLine*)ul->data)->line,file);
+              lineNum++;
+              ul = g_list_next(ul);
+            }
             ptk_bookmarks_save_item( l, file );
+            lineNum++;
+        }
+        while (ul != NULL && ul->data != NULL) {
+            fputs(((unparsedLine*)ul->data)->line,file);
+            lineNum++;
+            ul = g_list_next(ul);
         }
         fclose( file );
     }

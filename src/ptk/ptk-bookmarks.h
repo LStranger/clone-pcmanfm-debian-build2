@@ -28,6 +28,7 @@ G_BEGIN_DECLS
 
 typedef struct _PtkBookmarks{
   GList* list; /* Read-only */
+  GList* unparsedLines; /* Read-only */
   /* <private> */
   GArray* callbacks;
   gint n_ref;

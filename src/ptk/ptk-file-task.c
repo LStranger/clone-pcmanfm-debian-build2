@@ -423,8 +423,8 @@ gboolean query_overwrite( PtkFileTask* task, char** new_dest )
     if ( different_files )
     {
         /* Ths first %s is a file name, and the second one represents followed message.
-        ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?" */
-        message = _( "\"%s\" has existed.\n\n%s" );
+        ex: "/home/pcman/some_file" already exists.\n\nDo you want to overwrite existing file?" */
+        message = _( "\"%s\" already exists.\n\n%s" );
     }
     else
     {
@@ -502,6 +502,7 @@ gboolean query_overwrite( PtkFileTask* task, char** new_dest )
             g_free( dir_name );
         }
         break;
+    case GTK_RESPONSE_DELETE_EVENT: /* escape was pressed */
     case GTK_RESPONSE_CANCEL:
         vfs_file_task_abort( task->task );
         break;
@@ -513,6 +514,7 @@ gboolean query_overwrite( PtkFileTask* task, char** new_dest )
                                     ( GSourceFunc ) open_up_progress_dlg,
                                     ( gpointer ) task );
     }
-    return response != GTK_RESPONSE_CANCEL;
+    return (response != GTK_RESPONSE_DELETE_EVENT)
+        && (response != GTK_RESPONSE_CANCEL);
 }
 

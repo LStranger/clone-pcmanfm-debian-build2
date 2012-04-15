@@ -17,6 +17,7 @@
 #include <grp.h> /* Query group name */
 #include <pwd.h> /* Query user name */
 #include <string.h>
+#include "settings.h"
 
 #include "vfs-app-desktop.h"
 #include "vfs-thumbnail-loader.h"
@@ -391,8 +392,16 @@ void vfs_file_size_to_string( char* buf, guint64 size )
             point = ( guint ) ( size % 10 );
             size /= 10;
             */
-            val = ((gfloat)size) / ( ( guint64 ) 1 << 40 );
-            unit = "TB";
+	        if (app_settings.use_si_prefix==TRUE)
+	        {
+	            val = ((gfloat)size) / (( guint64 ) 1000000000000 );
+	            unit = "TB";
+            }
+            else
+            {
+                val = ((gfloat)size) / ( ( guint64 ) 1 << 40 );
+                unit = "TiB";
+            }
         }
         else
         {
@@ -401,8 +410,16 @@ void vfs_file_size_to_string( char* buf, guint64 size )
             point = ( guint ) ( size % 10 );
             size /= 10;
             */
-            val = ((gfloat)size) / ( ( guint64 ) 1 << 30 );
-            unit = "GB";
+	        if (app_settings.use_si_prefix==TRUE)
+	        {
+	            val = ((gfloat)size) / (( guint64 ) 1000000000 );
+	            unit = "GB";
+            }
+            else
+            {
+                val = ((gfloat)size) / ( ( guint64 ) 1 << 30 );
+                unit = "GiB";
+            }
         }
     }
     else if ( size > ( 1 << 20 ) )
@@ -412,8 +429,16 @@ void vfs_file_size_to_string( char* buf, guint64 size )
         point = ( guint ) ( size % 10 );
         size /= 10;
         */
-        val = ((gfloat)size) / ( ( guint64 ) 1 << 20 );
-        unit = "MB";
+	    if (app_settings.use_si_prefix==TRUE)
+	    {
+	        val = ((gfloat)size) / (( guint64 ) 1000000 );
+	        unit = "MB";
+        }
+        else
+        {
+            val = ((gfloat)size) / ( ( guint64 ) 1 << 20 );
+            unit = "MiB";
+        }
     }
     else if ( size > ( 1 << 10 ) )
     {
@@ -422,8 +447,16 @@ void vfs_file_size_to_string( char* buf, guint64 size )
         point = size % 10;
         size /= 10;
         */
-        val = ((gfloat)size) / ( ( guint64 ) 1 << 10 );
-        unit = "KB";
+	    if (app_settings.use_si_prefix==TRUE)
+	    {
+	        val = ((gfloat)size) / (( guint64 ) 1000 );
+	        unit = "KB";
+	    }
+	    else
+	    {
+	        val = ((gfloat)size) / ( ( guint64 ) 1 << 10 );
+            unit = "KiB";
+	    }
     }
     else
     {

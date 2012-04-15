@@ -4,7 +4,6 @@ INCLUDES = \
     -I$(top_srcdir)/src/mime-type \
     -I$(top_srcdir)/src/compat \
     -I$(top_srcdir)/src/ptk \
-    -I$(top_srcdir)/src/ptk-ui-xml \
     -I$(top_srcdir)/src/vfs \
     -I$(top_srcdir)/src/libmd5-rfc \
     -I$(top_srcdir)/src/desktop \
@@ -57,7 +56,6 @@ VFS_SOURCES = \
 if DESKTOP_INTEGRATION
 DESKTOP_SOURCES = \
     desktop/desktop-window.c desktop/desktop-window.h \
-    desktop/working-area.c desktop/working-area.h \
     desktop/desktop.c desktop/desktop.h
 else
 DESKTOP_SOURCES = desktop/desktop.c desktop/desktop.h
@@ -70,6 +68,7 @@ PTK_SOURCES = \
     ptk/ptk-text-renderer.c ptk/ptk-text-renderer.h \
     ptk/ptk-file-icon-renderer.c ptk/ptk-file-icon-renderer.h \
     ptk/ptk-utils.c ptk/ptk-utils.h \
+    desktop/working-area.c desktop/working-area.h \
     ptk/ptk-dir-tree-view.c ptk/ptk-dir-tree-view.h \
     ptk/ptk-dir-tree.c ptk/ptk-dir-tree.h \
     ptk/ptk-location-view.c ptk/ptk-location-view.h \
@@ -83,10 +82,6 @@ PTK_SOURCES = \
     ptk/ptk-file-misc.c ptk/ptk-file-misc.h \
     ptk/ptk-file-properties.c ptk/ptk-file-properties.h \
     ptk/ptk-app-chooser.c ptk/ptk-app-chooser.h
-
-PTK_UI_XML_SOURCES= \
-    ptk-ui-xml/ptk-ui-xml.c ptk-ui-xml/ptk-ui-xml.h \
-    ptk-ui-xml/ptk-xml-tree.c ptk-ui-xml/ptk-xml-tree.h
 
 INOTIFY_SOURCES = \
     inotify/inotify-syscalls.h \
@@ -111,7 +106,6 @@ pcmanfm_SOURCES = \
     $(MD5_SOURCES) \
     $(COMPAT_SOURCES) \
     $(PTK_SOURCES) \
-    $(PTK_UI_XML_SOURCES) \
     $(EXO_SOURCES) \
     $(DESKTOP_SOURCES) \
     private.h \
@@ -120,7 +114,8 @@ pcmanfm_SOURCES = \
     settings.c settings.h \
     pref-dialog.c pref-dialog.h \
     edit-bookmarks.c edit-bookmarks.h \
-    find-files.c find-files.h
+    find-files.c find-files.h \
+    go-dialog.c go-dialog.h
 
 pcmanfm_CFLAGS = \
     @GTK_CFLAGS@ \
@@ -130,4 +125,10 @@ pcmanfm_CFLAGS = \
     -Werror-implicit-function-declaration
 
 pcmanfm_LDADD = @GTK_LIBS@ $(INTLLIBS) @FAM_LIBS@ @HAL_LIBS@ @SN_LIBS@
+
+noinst_PROGRAMS=xml-purge
+xml_purge_SOURCES=xml-purge.c
+xml_purge_CFLAGS=@GTK_CFLAGS@
+xml_purge_LDADD=@GTK_LIBS@
+
 

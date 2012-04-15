@@ -281,7 +281,7 @@ void ptk_dialog_fit_small_screen( GtkDialog* dlg )
     int dw, dh, i;
 
     get_working_area( gtk_widget_get_screen((GtkWidget*)dlg), &wa );
-    gtk_widget_size_request( dlg, &req );
+    gtk_widget_size_request( GTK_WIDGET(dlg), &req );
 
     /* Try two times, so we won't be too aggrassive if mild shinkage can do the job.
      * First time shrink all spacings to their 1/3.
@@ -289,8 +289,8 @@ void ptk_dialog_fit_small_screen( GtkDialog* dlg )
      */
     for( i =0; (req.width > wa.width || req.height > wa.height) && i < 2; ++i )
     {
-        break_gnome_hig( dlg, i == 0 ? 3 : 2 );
-        gtk_widget_size_request( dlg, &req );
+        break_gnome_hig( GTK_WIDGET(dlg), GINT_TO_POINTER((i == 0 ? 3 : 2)) );
+        gtk_widget_size_request( GTK_WIDGET(dlg), &req );
         /* g_debug("%d, %d", req.width, req.height ); */
     }
 
@@ -313,12 +313,12 @@ void ptk_dialog_fit_small_screen( GtkDialog* dlg )
     }
     else
     {
-        gtk_window_get_default_size( (GtkWindow*)dlg, &dw, dh );
+        gtk_window_get_default_size( (GtkWindow*)dlg, &dw, &dh );
         if( dw > wa.width )
             dw = wa.width;
-        if( dh > wa.width )
+        if( dh > wa.height )
             dh = wa.height;
-        gtk_window_set_default_size( dlg, dw, dh );
+        gtk_window_set_default_size( GTK_WINDOW(dlg), dw, dh );
     }
 }
 
@@ -360,5 +360,16 @@ int ptk_dialog_run_modaless( GtkDialog* dlg )
     g_signal_handler_disconnect( dlg, rh );
 
     return data.response;
+}
+
+GtkBuilder* _gtk_builder_new_from_file( const char* file, GError** err )
+{
+    GtkBuilder* builder = gtk_builder_new();
+    if( G_UNLIKELY( ! gtk_builder_add_from_file( builder, file, err ) ) )
+    {
+        g_object_unref( builder );
+        return NULL;
+    }
+    return builder;
 }
 

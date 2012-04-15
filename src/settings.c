@@ -36,6 +36,7 @@ const int max_thumb_size_default = 1 << 20;
 const int big_icon_size_default = 48;
 const int small_icon_size_default = 20;
 const gboolean single_click_default = FALSE;
+const gboolean show_location_bar_default = TRUE;
 
 /* FIXME: temporarily disable trash since it's not finished */
 const gboolean use_trash_can_default = FALSE;
@@ -54,6 +55,14 @@ const GdkColor desktop_shadow_default={0};
 const int desktop_sort_by_default = DW_SORT_BY_MTIME;
 const int desktop_sort_type_default = GTK_SORT_ASCENDING;
 const gboolean show_wm_menu_default = FALSE;
+
+/* Default values of interface settings */
+const gboolean always_show_tabs_default = FALSE;
+const gboolean hide_close_tab_buttons_default = FALSE;
+const gboolean hide_side_pane_buttons_default = FALSE;
+const gboolean hide_folder_content_border_default = FALSE;
+
+const gboolean use_si_prefix_default = TRUE;
 
 typedef void ( *SettingsParseFunc ) ( char* line );
 
@@ -122,10 +131,14 @@ static void parse_general_settings( char* line )
         if ( value && *value )
             app_settings.terminal = strdup( value );
     }
+    else if ( 0 == strcmp( name, "use_si_prefix" ) )
+        app_settings.use_si_prefix = atoi( value );
     /*
     else if ( 0 == strcmp( name, "singleInstance" ) )
         app_settings.singleInstance = atoi( value );
     */
+    else if ( 0 == strcmp( name, "show_location_bar" ) )
+        app_settings.show_location_bar = atoi( value );
 }
 
 static void color_from_str( GdkColor* ret, const char* value )
@@ -206,6 +219,26 @@ static void parse_desktop_settings( char* line )
         app_settings.show_wm_menu = atoi( value );
 }
 
+static void parse_interface_settings( char* line )
+{
+    char * sep = strstr( line, "=" );
+    char* name;
+    char* value;
+    if ( !sep )
+        return ;
+    name = line;
+    value = sep + 1;
+    *sep = '\0';
+    if ( 0 == strcmp( name, "always_show_tabs" ) )
+        app_settings.always_show_tabs = atoi( value );
+    else if ( 0 == strcmp( name, "show_close_tab_buttons" ) )
+        app_settings.hide_close_tab_buttons = !atoi( value );
+    else if ( 0 == strcmp( name, "hide_side_pane_buttons" ) )
+        app_settings.hide_side_pane_buttons = atoi( value );
+    else if ( 0 == strcmp( name, "hide_folder_content_border" ) )
+        app_settings.hide_folder_content_border = atoi( value );
+}
+
 void load_settings()
 {
     FILE * file;
@@ -215,6 +248,7 @@ void load_settings()
     SettingsParseFunc func = NULL;
 
     /* set default value */
+
     /* General */
     /* app_settings.show_desktop = show_desktop_default; */
     app_settings.show_wallpaper = show_wallpaper_default;
@@ -239,6 +273,14 @@ void load_settings()
     app_settings.open_bookmark_method = open_bookmark_method_default;
     /* app_settings.iconTheme = NULL; */
     app_settings.terminal = NULL;
+    app_settings.use_si_prefix = use_si_prefix_default;
+    app_settings.show_location_bar = show_location_bar_default;
+
+    /* Interface */
+    app_settings.always_show_tabs = always_show_tabs_default;
+    app_settings.hide_close_tab_buttons = hide_close_tab_buttons_default;
+    app_settings.hide_side_pane_buttons = hide_side_pane_buttons_default;
+    app_settings.hide_folder_content_border = hide_folder_content_border_default;
 
     /* Window State */
     app_settings.splitter_pos = 160;
@@ -275,6 +317,8 @@ void load_settings()
                     func = &parse_general_settings;
                 else if ( 0 == strcmp( line + 1, "Window" ) )
                     func = &parse_window_state;
+                else if ( 0 == strcmp( line + 1, "Interface" ) )
+                    func = &parse_interface_settings;
                 else if ( 0 == strcmp( line + 1, "Desktop" ) )
                     func = &parse_desktop_settings;
                 else
@@ -351,7 +395,7 @@ void save_settings()
         if ( app_settings.sort_order != sort_order_default )
             fprintf( file, "sort_order=%d\n", app_settings.sort_order );
         if ( app_settings.sort_type != sort_type_default )
-            fprintf( file, "sort_yype=%d\n", app_settings.sort_type );
+            fprintf( file, "sort_type=%d\n", app_settings.sort_type );
         if ( app_settings.open_bookmark_method != open_bookmark_method_default )
             fprintf( file, "open_bookmark_method=%d\n", app_settings.open_bookmark_method );
         /*
@@ -360,6 +404,10 @@ void save_settings()
         */
         if ( app_settings.terminal )
             fprintf( file, "terminal=%s\n", app_settings.terminal );
+        if ( app_settings.use_si_prefix != use_si_prefix_default )
+            fprintf( file, "use_si_prefix=%d\n", !!app_settings.use_si_prefix );
+        if ( app_settings.show_location_bar != show_location_bar_default )
+            fprintf( file, "show_location_bar=%d\n", app_settings.show_location_bar );
 
         fputs( "\n[Window]\n", file );
         fprintf( file, "width=%d\n", app_settings.width );
@@ -399,6 +447,18 @@ void save_settings()
                &desktop_shadow_default ) )
             save_color( file, "shadow",
                         &app_settings.desktop_shadow );
+
+        /* Interface */
+        fputs( "[Interface]\n", file );
+        if ( app_settings.always_show_tabs != always_show_tabs_default )
+            fprintf( file, "always_show_tabs=%d\n", app_settings.always_show_tabs );
+        if ( app_settings.hide_close_tab_buttons != hide_close_tab_buttons_default )
+            fprintf( file, "show_close_tab_buttons=%d\n", !app_settings.hide_close_tab_buttons );
+        if ( app_settings.hide_side_pane_buttons != hide_side_pane_buttons_default )
+            fprintf( file, "hide_side_pane_buttons=%d\n", app_settings.hide_side_pane_buttons );
+        if ( app_settings.hide_folder_content_border != hide_folder_content_border_default )
+            fprintf( file, "hide_folder_content_border=%d\n", app_settings.hide_folder_content_border );
+
         fclose( file );
     }
 

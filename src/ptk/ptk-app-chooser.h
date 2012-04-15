@@ -1,7 +1,7 @@
 /*
 *  C Interface: appchooserdlg
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
@@ -19,7 +19,7 @@
 G_BEGIN_DECLS
 
 /* Let the user choose a application */
-const gchar* ptk_choose_app_for_mime_type( GtkWindow* parent,
+gchar* ptk_choose_app_for_mime_type( GtkWindow* parent,
                                     VFSMimeType* mime_type );
 
 /* Let the user choose a application */
@@ -31,7 +31,7 @@ GtkWidget* app_chooser_dialog_new( GtkWindow* parent, VFSMimeType* mime_type );
 * These two can be separated by check if the returned string is ended
 * with ".desktop".
 */
-const gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg );
+gchar* app_chooser_dialog_get_selected_app( GtkWidget* dlg );
 
 /*
 * Check if the user set the selected app default handler.

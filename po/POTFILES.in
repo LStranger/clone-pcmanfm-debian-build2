@@ -1,4 +1,18 @@
+[encoding: UTF-8]
 # List of source files containing translatable strings.
+data/pcmanfm-find.desktop.in
+data/pcmanfm.desktop.in
+data/ui/about-dlg.glade
+data/ui/appchooserdlg.glade
+data/ui/file-assoc-dlg.glade
+data/ui/file_operation.glade
+data/ui/file_properties.glade
+data/ui/find-files.glade
+data/ui/godlg.glade
+data/ui/prefdlg.glade
+src/exo/exo-icon-view.c
+src/exo/exo-tree-view.c
+src/file-assoc-dlg.c
 src/main.c
 src/main-window.c
 src/ptk/ptk-file-browser.c
@@ -18,9 +32,3 @@ src/vfs/vfs-volume-hal.c
 src/desktop/desktop.c
 src/desktop/desktop-window.c
 src/find-files.c
-
-data/ui/prefdlg.glade
-data/ui/file_properties.glade
-data/ui/appchooserdlg.glade
-data/ui/about-dlg.glade
-data/ui/find-files.glade

@@ -15,6 +15,7 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <gdk/gdkkeysyms.h>
 #include "glib-mem.h"
 
 #include <string.h>
@@ -45,6 +46,11 @@ static gboolean
 on_dir_tree_view_button_press( GtkWidget* view,
                                GdkEventButton* evt,
                                PtkFileBrowser* browser );
+
+static gboolean
+on_dir_tree_view_key_press( GtkWidget* view,
+                            GdkEventKey* evt,
+                            gpointer user_data );
 
 static gboolean sel_func ( GtkTreeSelection *selection,
                            GtkTreeModel *model,
@@ -170,6 +176,10 @@ GtkWidget* ptk_dir_tree_view_new( PtkFileBrowser* browser,
                        G_CALLBACK ( on_dir_tree_view_button_press ),
                        browser );
 
+    g_signal_connect ( dir_tree_view, "key-press-event",
+                       G_CALLBACK ( on_dir_tree_view_key_press ),
+                       NULL );
+
     tree_path = gtk_tree_path_new_first();
     gtk_tree_view_expand_row( dir_tree_view, tree_path, FALSE );
     gtk_tree_path_free( tree_path );
@@ -228,8 +238,10 @@ gboolean ptk_dir_tree_view_chdir( GtkTreeView* dir_tree_view, const char* path )
             {
                 tree_path = gtk_tree_model_get_path( model, &it );
 
-                gtk_tree_view_expand_row ( dir_tree_view, tree_path, FALSE );
-                gtk_tree_model_get_iter( model, &parent_it, tree_path );
+                if( dir[1] ) {
+                    gtk_tree_view_expand_row ( dir_tree_view, tree_path, FALSE );
+                    gtk_tree_model_get_iter( model, &parent_it, tree_path );
+                }
                 found = TRUE;
                 vfs_file_info_unref( info );
                 break;
@@ -408,4 +420,49 @@ gboolean on_dir_tree_view_button_press( GtkWidget* view,
         }
     }
     return FALSE;
+}
+
+gboolean on_dir_tree_view_key_press( GtkWidget* view,
+                                     GdkEventKey* evt,
+                                     gpointer user_data )
+{
+    switch(evt->keyval) {
+    case GDK_Left:
+    case GDK_Right:
+        break;
+    default:
+        return FALSE;
+    }
+
+
+    GtkTreeSelection *select = gtk_tree_view_get_selection(GTK_TREE_VIEW(view));
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    if(!gtk_tree_selection_get_selected(select, &model, &iter))
+        return FALSE;
+
+    GtkTreePath *path = gtk_tree_model_get_path(model, &iter);
+
+    switch( evt->keyval ) {
+    case GDK_Left:
+        if(gtk_tree_view_row_expanded(GTK_TREE_VIEW(view), path)) {
+            gtk_tree_view_collapse_row(GTK_TREE_VIEW(view), path);
+        } else if(gtk_tree_path_up(path)) {
+            gtk_tree_selection_select_path(select, path);
+            gtk_tree_view_set_cursor(GTK_TREE_VIEW(view), path, NULL, FALSE);
+        } else {
+            return FALSE;
+        }
+        break;
+    case GDK_Right:
+        if(!gtk_tree_view_row_expanded(GTK_TREE_VIEW(view), path)) {
+            gtk_tree_view_expand_row(GTK_TREE_VIEW(view), path, FALSE);
+        } else {
+            gtk_tree_path_down(path);
+            gtk_tree_selection_select_path(select, path);
+            gtk_tree_view_set_cursor(GTK_TREE_VIEW(view), path, NULL, FALSE);
+        }
+        break;
+    }
+    return TRUE;  
 }

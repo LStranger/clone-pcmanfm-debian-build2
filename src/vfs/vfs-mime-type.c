@@ -232,7 +232,9 @@ GdkPixbuf* vfs_mime_type_get_icon( VFSMimeType* mime_type, gboolean big )
 
     if ( G_UNLIKELY( 0 == strcmp( mime_type->type, XDG_MIME_TYPE_DIRECTORY ) ) )
     {
-        icon = vfs_load_icon ( icon_theme, "gnome-fs-directory", size );
+        icon = vfs_load_icon ( icon_theme, "folder", size );
+        if( G_UNLIKELY(! icon) )
+            icon = vfs_load_icon ( icon_theme, "gnome-fs-directory", size );
         if ( big )
             mime_type->big_icon = icon;
         else
@@ -243,24 +245,37 @@ GdkPixbuf* vfs_mime_type_get_icon( VFSMimeType* mime_type, gboolean big )
     sep = strchr( mime_type->type, '/' );
     if ( sep )
     {
+        /* convert mime-type foo/bar to foo-bar */
         strcpy( icon_name, mime_type->type );
         icon_name[ (sep - mime_type->type) ] = '-';
+        /* is there an icon named foo-bar? */
         icon = vfs_load_icon ( icon_theme, icon_name, size );
         if ( ! icon )
         {
+            /* maybe we can find a legacy icon named gnome-mime-foo-bar */
             strcpy( icon_name, "gnome-mime-" );
             strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
             strcat( icon_name, "-" );
             strcat( icon_name, sep + 1 );
             icon = vfs_load_icon ( icon_theme, icon_name, size );
         }
+        /* try gnome-mime-foo */
         if ( G_UNLIKELY( ! icon ) )
         {
-            icon_name[ 11 ] = 0;
+            icon_name[ 11 ] = '\0'; /* strlen("gnome-mime-") = 11 */
             strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
             icon = vfs_load_icon ( icon_theme, icon_name, size );
         }
+        /* try foo-x-generic */
+        if ( G_UNLIKELY( ! icon ) )
+        {
+            strncpy( icon_name, mime_type->type, ( sep - mime_type->type ) );
+            icon_name[ (sep - mime_type->type) ] = '\0';
+            strcat( icon_name, "-x-generic" );
+            icon = vfs_load_icon ( icon_theme, icon_name, size );
+        }
     }
+
     if( G_UNLIKELY( !icon ) )
     {
         /* prevent endless recursion of XDG_MIME_TYPE_UNKNOWN */
