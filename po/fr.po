@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCManFM.r731\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
-"PO-Revision-Date: 2009-05-09 04:33+0200\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-10-28 22:56+0100\n"
 "Last-Translator: Cilyan Olowen <gaknar@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -150,29 +150,25 @@ msgstr "Déplacer vers le _bas"
 msgid "Move _Up"
 msgstr "Déplacer vers le _haut"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Préparation..."
-
+# Ou peut-être "En cours :" ?
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
-msgstr "Traitement :"
+#: ../data/ui/file_operation.glade.h:2
+msgid "<b>Processing:</b>"
+msgstr "<b>Traitement :</b>"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
-msgstr "Avancement :"
+#: ../data/ui/file_operation.glade.h:3
+msgid "<b>Progress:</b>"
+msgstr "<b>Progression :</b>"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "Vers :"
+#: ../data/ui/file_operation.glade.h:5
+msgid "<b>To:</b>"
+msgstr "<b>Vers :</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Préparation..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -275,11 +271,11 @@ msgstr "<b>Le nom de fichier contenant :</b>"
 
 #: ../data/ui/find-files.glade.h:3
 msgid "<b>File Size</b>"
-msgstr "<b><b>Taille de fichier :</b>"
+msgstr "<b>Taille de fichier :</b>"
 
 #: ../data/ui/find-files.glade.h:4
 msgid "<b>File Types to Search</b>"
-msgstr "<b>Types de fichier à rechercher :<b>"
+msgstr "<b>Types de fichier à rechercher :</b>"
 
 #: ../data/ui/find-files.glade.h:5
 msgid "<b>Last Modified</b>"
@@ -536,7 +532,7 @@ msgstr "Texte :"
 
 #: ../data/ui/prefdlg.glade.h:37
 msgid "Use SI decimal prefixes instead of IEC binary prefixes"
-msgstr "Utiliser les préfixes SI (KB) à la place des préfixes IEC (KiB)"
+msgstr "Utiliser les préfixes SI (Ko) à la place des préfixes IEC (Kio)"
 
 #: ../data/ui/prefdlg.glade.h:38
 msgid "Wallpaper:"
@@ -777,7 +773,7 @@ msgstr "paquets"
 
 #: ../src/main.c:92
 msgid "Don't show desktop icons."
-msgstr "Ne pas montrer les icônes du bureau"
+msgstr "Ne pas montrer les icônes du bureau."
 
 #: ../src/main.c:93
 msgid "Run PCManFM as a daemon"
@@ -811,11 +807,11 @@ msgstr "Définir l'arrière-plan du bureau"
 msgid "[FILE1, FILE2,...]"
 msgstr "[FICHIER1, FICHIER2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "Le thème d'icônes GTK+ n'est pas correctement défini"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -839,7 +835,7 @@ msgstr ""
 "<big><b>%s</b></big>\n"
 "\n"
 "Ceci signifie habituellement que vous n'avez de gestionnaire XSETTINGS "
-"lancé. Les environnements de bureau comme GNOME ou XFCE exécute "
+"lancé.  Les environnements de bureau comme GNOME ou XFCE exécutent "
 "automatiquement leur gestionnaire XSETTINGS comme gnome-settings-daemon ou "
 "xfce-mcs-manager.\n"
 "\n"
@@ -857,7 +853,7 @@ msgstr ""
 "pas utilisables.  Actuellement aucune norme n'existe pour ceci, mais ce sera "
 "résolu par freedesktop.org dans le futur."
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -867,7 +863,7 @@ msgstr ""
 msgid "Error"
 msgstr "Erreur"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -877,15 +873,15 @@ msgstr ""
 "\n"
 "Possédez vous « FAM » ou « Gamin » installé et fonctionnel ?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "Le fichier n'existe pas"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "Je ne sais pas comment ouvrir le fichier"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1162,7 +1158,7 @@ msgstr[1] "%d éléments visibles (%s)%s"
 
 #: ../src/ptk/ptk-file-browser.c:521
 msgid "Directory doesn't exist!"
-msgstr "Répertoire inexistant."
+msgstr "Répertoire inexistant !"
 
 #: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
@@ -1285,6 +1281,23 @@ msgstr "Lien..."
 msgid "Changing Properties"
 msgstr "Modification les propriétés"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "Vers :"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Traitement :"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Avancement :"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "Annuler l'opération ?"
@@ -1353,33 +1366,33 @@ msgstr "Ignorer"
 msgid "Skip All"
 msgstr "Tout ignorer"
 
-#: ../src/ptk/ptk-file-archiver.c:119
-msgid "Save Compressd Files to..."
+#: ../src/ptk/ptk-file-archiver.c:125
+msgid "Save Compressed Files to..."
 msgstr "Enregistrer l'archive sous..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "Format de l'archive :"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Création de l'archive : %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "Compression des fichiers"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "Extraire le fichier vers..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Extraction des fichiers vers : %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "Extraction des fichiers"
 
@@ -1489,7 +1502,7 @@ msgstr "Saisissez un nom pour le nouveau fichier :"
 
 #: ../src/ptk/ptk-file-misc.c:259
 msgid "The new file cannot be created!"
-msgstr "Le nouveau fichier n'a pu être créé."
+msgstr "Le nouveau fichier n'a pu être créé !"
 
 #: ../src/ptk/ptk-file-properties.c:305
 msgid "Multiple files are selected"

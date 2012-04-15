@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
 "PO-Revision-Date: 2009-04-03 11:51+0700\n"
 "Last-Translator: Tim Chan Rithy <12rithy@gmail.com>\n"
 "Language-Team: Khmer <km@li.org>\n"
@@ -141,29 +141,27 @@ msgstr "ផ្លាស់ទី​ចុះ​ក្រោម"
 msgid "Move _Up"
 msgstr "ផ្លាស់ទី​ឡើង​លើ"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "កំពុង​រៀបចំ..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "កំពុង​ដំណើរ​ការ ៖"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "វឌ្ឍនភាព ៖"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "ទៅ ៖"
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>ក្រុម ៖</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "កំពុង​រៀបចំ..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -799,11 +797,11 @@ msgstr "កំណត់​ផ្ទាំងរូបភាព"
 msgid "[FILE1, FILE2,...]"
 msgstr "[FILE1, FILE2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "ស្បែក​រូបតំណាង GTK+ មិន​ត្រូវ​បាន​កំណត់​ត្រឹម​ត្រូវ​ទេ"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -842,7 +840,7 @@ msgstr ""
 "អាច​ប្រើ​ទេ ។  បច្ចុប្បន្ន​គ្មាន​ខ្នាត​គំរូ​សម្រាប់​បែប​នេះ​ទេ, ប៉ុន្តែ​វា​នឹង​ត្រូវ​បាន​ដោះស្រាយ​ដោយ "
 "freedesktop.org ក្នុង​ពេល​អនាគត ។"
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -852,7 +850,7 @@ msgstr ""
 msgid "Error"
 msgstr "កំហុស"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -862,15 +860,15 @@ msgstr ""
 "\n"
 "តើ​អ្នក​មានដំឡើង \"FAM\"ឬ \"Gamin\" ហើយ​កំពុង​រត់​វា ឬនៅ ?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "មិនមាន​ឯកសារឡើយ"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "មិន​ដឹង​ពី​របៀប​បើក​ឯកសារ"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1268,6 +1266,23 @@ msgstr "កំពុង​ធ្វើ​តំណ..."
 msgid "Changing Properties"
 msgstr "កំពុង​ប្ដូរ​លក្ខណៈសម្បត្តិ​​ឯកសារ"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "ទៅ ៖"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "កំពុង​ដំណើរ​ការ ៖"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "វឌ្ឍនភាព ៖"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "បោះបង់​ប្រតិបត្តិការ​នេះ ឬ ?"
@@ -1336,33 +1351,34 @@ msgstr "រំលង"
 msgid "Skip All"
 msgstr "រំលង​ទាំងអស់"
 
-#: ../src/ptk/ptk-file-archiver.c:119
-msgid "Save Compressd Files to..."
+#: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
+msgid "Save Compressed Files to..."
 msgstr "ចម្លង​ឯកសារ​បង្ហាប់​ទៅ..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "ទ្រង់ទ្រាយ​​របស់​ឯកសារ​បង្ហាញ ៖"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "កំពុង​បង្ហាប់​ឯកសារ ៖ %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "បង្ហាប់​ឯកសារ"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "ស្រង់​ឯកសារ​ទៅ..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "កំពុង​ស្រង់​ឯកសារ​ទៅ ៖ %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "ស្រង់​ឯកសារ​ចេញ"
 

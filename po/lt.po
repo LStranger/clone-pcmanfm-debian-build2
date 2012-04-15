@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCManFM 0.3.9.98\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
-"PO-Revision-Date: 2009-05-19 14:53+0200\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-10-26 17:35+0100\n"
 "Last-Translator: Julius Vitkauskas <zadintuvas@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -140,29 +140,24 @@ msgstr "Perkelti ž_emyn:"
 msgid "Move _Up"
 msgstr "Perkelti a_ukštyn:"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Ruošiamasi..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
-msgstr "Apdorojama:"
+#: ../data/ui/file_operation.glade.h:2
+msgid "<b>Processing:</b>"
+msgstr "<b>Apdorojama:</b>"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
-msgstr "Eiga:"
+#: ../data/ui/file_operation.glade.h:3
+msgid "<b>Progress:</b>"
+msgstr "<b>Eiga:</b>"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "Į:"
+#: ../data/ui/file_operation.glade.h:5
+msgid "<b>To:</b>"
+msgstr "<b>Į:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Ruošiamasi..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -789,11 +784,11 @@ msgstr "Nustatyti darbastalio foną"
 msgid "[FILE1, FILE2,...]"
 msgstr "[FAILAS1, FAILAS2, ...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "Neteisingai nustatyta GTK+ piktogramų tema"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -833,7 +828,7 @@ msgstr ""
 "vieningo piktogramų standarto, bet ateityje šią problemą išspręs freedesktop."
 "org."
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -843,7 +838,7 @@ msgstr ""
 msgid "Error"
 msgstr "Klaida"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -853,15 +848,15 @@ msgstr ""
 "\n"
 "Ar turite įdiegtą ir veikiantį „FAM“ arba „Gamin“ ?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "Failas neegzistuoja"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "Nežinoma kaip atverti failą"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1264,6 +1259,23 @@ msgstr "Siejama..."
 msgid "Changing Properties"
 msgstr "Keičiamos savybės"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "Į:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Apdorojama:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Eiga:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "Nutraukti veiksmą?"
@@ -1332,33 +1344,33 @@ msgstr "Praleisti"
 msgid "Skip All"
 msgstr "Praleisti visus"
 
-#: ../src/ptk/ptk-file-archiver.c:119
+#: ../src/ptk/ptk-file-archiver.c:125
 msgid "Save Compressed Files to..."
-msgstr "Įrašyti supakuotus failus į..."
+msgstr "Įšsaugoti supakuotus failus į..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "Supakuoto failo formatas:"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Failai pakuojami į: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "Supakuoti failus"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "Išpakuoti failą į..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Failai išpakuojami į: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "Išpakuoti failus"
 

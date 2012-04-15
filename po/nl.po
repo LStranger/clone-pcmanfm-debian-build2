@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.3.6rc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
 "PO-Revision-Date: 2009-05-04 14:27+0200\n"
 "Last-Translator: Sander De Voogdt <celettu@gmail.com>\n"
 "Language-Team: Sander De Voogdt <celettu@gmail.com>\n"
@@ -88,8 +88,12 @@ msgid "Opened in Terminal"
 msgstr "Geopend in Terminal"
 
 #: ../data/ui/appchooserdlg.glade.h:4
-msgid "Please choose an application from following lists or enter the command line by hand:"
-msgstr "Kies een applicatie uit de volgende lijst, of voer de opdrachtregel handmatig in:"
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr ""
+"Kies een applicatie uit de volgende lijst, of voer de opdrachtregel "
+"handmatig in:"
 
 #: ../data/ui/appchooserdlg.glade.h:5
 msgid "Set selected application to default action"
@@ -139,33 +143,27 @@ msgstr "Verplaats omhoog:"
 msgid "Move _Up"
 msgstr "Verplaats omlaag:"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
+#. Processing: <Name of currently proccesed file>
 #: ../data/ui/file_operation.glade.h:2
-#: ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Aan het klaarmaken..."
-
-#. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4
-#: ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "Verwerken:"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5
-#: ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "Vooruitgang:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7
-#: ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "Naar:"
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>Groep:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Aan het klaarmaken..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -250,8 +248,7 @@ msgstr "Sticky"
 msgid "Write"
 msgstr "Schrijf"
 
-#: ../data/ui/file_properties.glade.h:24
-#: ../data/ui/prefdlg.glade.h:41
+#: ../data/ui/file_properties.glade.h:24 ../data/ui/prefdlg.glade.h:41
 msgid "_General"
 msgstr "_Algemeen"
 
@@ -599,7 +596,8 @@ msgstr "Markup kolom"
 
 #: ../src/exo/exo-icon-view.c:800
 msgid "Model column used to retrieve the text if using Pango markup"
-msgstr "Gebruikt model om de tekst te ontvangen indien Pango markup wordt gebruikt"
+msgstr ""
+"Gebruikt model om de tekst te ontvangen indien Pango markup wordt gebruikt"
 
 #: ../src/exo/exo-icon-view.c:814
 msgid "Icon View Model"
@@ -614,7 +612,8 @@ msgid "Orientation"
 msgstr "Orientatie"
 
 #: ../src/exo/exo-icon-view.c:829
-msgid "How the text and icon of each item are positioned relative to each other"
+msgid ""
+"How the text and icon of each item are positioned relative to each other"
 msgstr "Plaatsing van tekst en icon ten opzichte van elkaar"
 
 #: ../src/exo/exo-icon-view.c:845
@@ -657,25 +656,25 @@ msgstr "Selecteermodus"
 msgid "The selection mode"
 msgstr "Selectiemodus"
 
-#: ../src/exo/exo-icon-view.c:923
-#: ../src/exo/exo-tree-view.c:201
+#: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
 msgid "Single Click"
 msgstr "Enkele Muisklik"
 
-#: ../src/exo/exo-icon-view.c:924
-#: ../src/exo/exo-tree-view.c:202
+#: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
 msgid "Whether the items in the view can be activated with single clicks"
 msgstr "Items in weergave weergeven met enkele muisklik"
 
-#: ../src/exo/exo-icon-view.c:940
-#: ../src/exo/exo-tree-view.c:218
+#: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
 msgid "Single Click Timeout"
 msgstr "Timeout van enkele muisklik"
 
-#: ../src/exo/exo-icon-view.c:941
-#: ../src/exo/exo-tree-view.c:219
-msgid "The amount of time after which the item under the mouse cursor will be selected automatically in single click mode"
-msgstr "De tijdspanne waarin een item onder de muiscursor kan geselecteerd worden in Enkele Muisklik modus"
+#: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
+msgid ""
+"The amount of time after which the item under the mouse cursor will be "
+"selected automatically in single click mode"
+msgstr ""
+"De tijdspanne waarin een item onder de muiscursor kan geselecteerd worden in "
+"Enkele Muisklik modus"
 
 #: ../src/exo/exo-icon-view.c:956
 msgid "Spacing"
@@ -768,12 +767,18 @@ msgid "Run PCManFM as a daemon"
 msgstr "PCManFM als deamon runnen"
 
 #: ../src/main.c:94
-msgid "Open folders in new tabs of the last used window instead of creating new windows"
+msgid ""
+"Open folders in new tabs of the last used window instead of creating new "
+"windows"
 msgstr "Open mappen in nieuwe tabs van het laatst gebruikte venster"
 
 #: ../src/main.c:95
-msgid "Open preference dialog. 'n' is the number of page you want to show (1, 2, 3...)."
-msgstr "Open venster Voorkeuren. 'n' is het nummer van de pagina die u wilt tonen (1,2,3,...)."
+msgid ""
+"Open preference dialog. 'n' is the number of page you want to show (1, 2, "
+"3...)."
+msgstr ""
+"Open venster Voorkeuren. 'n' is het nummer van de pagina die u wilt tonen "
+"(1,2,3,...)."
 
 #: ../src/main.c:96
 msgid "Find Files with PCManFM"
@@ -787,55 +792,62 @@ msgstr "Selecteer desktopachtergrond"
 msgid "[FILE1, FILE2,...]"
 msgstr "[BESTAND1, BESTAND2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ icon is niet correct gedefinieerd"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
 "\n"
-"This usually means you don't have an XSETTINGS manager running.  Desktop environment like GNOME or XFCE automatically execute their XSETTING managers like gnome-settings-daemon or xfce-mcs-manager.\n"
+"This usually means you don't have an XSETTINGS manager running.  Desktop "
+"environment like GNOME or XFCE automatically execute their XSETTING managers "
+"like gnome-settings-daemon or xfce-mcs-manager.\n"
 "\n"
 "<b>If you don't use these desktop environments, you have two choices:\n"
 "1. run an XSETTINGS manager, or\n"
 "2. simply specify an icon theme in ~/.gtkrc-2.0.</b>\n"
 "For example to use the Tango icon theme add a line:\n"
-"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it if no such file)\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it "
+"if no such file)\n"
 "\n"
-"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the file icons cannot be displayed correctly.</b>  Due to the differences in icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is no standard for this, but it will be solved by freedesktop.org in the future."
+"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the "
+"file icons cannot be displayed correctly.</b>  Due to the differences in "
+"icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
+"no standard for this, but it will be solved by freedesktop.org in the future."
 msgstr ""
 "<big><b>%s</b></big>\n"
 "\n"
-"Dit betekent meestal dat u geen XSETTINGS manager gestart hebt. Desktop omgevingen zoals GNOME of XFCE lanceren automatisch hun XSETTINGS managers, zoals gnome-settings-daemon of xfce-mce-manager.\n"
+"Dit betekent meestal dat u geen XSETTINGS manager gestart hebt. Desktop "
+"omgevingen zoals GNOME of XFCE lanceren automatisch hun XSETTINGS managers, "
+"zoals gnome-settings-daemon of xfce-mce-manager.\n"
 "\n"
 "<b>Indien u deze desktop omgevingen niet gebruikt, heb je twee keuzes:\n"
 "1. Start een XSETTINGS manager, of\n"
 "2. Specificeer een icoon-thema in ~/.gtkrc-2.0.<b>\n"
-"Bijvoorbeeld, om het Tango icoon-thema te gebruiken, voeg de volgende regel toe:\n"
-"<i>gtk-icon-theme-name=\"Tango\"</b></i> in je ~/.gtkrc-2.0. (maak de file aan als ze niet bestaat)\n"
+"Bijvoorbeeld, om het Tango icoon-thema te gebruiken, voeg de volgende regel "
+"toe:\n"
+"<i>gtk-icon-theme-name=\"Tango\"</b></i> in je ~/.gtkrc-2.0. (maak de file "
+"aan als ze niet bestaat)\n"
 "\n"
-"<b>BELANGRIJK: Het icoon-thema dat je kiest moet compatibel zijn met Gnome, of de iconen zullen niet juist weergegeven worden.</b> Omdat iconen in KDE anders genoemd worden, kunnen KDE-icoon-themas niet gebruikt worden. Op dit moment is hier geen standaard voor, maar dit zal in de toekomst wel het geval zijn (door freedesktop.org)."
+"<b>BELANGRIJK: Het icoon-thema dat je kiest moet compatibel zijn met Gnome, "
+"of de iconen zullen niet juist weergegeven worden.</b> Omdat iconen in KDE "
+"anders genoemd worden, kunnen KDE-icoon-themas niet gebruikt worden. Op dit "
+"moment is hier geen standaard voor, maar dit zal in de toekomst wel het "
+"geval zijn (door freedesktop.org)."
 
-#: ../src/main.c:662
-#: ../src/main.c:731
-#: ../src/main.c:782
-#: ../src/main-window.c:1704
-#: ../src/main-window.c:1771
-#: ../src/ptk/ptk-file-browser.c:520
-#: ../src/ptk/ptk-file-browser.c:538
-#: ../src/ptk/ptk-file-task.c:332
-#: ../src/ptk/ptk-console-output.c:225
-#: ../src/ptk/ptk-file-misc.c:258
-#: ../src/ptk/ptk-file-misc.c:326
-#: ../src/ptk/ptk-file-misc.c:415
-#: ../src/ptk/ptk-file-properties.c:701
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
+#: ../src/main-window.c:1704 ../src/main-window.c:1771
+#: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
+#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
+#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:326
+#: ../src/ptk/ptk-file-misc.c:415 ../src/ptk/ptk-file-properties.c:701
 #: ../src/ptk/ptk-file-properties.c:712
 msgid "Error"
 msgstr "Fout"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -845,15 +857,15 @@ msgstr ""
 "\n"
 "Zijn \"FAM\" of \"Gamin\" geïnstalleerd en gestart?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "Bestand bestaat niet"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "PCManFM weet niet hoe dit bestand te openen"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -864,14 +876,12 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: ../src/main-window.c:304
-#: ../src/ptk/ptk-file-menu.c:109
+#: ../src/main-window.c:304 ../src/ptk/ptk-file-menu.c:109
 #: ../src/desktop/desktop-window.c:186
 msgid "_Folder"
 msgstr "_Map"
 
-#: ../src/main-window.c:305
-#: ../src/ptk/ptk-file-menu.c:110
+#: ../src/main-window.c:305 ../src/ptk/ptk-file-menu.c:110
 #: ../src/desktop/desktop-window.c:187
 msgid "_Text File"
 msgstr "_Tekstbestand"
@@ -884,8 +894,7 @@ msgstr "Nieuw _Venster"
 msgid "New _Tab"
 msgstr "Nieuwe _Tab"
 
-#: ../src/main-window.c:314
-#: ../src/ptk/ptk-file-menu.c:133
+#: ../src/main-window.c:314 ../src/ptk/ptk-file-menu.c:133
 #: ../src/desktop/desktop-window.c:196
 msgid "_Create New"
 msgstr "_Nieuwe"
@@ -902,13 +911,11 @@ msgstr "Tab sluiten"
 msgid "_Close Window"
 msgstr "Venster Sluiten"
 
-#: ../src/main-window.c:327
-#: ../src/ptk/ptk-file-menu.c:128
+#: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "_Verwijder"
 
-#: ../src/main-window.c:328
-#: ../src/ptk/ptk-file-browser.c:1396
+#: ../src/main-window.c:328 ../src/ptk/ptk-file-browser.c:1396
 #: ../src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "_Hernoem"
@@ -937,23 +944,19 @@ msgstr "Ga naar _Bovenliggende Map"
 msgid "Go _Home"
 msgstr "Ga naar _Persoonlijke Map"
 
-#: ../src/main-window.c:355
-#: ../src/desktop/desktop-window.c:173
+#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:173
 msgid "Sort by _Name"
 msgstr "Sorteer volgens _Naam"
 
-#: ../src/main-window.c:356
-#: ../src/desktop/desktop-window.c:174
+#: ../src/main-window.c:356 ../src/desktop/desktop-window.c:174
 msgid "Sort by _Size"
 msgstr "Sorteer volgens _Grootte"
 
-#: ../src/main-window.c:357
-#: ../src/desktop/desktop-window.c:176
+#: ../src/main-window.c:357 ../src/desktop/desktop-window.c:176
 msgid "Sort by _Modification Time"
 msgstr "Sorteer volgens _Laatst Gewijzigd"
 
-#: ../src/main-window.c:358
-#: ../src/desktop/desktop-window.c:175
+#: ../src/main-window.c:358 ../src/desktop/desktop-window.c:175
 msgid "Sort by _Type"
 msgstr "Sorteer volgens _Type"
 
@@ -965,13 +968,11 @@ msgstr "Sorteer volgens _Rechten"
 msgid "Sort by _Owner"
 msgstr "Sorteer volgens _Eigenaar"
 
-#: ../src/main-window.c:362
-#: ../src/desktop/desktop-window.c:179
+#: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
 msgstr "Oplopend"
 
-#: ../src/main-window.c:363
-#: ../src/desktop/desktop-window.c:180
+#: ../src/main-window.c:363 ../src/desktop/desktop-window.c:180
 msgid "Descending"
 msgstr "Aflopend"
 
@@ -1143,29 +1144,24 @@ msgstr[1] "%d zichtbare items (%s)%s"
 msgid "Directory doesn't exist!"
 msgstr "Map bestaat niet!"
 
-#: ../src/ptk/ptk-file-browser.c:1392
-#: ../src/ptk/ptk-file-menu.c:142
+#: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "Open in nieuwe Tab"
 
-#: ../src/ptk/ptk-file-browser.c:1393
-#: ../src/ptk/ptk-file-menu.c:143
+#: ../src/ptk/ptk-file-browser.c:1393 ../src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "Open in nieuw Venster"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/edit-bookmarks.c:201
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/edit-bookmarks.c:201
 #: ../src/find-files.c:799
 msgid "Name"
 msgstr "Naam"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/find-files.c:820
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:820
 msgid "Size"
 msgstr "Grootte"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/find-files.c:824
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:824
 msgid "Type"
 msgstr "Type"
 
@@ -1197,8 +1193,7 @@ msgstr "Prullenbak"
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#: ../src/ptk/ptk-location-view.c:441
-#: ../src/ptk/ptk-location-view.c:635
+#: ../src/ptk/ptk-location-view.c:441 ../src/ptk/ptk-location-view.c:635
 msgid "Unable to mount device"
 msgstr "Kan schijf niet aankoppelen"
 
@@ -1270,6 +1265,23 @@ msgstr "Aan het koppelen..."
 msgid "Changing Properties"
 msgstr "Eigenschappen aan het veranderen"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "Naar:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Verwerken:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Vooruitgang:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "De operatie annuleren?"
@@ -1338,33 +1350,34 @@ msgstr "Sla over"
 msgid "Skip All"
 msgstr "Sla alle over"
 
-#: ../src/ptk/ptk-file-archiver.c:119
+#: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
 msgid "Save Compressed Files to..."
 msgstr "Bewaar gecomprimeerde bestanden in..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "Formaat van gecomprimeerd bestand:"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Gecomprimeerd bestand aanmaken: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "Comprimeer bestanden"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "Pak bestand uit in..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Bestanden aan het uitpakken naar: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "Pak Bestanden uit"
 
@@ -1430,8 +1443,7 @@ msgid "_Open with \"%s\""
 msgstr "Open _met \"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
-#: ../src/ptk/ptk-file-menu.c:408
-#: ../src/ptk/ptk-file-menu.c:417
+#: ../src/ptk/ptk-file-menu.c:408 ../src/ptk/ptk-file-menu.c:417
 #: ../src/find-files.c:229
 msgid "_Open"
 msgstr "_Open"
@@ -1448,8 +1460,7 @@ msgstr "Hernoem bestanden"
 msgid "Please input new file name:"
 msgstr "Voer nieuwe bestandsnaam in:"
 
-#: ../src/ptk/ptk-file-misc.c:151
-#: ../src/ptk/ptk-file-misc.c:172
+#: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
 msgid ""
 "The file name you specified already exists.\n"
@@ -1458,8 +1469,7 @@ msgstr ""
 "De bestandsnaam die u hebt ingevoerd bestaat al.\n"
 "Voer aub een andere in:"
 
-#: ../src/ptk/ptk-file-misc.c:195
-#: ../src/ptk/ptk-file-misc.c:197
+#: ../src/ptk/ptk-file-misc.c:195 ../src/ptk/ptk-file-misc.c:197
 msgid "New Folder"
 msgstr "Nieuwe Map"
 
@@ -1467,8 +1477,7 @@ msgstr "Nieuwe Map"
 msgid "Input a name for the new folder:"
 msgstr "Geef de naam van de nieuwe map:"
 
-#: ../src/ptk/ptk-file-misc.c:202
-#: ../src/ptk/ptk-file-misc.c:204
+#: ../src/ptk/ptk-file-misc.c:202 ../src/ptk/ptk-file-misc.c:204
 msgid "New File"
 msgstr "Nieuw Bestand"
 
@@ -1507,8 +1516,11 @@ msgid "Invalid Group"
 msgstr "Ongeldige groep"
 
 #: ../src/ptk/ptk-file-properties.c:760
-msgid "Do you want to recursively apply these changes to all files and sub-folders?"
-msgstr "Wilt u deze veranderingen toepassen op alle bestanden en onderliggende folders?"
+msgid ""
+"Do you want to recursively apply these changes to all files and sub-folders?"
+msgstr ""
+"Wilt u deze veranderingen toepassen op alle bestanden en onderliggende "
+"folders?"
 
 #: ../src/edit-bookmarks.c:79
 msgid "New Item"
@@ -1536,8 +1548,7 @@ msgstr "Opdracht niet gevonden"
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "Bestemmings-map \"%1$s\" ligt in bron-map \"%2$s\""
 
-#: ../src/vfs/vfs-volume-hal.c:475
-#: ../src/vfs/vfs-volume-hal.c:698
+#: ../src/vfs/vfs-volume-hal.c:475 ../src/vfs/vfs-volume-hal.c:698
 #, c-format
 msgid "%s Volume"
 msgstr "%s Volume"
@@ -1722,8 +1733,7 @@ msgid "Failed to connect to the HAL daemon: %s"
 msgstr "Verbinden met HAL-deamon mislukt: %s"
 
 #. definitely not a device that we're able to mount, eject or unmount
-#: ../src/vfs/vfs-volume-hal.c:1941
-#: ../src/vfs/vfs-volume-hal.c:1997
+#: ../src/vfs/vfs-volume-hal.c:1941 ../src/vfs/vfs-volume-hal.c:1997
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
 msgstr "Apparaat \"%s\" is geen medium of schijf"
@@ -1757,8 +1767,12 @@ msgstr "Ongeldige optie bij het aankoppelen van het medium \"%s\""
 
 #: ../src/vfs/vfs-volume-hal.c:2272
 #, c-format
-msgid "The volume \"%s\" uses the <i>%s</i> file system which is not supported by your system"
-msgstr "Het medium \"%s\" gebruikt het <i>%s</i> bestandssysteem, wat niet wordt ondersteund door uw systeem."
+msgid ""
+"The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
+"your system"
+msgstr ""
+"Het medium \"%s\" gebruikt het <i>%s</i> bestandssysteem, wat niet wordt "
+"ondersteund door uw systeem."
 
 #: ../src/vfs/vfs-volume-hal.c:2274
 #, c-format
@@ -1779,17 +1793,24 @@ msgstr "Fout <i>%s</i>"
 #: ../src/vfs/vfs-volume-hal.c:2281
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
-msgstr "Het medium \"%s\" is waarschijnlijk al aangekoppeld vanuit de command line."
+msgstr ""
+"Het medium \"%s\" is waarschijnlijk al aangekoppeld vanuit de command line."
 
 #: ../src/vfs/vfs-volume-hal.c:2289
 #, c-format
-msgid "Blank discs cannot be mounted, use a CD recording application to record audio or data on the disc"
-msgstr "Lege schijven kunnen niet aangekoppeld worden, gebruik een CD-recording programma om audio- of databestanden op deze schijf te schrijven."
+msgid ""
+"Blank discs cannot be mounted, use a CD recording application to record "
+"audio or data on the disc"
+msgstr ""
+"Lege schijven kunnen niet aangekoppeld worden, gebruik een CD-recording "
+"programma om audio- of databestanden op deze schijf te schrijven."
 
 #: ../src/vfs/vfs-volume-hal.c:2300
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
-msgstr "Audio CDs kunnen niet aangekoppeld worden, gebruik een mediaspeler om de audiobestanden af te spelen"
+msgstr ""
+"Audio CDs kunnen niet aangekoppeld worden, gebruik een mediaspeler om de "
+"audiobestanden af te spelen"
 
 #: ../src/desktop/desktop-window.c:193
 msgid "_Icons"

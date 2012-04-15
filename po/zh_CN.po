@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCMan File Manager 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-27 21:31-0400\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
 "PO-Revision-Date: 2009-06-05 22:57+0800\n"
 "Last-Translator: Careone <zzbusagain@yahoo.com.cn>\n"
 "Language-Team: zh_CN\n"
@@ -129,29 +129,28 @@ msgstr "向下移动(_D)"
 msgid "Move _Up"
 msgstr "向上移动(_U)"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "准备中..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "正在处理："
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "进度："
 
+#
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "到："
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>群组：</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "准备中..."
 
 #
 #: ../data/ui/file_properties.glade.h:1
@@ -812,11 +811,11 @@ msgstr "设置桌面壁纸"
 msgid "[FILE1, FILE2,...]"
 msgstr "[文件1，文件2，...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ 图标主题未正确设置"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -853,7 +852,7 @@ msgstr ""
 "b>由于 GNOME 和 KDE 图标的命名机制不同，KDE 主题将无法使用。现在还没有这种标"
 "准，将来 freedesktop.org 会解决这个问题。"
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -863,7 +862,7 @@ msgstr ""
 msgid "Error"
 msgstr "错误"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -873,15 +872,15 @@ msgstr ""
 "\n"
 "您是否已安装 \"FAM\" 或 \"Gamin\" 并正确运行？"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "文件不存在"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "不知道如何打开这个文件"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1283,6 +1282,23 @@ msgstr "正在创建链接..."
 msgid "Changing Properties"
 msgstr "修改属性"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "到："
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "正在处理："
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "进度："
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "取消这个操作？"
@@ -1352,6 +1368,7 @@ msgid "Skip All"
 msgstr "全部跳过"
 
 #: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
 msgid "Save Compressed Files to..."
 msgstr "将压缩文件保存到..."
 
@@ -1947,5 +1964,3 @@ msgstr "最后修改"
 
 #~ msgid "Open Terminal"
 #~ msgstr "打开终端"
-
- 	  	 

@@ -6,17 +6,17 @@
 # Avoid injury or death
 msgid ""
 msgstr ""
-"Project-Id-Version: PCMan FM 0.5\n"
+"Project-Id-Version: PCMan FM 0.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
-"PO-Revision-Date: 2009-05-17 12:47+0200\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-08-06 16:55+0200\n"
 "Last-Translator: Matej <paxmanpwnz@gmail.com>\n"
 "Language-Team: Slovenian <paxmanpwnz@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 "X-Generator: Pootle 1.1.0\n"
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
@@ -88,7 +88,7 @@ msgstr "Odpri tip datoteke:"
 
 #: ../data/ui/appchooserdlg.glade.h:3
 msgid "Opened in Terminal"
-msgstr "Odprto v terminalu"
+msgstr "Odprto v konzoli"
 
 #: ../data/ui/appchooserdlg.glade.h:4
 msgid ""
@@ -148,29 +148,27 @@ msgstr "_Dol"
 msgid "Move _Up"
 msgstr "_Gor"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Pripravljam..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "Obdelujem:"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "Napredek:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "V:"
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>Skupina:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Pripravljam..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -265,7 +263,7 @@ msgstr "_Dovoljenja"
 
 #: ../data/ui/find-files.glade.h:1
 msgid "<b>File Content</b>"
-msgstr "<b>Datoteka vsebuje</b>"
+msgstr "<b>Vsebina datoteke</b>"
 
 #: ../data/ui/find-files.glade.h:2
 msgid "<b>File Name Contains:</b>"
@@ -337,7 +335,7 @@ msgstr "Vsebina"
 
 #: ../data/ui/find-files.glade.h:22
 msgid "File Contains:"
-msgstr "Vsebina datoteke:"
+msgstr "Datoteka vsebuje:"
 
 #: ../data/ui/find-files.glade.h:23
 msgid "Find Files"
@@ -418,7 +416,7 @@ msgstr "Vedno prikaži vrstico zavihkov"
 
 #: ../data/ui/prefdlg.glade.h:7
 msgid "Background:"
-msgstr "Ozadje"
+msgstr "Ozadje:"
 
 #: ../data/ui/prefdlg.glade.h:8
 msgid "Bookmarks:"
@@ -430,7 +428,7 @@ msgstr "Onemogoči \"Koš\" in izbriši datoteke neposredno z diska"
 
 #: ../data/ui/prefdlg.glade.h:10
 msgid "Display image files with supported format as thumbnails"
-msgstr "Prikaži datoteke podprtih slikovnih formatov kot predogledne sličice"
+msgstr "Prikaži datoteke podprtih slikovnih oblik kot predogledne sličice"
 
 #: ../data/ui/prefdlg.glade.h:11
 msgid "Hide 'Close tab' buttons"
@@ -446,7 +444,7 @@ msgstr "Skrij gumbe stranskega okna"
 
 #: ../data/ui/prefdlg.glade.h:14
 msgid "I_nterface"
-msgstr "Vmes_nik"
+msgstr "_Vmesnik"
 
 #: ../data/ui/prefdlg.glade.h:15
 msgid "Manage the desktop and show file icons"
@@ -524,7 +522,7 @@ msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:35
 msgid "Terminal:"
-msgstr "Terminalski posnemovalnik:"
+msgstr "Ukaz za zagon konzole:"
 
 #: ../data/ui/prefdlg.glade.h:36
 msgid "Text:"
@@ -716,7 +714,7 @@ msgstr "Alfa vrednost izbirnega polja"
 #: ../src/exo/exo-icon-view.c:988
 #, fuzzy
 msgid "Opacity of the selection box"
-msgstr "Transparentnost izbirnega polja"
+msgstr "Transparenca izbirnega polja"
 
 #. mime-type: application
 #: ../src/file-assoc-dlg.c:34
@@ -802,11 +800,11 @@ msgstr "Nastavi ozadje namizja"
 msgid "[FILE1, FILE2,...]"
 msgstr "[DATOTEKA1, DATOTEKA2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+- ikonska tema je nastavljena napačno"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -846,7 +844,7 @@ msgstr ""
 "ikon v GNOME in KDE, slednjih tem ni mogoče uporabiti. Trenutno standarda za "
 "to še ni, v prihodnosti bo zanj poskrbel freedesktop.org."
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -856,7 +854,7 @@ msgstr ""
 msgid "Error"
 msgstr "Napaka"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -866,15 +864,15 @@ msgstr ""
 "\n"
 "Je \"FAM\" ali \"Gamin\" nameščen in zagnan?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "Datoteka ne obstaja"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "Datoteke ni bilo mogoče odpreti"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -914,11 +912,11 @@ msgstr "_Lastnosti datoteke"
 
 #: ../src/main-window.c:317
 msgid "Close Tab"
-msgstr "Zapri zavihek"
+msgstr "Zapri z_avihek"
 
 #: ../src/main-window.c:318
 msgid "_Close Window"
-msgstr "_Zapri okno"
+msgstr "Zapri o_kno"
 
 #: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
@@ -931,11 +929,11 @@ msgstr "_Preimenuj"
 
 #: ../src/main-window.c:330
 msgid "Select _All"
-msgstr "_Izberi vse"
+msgstr "I_zberi vse"
 
 #: ../src/main-window.c:331
 msgid "_Invert Selection"
-msgstr "Obrni izbor"
+msgstr "_Obrni izbor"
 
 #: ../src/main-window.c:340
 msgid "Go _Back"
@@ -975,7 +973,7 @@ msgstr "Po _dovoljenjih"
 
 #: ../src/main-window.c:360
 msgid "Sort by _Owner"
-msgstr "Po lastniku"
+msgstr "Po _lastniku"
 
 #: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
@@ -987,15 +985,15 @@ msgstr "Padajoče"
 
 #: ../src/main-window.c:369
 msgid "_Open Side Pane"
-msgstr "Odpri _stransko okno"
+msgstr "Odpri _stransko podokno"
 
 #: ../src/main-window.c:371
 msgid "Show _Location Pane"
-msgstr "Prikaži kot lokacije"
+msgstr "Prikaži _mesta"
 
 #: ../src/main-window.c:372
 msgid "Show _Directory Tree"
-msgstr "Prikaži kot drevo map"
+msgstr "Prikaži _drevo map"
 
 #: ../src/main-window.c:378
 msgid "_Refresh"
@@ -1003,7 +1001,7 @@ msgstr "_Osveži"
 
 #: ../src/main-window.c:379
 msgid "Side _Pane"
-msgstr "Stransko podokno"
+msgstr "S_transko podokno"
 
 #. PTK_CHECK_MENU_ITEM( N_( "_Full Screen" ), on_fullscreen_activate, GDK_F11, 0 ),
 #: ../src/main-window.c:381
@@ -1013,7 +1011,7 @@ msgstr "Mesto"
 
 #: ../src/main-window.c:383
 msgid "Show _Hidden Files"
-msgstr "Prikaži _skrite datoteke"
+msgstr "Prikaži skrite _datoteke"
 
 #: ../src/main-window.c:384
 msgid "_Sort..."
@@ -1021,23 +1019,23 @@ msgstr "_Razvrsti"
 
 #: ../src/main-window.c:386
 msgid "View as _Icons"
-msgstr "Prikaži ikone"
+msgstr "Prikaži _ikone"
 
 #: ../src/main-window.c:387
 msgid "View as _Compact List"
-msgstr "Prikaži strnjen seznam"
+msgstr "Prikaži _strnjen seznam"
 
 #: ../src/main-window.c:388
 msgid "View as Detailed _List"
-msgstr "Prikaži podroben seznam"
+msgstr "Prikaži _podroben seznam"
 
 #: ../src/main-window.c:394
 msgid "Open _Terminal"
-msgstr "Odpri _terminal"
+msgstr "Odpri _konzolo"
 
 #: ../src/main-window.c:395
 msgid "Open Current Folder as _Root"
-msgstr "Odpri trenutno mapo kot skrbnik"
+msgstr "Odpri trenutno mapo kot _skrbnik"
 
 #: ../src/main-window.c:399
 msgid "_Find Files"
@@ -1074,7 +1072,7 @@ msgstr "Po_moč"
 
 #: ../src/main-window.c:420
 msgid "New Tab"
-msgstr "Nov zavihek"
+msgstr "Odpri nov zavihek"
 
 #: ../src/main-window.c:421
 msgid "Back"
@@ -1086,7 +1084,7 @@ msgstr "Naprej"
 
 #: ../src/main-window.c:423
 msgid "Parent Folder"
-msgstr "Nadrejena mapa"
+msgstr "V nadrejeno mapo"
 
 #: ../src/main-window.c:424
 msgid "Refresh"
@@ -1094,7 +1092,7 @@ msgstr "Osveži"
 
 #: ../src/main-window.c:425
 msgid "Home Directory"
-msgstr "Domača mapa"
+msgstr "Domov"
 
 #: ../src/main-window.c:426
 msgid "Open Side Pane"
@@ -1110,7 +1108,7 @@ msgstr "Pozor: prijavljeni ste kot super uporabnik"
 
 #: ../src/main-window.c:1705
 msgid "Terminal program has not been set"
-msgstr "Terminal ni nastavljen"
+msgstr "Ukaz za zagon konzole ni nastavljen"
 
 #: ../src/main-window.c:1846
 msgid "_Add to Bookmarks"
@@ -1195,11 +1193,11 @@ msgstr "Zadnja sprememba"
 
 #: ../src/ptk/ptk-file-browser.c:2856
 msgid "Location"
-msgstr "Mesto"
+msgstr "Mesta"
 
 #: ../src/ptk/ptk-file-browser.c:2857
 msgid "Directory Tree"
-msgstr "Drevesni pogled"
+msgstr "Drevo map"
 
 #: ../src/ptk/ptk-location-view.c:207
 msgid "Trash"
@@ -1281,6 +1279,23 @@ msgstr "Povezujem..."
 msgid "Changing Properties"
 msgstr "Spreminjam lastnosti"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "V:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Obdelujem:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Napredek:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "Prekinem dejanje?"
@@ -1349,33 +1364,34 @@ msgstr "Preskoči"
 msgid "Skip All"
 msgstr "Preskoči vse"
 
-#: ../src/ptk/ptk-file-archiver.c:119
-msgid "Save Compressd Files to..."
+#: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
+msgid "Save Compressed Files to..."
 msgstr "Shrani stisnjene datoteke v..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "Zapis stisnjene datoteke:"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Ustvarjam stisnjeno datoteko: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "Stisni datoteke"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "Razširi datoteko v..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Razširjam v: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "Razširi datoteke"
 
@@ -1401,19 +1417,19 @@ msgstr "Ni podmap"
 
 #: ../src/ptk/ptk-file-menu.c:116
 msgid "E_xtract Here"
-msgstr "Razširi _tu"
+msgstr "Izvleci _tu"
 
 #: ../src/ptk/ptk-file-menu.c:117
 msgid "Extract _To"
-msgstr "Razširi _v"
+msgstr "Izvleci _v"
 
 #: ../src/ptk/ptk-file-menu.c:123
 msgid "Open _with..."
-msgstr "Odpri _z..."
+msgstr "_Odpri z..."
 
 #: ../src/ptk/ptk-file-menu.c:131
 msgid "Compress"
-msgstr "Stisni"
+msgstr "_Stisni"
 
 #: ../src/ptk/ptk-file-menu.c:132
 msgid "E_xtract"
@@ -1425,11 +1441,11 @@ msgstr "_Lastnosti"
 
 #: ../src/ptk/ptk-file-menu.c:144
 msgid "Open in Terminal"
-msgstr "Odpri v terminalu"
+msgstr "Odpri v _konzoli"
 
 #: ../src/ptk/ptk-file-menu.c:373
 msgid "_Open with another program"
-msgstr "Odpri z _drugim programom"
+msgstr "_Drugim programom"
 
 #: ../src/ptk/ptk-file-menu.c:388
 msgid "E_xecute"
@@ -1532,7 +1548,7 @@ msgstr "Pot"
 
 #: ../src/edit-bookmarks.c:233
 msgid "Use drag & drop to sort the items"
-msgstr "Zaznamke se razvrščajo z uporabo \"primi in spusti\""
+msgstr "Za razvrstitev zaznamkov uporabi \"povleci in spusti\""
 
 #: ../src/vfs/vfs-app-desktop.c:445
 #, c-format

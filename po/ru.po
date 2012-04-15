@@ -1,30 +1,33 @@
 # translation of ru.po to Russian
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
 # Roxana Kolosova <mavka@justos.org>, 2006.
 # Anton Dobkin <anton@viansib.ru>, 2008.
+# akdengi <kazancas@gmail.com>, 2009.
+# #-#-#-#-#  pcmanfm.pot (PACKAGE VERSION)  #-#-#-#-#
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# #-#-#-#-#  ru.po (ru)  #-#-#-#-#
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.#
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
-"PO-Revision-Date: 2009-05-27 17:26+0200\n"
-"Last-Translator: Tim Marinin <velkhar@gmail.com>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-06-29 19:10+0400\n"
+"Last-Translator: akdengi <kazancas@gmail.com>\n"
+"Language-Team: Russian <gnu@mx.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 1.1.0\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../data/ui/about-dlg.glade.h:1
 msgid "Copyright (C) 2005 - 2008"
-msgstr "Copyright (C) 2005 - 2008"
+msgstr "Copyright (C) 2005 - 2008 "
 
 #: ../data/ui/about-dlg.glade.h:2
-#, fuzzy
 msgid ""
 "Lightweight file manager\n"
 "\n"
@@ -50,7 +53,9 @@ msgid "translator-credits"
 msgstr ""
 "Roxana Kolosova <mavka@justos.org>\n"
 "Lebed Dmitrij <dimaz.sertolovo@gmail.com>\n"
-"Anton Dobkin <anton@viansib.ru>Tim Marinin <velkhar@gmail.com>"
+"Anton Dobkin <anton@viansib.ru> \n"
+"Tim Marinin <velkhar@gmail.com>\n"
+"Alexander Kazancev <kazancas@gmail.com>"
 
 #: ../data/ui/about-dlg.glade.h:10
 msgid ""
@@ -112,7 +117,7 @@ msgstr "_Обзор"
 
 #: ../data/ui/appchooserdlg.glade.h:8
 msgid "_Command Line:"
-msgstr "_Командная строка: "
+msgstr "_Командная строка:"
 
 #: ../data/ui/appchooserdlg.glade.h:9
 msgid "_Recommended Applications"
@@ -120,7 +125,7 @@ msgstr "_Рекомендуемые приложения"
 
 #: ../data/ui/file-assoc-dlg.glade.h:1
 msgid "Actions Showed in Popup Menus"
-msgstr ""
+msgstr "Действия показываемые в всплывающих меню"
 
 #: ../data/ui/file-assoc-dlg.glade.h:2
 msgid "Add _Application"
@@ -131,9 +136,8 @@ msgid "Add _Custom Action"
 msgstr "Добавить _настраиваемое действие"
 
 #: ../data/ui/file-assoc-dlg.glade.h:4
-#, fuzzy
 msgid "File Associations"
-msgstr "Файл содержит:"
+msgstr "Ассоциации файла"
 
 #: ../data/ui/file-assoc-dlg.glade.h:5
 msgid "Known File Types:"
@@ -147,29 +151,27 @@ msgstr "Переместить _ниже: "
 msgid "Move _Up"
 msgstr "Переместить _выше: "
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Подготовка..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
-msgstr "Обработка: "
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
+msgstr "Обработка:"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
-msgstr "Прогресс: "
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
+msgstr "Прогресс:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "В: "
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>Группа:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Подготовка..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -248,7 +250,7 @@ msgstr "Установить UID"
 #. This is used in file attribute
 #: ../data/ui/file_properties.glade.h:22
 msgid "Sticky"
-msgstr "Sticky"
+msgstr "Липкий"
 
 #: ../data/ui/file_properties.glade.h:23
 msgid "Write"
@@ -303,11 +305,11 @@ msgid ""
 "Within One Year\n"
 "Within Selected Date Range"
 msgstr ""
-"Любой \n"
+"Любой\n"
 "В течение одного дня\n"
 "В течение одной недели\n"
 "В течение одного месяца\n"
-"В течение одного года \n"
+"В течение одного года\n"
 "В пределах выбранного диапазона дат"
 
 #: ../data/ui/find-files.glade.h:15
@@ -437,20 +439,19 @@ msgstr "Скрывать кнопку 'Закрыть вкладку'"
 
 #: ../data/ui/prefdlg.glade.h:12
 msgid "Hide folder content border"
-msgstr ""
+msgstr "Скрыть рамку содержимого папки"
 
 #: ../data/ui/prefdlg.glade.h:13
 msgid "Hide side pane buttons"
-msgstr ""
+msgstr "Скрыть кнопки боковой панели"
 
 #: ../data/ui/prefdlg.glade.h:14
-#, fuzzy
 msgid "I_nterface"
 msgstr "И_нтерфейс"
 
 #: ../data/ui/prefdlg.glade.h:15
 msgid "Manage the desktop and show file icons"
-msgstr "Управлять рабочим столом и отобразить значки файлов"
+msgstr "Управлять рабочим столом и показать иконки"
 
 #: ../data/ui/prefdlg.glade.h:16
 msgid "Max size of files displayed as thumbnails:"
@@ -474,9 +475,9 @@ msgid ""
 "Opened in New Tab\n"
 "Opened in New Window"
 msgstr ""
-"Открытый в Текущей Вкладке\n"
-", Открытый в Новой Вкладке\n"
-", Открытый в Новом Окне"
+"Открыты в текущей вкладке\n"
+"Открыты в новой вкладке\n"
+"Открыты в новом окне"
 
 #: ../data/ui/prefdlg.glade.h:23
 msgid "Please select an image file"
@@ -531,7 +532,6 @@ msgid "Text:"
 msgstr "Текст:"
 
 #: ../data/ui/prefdlg.glade.h:37
-#, fuzzy
 msgid "Use SI decimal prefixes instead of IEC binary prefixes"
 msgstr "Использовать десятичные приставки СИ вместо двоичных приставок МЭК"
 
@@ -553,74 +553,69 @@ msgstr "_Управление томом"
 
 #: ../src/exo/exo-icon-view.c:696
 msgid "Column Spacing"
-msgstr ""
+msgstr "Расстояние между колонками"
 
 #: ../src/exo/exo-icon-view.c:697
 msgid "Space which is inserted between grid column"
-msgstr ""
+msgstr "Расстояние между колонками"
 
 #: ../src/exo/exo-icon-view.c:713
-#, fuzzy
 msgid "Number of columns"
 msgstr "Количество столбцов"
 
 #: ../src/exo/exo-icon-view.c:714
-#, fuzzy
 msgid "Number of columns to display"
 msgstr "Количество столбцов для показа"
 
 #: ../src/exo/exo-icon-view.c:728
-#, fuzzy
 msgid "Enable Search"
 msgstr "Разрешить поиск"
 
 #: ../src/exo/exo-icon-view.c:729
 msgid "View allows user to search through columns interactively"
-msgstr ""
+msgstr "Вид, позволяющий пользователю интерактивный поиск в колонках"
 
 #: ../src/exo/exo-icon-view.c:746
 msgid "Width for each item"
-msgstr ""
+msgstr "Ширина для каждого элемента"
 
 #: ../src/exo/exo-icon-view.c:747
 msgid "The width used for each item"
-msgstr ""
+msgstr "Ширина, используемая для каждого элемента"
 
 #: ../src/exo/exo-icon-view.c:765
 msgid "Layout mode"
-msgstr ""
+msgstr "Режим разметки"
 
 #: ../src/exo/exo-icon-view.c:766
 msgid "The layout mode"
-msgstr ""
+msgstr "Режим разметки"
 
 #: ../src/exo/exo-icon-view.c:782
 msgid "Margin"
-msgstr ""
+msgstr "Отступ"
 
 #: ../src/exo/exo-icon-view.c:783
 msgid "Space which is inserted at the edges of the icon view"
-msgstr ""
+msgstr "Расстояние, оставляемое между краями иконок"
 
 #: ../src/exo/exo-icon-view.c:799
 msgid "Markup column"
-msgstr ""
+msgstr "Разметка столбцов"
 
 #: ../src/exo/exo-icon-view.c:800
 msgid "Model column used to retrieve the text if using Pango markup"
-msgstr ""
+msgstr "Шаблон столбца, используемый для получении текста при разметке Pango"
 
 #: ../src/exo/exo-icon-view.c:814
-#, fuzzy
 msgid "Icon View Model"
 msgstr "Просмотр в виде значков"
 
 #: ../src/exo/exo-icon-view.c:815
 msgid "The model for the icon view"
-msgstr ""
+msgstr "Модель для отображения иконок"
 
 #: ../src/exo/exo-icon-view.c:828
-#, fuzzy
 msgid "Orientation"
 msgstr "Ориентация"
 
@@ -628,108 +623,104 @@ msgstr "Ориентация"
 msgid ""
 "How the text and icon of each item are positioned relative to each other"
 msgstr ""
+"Как текст и иконки каждого элемента позиционируются относительно друг-друга"
 
 #: ../src/exo/exo-icon-view.c:845
 msgid "Pixbuf column"
-msgstr ""
+msgstr "Столбцы pixbuf"
 
 #: ../src/exo/exo-icon-view.c:846
 msgid "Model column used to retrieve the icon pixbuf from"
-msgstr ""
+msgstr "Шаблон столбца, используемый для получения текста в режиме pixbuf"
 
 #: ../src/exo/exo-icon-view.c:861
-#, fuzzy
 msgid "Reorderable"
 msgstr "Переупорядочить"
 
 #: ../src/exo/exo-icon-view.c:862
 msgid "View is reorderable"
-msgstr ""
+msgstr "Вид переорганизован"
 
 #: ../src/exo/exo-icon-view.c:877
 msgid "Row Spacing"
-msgstr ""
+msgstr "Расстояние между строками"
 
 #: ../src/exo/exo-icon-view.c:878
 msgid "Space which is inserted between grid rows"
-msgstr ""
+msgstr "Расстояние, которое вставляется между строками"
 
 #: ../src/exo/exo-icon-view.c:892
-#, fuzzy
 msgid "Search Column"
-msgstr "Искать снова"
+msgstr "Столбец поиска"
 
 #: ../src/exo/exo-icon-view.c:893
 msgid "Model column to search through when searching through item"
-msgstr ""
+msgstr "Шаблон столбца поиска внутри элемента"
 
 #: ../src/exo/exo-icon-view.c:907
-#, fuzzy
 msgid "Selection mode"
-msgstr "Выделить _все"
+msgstr "Режим выделения"
 
 #: ../src/exo/exo-icon-view.c:908
 msgid "The selection mode"
-msgstr ""
+msgstr "Режим выбора"
 
 #: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
-#, fuzzy
 msgid "Single Click"
 msgstr "Одиночный клик"
 
 #: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
 msgid "Whether the items in the view can be activated with single clicks"
-msgstr ""
+msgstr "Элементы могут быть активированы с помощью одиночного клика"
 
 #: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
 msgid "Single Click Timeout"
-msgstr ""
+msgstr "Таймаут одиночного клика"
 
 #: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
 msgid ""
 "The amount of time after which the item under the mouse cursor will be "
 "selected automatically in single click mode"
 msgstr ""
+"После того, как элемент будет находиться под курсором, он может быть "
+"активирован за один клик"
 
 #: ../src/exo/exo-icon-view.c:956
 msgid "Spacing"
-msgstr ""
+msgstr "Расстояние"
 
 #: ../src/exo/exo-icon-view.c:957
 msgid "Space which is inserted between cells of an item"
-msgstr ""
+msgstr "Расстояние между сеткой элементов"
 
 #: ../src/exo/exo-icon-view.c:972
 msgid "Text column"
-msgstr ""
+msgstr "Колонка текста"
 
 #: ../src/exo/exo-icon-view.c:973
 msgid "Model column used to retrieve the text from"
-msgstr ""
+msgstr "Шаблон столбца, используемой для появления текста из..."
 
 #: ../src/exo/exo-icon-view.c:980
-#, fuzzy
 msgid "Selection Box Color"
-msgstr "Выделить _все"
+msgstr "Цвет области выделения"
 
 #: ../src/exo/exo-icon-view.c:981
 msgid "Color of the selection box"
-msgstr ""
+msgstr "Цвет выделенного блока"
 
 #: ../src/exo/exo-icon-view.c:987
-#, fuzzy
 msgid "Selection Box Alpha"
-msgstr "Выделить _все"
+msgstr "Прозрачность области выделения"
 
 #: ../src/exo/exo-icon-view.c:988
 msgid "Opacity of the selection box"
-msgstr ""
+msgstr "Прозрачность выделенной области"
 
 #. mime-type: application
 #: ../src/file-assoc-dlg.c:34
-#, fuzzy
 msgid "application"
-msgstr "_Все приложения"
+msgstr "приложение"
 
 #. mime-type: audio
 #: ../src/file-assoc-dlg.c:37
@@ -743,14 +734,13 @@ msgstr "видео"
 
 #. mime-type: text
 #: ../src/file-assoc-dlg.c:43
-#, fuzzy
 msgid "text"
-msgstr "Текст:"
+msgstr "текст:"
 
 #. mime-type: multipart
 #: ../src/file-assoc-dlg.c:46
 msgid "multipart"
-msgstr ""
+msgstr "многотомный"
 
 #. mime-type: image
 #: ../src/file-assoc-dlg.c:49
@@ -764,15 +754,13 @@ msgstr "сообщение"
 
 #. mime-type: model
 #: ../src/file-assoc-dlg.c:55
-#, fuzzy
 msgid "model"
-msgstr "Режим:"
+msgstr "шаблон"
 
 #. mime-type: inode
 #: ../src/file-assoc-dlg.c:58
-#, fuzzy
 msgid "inode"
-msgstr "Режим:"
+msgstr "режим:"
 
 #. mime-type: packages
 #: ../src/file-assoc-dlg.c:61
@@ -796,7 +784,6 @@ msgstr ""
 "чтобы создавать новые Окна"
 
 #: ../src/main.c:95
-#, fuzzy
 msgid ""
 "Open preference dialog. 'n' is the number of page you want to show (1, 2, "
 "3...)."
@@ -816,11 +803,11 @@ msgstr "Установить рисунок рабочего стола"
 msgid "[FILE1, FILE2,...]"
 msgstr "[ФАЙЛ1, ФАЙЛ2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "Тема значков GTK+ не установлена"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -861,7 +848,7 @@ msgstr ""
 "тема KDE. В настоящее время нет никакого стандарта для этого, но это будет "
 "решено freedesktop.org в будущем."
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -871,7 +858,7 @@ msgstr ""
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -881,15 +868,15 @@ msgstr ""
 "\n"
 "У Вас установлен и запущен \"FAM\" или \"Gamin\"?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "Файл не существует"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "Неизвестный тип файла"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1022,9 +1009,8 @@ msgstr "Боковая _панель"
 
 #. PTK_CHECK_MENU_ITEM( N_( "_Full Screen" ), on_fullscreen_activate, GDK_F11, 0 ),
 #: ../src/main-window.c:381
-#, fuzzy
 msgid "L_ocation Bar"
-msgstr "Путь"
+msgstr "Строка пути"
 
 #: ../src/main-window.c:383
 msgid "Show _Hidden Files"
@@ -1148,9 +1134,8 @@ msgstr ", Свободное пространство: %s (Всего: %s )"
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
-msgstr[0] "выбран %d элемент (%s)%s"
-msgstr[1] "выбрано %d элемента (%s)%s"
-msgstr[2] "выбрано %d элементов (%s)%s"
+msgstr[0] "выбраны %d элементы (%s)%s"
+msgstr[1] "выбрано %d элемента(ов) (%s)%s"
 
 #: ../src/main-window.c:2122
 #, c-format
@@ -1158,15 +1143,13 @@ msgid "%d hidden"
 msgid_plural "%d hidden"
 msgstr[0] "%d скрыт"
 msgstr[1] "%d скрыто"
-msgstr[2] "%d скрытых"
 
 #: ../src/main-window.c:2123
 #, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
 msgstr[0] "%d видимый элемент (%s)%s"
-msgstr[1] "%d видимых элемента (%s)%s"
-msgstr[2] "%d видимых элементов (%s)%s"
+msgstr[1] "%d видимых элемента(ов) (%s)%s"
 
 #: ../src/ptk/ptk-file-browser.c:521
 msgid "Directory doesn't exist!"
@@ -1293,6 +1276,23 @@ msgstr "Создание ссылок..."
 msgid "Changing Properties"
 msgstr "Изменение свойств"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "В: "
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Обработка:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Прогресс:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "Отменить это действие?"
@@ -1315,7 +1315,7 @@ msgstr "Пожалуйста, выберите другое имя файла."
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" already exists.\n\nDo you want to overwrite existing file?"
 #: ../src/ptk/ptk-file-task.c:427
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\" already exists.\n"
 "\n"
@@ -1361,33 +1361,34 @@ msgstr "Пропустить"
 msgid "Skip All"
 msgstr "Пропустить все"
 
-#: ../src/ptk/ptk-file-archiver.c:119
+#: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
 msgid "Save Compressed Files to..."
 msgstr "Сохранить сжатые файлы в..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "Формат сжатых файлов:"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Процесс сжатия файла: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "Сжать файлы"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "Распаковать файл в..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Процесс распаковки файлов: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "Извлечь файлы"
 
@@ -1441,7 +1442,7 @@ msgstr "Открыть в терминале"
 
 #: ../src/ptk/ptk-file-menu.c:373
 msgid "_Open with another program"
-msgstr "_Выбрать программу"
+msgstr "_Открыть с помощью другой программы"
 
 #: ../src/ptk/ptk-file-menu.c:388
 msgid "E_xecute"
@@ -1472,7 +1473,6 @@ msgstr "Укажите новое имя файла:"
 
 #: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
-#, fuzzy
 msgid ""
 "The file name you specified already exists.\n"
 "Please input a new one:"
@@ -1550,7 +1550,7 @@ msgstr "Для сортировки использовать drag & drop"
 #: ../src/vfs/vfs-app-desktop.c:445
 #, c-format
 msgid "Command not found"
-msgstr "Командная не найдена"
+msgstr "Команда не найдена"
 
 #: ../src/vfs/vfs-file-task.c:733
 #, c-format
@@ -1638,7 +1638,7 @@ msgstr "Jaz Устройство"
 
 #: ../src/vfs/vfs-volume-hal.c:541
 msgid "Pen Drive"
-msgstr "Pen Устройство"
+msgstr "Флэш диск"
 
 #: ../src/vfs/vfs-volume-hal.c:547
 #, c-format
@@ -1786,7 +1786,7 @@ msgstr ""
 #: ../src/vfs/vfs-volume-hal.c:2274
 #, c-format
 msgid "An application is preventing the volume \"%s\" from being unmounted"
-msgstr "Приложение предотвращает том \"%s \" от отключения"
+msgstr "Приложение препятствует отключению тома \"%s \""
 
 #: ../src/vfs/vfs-volume-hal.c:2276
 #, c-format
@@ -1812,7 +1812,7 @@ msgid ""
 "audio or data on the disc"
 msgstr ""
 "Чистый диск не может быть подключен, используйте программу записи CD для "
-"записиаудио диска или диска с данными"
+"записи аудио диска или диска с данными"
 
 #: ../src/vfs/vfs-volume-hal.c:2300
 #, c-format
@@ -1827,9 +1827,8 @@ msgid "_Icons"
 msgstr "В виде ик_онок"
 
 #: ../src/desktop/desktop-window.c:198
-#, fuzzy
 msgid "_Desktop Settings"
-msgstr "_Рабочий стол"
+msgstr "_Настройки рабочего стола"
 
 #: ../src/desktop/desktop-window.c:1842
 msgid "My Documents"
@@ -1837,12 +1836,11 @@ msgstr "Мои документы"
 
 #: ../src/find-files.c:230
 msgid "Open Containing _Folder"
-msgstr ""
+msgstr "Открыть содержащую элемент папку"
 
 #: ../src/find-files.c:677
-#, fuzzy
 msgid "Select a folder"
-msgstr "Выделить _все"
+msgstr "Выбор папки"
 
 #: ../src/find-files.c:722
 msgid "Browse..."
@@ -1853,23 +1851,9 @@ msgid "All Local Disk Partitions"
 msgstr "Все разделы локального диска"
 
 #: ../src/find-files.c:814
-#, fuzzy
 msgid "Folder"
 msgstr "Папка"
 
 #: ../src/find-files.c:830
-#, fuzzy
 msgid "Last Modified"
 msgstr "Последние изменение"
-
-#, fuzzy
-#~ msgid "Opened in Current Tab"
-#~ msgstr "Открыть в новой _вкладке"
-
-#, fuzzy
-#~ msgid "Opened in New Tab"
-#~ msgstr "Открыть в новой _вкладке"
-
-#, fuzzy
-#~ msgid "Opened in New Window"
-#~ msgstr "Открыть в новом _окне"

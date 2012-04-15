@@ -3,6 +3,7 @@ Encoding=UTF-8
 Name=Open Folder
 Name[ru]=Открыть Папку
 Name[fi]=Avaa kansio
+Name[ja]=フォルダを開く
 TryExec=pcmanfm
 Exec=pcmanfm %U
 NoDisplay=true

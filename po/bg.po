@@ -1,26 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# SZERVÁC Attila <sas@321.hu>, 2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PCMan File Manager 0.3.6\n"
+"Project-Id-Version: pcmanfm\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-26 16:22+0100\n"
-"PO-Revision-Date: 2009-07-15 08:38+0100\n"
-"Last-Translator: Zsolt Peter Basak <shiki@biomernok.hu>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"PO-Revision-Date: 2009-10-23 18:34+0200\n"
+"Last-Translator: Rossen Karpuzov <gustav@cointech.net>\n"
+"Language-Team: Mandriva User Group - Bulgaria <mandriva-bg@googlegroups."
+"com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Poedit-Language: Hungarian\n"
-"X-Poedit-Country: HUNGARY\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../data/ui/about-dlg.glade.h:1
 msgid "Copyright (C) 2005 - 2008"
-msgstr "Copyright (C) 2005 - 2008"
+msgstr "Авторско право (C) 2005 - 2008"
 
 #: ../data/ui/about-dlg.glade.h:2
 msgid ""
@@ -28,9 +28,9 @@ msgid ""
 "\n"
 "Developed by Hon Jen Yee (PCMan)"
 msgstr ""
-"Pehelysúlyú fájlkezelő\n"
+"Lightweight файлов мениджър\n"
 "\n"
-"Írta: Hon Jen Yee (PCMan)"
+"Създаден от Hon Jen Yee (PCMan)"
 
 #: ../data/ui/about-dlg.glade.h:5
 msgid ""
@@ -38,14 +38,11 @@ msgid ""
 "created by Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 msgstr ""
-"Az ikon a \"nuoveXT 2\" ikontémából jön, melyet\n"
-"Alexandre Moore (saki) készített.\n"
-"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 
 #. Please replace this line with your own names, one name per line.
 #: ../data/ui/about-dlg.glade.h:9
 msgid "translator-credits"
-msgstr "SZERVÁC Attila"
+msgstr "Росен Карпузов <gustav@cointech.net>"
 
 #: ../data/ui/about-dlg.glade.h:10
 msgid ""
@@ -62,230 +59,227 @@ msgid ""
 "     * thunar-vfs and libexo: Benedikt Meurer\n"
 "     * gnome-mount: David Zeuthen"
 msgstr ""
-"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
-"\n"
-"Source code taken from other projects:\n"
-" * libmd5-rfc: Aladdin Enterprises\n"
-" * Working area detection: Gary Kramlich\n"
-" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
-" * Text and icon renderer uses code from Jonathan Blandford\n"
-" * Desktop icons use code from Brian Tarricone\n"
-" * Volume management uses code from following projects/authors:\n"
-"     * gnome-vfs: David Zeuthen\n"
-"     * thunar-vfs and libexo: Benedikt Meurer\n"
-"     * gnome-mount: David Zeuthen"
 
 #: ../data/ui/appchooserdlg.glade.h:1
 msgid "Choose an Application"
-msgstr "Válassz alkalmazást"
+msgstr "Избор на програма"
 
 #: ../data/ui/appchooserdlg.glade.h:2
 msgid "File Type To be Opened:"
-msgstr "Megnyitandó fájltípus:"
+msgstr ""
 
 #: ../data/ui/appchooserdlg.glade.h:3
 msgid "Opened in Terminal"
-msgstr "Megnyitás Terminálban"
+msgstr "Стартиране в терминал"
 
 #: ../data/ui/appchooserdlg.glade.h:4
 msgid ""
 "Please choose an application from following lists or enter the command line "
 "by hand:"
 msgstr ""
-"Válassz egy alkalmazást az alábbi listákból, vagy add meg a parancsot kézzel:"
+"Моля изберете програма от следния списък или въведете командния ред на ръка: "
 
 #: ../data/ui/appchooserdlg.glade.h:5
 msgid "Set selected application to default action"
-msgstr "A választott alkalmazás legyen alap"
+msgstr ""
 
 #: ../data/ui/appchooserdlg.glade.h:6
 msgid "_All Applications"
-msgstr "V_alamennyi alkalmazás"
+msgstr "_Всички Приложения"
 
 #: ../data/ui/appchooserdlg.glade.h:7
 msgid "_Browse"
-msgstr "_Böngészés"
+msgstr "_Разглеждане"
 
 #: ../data/ui/appchooserdlg.glade.h:8
 msgid "_Command Line:"
-msgstr "_Parancssor: "
+msgstr "_Команден ред:"
 
 #: ../data/ui/appchooserdlg.glade.h:9
 msgid "_Recommended Applications"
-msgstr "Ajánlott alkalmazások"
+msgstr "_Препоръчани програми"
 
 #: ../data/ui/file-assoc-dlg.glade.h:1
 msgid "Actions Showed in Popup Menus"
-msgstr "Felugró menükben megjelenő műveletek"
+msgstr "Действия показани в изскачащи менюта "
 
 #: ../data/ui/file-assoc-dlg.glade.h:2
 msgid "Add _Application"
-msgstr "Alkalmazás hozzá_adása"
+msgstr "Добавяне на _програма"
 
 #: ../data/ui/file-assoc-dlg.glade.h:3
+#, fuzzy
 msgid "Add _Custom Action"
-msgstr "Egyéni művelet hozáadása"
+msgstr "/Добавяне на източник"
 
 #: ../data/ui/file-assoc-dlg.glade.h:4
 msgid "File Associations"
-msgstr "Fájltársítások"
+msgstr "Асоцииране на файлове"
 
 #: ../data/ui/file-assoc-dlg.glade.h:5
 msgid "Known File Types:"
-msgstr "Ismert fájl típusok:"
+msgstr "Познати файлови типове:"
 
 #: ../data/ui/file-assoc-dlg.glade.h:6
 msgid "Move _Down"
-msgstr "Mozgatás _le:"
+msgstr "Преместване на_долу"
 
 #: ../data/ui/file-assoc-dlg.glade.h:7
 msgid "Move _Up"
-msgstr "Mozgatás _fel:"
+msgstr "Преместване _нагоре"
 
 #. Processing: <Name of currently proccesed file>
 #: ../data/ui/file_operation.glade.h:2
 #, fuzzy
 msgid "<b>Processing:</b>"
-msgstr "Feldolgozás:"
+msgstr "Обработване:"
 
 #: ../data/ui/file_operation.glade.h:3
 #, fuzzy
 msgid "<b>Progress:</b>"
-msgstr "Folyamat:"
+msgstr "Изпълнение:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
 #: ../data/ui/file_operation.glade.h:5
 #, fuzzy
 msgid "<b>To:</b>"
-msgstr "<b>Csoport:</b>"
+msgstr "<b>Група:</b>"
 
 #. Preparing to do some file operation (Copy, Move, Delete...)
 #: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
 msgid "Preparing..."
-msgstr "Előkészítés..."
+msgstr "Подготовка..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
-msgstr "<b>Fájltípus:</b>"
+msgstr "<b>Тип файл:</b>"
 
 #: ../data/ui/file_properties.glade.h:2
 msgid "<b>File _Name:</b>"
-msgstr "<b>Fájl_név:</b>"
+msgstr "<b>Име на _файл:</b>"
 
 #: ../data/ui/file_properties.glade.h:3
 msgid "<b>Group:</b>"
-msgstr "<b>Csoport:</b>"
+msgstr "<b>Група:</b>"
 
 #: ../data/ui/file_properties.glade.h:4
 msgid "<b>Last Access:</b>"
-msgstr "<b>Utolsó hozzáférés:</b>"
+msgstr "<b>Последен достъп:</b>"
 
 #: ../data/ui/file_properties.glade.h:5
 msgid "<b>Last Modification:</b>"
-msgstr "<b>Utolsó módosítás:</b>"
+msgstr "<b>Последна промяна:</b>"
 
 #: ../data/ui/file_properties.glade.h:6
 msgid "<b>Location:</b>"
-msgstr "<b>Hely:</b>"
+msgstr "<b>Местоположение:</b>"
 
 #: ../data/ui/file_properties.glade.h:7
 msgid "<b>Open _with:</b>"
-msgstr "<b>Megnyitás ezzel:</b>"
+msgstr "<b>Отваряне _с:</b>"
 
 #: ../data/ui/file_properties.glade.h:8
 msgid "<b>Other Users:</b>"
-msgstr "<b>Más felhasználók:</b>"
+msgstr "<b>Други потребители:</b>"
 
 #: ../data/ui/file_properties.glade.h:9
 msgid "<b>Owner:</b>"
-msgstr "<b>Tulajdonos:</b>"
+msgstr "<b>Собственик:</b>"
 
 #: ../data/ui/file_properties.glade.h:10
 msgid "<b>Size on Disk:</b>"
-msgstr "<b>Méret a lemezen:</b>"
+msgstr "<b>Размер на диск:</b>"
 
 #: ../data/ui/file_properties.glade.h:11
 msgid "<b>Total Size of Files:</b>"
-msgstr "<b>Fájlok összmérete:</b>"
+msgstr "<b>Общ размер на файлове:</b>"
 
 #: ../data/ui/file_properties.glade.h:12
 msgid "<b>_Group:</b>"
-msgstr "<b>_Csoport:</b>"
+msgstr "<b>_Група:</b>"
 
 #: ../data/ui/file_properties.glade.h:13
 msgid "<b>_Owner:</b>"
-msgstr "<b>_Tulajdonos:</b>"
+msgstr "<b>_Собственик:</b>"
 
 #: ../data/ui/file_properties.glade.h:14
 msgid "Execute"
-msgstr "Futtat"
+msgstr "Изпълняване"
 
 #: ../data/ui/file_properties.glade.h:15
 msgid "File Properties"
-msgstr "Tulajdonságok"
+msgstr "Информация за файла"
 
 #: ../data/ui/file_properties.glade.h:16
 msgid "Read"
-msgstr "Olvas"
+msgstr "Четене"
 
 #. This is used in file attribute
 #: ../data/ui/file_properties.glade.h:18
 msgid "Set GID"
-msgstr "Set GID"
+msgstr "Задаване на GID"
 
 #. This is used in file attribute
 #: ../data/ui/file_properties.glade.h:20
 msgid "Set UID"
-msgstr "Set UID"
+msgstr "Задаване на UID"
 
 #. This is used in file attribute
 #: ../data/ui/file_properties.glade.h:22
+#, fuzzy
 msgid "Sticky"
-msgstr "Ragadós"
+msgstr "На всички работни плотове"
 
 #: ../data/ui/file_properties.glade.h:23
 msgid "Write"
-msgstr "Ír"
+msgstr "Запис"
 
 #: ../data/ui/file_properties.glade.h:24 ../data/ui/prefdlg.glade.h:41
 msgid "_General"
-msgstr "Általá_nos"
+msgstr "_Общи"
 
 #: ../data/ui/file_properties.glade.h:25
 msgid "_Permissions"
-msgstr "_Jogok"
+msgstr "_Права"
 
 #: ../data/ui/find-files.glade.h:1
+#, fuzzy
 msgid "<b>File Content</b>"
-msgstr "<b>Fájltartalom</b>"
+msgstr "Съдържание на файла"
 
 #: ../data/ui/find-files.glade.h:2
+#, fuzzy
 msgid "<b>File Name Contains:</b>"
-msgstr "<b>Fájlnév tartalma:</b>"
+msgstr "името съдържа интервали"
 
 #: ../data/ui/find-files.glade.h:3
+#, fuzzy
 msgid "<b>File Size</b>"
-msgstr "<b>Fájlméret</b>"
+msgstr "Размер на файл"
 
 #: ../data/ui/find-files.glade.h:4
 msgid "<b>File Types to Search</b>"
-msgstr "<b>Keresendő fájltípusok</b>"
+msgstr ""
 
 #: ../data/ui/find-files.glade.h:5
+#, fuzzy
 msgid "<b>Last Modified</b>"
-msgstr "<b>Utolsó módosítás</b>"
+msgstr "Последна промяна:"
 
 #: ../data/ui/find-files.glade.h:6
+#, fuzzy
 msgid "<b>Places to Search</b>"
-msgstr "<b>Keresési helyek</b>"
+msgstr "/Търсене/_Отиване на..."
 
 #: ../data/ui/find-files.glade.h:7
+#, fuzzy
 msgid "<b>Search Result:</b>"
-msgstr "<b>Keresési eredmények:</b>"
+msgstr "&Последни резултати"
 
 #: ../data/ui/find-files.glade.h:8
+#, fuzzy
 msgid "All Files and Folders"
-msgstr "Minden fájl és mappa"
+msgstr "Споделени мрежови директории <br />и файлове"
 
 #: ../data/ui/find-files.glade.h:9
 msgid ""
@@ -296,16 +290,10 @@ msgid ""
 "Within One Year\n"
 "Within Selected Date Range"
 msgstr ""
-"Bármely\n"
-"Egy napon belül\n"
-"Egy héten belül\n"
-"Egy hónapon belül\n"
-"Egy éven belül\n"
-" "
 
 #: ../data/ui/find-files.glade.h:15
 msgid "Audio Files (mp3, ogg,...)"
-msgstr "Hangfájlok (ogg, mp3,...)"
+msgstr ""
 
 #: ../data/ui/find-files.glade.h:16
 msgid ""
@@ -314,150 +302,169 @@ msgid ""
 "MB\n"
 "GB"
 msgstr ""
-"Bájt\n"
-"KB\n"
-"MB\n"
-"GB"
 
 #: ../data/ui/find-files.glade.h:20
+#, fuzzy
 msgid "Case Sensitive"
-msgstr "Nagybetű-érzékeny"
+msgstr "Чувствителен регистър"
 
 #: ../data/ui/find-files.glade.h:21
+#, fuzzy
 msgid "Content"
-msgstr "Tartalom"
+msgstr "Съдържание"
 
 #: ../data/ui/find-files.glade.h:22
+#, fuzzy
 msgid "File Contains:"
-msgstr "Fájl tartalma:"
+msgstr "Адресът съдържа"
 
 #: ../data/ui/find-files.glade.h:23
+#, fuzzy
 msgid "Find Files"
-msgstr "Fájlkeresés"
+msgstr "Търсене на файлове"
 
 #: ../data/ui/find-files.glade.h:24
+#, fuzzy
 msgid "General"
-msgstr "Általános"
+msgstr "Общи"
 
 #: ../data/ui/find-files.glade.h:25
+#, fuzzy
 msgid "Greater Than:"
-msgstr "Nagyobb mint:"
+msgstr "по-голямо от"
 
 #: ../data/ui/find-files.glade.h:26
 msgid "Image Files (jpg, png,...)"
-msgstr "Képfájlok (png, jpg...)"
+msgstr ""
 
 #: ../data/ui/find-files.glade.h:27
+#, fuzzy
 msgid "Plain Text Files"
-msgstr "Sima szövegfájlok"
+msgstr "Редактиране на текстови файлове"
 
 #: ../data/ui/find-files.glade.h:28
+#, fuzzy
 msgid "Search Again"
-msgstr "Keresés újra"
+msgstr "Търси пак        F17"
 
 #: ../data/ui/find-files.glade.h:29
+#, fuzzy
 msgid "Search Hidden Files"
-msgstr "Rejtett fájlok keresése"
+msgstr "Показвай скрити файлове"
 
 #: ../data/ui/find-files.glade.h:30
 msgid "Search in Sub Directories"
-msgstr "Keresés Almappákban is"
+msgstr ""
 
 #: ../data/ui/find-files.glade.h:31
+#, fuzzy
 msgid "Size & Date"
-msgstr "Méret és dátum"
+msgstr "Управляващ елемент дата"
 
 #: ../data/ui/find-files.glade.h:32
+#, fuzzy
 msgid "Smaller Than:"
-msgstr "Kisebb mint:"
+msgstr "по-малка от"
 
 #: ../data/ui/find-files.glade.h:33
+#, fuzzy
 msgid "Use Regular Expression"
-msgstr "Szabályos kifejezéssel"
+msgstr "Регулярен израз"
 
 #: ../data/ui/find-files.glade.h:34
 msgid "Video Files (avi, mpg,...)"
-msgstr "Videófájlok (mpg, avi...)"
+msgstr ""
 
 #: ../data/ui/godlg.glade.h:1
+#, fuzzy
 msgid "Go to folder"
-msgstr "Ugrás mappára"
+msgstr "Възстановяване в директория:"
 
 #: ../data/ui/prefdlg.glade.h:1
+#, fuzzy
 msgid "<b>Behavior</b>"
-msgstr "<b>Viselkedés</b>"
+msgstr "<b>Поведение</b>"
 
 #: ../data/ui/prefdlg.glade.h:2
+#, fuzzy
 msgid "<b>Colors</b>"
-msgstr "<b>Színek</b>"
+msgstr "<b>Цветове</b>"
 
 #: ../data/ui/prefdlg.glade.h:3
+#, fuzzy
 msgid "<b>Display</b>"
-msgstr "<b>Kijelző</b>"
+msgstr "<b>Изглед</b>"
 
 #: ../data/ui/prefdlg.glade.h:4
+#, fuzzy
 msgid "<b>General</b>"
-msgstr "<b>Általános</b>"
+msgstr "<b>Основни</b>"
 
 #: ../data/ui/prefdlg.glade.h:5
+#, fuzzy
 msgid "<b>Wallpaper</b>"
-msgstr "<b>Tapéta</b>"
+msgstr "тапет"
 
 #: ../data/ui/prefdlg.glade.h:6
+#, fuzzy
 msgid "Always show the tab bar"
-msgstr "Fül sáv állandó mutatása"
+msgstr "Винаги да се показва лентата с подпрозорците"
 
 #: ../data/ui/prefdlg.glade.h:7
+#, fuzzy
 msgid "Background:"
-msgstr "Háttér:"
+msgstr "Фон:"
 
 #: ../data/ui/prefdlg.glade.h:8
+#, fuzzy
 msgid "Bookmarks:"
-msgstr "Könyvjelzők"
+msgstr "&Отметки"
 
 #: ../data/ui/prefdlg.glade.h:9
 msgid "Disable \"Trash Can\" and delete files from disk directly"
-msgstr "\"Lomtár\" kikapcsolása, s a fájlok közvetlen törlése"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:10
 msgid "Display image files with supported format as thumbnails"
-msgstr "Támogatott formátumú fájlok megjelenítése előképként"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:11
 msgid "Hide 'Close tab' buttons"
-msgstr "'Fül bezárása' gombok elrejtése"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:12
 msgid "Hide folder content border"
-msgstr "'Mappa tartalma' keret eltüntetése"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:13
+#, fuzzy
 msgid "Hide side pane buttons"
-msgstr "Oldalsó mező gombok eltüntetése"
+msgstr "Показване/скриване на страничния панел."
 
 #: ../data/ui/prefdlg.glade.h:14
 msgid "I_nterface"
-msgstr "F_elület"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:15
 msgid "Manage the desktop and show file icons"
-msgstr "Asztal kezelése, s fájl ikonok mutatása"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:16
 msgid "Max size of files displayed as thumbnails:"
-msgstr "Az előképként megjelenített legnagyobb fájl:"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:17
+#, fuzzy
 msgid "Mode:"
-msgstr "Mód:"
+msgstr "Режим:"
 
 #: ../data/ui/prefdlg.glade.h:18
 msgid "On-disk file name encoding:"
-msgstr "Fájlnévkódolás a lemezen:"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:19
 msgid "Open files with single click"
-msgstr "Fájlok megnyitása 1 kattintással"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:20
 msgid ""
@@ -465,41 +472,43 @@ msgid ""
 "Opened in New Tab\n"
 "Opened in New Window"
 msgstr ""
-"E lapon nyílik\n"
-"Új lapon nyílik\n"
-"Új ablakban nyílik"
 
 #: ../data/ui/prefdlg.glade.h:23
+#, fuzzy
 msgid "Please select an image file"
-msgstr "Válassz egy kép fájlt"
+msgstr "Избор на изображение за обложка"
 
 #: ../data/ui/prefdlg.glade.h:24
+#, fuzzy
 msgid "Preferences"
-msgstr "Tulajdonságok"
+msgstr "Настройки"
 
 #: ../data/ui/prefdlg.glade.h:25
+#, fuzzy
 msgid "Shadow:"
-msgstr "Árnyék:"
+msgstr "Сянка:"
 
 #: ../data/ui/prefdlg.glade.h:26
 msgid "Show \"My Documents\" icon on desktop"
-msgstr "\"Dokumentumaim\" ikon az asztalon"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:27
+#, fuzzy
 msgid "Show icons of volumes on desktop"
-msgstr "Kötetikonok az asztalon"
+msgstr "Показване на монтираните устройства на работния плот"
 
 #: ../data/ui/prefdlg.glade.h:28
 msgid "Show menus provided by WM when desktop is clicked"
-msgstr "Ablakkezelő menüit mutatja az asztalra kattintva"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:29
 msgid "Size of Big Icons:"
-msgstr "Nagy ikonok mérete:"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:30
+#, fuzzy
 msgid "Size of Small Icons:"
-msgstr "Kis ikonok mérete"
+msgstr "Най-малък"
 
 #: ../data/ui/prefdlg.glade.h:31
 msgid ""
@@ -508,292 +517,326 @@ msgid ""
 "Center on the screen\n"
 "Tile the image to fill the entire screen"
 msgstr ""
-"Méretezés, hogy kitöltse a képernyőt\n"
-"Méretezés, hogy beférjen a képernyőbe\n"
-"Középen\n"
-"Mozaik"
 
 #: ../data/ui/prefdlg.glade.h:35
 msgid "Terminal:"
-msgstr "Terminál:"
+msgstr "Терминал:"
 
 #: ../data/ui/prefdlg.glade.h:36
 msgid "Text:"
-msgstr "Szöveg:"
+msgstr "Текст:"
 
 #: ../data/ui/prefdlg.glade.h:37
 msgid "Use SI decimal prefixes instead of IEC binary prefixes"
-msgstr "SI tízes előtagok használata IEC binárisok helyett"
+msgstr ""
 
 #: ../data/ui/prefdlg.glade.h:38
+#, fuzzy
 msgid "Wallpaper:"
-msgstr "Tapéta:"
+msgstr "тапет"
 
 #: ../data/ui/prefdlg.glade.h:39
+#, fuzzy
 msgid "_Advanced"
-msgstr "_Haladó"
+msgstr "_Разширени"
 
 #: ../data/ui/prefdlg.glade.h:40
+#, fuzzy
 msgid "_Desktop"
-msgstr "Asztal"
+msgstr "Ра_ботен плот"
 
 #: ../data/ui/prefdlg.glade.h:42
+#, fuzzy
 msgid "_Volume Management"
-msgstr "_Kötetkezelés"
+msgstr "Работа със сметки"
 
 #: ../src/exo/exo-icon-view.c:696
+#, fuzzy
 msgid "Column Spacing"
-msgstr "Oszloptáv"
+msgstr "Разредка на колоните"
 
 #: ../src/exo/exo-icon-view.c:697
+#, fuzzy
 msgid "Space which is inserted between grid column"
-msgstr "Az oszlopok közti táv"
+msgstr "Пространството, което се вмъква между колоните в мрежата"
 
 #: ../src/exo/exo-icon-view.c:713
+#, fuzzy
 msgid "Number of columns"
-msgstr "Oszlopszám"
+msgstr "Брой колони"
 
 #: ../src/exo/exo-icon-view.c:714
+#, fuzzy
 msgid "Number of columns to display"
-msgstr "Megjelenített oszlopok száma"
+msgstr "Брой колони, които да се покажат"
 
 #: ../src/exo/exo-icon-view.c:728
+#, fuzzy
 msgid "Enable Search"
-msgstr "Keresés bekapcsolva"
+msgstr "Разрешаване на търсене"
 
 #: ../src/exo/exo-icon-view.c:729
+#, fuzzy
 msgid "View allows user to search through columns interactively"
-msgstr "Lehetővé teszik az oszlopok közti interaktív keresést"
+msgstr ""
+"Изгледът позволява на потребителите да претърсват колоните интерактивно"
 
 #: ../src/exo/exo-icon-view.c:746
+#, fuzzy
 msgid "Width for each item"
-msgstr "Elemek szélessége"
+msgstr "Широчина на всеки елемент"
 
 #: ../src/exo/exo-icon-view.c:747
+#, fuzzy
 msgid "The width used for each item"
-msgstr "Az egyes elemekhez használt szélesség"
+msgstr "Широчината, която се ползва за всеки елемент"
 
 #: ../src/exo/exo-icon-view.c:765
+#, fuzzy
 msgid "Layout mode"
-msgstr "Rendezési mód"
+msgstr "Режимите за достъп се различават"
 
 #: ../src/exo/exo-icon-view.c:766
+#, fuzzy
 msgid "The layout mode"
-msgstr "Az elrendezés módja"
+msgstr "Режимите за достъп се различават"
 
 #: ../src/exo/exo-icon-view.c:782
 msgid "Margin"
-msgstr "Margó"
+msgstr "Граница"
 
 #: ../src/exo/exo-icon-view.c:783
+#, fuzzy
 msgid "Space which is inserted at the edges of the icon view"
-msgstr "Az ikonnézet széleihez tett táv"
+msgstr "Пространството, което се вмъква по ръбовете на изгледа с икони"
 
 #: ../src/exo/exo-icon-view.c:799
+#, fuzzy
 msgid "Markup column"
-msgstr ""
+msgstr "Колона с маркиране"
 
 #: ../src/exo/exo-icon-view.c:800
+#, fuzzy
 msgid "Model column used to retrieve the text if using Pango markup"
 msgstr ""
+"Колона в модела, от която се взема текста, ако се ползва маркиране на Pango"
 
 #: ../src/exo/exo-icon-view.c:814
+#, fuzzy
 msgid "Icon View Model"
-msgstr "Ikon nézet"
+msgstr "Изглед с икони"
 
 #: ../src/exo/exo-icon-view.c:815
+#, fuzzy
 msgid "The model for the icon view"
-msgstr "Az ikon nézethez tartozó model"
+msgstr "Моделът на изглед с икони"
 
 #: ../src/exo/exo-icon-view.c:828
 msgid "Orientation"
-msgstr "Elrendezés"
+msgstr "Ориентация"
 
 #: ../src/exo/exo-icon-view.c:829
 #, fuzzy
 msgid ""
 "How the text and icon of each item are positioned relative to each other"
-msgstr "Hogy legyen a szöveg és az ikon elhelyezve relatívan a többihez képest"
+msgstr "Как се разполагат относително един спрямо друг текстът и иконата"
 
 #: ../src/exo/exo-icon-view.c:845
+#, fuzzy
 msgid "Pixbuf column"
-msgstr "Pixbuf oszlop"
+msgstr "Колона на буферите"
 
 #: ../src/exo/exo-icon-view.c:846
+#, fuzzy
 msgid "Model column used to retrieve the icon pixbuf from"
-msgstr ""
+msgstr "Колона в модела, от която се вземат буферите с пиксели за иконите"
 
 #: ../src/exo/exo-icon-view.c:861
 msgid "Reorderable"
-msgstr "Újrarendezhető"
+msgstr "Преподредим"
 
 #: ../src/exo/exo-icon-view.c:862
+#, fuzzy
 msgid "View is reorderable"
-msgstr "A nézet újrarendezhető"
+msgstr "Изгледът може да се преподрежда"
 
 #: ../src/exo/exo-icon-view.c:877
+#, fuzzy
 msgid "Row Spacing"
-msgstr "Sor Térköz"
+msgstr "Разредка на редовете"
 
 #: ../src/exo/exo-icon-view.c:878
+#, fuzzy
 msgid "Space which is inserted between grid rows"
-msgstr "Térköz ami a rács sorok közé kerül"
+msgstr "Пространството, което се вмъква между редовете в мрежата"
 
 #: ../src/exo/exo-icon-view.c:892
+#, fuzzy
 msgid "Search Column"
-msgstr "Kereső Oszlop"
+msgstr "Колона за търсене"
 
 #: ../src/exo/exo-icon-view.c:893
+#, fuzzy
 msgid "Model column to search through when searching through item"
-msgstr ""
+msgstr "Колона от модела, в която се търси"
 
 #: ../src/exo/exo-icon-view.c:907
+#, fuzzy
 msgid "Selection mode"
-msgstr "Kijelölő mód"
+msgstr "Начин на избор"
 
 #: ../src/exo/exo-icon-view.c:908
+#, fuzzy
 msgid "The selection mode"
-msgstr "Kijelölés mód"
+msgstr "Начинът за избор"
 
 #: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
 msgid "Single Click"
-msgstr "Kattintás"
+msgstr "Единично натискане"
 
 #: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
 msgid "Whether the items in the view can be activated with single clicks"
 msgstr ""
-"Az elemek bekapcsolhatóak legyenek e a nézetben egy egyszerű kattintással"
 
 #: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
+#, fuzzy
 msgid "Single Click Timeout"
-msgstr "Szimpla kattintás időtúllépése"
+msgstr "<b>Пауза между две натискания</b>"
 
 #: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
 msgid ""
 "The amount of time after which the item under the mouse cursor will be "
 "selected automatically in single click mode"
 msgstr ""
-"Az időtartam amely szükséges egy elem kijelöléséhez a kurzor rajtatartásával"
 
 #: ../src/exo/exo-icon-view.c:956
 msgid "Spacing"
-msgstr "Térköz"
+msgstr "Разредка"
 
 #: ../src/exo/exo-icon-view.c:957
+#, fuzzy
 msgid "Space which is inserted between cells of an item"
-msgstr "Térköz amely az elem cellái közé kerül"
+msgstr "Пространството, което се вмъква между клетките на елемент"
 
 #: ../src/exo/exo-icon-view.c:972
+#, fuzzy
 msgid "Text column"
-msgstr "Szövegoszlop"
+msgstr "Текстова колона"
 
 #: ../src/exo/exo-icon-view.c:973
+#, fuzzy
 msgid "Model column used to retrieve the text from"
-msgstr ""
+msgstr "Колона в модела, от която се взема текста"
 
 #: ../src/exo/exo-icon-view.c:980
+#, fuzzy
 msgid "Selection Box Color"
-msgstr "Kijelölő doboz színe"
+msgstr "Цвят на прозореца за избор"
 
 #: ../src/exo/exo-icon-view.c:981
+#, fuzzy
 msgid "Color of the selection box"
-msgstr "Kijelölődoboz színe"
+msgstr "Цветът на прозореца за избор"
 
 #: ../src/exo/exo-icon-view.c:987
+#, fuzzy
 msgid "Selection Box Alpha"
-msgstr "Kijelölő doboz alfa"
+msgstr "Алфа каналът на прозореца за избор"
 
 #: ../src/exo/exo-icon-view.c:988
+#, fuzzy
 msgid "Opacity of the selection box"
-msgstr "Kijelölő dobod telítettsége"
+msgstr "Непрозрачността на прозореца за избор"
 
 #. mime-type: application
 #: ../src/file-assoc-dlg.c:34
 msgid "application"
-msgstr "alkalmazás"
+msgstr "приложение"
 
 #. mime-type: audio
 #: ../src/file-assoc-dlg.c:37
 msgid "audio"
-msgstr "hang"
+msgstr "аудио"
 
 #. mime-type: video
 #: ../src/file-assoc-dlg.c:40
 msgid "video"
-msgstr "mozgókép"
+msgstr "видео"
 
 #. mime-type: text
 #: ../src/file-assoc-dlg.c:43
 msgid "text"
-msgstr "szöveg"
+msgstr "текст"
 
 #. mime-type: multipart
 #: ../src/file-assoc-dlg.c:46
 msgid "multipart"
-msgstr "többrészes"
+msgstr ""
 
 #. mime-type: image
 #: ../src/file-assoc-dlg.c:49
 msgid "image"
-msgstr "kép"
+msgstr "изображение"
 
 #. mime-type: message
 #: ../src/file-assoc-dlg.c:52
 msgid "message"
-msgstr "üzenet"
+msgstr "съобщение"
 
 #. mime-type: model
 #: ../src/file-assoc-dlg.c:55
 msgid "model"
-msgstr "modell"
+msgstr "модел"
 
 #. mime-type: inode
 #: ../src/file-assoc-dlg.c:58
 msgid "inode"
-msgstr "inode"
+msgstr "I-възел"
 
 #. mime-type: packages
 #: ../src/file-assoc-dlg.c:61
+#, fuzzy
 msgid "packages"
-msgstr "csomagok"
+msgstr "&Пакети"
 
 #: ../src/main.c:92
+#, fuzzy
 msgid "Don't show desktop icons."
-msgstr "Asztali ikonok mellőzése"
+msgstr "Пока&зване на иконите върху работния плот"
 
 #: ../src/main.c:93
+#, fuzzy
 msgid "Run PCManFM as a daemon"
-msgstr "PCManFM futtatása démonként"
+msgstr "Стартиране като daemon процес"
 
 #: ../src/main.c:94
 msgid ""
 "Open folders in new tabs of the last used window instead of creating new "
 "windows"
-msgstr "Mappák megnyitása a legutóbbi ablak lapjain új ablak helyett"
+msgstr ""
 
 #: ../src/main.c:95
 msgid ""
 "Open preference dialog. 'n' is the number of page you want to show (1, 2, "
 "3...)."
 msgstr ""
-"Tulajdonságok ablak megnyitása. 'n' a lap száma amit szeretnél megjeleníteni "
-"(1, 2, 3...)."
 
 #: ../src/main.c:96
 msgid "Find Files with PCManFM"
-msgstr "PCManFM fájlkeresés"
+msgstr ""
 
 #: ../src/main.c:103
+#, fuzzy
 msgid "Set desktop wallpaper"
-msgstr "Asztali tapéta beállítása"
+msgstr "&Използване като тапет"
 
 #: ../src/main.c:112
 msgid "[FILE1, FILE2,...]"
-msgstr "[FÁJL1, FÁJL2,...]"
+msgstr ""
 
 #: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
-msgstr "A GTK+ ikon téma nincs helyesen beállítva"
+msgstr ""
 
 #: ../src/main.c:341
 #, c-format
@@ -816,23 +859,6 @@ msgid ""
 "icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
 "no standard for this, but it will be solved by freedesktop.org in the future."
 msgstr ""
-"<big><b>%s</b></big>\n"
-"\n"
-"Valószínűleg nem futtatsz XSETTINGS kezelőt.  Az Xfce vagy GNOME "
-"munkakörnyezetek automatikusan futtatják xfce-mcs-manager vagy gnome-"
-"settings-daemon XSETTING kezelőjüket.\n"
-"\n"
-"<b>Ha nem használod ezeket 2 lehetőséged van:\n"
-"1. futtas egy XSETTINGS kezelőt, vagy\n"
-"2. egyszerűen adj meg egy ikon témát a ~/.gtkrc-2.0 fájlban.</b>\n"
-"Például a Tango ikon témához adj egy ilyen sort:\n"
-"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> a ~/.gtkrc-2.0 fájlodban. (hozd "
-"létre, ha nincs)\n"
-"\n"
-"<b>MEGJEGYZÉS: Az ikon téma Xfce/GNOME kompatibilis kell legyen, különben a "
-"fájl ikonok nem jelennek meg helyesen.</b>  Ezek és a KDE ikon nevek közti "
-"eltérés miatt, a KDE témák nem használhatók.  Még nincs erre szabvány, de a "
-"freedesktop.org megoldja a jövőben."
 
 #: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
@@ -842,7 +868,7 @@ msgstr ""
 #: ../src/ptk/ptk-file-misc.c:415 ../src/ptk/ptk-file-properties.c:701
 #: ../src/ptk/ptk-file-properties.c:712
 msgid "Error"
-msgstr "Hiba"
+msgstr "Грешка"
 
 #: ../src/main.c:678
 msgid ""
@@ -850,467 +876,501 @@ msgid ""
 "\n"
 "Do you have \"FAM\" or \"Gamin\" installed and running?"
 msgstr ""
-"Hiba: Nem tudok kapcsolódni a FAM-hoz.\n"
-"\n"
-"A \"FAM\" vagy \"Gamin\" telepítve van és fut?"
 
 #: ../src/main.c:747
+#, fuzzy
 msgid "File doesn't exist"
-msgstr "A fájl nem létezik"
+msgstr "Файлът не съществува"
 
 #: ../src/main.c:794
 msgid "Don't know how to open the file"
-msgstr "Nincs adatom e fájl megnyitásáról"
+msgstr ""
 
 #: ../src/main.c:796
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Unable to open file:\n"
 "\"%s\"\n"
 "%s"
-msgstr ""
-"Fájl megnyitása sikertelen:\n"
-"\"%s\"\n"
-"%s"
+msgstr "Не може да бъде отворен файл."
 
 #: ../src/main-window.c:304 ../src/ptk/ptk-file-menu.c:109
 #: ../src/desktop/desktop-window.c:186
+#, fuzzy
 msgid "_Folder"
-msgstr "_Mappa"
+msgstr "Директория"
 
 #: ../src/main-window.c:305 ../src/ptk/ptk-file-menu.c:110
 #: ../src/desktop/desktop-window.c:187
+#, fuzzy
 msgid "_Text File"
-msgstr "_Szövegfájl"
+msgstr "Текстов файл (*)"
 
 #: ../src/main-window.c:311
 msgid "New _Window"
-msgstr "Új _ablak"
+msgstr "Нов _прозорец"
 
 #: ../src/main-window.c:312
 msgid "New _Tab"
-msgstr "Új _lap"
+msgstr "Нов _подпрозорец"
 
 #: ../src/main-window.c:314 ../src/ptk/ptk-file-menu.c:133
 #: ../src/desktop/desktop-window.c:196
 msgid "_Create New"
-msgstr "Ú_j"
+msgstr "_Създаване на нов..."
 
 #: ../src/main-window.c:315
 msgid "File _Properties"
-msgstr "Fájl _tulajdonságok"
+msgstr "Информация за файла"
 
 #: ../src/main-window.c:317
 msgid "Close Tab"
-msgstr "Lap bezárása"
+msgstr "Затваряне на подпрозорец"
 
 #: ../src/main-window.c:318
 msgid "_Close Window"
-msgstr "Ablak bezárása"
+msgstr "Зат_варяне на този прозорец"
 
 #: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
-msgstr "_Törlés"
+msgstr "_Изтриване"
 
 #: ../src/main-window.c:328 ../src/ptk/ptk-file-browser.c:1396
 #: ../src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
-msgstr "Át_nevezés"
+msgstr "П_реименуване"
 
 #: ../src/main-window.c:330
 msgid "Select _All"
-msgstr "M_indent kiválaszt"
+msgstr "Избиране на _всичко"
 
 #: ../src/main-window.c:331
 msgid "_Invert Selection"
-msgstr "Választás meg_fordítása"
+msgstr "_Обръщане на избора"
 
 #: ../src/main-window.c:340
 msgid "Go _Back"
-msgstr "_Vissza"
+msgstr "Връщане назад"
 
 #: ../src/main-window.c:341
 msgid "Go _Forward"
-msgstr "_Előre"
+msgstr "Отиване напред"
 
 #: ../src/main-window.c:342
+#, fuzzy
 msgid "Go to _Parent Folder"
-msgstr "_Szülő"
+msgstr "Преместване в родителската папка"
 
 #: ../src/main-window.c:343
+#, fuzzy
 msgid "Go _Home"
-msgstr "_Haza"
+msgstr "Домашна директория на потребител"
 
 #: ../src/main-window.c:355 ../src/desktop/desktop-window.c:173
+#, fuzzy
 msgid "Sort by _Name"
-msgstr "_Név"
+msgstr "Подреждане по _име"
 
 #: ../src/main-window.c:356 ../src/desktop/desktop-window.c:174
+#, fuzzy
 msgid "Sort by _Size"
-msgstr "_Méret"
+msgstr "По размер"
 
 #: ../src/main-window.c:357 ../src/desktop/desktop-window.c:176
 msgid "Sort by _Modification Time"
-msgstr "Rendezés módosítás szerint"
+msgstr ""
 
 #: ../src/main-window.c:358 ../src/desktop/desktop-window.c:175
+#, fuzzy
 msgid "Sort by _Type"
-msgstr "Rendezés típus szerint"
+msgstr "Търсене по тип"
 
 #: ../src/main-window.c:359
+#, fuzzy
 msgid "Sort by _Permission"
-msgstr "Rendezés jogok szerint"
+msgstr "Филтър"
 
 #: ../src/main-window.c:360
+#, fuzzy
 msgid "Sort by _Owner"
-msgstr "Rendezés tulajdonos szerint"
+msgstr "четене от собственика"
 
 #: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
-msgstr "Növekvő"
+msgstr "Възходящо"
 
 #: ../src/main-window.c:363 ../src/desktop/desktop-window.c:180
 msgid "Descending"
-msgstr "Csökkenő"
+msgstr "Низходящо"
 
 #: ../src/main-window.c:369
+#, fuzzy
 msgid "_Open Side Pane"
-msgstr "_Oldalpanel megnyitása"
+msgstr "Показване на страничната лента"
 
 #: ../src/main-window.c:371
+#, fuzzy
 msgid "Show _Location Pane"
-msgstr "Címpanel megjelenítése"
+msgstr "Показване на предварителния преглед на писмата"
 
 #: ../src/main-window.c:372
+#, fuzzy
 msgid "Show _Directory Tree"
-msgstr "_Könyvtárfa megjelenítése"
+msgstr "&Местни папки"
 
 #: ../src/main-window.c:378
 msgid "_Refresh"
-msgstr "_Frissít"
+msgstr "_Обновяване"
 
 #: ../src/main-window.c:379
 msgid "Side _Pane"
-msgstr "Oldal_panel"
+msgstr "_Страничен панел"
 
 #. PTK_CHECK_MENU_ITEM( N_( "_Full Screen" ), on_fullscreen_activate, GDK_F11, 0 ),
 #: ../src/main-window.c:381
+#, fuzzy
 msgid "L_ocation Bar"
-msgstr "Helysáv"
+msgstr "Лента за състоянието"
 
 #: ../src/main-window.c:383
 msgid "Show _Hidden Files"
-msgstr "R_ejtettek"
+msgstr "Показване на _скритите файлове"
 
 #: ../src/main-window.c:384
 msgid "_Sort..."
-msgstr "_Rendezés..."
+msgstr "_Подреждане…"
 
 #: ../src/main-window.c:386
+#, fuzzy
 msgid "View as _Icons"
-msgstr "_Ikonnézet"
+msgstr "Показване като мрежа"
 
 #: ../src/main-window.c:387
 msgid "View as _Compact List"
-msgstr "Tömör lista"
+msgstr ""
 
 #: ../src/main-window.c:388
 msgid "View as Detailed _List"
-msgstr "Részletes _Lista"
+msgstr ""
 
 #: ../src/main-window.c:394
+#, fuzzy
 msgid "Open _Terminal"
-msgstr "_Terminál megnyitása"
+msgstr "_Отваряне на прозорец"
 
 #: ../src/main-window.c:395
 msgid "Open Current Folder as _Root"
-msgstr "E könyvtár megnyitása rendszergazdaként"
+msgstr ""
 
 #: ../src/main-window.c:399
+#, fuzzy
 msgid "_Find Files"
-msgstr "_Fájlkeresés"
+msgstr "Търсене на файлове"
 
 #: ../src/main-window.c:405
 msgid "_File"
-msgstr "_Fájl"
+msgstr "_Файл"
 
 #: ../src/main-window.c:406
 msgid "_Edit"
-msgstr "Sz_erkesztés"
+msgstr "_Редактиране"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
 #: ../src/main-window.c:408
+#, fuzzy
 msgid "_Go"
-msgstr "_Ugrás"
+msgstr "_Управление"
 
 #: ../src/main-window.c:409
+#, fuzzy
 msgid "_Bookmark"
-msgstr "_Könyvjelzők"
+msgstr "&Отметка..."
 
 #: ../src/main-window.c:410
 msgid "_View"
-msgstr "_Nézet"
+msgstr "_Изглед"
 
 #: ../src/main-window.c:411
 msgid "_Tool"
-msgstr "Esz_köz"
+msgstr "_Инструмент"
 
 #: ../src/main-window.c:412
 msgid "_Help"
-msgstr "_Súgó"
+msgstr "_Помощ"
 
 #: ../src/main-window.c:420
 msgid "New Tab"
-msgstr "Új lap"
+msgstr "Нов подпрозорец"
 
 #: ../src/main-window.c:421
 msgid "Back"
-msgstr "Vissza"
+msgstr "Назад"
 
 #: ../src/main-window.c:422
 msgid "Forward"
-msgstr "Előre"
+msgstr "Напред"
 
 #: ../src/main-window.c:423
 msgid "Parent Folder"
-msgstr "Szülő"
+msgstr "Родителска директория"
 
 #: ../src/main-window.c:424
 msgid "Refresh"
-msgstr "Frissít"
+msgstr "Опресни"
 
 #: ../src/main-window.c:425
 msgid "Home Directory"
-msgstr "Saját könyvtár"
+msgstr "Домашна директория на потребител"
 
 #: ../src/main-window.c:426
 msgid "Open Side Pane"
-msgstr "Oldalpanel megnyitása"
+msgstr "Показване на страничната лента"
 
 #: ../src/main-window.c:432
 msgid "Go"
-msgstr "Ugrás"
+msgstr "Давай"
 
 #: ../src/main-window.c:664
 msgid "Warning: You are in super user mode"
-msgstr "Figyelj!: Most rendszergazda módban vagy!"
+msgstr ""
 
 #: ../src/main-window.c:1705
 msgid "Terminal program has not been set"
-msgstr "Nem állítottál be Terminál programot"
+msgstr ""
 
 #: ../src/main-window.c:1846
 msgid "_Add to Bookmarks"
-msgstr "Hozzá_adás a könyvjelzőkhöz"
+msgstr "_Добавяне към отметките"
 
 #: ../src/main-window.c:1847
 msgid "_Edit Bookmarks"
-msgstr "Könyvjelzők sz_erkesztése"
+msgstr "_Редакция на отметки"
 
 #: ../src/main-window.c:1918
 msgid "Loading..."
-msgstr "Betöltés..."
+msgstr "Зареждане…"
 
 #: ../src/main-window.c:2103
-#, c-format
+#, fuzzy, c-format
 msgid ", Free space: %s (Total: %s )"
-msgstr ", Szabad hely: %s (Összesen: %s )"
+msgstr "Свободно място:"
 
 #: ../src/main-window.c:2112
-#, c-format
+#, fuzzy, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
-msgstr[0] "%d kijelölt elem (%s)%s"
+msgstr[0] "Маркиран е %1 елемента"
+msgstr[1] ""
 
 #: ../src/main-window.c:2122
-#, c-format
+#, fuzzy, c-format
 msgid "%d hidden"
 msgid_plural "%d hidden"
-msgstr[0] "%d rejtett"
+msgstr[0] "Скрита"
+msgstr[1] ""
 
 #: ../src/main-window.c:2123
-#, c-format
+#, fuzzy, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
-msgstr[0] "%d látható elem (%s)%s"
+msgstr[0] "&Добавяне на елемент"
+msgstr[1] ""
 
 #: ../src/ptk/ptk-file-browser.c:521
+#, fuzzy
 msgid "Directory doesn't exist!"
-msgstr "A könyvtár nem létezik!"
+msgstr "Файлът не съществува"
 
 #: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
-msgstr "Megnyitás új _lapon"
+msgstr "Отваряне в нов _подпрозорец"
 
 #: ../src/ptk/ptk-file-browser.c:1393 ../src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
-msgstr "Megnyitás új ablakban"
+msgstr "Отваряне в _нов прозорец"
 
 #: ../src/ptk/ptk-file-browser.c:1646 ../src/edit-bookmarks.c:201
 #: ../src/find-files.c:799
 msgid "Name"
-msgstr "Név"
+msgstr "Име"
 
 #: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:820
 msgid "Size"
-msgstr "Méret"
+msgstr "Размер"
 
 #: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:824
 msgid "Type"
-msgstr "Típus"
+msgstr "Тип"
 
 #: ../src/ptk/ptk-file-browser.c:1647
 msgid "Permission"
-msgstr "Engedély"
+msgstr "Права"
 
 #: ../src/ptk/ptk-file-browser.c:1647
+#, fuzzy
 msgid "Owner:Group"
-msgstr "Tulajdonos:Csoport"
+msgstr "Собственик (група)"
 
 #: ../src/ptk/ptk-file-browser.c:1647
+#, fuzzy
 msgid "Last Modification"
-msgstr "Utolsó módosítás"
+msgstr "Промяна на пътека"
 
 #: ../src/ptk/ptk-file-browser.c:2856
 msgid "Location"
-msgstr "Hely"
+msgstr "Местоположение"
 
 #: ../src/ptk/ptk-file-browser.c:2857
 msgid "Directory Tree"
-msgstr "Könyvtárfa"
+msgstr "Дърво на директориите"
 
 #: ../src/ptk/ptk-location-view.c:207
 msgid "Trash"
-msgstr "Kuka"
+msgstr "Кошче"
 
 #: ../src/ptk/ptk-location-view.c:250
 msgid "Desktop"
-msgstr "Munkaasztal"
+msgstr "Работен плот"
 
 #: ../src/ptk/ptk-location-view.c:441 ../src/ptk/ptk-location-view.c:635
+#, fuzzy
 msgid "Unable to mount device"
-msgstr "Eszköz csatolása sikertelen"
+msgstr "Не може да се записва в устройство %s"
 
 #: ../src/ptk/ptk-location-view.c:652
+#, fuzzy
 msgid "Unable to unmount device"
-msgstr "Eszköz lecsatolása sikertelen"
+msgstr "Не може да се записва в устройство %s"
 
 #: ../src/ptk/ptk-location-view.c:671
+#, fuzzy
 msgid "Unable to eject device"
-msgstr "Eszköz kiadása sikertelen"
+msgstr "Не може да се записва в устройство %s"
 
 #: ../src/ptk/ptk-location-view.c:730
+#, fuzzy
 msgid "_Mount File System"
-msgstr "Fájlrendszer _felcsatolása"
+msgstr "Виртуална Файлова Система:"
 
 #: ../src/ptk/ptk-location-view.c:740
 msgid "_Eject"
-msgstr "Kiad"
+msgstr "_Изваждане"
 
 #: ../src/ptk/ptk-location-view.c:746
+#, fuzzy
 msgid "_Unmount File System"
-msgstr "Fájlrendszer _lecsatolása"
+msgstr "Виртуална Файлова Система:"
 
 #: ../src/ptk/ptk-file-task.c:103
+#, fuzzy
 msgid "Move: "
-msgstr "Mozgatás:"
+msgstr "Преместване: "
 
 #: ../src/ptk/ptk-file-task.c:104
+#, fuzzy
 msgid "Copy: "
-msgstr "Másolás:"
+msgstr "&Копиране"
 
 #: ../src/ptk/ptk-file-task.c:105
+#, fuzzy
 msgid "Move to Trash: "
-msgstr "Mozgatás a kukába:"
+msgstr "Преместване в кошчето"
 
 #: ../src/ptk/ptk-file-task.c:106
+#, fuzzy
 msgid "Delete: "
-msgstr "Törlés:"
+msgstr "/_Изтрий"
 
 #: ../src/ptk/ptk-file-task.c:107
+#, fuzzy
 msgid "Link: "
-msgstr "Lánc:"
+msgstr "Линк      "
 
 #: ../src/ptk/ptk-file-task.c:108
+#, fuzzy
 msgid "Change Properties: "
-msgstr "Tulajdonságok megváltoztatása:"
+msgstr "Промяна настройките на лист"
 
 #: ../src/ptk/ptk-file-task.c:112
+#, fuzzy
 msgid "Moving..."
-msgstr "Mozgatás..."
+msgstr "Премествам %s"
 
 #: ../src/ptk/ptk-file-task.c:113
+#, fuzzy
 msgid "Copying..."
-msgstr "Másolás..."
+msgstr "Копиране"
 
 #: ../src/ptk/ptk-file-task.c:114
+#, fuzzy
 msgid "Moving to Trash..."
-msgstr "Mozgatás a kukába..."
+msgstr "Преместване на файловете в кошчето"
 
 #: ../src/ptk/ptk-file-task.c:115
+#, fuzzy
 msgid "Deleting..."
-msgstr "Törlés..."
+msgstr "%s: Изтрива се %s\n"
 
 #: ../src/ptk/ptk-file-task.c:116
 msgid "Linking..."
-msgstr "Láncolás..."
+msgstr ""
 
 #: ../src/ptk/ptk-file-task.c:117
+#, fuzzy
 msgid "Changing Properties"
-msgstr "Tulajdonságok megváltoztatása"
+msgstr "Обща свойства"
 
 #. To: <Destination folder>
 #. ex. Copy file to..., Move file to...etc.
 #: ../src/ptk/ptk-file-task.c:154
 msgid "To:"
-msgstr "Ide:"
+msgstr "До:"
 
 #. Processing:
 #. Processing: <Name of currently proccesed file>
 #: ../src/ptk/ptk-file-task.c:169
 msgid "Processing:"
-msgstr "Feldolgozás:"
+msgstr "Обработване:"
 
 #. Progress:
 #: ../src/ptk/ptk-file-task.c:184
 msgid "Progress:"
-msgstr "Folyamat:"
+msgstr "Изпълнение:"
 
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
-msgstr "Törlöd a műveletet?"
+msgstr "Прекъсване на операцията?"
 
 #. Ask the user whether to overwrite dir content or not
 #: ../src/ptk/ptk-file-task.c:409
 msgid "Do you want to overwrite the folder and its content?"
-msgstr "Felülírod a mappát és tartalmát?"
+msgstr ""
 
 #. Ask the user whether to overwrite the file or not
 #: ../src/ptk/ptk-file-task.c:414
+#, fuzzy
 msgid "Do you want to overwrite this file?"
-msgstr "Felülírod e fájlt?"
+msgstr "Вече има такъв файл. Сигурни ли сте, че искате да бъде презаписан?"
 
 #. Rename is required
 #: ../src/ptk/ptk-file-task.c:419
+#, fuzzy
 msgid "Please choose a new file name."
-msgstr "Adj új nevet"
+msgstr "Моля, въведете име на новия портфейл:"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" already exists.\n\nDo you want to overwrite existing file?"
 #: ../src/ptk/ptk-file-task.c:427
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\"%s\" already exists.\n"
 "\n"
 "%s"
-msgstr ""
-"\"%s\" már van\n"
-"\n"
-"%s"
+msgstr "%s вече съществува\n"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #: ../src/ptk/ptk-file-task.c:432
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\"%s\"\n"
 "\n"
@@ -1318,141 +1378,148 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"\"%s\"\n"
-"\n"
-"A cél és a forrás ugyanaz a fájl\n"
-"\n"
-"%s"
+"Файлът източник и файлът приемник са един и същи файл.\n"
+"%1"
 
 #: ../src/ptk/ptk-file-task.c:449
 msgid "Overwrite"
-msgstr "Felülír"
+msgstr "Презапис"
 
 #: ../src/ptk/ptk-file-task.c:450
 msgid "Overwrite All"
-msgstr "Mindet felülírja"
+msgstr "Презаписване на всички"
 
 #: ../src/ptk/ptk-file-task.c:455
 msgid "Rename"
-msgstr "Átnevezés"
+msgstr "Преименуване"
 
 #: ../src/ptk/ptk-file-task.c:456
 msgid "Skip"
-msgstr "Kihagy"
+msgstr "Пропуск"
 
 #: ../src/ptk/ptk-file-task.c:457
 msgid "Skip All"
-msgstr "Mindet kihagyja"
+msgstr "Пропускане на всички"
 
 #: ../src/ptk/ptk-file-archiver.c:125
 #, fuzzy
 msgid "Save Compressed Files to..."
-msgstr "Tömörített fájlok mentése ide..."
+msgstr "Папка, в която да се запазят получените файлове"
 
 #: ../src/ptk/ptk-file-archiver.c:133
+#, fuzzy
 msgid "Format of compressed File:"
-msgstr "Tömörített fájl formátuma:"
+msgstr "Файл компресиран с bzip2"
 
 #: ../src/ptk/ptk-file-archiver.c:204
-#, c-format
+#, fuzzy, c-format
 msgid "Creating Compressed File: %s"
-msgstr "Tömörített fájl létrehozása: %s"
+msgstr "Файл компресиран с bzip2"
 
 #: ../src/ptk/ptk-file-archiver.c:207
+#, fuzzy
 msgid "Compress Files"
-msgstr "Fájlok tömörítése"
+msgstr "Компресиране на TIFF-файлове"
 
 #: ../src/ptk/ptk-file-archiver.c:238
+#, fuzzy
 msgid "Extract File to..."
-msgstr "Fájlok kibontása ide..."
+msgstr "Файлът \"%1\" не може да бъде извлечен"
 
 #: ../src/ptk/ptk-file-archiver.c:287
-#, c-format
+#, fuzzy, c-format
 msgid "Extracting Files to: %s"
-msgstr "Fájlok kibontása ide: %s"
+msgstr "&Файл за вето:"
 
 #: ../src/ptk/ptk-file-archiver.c:289
+#, fuzzy
 msgid "Extract Files"
-msgstr "Fájlok kibontása"
+msgstr " %s преименува файлове\n"
 
 #: ../src/ptk/ptk-console-output.c:67
 msgid ""
 "\n"
 "Complete!"
 msgstr ""
-"\n"
-"Kész!"
 
 #: ../src/ptk/ptk-console-output.c:171
 msgid "Command:"
-msgstr "Parancs:"
+msgstr "Команда:"
 
 #: ../src/ptk/ptk-dir-tree.c:174
 msgid "File System"
-msgstr "Fájlrendszer"
+msgstr "Файлова система"
 
 #: ../src/ptk/ptk-dir-tree.c:397
+#, fuzzy
 msgid "No Sub Folder"
-msgstr "Nincs alkönyvtár"
+msgstr "Няма такава папка „%s“"
 
 #: ../src/ptk/ptk-file-menu.c:116
+#, fuzzy
 msgid "E_xtract Here"
-msgstr "Kibontás itt"
+msgstr "&Копиране"
 
 #: ../src/ptk/ptk-file-menu.c:117
+#, fuzzy
 msgid "Extract _To"
-msgstr "Kibontás ide"
+msgstr "Извличане в: "
 
 #: ../src/ptk/ptk-file-menu.c:123
+#, fuzzy
 msgid "Open _with..."
-msgstr "Megnyitás _ezzel:"
+msgstr "Отваряне с"
 
 #: ../src/ptk/ptk-file-menu.c:131
 msgid "Compress"
-msgstr "Tömörít"
+msgstr "Компресиране"
 
 #: ../src/ptk/ptk-file-menu.c:132
+#, fuzzy
 msgid "E_xtract"
-msgstr "Kibontás"
+msgstr "Из&вличане..."
 
 #: ../src/ptk/ptk-file-menu.c:135
 msgid "_Properties"
-msgstr "T_ulajdonságok"
+msgstr "_Настройки"
 
 #: ../src/ptk/ptk-file-menu.c:144
+#, fuzzy
 msgid "Open in Terminal"
-msgstr "Megnyitás Terminálban"
+msgstr "&Стартиране в терминал"
 
 #: ../src/ptk/ptk-file-menu.c:373
+#, fuzzy
 msgid "_Open with another program"
-msgstr "Megnyitás _más programmal"
+msgstr "Отваряне на <b>%(name)s с %(program)s</b>"
 
 #: ../src/ptk/ptk-file-menu.c:388
 msgid "E_xecute"
-msgstr "_Futtat"
+msgstr "_Изпълнение"
 
 #: ../src/ptk/ptk-file-menu.c:397
 #, c-format
 msgid "_Open with \"%s\""
-msgstr "Megnyitás _ezzel: \"%s\""
+msgstr "_Отваряне с \\„%s\\“"
 
 #. delete some confusing menu item if this menu is for current folder
 #: ../src/ptk/ptk-file-menu.c:408 ../src/ptk/ptk-file-menu.c:417
 #: ../src/find-files.c:229
 msgid "_Open"
-msgstr "Megnyitás"
+msgstr "_Отваряне"
 
 #: ../src/ptk/ptk-file-misc.c:60
+#, fuzzy
 msgid "Really delete selected files?"
-msgstr "Tényleg törlöd a kijelölt fájlokat?"
+msgstr "Изтриване на маркираните файлове"
 
 #: ../src/ptk/ptk-file-misc.c:121
 msgid "Rename File"
-msgstr "Fájl átnevezése"
+msgstr "Преименувай файл"
 
 #: ../src/ptk/ptk-file-misc.c:122
 msgid "Please input new file name:"
-msgstr "Adj új nevet:"
+msgstr ""
 
 #: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
@@ -1460,90 +1527,89 @@ msgid ""
 "The file name you specified already exists.\n"
 "Please input a new one:"
 msgstr ""
-"Már van ilyen nevű fájl.\n"
-"Adj más nevet:"
 
 #: ../src/ptk/ptk-file-misc.c:195 ../src/ptk/ptk-file-misc.c:197
 msgid "New Folder"
-msgstr "Új könyvtár"
+msgstr "Нова директория"
 
 #: ../src/ptk/ptk-file-misc.c:196
 msgid "Input a name for the new folder:"
-msgstr "Adj nevet az új könyvtárnak:"
+msgstr "Въведете име за новата папка:"
 
 #: ../src/ptk/ptk-file-misc.c:202 ../src/ptk/ptk-file-misc.c:204
 msgid "New File"
-msgstr "Új fájl"
+msgstr "Нов файл"
 
 #: ../src/ptk/ptk-file-misc.c:203
 msgid "Input a name for the new file:"
-msgstr "Adj nevet az új fájlnak:"
+msgstr ""
 
 #: ../src/ptk/ptk-file-misc.c:259
 msgid "The new file cannot be created!"
-msgstr "Az új fájl nem hozható létre!"
+msgstr ""
 
 #: ../src/ptk/ptk-file-properties.c:305
 msgid "Multiple files are selected"
-msgstr "Fájlok kiválasztva"
+msgstr ""
 
 #: ../src/ptk/ptk-file-properties.c:384
 msgid "Multiple files of different types"
-msgstr "Különböző típusú fájlok"
+msgstr ""
 
 #: ../src/ptk/ptk-file-properties.c:452
+#, fuzzy
 msgid "Other program..."
-msgstr "Más program..."
+msgstr "Програмата \"%1\" блокира."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
 #: ../src/ptk/ptk-file-properties.c:546
 msgid "Calculating..."
-msgstr "Számolás..."
+msgstr "Изчисление..."
 
 #: ../src/ptk/ptk-file-properties.c:701
 msgid "Invalid User"
-msgstr "Nem létező felhasználó"
+msgstr "несъществуващ потребител"
 
 #: ../src/ptk/ptk-file-properties.c:712
 msgid "Invalid Group"
-msgstr "Nem létező csoport"
+msgstr "Невалидна група"
 
 #: ../src/ptk/ptk-file-properties.c:760
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
-msgstr "Minden fájl és alkönyvtár módosítása?"
+msgstr ""
 
 #: ../src/edit-bookmarks.c:79
 msgid "New Item"
-msgstr "Új elem"
+msgstr "Нов елемент"
 
 #: ../src/edit-bookmarks.c:153
 msgid "Edit Bookmarks"
-msgstr "Könyvjelzők szerkesztése"
+msgstr "Редактиране на отметките"
 
 #: ../src/edit-bookmarks.c:210
 msgid "Path"
-msgstr "Ösvény"
+msgstr "Път"
 
 #: ../src/edit-bookmarks.c:233
 msgid "Use drag & drop to sort the items"
-msgstr "Vidd és ejtsd a rendezéshez"
+msgstr ""
 
 #: ../src/vfs/vfs-app-desktop.c:445
-#, c-format
+#, fuzzy, c-format
 msgid "Command not found"
-msgstr "Parancs nem található"
+msgstr "Командата не е инсталирана"
 
 #: ../src/vfs/vfs-file-task.c:733
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
-msgstr "\"%1$s\" cél könyvtár szerepel a forrásban: \"%2$s\""
+msgstr ""
 
 #: ../src/vfs/vfs-volume-hal.c:475 ../src/vfs/vfs-volume-hal.c:698
-#, c-format
+#, fuzzy, c-format
 msgid "%s Volume"
-msgstr "%s kötet"
+msgstr "Дял %s"
 
 #: ../src/vfs/vfs-volume-hal.c:490
 msgid "CD-ROM"
@@ -1584,178 +1650,179 @@ msgstr "DVD-RAM"
 #: ../src/vfs/vfs-volume-hal.c:517
 #, c-format
 msgid "%s/%s Drive"
-msgstr "%s/%s meghajtó"
+msgstr "Устройство %s/%s"
 
 #: ../src/vfs/vfs-volume-hal.c:519
 #, c-format
 msgid "%s Drive"
-msgstr "%s Meghajtó"
+msgstr "Устройство %s"
 
 #: ../src/vfs/vfs-volume-hal.c:524
 msgid "Floppy Drive"
-msgstr "Flopi meghajtó"
+msgstr "Флопи-дисково устройство"
 
 #: ../src/vfs/vfs-volume-hal.c:527
 msgid "Compact Flash Drive"
-msgstr "Compact Flash meghajtó"
+msgstr "Устройство за компактна флаш памет"
 
 #: ../src/vfs/vfs-volume-hal.c:529
+#, fuzzy
 msgid "Memory Stick Drive"
-msgstr "Memory Stick meghajtó"
+msgstr "Устройство за паметови пръчки"
 
 #: ../src/vfs/vfs-volume-hal.c:531
 msgid "Smart Media Drive"
-msgstr "Smart Media meghajtó"
+msgstr "Устройство за умни носители (smart media)"
 
 #: ../src/vfs/vfs-volume-hal.c:533
 msgid "SD/MMC Drive"
-msgstr "SD/MMC meghajtó"
+msgstr "Устройство SD/MMC"
 
 #: ../src/vfs/vfs-volume-hal.c:535
 msgid "Zip Drive"
-msgstr "Zip meghajtó"
+msgstr "Устройство Zip"
 
 #: ../src/vfs/vfs-volume-hal.c:538
 msgid "Jaz Drive"
-msgstr "Jaz meghajtó"
+msgstr "Устройство Jaz"
 
 #: ../src/vfs/vfs-volume-hal.c:541
 msgid "Pen Drive"
-msgstr "Pen meghajtó"
+msgstr "Устройство Pen"
 
 #: ../src/vfs/vfs-volume-hal.c:547
 #, c-format
 msgid "%s %s Music Player"
-msgstr "%s %s zenelejátszó"
+msgstr "Портативно устройство за музика %s %s"
 
 #: ../src/vfs/vfs-volume-hal.c:555
 #, c-format
 msgid "%s %s Digital Camera"
-msgstr "%s %s digitális kamera"
+msgstr "Цифров фотоапарат/камера %s %s"
 
 #: ../src/vfs/vfs-volume-hal.c:586
 msgid "Drive"
-msgstr "Meghajtó"
+msgstr "Устройство"
 
 #: ../src/vfs/vfs-volume-hal.c:591
 #, c-format
 msgid "External %s"
-msgstr "Külső %s"
+msgstr "Външно %s"
 
 #: ../src/vfs/vfs-volume-hal.c:625
 msgid "CD-ROM Disc"
-msgstr "CD-ROM lemez"
+msgstr "Диск CD-ROM"
 
 #: ../src/vfs/vfs-volume-hal.c:630
 msgid "Blank CD-R Disc"
-msgstr "Üres CD-R lemez"
+msgstr "Празен диск CD-R"
 
 #: ../src/vfs/vfs-volume-hal.c:632
 msgid "CD-R Disc"
-msgstr "CD-R lemez"
+msgstr "Диск CD-R"
 
 #: ../src/vfs/vfs-volume-hal.c:637
 msgid "Blank CD-RW Disc"
-msgstr "Üres CD-RW lemez"
+msgstr "Празен диск CD-RW"
 
 #: ../src/vfs/vfs-volume-hal.c:639
 msgid "CD-RW Disc"
-msgstr "CD-RW lemez"
+msgstr "Диск CD-RW"
 
 #: ../src/vfs/vfs-volume-hal.c:643
 msgid "DVD-ROM Disc"
-msgstr "DVD-ROM lemez"
+msgstr "Диск DVD-ROM"
 
 #: ../src/vfs/vfs-volume-hal.c:648
 msgid "Blank DVD-RAM Disc"
-msgstr "Üres DVD-RAM lemez"
+msgstr "Празен диск DVD-RAM"
 
 #: ../src/vfs/vfs-volume-hal.c:650
 msgid "DVD-RAM Disc"
-msgstr "DVD-RAM lemez"
+msgstr "Диск DVD-RAM"
 
 #: ../src/vfs/vfs-volume-hal.c:655
 msgid "Blank DVD-R Disc"
-msgstr "Üres DVD-R lemez"
+msgstr "Празен диск DVD-R"
 
 #: ../src/vfs/vfs-volume-hal.c:657
 msgid "DVD-R Disc"
-msgstr "DVD-R lemez"
+msgstr "Диск DVD-R"
 
 #: ../src/vfs/vfs-volume-hal.c:662
 msgid "Blank DVD-RW Disc"
-msgstr "Üres DVD-RW lemez"
+msgstr "Празен диск DVD-RW"
 
 #: ../src/vfs/vfs-volume-hal.c:664
 msgid "DVD-RW Disc"
-msgstr "DVD-RW lemez"
+msgstr "Диск DVD-RW"
 
 #: ../src/vfs/vfs-volume-hal.c:670
 msgid "Blank DVD+R Disc"
-msgstr "Üres DVD+R lemez"
+msgstr "Празен диск DVD+R"
 
 #: ../src/vfs/vfs-volume-hal.c:672
 msgid "DVD+R Disc"
-msgstr "DVD+R lemez"
+msgstr "Диск DVD+R"
 
 #: ../src/vfs/vfs-volume-hal.c:677
 msgid "Blank DVD+RW Disc"
-msgstr "Üres DVD+RW lemez"
+msgstr "Празен диск DVD+RW"
 
 #: ../src/vfs/vfs-volume-hal.c:679
 msgid "DVD+RW Disc"
-msgstr "DVD+RW lemez"
+msgstr "Диск DVD+RW"
 
 #: ../src/vfs/vfs-volume-hal.c:686
 msgid "Audio Disc"
-msgstr "Audio lemez"
+msgstr "Аудио диск"
 
 #: ../src/vfs/vfs-volume-hal.c:696
-#, c-format
+#, fuzzy, c-format
 msgid "%s Removable Volume"
-msgstr "%s eltávolítható kötet"
+msgstr "Подвижен дял %s"
 
 #: ../src/vfs/vfs-volume-hal.c:704
 msgid "Volume"
-msgstr "Kötet"
+msgstr "Сила на звука"
 
 #: ../src/vfs/vfs-volume-hal.c:1100
-#, c-format
+#, fuzzy, c-format
 msgid "Failed to connect to the HAL daemon: %s"
-msgstr "Nem tudtam kapcsolódni a HAL démonhoz: %s"
+msgstr "Неуспешно свързване към демона HAL"
 
 #. definitely not a device that we're able to mount, eject or unmount
 #: ../src/vfs/vfs-volume-hal.c:1941 ../src/vfs/vfs-volume-hal.c:1997
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
-msgstr "A megadott \"%s\" eszköz nem kötet vagy meghajtó"
+msgstr ""
 
 #. tell the caller that no matching device was found
 #: ../src/vfs/vfs-volume-hal.c:2073
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
-msgstr "\"%s\" eszköz nincs a fájlrendszer eszköz táblában"
+msgstr ""
 
 #: ../src/vfs/vfs-volume-hal.c:2256
 #, c-format
 msgid "You are not privileged to mount the volume \"%s\""
-msgstr "Nincs jogod csatolni \"%s\" kötetet"
+msgstr ""
 
 #: ../src/vfs/vfs-volume-hal.c:2257
 #, c-format
 msgid "You are not privileged to unmount the volume \"%s\""
-msgstr "Nincs jogod lecsatolni \"%s\" kötetet"
+msgstr ""
 
 #: ../src/vfs/vfs-volume-hal.c:2258
 #, c-format
 msgid "You are not privileged to eject the volume \"%s\""
-msgstr "Nincs jogod kiadni \"%s\" kötetet"
+msgstr ""
 
 #. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
 #: ../src/vfs/vfs-volume-hal.c:2270
 #, c-format
 msgid "Invalid mount option when attempting to mount the volume \"%s\""
-msgstr "Érvénytelen csatolási opció \"%s\" kötet csatolása közben"
+msgstr ""
 
 #: ../src/vfs/vfs-volume-hal.c:2272
 #, c-format
@@ -1763,28 +1830,27 @@ msgid ""
 "The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
 "your system"
 msgstr ""
-"\"%s\" kötet <i>%s</i> fájlrendszert használja, melyet nem támogat rendszered"
 
 #: ../src/vfs/vfs-volume-hal.c:2274
 #, c-format
 msgid "An application is preventing the volume \"%s\" from being unmounted"
-msgstr "Egy alkalmazás gátolja \"%s\" kötet lecsatolását"
+msgstr ""
 
 #: ../src/vfs/vfs-volume-hal.c:2276
-#, c-format
+#, fuzzy, c-format
 msgid "The volume \"%s\" is not mounted"
-msgstr "Az alábbi kötet nincs csatolva: \"%s\""
+msgstr "%s е празна (не е монтирана?)\n"
 
 #: ../src/vfs/vfs-volume-hal.c:2278
 #, c-format
 msgid "Error <i>%s</i>"
-msgstr "Hiba: <i>%s</i>"
+msgstr "Грешка <i>%s</i>"
 
 #. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
 #: ../src/vfs/vfs-volume-hal.c:2281
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
-msgstr "Az alábbi kötet valószínűleg kézzel került csatolásra: \"%s\""
+msgstr ""
 
 #: ../src/vfs/vfs-volume-hal.c:2289
 #, c-format
@@ -1792,145 +1858,46 @@ msgid ""
 "Blank discs cannot be mounted, use a CD recording application to record "
 "audio or data on the disc"
 msgstr ""
-"Az üres lemezek nem csatolhatók, használj egy CD-író alkalmazást hangsávok "
-"vagy adatok rögzítésére a lemezen"
 
 #: ../src/vfs/vfs-volume-hal.c:2300
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr ""
-"A hang CD-k nem csatolhatók, használj zenelejátszót a hangsávok lejátszására"
 
 #: ../src/desktop/desktop-window.c:193
 msgid "_Icons"
-msgstr "_Ikonok"
+msgstr "_Икони"
 
 #: ../src/desktop/desktop-window.c:198
+#, fuzzy
 msgid "_Desktop Settings"
-msgstr "Asztal beállításai"
+msgstr "Настройки на средата"
 
 #: ../src/desktop/desktop-window.c:1842
 msgid "My Documents"
-msgstr "Dokumentumaim"
+msgstr "Моите документи"
 
 #: ../src/find-files.c:230
+#, fuzzy
 msgid "Open Containing _Folder"
-msgstr "Tartalmazó _mappa megnyitása"
+msgstr "Отваряне на &родителската директория"
 
 #: ../src/find-files.c:677
 msgid "Select a folder"
-msgstr "Válassz mappát"
+msgstr "Избор на папка"
 
 #: ../src/find-files.c:722
 msgid "Browse..."
-msgstr "Böngész..."
+msgstr "Преглед..."
 
 #: ../src/find-files.c:744
 msgid "All Local Disk Partitions"
-msgstr "Minden lemezpartíció"
+msgstr ""
 
 #: ../src/find-files.c:814
 msgid "Folder"
-msgstr "Mappa"
+msgstr "Папка"
 
 #: ../src/find-files.c:830
 msgid "Last Modified"
-msgstr "Utolsó módosítás"
-
-#~ msgid "Opened in Current Tab"
-#~ msgstr "Megnyitva e lapon"
-
-#~ msgid "Opened in New Tab"
-#~ msgstr "Megnyitva új lapon"
-
-#~ msgid "Opened in New Window"
-#~ msgstr "Megnyitva új ablakban"
-
-#~ msgid "Owner:"
-#~ msgstr "Tulajdonos:"
-
-#~ msgid "gksu or kdesu is not found"
-#~ msgstr "Nem találok ismert su felületet (gksu v. kdesu)"
-
-#~ msgid "Error: %s\n"
-#~ msgstr "Hiba: %s\n"
-
-#~ msgid ""
-#~ "The volume \"%s\" is not mounted.\n"
-#~ "Do you want to mount it?"
-#~ msgstr ""
-#~ "Az alábbi kötet nincs csatolva: \"%s\" \n"
-#~ "Csatoljuk?"
-
-#~ msgid "Source code taken from other projects:"
-#~ msgstr "Más projektekből származó kódok:"
-
-#~ msgid " * libmd5-rfc: Aladdin Enterprises"
-#~ msgstr " * libmd5-rfc: Aladdin Enterprises"
-
-#~ msgid " * Working area detection: Gary Kramlich"
-#~ msgstr " * Munkaterület érzékelés: Gary Kramlich"
-
-#~ msgid " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
-#~ msgstr ""
-#~ " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
-
-#~ msgid " * Text and icon renderer uese code from Jonathan Blandford"
-#~ msgstr " * A szöveg és ikon rajzoló Jonathan Blandford kódját használja"
-
-#~ msgid " * Desktop icons use code from Brian Tarricone"
-#~ msgstr " * Az asztali ikonok Brian Tarricone kódját használják"
-
-#~ msgid ""
-#~ " * Volume management uses code from following projects/authors:\n"
-#~ "     * gnome-vfs: David Zeuthen,\n"
-#~ "     * thunar-vfs and libexo: Benedikt Meurer\n"
-#~ "     * gnome-mount: David Zeuthen"
-#~ msgstr ""
-#~ " * A kötetkezelő e projektek/szerzők kódját használja:\n"
-#~ "     * gnome-vfs: David Zeuthen,\n"
-#~ "     * thunar-vfs és libexo: Benedikt Meurer\n"
-#~ "     * gnome-mount: David Zeuthen"
-
-#~ msgid "PCMan File Manager"
-#~ msgstr "PCMan fájlkezelő"
-
-#~ msgid "Icon Theme:"
-#~ msgstr "Ikon téma:"
-
-#~ msgid "A_ddress:"
-#~ msgstr "_Cím:"
-
-#~ msgid " * xdgmime: Red Hat, Inc & Jonathan Blandford"
-#~ msgstr " * xdgmime: Red Hat, Inc & Jonathan Blandford"
-
-#~ msgid "_Full Screen"
-#~ msgstr "Teljes képernyő"
-
-#~ msgid ""
-#~ "File operation failed.\n"
-#~ "\n"
-#~ "Unable to process \"%s\"\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Sikertelen fájlművelet\n"
-#~ "\n"
-#~ "Feldolgozatlan: \"%s\"\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Edit Bookmark"
-#~ msgstr "Könyvjelző szerkesztése"
-
-#~ msgid "Add to Bookmarks"
-#~ msgstr "Hozzáadás a könyvjelzőkhöz"
-
-#~ msgid "Enter new directory path:"
-#~ msgstr "Új könyvtár útvonala:"
-
-#~ msgid "Open Directory _Tree"
-#~ msgstr "Könyvtár_fa"
-
-#~ msgid "Open Terminal"
-#~ msgstr "Terminál megnyitása"
+msgstr "Последна промяна"

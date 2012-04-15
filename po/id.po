@@ -1,16 +1,16 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Rahman Yusri Aftian <aftian@yahoo.com>, 2009.
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: pcmanfm-id\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
 "PO-Revision-Date: 2009-05-23 15:42+0200\n"
 "Last-Translator: Rahman Yusri Aftian <aftian@yahoo.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: LANGUAGE <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -142,29 +142,27 @@ msgstr "Pidah _Kebawah"
 msgid "Move _Up"
 msgstr "Pidah Kea_tas"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Sedang Mempersiapkan..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "Sedang Memproses:"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "Kemajuan:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "Ke:"
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>Grup:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Sedang Mempersiapkan..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -786,8 +784,8 @@ msgid ""
 "Open preference dialog. 'n' is the number of page you want to show (1, 2, "
 "3...)."
 msgstr ""
-"Membuka pilihan dialog. ' n' adalah banyaknya halamanmu yang menunjukkan ( "
-"1, 2, 3...)."
+"Membuka pilihan dialog. ' n' adalah banyaknya halamanmu yang menunjukkan "
+"( 1, 2, 3...)."
 
 #: ../src/main.c:96
 msgid "Find Files with PCManFM"
@@ -801,11 +799,11 @@ msgstr "Mengatur Wallpaper Desktop"
 msgid "[FILE1, FILE2,...]"
 msgstr "[FILE1, FILE2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ tema ikon tidak diatur dengan baik"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -837,9 +835,10 @@ msgstr ""
 "pilihan:\n"
 " 1. menjalankan XSETTINGS manajer, or\n"
 " 2. menetapkan suatu ikon tema  di~/. gtkrc-2.0.</b>\n"
-" Sebagai contoh untuk menggunakan ikon Tema  Tango  menambahkan suatu garis:\n"
-" < i><b>gtk-icon-theme-name=\"Tango\"</b></i> di dalammu ~/. gtkrc-2.0. ( "
-"menciptakan Jika tidak ada file seperti itu\n"
+" Sebagai contoh untuk menggunakan ikon Tema  Tango  menambahkan suatu "
+"garis:\n"
+" < i><b>gtk-icon-theme-name=\"Tango\"</b></i> di dalammu ~/. gtkrc-2.0. "
+"( menciptakan Jika tidak ada file seperti itu\n"
 " \n"
 " < b>CATATAN: Ikon Tema yang kamu pilih harus kompatibel dengan GNOME, atau "
 "file ikon tidak bisa dipertunjukkan Pengoreksian.</b> Dalam kaitan dengan "
@@ -847,7 +846,7 @@ msgstr ""
 "Sekarang ini tidak ada standard untuk ini, tetapi akan jadi dipecahkan oleh "
 "freedesktop.org di masa datang."
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -857,7 +856,7 @@ msgstr ""
 msgid "Error"
 msgstr "Galat"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -867,15 +866,15 @@ msgstr ""
 "\n"
 "Apakah kamu suka \"FAM\" atau \"Gamin\" untuk dipasang atau dijalankan?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "File tidak ditemukan"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "Tidak tahu kapan membuka file"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1272,6 +1271,23 @@ msgstr "Sedang Mengaitkan..."
 msgid "Changing Properties"
 msgstr "Merubah Properties"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "Ke:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Sedang Memproses:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Kemajuan:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "Batalkan Operasi ini?"
@@ -1340,33 +1356,34 @@ msgstr "Abaikan"
 msgid "Skip All"
 msgstr "Abaikan Semuanya"
 
-#: ../src/ptk/ptk-file-archiver.c:119
-msgid "Save Compressd Files to..."
+#: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
+msgid "Save Compressed Files to..."
 msgstr "Simpan File Kompresan Ke..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "Format dari File Kompres:"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Membuat File Kompres: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "File Kompres"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "Extract File Ke..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Sedang Mengeextract Files ke: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "Extract Files"
 
@@ -1508,8 +1525,8 @@ msgstr "Grup Tidak Valid"
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
-"Apakah kamu ingin secara berulang menerapkan perubahan ke semua file dan "
-"sub-folder?"
+"Apakah kamu ingin secara berulang menerapkan perubahan ke semua file dan sub-"
+"folder?"
 
 #: ../src/edit-bookmarks.c:79
 msgid "New Item"
@@ -1835,3 +1852,30 @@ msgstr "Folder"
 #: ../src/find-files.c:830
 msgid "Last Modified"
 msgstr "Terakhir Dimodifikasi"
+
+#~ msgid ""
+#~ "??? Hong Jen Yee <pcman.tw@gmail.com>\n"
+#~ "\n"
+#~ "Source code taken from other projects:\n"
+#~ " * libmd5-rfc: Aladdin Enterprises\n"
+#~ " * Working area detection: Gary Kramlich\n"
+#~ " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+#~ " * Text and icon renderer uses code from Jonathan Blandford\n"
+#~ " * Desktop icons use code from Brian Tarricone\n"
+#~ " * Volume management uses code from following projects/authors:\n"
+#~ "     * gnome-vfs: David Zeuthen\n"
+#~ "     * thunar-vfs and libexo: Benedikt Meurer\n"
+#~ "     * gnome-mount: David Zeuthen"
+#~ msgstr ""
+#~ "??? Hong Jen Yee <pcman.tw@gmail.com>\n"
+#~ "\n"
+#~ "Sumber kode diambil dari proyek lain:\n"
+#~ " * libmd5-rfc: Aladdin Enterprises\n"
+#~ " * Working area detection: Gary Kramlich\n"
+#~ " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+#~ " * Teks dan ikon disumbangkan oleh Jonathan Blandford\n"
+#~ " * Ikon Desktop  mengunkan kode oleh Brian Tarricone\n"
+#~ " * Manajemen Volume  menggunakan kode dari proyek lainnya/Pengembang:\n"
+#~ "     * gnome-vfs: David Zeuthen\n"
+#~ "     * thunar-vfs and libexo: Benedikt Meurer\n"
+#~ "     * gnome-mount: David Zeuthen"

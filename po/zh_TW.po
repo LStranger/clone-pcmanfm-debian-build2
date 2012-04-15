@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCMan File Manager 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
-"PO-Revision-Date: 2008-12-13 00:36+0800\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-07-26 10:53+0200\n"
+"Last-Translator: 羅廷中 <timloo0710@gmail.com>\n"
 "Language-Team: zh_TW <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.1.0\n"
 
 #: ../data/ui/about-dlg.glade.h:1
 msgid "Copyright (C) 2005 - 2008"
@@ -142,29 +143,27 @@ msgstr "下移(_D)"
 msgid "Move _Up"
 msgstr "上移(_U)"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "準備中..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "正在處理："
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "進度："
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "到："
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>群組：</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "準備中..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -307,7 +306,7 @@ msgstr ""
 
 #: ../data/ui/find-files.glade.h:15
 msgid "Audio Files (mp3, ogg,...)"
-msgstr ""
+msgstr "音樂檔(mp3, ogg,...等)"
 
 #: ../data/ui/find-files.glade.h:16
 msgid ""
@@ -347,7 +346,7 @@ msgstr "大於："
 
 #: ../data/ui/find-files.glade.h:26
 msgid "Image Files (jpg, png,...)"
-msgstr ""
+msgstr "圖片檔(jpg, png,...等)"
 
 #: ../data/ui/find-files.glade.h:27
 msgid "Plain Text Files"
@@ -379,7 +378,7 @@ msgstr "使用正規表示式"
 
 #: ../data/ui/find-files.glade.h:34
 msgid "Video Files (avi, mpg,...)"
-msgstr ""
+msgstr "影像檔(avi, mpg,...等)"
 
 #: ../data/ui/godlg.glade.h:1
 #, fuzzy
@@ -408,7 +407,7 @@ msgstr "<b>桌布</b>"
 
 #: ../data/ui/prefdlg.glade.h:6
 msgid "Always show the tab bar"
-msgstr ""
+msgstr "永遠秀出分頁條"
 
 #: ../data/ui/prefdlg.glade.h:7
 msgid "Background:"
@@ -428,19 +427,19 @@ msgstr "以縮圖顯示可支援的圖檔格式"
 
 #: ../data/ui/prefdlg.glade.h:11
 msgid "Hide 'Close tab' buttons"
-msgstr ""
+msgstr "隱藏'關閉分頁'按鍵"
 
 #: ../data/ui/prefdlg.glade.h:12
 msgid "Hide folder content border"
-msgstr ""
+msgstr "隱藏目錄內容的邊線"
 
 #: ../data/ui/prefdlg.glade.h:13
 msgid "Hide side pane buttons"
-msgstr ""
+msgstr "隱藏邊線上的按鍵"
 
 #: ../data/ui/prefdlg.glade.h:14
 msgid "I_nterface"
-msgstr ""
+msgstr "介面"
 
 #: ../data/ui/prefdlg.glade.h:15
 msgid "Manage the desktop and show file icons"
@@ -468,6 +467,9 @@ msgid ""
 "Opened in New Tab\n"
 "Opened in New Window"
 msgstr ""
+"在目前分頁下開啟\n"
+"在新分頁下開啟\n"
+"在新視窗開啟"
 
 #: ../data/ui/prefdlg.glade.h:23
 msgid "Please select an image file"
@@ -508,6 +510,10 @@ msgid ""
 "Center on the screen\n"
 "Tile the image to fill the entire screen"
 msgstr ""
+"伸展到填滿整個螢幕\n"
+"伸展到適合螢幕\n"
+"在螢幕中間\n"
+"將圖片置入整個螢幕"
 
 #: ../data/ui/prefdlg.glade.h:35
 msgid "Terminal:"
@@ -519,7 +525,7 @@ msgstr "文字："
 
 #: ../data/ui/prefdlg.glade.h:37
 msgid "Use SI decimal prefixes instead of IEC binary prefixes"
-msgstr ""
+msgstr "使用SI 10進位的字首取代IEC 二進位的字首"
 
 #: ../data/ui/prefdlg.glade.h:38
 msgid "Wallpaper:"
@@ -539,101 +545,102 @@ msgstr "磁碟管理(_V)"
 
 #: ../src/exo/exo-icon-view.c:696
 msgid "Column Spacing"
-msgstr ""
+msgstr "欄空間"
 
 #: ../src/exo/exo-icon-view.c:697
 msgid "Space which is inserted between grid column"
-msgstr ""
+msgstr "填入表格欄位之間的空間"
 
 #: ../src/exo/exo-icon-view.c:713
 msgid "Number of columns"
-msgstr ""
+msgstr "欄的數目"
 
 #: ../src/exo/exo-icon-view.c:714
 msgid "Number of columns to display"
-msgstr ""
+msgstr "秀在畫面上的欄的數目"
 
 #: ../src/exo/exo-icon-view.c:728
 msgid "Enable Search"
-msgstr ""
+msgstr "讓搜尋作用"
 
 #: ../src/exo/exo-icon-view.c:729
 msgid "View allows user to search through columns interactively"
-msgstr ""
+msgstr "畫面可允許使用者在欄位間互動式的搜尋"
 
 #: ../src/exo/exo-icon-view.c:746
 msgid "Width for each item"
-msgstr ""
+msgstr "每一個項目的寬度"
 
 #: ../src/exo/exo-icon-view.c:747
 msgid "The width used for each item"
-msgstr ""
+msgstr "每一個項目已使用的寬度"
 
 #: ../src/exo/exo-icon-view.c:765
 msgid "Layout mode"
-msgstr ""
+msgstr "輸出的模式"
 
 #: ../src/exo/exo-icon-view.c:766
 msgid "The layout mode"
-msgstr ""
+msgstr "輸出的模式"
 
 #: ../src/exo/exo-icon-view.c:782
 msgid "Margin"
-msgstr ""
+msgstr "邊緣"
 
 #: ../src/exo/exo-icon-view.c:783
 msgid "Space which is inserted at the edges of the icon view"
-msgstr ""
+msgstr "圖示的邊緣已經填入的空間"
 
 #: ../src/exo/exo-icon-view.c:799
 msgid "Markup column"
-msgstr ""
+msgstr "標高的欄"
 
 #: ../src/exo/exo-icon-view.c:800
 msgid "Model column used to retrieve the text if using Pango markup"
-msgstr ""
+msgstr "被用來取得文字的模欄位，假如使用Pango 繪圖"
 
 #: ../src/exo/exo-icon-view.c:814
 msgid "Icon View Model"
-msgstr ""
+msgstr "圖示的觀看模式"
 
 #: ../src/exo/exo-icon-view.c:815
 msgid "The model for the icon view"
-msgstr ""
+msgstr "觀看圖示的模型"
 
 #: ../src/exo/exo-icon-view.c:828
 msgid "Orientation"
-msgstr ""
+msgstr "方向"
 
 #: ../src/exo/exo-icon-view.c:829
 msgid ""
 "How the text and icon of each item are positioned relative to each other"
-msgstr ""
+msgstr "關於文字和每一個項目的圖示的相對位置"
 
 #: ../src/exo/exo-icon-view.c:845
 msgid "Pixbuf column"
-msgstr ""
+msgstr "Pixbuf 欄"
 
 #: ../src/exo/exo-icon-view.c:846
 msgid "Model column used to retrieve the icon pixbuf from"
-msgstr ""
+msgstr "用來取得圖示pixbuf的模型欄"
 
 #: ../src/exo/exo-icon-view.c:861
 msgid "Reorderable"
-msgstr ""
+msgstr "可重新排序的"
 
 #: ../src/exo/exo-icon-view.c:862
 msgid "View is reorderable"
-msgstr ""
+msgstr "呈現是可重新排序的"
 
 #: ../src/exo/exo-icon-view.c:877
 msgid "Row Spacing"
-msgstr ""
+msgstr "列的間距"
 
 #: ../src/exo/exo-icon-view.c:878
 msgid "Space which is inserted between grid rows"
-msgstr ""
+msgstr "已經填入表格中兩列之間的空間"
 
+# 不是TIM翻的
 #: ../src/exo/exo-icon-view.c:892
 #, fuzzy
 msgid "Search Column"
@@ -641,7 +648,7 @@ msgstr "再次搜尋"
 
 #: ../src/exo/exo-icon-view.c:893
 msgid "Model column to search through when searching through item"
-msgstr ""
+msgstr "當在項目間搜尋時，模型欄位的搜尋"
 
 #: ../src/exo/exo-icon-view.c:907
 #, fuzzy
@@ -650,33 +657,33 @@ msgstr "選擇一個資料夾"
 
 #: ../src/exo/exo-icon-view.c:908
 msgid "The selection mode"
-msgstr ""
+msgstr "選取模式"
 
 #: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
 msgid "Single Click"
-msgstr ""
+msgstr "單點"
 
 #: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
 msgid "Whether the items in the view can be activated with single clicks"
-msgstr ""
+msgstr "在此視圖下，項目是否可以單點觸發"
 
 #: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
 msgid "Single Click Timeout"
-msgstr ""
+msgstr "單點後的停止時間"
 
 #: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
 msgid ""
 "The amount of time after which the item under the mouse cursor will be "
 "selected automatically in single click mode"
-msgstr ""
+msgstr "在單點模式下，一個項目會被鼠標自動選取，所用的時間"
 
 #: ../src/exo/exo-icon-view.c:956
 msgid "Spacing"
-msgstr ""
+msgstr "間隔"
 
 #: ../src/exo/exo-icon-view.c:957
 msgid "Space which is inserted between cells of an item"
-msgstr ""
+msgstr "一個項目的儲存格之間被填入的空間"
 
 #: ../src/exo/exo-icon-view.c:972
 #, fuzzy
@@ -685,7 +692,7 @@ msgstr "文字色彩"
 
 #: ../src/exo/exo-icon-view.c:973
 msgid "Model column used to retrieve the text from"
-msgstr ""
+msgstr "從    取得文字所使用的模型欄位"
 
 #: ../src/exo/exo-icon-view.c:980
 #, fuzzy
@@ -694,7 +701,7 @@ msgstr "選擇一個資料夾"
 
 #: ../src/exo/exo-icon-view.c:981
 msgid "Color of the selection box"
-msgstr ""
+msgstr "選取盒的顏色"
 
 #: ../src/exo/exo-icon-view.c:987
 #, fuzzy
@@ -703,7 +710,7 @@ msgstr "全選(_A)"
 
 #: ../src/exo/exo-icon-view.c:988
 msgid "Opacity of the selection box"
-msgstr ""
+msgstr "選取盒的不透明度"
 
 #. mime-type: application
 #: ../src/file-assoc-dlg.c:34
@@ -788,11 +795,11 @@ msgstr "設定桌布"
 msgid "[FILE1, FILE2,...]"
 msgstr "[檔案1, 檔案2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ 圖示佈景主題設定不正確"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -830,7 +837,7 @@ msgstr ""
 "示。</b>  因為 GNOME 和 KDE 對圖示的命名方式不同，KDE 的佈景主題並不適用。  "
 "目前這個部份並沒有標準規範，但 freedesktop.org 未來將會解決這個問題。"
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -840,7 +847,7 @@ msgstr ""
 msgid "Error"
 msgstr "錯誤"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -850,15 +857,15 @@ msgstr ""
 "\n"
 "你是否有安裝 \"FAM\" 或 \"Gamin\"，並且正確執行？"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "檔案不存在!"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "不知道如何開啟這個檔案"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1256,6 +1263,23 @@ msgstr "正在建立連結..."
 msgid "Changing Properties"
 msgstr "改變檔案屬性"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "到："
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "正在處理："
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "進度："
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "取消這項操作？"
@@ -1324,33 +1348,34 @@ msgstr "略過"
 msgid "Skip All"
 msgstr "全部略過"
 
-#: ../src/ptk/ptk-file-archiver.c:119
+#: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
 msgid "Save Compressed Files to..."
 msgstr "儲存壓縮檔到..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "壓縮檔格式："
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "正在建立壓縮檔：%s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "壓縮檔案"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "解壓縮檔案到..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "正在解壓縮檔案到：%s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "解壓縮檔案"
 

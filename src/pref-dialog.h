@@ -7,6 +7,7 @@ G_BEGIN_DECLS
 
 typedef enum {
     PREF_GENERAL,
+    PREF_INTERFACE,
     PREF_DESKTOP,
     PREF_VOLMAN,
     PREF_ADVANCED

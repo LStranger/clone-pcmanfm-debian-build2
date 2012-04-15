@@ -8,15 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-21 02:21+0800\n"
-"PO-Revision-Date: 2009-05-01 00:36-0000\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-10-26 20:20+0100\n"
 "Last-Translator: Artur Kruszewski <mazdac@gmail.com>\n"
 "Language-Team: Polish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: poEdit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 1.1.0\n"
 "X-Poedit-Bookmarks: 19,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 "X-Poedit-Country: Poland\n"
 
@@ -90,8 +91,11 @@ msgid "Opened in Terminal"
 msgstr "Otwórz w konsoli"
 
 #: ../data/ui/appchooserdlg.glade.h:4
-msgid "Please choose an application from following lists or enter the command line by hand:"
-msgstr "Proszę wybrać aplikację z listy lub wprowadzić ją ręcznie w linii poleceń"
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr ""
+"Proszę wybrać aplikację z listy lub wprowadzić ją ręcznie w linii poleceń"
 
 #: ../data/ui/appchooserdlg.glade.h:5
 msgid "Set selected application to default action"
@@ -141,33 +145,24 @@ msgstr "Przenieś w dół"
 msgid "Move _Up"
 msgstr "Przenieś w górę"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
+#. Processing: <Name of currently proccesed file>
 #: ../data/ui/file_operation.glade.h:2
-#: ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Przygotowywanie..."
+msgid "<b>Processing:</b>"
+msgstr "<b>Przetwarzanie:</b>"
 
-#. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4
-#: ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
-msgstr "Przetwarzanie:"
-
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5
-#: ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
-msgstr "Postęp:"
+#: ../data/ui/file_operation.glade.h:3
+msgid "<b>Progress:</b>"
+msgstr "<b>Postęp:</b>"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7
-#: ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "Do :"
+#: ../data/ui/file_operation.glade.h:5
+msgid "<b>To:</b>"
+msgstr "<b>Do:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Przygotowywanie..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -252,8 +247,7 @@ msgstr "Przyklejony"
 msgid "Write"
 msgstr "Zapis"
 
-#: ../data/ui/file_properties.glade.h:24
-#: ../data/ui/prefdlg.glade.h:41
+#: ../data/ui/file_properties.glade.h:24 ../data/ui/prefdlg.glade.h:41
 msgid "_General"
 msgstr "Ogólne"
 
@@ -529,7 +523,8 @@ msgstr "Tekst:"
 
 #: ../data/ui/prefdlg.glade.h:37
 msgid "Use SI decimal prefixes instead of IEC binary prefixes"
-msgstr "Używaj przedrostków dziesiętnych układu SI zamiast przedrostków binarnych IEC"
+msgstr ""
+"Używaj przedrostków dziesiętnych układu SI zamiast przedrostków binarnych IEC"
 
 #: ../data/ui/prefdlg.glade.h:38
 msgid "Wallpaper:"
@@ -601,7 +596,9 @@ msgstr "Kolumna formatowana"
 
 #: ../src/exo/exo-icon-view.c:800
 msgid "Model column used to retrieve the text if using Pango markup"
-msgstr "Kolumna modelu używana do pobierania tesktu jeżeli używane jest formatowanie Pango"
+msgstr ""
+"Kolumna modelu używana do pobierania tesktu jeżeli używane jest formatowanie "
+"Pango"
 
 #: ../src/exo/exo-icon-view.c:814
 msgid "Icon View Model"
@@ -616,7 +613,8 @@ msgid "Orientation"
 msgstr "Orientacja"
 
 #: ../src/exo/exo-icon-view.c:829
-msgid "How the text and icon of each item are positioned relative to each other"
+msgid ""
+"How the text and icon of each item are positioned relative to each other"
 msgstr "Jak tekst i ikony każdego elementu są ułożone względem innych"
 
 #: ../src/exo/exo-icon-view.c:845
@@ -649,7 +647,8 @@ msgstr "Przeszukaj kolumnę"
 
 #: ../src/exo/exo-icon-view.c:893
 msgid "Model column to search through when searching through item"
-msgstr "Kolumna modelu do przeszukania gdy odbywa się przeszukiwanie po elemencie"
+msgstr ""
+"Kolumna modelu do przeszukania gdy odbywa się przeszukiwanie po elemencie"
 
 #: ../src/exo/exo-icon-view.c:907
 msgid "Selection mode"
@@ -659,25 +658,25 @@ msgstr "Tryb zaznaczania"
 msgid "The selection mode"
 msgstr "Tryb zaznaczania"
 
-#: ../src/exo/exo-icon-view.c:923
-#: ../src/exo/exo-tree-view.c:201
+#: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
 msgid "Single Click"
 msgstr "Pojedyncze kliknięcie"
 
-#: ../src/exo/exo-icon-view.c:924
-#: ../src/exo/exo-tree-view.c:202
+#: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
 msgid "Whether the items in the view can be activated with single clicks"
 msgstr "Czy elementy w widoku mogą być aktywowane pojedyńczym kliknięciem"
 
-#: ../src/exo/exo-icon-view.c:940
-#: ../src/exo/exo-tree-view.c:218
+#: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
 msgid "Single Click Timeout"
 msgstr "Czas pojedyńczego kliknięcia"
 
-#: ../src/exo/exo-icon-view.c:941
-#: ../src/exo/exo-tree-view.c:219
-msgid "The amount of time after which the item under the mouse cursor will be selected automatically in single click mode"
-msgstr "Ilość czasy po której element pod kursorem zostanie automatycznie zaznaczony w trybie pojedynczego kliknięcia."
+#: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
+msgid ""
+"The amount of time after which the item under the mouse cursor will be "
+"selected automatically in single click mode"
+msgstr ""
+"Ilość czasy po której element pod kursorem zostanie automatycznie zaznaczony "
+"w trybie pojedynczego kliknięcia."
 
 #: ../src/exo/exo-icon-view.c:956
 msgid "Spacing"
@@ -770,12 +769,20 @@ msgid "Run PCManFM as a daemon"
 msgstr "Uruchom PCManFM jako demona."
 
 #: ../src/main.c:94
-msgid "Open folders in new tabs of the last used window instead of creating new windows"
-msgstr "Otwórz katalogi w nowych kartach ostatnio używanego okna zamiast tworzyć nowe okna"
+msgid ""
+"Open folders in new tabs of the last used window instead of creating new "
+"windows"
+msgstr ""
+"Otwórz katalogi w nowych kartach ostatnio używanego okna zamiast tworzyć "
+"nowe okna"
 
 #: ../src/main.c:95
-msgid "Open preference dialog. 'n' is the number of page you want to show (1, 2, 3...)."
-msgstr "Otwórz okno preferencji. 'n' jest numerem strony którą chcesz obejrzeć (1, 2, 3...)."
+msgid ""
+"Open preference dialog. 'n' is the number of page you want to show (1, 2, "
+"3...)."
+msgstr ""
+"Otwórz okno preferencji. 'n' jest numerem strony którą chcesz obejrzeć (1, "
+"2, 3...)."
 
 #: ../src/main.c:96
 msgid "Find Files with PCManFM"
@@ -789,54 +796,62 @@ msgstr "Ustaw tło pulpitu"
 msgid "[FILE1, FILE2,...]"
 msgstr "[PLIK1, PLIK2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "Schemat ikon GTK+ nie jest poprawnie ustawiony"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
 "\n"
-"This usually means you don't have an XSETTINGS manager running.  Desktop environment like GNOME or XFCE automatically execute their XSETTING managers like gnome-settings-daemon or xfce-mcs-manager.\n"
+"This usually means you don't have an XSETTINGS manager running.  Desktop "
+"environment like GNOME or XFCE automatically execute their XSETTING managers "
+"like gnome-settings-daemon or xfce-mcs-manager.\n"
 "\n"
 "<b>If you don't use these desktop environments, you have two choices:\n"
 "1. run an XSETTINGS manager, or\n"
 "2. simply specify an icon theme in ~/.gtkrc-2.0.</b>\n"
 "For example to use the Tango icon theme add a line:\n"
-"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it if no such file)\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it "
+"if no such file)\n"
 "\n"
-"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the file icons cannot be displayed correctly.</b>  Due to the differences in icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is no standard for this, but it will be solved by freedesktop.org in the future."
+"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the "
+"file icons cannot be displayed correctly.</b>  Due to the differences in "
+"icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
+"no standard for this, but it will be solved by freedesktop.org in the future."
 msgstr ""
 "<big><b>%s</b></big>\n"
 "\n"
-"Najczęściej osznacza to, że nie masz uruchomionego menadżera XSETTINGS. Środowiska graficzne takie jak GNOME lub XFCE automatycznie uruchamiają własnych menadżerów XSETTINGS, takich jak gnome-settings-daemon lub xfce-mcs-manager.\n"
+"Najczęściej osznacza to, że nie masz uruchomionego menadżera XSETTINGS. "
+"Środowiska graficzne takie jak GNOME lub XFCE automatycznie uruchamiają "
+"własnych menadżerów XSETTINGS, takich jak gnome-settings-daemon lub xfce-mcs-"
+"manager.\n"
 "\n"
-"<b>Jeśli nie chcesz używać tych środowisk graficznych możesz postąpić w dwojaki sposób:\n"
+"<b>Jeśli nie chcesz używać tych środowisk graficznych możesz postąpić w "
+"dwojaki sposób:\n"
 "1. uruchomić menadżera XSETTINGS, lub\n"
 "2. ustawić schemat ikon w ~/.gtkrc-2.0 ręcznie.</b>\n"
-"Przykładowo aby dodać schemat Tango dodaj poniższą linijkę do swojego ~/.gtkrc-2.0 (jeśli plik nie istnieje to utwórz go):\n"
+"Przykładowo aby dodać schemat Tango dodaj poniższą linijkę do swojego ~/."
+"gtkrc-2.0 (jeśli plik nie istnieje to utwórz go):\n"
 "<i><b>gtk-icon-theme-name=\"Tango\"</b></i> \n"
-"<b><b>OSTRZEŻENIE: Użyty schemat ikon powinien być kompatybilny z GNOME, w innym przypadku ikony zostać wyświetlone prawidłowo.</b>  Z powodu różnic w nazewnictwie ikon KDE i GNOME, schematy ikon KDE nie mogą zostać użyte.  Obecnie nie ma standardów dotyczących nazewnictwa ikon, ma zostać to rozwiązane w przyszłości przez freedesktop.org."
+"<b><b>OSTRZEŻENIE: Użyty schemat ikon powinien być kompatybilny z GNOME, w "
+"innym przypadku ikony zostać wyświetlone prawidłowo.</b>  Z powodu różnic w "
+"nazewnictwie ikon KDE i GNOME, schematy ikon KDE nie mogą zostać użyte.  "
+"Obecnie nie ma standardów dotyczących nazewnictwa ikon, ma zostać to "
+"rozwiązane w przyszłości przez freedesktop.org."
 
-#: ../src/main.c:662
-#: ../src/main.c:731
-#: ../src/main.c:782
-#: ../src/main-window.c:1704
-#: ../src/main-window.c:1771
-#: ../src/ptk/ptk-file-browser.c:520
-#: ../src/ptk/ptk-file-browser.c:538
-#: ../src/ptk/ptk-file-task.c:332
-#: ../src/ptk/ptk-console-output.c:225
-#: ../src/ptk/ptk-file-misc.c:258
-#: ../src/ptk/ptk-file-misc.c:326
-#: ../src/ptk/ptk-file-misc.c:415
-#: ../src/ptk/ptk-file-properties.c:701
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
+#: ../src/main-window.c:1704 ../src/main-window.c:1771
+#: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
+#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
+#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:326
+#: ../src/ptk/ptk-file-misc.c:415 ../src/ptk/ptk-file-properties.c:701
 #: ../src/ptk/ptk-file-properties.c:712
 msgid "Error"
 msgstr "Błąd"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -846,15 +861,15 @@ msgstr ""
 "\n"
 "Czy \"FAM\" lub  \"Gamin\" działa i jest zainstalowany?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "Plik nie istnieje!"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "Nie wiem jak otworzyć plik"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -865,14 +880,12 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: ../src/main-window.c:304
-#: ../src/ptk/ptk-file-menu.c:109
+#: ../src/main-window.c:304 ../src/ptk/ptk-file-menu.c:109
 #: ../src/desktop/desktop-window.c:186
 msgid "_Folder"
 msgstr "Katalog"
 
-#: ../src/main-window.c:305
-#: ../src/ptk/ptk-file-menu.c:110
+#: ../src/main-window.c:305 ../src/ptk/ptk-file-menu.c:110
 #: ../src/desktop/desktop-window.c:187
 msgid "_Text File"
 msgstr "Plik tekstowy"
@@ -885,8 +898,7 @@ msgstr "Nowe okno"
 msgid "New _Tab"
 msgstr "Nowa karta"
 
-#: ../src/main-window.c:314
-#: ../src/ptk/ptk-file-menu.c:133
+#: ../src/main-window.c:314 ../src/ptk/ptk-file-menu.c:133
 #: ../src/desktop/desktop-window.c:196
 msgid "_Create New"
 msgstr "Utwórz nowy"
@@ -903,13 +915,11 @@ msgstr "Zamknij kartę"
 msgid "_Close Window"
 msgstr "Zamknij okno"
 
-#: ../src/main-window.c:327
-#: ../src/ptk/ptk-file-menu.c:128
+#: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "Usuń"
 
-#: ../src/main-window.c:328
-#: ../src/ptk/ptk-file-browser.c:1396
+#: ../src/main-window.c:328 ../src/ptk/ptk-file-browser.c:1396
 #: ../src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "Zmień nazwę"
@@ -938,23 +948,19 @@ msgstr "Do katalogu nadrzędnego"
 msgid "Go _Home"
 msgstr "Do katalogu domowego"
 
-#: ../src/main-window.c:355
-#: ../src/desktop/desktop-window.c:173
+#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:173
 msgid "Sort by _Name"
 msgstr "Według nazwy"
 
-#: ../src/main-window.c:356
-#: ../src/desktop/desktop-window.c:174
+#: ../src/main-window.c:356 ../src/desktop/desktop-window.c:174
 msgid "Sort by _Size"
 msgstr "Według rozmiaru"
 
-#: ../src/main-window.c:357
-#: ../src/desktop/desktop-window.c:176
+#: ../src/main-window.c:357 ../src/desktop/desktop-window.c:176
 msgid "Sort by _Modification Time"
 msgstr "Według daty modyfikacji"
 
-#: ../src/main-window.c:358
-#: ../src/desktop/desktop-window.c:175
+#: ../src/main-window.c:358 ../src/desktop/desktop-window.c:175
 msgid "Sort by _Type"
 msgstr "Według typu"
 
@@ -966,13 +972,11 @@ msgstr "Według uprawnień"
 msgid "Sort by _Owner"
 msgstr "Według właściciela"
 
-#: ../src/main-window.c:362
-#: ../src/desktop/desktop-window.c:179
+#: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
 msgstr "Rosnąco"
 
-#: ../src/main-window.c:363
-#: ../src/desktop/desktop-window.c:180
+#: ../src/main-window.c:363 ../src/desktop/desktop-window.c:180
 msgid "Descending"
 msgstr "Malejąco"
 
@@ -1147,29 +1151,24 @@ msgstr[2] "%d widocznych (%s)%s"
 msgid "Directory doesn't exist!"
 msgstr "Katalog nie istnieje!"
 
-#: ../src/ptk/ptk-file-browser.c:1392
-#: ../src/ptk/ptk-file-menu.c:142
+#: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "Otwórz w nowej karcie"
 
-#: ../src/ptk/ptk-file-browser.c:1393
-#: ../src/ptk/ptk-file-menu.c:143
+#: ../src/ptk/ptk-file-browser.c:1393 ../src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "Otwórz w nowym oknie"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/edit-bookmarks.c:201
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/edit-bookmarks.c:201
 #: ../src/find-files.c:799
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/find-files.c:820
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:820
 msgid "Size"
 msgstr "Rozmiar"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/find-files.c:824
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:824
 msgid "Type"
 msgstr "Typ"
 
@@ -1201,8 +1200,7 @@ msgstr "Kosz"
 msgid "Desktop"
 msgstr "Pulpit"
 
-#: ../src/ptk/ptk-location-view.c:441
-#: ../src/ptk/ptk-location-view.c:635
+#: ../src/ptk/ptk-location-view.c:441 ../src/ptk/ptk-location-view.c:635
 msgid "Unable to mount device"
 msgstr "Nie można zamontowac urządzenia"
 
@@ -1274,6 +1272,23 @@ msgstr "Dowiązywanie..."
 msgid "Changing Properties"
 msgstr "Zmienianie właściwości"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "Do :"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Przetwarzanie:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Postęp:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "Anulować operację?"
@@ -1342,33 +1357,33 @@ msgstr "Pomiń"
 msgid "Skip All"
 msgstr "Pomiń wszystkie"
 
-#: ../src/ptk/ptk-file-archiver.c:119
+#: ../src/ptk/ptk-file-archiver.c:125
 msgid "Save Compressed Files to..."
-msgstr "zapisz spakowane pliki do..."
+msgstr "Rozpakuj do..."
 
-#: ../src/ptk/ptk-file-archiver.c:127
+#: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"
 msgstr "Format pakowania plików:"
 
-#: ../src/ptk/ptk-file-archiver.c:198
+#: ../src/ptk/ptk-file-archiver.c:204
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Tworzenie spakowanego archiwum: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:201
+#: ../src/ptk/ptk-file-archiver.c:207
 msgid "Compress Files"
 msgstr "Pakuj pliki"
 
-#: ../src/ptk/ptk-file-archiver.c:232
+#: ../src/ptk/ptk-file-archiver.c:238
 msgid "Extract File to..."
 msgstr "Rozpakowywanie plików do..."
 
-#: ../src/ptk/ptk-file-archiver.c:281
+#: ../src/ptk/ptk-file-archiver.c:287
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Rozpakowywanie plików do: %s"
 
-#: ../src/ptk/ptk-file-archiver.c:283
+#: ../src/ptk/ptk-file-archiver.c:289
 msgid "Extract Files"
 msgstr "Rozpakuj pliki"
 
@@ -1434,8 +1449,7 @@ msgid "_Open with \"%s\""
 msgstr "Otwórz w \"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
-#: ../src/ptk/ptk-file-menu.c:408
-#: ../src/ptk/ptk-file-menu.c:417
+#: ../src/ptk/ptk-file-menu.c:408 ../src/ptk/ptk-file-menu.c:417
 #: ../src/find-files.c:229
 msgid "_Open"
 msgstr "Otwórz"
@@ -1452,8 +1466,7 @@ msgstr "Zmień nazwę pliku"
 msgid "Please input new file name:"
 msgstr "Proszę wprowadzić nową nazwę pliku:"
 
-#: ../src/ptk/ptk-file-misc.c:151
-#: ../src/ptk/ptk-file-misc.c:172
+#: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
 msgid ""
 "The file name you specified already exists.\n"
@@ -1462,8 +1475,7 @@ msgstr ""
 "Nazwa PLIKU którą wprowadziłeś już istnieje.\n"
 "Proszę wprowadzić nową:"
 
-#: ../src/ptk/ptk-file-misc.c:195
-#: ../src/ptk/ptk-file-misc.c:197
+#: ../src/ptk/ptk-file-misc.c:195 ../src/ptk/ptk-file-misc.c:197
 msgid "New Folder"
 msgstr "Nowy folder"
 
@@ -1471,8 +1483,7 @@ msgstr "Nowy folder"
 msgid "Input a name for the new folder:"
 msgstr "Wprowadź nazwę dla nowego katalogu:"
 
-#: ../src/ptk/ptk-file-misc.c:202
-#: ../src/ptk/ptk-file-misc.c:204
+#: ../src/ptk/ptk-file-misc.c:202 ../src/ptk/ptk-file-misc.c:204
 msgid "New File"
 msgstr "Nowy plik"
 
@@ -1511,8 +1522,10 @@ msgid "Invalid Group"
 msgstr "Niewłaściwa grupa"
 
 #: ../src/ptk/ptk-file-properties.c:760
-msgid "Do you want to recursively apply these changes to all files and sub-folders?"
-msgstr "Zastosować zmiany rekursywnie do wszystkich podrzędnych plików i katalogów?"
+msgid ""
+"Do you want to recursively apply these changes to all files and sub-folders?"
+msgstr ""
+"Zastosować zmiany rekursywnie do wszystkich podrzędnych plików i katalogów?"
 
 #: ../src/edit-bookmarks.c:79
 msgid "New Item"
@@ -1538,10 +1551,10 @@ msgstr "Polecenie nie znalezione"
 #: ../src/vfs/vfs-file-task.c:733
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
-msgstr "Ścieżka docelowa jest \"%1$s\" jest zawarta w ścieżce źródłowej \"%2$s\""
+msgstr ""
+"Ścieżka docelowa jest \"%1$s\" jest zawarta w ścieżce źródłowej \"%2$s\""
 
-#: ../src/vfs/vfs-volume-hal.c:475
-#: ../src/vfs/vfs-volume-hal.c:698
+#: ../src/vfs/vfs-volume-hal.c:475 ../src/vfs/vfs-volume-hal.c:698
 #, c-format
 msgid "%s Volume"
 msgstr "%s Wolumin"
@@ -1726,8 +1739,7 @@ msgid "Failed to connect to the HAL daemon: %s"
 msgstr "Podłączanie do demona HAL nie powiodło się: %s"
 
 #. definitely not a device that we're able to mount, eject or unmount
-#: ../src/vfs/vfs-volume-hal.c:1941
-#: ../src/vfs/vfs-volume-hal.c:1997
+#: ../src/vfs/vfs-volume-hal.c:1941 ../src/vfs/vfs-volume-hal.c:1997
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
 msgstr "Podane urządzenie \"%s\" nie jest woluminem ani napędem."
@@ -1736,7 +1748,8 @@ msgstr "Podane urządzenie \"%s\" nie jest woluminem ani napędem."
 #: ../src/vfs/vfs-volume-hal.c:2073
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
-msgstr "Urządzenie \"%s\" nie zostało znalezione w systemowym pliku tabeli urządzeń"
+msgstr ""
+"Urządzenie \"%s\" nie zostało znalezione w systemowym pliku tabeli urządzeń"
 
 #: ../src/vfs/vfs-volume-hal.c:2256
 #, c-format
@@ -1761,8 +1774,12 @@ msgstr "Niewłaściwa opcja montowania przy próbie montowania woluminu \"%s\""
 
 #: ../src/vfs/vfs-volume-hal.c:2272
 #, c-format
-msgid "The volume \"%s\" uses the <i>%s</i> file system which is not supported by your system"
-msgstr "Wolumin \"%s\" używa systemu plików <i>%s</i> który nie jest obsługiwany przez twój system."
+msgid ""
+"The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
+"your system"
+msgstr ""
+"Wolumin \"%s\" używa systemu plików <i>%s</i> który nie jest obsługiwany "
+"przez twój system."
 
 #: ../src/vfs/vfs-volume-hal.c:2274
 #, c-format
@@ -1783,17 +1800,24 @@ msgstr "Błąd <i>%s</i>"
 #: ../src/vfs/vfs-volume-hal.c:2281
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
-msgstr "Wolumin \"%s\" prawdopodobnie został zamontowany ręcznie, z lini poleceń"
+msgstr ""
+"Wolumin \"%s\" prawdopodobnie został zamontowany ręcznie, z lini poleceń"
 
 #: ../src/vfs/vfs-volume-hal.c:2289
 #, c-format
-msgid "Blank discs cannot be mounted, use a CD recording application to record audio or data on the disc"
-msgstr "Puste dyski nie mogą zostać zamontowane, użyj programu do nagrywania aby nagrać dane na dysk."
+msgid ""
+"Blank discs cannot be mounted, use a CD recording application to record "
+"audio or data on the disc"
+msgstr ""
+"Puste dyski nie mogą zostać zamontowane, użyj programu do nagrywania aby "
+"nagrać dane na dysk."
 
 #: ../src/vfs/vfs-volume-hal.c:2300
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
-msgstr "Dysk CD Audio nie może zostać zamontowany, użyj odtwarzacza muzyki aby odtworzyć ścieżki audio."
+msgstr ""
+"Dysk CD Audio nie może zostać zamontowany, użyj odtwarzacza muzyki aby "
+"odtworzyć ścieżki audio."
 
 #: ../src/desktop/desktop-window.c:193
 msgid "_Icons"
@@ -1833,75 +1857,108 @@ msgstr "Ostatnio zmodyfikowany"
 
 #~ msgid "Center on the screen"
 #~ msgstr "Centruj na ekranie"
+
 #~ msgid "Opened in Current Tab"
 #~ msgstr "Otwórz w aktualnej karcie"
+
 #~ msgid "Opened in New Tab"
 #~ msgstr "Otwórz w nowej karcie"
+
 #~ msgid "Opened in New Window"
 #~ msgstr "Otwórz w nowym oknie"
+
 #~ msgid "Stretch to fill the entire screen"
 #~ msgstr "Rozciągnij aby zakryć cały ekran"
+
 #~ msgid "Stretch to fit the screen"
 #~ msgstr "Rozciągnij aby zakryć ekran"
+
 #~ msgid "Tile the image to fill the entire screen"
 #~ msgstr "Powtarzaj obrazek aby zakryc cały ekran"
+
 #~ msgid "Any"
 #~ msgstr "Nie sprawdzaj"
+
 #~ msgid "Bytes"
 #~ msgstr "Bajty"
+
 #~ msgid "GB"
 #~ msgstr "GB"
+
 #~ msgid "KB"
 #~ msgstr "KB"
+
 #~ msgid "MB"
 #~ msgstr "MB"
+
 #~ msgid "Within One Day"
 #~ msgstr "W ciągu ostatniego dnia"
+
 #~ msgid "Within One Month"
 #~ msgstr "W ciągu ostatniego miesiąca"
+
 #~ msgid "Within One Week"
 #~ msgstr "W ciągu ostatniego tygodnia"
+
 #~ msgid "Within One Year"
 #~ msgstr "W ciągu ostatniego roku"
+
 #~ msgid "Within Selected Date Range"
 #~ msgstr "W wyznaczonym okresie czasu"
+
 #~ msgid "Owner:"
 #~ msgstr "Właściciel:"
+
 #~ msgid "gksu or kdesu is not found"
 #~ msgstr "brak kdesu lub gksu"
+
 #~ msgid "Error: %s\n"
 #~ msgstr "Błąd: %s\n"
+
 #~ msgid ""
 #~ "The volume \"%s\" is not mounted.\n"
 #~ "Do you want to mount it?"
 #~ msgstr ""
 #~ "Wolumin \"%s\" nie jest zamontowant.\n"
 #~ "Chcesz go zamontować?"
+
 #~ msgid "Source code taken from other projects:"
 #~ msgstr "Kod źródłowy zapożyczony z innych projektów:"
+
 #~ msgid " * libmd5-rfc: Aladdin Enterprises"
 #~ msgstr " * libmd5-rfc: Aladdin Enterprises"
+
 #~ msgid " * Working area detection: Gary Kramlich"
 #~ msgstr " * Wykrywanie strefy roboczej: Garyego Kramlich'a"
+
 #~ msgid " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
 #~ msgstr ""
 #~ " * ExoIconView: os-cillation e.K, Anders Carlsson, oraz Benedikt Meurer"
+
 #~ msgid " * Text and icon renderer uese code from Jonathan Blandford"
 #~ msgstr " * Do renedrowanie ikon i tekstu użyto kodu Jonathana Blandforda"
+
 #~ msgid " * Desktop icons use code from Brian Tarricone"
 #~ msgstr " * Do obsługi ikon pulpitu użyto kodu kodu Briana Tarricone'a"
+
 #~ msgid "PCMan File Manager"
 #~ msgstr "Menadżer plików PCMan"
+
 #~ msgid "Icon Theme:"
 #~ msgstr "Schemat ikon:"
+
 #~ msgid "A_ddress:"
 #~ msgstr "Ścieżka:"
+
 #~ msgid " * xdgmime: Red Hat, Inc & Jonathan Blandford"
 #~ msgstr " * xdgmime: Red Hat, Inc oraz Jonathan Blandford"
+
 #~ msgid "Icon Theme (Need Restart):"
 #~ msgstr "Motyw ikon (wymagany restart)"
+
 #~ msgid "_Full Screen"
 #~ msgstr "Pełny ekran"
+
 #~ msgid ""
 #~ "File operation failed.\n"
 #~ "\n"
@@ -1914,10 +1971,12 @@ msgstr "Ostatnio zmodyfikowany"
 #~ "Nie można kontynuować \"%s\"\n"
 #~ "\n"
 #~ "%s"
+
 #~ msgid "Edit Bookmark"
 #~ msgstr "Edytuj zakładkę"
+
 #~ msgid "Add to Bookmarks"
 #~ msgstr "Dodaj do zakładek"
+
 #~ msgid "Enter new directory path:"
 #~ msgstr "Wprowadź ścieżkę nowego katalogu"
-

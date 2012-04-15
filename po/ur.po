@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-27 21:31-0400\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
 "PO-Revision-Date: 2009-05-10 12:57+0500\n"
 "Last-Translator: Muhammad Ali Makki <makki.ma@gmail.com>\n"
 "Language-Team: Urdu <makki.ma@gmail.com>\n"
@@ -97,7 +97,9 @@ msgid "Opened in Terminal"
 msgstr "ٹرمنل میں چلائیں"
 
 #: ../data/ui/appchooserdlg.glade.h:4
-msgid "Please choose an application from following lists or enter the command line by hand:"
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
 msgstr "مندرجہ ذیل فہرست سے اطلاقیے منتخب کریں یا خود ہی کمانڈ لائن لکھیں:"
 
 #: ../data/ui/appchooserdlg.glade.h:5
@@ -148,33 +150,27 @@ msgstr "_نیچے کریں"
 msgid "Move _Up"
 msgstr "_اوپر کریں"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
+#. Processing: <Name of currently proccesed file>
 #: ../data/ui/file_operation.glade.h:2
-#: ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "تیاری..."
-
-#. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4
-#: ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "عمل کاری:"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5
-#: ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "پیش رفت:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7
-#: ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "تا:"
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>گروپ:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "تیاری..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -259,8 +255,7 @@ msgstr "چسپاں"
 msgid "Write"
 msgstr "لکھیں"
 
-#: ../data/ui/file_properties.glade.h:24
-#: ../data/ui/prefdlg.glade.h:41
+#: ../data/ui/file_properties.glade.h:24 ../data/ui/prefdlg.glade.h:41
 msgid "_General"
 msgstr "_عام"
 
@@ -608,7 +603,9 @@ msgstr "نشان زدہ کالم"
 
 #: ../src/exo/exo-icon-view.c:800
 msgid "Model column used to retrieve the text if using Pango markup"
-msgstr "ماڈل کالم جو متن حاصل کرنے کے لیے استعمال ہوتا ہے اگر پانگو مارک اپ استعمال کیا جائے"
+msgstr ""
+"ماڈل کالم جو متن حاصل کرنے کے لیے استعمال ہوتا ہے اگر پانگو مارک اپ استعمال "
+"کیا جائے"
 
 #: ../src/exo/exo-icon-view.c:814
 msgid "Icon View Model"
@@ -623,7 +620,8 @@ msgid "Orientation"
 msgstr "جہتیابی"
 
 #: ../src/exo/exo-icon-view.c:829
-msgid "How the text and icon of each item are positioned relative to each other"
+msgid ""
+"How the text and icon of each item are positioned relative to each other"
 msgstr "ہر عنصر کی آئکن اور متن ایک دوسرے کی نسبت سے کس طرح مقام لیں گے"
 
 #: ../src/exo/exo-icon-view.c:845
@@ -666,25 +664,25 @@ msgstr "انتخاب موڈ"
 msgid "The selection mode"
 msgstr "انتخاب موڈ"
 
-#: ../src/exo/exo-icon-view.c:923
-#: ../src/exo/exo-tree-view.c:201
+#: ../src/exo/exo-icon-view.c:923 ../src/exo/exo-tree-view.c:201
 msgid "Single Click"
 msgstr "ایک کلک"
 
-#: ../src/exo/exo-icon-view.c:924
-#: ../src/exo/exo-tree-view.c:202
+#: ../src/exo/exo-icon-view.c:924 ../src/exo/exo-tree-view.c:202
 msgid "Whether the items in the view can be activated with single clicks"
 msgstr "منظر میں آئکن ایک کلک سے فعال ہوں گے"
 
-#: ../src/exo/exo-icon-view.c:940
-#: ../src/exo/exo-tree-view.c:218
+#: ../src/exo/exo-icon-view.c:940 ../src/exo/exo-tree-view.c:218
 msgid "Single Click Timeout"
 msgstr "ایک کلک تعطل وقت"
 
-#: ../src/exo/exo-icon-view.c:941
-#: ../src/exo/exo-tree-view.c:219
-msgid "The amount of time after which the item under the mouse cursor will be selected automatically in single click mode"
-msgstr "ایک کلک موڈ میں وقت کا دورانہ جس کے بعد ماؤس کے کرسر کے نیچے موجود عنصر خود بخود انتخاب میں آجائے گا"
+#: ../src/exo/exo-icon-view.c:941 ../src/exo/exo-tree-view.c:219
+msgid ""
+"The amount of time after which the item under the mouse cursor will be "
+"selected automatically in single click mode"
+msgstr ""
+"ایک کلک موڈ میں وقت کا دورانہ جس کے بعد ماؤس کے کرسر کے نیچے موجود عنصر خود "
+"بخود انتخاب میں آجائے گا"
 
 #: ../src/exo/exo-icon-view.c:956
 msgid "Spacing"
@@ -777,12 +775,19 @@ msgid "Run PCManFM as a daemon"
 msgstr "پی سی مین ایف ایم کو بطور ڈیمن چلائیں"
 
 #: ../src/main.c:94
-msgid "Open folders in new tabs of the last used window instead of creating new windows"
-msgstr "نئی ونڈوز بنانے کی بجائے فولڈر نئے ٹیب میں آخری استعمال کردہ ونڈو میں کھولیں"
+msgid ""
+"Open folders in new tabs of the last used window instead of creating new "
+"windows"
+msgstr ""
+"نئی ونڈوز بنانے کی بجائے فولڈر نئے ٹیب میں آخری استعمال کردہ ونڈو میں کھولیں"
 
 #: ../src/main.c:95
-msgid "Open preference dialog. 'n' is the number of page you want to show (1, 2, 3...)."
-msgstr "ترجیحات ڈائیلاگ کھولیں. 'n' صفحہ کا نمبر ہے جسے آپ ظاہر کرنا چاہتے ہیں (1, 2, 3...)."
+msgid ""
+"Open preference dialog. 'n' is the number of page you want to show (1, 2, "
+"3...)."
+msgstr ""
+"ترجیحات ڈائیلاگ کھولیں. 'n' صفحہ کا نمبر ہے جسے آپ ظاہر کرنا چاہتے ہیں (1, "
+"2, 3...)."
 
 #: ../src/main.c:96
 msgid "Find Files with PCManFM"
@@ -796,55 +801,60 @@ msgstr "ڈیسک ٹاپ وال پیپر مرتب کریں"
 msgid "[FILE1, FILE2,...]"
 msgstr "[FILE1, FILE2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+ آئکن تھیم درست طور پر مرتب نہیں ہے"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
 "\n"
-"This usually means you don't have an XSETTINGS manager running.  Desktop environment like GNOME or XFCE automatically execute their XSETTING managers like gnome-settings-daemon or xfce-mcs-manager.\n"
+"This usually means you don't have an XSETTINGS manager running.  Desktop "
+"environment like GNOME or XFCE automatically execute their XSETTING managers "
+"like gnome-settings-daemon or xfce-mcs-manager.\n"
 "\n"
 "<b>If you don't use these desktop environments, you have two choices:\n"
 "1. run an XSETTINGS manager, or\n"
 "2. simply specify an icon theme in ~/.gtkrc-2.0.</b>\n"
 "For example to use the Tango icon theme add a line:\n"
-"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it if no such file)\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it "
+"if no such file)\n"
 "\n"
-"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the file icons cannot be displayed correctly.</b>  Due to the differences in icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is no standard for this, but it will be solved by freedesktop.org in the future."
+"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the "
+"file icons cannot be displayed correctly.</b>  Due to the differences in "
+"icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
+"no standard for this, but it will be solved by freedesktop.org in the future."
 msgstr ""
 "<big><b>%s</b></big>\n"
 "\n"
-"This usually means you don't have an XSETTINGS manager running.  Desktop environment like GNOME or XFCE automatically execute their XSETTING managers like gnome-settings-daemon or xfce-mcs-manager.\n"
+"This usually means you don't have an XSETTINGS manager running.  Desktop "
+"environment like GNOME or XFCE automatically execute their XSETTING managers "
+"like gnome-settings-daemon or xfce-mcs-manager.\n"
 "\n"
 "<b>If you don't use these desktop environments, you have two choices:\n"
 "1. run an XSETTINGS manager, or\n"
 "2. simply specify an icon theme in ~/.gtkrc-2.0.</b>\n"
 "For example to use the Tango icon theme add a line:\n"
-"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it if no such file)\n"
+"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> in your ~/.gtkrc-2.0. (create it "
+"if no such file)\n"
 "\n"
-"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the file icons cannot be displayed correctly.</b>  Due to the differences in icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is no standard for this, but it will be solved by freedesktop.org in the future."
+"<b>NOTICE: The icon theme you choose should be compatible with GNOME, or the "
+"file icons cannot be displayed correctly.</b>  Due to the differences in "
+"icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
+"no standard for this, but it will be solved by freedesktop.org in the future."
 
-#: ../src/main.c:662
-#: ../src/main.c:731
-#: ../src/main.c:782
-#: ../src/main-window.c:1704
-#: ../src/main-window.c:1771
-#: ../src/ptk/ptk-file-browser.c:520
-#: ../src/ptk/ptk-file-browser.c:538
-#: ../src/ptk/ptk-file-task.c:332
-#: ../src/ptk/ptk-console-output.c:225
-#: ../src/ptk/ptk-file-misc.c:258
-#: ../src/ptk/ptk-file-misc.c:326
-#: ../src/ptk/ptk-file-misc.c:415
-#: ../src/ptk/ptk-file-properties.c:701
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
+#: ../src/main-window.c:1704 ../src/main-window.c:1771
+#: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
+#: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
+#: ../src/ptk/ptk-file-misc.c:258 ../src/ptk/ptk-file-misc.c:326
+#: ../src/ptk/ptk-file-misc.c:415 ../src/ptk/ptk-file-properties.c:701
 #: ../src/ptk/ptk-file-properties.c:712
 msgid "Error"
 msgstr "غلطی"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -854,15 +864,15 @@ msgstr ""
 "\n"
 "کیا آپ کے پاس \"FAM\" اور \"Gamin\" نصب ہیں اور چل رہے ہیں؟"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "فائل وجود نہیں رکھتی"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "نہیں معلوم کہ فائل کیسے کھولی جائے"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -873,14 +883,12 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: ../src/main-window.c:304
-#: ../src/ptk/ptk-file-menu.c:109
+#: ../src/main-window.c:304 ../src/ptk/ptk-file-menu.c:109
 #: ../src/desktop/desktop-window.c:186
 msgid "_Folder"
 msgstr "_فولڈر"
 
-#: ../src/main-window.c:305
-#: ../src/ptk/ptk-file-menu.c:110
+#: ../src/main-window.c:305 ../src/ptk/ptk-file-menu.c:110
 #: ../src/desktop/desktop-window.c:187
 msgid "_Text File"
 msgstr "_متن فائل"
@@ -893,8 +901,7 @@ msgstr "نئی ونڈ_و"
 msgid "New _Tab"
 msgstr "_نیا ٹیب"
 
-#: ../src/main-window.c:314
-#: ../src/ptk/ptk-file-menu.c:133
+#: ../src/main-window.c:314 ../src/ptk/ptk-file-menu.c:133
 #: ../src/desktop/desktop-window.c:196
 msgid "_Create New"
 msgstr "نیا _بنائیں"
@@ -911,13 +918,11 @@ msgstr "ٹیب بند کریں"
 msgid "_Close Window"
 msgstr "ونڈو _بند کریں"
 
-#: ../src/main-window.c:327
-#: ../src/ptk/ptk-file-menu.c:128
+#: ../src/main-window.c:327 ../src/ptk/ptk-file-menu.c:128
 msgid "_Delete"
 msgstr "_حذف"
 
-#: ../src/main-window.c:328
-#: ../src/ptk/ptk-file-browser.c:1396
+#: ../src/main-window.c:328 ../src/ptk/ptk-file-browser.c:1396
 #: ../src/ptk/ptk-file-menu.c:129
 msgid "_Rename"
 msgstr "نام _بدلیں"
@@ -946,23 +951,19 @@ msgstr "آ_بائی فولڈر میں جائیں"
 msgid "Go _Home"
 msgstr "_مرکزی فولڈر میں جائیں"
 
-#: ../src/main-window.c:355
-#: ../src/desktop/desktop-window.c:173
+#: ../src/main-window.c:355 ../src/desktop/desktop-window.c:173
 msgid "Sort by _Name"
 msgstr "_نام سے ترتیب دیں"
 
-#: ../src/main-window.c:356
-#: ../src/desktop/desktop-window.c:174
+#: ../src/main-window.c:356 ../src/desktop/desktop-window.c:174
 msgid "Sort by _Size"
 msgstr "_حجم سے ترتیب دیں"
 
-#: ../src/main-window.c:357
-#: ../src/desktop/desktop-window.c:176
+#: ../src/main-window.c:357 ../src/desktop/desktop-window.c:176
 msgid "Sort by _Modification Time"
 msgstr "_تبدیلی کے وقت سے ترتیب دیں"
 
-#: ../src/main-window.c:358
-#: ../src/desktop/desktop-window.c:175
+#: ../src/main-window.c:358 ../src/desktop/desktop-window.c:175
 msgid "Sort by _Type"
 msgstr "_نوعیت سے ترتیب دیں"
 
@@ -974,13 +975,11 @@ msgstr "اجازوں سے ترتیب دیں"
 msgid "Sort by _Owner"
 msgstr "ملکیت سے ترتیب دیں"
 
-#: ../src/main-window.c:362
-#: ../src/desktop/desktop-window.c:179
+#: ../src/main-window.c:362 ../src/desktop/desktop-window.c:179
 msgid "Ascending"
 msgstr "صعودی"
 
-#: ../src/main-window.c:363
-#: ../src/desktop/desktop-window.c:180
+#: ../src/main-window.c:363 ../src/desktop/desktop-window.c:180
 msgid "Descending"
 msgstr "نزولی"
 
@@ -1142,6 +1141,7 @@ msgstr[0] "%d پوشیدہ"
 msgstr[1] "%d پوشیدہ"
 
 #: ../src/main-window.c:2123
+#, c-format
 msgid "%d visible item (%s)%s"
 msgid_plural "%d visible items (%s)%s"
 msgstr[0] "%d ظاہر عنصر (%s)%s"
@@ -1151,29 +1151,24 @@ msgstr[1] "%d ظاہر عناصر (%s)%s"
 msgid "Directory doesn't exist!"
 msgstr "ڈائریکٹری موجود نہیں!"
 
-#: ../src/ptk/ptk-file-browser.c:1392
-#: ../src/ptk/ptk-file-menu.c:142
+#: ../src/ptk/ptk-file-browser.c:1392 ../src/ptk/ptk-file-menu.c:142
 msgid "Open in New _Tab"
 msgstr "نئے _ٹیب میں کھولیں"
 
-#: ../src/ptk/ptk-file-browser.c:1393
-#: ../src/ptk/ptk-file-menu.c:143
+#: ../src/ptk/ptk-file-browser.c:1393 ../src/ptk/ptk-file-menu.c:143
 msgid "Open in New _Window"
 msgstr "_نئی ونڈو میں کھولیں"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/edit-bookmarks.c:201
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/edit-bookmarks.c:201
 #: ../src/find-files.c:799
 msgid "Name"
 msgstr "نام"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/find-files.c:820
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:820
 msgid "Size"
 msgstr "حجم"
 
-#: ../src/ptk/ptk-file-browser.c:1646
-#: ../src/find-files.c:824
+#: ../src/ptk/ptk-file-browser.c:1646 ../src/find-files.c:824
 msgid "Type"
 msgstr "نوعیت"
 
@@ -1205,8 +1200,7 @@ msgstr "ردی"
 msgid "Desktop"
 msgstr "ڈیسک ٹاپ"
 
-#: ../src/ptk/ptk-location-view.c:441
-#: ../src/ptk/ptk-location-view.c:635
+#: ../src/ptk/ptk-location-view.c:441 ../src/ptk/ptk-location-view.c:635
 msgid "Unable to mount device"
 msgstr "ڈیوائس ماؤنٹ نہیں ہوسکی"
 
@@ -1278,6 +1272,23 @@ msgstr "ربط کاری..."
 msgid "Changing Properties"
 msgstr "خصوصیات کی تبدیلی"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "تا:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "عمل کاری:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "پیش رفت:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "عمل کاری روک دیں؟"
@@ -1347,6 +1358,7 @@ msgid "Skip All"
 msgstr "نظر انداز تمام"
 
 #: ../src/ptk/ptk-file-archiver.c:125
+#, fuzzy
 msgid "Save Compressed Files to..."
 msgstr "دبی ہوئی فائلیں محفوظ کریں تا..."
 
@@ -1438,8 +1450,7 @@ msgid "_Open with \"%s\""
 msgstr "_کھولیں بذریعہ \"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
-#: ../src/ptk/ptk-file-menu.c:408
-#: ../src/ptk/ptk-file-menu.c:417
+#: ../src/ptk/ptk-file-menu.c:408 ../src/ptk/ptk-file-menu.c:417
 #: ../src/find-files.c:229
 msgid "_Open"
 msgstr "ک_ھولیں"
@@ -1456,8 +1467,7 @@ msgstr "فائل کا نام بدلیں"
 msgid "Please input new file name:"
 msgstr "نئی فائل کا نام لکھیں:"
 
-#: ../src/ptk/ptk-file-misc.c:151
-#: ../src/ptk/ptk-file-misc.c:172
+#: ../src/ptk/ptk-file-misc.c:151 ../src/ptk/ptk-file-misc.c:172
 #: ../src/ptk/ptk-file-misc.c:225
 msgid ""
 "The file name you specified already exists.\n"
@@ -1466,8 +1476,7 @@ msgstr ""
 "آپ کا فراہم کردہ فائل کا نام پہلے ہی موجود ہے.\n"
 "براہ مہربانی نیا نام لکھیں:"
 
-#: ../src/ptk/ptk-file-misc.c:195
-#: ../src/ptk/ptk-file-misc.c:197
+#: ../src/ptk/ptk-file-misc.c:195 ../src/ptk/ptk-file-misc.c:197
 msgid "New Folder"
 msgstr "نیا فولڈر"
 
@@ -1475,8 +1484,7 @@ msgstr "نیا فولڈر"
 msgid "Input a name for the new folder:"
 msgstr "نئے فولڈر کا نام لکھیں:"
 
-#: ../src/ptk/ptk-file-misc.c:202
-#: ../src/ptk/ptk-file-misc.c:204
+#: ../src/ptk/ptk-file-misc.c:202 ../src/ptk/ptk-file-misc.c:204
 msgid "New File"
 msgstr "نئی فائل"
 
@@ -1515,8 +1523,10 @@ msgid "Invalid Group"
 msgstr "ناموزوں گروپ"
 
 #: ../src/ptk/ptk-file-properties.c:760
-msgid "Do you want to recursively apply these changes to all files and sub-folders?"
-msgstr "کیا آپ ان تبدیلیوں کا اطلاق فائلوں اور ذیلی فولڈروں پر بھی کرنا چاہتے ہیں؟"
+msgid ""
+"Do you want to recursively apply these changes to all files and sub-folders?"
+msgstr ""
+"کیا آپ ان تبدیلیوں کا اطلاق فائلوں اور ذیلی فولڈروں پر بھی کرنا چاہتے ہیں؟"
 
 #: ../src/edit-bookmarks.c:79
 msgid "New Item"
@@ -1544,8 +1554,7 @@ msgstr "کمانڈ نہیں پائی گئی"
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "سمت ڈائریکٹری \"%1$s\" مصدر \"%2$s\" میں ہے"
 
-#: ../src/vfs/vfs-volume-hal.c:475
-#: ../src/vfs/vfs-volume-hal.c:698
+#: ../src/vfs/vfs-volume-hal.c:475 ../src/vfs/vfs-volume-hal.c:698
 #, c-format
 msgid "%s Volume"
 msgstr "والیم %s"
@@ -1730,8 +1739,7 @@ msgid "Failed to connect to the HAL daemon: %s"
 msgstr "اتصال HAL ڈائمن سے نہیں ہوسکا: %s"
 
 #. definitely not a device that we're able to mount, eject or unmount
-#: ../src/vfs/vfs-volume-hal.c:1941
-#: ../src/vfs/vfs-volume-hal.c:1997
+#: ../src/vfs/vfs-volume-hal.c:1941 ../src/vfs/vfs-volume-hal.c:1997
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
 msgstr "دی گئی ڈیوائس \"%s\" کوئی والیم یا ڈرائیو نہیں ہے"
@@ -1765,8 +1773,12 @@ msgstr "والیم \"%s\" کو ماؤنٹ کرنے کی کوشش میں نامو
 
 #: ../src/vfs/vfs-volume-hal.c:2272
 #, c-format
-msgid "The volume \"%s\" uses the <i>%s</i> file system which is not supported by your system"
-msgstr "والیم \"%s\" فائل سسٹم <i>%s</i> استعمال کرتا ہے جس کی آپ کے نظام میں معاونت نہیں ہے"
+msgid ""
+"The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
+"your system"
+msgstr ""
+"والیم \"%s\" فائل سسٹم <i>%s</i> استعمال کرتا ہے جس کی آپ کے نظام میں معاونت "
+"نہیں ہے"
 
 #: ../src/vfs/vfs-volume-hal.c:2274
 #, c-format
@@ -1791,13 +1803,19 @@ msgstr "ممکنہ طور پر والیم \"%s\" کمانڈ لائن سے ماؤ
 
 #: ../src/vfs/vfs-volume-hal.c:2289
 #, c-format
-msgid "Blank discs cannot be mounted, use a CD recording application to record audio or data on the disc"
-msgstr "خالی سیڈیاں ماؤنٹ نہیں کی جاسکتیں، آڈیو یا کوئی ڈیٹا ریکارڈ کرنے کے لیے کوئی سی ڈی ریکارڈنگ اطلاقیہ استعمال کریں"
+msgid ""
+"Blank discs cannot be mounted, use a CD recording application to record "
+"audio or data on the disc"
+msgstr ""
+"خالی سیڈیاں ماؤنٹ نہیں کی جاسکتیں، آڈیو یا کوئی ڈیٹا ریکارڈ کرنے کے لیے کوئی "
+"سی ڈی ریکارڈنگ اطلاقیہ استعمال کریں"
 
 #: ../src/vfs/vfs-volume-hal.c:2300
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
-msgstr "آڈیو سیڈیاں ماؤنٹ نہیں کی جاسکتیں، آڈیو سی ڈی کو چلانے کے لیے کوئی آڈیو پلیئر استعمال کریں"
+msgstr ""
+"آڈیو سیڈیاں ماؤنٹ نہیں کی جاسکتیں، آڈیو سی ڈی کو چلانے کے لیے کوئی آڈیو "
+"پلیئر استعمال کریں"
 
 #: ../src/desktop/desktop-window.c:193
 msgid "_Icons"
@@ -1837,12 +1855,13 @@ msgstr "آخری تبدیلی"
 
 #~ msgid "Error: %s\n"
 #~ msgstr "غلطی: %s\n"
+
 #~ msgid "gksu or kdesu is not found"
 #~ msgstr "gksu یا kdesu نہیں پایا گیا"
+
 #~ msgid ""
 #~ "The volume \"%s\" is not mounted.\n"
 #~ "Do you want to mount it?"
 #~ msgstr ""
 #~ "والیم \"%s\" ماؤنٹ نہیں ہے.\n"
 #~ "کیا آپ اسے ماؤنٹ کرنا چاہتے ہیں؟"
-

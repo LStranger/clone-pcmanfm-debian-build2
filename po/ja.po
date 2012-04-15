@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pcmanfm 0.6\n"
+"Project-Id-Version: pcmanfm 0.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-28 19:48+0900\n"
-"PO-Revision-Date: 2009-04-21 16:06+0900\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-06-16 13:02+0900\n"
 "Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
 "Language-Team: Japanese <hironao@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -141,29 +141,27 @@ msgstr "下へ(_D)"
 msgid "Move _Up"
 msgstr "上へ(_U)"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "準備中..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "処理中:"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "進行中:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "送り先:"
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>グループ:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "準備中..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -266,7 +264,7 @@ msgstr "<b>ファイル名に含む:</b>"
 
 #: ../data/ui/find-files.glade.h:3
 msgid "<b>File Size</b>"
-msgstr "<b>ファイルのサイズ:</b>"
+msgstr "<b>ファイルのサイズ</b>"
 
 #: ../data/ui/find-files.glade.h:4
 msgid "<b>File Types to Search</b>"
@@ -791,11 +789,11 @@ msgstr "デスクトップに壁紙を設定する"
 msgid "[FILE1, FILE2,...]"
 msgstr "[ファイル1, ファイル2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "GTK+のアイコンテーマが適切に設定されていません"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -834,7 +832,7 @@ msgstr ""
 "きません。現時点ではアイコン名に関する規格はありませんが、将来freedesktop.org"
 "がこれを解決するでしょう。"
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -844,7 +842,7 @@ msgstr ""
 msgid "Error"
 msgstr "エラー"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -854,15 +852,15 @@ msgstr ""
 "\n"
 "\"FAM\" ないし \"Gamin\" はインストールされ実行されていますか?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "ファイルが存在しません"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "ファイルが開く方法が不明です"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1259,6 +1257,23 @@ msgstr "リンクしています..."
 msgid "Changing Properties"
 msgstr "プロパティを変更しています"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "送り先:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "処理中:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "進行中:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "キャンセルしますか?"
@@ -1329,7 +1344,7 @@ msgstr "すべてスキップ"
 
 #: ../src/ptk/ptk-file-archiver.c:125
 msgid "Save Compressed Files to..."
-msgstr "圧縮ファイルの保存..."
+msgstr "圧縮ファイルの保存先"
 
 #: ../src/ptk/ptk-file-archiver.c:133
 msgid "Format of compressed File:"

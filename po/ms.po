@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-27 21:31-0400\n"
-"PO-Revision-Date: 2009-05-29 01:00+0200\n"
+"POT-Creation-Date: 2009-10-26 16:22+0100\n"
+"PO-Revision-Date: 2009-06-07 18:33+0200\n"
 "Last-Translator: Payne Samad Loh <sploh77@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,8 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "罗森炳 Payne Samad Loh <sploh77@yahoo.com>\n"
-"Phyz <phyz2010@gmail.com>"
+"Phyz <phyz2010@gmail.com>\n"
+"Umarzuki Bin Mochlis Moktar <umarzuki@gmail.com>"
 
 #: ../data/ui/about-dlg.glade.h:10
 msgid ""
@@ -145,29 +146,27 @@ msgstr "Langkah _Turun"
 msgid "Move _Up"
 msgstr "Langkah _Naik"
 
-#. Preparing to do some file operation (Copy, Move, Delete...)
-#: ../data/ui/file_operation.glade.h:2 ../src/ptk/ptk-file-task.c:176
-msgid "Preparing..."
-msgstr "Dalam persediaan..."
-
 #. Processing: <Name of currently proccesed file>
-#. Processing:
-#. Processing: <Name of currently proccesed file>
-#: ../data/ui/file_operation.glade.h:4 ../src/ptk/ptk-file-task.c:169
-msgid "Processing:"
+#: ../data/ui/file_operation.glade.h:2
+#, fuzzy
+msgid "<b>Processing:</b>"
 msgstr "Pemprosesan:"
 
-#. Progress:
-#: ../data/ui/file_operation.glade.h:5 ../src/ptk/ptk-file-task.c:184
-msgid "Progress:"
+#: ../data/ui/file_operation.glade.h:3
+#, fuzzy
+msgid "<b>Progress:</b>"
 msgstr "Progres:"
 
 #. To: <Destination folder> ex. Copy file to..., Move file to...etc.
-#. To: <Destination folder>
-#. ex. Copy file to..., Move file to...etc.
-#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:154
-msgid "To:"
-msgstr "Kepada:"
+#: ../data/ui/file_operation.glade.h:5
+#, fuzzy
+msgid "<b>To:</b>"
+msgstr "<b>Kumpulan:</b>"
+
+#. Preparing to do some file operation (Copy, Move, Delete...)
+#: ../data/ui/file_operation.glade.h:7 ../src/ptk/ptk-file-task.c:176
+msgid "Preparing..."
+msgstr "Dalam persediaan..."
 
 #: ../data/ui/file_properties.glade.h:1
 msgid "<b>File Type:</b>"
@@ -806,11 +805,11 @@ msgstr "Set kertas dinding desktop"
 msgid "[FILE1, FILE2,...]"
 msgstr "[FAIL1, FAIL2,...]"
 
-#: ../src/main.c:332
+#: ../src/main.c:339
 msgid "GTK+ icon theme is not properly set"
 msgstr "Tema ikon GTK+ belum lagi di set dengan betul"
 
-#: ../src/main.c:334
+#: ../src/main.c:341
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -848,10 +847,10 @@ msgstr ""
 "<b>NOTIS: Tema ikon yang anda pilih itu patut serasi dengan GNOME, atau ikon "
 "fail itu tidak boleh dipaparkan dengan betul.</b>  Akibat perbezaan dalam "
 "penamaan ikon GNOME dan KDE, tema KdE tidak boleh digunakan.  Kini tidak "
-"terdapat standard untuk ini, tetapi ia boleh diselesaikan oleh "
-"freedesktop.org pada masa akan datang."
+"terdapat standard untuk ini, tetapi ia boleh diselesaikan oleh freedesktop."
+"org pada masa akan datang."
 
-#: ../src/main.c:662 ../src/main.c:731 ../src/main.c:782
+#: ../src/main.c:678 ../src/main.c:747 ../src/main.c:798
 #: ../src/main-window.c:1704 ../src/main-window.c:1771
 #: ../src/ptk/ptk-file-browser.c:520 ../src/ptk/ptk-file-browser.c:538
 #: ../src/ptk/ptk-file-task.c:332 ../src/ptk/ptk-console-output.c:225
@@ -861,7 +860,7 @@ msgstr ""
 msgid "Error"
 msgstr "Ralat"
 
-#: ../src/main.c:662
+#: ../src/main.c:678
 msgid ""
 "Error: Unable to establish connection with FAM.\n"
 "\n"
@@ -871,15 +870,15 @@ msgstr ""
 "\n"
 "Adakah anda mempunyai \"FAM\" atau \"Gamin\" dipasangkan dan berjalanan?"
 
-#: ../src/main.c:731
+#: ../src/main.c:747
 msgid "File doesn't exist"
 msgstr "Fail tidak wujud"
 
-#: ../src/main.c:778
+#: ../src/main.c:794
 msgid "Don't know how to open the file"
 msgstr "Tidak tahu bagaimana untuk membuka fail itu"
 
-#: ../src/main.c:780
+#: ../src/main.c:796
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -1276,6 +1275,23 @@ msgstr "Hubungikan..."
 msgid "Changing Properties"
 msgstr "Tukarkan Ciri-Ciri"
 
+#. To: <Destination folder>
+#. ex. Copy file to..., Move file to...etc.
+#: ../src/ptk/ptk-file-task.c:154
+msgid "To:"
+msgstr "Kepada:"
+
+#. Processing:
+#. Processing: <Name of currently proccesed file>
+#: ../src/ptk/ptk-file-task.c:169
+msgid "Processing:"
+msgstr "Pemprosesan:"
+
+#. Progress:
+#: ../src/ptk/ptk-file-task.c:184
+msgid "Progress:"
+msgstr "Progres:"
+
 #: ../src/ptk/ptk-file-task.c:320
 msgid "Cancel the operation?"
 msgstr "Batalkan operasi?"
@@ -1345,7 +1361,8 @@ msgid "Skip All"
 msgstr "Langkau Semua"
 
 #: ../src/ptk/ptk-file-archiver.c:125
-msgid "Save Compressd Files to..."
+#, fuzzy
+msgid "Save Compressed Files to..."
 msgstr "Simpan Fail-Fail Mampat pada..."
 
 #: ../src/ptk/ptk-file-archiver.c:133
