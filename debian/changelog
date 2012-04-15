@@ -1,3 +1,12 @@
+pcmanfm (0.3.6.2-1) unstable; urgency=low
+
+  * New upstream release
+    - Fix performance problem of desktop icons.
+    - Little bug fix.
+    - Add new locales.
+
+ -- Andrew Lee <andrew@linux.org.tw>  Wed, 05 Mar 2008 17:52:05 +0800
+
 pcmanfm (0.3.6.1-1) unstable; urgency=low
 
   * New upstream release
