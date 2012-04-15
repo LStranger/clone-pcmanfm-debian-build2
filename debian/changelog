@@ -1,3 +1,16 @@
+pcmanfm (0.3.0.2-1) unstable; urgency=low
+
+  [ Lu, Chao-Ming (Tetralet) ]
+  * New upstream version.
+  * HAL is disabled by default.
+  * debian/control: s/X Window/X/ (Closes:#385040)
+  * debian/control: s/extamly/extremely/ (Closes:#385042)
+
+  [ Andrew Lee ]
+  * Minor correction in copyright file.
+
+ -- Andrew Lee <andrew@linux.org.tw>  Fri, 22 Sep 2006 18:24:37 +0800
+
 pcmanfm (0.2.4-2) unstable; urgency=low
 
   * Apply 01_implicit-pointer-conversion.dpatch by Dann Frazier

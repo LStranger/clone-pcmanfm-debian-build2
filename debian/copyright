@@ -6,9 +6,6 @@ It was downloaded from http://pcmanfm.sourceforge.net/
 Upstream Author: 
 	洪任諭 Hong Jen Yee (PCMan) from Taiwan <pcman.tw@gmail.com>
 
-Copyright Holder: 
-	洪任諭 Hong Jen Yee (PCMan) from Taiwan <pcman.tw@gmail.com>
-
 Copyright:
 
     Copyright (C) 2006  洪任諭 Hong Jen Yee (PCMan) from Taiwan
@@ -32,12 +29,18 @@ Copyright:
     On Debian GNU/Linux systems, the complete text of the GNU General
     Public License may be found in /usr/share/common-licenses/GPL.
 
-Directory src/ptk
-    Ptk is distributed under the GNU Lesser General Public Licence
-    (LGPL). This library is distributed in the hope that it will be 
-    useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-    GNU Lesser General Public Licence for more details.
+Files src/ptk/exo-string.c
+      src/ptk/exo-string.h
+      src/ptk/ptk-icon-view.c
+      src/ptk/ptk-icon-view.h
+      src/ptk/ptk-text-renderer.c
+      src/ptk/ptk-text-renderer.h
+
+    Those files are distributed under the GNU Lesser General Public 
+    Licence (LGPL). This library is distributed in the hope that it 
+    will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+    See the GNU Lesser General Public Licence for more details.
 
     You should have received a copy of the GNU Lesser General Public 
     Licence along with this library; if not, write to the Free Software
@@ -49,6 +52,7 @@ Directory src/ptk
     /usr/share/common-licenses/LGPL
 
 Directory src/xdgmime
+
     The src/xdgmime is dual-licensed under the terms of the GNU Lesser
     General Public License, and the Academic Free License, version 2.0.
     See 'http://webcvs.freedesktop.org/mime/xdgmime/README?view=markup'
@@ -59,5 +63,35 @@ Directory src/xdgmime
     the complete text of the Lesser GNU General Public License may be 
     found in /usr/share/common-licenses/LGPL.
 
-The Debian packaging is (C) 2006, Andrew Lee <andrew@linux.org.tw> and
+Directory src/libmd5-rfc
+
+    Those files are an independent implementation of MD5 (RFC 1321).
+    The original and principal author of these files are by L. Peter 
+    Deutsch <ghost@aladdin.com>. These files are distributed under
+    a BSD-like license, you can see the complete statements bwlow:
+
+    Copyright (C) 1999, 2000, 2002 Aladdin Enterprises.  All rights 
+    reserved.
+
+    This software is provided 'as-is', without any express or implied
+    warranty.  In no event will the authors be held liable for any 
+    damages arising from the use of this software.
+
+    Permission is granted to anyone to use this software for any 
+    purpose, including commercial applications, and to alter it and 
+    redistribute it freely, subject to the following restrictions:
+
+    1. The origin of this software must not be misrepresented; you must
+       not claim that you wrote the original software. If you use this 
+       software in a product, an acknowledgment in the product 
+       documentation would be appreciated but is not required.
+    2. Altered source versions must be plainly marked as such, and must 
+       not be misrepresented as being the original software.
+    3. This notice may not be removed or altered from any source 
+       distribution.
+
+    L. Peter Deutsch
+    ghost@aladdin.com
+
+The Debian packaging is (C) 2006, Tetralet <tetralet@debian.org.tw> and 
 is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
