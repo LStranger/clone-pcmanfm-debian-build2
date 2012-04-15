@@ -1,27 +1,52 @@
-pcmanfm (0.4.4.2-1) experimental; urgency=low
+pcmanfm (0.5-1) unstable; urgency=low
 
-  * New upstream release (Closes: #452667)
-    - Mount remote file systems via ftp, ftps, sftp, and samba with
-      user-friendly GUI. (utilize FUSE technology)
-    Note:
-    FTP/FTPS support is provide by curlftpfs. SFTP support is provided by
-    sshfs. Samba support is provided by fusesmb. To use those new features,
-    curlftpfs, sshfs, and fusesmb must be installed.
+  * New upstream release
+    - Single click to open items (optional, finally we have it!).
+    - UI adjustment: The preference dialog is now GNOME HIG compliant.
+    - The preference dialog will use a non-GNOME HIG compliant, more 
+      compact layout under small screens.
+    - Support calling preference dialog via command line with 
+      --show-pref.
+    - Support changing wallpaper desktop window via command line with 
+      --set-wallpaper.
+    - Open preference dialog no longer blocks the desktop window and 
+      other folder windows.
+    - Improve the usability of detailed list view (better selection
+      handling).
+    - Add a basic but user-friendly "Find Files" utility.This can 
+      completely replace the simple find tool provided by GNOME.
+      (Can be launched from command line, too). 
+    - Fix folder handler problems previously interfering nautilus 
+      under GNOME.
+    - Rename the menu item showed in the system menu from 
+      "PCMan File Manager" to "File Manager" for better usability.
 
-    Besides, for FUSE to work, you must be a member of group 'fuse'.
-    Otherwise, you'll get "permission denied". For detail, please refer to
-    the documentation of FUSE.
+ -- Andrew Lee <andrew@linux.org.tw>  Thu, 17 Jul 2008 13:31:07 +0800
 
-  * Security Concerns:
-    - When using ftp and ftps with curlftpfs, the username and password will
-      be passed in the command line, so they are clearly visible with 'ps'
-      command. Use this with cautions.
-    - The usernames and passwords are stored in
-      ~/.config/pcmanfm/remote-fs.list in plain text without encryption.
-      The permission of that file is 0600, so only the owner and root can
-      view it. However, there are still risks. Please keep this in mind.
+pcmanfm (0.4.5-1) unstable; urgency=low
 
- -- Andrew Lee <andrew@linux.org.tw>  Tue, 08 Jul 2008 04:59:25 +0800
+  * New upstream release
+    - Support new shared-mime-info 0.40
+    - Adjust UI of preference dialog
+
+ -- Andrew Lee <andrew@linux.org.tw>  Tue, 01 Jul 2008 00:37:56 +0800
+
+pcmanfm (0.4.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #481957)
+    - Finally support drag and drop of desktop icons.
+    - Finally support rubber banding selection of desktop icons.
+    - Finally support adding folder to bookmark pane with drag and drop.
+    - Fix some permission problems.
+    - Update some locales
+  Don't ask why pcmanfm didn't support those listed basic features in
+  previous releases. GTK+ has very few supports for those things and its
+  default behavior isn't suitable for more complicated applications. So,
+  those listed features are coded by the author of PCManFM line by line,
+  which is very time-consuming... 
+  However, after endless hacking, we got them. Cheers!
+
+ -- Andrew Lee <andrew@linux.org.tw>  Wed, 18 Jun 2008 04:40:48 +0800
 
 pcmanfm (0.4.1.1-1) unstable; urgency=low
 
