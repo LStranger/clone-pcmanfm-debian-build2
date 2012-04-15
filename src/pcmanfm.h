@@ -1,7 +1,7 @@
 /*
  *      pcmanfm.h
  *
- *      Copyright 2008  <pcman.tw@gmail.com>
+ *      Copyright 2010 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -19,10 +19,11 @@
  *      MA 02110-1301, USA.
  */
 
-#ifndef _PCMANFM_H_
-#define _PCMANFM_H_
+#ifndef __PCMANFM_H__
+#define __PCMANFM_H__
 
 #include <gtk/gtk.h>
+#include <libfm/fm.h>
 
 G_BEGIN_DECLS
 
@@ -32,7 +33,17 @@ void pcmanfm_ref();
 /* After closing any window/dialog/tool, this should be called.
  * If the last window is closed and we are not a deamon, pcmanfm will quit.
  */
-gboolean pcmanfm_unref();
+void pcmanfm_unref();
+
+gboolean pcmanfm_open_folder(GAppLaunchContext* ctx, GList* folder_infos, gpointer user_data, GError** err);
+
+void pcmanfm_save_config();
+
+void pcmanfm_open_folder_in_terminal(GtkWindow* parent, FmPath* dir);
+
+#define TEMPL_NAME_FOLDER    NULL
+#define TEMPL_NAME_BLANK     (const char*)-1
+void pcmanfm_create_new(GtkWindow* parent, FmPath* cwd, const char* templ);
 
 G_END_DECLS
 

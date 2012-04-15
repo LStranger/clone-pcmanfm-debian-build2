@@ -1,39 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include <glib.h>
 
 #define IS_BLANK(ch)	strchr(" \t\n\r", ch)
 
 static void purge_file( const char* file )
 {
-	struct stat statbuf;
-	int fd;
 	char* buf, *pbuf;
 	int in_tag = 0, in_quote = 0;
 	FILE* fo;
 
-	fd = open( file, O_RDONLY );
-	if( fd == -1 )
-		return;
-
-	if( fstat( fd, &statbuf) == -1 )
-		return;
-
-	if( buf = (char*)malloc( statbuf.st_size + 1 ) )
-	{
-		if( read( fd, buf, statbuf.st_size) == -1 )
-		{
-			free( buf );
-			return;
-		}
-		buf[ statbuf.st_size ] = '\0';
-	}
-	close( fd );
+    if(!g_file_get_contents(file, &buf, NULL, NULL))
+        exit(1);
 
 	fo = fopen( file, "w" );
 	if( ! fo )
