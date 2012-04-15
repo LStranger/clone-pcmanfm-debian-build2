@@ -1,0 +1,22 @@
+pcmanfm (0.4.4.0-1) unstable; urgency=low 
+
+  * Note:
+    FTP/FTPS support is provide by curlftpfs. SFTP support is provided by 
+    sshfs. Samba support is provided by fusesmb. To use those new features,
+    curlftpfs, sshfs, and fusesmb must be installed.
+
+    Besides, for FUSE to work, you must be a member of group 'fuse'. 
+    Otherwise, you'll get "permission denied". For detail, please refer to 
+    the documentation of FUSE.
+
+  * Security Concerns:
+    - When using ftp and ftps with curlftpfs, the username and password will
+      be passed in the command line, so they are clearly visible with 'ps' 
+      command. Use this with cautions.
+    - The usernames and passwords are stored in 
+      ~/.config/pcmanfm/remote-fs.list in plain text without encryption. 
+      The permission of that file is 0600, so only the owner and root can 
+      view it. However, there are still risks. Please keep this in mind.
+
+ -- Andrew Lee <andrew@linux.org.tw>  Sun, 18 May 2008 15:31:46 +0800
+
