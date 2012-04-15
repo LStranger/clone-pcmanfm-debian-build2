@@ -9,7 +9,7 @@ Standards-Version: 3.7.2.2
 
 Package: pcmanfm
 Architecture: linux-any
-Depends: ${shlibs:Depends}, gamin, shared-mime-info
+Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils
 Recommends: gnome-icon-theme
 Conflicts: pcmanfm-nohal
 Description: an extremely fast and lightweight file manager for X
@@ -34,7 +34,7 @@ Description: an extremely fast and lightweight file manager for X
 
 Package: pcmanfm-nohal
 Architecture: any
-Depends: ${shlibs:Depends}, gamin, shared-mime-info
+Depends: ${shlibs:Depends}, gamin, shared-mime-info, desktop-file-utils
 Recommends: gnome-icon-theme
 Conflicts: pcmanfm
 Description: an extremely fast and lightweight file manager for X

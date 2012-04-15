@@ -1,0 +1,17 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 02_desktop-entry-invalid-category.dpatch by  <andrew@linux.org.tw>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad pcmanfm-0.3.2.2~/pcmanfm.desktop.in pcmanfm-0.3.2.2/pcmanfm.desktop.in
+--- pcmanfm-0.3.2.2~/pcmanfm.desktop.in	2007-08-23 06:20:45.000000000 +0800
++++ pcmanfm-0.3.2.2/pcmanfm.desktop.in	2007-08-23 06:21:04.000000000 +0800
+@@ -1,5 +1,5 @@
+ [Desktop Entry]
+-Categories=Application;System;Utility;Core;GTK;
++Categories=System;Utility;Core;GTK;
+ Encoding=UTF-8
+ Name=PCMan File Manager
+ Name[zh_TW]=PCMan 檔案管理程式

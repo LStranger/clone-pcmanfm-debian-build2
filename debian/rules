@@ -64,7 +64,7 @@ clean: unpatch
 	rm -f build-stamp 
 
 	# Add here commands to clean up after the build process.
-	-$(MAKE) distclean
+	[ ! -f Makefile ] || $(MAKE) distclean
 #ifneq "$(wildcard /usr/share/misc/config.sub)" ""
 #	cp -f /usr/share/misc/config.sub config.sub
 #endif
@@ -85,8 +85,6 @@ install: build
 	$(MAKE) -f debian/rules config-nohal
 	$(MAKE)
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/pcmanfm-nohal
-	install -m 644 -D $(CURDIR)/pcmanfm.desktop \
-		$(CURDIR)/debian/pcmanfm-nohal/usr/share/applications/pcmanfm.desktop
 ifeq (linux,$(DEB_HOST_ARCH_OS))
 	$(MAKE) distclean
 
@@ -94,8 +92,6 @@ ifeq (linux,$(DEB_HOST_ARCH_OS))
 	$(MAKE) -f debian/rules config-hal
 	$(MAKE)
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/pcmanfm
-	install -m 644 -D $(CURDIR)/pcmanfm.desktop \
-		$(CURDIR)/debian/pcmanfm/usr/share/applications/pcmanfm.desktop
 endif
 
 # Build architecture-independent files here.
@@ -116,6 +112,7 @@ binary-arch: build install
 #	dh_installemacsen
 #	dh_installpam
 #	dh_installmime
+	dh_desktop -A pcmanfm.desktop
 #	dh_installinit
 #	dh_installcron
 #	dh_installinfo
