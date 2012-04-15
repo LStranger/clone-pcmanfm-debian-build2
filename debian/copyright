@@ -46,6 +46,40 @@ Directory src/ptk/
     General Public License may be found in 
     /usr/share/common-licenses/LGPL
 
+File src/ptk/ptk-file-icon-renderer.c
+    Some parts in the file are taken from GtkCellRendererPixbuf
+    Copyright (C) Red Hat, Inc., Jonathan Blandford <jrb@redhat.com>. 
+
+File src/ptk-ui-xml/ptk-ui-xml.c
+    Some parts in the file are taken from gtkcombox.c of gtk+.
+    Please refer to gtk+ license for detail.
+
+File src/vfs/vfs-volume-hal.c
+    Part from libgnomevfs and gnome-mount.c
+    Copyright (C) 2004-2005 Red Hat, Inc, David Zeuthen <davidz@redhat.com>
+    Part from thunar-vfs-volume-hal.c and exo-mount.c
+    Copyright (c) 2005-2007 Benedikt Meurer <benny@xfce.org>
+
+File src/vfs/vfs-execute.c
+    A function is taken from thunar
+    Copyright (c) Benedikt Meurer <benny@xfce.org>
+
+File src/vfs/vfs-file-monitor.c
+    The inotify parts taken from "menu-monitor-inotify.c" of gnome-menus
+    are licensed under GNU Lesser General Public License.
+    Copyright (C) 2005 Red Hat, Inc.
+    Copyright (C) 2006 Mark McLoughlin
+
+Directory src/exo/
+    
+    Copyright (c) 2004-2006  os-cillation e.K.
+    Copyright (c) 2002,2004  Anders Carlsson <andersca@gnu.org>
+    Copyright (c) 2004-2006 Benedikt Meurer <benny@xfce.org>
+    Copyright (C) 2008 洪任諭 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
+
+    Those files are distributed under the GNU Lesser General Public 
+    Licence (LGPL).
+
 Directory src/libmd5-rfc
 
     Copyright (C) 1999, 2000, 2002 Aladdin Enterprises.  All rights 

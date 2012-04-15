@@ -1,3 +1,13 @@
+pcmanfm (0.5-3) unstable; urgency=low
+
+  * Correct spellings,  03_correct_spelling.dpatch (Closes:498794) 
+  * Code in some files are taken from other projects, added these
+    informations into copyright file. (Closes:499678)
+  * Applied 04_defaut_terminal.dpatch to support x-terminal-emulator
+    alternative. (Closes:497494) 
+
+ -- Andrew Lee <andrew@linux.org.tw>  Fri, 26 Sep 2008 10:19:20 +0800
+
 pcmanfm (0.5-2) unstable; urgency=low
 
   * Solve strange Xorg errors problem. (Closes:#494185) 
