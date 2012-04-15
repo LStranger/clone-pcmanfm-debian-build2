@@ -150,4 +150,7 @@ Desktop Icon Support:
   Currently don't use it, if you can.  If you only need to set desktop wallpaper,
   the small program 'hsetroot' is for you.
 
+  The feature could be removed during build time via configuration option
+  "--disable-desktop-integration".
+
 

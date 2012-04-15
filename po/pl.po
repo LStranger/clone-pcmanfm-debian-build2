@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 21:48+0800\n"
+"POT-Creation-Date: 2008-03-05 03:06+0800\n"
 "PO-Revision-Date: 2008-02-16 23:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: Polish\n"
@@ -404,31 +404,31 @@ msgstr "Miejsca"
 msgid "Directory Tree"
 msgstr "Drzewo katalogu"
 
-#: src/ptk/ptk-location-view.c:184
+#: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
 msgstr "Pulpit"
 
-#: src/ptk/ptk-location-view.c:380 src/ptk/ptk-location-view.c:572
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
 msgid "Unable to mount device"
 msgstr "Nie można zamontowac urządzenia"
 
-#: src/ptk/ptk-location-view.c:587
+#: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
 msgstr "Nie można odmontowac urządzenia"
 
-#: src/ptk/ptk-location-view.c:604
+#: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
 msgstr "Nie można wysunąć"
 
-#: src/ptk/ptk-location-view.c:662
+#: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
 msgstr "Zamontuj system plików"
 
-#: src/ptk/ptk-location-view.c:672
+#: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
 msgstr "Wysuń"
 
-#: src/ptk/ptk-location-view.c:678
+#: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
 msgstr "Odmontuj system plików"
 

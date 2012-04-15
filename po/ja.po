@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm 0.3.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 21:48+0800\n"
+"POT-Creation-Date: 2008-03-05 03:06+0800\n"
 "PO-Revision-Date: 2007-11-19 20:36+0800\n"
 "Last-Translator: Hironao Komatsu <hironao@users.sourceforge.net>\n"
 "Language-Team: Japanese <hironao@users.sourceforge.net>\n"
@@ -390,31 +390,31 @@ msgstr "場所"
 msgid "Directory Tree"
 msgstr "ディレクトリツリー"
 
-#: src/ptk/ptk-location-view.c:184
+#: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: src/ptk/ptk-location-view.c:380 src/ptk/ptk-location-view.c:572
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
 msgid "Unable to mount device"
 msgstr "デバイスのマウントに失敗"
 
-#: src/ptk/ptk-location-view.c:587
+#: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
 msgstr "デバイスのアンマウントに失敗"
 
-#: src/ptk/ptk-location-view.c:604
+#: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
 msgstr "デバイスの取り出しに失敗"
 
-#: src/ptk/ptk-location-view.c:662
+#: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
 msgstr "ファイルシステムをマウントする(_M)"
 
-#: src/ptk/ptk-location-view.c:672
+#: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
 msgstr "取り出し(_E)"
 
-#: src/ptk/ptk-location-view.c:678
+#: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
 msgstr "ファイルシステムをアンマウントする(_U)"
 

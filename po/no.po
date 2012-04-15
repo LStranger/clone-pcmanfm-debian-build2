@@ -1,34 +1,27 @@
-# translation of ru.po to
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Roxana Kolosova <mavka@justos.org>, 2006.
-#
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: ru\n"
+"Project-Id-Version: pcmanfm-0.3.6.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-05 03:06+0800\n"
-"PO-Revision-Date: 2006-08-02 01:12+0400\n"
-"Last-Translator: \n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2008-03-04 19:53+0100\n"
+"Last-Translator: Vidar Jon Bauge <vidarjb@gmail.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.2\n"
 
 #: src/main.c:58
 msgid "Don't show desktop icons."
-msgstr ""
+msgstr "Ikke vis ikoner på skrivebordet"
 
 #: src/main.c:66
 msgid "[FILE1, FILE2,...]"
-msgstr ""
+msgstr "[FIL1, FIL2,...]"
 
 #: src/main.c:245
 msgid "GTK+ icon theme is not properly set"
-msgstr ""
+msgstr "GTK+ ikon tema er ikke konfigurert"
 
 #: src/main.c:247
 #, c-format
@@ -51,12 +44,33 @@ msgid ""
 "icon naming of GNOME and KDE, KDE themes cannot be used.  Currently there is "
 "no standard for this, but it will be solved by freedesktop.org in the future."
 msgstr ""
+"<big><b>%s</b></big>\n"
+"\n"
+"Dette betyr at du ikke har en XSETTINGS manager kjørende. Skrivebordsmiljøer "
+"som GNOME eller XFCE starter automatisk sine  XSETTING managers som gnome-"
+"settings-daemon eller xfce-mcs-manager.\n"
+"\n"
+"<b>Hvis du ikke bruker disse skrivebordsmiljøene, har du to muligheter:\n"
+"\"\"1. kjør en XSETTINGS manager, eller\n"
+"\"\"2. spesifiser et ikon tema i ~/.gtkrc-2.0.</b>\n"
+"For eksempel å bruke Tango ikon temaet, tilføy linjene:\n"
+"\"\"<i><b>gtk-icon-theme-name=\"Tango\"</b></i> i din ~/.gtkrc-2.0. (opprett "
+"filen hvis den ikke finnes)\n"
+"\n"
+"<b>OBS: Ikon temaet du velger må være kompatibelt med GNOME, ellers blir "
+"ikonene ikke vist riktig.</b>  På grunn av forskjeller mellom GNOME og KDE, "
+"kan KDE temaer ikke brukes. Der er ingen standard for dette, men freedesktop."
+"org arbeider med å løse dette."
 
+# msgid "Error: %s\n"
+# msgstr "Filen finnes ikke\n"
 #: src/main.c:373
-#, c-format
+#, fuzzy, c-format
 msgid "Error: %s\n"
-msgstr ""
+msgstr "Feil"
 
+# msgid "Error: %s\n"
+# msgstr "Filen finnes ikke\n"
 #: src/main.c:413 src/main.c:514 src/main.c:565 src/main-window.c:1618
 #: src/main-window.c:1674 src/ptk/ptk-file-browser.c:503
 #: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:329
@@ -64,7 +78,7 @@ msgstr ""
 #: src/ptk/ptk-file-misc.c:319 src/ptk/ptk-file-misc.c:406
 #: src/file-properties.c:693 src/file-properties.c:704
 msgid "Error"
-msgstr ""
+msgstr "Feil"
 
 #: src/main.c:413
 msgid ""
@@ -72,422 +86,422 @@ msgid ""
 "\n"
 "Do you have \"FAM\" or \"Gamin\" installed and running?"
 msgstr ""
+"Feil: Kan ikke oprette forbindelse til FAM.\n"
+"\n"
+"Er FAM eller Gamin installeret og kører?"
 
 #: src/main.c:514
 msgid "File doesn't exist"
-msgstr "Файл не существует!"
+msgstr "Filen finnes ikke"
 
 #: src/main.c:561
 msgid "Don't know how to open the file"
-msgstr "Неизвестный тип файла"
+msgstr "Vet ikke hvordan filen skal åpnes"
 
 #: src/main.c:563
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to open file:\n"
 "\"%s\"\n"
 "%s"
-msgstr "Невозможно подключить устройство"
+msgstr ""
+"Kan ikke åpne filen:\n"
+"\"%s\"\n"
+"%s"
 
 #: src/main-window.c:289 src/ptk/ptk-file-menu.c:107
 msgid "_Folder"
-msgstr "_Папка"
+msgstr "Mappe"
 
 #: src/main-window.c:290 src/ptk/ptk-file-menu.c:108
 msgid "_Text File"
-msgstr "_Текстовый файл"
+msgstr "Tekst fil"
 
 #: src/main-window.c:296
 msgid "New _Window"
-msgstr "Новое _окно"
+msgstr "Nytt Vindu"
 
 #: src/main-window.c:297
 msgid "New _Tab"
-msgstr "Новая _вкладка"
+msgstr "Ny _Tab"
 
 #: src/main-window.c:298
 msgid "Close Tab"
-msgstr "Закрыть вкладку"
+msgstr "Lukk Tab"
 
 #: src/main-window.c:300 src/ptk/ptk-file-menu.c:131
 msgid "_Create New"
-msgstr "_Создать"
+msgstr "Opprett Ny"
 
 #: src/main-window.c:301
 msgid "File _Properties"
-msgstr "Свойства _файла"
+msgstr "Fil Egenska_per"
 
 #: src/main-window.c:312 src/ptk/ptk-file-menu.c:126
 msgid "_Delete"
-msgstr "_Удалить"
+msgstr "Slett"
 
 #: src/main-window.c:313 src/ptk/ptk-file-browser.c:1365
 #: src/ptk/ptk-file-menu.c:127
 msgid "_Rename"
-msgstr "_Переименовать"
+msgstr "Gi Nytt Navn"
 
 #: src/main-window.c:315
 msgid "Select _All"
-msgstr "Выделить _все"
+msgstr "Velg _Alle"
 
 #: src/main-window.c:316
 msgid "_Invert Selection"
-msgstr "_Инвертировать выделение"
+msgstr "_Inverter Utvalg"
 
 #: src/main-window.c:325
 msgid "Go _Back"
-msgstr "_Назад"
+msgstr "Til_bake"
 
 #: src/main-window.c:326
 msgid "Go _Forward"
-msgstr "_Вперед"
+msgstr "Gå _Frem"
 
 #: src/main-window.c:327
 msgid "Go to _Parent Folder"
-msgstr "В _родительскую папку"
+msgstr "Gå til Ma_ppen Over"
 
 #: src/main-window.c:328
 msgid "Go _Home"
-msgstr "В _домашнюю папку"
+msgstr "Gå til _Hjemmemappen"
 
 #: src/main-window.c:340
 msgid "Sort by _Name"
-msgstr "По _имени"
+msgstr "Sorter etter _Navn"
 
 #: src/main-window.c:341
 msgid "Sort by _Size"
-msgstr "По р_азмеру"
+msgstr "Sorter etter _Størrelse"
 
 #: src/main-window.c:342
 msgid "Sort by _Modification Time"
-msgstr "По _дате изменения"
+msgstr "Sorter etter _Modifikasjons tidspunkt"
 
 #: src/main-window.c:343
 msgid "Sort by _Type"
-msgstr "По _типу"
+msgstr "Sorter etter _Type"
 
 #: src/main-window.c:344
 msgid "Sort by _Permission"
-msgstr "_По правам доступа"
+msgstr "Sorter etter _Rettigheter"
 
 #: src/main-window.c:345
 msgid "Sort by _Owner"
-msgstr "По _владельцу"
+msgstr "Sorter etter _Eier"
 
 #: src/main-window.c:347
 msgid "Ascending"
-msgstr "В_озрастающий"
+msgstr "Stigende"
 
 #: src/main-window.c:348
 msgid "Descending"
-msgstr "_Убывающий"
+msgstr "Fallende"
 
 #: src/main-window.c:354
 msgid "_Open Side Pane"
-msgstr "_Открыть боковую панель"
+msgstr "Åpne Sidepanel"
 
 #: src/main-window.c:356
 msgid "Show _Location Pane"
-msgstr "_Расположение"
+msgstr "Vis Adresse_linje"
 
 #: src/main-window.c:357
 msgid "Show _Directory Tree"
-msgstr "_Дерево каталогов"
+msgstr "Vis Mappe _Tre"
 
 #: src/main-window.c:363
 msgid "_Refresh"
-msgstr "_Обновить"
+msgstr "Oppdate_r"
 
 #: src/main-window.c:364
 msgid "Side _Pane"
-msgstr "Боковая _панель"
+msgstr "Side_panel"
 
 #: src/main-window.c:367
 msgid "Show _Hidden Files"
-msgstr "Показать с_крытые файлы"
+msgstr "Vis Skjulte filer"
 
 #: src/main-window.c:368
 msgid "_Sort..."
-msgstr "_Сортировать..."
+msgstr "_Sorter..."
 
 #: src/main-window.c:370
 msgid "View as _Icons"
-msgstr "В виде ик_онок"
+msgstr "Vis som _Ikoner"
 
 #: src/main-window.c:371
 msgid "View as Detailed _List"
-msgstr "В виде сп_иска"
+msgstr "Detaljert _Listevisning"
 
 #: src/main-window.c:377
 msgid "Open _Terminal"
-msgstr "Открыть _терминал"
+msgstr "Åpne _Terminal"
 
 #: src/main-window.c:378
 msgid "Open Current Folder as _Root"
-msgstr "Открыть текущую папку от пользователя root"
+msgstr "Åpne aktuell mappe som _Root"
 
 #: src/main-window.c:386
 msgid "_File"
-msgstr "_Файл"
+msgstr "_Fil"
 
 #: src/main-window.c:387
 msgid "_Edit"
-msgstr "_Правка"
+msgstr "R_ediger"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
 #: src/main-window.c:389
 msgid "_Go"
-msgstr "_Переход"
+msgstr "_Gå"
 
 #: src/main-window.c:390
 msgid "_Bookmark"
-msgstr "_Закладки"
+msgstr "_Bokmerke"
 
 #: src/main-window.c:391
 msgid "_View"
-msgstr "_Вид"
+msgstr "_Vis"
 
 #: src/main-window.c:392
 msgid "_Tool"
-msgstr "_Инструменты"
+msgstr "Verk_tøy"
 
 #: src/main-window.c:393
 msgid "_Help"
-msgstr "_Справка"
+msgstr "_Hjelp"
 
 #: src/main-window.c:401
 msgid "New Tab"
-msgstr "Новая вкладка"
+msgstr "Ny Tab"
 
 #: src/main-window.c:402
 msgid "Back"
-msgstr "Назад"
+msgstr "Tilbake"
 
 #: src/main-window.c:403
 msgid "Forward"
-msgstr "Вперед"
+msgstr "Frem"
 
 #: src/main-window.c:404
 msgid "Parent Folder"
-msgstr "Родительская папка"
+msgstr "Mappen Over"
 
 #: src/main-window.c:405
 msgid "Refresh"
-msgstr "Обновить"
+msgstr "Oppdater"
 
 #: src/main-window.c:406
 msgid "Home Directory"
-msgstr "Домашняя папка"
+msgstr "Hjemmemappe"
 
 #: src/main-window.c:407
 msgid "Open Side Pane"
-msgstr "Открыть боковую панель"
+msgstr "Åpne Sidepanel"
 
 #: src/main-window.c:413
 msgid "Go"
-msgstr "Перейти"
+msgstr "Gå"
 
 #: src/main-window.c:617
 msgid "Warning: You are in super user mode"
-msgstr "Предупреждение: вы обладаете правами суперпользователя"
+msgstr "Advarsel: Du er logget på som root"
 
 #: src/main-window.c:1619
 msgid "Terminal program has not been set"
-msgstr "Не указана команда, запускающая терминал"
+msgstr "Terminal·program·er·ikke·valgt"
 
 #: src/main-window.c:1674
 msgid "gksu or kdesu is not found"
-msgstr "Программ gksu или kdesu не найдено"
+msgstr "gksu·eller·kdesu·ikke·funnet"
 
 #: src/main-window.c:1757
 msgid "_Add to Bookmarks"
-msgstr "_Добавить в закладки"
+msgstr "Tilføy·til·bokmerker"
 
 #: src/main-window.c:1758
 msgid "_Edit Bookmarks"
-msgstr "_Редактировать закладки"
+msgstr "R_ediger·bokmerker"
 
 #: src/main-window.c:1835
 msgid "Loading..."
-msgstr "Загрузка..."
+msgstr "Laster..."
 
 #: src/main-window.c:2036
 #, c-format
 msgid ", Free space: %s (Total: %s )"
-msgstr ""
+msgstr ",·Ledig·plass:·%s·(Totalt:·%s·)"
 
 #: src/main-window.c:2044
 #, fuzzy, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
-msgstr[0] "выбран %d элемент (%s)"
-msgstr[1] "выбрано %d элемента (%s)"
-msgstr[2] "выбрано %d элементов (%s)"
+msgstr[0] "%d·oppføring·valgt·(%s)%s"
+msgstr[1] "%d·oppføring·valgt·(%s)%s"
 
 #: src/main-window.c:2052
 #, fuzzy, c-format
 msgid "%d visible item (%d hidden)%s"
 msgid_plural "%d visible items (%d hidden)%s"
-msgstr[0] "%d видимый элемент (%d скрытых)"
-msgstr[1] "%d видимых элемента (%d скрытых)"
-msgstr[2] "%d видимых элементов (%d скрытых)"
+msgstr[0] "%d·synlige·oppføringer·(%d·skjult)%s"
+msgstr[1] "%d·synlige·oppføringer·(%d·skjult)%s"
 
 #: src/ptk/ptk-file-browser.c:504
 msgid "Directory doesn't exist!"
-msgstr "Каталог не существует!"
+msgstr "Mappen·finnes·ikke!"
 
 #: src/ptk/ptk-file-browser.c:1361 src/ptk/ptk-file-menu.c:140
 msgid "Open in New _Tab"
-msgstr "Открыть в новой _вкладке"
+msgstr "Åpne·i·Ny·Fane"
 
 #: src/ptk/ptk-file-browser.c:1362 src/ptk/ptk-file-menu.c:141
-#, fuzzy
 msgid "Open in New _Window"
-msgstr "Открыть в новом окне"
+msgstr "Åpne·i·Nytt·_Vindu"
 
 #: src/ptk/ptk-file-browser.c:1599 src/edit-bookmarks.c:198
 msgid "Name"
-msgstr "Имя"
+msgstr "Navn"
 
 #: src/ptk/ptk-file-browser.c:1599
 msgid "Size"
-msgstr "Размер"
+msgstr "Størrelse"
 
 #: src/ptk/ptk-file-browser.c:1599
 msgid "Type"
-msgstr "Тип"
+msgstr "Type"
 
 #: src/ptk/ptk-file-browser.c:1600
 msgid "Permission"
-msgstr "Права доступа"
+msgstr "Rettighet"
 
 #: src/ptk/ptk-file-browser.c:1600
 msgid "Owner:Group"
-msgstr "Владелец:Группа"
+msgstr "Eier:Gruppe"
 
 #: src/ptk/ptk-file-browser.c:1600
 msgid "Last Modification"
-msgstr "Последние изменение"
+msgstr "Sist·Endret"
 
 #: src/ptk/ptk-file-browser.c:2793
 msgid "Location"
-msgstr "Путь"
+msgstr "Plassering"
 
 #: src/ptk/ptk-file-browser.c:2794
 msgid "Directory Tree"
-msgstr "Дерево каталогов"
+msgstr "Mappe·Tre"
 
 #: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
-msgstr "Рабочий стол"
+msgstr "Skrivebord"
 
 #: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
 msgid "Unable to mount device"
-msgstr "Невозможно подключить устройство"
+msgstr "Kan ikke montere enheten"
 
 #: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
-msgstr "Невозможно отключить устройство"
+msgstr "Kan·ikke·avmontere·enheten"
 
 #: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
-msgstr "Невозможно извлечь устройство"
+msgstr "Kan·ikke·skubbe·enheten ut"
 
 #: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
-msgstr "_Подключить файловую систему"
+msgstr "_Monter filsystem"
 
 #: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
-msgstr "_Извлечь"
+msgstr "Skubb ut"
 
 #: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
-msgstr "_Отключить файловую систему"
+msgstr "Avmonter filsystem"
 
 #: src/ptk/ptk-file-task.c:103
 msgid "Move: "
-msgstr "Переместить: "
+msgstr "Flytt:·"
 
 #: src/ptk/ptk-file-task.c:104
 msgid "Copy: "
-msgstr "Копировать: "
+msgstr "Kopier:·"
 
 #: src/ptk/ptk-file-task.c:105
 msgid "Delete: "
-msgstr "Удалить: "
+msgstr "Slett:·"
 
 #: src/ptk/ptk-file-task.c:106
 msgid "Link: "
-msgstr "Ссылка: "
+msgstr "Lenke:·"
 
 #: src/ptk/ptk-file-task.c:107
 msgid "Change Properties: "
-msgstr "Изменить свойства: "
+msgstr "Endre·Egenskaper:·"
 
 #: src/ptk/ptk-file-task.c:111
 msgid "Moving..."
-msgstr "Перемещение..."
+msgstr "Flytter..."
 
 #: src/ptk/ptk-file-task.c:112
 msgid "Copying..."
-msgstr "Копирование..."
+msgstr "Kopierer..."
 
 #: src/ptk/ptk-file-task.c:113
 msgid "Deleting..."
-msgstr "Удаление..."
+msgstr "Sletter..."
 
 #: src/ptk/ptk-file-task.c:114
 msgid "Linking..."
-msgstr "Создание ссылок..."
+msgstr "Lenker..."
 
 #: src/ptk/ptk-file-task.c:115
 msgid "Changing Properties"
-msgstr "Изменение свойств"
+msgstr "Endrer·Rettigheter"
 
 #. To: <Destination folder>
 #. ex. Copy file to..., Move file to...etc.
 #: src/ptk/ptk-file-task.c:152
-#, fuzzy
 msgid "To:"
-msgstr "В: "
+msgstr "Til:"
 
 #. Processing:
 #. Processing: <Name of currently proccesed file>
 #: src/ptk/ptk-file-task.c:167
-#, fuzzy
 msgid "Processing:"
-msgstr "Обработка: "
+msgstr "Behandler:"
 
 #. Preparing to do some file operation (Copy, Move, Delete...)
 #: src/ptk/ptk-file-task.c:174
 msgid "Preparing..."
-msgstr "Подготовка..."
+msgstr "Forbereder..."
 
 #. Progress:
 #: src/ptk/ptk-file-task.c:182
-#, fuzzy
 msgid "Progress:"
-msgstr "Прогресс: "
+msgstr "Fremgang:"
 
 #: src/ptk/ptk-file-task.c:317
 msgid "Cancel the operation?"
-msgstr "Отменить это действие?"
+msgstr "Avbryte·operasjonen?"
 
 #. Ask the user whether to overwrite dir content or not
 #: src/ptk/ptk-file-task.c:406
 msgid "Do you want to overwrite the folder and its content?"
-msgstr "Вы хотите переписать папку и ее содержимое?"
+msgstr "Vil·du·overskrive·mappen·og·hele·dens·innhold?"
 
 #. Ask the user whether to overwrite the file or not
 #: src/ptk/ptk-file-task.c:411
 msgid "Do you want to overwrite this file?"
-msgstr "Вы хотите перезаписать этот файл?"
+msgstr "Vil·du·overskrive·denne·filen?"
 
 #. Rename is required
 #: src/ptk/ptk-file-task.c:416
 msgid "Please choose a new file name."
-msgstr "Пожалуйста, выберите другое имя файла."
+msgstr "Velg·nytt·filnavn"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
@@ -498,7 +512,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"\"%s\" существует.\n"
+"\"%s\"·eksisterer.\n"
 "\n"
 "%s"
 
@@ -514,59 +528,59 @@ msgid ""
 msgstr ""
 "\"%s\"\n"
 "\n"
-"Источник и место назначения являются одним и тем же файлом.\n"
+"Kilden·og·Målfilen·er·den·samme·fil.\n"
 "\n"
 "%s"
 
 #: src/ptk/ptk-file-task.c:446
 msgid "Overwrite"
-msgstr "Переписать"
+msgstr "Skriv·Over"
 
 #: src/ptk/ptk-file-task.c:447
 msgid "Overwrite All"
-msgstr "Переписать все"
+msgstr "Skriv·Over·Alle"
 
 #: src/ptk/ptk-file-task.c:452
 msgid "Rename"
-msgstr "Переименовать"
+msgstr "Gi·Nytt·Navn"
 
 #: src/ptk/ptk-file-task.c:453
 msgid "Skip"
-msgstr "Пропустить"
+msgstr "Hopp·Over"
 
 #: src/ptk/ptk-file-task.c:454
 msgid "Skip All"
-msgstr "Пропустить все"
+msgstr "Hopp·Over·Alle"
 
 #: src/ptk/ptk-file-archiver.c:119
 msgid "Save Compressd Files to..."
-msgstr "Сохранить сжатые файлы в..."
+msgstr "Lagre·Komprimerte·Filer·i..."
 
 #: src/ptk/ptk-file-archiver.c:127
 msgid "Format of compressed File:"
-msgstr "Формат сжатых файлов:"
+msgstr "Arkivets·Format"
 
 #: src/ptk/ptk-file-archiver.c:198
 #, c-format
 msgid "Creating Compressed File: %s"
-msgstr "Процесс сжатия файла: %s"
+msgstr "Oppretter·Arkiv:·%s"
 
 #: src/ptk/ptk-file-archiver.c:201
 msgid "Compress Files"
-msgstr "Сжать файлы"
+msgstr "Komprimer·Filer"
 
 #: src/ptk/ptk-file-archiver.c:232
 msgid "Extract File to..."
-msgstr "Распаковать файл в..."
+msgstr "Pakk·Filer·Ut·til..."
 
 #: src/ptk/ptk-file-archiver.c:281
 #, c-format
 msgid "Extracting Files to: %s"
-msgstr "Процесс распаковки файлов: %s"
+msgstr "Pakker·Filer·ut·til:·%s"
 
 #: src/ptk/ptk-file-archiver.c:283
 msgid "Extract Files"
-msgstr "Извлечь файлы"
+msgstr "Pakk·Ut·Filer"
 
 #: src/ptk/ptk-console-output.c:66
 msgid ""
@@ -574,78 +588,77 @@ msgid ""
 "Complete!"
 msgstr ""
 "\n"
-"Завершено!"
+"Ferdig!"
 
 #: src/ptk/ptk-console-output.c:168
-#, fuzzy
 msgid "Command:"
-msgstr "Командная строка: "
+msgstr "Kommando:"
 
 #: src/ptk/ptk-dir-tree.c:174
 msgid "File System"
-msgstr "Файловая система:"
+msgstr "Filsystem"
 
 #: src/ptk/ptk-dir-tree.c:397
 msgid "No Sub Folder"
-msgstr "Нет подпапки"
+msgstr "Ingen·Undermappe"
 
 #: src/ptk/ptk-file-menu.c:114
 msgid "E_xtract Here"
-msgstr "_Распаковать в текущую папку"
+msgstr "Pakk·Ut·Her"
 
 #: src/ptk/ptk-file-menu.c:115
 msgid "Extract _To"
-msgstr "Распаковать _в"
+msgstr "Pakk·Ut·_Til"
 
 #: src/ptk/ptk-file-menu.c:121
 msgid "Open _with..."
-msgstr "Открыть с _помощью..."
+msgstr "Åpne·med"
 
 #: src/ptk/ptk-file-menu.c:129
 msgid "Compress"
-msgstr "_Архивировать"
+msgstr "Komprimer"
 
 #: src/ptk/ptk-file-menu.c:130
 msgid "E_xtract"
-msgstr "_Распаковать"
+msgstr "Pakk·Ut"
 
 #: src/ptk/ptk-file-menu.c:133
 msgid "_Properties"
-msgstr "_Свойства"
+msgstr "Egenska_per"
 
 #: src/ptk/ptk-file-menu.c:142
 msgid "Open in Terminal"
-msgstr "Открыть в терминале"
+msgstr "Åpne·i·Terminal"
 
 #: src/ptk/ptk-file-menu.c:368
 msgid "_Open with another program"
-msgstr "_Выбрать программу"
+msgstr "Åpne·med·et·andet·pr_ogram"
 
 #: src/ptk/ptk-file-menu.c:383
 msgid "E_xecute"
-msgstr "_Выполнить"
+msgstr "Kjør"
 
 #: src/ptk/ptk-file-menu.c:392
 #, c-format
 msgid "_Open with \"%s\""
-msgstr "Открыть с помощью \"%s\""
+msgstr "Åpne·med·\"%s\""
 
 #. delete some confusing menu item if this menu is for current folder
 #: src/ptk/ptk-file-menu.c:403 src/ptk/ptk-file-menu.c:412
 msgid "_Open"
-msgstr "_Открыть"
+msgstr "Åpne"
 
 #: src/ptk/ptk-file-misc.c:55
 msgid "Really delete selected files?"
-msgstr "Удалить выбранные файлы?"
+msgstr "Bekreft·sletting·av·markerte·filer"
 
 #: src/ptk/ptk-file-misc.c:115
 msgid "Rename File"
-msgstr "Переименовать файл"
+msgstr "Gi·Nytt·Navn"
 
 #: src/ptk/ptk-file-misc.c:116
 msgid "Please input new file name:"
-msgstr "Укажите новое имя файла:"
+msgstr "Nytt·Filnavn:"
 
 #: src/ptk/ptk-file-misc.c:145 src/ptk/ptk-file-misc.c:166
 #: src/ptk/ptk-file-misc.c:219
@@ -653,304 +666,302 @@ msgid ""
 "The file name you specified has existed.\n"
 "Please input a new one:"
 msgstr ""
-"Файл с таким именем уже существует.\n"
-"Пожалуйста, укажите другое имя:"
+"Det·oppgitte·filnavn·eksisterer.\n"
+"Skriv·inn·et·nytt·filnavn:"
 
 #: src/ptk/ptk-file-misc.c:189 src/ptk/ptk-file-misc.c:191
 msgid "New Folder"
-msgstr "Новая папка"
+msgstr "Ny·Mappe"
 
 #: src/ptk/ptk-file-misc.c:190
 msgid "Input a name for the new folder:"
-msgstr "Укажите имя для новой папки:"
+msgstr "Navn·til·Ny·Mappe:"
 
 #: src/ptk/ptk-file-misc.c:196 src/ptk/ptk-file-misc.c:198
 msgid "New File"
-msgstr "Новый файл"
+msgstr "Ny·Fil"
 
 #: src/ptk/ptk-file-misc.c:197
 msgid "Input a name for the new file:"
-msgstr "Укажите имя для нового файла:"
+msgstr "Navn·til·Ny·Fil:"
 
 #: src/ptk/ptk-file-misc.c:253
 msgid "The new file cannot be created!"
-msgstr ""
+msgstr "Den·nye·filen·kan·ikke·opprettes!"
 
 #: src/file-properties.c:304
 msgid "Multiple files are selected"
-msgstr "Выделено несколько файлов"
+msgstr "Flere·filer·er·markert"
 
 #: src/file-properties.c:380
 msgid "Multiple files of different types"
-msgstr "Несколько файлов различных типов"
+msgstr "Flere·filer·av·forskjellige·typer"
 
 #: src/file-properties.c:448
-#, fuzzy
 msgid "Other program..."
-msgstr "_Выбрать программу"
+msgstr "Andre·programmer..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
 #: src/file-properties.c:542
 msgid "Calculating..."
-msgstr "Подсчет..."
+msgstr "Beregner..."
 
 #: src/file-properties.c:693
 msgid "Invalid User"
-msgstr "Неправильно указан пользователь"
+msgstr "Ugyldig·Bruker"
 
 #: src/file-properties.c:704
 msgid "Invalid Group"
-msgstr "Неправильно указана группа"
+msgstr "Ugyldig·Gruppe"
 
 #: src/file-properties.c:752
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
-msgstr "Вы хотите применить эти изменения ко всем файлам и дочерним папкам?"
+msgstr "Vil·du·skrive·disse·endringene·rekursivt på alle undermapper?"
 
 #: src/edit-bookmarks.c:77
 msgid "New Item"
-msgstr "Новая элемент"
+msgstr "Ny·oppføring"
 
 #: src/edit-bookmarks.c:151
 msgid "Edit Bookmarks"
-msgstr "Правка закладок"
+msgstr "Rediger·Bokmerker"
 
 #: src/edit-bookmarks.c:207
 msgid "Path"
-msgstr "Путь"
+msgstr "Sti"
 
 #: src/edit-bookmarks.c:230
 msgid "Use drag & drop to sort the items"
-msgstr "Для сортировки используйте drag & drop"
+msgstr "Bruk·drag·&·drop·til·å·sortere·oppføringene"
 
 #: src/vfs/vfs-app-desktop.c:445
-#, fuzzy, c-format
+#, c-format
 msgid "Command not found"
-msgstr "Командная строка: "
+msgstr "Kommando·ikke·funnet"
 
 #: src/vfs/vfs-file-task.c:697
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
-msgstr ""
+msgstr "Målmappen··\"%1$s\"·finnes·i·kildemappen··\"%2$s\""
 
 #: src/vfs/vfs-volume-hal.c:459 src/vfs/vfs-volume-hal.c:682
 #, c-format
 msgid "%s Volume"
-msgstr ""
+msgstr "%s·Enhed"
 
 #: src/vfs/vfs-volume-hal.c:474
 msgid "CD-ROM"
-msgstr ""
+msgstr "CD-ROM"
 
 #: src/vfs/vfs-volume-hal.c:476
 msgid "CD-R"
-msgstr ""
+msgstr "CD-R"
 
 #: src/vfs/vfs-volume-hal.c:478
 msgid "CD-RW"
-msgstr ""
+msgstr "CD-RW"
 
 #: src/vfs/vfs-volume-hal.c:482
 msgid "DVD-ROM"
-msgstr ""
+msgstr "DVD-ROM"
 
 #: src/vfs/vfs-volume-hal.c:484
 msgid "DVD+R"
-msgstr ""
+msgstr "DVD+R"
 
 #: src/vfs/vfs-volume-hal.c:486
 msgid "DVD+RW"
-msgstr ""
+msgstr "DVD+RW"
 
 #: src/vfs/vfs-volume-hal.c:488
 msgid "DVD-R"
-msgstr ""
+msgstr "DVD-R"
 
 #: src/vfs/vfs-volume-hal.c:490
 msgid "DVD-RW"
-msgstr ""
+msgstr "DVD-RW"
 
 #: src/vfs/vfs-volume-hal.c:492
 msgid "DVD-RAM"
-msgstr ""
+msgstr "DVD-RAM"
 
 #: src/vfs/vfs-volume-hal.c:501
 #, c-format
 msgid "%s/%s Drive"
-msgstr ""
+msgstr "%s/%s·Drev"
 
 #: src/vfs/vfs-volume-hal.c:503
 #, c-format
 msgid "%s Drive"
-msgstr ""
+msgstr "%s·Drev"
 
 #: src/vfs/vfs-volume-hal.c:508
 msgid "Floppy Drive"
-msgstr ""
+msgstr "Diskettedrev"
 
 #: src/vfs/vfs-volume-hal.c:511
 msgid "Compact Flash Drive"
-msgstr ""
+msgstr "Compact Flash Drev"
 
 #: src/vfs/vfs-volume-hal.c:513
 msgid "Memory Stick Drive"
-msgstr ""
+msgstr "USB lagringsenhet"
 
 #: src/vfs/vfs-volume-hal.c:515
 msgid "Smart Media Drive"
-msgstr ""
+msgstr "Smart Media Drev"
 
 #: src/vfs/vfs-volume-hal.c:517
 msgid "SD/MMC Drive"
-msgstr ""
+msgstr "SD/MMC Drev"
 
 #: src/vfs/vfs-volume-hal.c:519
 msgid "Zip Drive"
-msgstr ""
+msgstr "Zip Drev"
 
 #: src/vfs/vfs-volume-hal.c:522
 msgid "Jaz Drive"
-msgstr ""
+msgstr "Jaz Drev"
 
 #: src/vfs/vfs-volume-hal.c:525
 msgid "Pen Drive"
-msgstr ""
+msgstr "Pen Drev"
 
 #: src/vfs/vfs-volume-hal.c:531
 #, c-format
 msgid "%s %s Music Player"
-msgstr ""
+msgstr "%s %s Musiikk avspiller"
 
 #: src/vfs/vfs-volume-hal.c:539
 #, c-format
 msgid "%s %s Digital Camera"
-msgstr ""
+msgstr "%s %s Digitalkamera"
 
 #: src/vfs/vfs-volume-hal.c:570
-#, fuzzy
 msgid "Drive"
-msgstr "Запись"
+msgstr "Drev"
 
 #: src/vfs/vfs-volume-hal.c:575
 #, c-format
 msgid "External %s"
-msgstr ""
+msgstr "Ekstern %s"
 
 #: src/vfs/vfs-volume-hal.c:609
 msgid "CD-ROM Disc"
-msgstr ""
+msgstr "CD-ROM Disk"
 
 #: src/vfs/vfs-volume-hal.c:614
 msgid "Blank CD-R Disc"
-msgstr ""
+msgstr "Blank CD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:616
 msgid "CD-R Disc"
-msgstr ""
+msgstr "CD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:621
 msgid "Blank CD-RW Disc"
-msgstr ""
+msgstr "Blank CD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:623
 msgid "CD-RW Disc"
-msgstr ""
+msgstr "CD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:627
 msgid "DVD-ROM Disc"
-msgstr ""
+msgstr "DVD-ROM Disk"
 
 #: src/vfs/vfs-volume-hal.c:632
 msgid "Blank DVD-RAM Disc"
-msgstr ""
+msgstr "Blank DVD-RAM Disk"
 
 #: src/vfs/vfs-volume-hal.c:634
 msgid "DVD-RAM Disc"
-msgstr ""
+msgstr "DVD-RAM Disk"
 
 #: src/vfs/vfs-volume-hal.c:639
 msgid "Blank DVD-R Disc"
-msgstr ""
+msgstr "Blank DVD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:641
 msgid "DVD-R Disc"
-msgstr ""
+msgstr "DVD-R Disk"
 
 #: src/vfs/vfs-volume-hal.c:646
 msgid "Blank DVD-RW Disc"
-msgstr ""
+msgstr "Tom DVD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:648
 msgid "DVD-RW Disc"
-msgstr ""
+msgstr "DVD-RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:654
 msgid "Blank DVD+R Disc"
-msgstr ""
+msgstr "Tom DVD+R Disk"
 
 #: src/vfs/vfs-volume-hal.c:656
 msgid "DVD+R Disc"
-msgstr ""
+msgstr "DVD+R Disk"
 
 #: src/vfs/vfs-volume-hal.c:661
 msgid "Blank DVD+RW Disc"
-msgstr ""
+msgstr "Tom DVD+RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:663
 msgid "DVD+RW Disc"
-msgstr ""
+msgstr "DVD+RW Disk"
 
 #: src/vfs/vfs-volume-hal.c:670
 msgid "Audio Disc"
-msgstr ""
+msgstr "Audio Disk"
 
 #: src/vfs/vfs-volume-hal.c:680
 #, c-format
 msgid "%s Removable Volume"
-msgstr ""
+msgstr "%s fjernbar enhet"
 
 #: src/vfs/vfs-volume-hal.c:688
 msgid "Volume"
-msgstr ""
+msgstr "Enhet"
 
 #: src/vfs/vfs-volume-hal.c:1084
 #, c-format
 msgid "Failed to connect to the HAL daemon: %s"
-msgstr ""
+msgstr "Kunne ikke forbinde til HAL prosessen: %s"
 
 #. definitely not a device that we're able to mount, eject or unmount
 #: src/vfs/vfs-volume-hal.c:1926 src/vfs/vfs-volume-hal.c:1982
 #, c-format
 msgid "Given device \"%s\" is not a volume or drive"
-msgstr ""
+msgstr "Enheten \"%s\" er ikke egyldig drev eller medie"
 
 #. tell the caller that no matching device was found
 #: src/vfs/vfs-volume-hal.c:2058
 #, c-format
 msgid "Device \"%s\" not found in file system device table"
-msgstr ""
+msgstr "Enheten \"%s\" ikke fundet i systemets enhetstabell"
 
 #: src/vfs/vfs-volume-hal.c:2228
 #, c-format
 msgid "You are not privileged to mount the volume \"%s\""
-msgstr ""
+msgstr "Du har ikke rettigheter til å montere enheten \"%s\""
 
 #: src/vfs/vfs-volume-hal.c:2229
 #, c-format
 msgid "You are not privileged to unmount the volume \"%s\""
-msgstr ""
+msgstr "Du har ikke rettigheter til å avmontere enheten \"%s\""
 
 #: src/vfs/vfs-volume-hal.c:2230
 #, c-format
 msgid "You are not privileged to eject the volume \"%s\""
-msgstr ""
+msgstr "Du har ikke rettigheter til å skubbe enheten ut \"%s\""
 
 #. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
 #: src/vfs/vfs-volume-hal.c:2242
 #, c-format
 msgid "Invalid mount option when attempting to mount the volume \"%s\""
-msgstr ""
+msgstr "Ugyldig valg ved montering av enheten \"%s\""
 
 #: src/vfs/vfs-volume-hal.c:2244
 #, c-format
@@ -958,27 +969,29 @@ msgid ""
 "The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
 "your system"
 msgstr ""
+"Enheten·\"%s\"·bruker·<i>%s</i>·filsystemet, som i ikke er understøttet av "
+"dette system"
 
 #: src/vfs/vfs-volume-hal.c:2246
 #, c-format
 msgid "An application is preventing the volume \"%s\" from being unmounted"
-msgstr ""
+msgstr "En applikasjon forhindrer denne enheten·\"%s\" fra å bli avmontert"
 
 #: src/vfs/vfs-volume-hal.c:2248
 #, c-format
 msgid "The volume \"%s\" is not mounted"
-msgstr ""
+msgstr "Enheten·\"%s\" er ikke montert"
 
 #: src/vfs/vfs-volume-hal.c:2250
 #, c-format
 msgid "Error <i>%s</i>"
-msgstr ""
+msgstr "Feil <i>%s</i>"
 
 #. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
 #: src/vfs/vfs-volume-hal.c:2253
 #, c-format
 msgid "The volume \"%s\" was probably mounted manually on the command line"
-msgstr ""
+msgstr "Enheten \"%s\" er sannsynligvis montert manuelt fra kommandolinjen"
 
 #: src/vfs/vfs-volume-hal.c:2261
 #, c-format
@@ -986,23 +999,26 @@ msgid ""
 "Blank discs cannot be mounted, use a CD recording application to record "
 "audio or data on the disc"
 msgstr ""
+"Tomme disker kan ikke monteres. Bruk en appliaksjon til CD brenning til å "
+"skrive audio eller data til disken"
 
 #: src/vfs/vfs-volume-hal.c:2272
 #, c-format
 msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
 msgstr ""
+"Lyd CDer kan ikke monteres. Bruk en musik avspiller til å spille lydsporene"
 
 #: data/ui/prefdlg.glade:7
 msgid "Preference"
-msgstr "Параметры"
+msgstr "Brukervalg"
 
 #: data/ui/prefdlg.glade:30
 msgid "On-disk file name encoding:"
-msgstr "Кодировка имени файла:"
+msgstr "Filnavnenes koding på disken"
 
 #: data/ui/prefdlg.glade:62
 msgid "Bookmarks:"
-msgstr "Закладки:"
+msgstr "Bokmerker"
 
 #: data/ui/prefdlg.glade:72
 msgid ""
@@ -1010,102 +1026,101 @@ msgid ""
 "Opened in New Tab\n"
 "Opened in New Window"
 msgstr ""
+"Åpnes i den aktuelle fane\n"
+"Åpnes i en ny fane\n"
+"Åpnes i et nytt vindu"
 
 #: data/ui/prefdlg.glade:94
 msgid "Size of Big Icons:"
-msgstr "Размер больших иконок:"
+msgstr "Størrelse på store ikoner"
 
 #: data/ui/prefdlg.glade:121
 msgid "Size of Small Icons:"
-msgstr "Размер маленьких иконок:"
+msgstr "Størrelse på små ikoner"
 
 #: data/ui/prefdlg.glade:155
 msgid "Display image files with supported format as thumbnails"
-msgstr "Отображать графические файлы поддерживаемых форматов в виде миниатюр"
+msgstr "Vis understøtte billed filer som miniatyrer"
 
 #: data/ui/prefdlg.glade:174
 msgid "Max size of files displayed as thumbnails:"
-msgstr "Максимальный размер файлов, отображаемых в виде миниатюр:"
+msgstr "Max størrelse på filer som vises som miniatyrer"
 
 #: data/ui/prefdlg.glade:218
 msgid "Terminal:"
-msgstr "Терминал:"
+msgstr "Terminal:"
 
 #: data/ui/prefdlg.glade:252 data/ui/file_properties.glade:254
 msgid "_General"
-msgstr "_Основные"
+msgstr "_Generelt"
 
 #: data/ui/prefdlg.glade:268
 msgid "Show file icons on desktop"
-msgstr ""
+msgstr "Vis ikoner på skrivebordet"
 
 #: data/ui/prefdlg.glade:287
 msgid "Wallpaper:"
-msgstr ""
+msgstr "Skrivebords-bakgrunn:"
 
 #: data/ui/prefdlg.glade:300
-#, fuzzy
 msgid "Please select an image file"
-msgstr "Пожалуйста, выберите другое имя файла."
+msgstr "Velg en billedfil"
 
 #: data/ui/prefdlg.glade:325
 msgid "Background Color"
-msgstr ""
+msgstr "Bakgrunnsfarge"
 
 #: data/ui/prefdlg.glade:357
-#, fuzzy
 msgid "Text Color"
-msgstr "_Текстовый файл"
+msgstr "Tekst Farge"
 
 #: data/ui/prefdlg.glade:395
-#, fuzzy
 msgid "_Desktop"
-msgstr "Рабочий стол"
+msgstr "Skrivebor_d"
 
 #: data/ui/file_properties.glade:7
 msgid "File Properties"
-msgstr "Свойства файла"
+msgstr "Fil Egenskaper"
 
 #: data/ui/file_properties.glade:45
-#, fuzzy
 msgid "Open with:"
-msgstr "Открыть с _помощью..."
+msgstr "Åpne med:"
 
 #: data/ui/file_properties.glade:74
 msgid "Size on Disk:"
-msgstr "Размер на диске:"
+msgstr "Diskforbruk:"
 
 #: data/ui/file_properties.glade:115
 msgid "Location:"
-msgstr "Путь:"
+msgstr "Plassering:"
 
 #: data/ui/file_properties.glade:142
 msgid "Last Access:"
-msgstr "Время последнего доступа:"
+msgstr "Sist Åpnet:"
 
 #: data/ui/file_properties.glade:203
 msgid "Last Modification:"
-msgstr "Время последнего изменения:"
+msgstr "Sist Endret"
 
 #: data/ui/file_properties.glade:216
 msgid "Total Size of Files:"
-msgstr "Общий размер файлов:"
+msgstr "Total Filstørrelse:"
 
 #: data/ui/file_properties.glade:229
 msgid "File Type:"
-msgstr "Тип файла:"
+msgstr "FilType:"
 
 #: data/ui/file_properties.glade:242
 msgid "File Name:"
-msgstr "Имя файла:"
+msgstr "Filnavn:"
 
 #: data/ui/file_properties.glade:302 data/ui/file_properties.glade:594
 msgid "Group:"
-msgstr "Группа:"
+msgstr "Gruppe:"
 
 #: data/ui/file_properties.glade:314 data/ui/file_properties.glade:607
 msgid "Owner:"
-msgstr "Владелец:"
+msgstr "Eier:"
 
 #: data/ui/file_properties.glade:362
 msgid "Sticky"
@@ -1113,75 +1128,72 @@ msgstr "Sticky"
 
 #: data/ui/file_properties.glade:381
 msgid "Set GID"
-msgstr "Установить GID"
+msgstr "Sett GID"
 
 #: data/ui/file_properties.glade:400
 msgid "Set UID"
-msgstr "Установить UID"
+msgstr "Sett UID"
 
 #: data/ui/file_properties.glade:417 data/ui/file_properties.glade:436
 #: data/ui/file_properties.glade:455
 msgid "Execute"
-msgstr "Выполнение"
+msgstr "Kjør"
 
 #: data/ui/file_properties.glade:472 data/ui/file_properties.glade:491
 #: data/ui/file_properties.glade:510
 msgid "Write"
-msgstr "Запись"
+msgstr "Skriv"
 
 #: data/ui/file_properties.glade:527 data/ui/file_properties.glade:546
 #: data/ui/file_properties.glade:565
 msgid "Read"
-msgstr "Чтение"
+msgstr "Les"
 
 #: data/ui/file_properties.glade:581
 msgid "Other Users:"
-msgstr "Другие пользователи:"
+msgstr "Andre brukere:"
 
 #: data/ui/file_properties.glade:628
 msgid "_Permissions"
-msgstr "_Права доступа"
+msgstr "Rettigheter"
 
 #: data/ui/appchooserdlg.glade:6
 msgid "Choose an Application"
-msgstr "Выбор приложения"
+msgstr "Velg en Applikasjon"
 
 #: data/ui/appchooserdlg.glade:23
 msgid "File Type To be Opened:"
-msgstr "Тип открываемого файла:"
+msgstr "Filtype som skal åpnes:"
 
 #: data/ui/appchooserdlg.glade:52
 msgid ""
 "Please choose an application from following lists or enter the command line "
 "by hand:"
-msgstr "Укажите приложение из списка или введите команду в строке ввода:"
+msgstr "Velg en applikasjon fra listen, eller skriv inn kommandoen nedenfor:"
 
 #: data/ui/appchooserdlg.glade:87
-#, fuzzy
 msgid "_Recommended Applications"
-msgstr "Рекомендуемые приложения"
+msgstr "Anbefalte Applikasjone_r"
 
 #: data/ui/appchooserdlg.glade:117
-#, fuzzy
 msgid "_All Applications"
-msgstr "Все приложения"
+msgstr "_Alle Applikasjoner"
 
 #: data/ui/appchooserdlg.glade:139
-#, fuzzy
 msgid "_Command Line: "
-msgstr "Командная строка: "
+msgstr "Kommando Linje"
 
 #: data/ui/appchooserdlg.glade:186
 msgid "_Browse"
-msgstr "_Обзор"
+msgstr "_Bla gjennom"
 
 #: data/ui/appchooserdlg.glade:221
 msgid "Opened in Terminal"
-msgstr "Открыть в терминале"
+msgstr "Åpnes i Terminal"
 
 #: data/ui/appchooserdlg.glade:235
 msgid "Set selected application to default action"
-msgstr "Установить как приложение по умолчанию"
+msgstr "Sett den valgte applikasjon som forvalgt handling"
 
 #: data/ui/about-dlg.glade:11
 msgid "Copyright (C) 2005 - 2006"
@@ -1193,9 +1205,9 @@ msgid ""
 "\n"
 "Developed by Hon Jen Yee (PCMan)"
 msgstr ""
-"Небольшой файловый менеджер,\n"
+"Lettvekts filbehandler\n"
 "\n"
-"созданный Hon Jen Yee (PCMan)"
+"Utviklet av Hon Jen Yee (PCMan)"
 
 #: data/ui/about-dlg.glade:33
 msgid ""
@@ -1212,11 +1224,22 @@ msgid ""
 "     * thunar-vfs and libexo: Benedikt Meurer\n"
 "     * gnome-mount: David Zeuthen"
 msgstr ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Kildekode fra andre prosjekter:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Oppdatering av arbeidsområde: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Rendering av tekst og ikoner bruker kode fra Jonathan Blandford\n"
+" * Visning av ikoner på skrivebordet bruker kode fra Brian Tarricone\n"
+" * Enhetshåndering bruker kode fra følgende prosjekter/utviklere:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs and libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
 
 #: data/ui/about-dlg.glade:45
 msgid "translator-credits"
-msgstr ""
-"Roxana Kolosova <mavka@justos.org> Lebed Dmitrij <dimaz.sertolovo@gmail.com>"
+msgstr "Vidar Jon Bauge <vidarjb@gmail.com>"
 
 #: data/ui/about-dlg.glade:46
 msgid ""
@@ -1224,69 +1247,6 @@ msgid ""
 "created by Alexandre Moore (saki).\n"
 "http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
 msgstr ""
-
-#, fuzzy
-#~ msgid "application"
-#~ msgstr "Все приложения"
-
-#~ msgid "audio"
-#~ msgstr "аудио"
-
-#~ msgid "video"
-#~ msgstr "видео"
-
-#~ msgid "text"
-#~ msgstr "текст"
-
-#~ msgid "image"
-#~ msgstr "изображение"
-
-#~ msgid "message"
-#~ msgstr "сообщение"
-
-#~ msgid "inode"
-#~ msgstr "индексный дескриптор"
-
-#~ msgid "packages"
-#~ msgstr "пакеты"
-
-#, fuzzy
-#~ msgid "File Associations"
-#~ msgstr "Все приложения"
-
-#, fuzzy
-#~ msgid "Known File Types:"
-#~ msgstr "Тип файла:"
-
-#~ msgid "Actions Showed in Popup Menus"
-#~ msgstr "Действия, отображаемые во всплывающих меню"
-
-#~ msgid "Add _Application"
-#~ msgstr "Добавить программу"
-
-#~ msgid "Add _Custom Action"
-#~ msgstr "Добавить _другое действие"
-
-#~ msgid "Move _Up"
-#~ msgstr "Переместить вверх: "
-
-#~ msgid "Move _Down"
-#~ msgstr "Переместить вниз: "
-
-#~ msgid "PCMan File Manager"
-#~ msgstr "Файловый менеджер PCMan"
-
-#~ msgid "Opened in Current Tab"
-#~ msgstr "Открывать в текущей вкладке"
-
-#~ msgid "Opened in New Tab"
-#~ msgstr "Открывать в новой вкладке"
-
-#~ msgid "Opened in New Window"
-#~ msgstr "Открывать в новом окне"
-
-#~ msgid "Icon Theme:"
-#~ msgstr "Тема иконок:"
-
-#~ msgid "A_ddress:"
-#~ msgstr "Адр_ес:"
+"Ikonet er hentet fra \"nuoveXT 2\" ikon temaet\n"
+"laget av Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"

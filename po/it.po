@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm 0.1.9.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 21:48+0800\n"
+"POT-Creation-Date: 2008-03-05 03:06+0800\n"
 "PO-Revision-Date: 2006-08-06 22:54+0100\n"
 "Last-Translator: Claudio Riva <firetux83@gmail.com>\n"
 "Language-Team: Italian <firetux83@gmail.com>\n"
@@ -397,31 +397,31 @@ msgstr "Locazione"
 msgid "Directory Tree"
 msgstr "Albero Cartelle"
 
-#: src/ptk/ptk-location-view.c:184
+#: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
 msgstr "Desktop"
 
-#: src/ptk/ptk-location-view.c:380 src/ptk/ptk-location-view.c:572
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
 msgid "Unable to mount device"
 msgstr "Impossibile montare il dispositivo"
 
-#: src/ptk/ptk-location-view.c:587
+#: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
 msgstr "Impossibile smontare il dispositivo"
 
-#: src/ptk/ptk-location-view.c:604
+#: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
 msgstr "Impossibile espellere il dispositivo"
 
-#: src/ptk/ptk-location-view.c:662
+#: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
 msgstr "_Monta File System"
 
-#: src/ptk/ptk-location-view.c:672
+#: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
 msgstr "_Espelli"
 
-#: src/ptk/ptk-location-view.c:678
+#: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
 msgstr "_Smonta File System"
 

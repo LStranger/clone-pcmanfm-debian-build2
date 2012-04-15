@@ -110,7 +110,9 @@ am__objects_8 = vfs-file-monitor.$(OBJEXT) vfs-mime-type.$(OBJEXT) \
 	vfs-async-task.$(OBJEXT) vfs-thumbnail-loader.$(OBJEXT) \
 	vfs-utils.$(OBJEXT)
 am__objects_9 = md5.$(OBJEXT)
-am__objects_10 = fm-desktop.$(OBJEXT) working-area.$(OBJEXT)
+@DESKTOP_INTEGRATION_FALSE@am__objects_10 = fm-desktop.$(OBJEXT)
+@DESKTOP_INTEGRATION_TRUE@am__objects_10 = fm-desktop.$(OBJEXT) \
+@DESKTOP_INTEGRATION_TRUE@	working-area.$(OBJEXT)
 am__objects_11 = glib-utils.$(OBJEXT)
 am_pcmanfm_OBJECTS = $(am__objects_1) $(am__objects_2) \
 	$(am__objects_3) $(am__objects_4) $(am__objects_8) \
@@ -346,9 +348,12 @@ PTK_UI_XML_SOURCES = \
     ptk-ui-xml/ptk-ui-xml.c ptk-ui-xml/ptk-ui-xml.h \
     ptk-ui-xml/ptk-xml-tree.c ptk-ui-xml/ptk-xml-tree.h
 
-DESKTOP_SOURCES = \
-    desktop/fm-desktop.c desktop/fm-desktop.h \
-    desktop/working-area.c desktop/working-area.h
+@DESKTOP_INTEGRATION_FALSE@DESKTOP_SOURCES = \
+@DESKTOP_INTEGRATION_FALSE@    desktop/fm-desktop.c desktop/fm-desktop.h
+
+@DESKTOP_INTEGRATION_TRUE@DESKTOP_SOURCES = \
+@DESKTOP_INTEGRATION_TRUE@    desktop/fm-desktop.c desktop/fm-desktop.h \
+@DESKTOP_INTEGRATION_TRUE@    desktop/working-area.c desktop/working-area.h
 
 INOTIFY_SOURCES = \
     inotify/inotify-syscalls.h \

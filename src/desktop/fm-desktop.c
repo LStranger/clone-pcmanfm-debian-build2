@@ -32,6 +32,8 @@
 #include <config.h>
 #endif
 
+#ifdef DESKTOP_INTEGRATION
+
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
@@ -434,6 +436,8 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     guint32 val;
 
     desktop = gtk_window_new( GTK_WINDOW_TOPLEVEL );
+    gtk_widget_set_app_paintable( desktop, TRUE );
+
     get_working_area( screen, &area );
     gtk_window_move( GTK_WINDOW( desktop ), 0, 0 );
     gtk_widget_set_size_request( desktop,
@@ -444,7 +448,8 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     gtk_container_add( GTK_CONTAINER(desktop), alignment );
 
     browser = PTK_FILE_BROWSER(ptk_file_browser_new( alignment, PTK_FB_ICON_VIEW ));
-
+    gtk_widget_set_app_paintable( browser, TRUE );
+g_debug("HERE");
     g_signal_connect( browser, "open-item",
                       G_CALLBACK( on_open_item ), desktop );
 
@@ -684,3 +689,14 @@ void fm_desktop_update_view()
         ptk_file_browser_update_display( browser );
     }
 }
+
+#else /* ! DESKTOP_INTEGRATION */
+
+int fm_desktop_init() { return 0; }
+void fm_desktop_cleanup() { }
+void fm_desktop_update_wallpaper() { }
+void fm_desktop_update_colors() { }
+void fm_desktop_update_thumbnails() { }
+void fm_desktop_update_view() { }
+#endif
+

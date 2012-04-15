@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pcmanfm_TR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 21:48+0800\n"
+"POT-Creation-Date: 2008-03-05 03:06+0800\n"
 "PO-Revision-Date: 2006-11-14 15:51+0200\n"
 "Last-Translator: Bekir SONAT <bekirsonat@kde.org.tr>\n"
 "Language-Team: Türkçe <yerellestirme@kde.org.tr>\n"
@@ -393,31 +393,31 @@ msgstr "Konum"
 msgid "Directory Tree"
 msgstr "Dizin Ağacı"
 
-#: src/ptk/ptk-location-view.c:184
+#: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
 msgstr "Masaüstü"
 
-#: src/ptk/ptk-location-view.c:380 src/ptk/ptk-location-view.c:572
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
 msgid "Unable to mount device"
 msgstr "Ortama bağlanamadı"
 
-#: src/ptk/ptk-location-view.c:587
+#: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
 msgstr "Ortam ayrılamadı"
 
-#: src/ptk/ptk-location-view.c:604
+#: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
 msgstr "Ortam çıkartılamadı"
 
-#: src/ptk/ptk-location-view.c:662
+#: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
 msgstr "Dosya Sistemini _Bağla"
 
-#: src/ptk/ptk-location-view.c:672
+#: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
 msgstr "Çı_kart"
 
-#: src/ptk/ptk-location-view.c:678
+#: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
 msgstr "Dosya Sistemini _Ayır"
 

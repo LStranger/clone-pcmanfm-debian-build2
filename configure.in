@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(pcmanfm, 0.3.6.1)
+AM_INIT_AUTOMAKE(pcmanfm, 0.3.6.2)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
@@ -144,6 +144,19 @@ if test ! -z "$preferable_sudo"; then
   CPPFLAGS="$CPPFLAGS -DPREFERABLE_SUDO_PROG=\\\"$preferable_sudo\\\""
 fi
 
+AC_ARG_ENABLE(
+    [desktop-integration],
+    AS_HELP_STRING([--disable-desktop-integration],
+                   [disable desktop integrations such as icons]),
+    desktop_integration=$enableval, desktop_integration="yes")
+if test x"$desktop_integration" = "xyes"; then
+  AC_DEFINE(DESKTOP_INTEGRATION, 1, [Whether to integrate desktop or not.])
+fi
+AM_CONDITIONAL(DESKTOP_INTEGRATION, test "$desktop_integration" = "yes")
+
+dnl advanced compiler tweaking
+CPPFLAGS="$CPPFLAGS -fstrict-aliasing -fmessage-length=0"
+
 AC_CHECK_FUNC(euidaccess,[AC_DEFINE(HAVE_EUIDACCESS,[],[Define to 1 if euidaccess is available])])
 AC_CHECK_FUNC(eaccess,[AC_DEFINE(HAVE_EACCESS,[],[Define to 1 if eaccess is available])])
 
@@ -154,7 +167,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 
 dnl Add the languages which your application supports here.
-ALL_LINGUAS="zh_TW zh_CN hu fr pl it es de sv_SE ru pt_BR ca tr eu ja pt_PT ur"
+ALL_LINGUAS="zh_TW zh_CN hu fr pl it es de sv_SE ru pt_BR ca tr eu ja pt_PT ur da no"
 AM_GLIB_GNU_GETTEXT
 
 AC_OUTPUT([

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PCMan FM 0.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 21:48+0800\n"
+"POT-Creation-Date: 2008-03-05 03:06+0800\n"
 "PO-Revision-Date: 2008-02-16 12:46+0100\n"
 "Last-Translator: Rüdiger Arp <ruediger@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
@@ -400,31 +400,31 @@ msgstr "Orte"
 msgid "Directory Tree"
 msgstr "Baum"
 
-#: src/ptk/ptk-location-view.c:184
+#: src/ptk/ptk-location-view.c:186
 msgid "Desktop"
 msgstr "Desktop"
 
-#: src/ptk/ptk-location-view.c:380 src/ptk/ptk-location-view.c:572
+#: src/ptk/ptk-location-view.c:382 src/ptk/ptk-location-view.c:574
 msgid "Unable to mount device"
 msgstr "Datenträger konnte nicht ins System eingebunden werden"
 
-#: src/ptk/ptk-location-view.c:587
+#: src/ptk/ptk-location-view.c:589
 msgid "Unable to unmount device"
 msgstr "Datenträger konnte nicht ausgehängt werden"
 
-#: src/ptk/ptk-location-view.c:604
+#: src/ptk/ptk-location-view.c:606
 msgid "Unable to eject device"
 msgstr "Datenträger konnte nicht ausgeworfen werden"
 
-#: src/ptk/ptk-location-view.c:662
+#: src/ptk/ptk-location-view.c:664
 msgid "_Mount File System"
 msgstr "_Dateisystem einbinden"
 
-#: src/ptk/ptk-location-view.c:672
+#: src/ptk/ptk-location-view.c:674
 msgid "_Eject"
 msgstr "_Auswerfen"
 
-#: src/ptk/ptk-location-view.c:678
+#: src/ptk/ptk-location-view.c:680
 msgid "_Unmount File System"
 msgstr "_Dateisystem aushängen"
 

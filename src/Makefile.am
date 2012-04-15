@@ -80,9 +80,14 @@ PTK_UI_XML_SOURCES= \
     ptk-ui-xml/ptk-ui-xml.c ptk-ui-xml/ptk-ui-xml.h \
     ptk-ui-xml/ptk-xml-tree.c ptk-ui-xml/ptk-xml-tree.h
 
+if DESKTOP_INTEGRATION
 DESKTOP_SOURCES = \
     desktop/fm-desktop.c desktop/fm-desktop.h \
     desktop/working-area.c desktop/working-area.h
+else
+DESKTOP_SOURCES = \
+    desktop/fm-desktop.c desktop/fm-desktop.h
+endif
 
 INOTIFY_SOURCES = \
     inotify/inotify-syscalls.h \

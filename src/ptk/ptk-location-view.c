@@ -95,6 +95,8 @@ static void on_model_destroy( gpointer data, GObject* object )
 {
     GtkIconTheme* icon_theme;
 
+    vfs_volume_remove_callback( on_volume_event, (gpointer)object );
+
     model = NULL;
     ptk_bookmarks_remove_callback( on_bookmark_changed, NULL );
     n_vols = 0;

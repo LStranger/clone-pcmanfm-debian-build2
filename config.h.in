@@ -1,5 +1,8 @@
 /* config.h.in.  Generated from configure.in by autoheader.  */
 
+/* Whether to integrate desktop or not. */
+#undef DESKTOP_INTEGRATION
+
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 
