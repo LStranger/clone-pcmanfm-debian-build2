@@ -18,6 +18,7 @@
 
 #include "vfs-file-monitor.h"
 #include "vfs-file-info.h"
+#include "vfs-async-task.h"
 
 G_BEGIN_DECLS
 
@@ -27,9 +28,6 @@ G_BEGIN_DECLS
 #define VFS_IS_DIR(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), VFS_TYPE_DIR))
 #define VFS_IS_DIR_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass),  VFS_TYPE_DIR))
 #define VFS_DIR_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj),  VFS_TYPE_DIR, VFSDirClass))
-
-#define vfs_dir_ref( dir )      g_object_ref(dir)
-#define vfs_dir_unref( dir )    g_object_unref(dir)
 
 typedef struct _VFSDir VFSDir;
 typedef struct _VFSDirClass VFSDirClass;
@@ -46,21 +44,13 @@ struct _VFSDir
     /*<private>*/
     VFSFileMonitor* monitor;
     GMutex* mutex;  /* Used to guard file_list */
-    GThread* thread;
-    GSList* state_callback_list;
+    VFSAsyncTask* task;
     gboolean file_listed : 1;
     gboolean load_complete : 1;
     gboolean cancel: 1;
     gboolean show_hidden : 1;
-    /* gboolean dir_only : 1; FIXME: can this be implemented? */
-    guint load_notify;
 
-    GQueue* thumbnail_requests;
-    GMutex* thumbnail_mutex;  /* Used to guard thumbnail_requests */
-    GCond* thumbnail_cond;
-    GThread* thumbnail_thread;
-    guint thumbnail_idle;
-    GList* loaded_thumbnails;
+    struct _VFSThumbnailLoader* thumbnail_loader;
 
     GSList* changed_files;
 };
@@ -69,9 +59,10 @@ struct _VFSDirClass
 {
     GObjectClass parent;
     /* Default signal handlers */
-    void ( *file_created ) ( VFSDir* dir, const char* file_name );
-    void ( *file_deleted ) ( VFSDir* dir, const char* file_name );
-    void ( *file_changed ) ( VFSDir* dir, const char* file_name );
+    void ( *file_created ) ( VFSDir* dir, VFSFileInfo* file );
+    void ( *file_deleted ) ( VFSDir* dir, VFSFileInfo* file );
+    void ( *file_changed ) ( VFSDir* dir, VFSFileInfo* file );
+    void ( *thumbnail_loaded ) ( VFSDir* dir, VFSFileInfo* file );
     void ( *file_listed ) ( VFSDir* dir );
     void ( *load_complete ) ( VFSDir* dir );
     /*  void (*need_reload) ( VFSDir* dir ); */
@@ -81,24 +72,29 @@ struct _VFSDirClass
 typedef void ( *VFSDirStateCallback ) ( VFSDir* dir, int state, gpointer user_data );
 
 GType vfs_dir_get_type ( void );
-VFSDir* vfs_dir_new();
 
-VFSDir* vfs_get_dir( const char* path );
-
-void vfs_dir_add_state_callback( VFSDir* dir,
-                                 VFSDirStateCallback func,
-                                 gpointer user_data );
-
-void vfs_dir_remove_state_callback( VFSDir* dir,
-                                    VFSDirStateCallback func,
-                                    gpointer user_data );
+VFSDir* vfs_dir_get_by_path( const char* path );
 
 gboolean vfs_dir_is_loading( VFSDir* dir );
 void vfs_dir_cancel_load( VFSDir* dir );
+gboolean vfs_dir_is_file_listed( VFSDir* dir );
 
 void vfs_dir_request_thumbnail( VFSDir* dir, VFSFileInfo* file, gboolean big );
 void vfs_dir_cancel_thumbnail_request( VFSDir* dir, VFSFileInfo* file,
                                        gboolean big );
+void vfs_dir_unload_thumbnails( VFSDir* dir, gboolean is_big );
+
+/* emit signals */
+void vfs_dir_emit_file_created( VFSDir* dir, const char* file_name, VFSFileInfo* file );
+void vfs_dir_emit_file_deleted( VFSDir* dir, const char* file_name, VFSFileInfo* file );
+void vfs_dir_emit_file_changed( VFSDir* dir, const char* file_name, VFSFileInfo* file );
+void vfs_dir_emit_thumbnail_loaded( VFSDir* dir, VFSFileInfo* file );
+
+/* get the path of desktop dir */
+const char* vfs_get_desktop_dir();
+
+/* call function "func" for every VFSDir instances */
+void vfs_dir_foreach( GHFunc func, gpointer user_data );
 
 G_END_DECLS
 

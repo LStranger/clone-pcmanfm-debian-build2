@@ -1,4 +1,4 @@
-/* $Id: ptk-icon-view.c 405 2006-10-10 12:40:26Z pcmanx $ */
+/* $Id: ptk-icon-view.c 518 2008-02-15 06:02:13Z pcmanx $ */
 /*-
  * Copyright (c) 2004-2006  os-cillation e.K.
  * Copyright (c) 2002,2004  Anders Carlsson <andersca@gnu.org>
@@ -1556,12 +1556,13 @@ ptk_icon_view_expose_event ( GtkWidget *widget,
     if ( icon_view->priv->pixmap )
     {
         gdk_draw_drawable( event->window, widget->style->fg_gc[ GTK_STATE_NORMAL ],
-                           icon_view->priv->pixmap, 
+                           icon_view->priv->pixmap,
                            icon_view->priv->pixmap_x_offset + event->area.x,
                            icon_view->priv->pixmap_y_offset + event->area.y,
                            event->area.x, event->area.y,
                            event->area.width, event->area.height );
     }
+
     /* don't handle expose if the layout isn't done yet; the layout
      * method will schedule a redraw when done.
      */
@@ -1752,7 +1753,7 @@ ptk_icon_view_motion_notify_event ( GtkWidget *widget,
             ptk_icon_view_queue_draw_item (icon_view, item);
         }
     }
-    */ 
+    */
     return TRUE;
 }
 
@@ -4001,14 +4002,17 @@ ptk_icon_view_scroll_to_item ( PtkIconView *icon_view,
     gdk_drawable_get_size ( GDK_DRAWABLE ( icon_view->priv->bin_window ),
                             &width, &height );
     gdk_window_get_position ( icon_view->priv->bin_window, &x, &y );
-
     if ( y + item->area.y - focus_width < 0 )
+    {
         gtk_adjustment_set_value ( icon_view->priv->vadjustment,
                                    icon_view->priv->vadjustment->value + y + item->area.y - focus_width );
+    }
     else if ( y + item->area.y + item->area.height + focus_width > GTK_WIDGET ( icon_view ) ->allocation.height )
+    {
         gtk_adjustment_set_value ( icon_view->priv->vadjustment,
                                    icon_view->priv->vadjustment->value + y + item->area.y + item->area.height
                                    + focus_width - GTK_WIDGET ( icon_view ) ->allocation.height );
+    }
 
     if ( x + item->area.x - focus_width < 0 )
     {

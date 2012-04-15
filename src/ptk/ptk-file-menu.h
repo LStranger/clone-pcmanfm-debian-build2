@@ -19,6 +19,10 @@
 
 G_BEGIN_DECLS
 
+/* sel_files is a list containing VFSFileInfo structures
+  * The list will be freed in this function, so the caller mustn't
+  * free the list after calling this function.
+  */
 GtkWidget* ptk_file_menu_new( const char* file_path,
                               VFSFileInfo* info, const char* cwd,
                               GList* sel_files, PtkFileBrowser* browser );

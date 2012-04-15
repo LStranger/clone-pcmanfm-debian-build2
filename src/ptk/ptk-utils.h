@@ -51,7 +51,8 @@ typedef struct _PtkMenuItemEntry PtkMenuItemEntry;
 #define PTK_TOOL_ITEM( label, icon, tooltip, cb ) { label, icon, tooltip, G_CALLBACK(cb), NULL, NULL }
 #define PTK_CHECK_TOOL_ITEM( label, icon, tooltip, cb ) { label, icon, tooltip, G_CALLBACK(cb), (PtkMenuItemEntry*)1, NULL }
 #define PTK_RADIO_TOOL_ITEM( label, icon, tooltip, cb ) { label, icon, tooltip, G_CALLBACK(cb), (PtkMenuItemEntry*)2, NULL }
-#define PTK_MENU_TOOL_ITEM( label, icon, tooltip, menu ) { label, icon, tooltip, NULL, menu, NULL }
+#define PTK_EMPTY_MENU  ((gpointer)3)
+#define PTK_MENU_TOOL_ITEM( label, icon, tooltip, cb, menu ) { label, icon, tooltip, cb, menu, NULL }
 #define PTK_SEPARATOR_TOOL_ITEM { NULL, NULL, NULL, -1, NULL, NULL}
 #define PTK_TOOL_END  {0}
 #define PTK_IS_CHECK_TOOL_ITEM( ent )  ( ent->menu == (PtkMenuItemEntry*)1 )
@@ -64,7 +65,7 @@ struct _PtkToolItemEntry
   const char* stock_icon; /* or menu type  1: check, 2: radio */
   const char* tooltip;
   GCallback callback;
-  struct _PtkMenuItemEntry* menu; /* NULL: normal, 1: check, 2: radio, > 2: menu */
+  struct _PtkMenuItemEntry* menu; /* NULL: normal, 1: check, 2: radio, 3: empty menu, > 3: menu */
   GtkWidget** ret;
 };
 typedef struct _PtkToolItemEntry PtkToolItemEntry;
@@ -83,7 +84,7 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
                                             gpointer cb_data,
                                             GtkTooltips* tooltips );
 
-void ptk_show_error(GtkWindow* parent, const char* message );
+void ptk_show_error(GtkWindow* parent, const char* title, const char* message );
 
 G_END_DECLS
 

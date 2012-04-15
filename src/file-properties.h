@@ -1,3 +1,15 @@
+/*                                                                                  
+*  C Interface: file_properties
+*
+* Description: 
+*
+*
+* Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
+*
+* Copyright: See COPYING file that comes with this distribution
+*
+*/
+
 #ifndef _FILE_PROPERTIES_H_
 #define _FILE_PROPERTIES_H_
 

@@ -8,7 +8,6 @@
 
 #include "file-assoc-dlg.h"
 #include "file-assoc-dlg-ui.h"
-#include "glade-support.h"
 
 #include "vfs-app-desktop.h"
 #include "vfs-mime-type.h"
@@ -185,7 +184,7 @@ void edit_file_associations( GtkWindow* parent_win )
     GtkWidget* dlg = create_file_assoc_dlg();
     gtk_window_set_transient_for( GTK_WINDOW( dlg ), parent_win );
 
-    init_type_tree( GTK_TREE_VIEW( lookup_widget( dlg, "types" ) ) );
+    init_type_tree( GTK_TREE_VIEW( g_object_get_data( G_OBJECT(dlg), "types" ) ) );
 
     gtk_dialog_run( GTK_DIALOG( dlg ) );
     gtk_widget_destroy( dlg );

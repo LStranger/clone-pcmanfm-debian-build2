@@ -1,4 +1,4 @@
-/* $Id: ptk-icon-view.h 354 2006-09-07 16:53:54Z pcmanx $ */
+/* $Id: ptk-icon-view.h 491 2008-02-13 05:02:19Z pcmanx $ */
 /*-
  * Copyright (c) 2004-2005  os-cillation e.K.
  * Copyright (c) 2002,2004  Anders Carlsson <andersca@gnu.org>

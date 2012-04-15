@@ -1,7 +1,7 @@
 /*
 *  C Implementation: ptk-dir-tree
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
@@ -400,8 +400,7 @@ void ptk_dir_tree_get_value ( GtkTreeModel *tree_model,
     case COL_DIR_TREE_INFO:
         if( G_UNLIKELY( !info ) )
             return;
-        vfs_file_info_ref( info );
-        g_value_set_pointer( value, info );
+        g_value_set_pointer( value, vfs_file_info_ref( info ) );
         break;
     }
 }
@@ -752,7 +751,7 @@ void ptk_dir_tree_expand_row ( PtkDirTree* tree,
     dir = g_dir_open( path, 0, NULL );
     if( dir )
     {
-        node->monitor = vfs_file_monitor_add( path,
+        node->monitor = vfs_file_monitor_add_dir( path,
                                               &on_file_monitor_event,
                                               node );
         while( (name = g_dir_read_name( dir )) )

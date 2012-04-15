@@ -1,7 +1,7 @@
 /*
 *  C Implementation: ptk-file-archiver
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
@@ -17,6 +17,7 @@
 #include "ptk-console-output.h"
 
 #include "vfs-file-info.h"
+#include "vfs-mime-type.h"
 
 typedef struct _ArchiveHandler
 {
@@ -298,10 +299,13 @@ gboolean ptk_file_archiver_is_format_supported( VFSMimeType* mime,
 {
     int i;
     const char* type;
+    char** alias;
 
     if( !mime ) return FALSE;
     type = vfs_mime_type_get_type( mime );
     if(! type ) return FALSE;
+
+    alias = mime_type_get_alias( type );
 
     for( i = 0; i < G_N_ELEMENTS(handlers); ++i )
     {

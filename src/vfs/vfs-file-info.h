@@ -29,7 +29,9 @@ typedef enum
     VFS_FILE_INFO_HOME_DIR = (1 << 0),
     VFS_FILE_INFO_DESKTOP_DIR = (1 << 1),
     VFS_FILE_INFO_DESKTOP_ENTRY = (1 << 2),
-}VFSFileInfoFlag;
+    VFS_FILE_INFO_MOUNT_POINT = (1 << 3),
+    VFS_FILE_INFO_REMOTE = (1 << 4)
+}VFSFileInfoFlag;   /* For future use, not all supported now */
 
 typedef struct _VFSFileInfo VFSFileInfo;
 
@@ -66,7 +68,7 @@ struct _VFSFileInfo
 void vfs_file_info_set_utf8_filename( gboolean is_utf8 );
 
 VFSFileInfo* vfs_file_info_new ();
-void vfs_file_info_ref( VFSFileInfo* fi );
+VFSFileInfo* vfs_file_info_ref( VFSFileInfo* fi );
 void vfs_file_info_unref( VFSFileInfo* fi );
 
 gboolean vfs_file_info_get( VFSFileInfo* fi,
@@ -112,13 +114,15 @@ GdkPixbuf* vfs_file_info_get_small_icon( VFSFileInfo* fi );
 GdkPixbuf* vfs_file_info_get_big_thumbnail( VFSFileInfo* fi );
 GdkPixbuf* vfs_file_info_get_small_thumbnail( VFSFileInfo* fi );
 
-void file_size_to_string( char* buf, guint64 size );
+void vfs_file_size_to_string( char* buf, guint64 size );
 
 gboolean vfs_file_info_is_dir( VFSFileInfo* fi );
 
 gboolean vfs_file_info_is_symlink( VFSFileInfo* fi );
 
 gboolean vfs_file_info_is_image( VFSFileInfo* fi );
+
+gboolean vfs_file_info_is_desktop_entry( VFSFileInfo* fi );
 
 gboolean vfs_file_info_is_unknown_type( VFSFileInfo* fi );
 

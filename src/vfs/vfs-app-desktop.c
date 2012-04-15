@@ -1,7 +1,7 @@
 /*
 *  C Implementation: vfs-app-desktop
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
@@ -72,6 +72,8 @@ VFSAppDesktop* vfs_app_desktop_new( const char* file_name )
                                                  "Icon", NULL);
         app->terminal = g_key_file_get_boolean( file, desktop_entry_name,
                                                 "Terminal", NULL );
+        app->hidden = g_key_file_get_boolean( file, desktop_entry_name,
+                                                "NoDisplay", NULL );
     }
 
     g_key_file_free( file );
@@ -91,14 +93,13 @@ static void vfs_app_desktop_free( VFSAppDesktop* app )
 
 void vfs_app_desktop_ref( VFSAppDesktop* app )
 {
-    ++app->n_ref;
+    g_atomic_int_inc( &app->n_ref );
 }
 
 void vfs_app_desktop_unref( gpointer data )
 {
     VFSAppDesktop* app = (VFSAppDesktop*)data;
-    --app->n_ref;
-    if( app->n_ref <=0 )
+    if( g_atomic_int_dec_and_test(&app->n_ref) )
         vfs_app_desktop_free( app );
 }
 
@@ -124,7 +125,7 @@ const char* vfs_app_desktop_get_icon_name( VFSAppDesktop* app )
     return app->icon_name;
 }
 
-GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size  )
+GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size, gboolean use_fallback )
 {
     GtkIconTheme* theme;
     char *icon_name = NULL, *suffix;
@@ -154,6 +155,19 @@ GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size  )
                                                  GTK_ICON_LOOKUP_USE_BUILTIN,
                                                  NULL );
             }
+        }
+    }
+    if( G_UNLIKELY( ! icon ) && use_fallback )  /* fallback to generic icon */
+    {
+        theme = gtk_icon_theme_get_default();
+        icon = gtk_icon_theme_load_icon( theme, "application-x-executable", size,
+                                         GTK_ICON_LOOKUP_USE_BUILTIN,
+                                         NULL );
+        if( G_UNLIKELY( ! icon ) )  /* fallback to generic icon */
+        {
+            icon = gtk_icon_theme_load_icon( theme, "gnome-mime-application-x-executable", size,
+                                             GTK_ICON_LOOKUP_USE_BUILTIN,
+                                             NULL );
         }
     }
     return icon;
@@ -189,6 +203,11 @@ gboolean vfs_app_desktop_open_multiple_files( VFSAppDesktop* app )
 gboolean vfs_app_desktop_open_in_terminal( VFSAppDesktop* app )
 {
     return app->terminal;
+}
+
+gboolean vfs_app_desktop_is_hidden( VFSAppDesktop* app )
+{
+    return app->hidden;
 }
 
 /*
@@ -341,8 +360,8 @@ gboolean vfs_app_desktop_open_files( GdkScreen* screen,
     char* exec = NULL;
     char* cmd;
     GList* l;
-    gchar** argv;
-    gint argc;
+    gchar** argv = NULL;
+    gint argc = 0;
     const char* sn_desc;
 
     if( vfs_app_desktop_get_exec( app ) )
@@ -370,7 +389,7 @@ gboolean vfs_app_desktop_open_files( GdkScreen* screen,
             cmd = translate_app_exec_to_command_line( app, file_paths );
             if ( cmd )
             {
-                g_debug( "Execute %s\n", cmd );
+                /* g_debug( "Execute %s\n", cmd ); */
                 if( g_shell_parse_argv( cmd, &argc, &argv, NULL ) )
                 {
                     vfs_exec_on_screen( screen, NULL, argv, NULL,
@@ -386,7 +405,7 @@ gboolean vfs_app_desktop_open_files( GdkScreen* screen,
                     cmd = translate_app_exec_to_command_line( app, l );
                     if ( cmd )
                     {
-                        g_debug( "Execute %s\n", cmd );
+                        /* g_debug( "Execute %s\n", cmd ); */
                         if( g_shell_parse_argv( cmd, &argc, &argv, NULL ) )
                         {
                             vfs_exec_on_screen( screen, NULL,argv, NULL, sn_desc,

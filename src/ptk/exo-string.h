@@ -1,4 +1,4 @@
-/* $Id: exo-string.h 47 2006-01-30 02:32:10Z pcmanx $ */
+/* $Id: exo-string.h 491 2008-02-13 05:02:19Z pcmanx $ */
 /*-
  * Copyright (c) 2004 os-cillation e.K.
  *

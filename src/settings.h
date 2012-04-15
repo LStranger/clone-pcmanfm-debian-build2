@@ -37,6 +37,7 @@ typedef struct
     int splitterPos;
     int width;
     int height;
+    gboolean maximized;
 
     /* Bookmarks */
     PtkBookmarks* bookmarks;

@@ -24,6 +24,9 @@
 /* Define to 1 if you have the <fam.h> header file. */
 #undef HAVE_FAM_H
 
+/* Define to 1 if you have the `getpagesize' function. */
+#undef HAVE_GETPAGESIZE
+
 /* Define if the GNU gettext() function is already present or preinstalled. */
 #undef HAVE_GETTEXT
 
@@ -44,6 +47,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* Define to 1 if you have a working `mmap' system call. */
+#undef HAVE_MMAP
 
 /* Define to 1 if statvfs is available */
 #undef HAVE_STATVFS

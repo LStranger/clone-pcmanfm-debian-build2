@@ -30,6 +30,8 @@ char* ptk_dir_tree_view_get_selected_dir( GtkTreeView* dir_tree_view );
 void ptk_dir_tree_view_show_hidden_files( GtkTreeView* dir_tree_view,
                                           gboolean show_hidden );
 
+char* ptk_dir_view_get_dir_path( GtkTreeModel* model, GtkTreeIter* it );
+
 G_END_DECLS
 
 #endif

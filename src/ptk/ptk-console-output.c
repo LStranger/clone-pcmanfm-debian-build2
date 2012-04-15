@@ -221,7 +221,7 @@ int ptk_console_output_run( GtkWindow* parent_win,
     else
     {
         gtk_widget_destroy( main_dlg );
-        ptk_show_error( parent_win, err->message );
+        ptk_show_error( parent_win, _("Error"), err->message );
         g_error_free( err );
         return 1;
     }

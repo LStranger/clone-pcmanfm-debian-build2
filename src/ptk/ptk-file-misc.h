@@ -23,20 +23,27 @@ void ptk_delete_files( GtkWindow* parent_win,
                        const char* cwd,
                        GList* sel_files );
 
-void ptk_rename_file( GtkWindow* parent_win,
+gboolean  ptk_rename_file( GtkWindow* parent_win,
                       const char* cwd,
                       VFSFileInfo* file );
 
-void ptk_create_new_file( GtkWindow* parent_win,
+gboolean ptk_create_new_file( GtkWindow* parent_win,
                           const char* cwd,
-                          gboolean create_folder );
+                          gboolean create_folder,
+                          VFSFileInfo** file );
 
 void ptk_show_file_properties( GtkWindow* parent_win,
                                const char* cwd,
                                GList* sel_files );
 
-void ptk_open_files_with_app( const char* cwd, 
-                              GList* sel_files, 
+/*
+ * sel_files is a list of VFSFileInfo
+ * app_desktop is the application used to open the files.
+ * If app_desktop == NULL, each file will be opened with its
+ * default application.
+ */
+void ptk_open_files_with_app( const char* cwd,
+                              GList* sel_files,
                               char* app_desktop,
                               PtkFileBrowser* file_browser );
 

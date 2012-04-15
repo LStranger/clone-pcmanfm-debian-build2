@@ -1,7 +1,7 @@
 /*
 *  C Interface: vfs-app-desktop
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
@@ -27,7 +27,8 @@ struct _VFSAppDesktop
     char* comment;
     char* exec;
     char* icon_name;
-    gboolean terminal;
+    gboolean terminal : 1;
+    gboolean hidden : 1;
 
     /* <private> */
     int n_ref;
@@ -49,13 +50,15 @@ const char* vfs_app_desktop_get_disp_name( VFSAppDesktop* app );
 
 const char* vfs_app_desktop_get_exec( VFSAppDesktop* app );
 
-GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size );
+GdkPixbuf* vfs_app_desktop_get_icon( VFSAppDesktop* app, int size, gboolean use_fallback );
 
 const char* vfs_app_desktop_get_icon_name( VFSAppDesktop* app );
 
 gboolean vfs_app_desktop_open_multiple_files( VFSAppDesktop* app );
 
 gboolean vfs_app_desktop_open_in_terminal( VFSAppDesktop* app );
+
+gboolean vfs_app_desktop_is_hidden( VFSAppDesktop* app );
 
 gboolean vfs_app_desktop_open_files( GdkScreen* screen,
                                      const char* working_dir,

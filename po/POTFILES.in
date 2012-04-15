@@ -10,16 +10,17 @@ src/ptk/ptk-console-output.c
 src/ptk/ptk-dir-tree.c
 src/ptk/ptk-file-menu.c
 src/ptk/ptk-file-misc.c
-src/file-properties-ui.c
 src/file-properties.c
-src/pref-dialog-ui.c
 src/edit-bookmarks.c
 src/app-chooser-dialog.c
-src/app-chooser-dialog-ui.c
 src/file-assoc-dlg.c
 src/file-assoc-dlg-ui.c
 src/vfs/vfs-app-desktop.c
 src/vfs/vfs-file-task.c
-src/vfs/vfs-volume.c
+src/vfs/vfs-volume-hal.c
 src/desktop/fm-desktop.c
 
+data/ui/prefdlg.glade
+data/ui/file_properties.glade
+data/ui/appchooserdlg.glade
+data/ui/about-dlg.glade

@@ -301,7 +301,7 @@ static void show_busy_cursor()
         for ( i = 0; i < n_screens; i++ )
         {
             GdkCursor* cursor;
-            cursor = gdk_cursor_new( GDK_WATCH );
+            cursor = gdk_cursor_new_for_display( gtk_widget_get_display(desktops[i]), GDK_WATCH );
             gdk_window_set_cursor ( desktops[ i ] ->window, cursor );
             gdk_cursor_unref( cursor );
         }
@@ -354,6 +354,11 @@ static gboolean on_desktop_key_press( GtkWidget* desktop,
         PtkFileBrowser* browser = (PtkFileBrowser*)user_data;
         fm_main_window_open_terminal( GTK_WINDOW(desktop),
                                       ptk_file_browser_get_cwd( browser ));
+        return TRUE;
+    }
+    else if( evt->keyval == GDK_BackSpace )
+    {
+        /* Intercept the Backspace key to supress the default "Go Up" behavior of PtkFileBrowser */
         return TRUE;
     }
     return FALSE;
@@ -425,7 +430,7 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     GtkScrolledWindow *scroll;
     GdkWindow *root;
     GtkWidget* alignment;
-    char* desktop_dir;
+    const char* desktop_dir;
     GdkRectangle area;
     int rpad, bpad;
     guint32 val;
@@ -445,15 +450,20 @@ GtkWidget* fm_desktop_new( GdkScreen* screen )
     g_signal_connect( browser, "open-item",
                       G_CALLBACK( on_open_item ), desktop );
 
+/*
+    g_signal_connect( browser, "before-chdir",
+                      G_CALLBACK( on_before_chdir ), desktop );
+*/
+
     ptk_file_browser_show_hidden_files( browser,
                                         appSettings.showHiddenFiles );
     ptk_file_browser_show_thumbnails( browser,
                                       appSettings.showThumbnail ? appSettings.maxThumbSize : 0 );
-    desktop_dir = g_build_filename( g_get_home_dir(), "Desktop", NULL );
+    desktop_dir = vfs_get_desktop_dir();
+
     /* FIXME: add histroy should be true because
     current working directory is stored in history list. */
     ptk_file_browser_chdir( browser, desktop_dir, TRUE );
-    g_free( desktop_dir );
 
     gtk_widget_set_size_request( GTK_WIDGET(browser),
                                  area.width, area.height );

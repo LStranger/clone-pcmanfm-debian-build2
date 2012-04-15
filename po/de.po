@@ -6,23 +6,30 @@
 # Avoid injury or death
 msgid ""
 msgstr ""
-"Project-Id-Version: PCMan FM 0.3.2\n"
+"Project-Id-Version: PCMan FM 0.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-12 16:31+0800\n"
-"PO-Revision-Date: 2006-10-15 01:04+0800\n"
-"Last-Translator: 洪任諭 <pcman.tw@gmail.com>\n"
+"POT-Creation-Date: 2008-02-15 23:40+0800\n"
+"PO-Revision-Date: 2008-02-14 15:57+0100\n"
+"Last-Translator: Rüdiger Arp <ruediger@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.2\n"
 
-#: src/main.c:183
+#: src/main.c:56
+msgid "Don't show desktop icons."
+msgstr "Desktop-Symbole nicht anzeigen"
+
+#: src/main.c:64
+msgid "[FILE1, FILE2,...]"
+msgstr "[DATEI1, DATEI2,...]"
+
+#: src/main.c:243
 msgid "GTK+ icon theme is not properly set"
-msgstr "Das GTK+ Symbolthema wurde nicht korrekt eingerichtet"
+msgstr "Das GTK+-Symbolthema wurde nicht korrekt eingerichtet"
 
-#: src/main.c:185
+#: src/main.c:245
 #, c-format
 msgid ""
 "<big><b>%s</b></big>\n"
@@ -65,15 +72,39 @@ msgstr ""
 "Benennung von Symbolen gehen. Gegenwärtig existiert hierfür kein allgemeiner "
 "Standard, allerdings arbeitet freedesktop.org an einer Lösung."
 
-#: src/main.c:322
+#: src/main.c:370
+#, c-format
+msgid "Error: %s\n"
+msgstr "Fehler: %s\n"
+
+#: src/main.c:410 src/main.c:511 src/main.c:562 src/main-window.c:1604
+#: src/main-window.c:1654 src/ptk/ptk-file-browser.c:503
+#: src/ptk/ptk-file-browser.c:520 src/ptk/ptk-file-task.c:333
+#: src/ptk/ptk-console-output.c:224 src/ptk/ptk-file-misc.c:252
+#: src/ptk/ptk-file-misc.c:325 src/ptk/ptk-file-misc.c:414
+#: src/file-properties.c:695 src/file-properties.c:706
+msgid "Error"
+msgstr "Fehler"
+
+#: src/main.c:410
+msgid ""
+"Error: Unable to establish connection with FAM.\n"
+"\n"
+"Do you have \"FAM\" or \"Gamin\" installed and running?"
+msgstr ""
+"Fehler: Es konnte keine Verbindung zu FAM hergestellt werden.\n"
+"\n"
+"Sind \"FAM\" oder \"Gamin\" installiert und aktiv?"
+
+#: src/main.c:511
 msgid "File doesn't exist"
 msgstr "Die Datei existiert nicht"
 
-#: src/main.c:369
+#: src/main.c:558
 msgid "Don't know how to open the file"
 msgstr "Die Datei konnte nicht angezeigt werden"
 
-#: src/main.c:371
+#: src/main.c:560
 #, c-format
 msgid ""
 "Unable to open file:\n"
@@ -84,352 +115,296 @@ msgstr ""
 "\"%s\"\n"
 "%s"
 
-#: src/main-window.c:268 src/ptk/ptk-file-menu.c:92
+#: src/main-window.c:282 src/ptk/ptk-file-menu.c:98
 msgid "_Folder"
 msgstr "_Ordner"
 
-#: src/main-window.c:269 src/ptk/ptk-file-menu.c:93
+#: src/main-window.c:283 src/ptk/ptk-file-menu.c:99
 msgid "_Text File"
 msgstr "_Textdatei"
 
-#: src/main-window.c:275
+#: src/main-window.c:289
 msgid "New _Window"
 msgstr "Neues _Fenster"
 
-#: src/main-window.c:276
+#: src/main-window.c:290
 msgid "New _Tab"
 msgstr "Neuer _Reiter"
 
-#: src/main-window.c:277
+#: src/main-window.c:291
 msgid "Close Tab"
 msgstr "Reiter schließen"
 
-#: src/main-window.c:279 src/ptk/ptk-file-menu.c:116
+#: src/main-window.c:293 src/ptk/ptk-file-menu.c:122
 msgid "_Create New"
 msgstr "Neu _anlegen"
 
-#: src/main-window.c:280
+#: src/main-window.c:294
 msgid "File _Properties"
 msgstr "_Eigenschaften"
 
-#: src/main-window.c:291 src/ptk/ptk-file-menu.c:111
+#: src/main-window.c:305 src/ptk/ptk-file-menu.c:117
 msgid "_Delete"
 msgstr "Lö_schen"
 
-#: src/main-window.c:292 src/ptk/ptk-file-browser.c:1340
-#: src/ptk/ptk-file-menu.c:112
+#: src/main-window.c:306 src/ptk/ptk-file-browser.c:1387
+#: src/ptk/ptk-file-menu.c:118
 msgid "_Rename"
 msgstr "_Umbenennen"
 
-#: src/main-window.c:294
+#: src/main-window.c:308
 msgid "Select _All"
 msgstr "A_lle auswählen"
 
-#: src/main-window.c:295
+#: src/main-window.c:309
 msgid "_Invert Selection"
 msgstr "Aus_wahl umkehren"
 
-#: src/main-window.c:304
+#: src/main-window.c:318
 msgid "Go _Back"
 msgstr "_Zurück"
 
-#: src/main-window.c:305
+#: src/main-window.c:319
 msgid "Go _Forward"
 msgstr "_Vor"
 
-#: src/main-window.c:306
+#: src/main-window.c:320
 msgid "Go to _Parent Folder"
 msgstr "_Eltern-Ordner öffnen"
 
-#: src/main-window.c:307
+#: src/main-window.c:321
 msgid "Go _Home"
 msgstr "_Persönlicher Ordner"
 
-#: src/main-window.c:319
+#: src/main-window.c:333
 msgid "Sort by _Name"
 msgstr "Nach _Name sortieren"
 
-#: src/main-window.c:320
+#: src/main-window.c:334
 msgid "Sort by _Size"
 msgstr "Nach _Größe sortieren"
 
-#: src/main-window.c:321
+#: src/main-window.c:335
 msgid "Sort by _Modification Time"
 msgstr "Nach Än_derungsdatum sortieren"
 
-#: src/main-window.c:322
+#: src/main-window.c:336
 msgid "Sort by _Type"
 msgstr "Nach _Typ sortieren"
 
-#: src/main-window.c:323
+#: src/main-window.c:337
 msgid "Sort by _Permission"
 msgstr "Nach _Zugriffsrechten sortieren"
 
-#: src/main-window.c:324
+#: src/main-window.c:338
 msgid "Sort by _Owner"
 msgstr "Nach _Besitzer sortieren"
 
-#: src/main-window.c:326
+#: src/main-window.c:340
 msgid "Ascending"
 msgstr "Aufsteigend"
 
-#: src/main-window.c:327
+#: src/main-window.c:341
 msgid "Descending"
 msgstr "Absteigend"
 
-#: src/main-window.c:333
+#: src/main-window.c:347
 msgid "_Open Side Pane"
 msgstr "Sei_tenleiste öffnen"
 
-#: src/main-window.c:335
+#: src/main-window.c:349
 msgid "Show _Location Pane"
 msgstr "_Orte anzeigen"
 
-#: src/main-window.c:336
+#: src/main-window.c:350
 msgid "Show _Directory Tree"
 msgstr "Or_dner anzeigen"
 
-#: src/main-window.c:342
+#: src/main-window.c:356
 msgid "_Refresh"
 msgstr "Aktualisie_ren"
 
-#: src/main-window.c:343
+#: src/main-window.c:357
 msgid "Side _Pane"
 msgstr "S_eitenleiste"
 
-#: src/main-window.c:346
+#: src/main-window.c:360
 msgid "Show _Hidden Files"
 msgstr "_Verborgene Dateien anzeigen"
 
-#: src/main-window.c:347
+#: src/main-window.c:361
 msgid "_Sort..."
 msgstr "_Sortieren..."
 
-#: src/main-window.c:349
+#: src/main-window.c:363
 msgid "View as _Icons"
 msgstr "Symbolans_icht"
 
-#: src/main-window.c:350
+#: src/main-window.c:364
 msgid "View as Detailed _List"
 msgstr "_Listenansicht"
 
-#: src/main-window.c:356
+#: src/main-window.c:370
 msgid "Open _Terminal"
 msgstr "_Terminal öffnen"
 
-#: src/main-window.c:357
+#: src/main-window.c:371
 msgid "Open Current Folder as _Root"
 msgstr "Aktuellen Ordner als _root öffnen"
 
-#: src/main-window.c:365
+#: src/main-window.c:379
 msgid "_File"
 msgstr "_Datei"
 
-#: src/main-window.c:366
+#: src/main-window.c:380
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
 #. PTK_POPUP_MENU( N_( "_Edit" ), fm_edit_menu ),
-#: src/main-window.c:368
+#: src/main-window.c:382
 msgid "_Go"
 msgstr "_Gehe zu"
 
-#: src/main-window.c:369
+#: src/main-window.c:383
 msgid "_Bookmark"
 msgstr "_Lesezeichen"
 
-#: src/main-window.c:370
+#: src/main-window.c:384
 msgid "_View"
 msgstr "_Ansicht"
 
-#: src/main-window.c:371
+#: src/main-window.c:385
 msgid "_Tool"
 msgstr "_Werkzeuge"
 
-#: src/main-window.c:372
+#: src/main-window.c:386
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: src/main-window.c:380
+#: src/main-window.c:394
 msgid "New Tab"
 msgstr "Neuer Reiter"
 
-#: src/main-window.c:381
+#: src/main-window.c:395
 msgid "Back"
 msgstr "Zurück"
 
-#: src/main-window.c:382
+#: src/main-window.c:396
 msgid "Forward"
 msgstr "Vorwärts"
 
-#: src/main-window.c:383
+#: src/main-window.c:397
 msgid "Parent Folder"
 msgstr "Übergeordneter Ordner"
 
-#: src/main-window.c:384
+#: src/main-window.c:398
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#: src/main-window.c:385
+#: src/main-window.c:399
 msgid "Home Directory"
 msgstr "Persönlicher Ordner"
 
-#: src/main-window.c:386
+#: src/main-window.c:400
 msgid "Open Side Pane"
 msgstr "Seitenleiste öffnen"
 
-#: src/main-window.c:392
+#: src/main-window.c:406
 msgid "Go"
 msgstr "Gehe zu"
 
-#. FIXME: Is this label required? What about the hotkey?
-#: src/main-window.c:486
-msgid "A_ddress:"
-msgstr "_Ort:"
-
-#: src/main-window.c:514
+#: src/main-window.c:607
 msgid "Warning: You are in super user mode"
 msgstr "Warnung: Sie arbeiten mit Superuser-Rechten"
 
-#: src/main-window.c:935
-msgid "Source code taken from other projects:"
-msgstr "Der Quelltext folgender Projekte wurde benutzt:"
-
-#: src/main-window.c:936
-msgid " * xdgmime: Red Hat, Inc & Jonathan Blandford"
-msgstr " * xdgmime: Red Hat, Inc & Jonathan Blandford"
-
-#: src/main-window.c:937
-msgid " * libmd5-rfc: Aladdin Enterprises"
-msgstr " * libmd5-rfc: Aladdin Enterprises"
-
-#: src/main-window.c:938
-msgid " * Working area detection: Gary Kramlich"
-msgstr ""
-
-#: src/main-window.c:939
-msgid " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
-msgstr " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
-
-#: src/main-window.c:940
-msgid " * Text and icon renderer uese code from Jonathan Blandford"
-msgstr " * Der Text- und Icon-Renderer nutzt Code von Jonathan Blandford"
-
-#: src/main-window.c:941
-msgid " * Desktop icons use code from Brian Tarricone"
-msgstr " * Die Desktop-Symbole nutzen Code von Brian Tarricone"
-
-#. TRANSLATORS: Replace this string with your names, one name per line.
-#: src/main-window.c:945
-msgid "translator-credits"
-msgstr "Rüdiger Arp <ruediger@gmx.net>"
-
-#: src/main-window.c:950
-msgid "PCMan File Manager"
-msgstr "PCMan Datei-Manager"
-
-#: src/main-window.c:951
-msgid "Copyright (C) 2005 - 2006"
-msgstr "Copyright (C) 2005 - 2006"
-
-#: src/main-window.c:952
-msgid ""
-"Lightweight file manager\n"
-"\n"
-"Developed by Hon Jen Yee (PCMan)"
-msgstr ""
-"Ressourcenschonender Datei-Manager\n"
-"\n"
-"Entwicklung von Hon Jen Yee (PCMan)"
-
-#: src/main-window.c:1488
+#: src/main-window.c:1605
 msgid "Terminal program has not been set"
 msgstr "Es wurde noch keine Terminal-Anwendung in den Einstellungen angegeben"
 
-#: src/main-window.c:1535
+#: src/main-window.c:1654
 msgid "gksu or kdesu is not found"
 msgstr "gksu oder kdesu wurden nicht gefunden"
 
-#: src/main-window.c:1612
+#: src/main-window.c:1731
 msgid "_Add to Bookmarks"
 msgstr "_Lesezeichen hinzufügen"
 
-#: src/main-window.c:1613
+#: src/main-window.c:1732
 msgid "_Edit Bookmarks"
 msgstr "L_esezeichen bearbeiten"
 
-#: src/main-window.c:1693
+#: src/main-window.c:1811
 msgid "Loading..."
 msgstr "Lade..."
 
-#: src/main-window.c:1880
+#: src/main-window.c:2003
 #, c-format
 msgid ", Free space: %s (Total: %s )"
-msgstr ", Freier Speicherplatz: %s (Gesamt: %s )"
+msgstr ", freier Speicherplatz: %s (Gesamt: %s )"
 
-#: src/main-window.c:1888
+#: src/main-window.c:2011
 #, c-format
 msgid "%d item selected (%s)%s"
 msgid_plural "%d items selected (%s)%s"
 msgstr[0] "%d Objekt ausgewählt (%s)%s"
 msgstr[1] "%d Objekte ausgewählt (%s)%s"
 
-#: src/main-window.c:1896
+#: src/main-window.c:2019
 #, c-format
 msgid "%d visible item (%d hidden)%s"
 msgid_plural "%d visible items (%d hidden)%s"
 msgstr[0] "%d Objekt angezeigt (%d veborgen)%s"
 msgstr[1] "%d Objekte angezeigt (%d veborgen)%s"
 
-#: src/ptk/ptk-file-browser.c:496
+#: src/ptk/ptk-file-browser.c:504
 msgid "Directory does'nt exist!"
 msgstr "Das Verzeichnis existiert nicht!"
 
-#: src/ptk/ptk-file-browser.c:1336 src/ptk/ptk-file-menu.c:125
+#: src/ptk/ptk-file-browser.c:1383 src/ptk/ptk-file-menu.c:131
 msgid "Open in New _Tab"
 msgstr "In neuem Rei_ter öffnen"
 
-#: src/ptk/ptk-file-browser.c:1337 src/ptk/ptk-file-menu.c:126
+#: src/ptk/ptk-file-browser.c:1384 src/ptk/ptk-file-menu.c:132
 msgid "Open in New _Window"
 msgstr "In neuem _Fenster öffnen"
 
-#: src/ptk/ptk-file-browser.c:1571 src/edit-bookmarks.c:175
+#: src/ptk/ptk-file-browser.c:1632 src/edit-bookmarks.c:175
 msgid "Name"
 msgstr "Name"
 
-#: src/ptk/ptk-file-browser.c:1571
+#: src/ptk/ptk-file-browser.c:1632
 msgid "Size"
 msgstr "Größe"
 
-#: src/ptk/ptk-file-browser.c:1571
+#: src/ptk/ptk-file-browser.c:1632
 msgid "Type"
 msgstr "Typ"
 
-#: src/ptk/ptk-file-browser.c:1572
+#: src/ptk/ptk-file-browser.c:1633
 msgid "Permission"
 msgstr "Zugriffsrechte"
 
-#: src/ptk/ptk-file-browser.c:1572
+#: src/ptk/ptk-file-browser.c:1633
 msgid "Owner:Group"
 msgstr "Besitzer:Gruppe"
 
-#: src/ptk/ptk-file-browser.c:1572
+#: src/ptk/ptk-file-browser.c:1633
 msgid "Last Modification"
 msgstr "Änderungsdatum"
 
-#: src/ptk/ptk-file-browser.c:2607
+#: src/ptk/ptk-file-browser.c:2749
 msgid "Location"
 msgstr "Orte"
 
-#: src/ptk/ptk-file-browser.c:2608
+#: src/ptk/ptk-file-browser.c:2750
 msgid "Directory Tree"
 msgstr "Baum"
 
-#: src/ptk/ptk-location-view.c:142
+#: src/ptk/ptk-location-view.c:177
 msgid "Desktop"
 msgstr "Desktop"
 
-#: src/ptk/ptk-location-view.c:329
+#: src/ptk/ptk-location-view.c:367
 #, c-format
 msgid ""
 "The volume \"%s\" is not mounted.\n"
@@ -438,28 +413,28 @@ msgstr ""
 "Der Datenträger \"%s\" ist nicht im System eingebunden.\n"
 "Möchten Sie ihn jetzt einbinden?"
 
-#: src/ptk/ptk-location-view.c:338 src/ptk/ptk-location-view.c:510
-#: src/ptk/ptk-location-view.c:526
+#: src/ptk/ptk-location-view.c:378 src/ptk/ptk-location-view.c:550
+#: src/ptk/ptk-location-view.c:578
 msgid "Unable to mount device"
 msgstr "Datenträger konnte nicht ins System eingebunden werden"
 
-#: src/ptk/ptk-location-view.c:532
+#: src/ptk/ptk-location-view.c:593
 msgid "Unable to unmount device"
 msgstr "Datenträger konnte nicht ausgehängt werden"
 
-#: src/ptk/ptk-location-view.c:540
+#: src/ptk/ptk-location-view.c:610
 msgid "Unable to eject device"
 msgstr "Datenträger konnte nicht ausgeworfen werden"
 
-#: src/ptk/ptk-location-view.c:592
+#: src/ptk/ptk-location-view.c:670
 msgid "_Mount File System"
 msgstr "_Dateisystem einbinden"
 
-#: src/ptk/ptk-location-view.c:601
+#: src/ptk/ptk-location-view.c:680
 msgid "_Eject"
 msgstr "_Auswerfen"
 
-#: src/ptk/ptk-location-view.c:606
+#: src/ptk/ptk-location-view.c:686
 msgid "_Unmount File System"
 msgstr "_Dateisystem aushängen"
 
@@ -530,23 +505,23 @@ msgid "Cancel the operation?"
 msgstr "Vorgang abbrechen?"
 
 #. Ask the user whether to overwrite dir content or not
-#: src/ptk/ptk-file-task.c:409
+#: src/ptk/ptk-file-task.c:410
 msgid "Do you want to overwrite the folder and its content?"
 msgstr "Möchten Sie diesen Ordner und seinen Inhalt überschreiben?"
 
 #. Ask the user whether to overwrite the file or not
-#: src/ptk/ptk-file-task.c:414
+#: src/ptk/ptk-file-task.c:415
 msgid "Do you want to overwrite this file?"
 msgstr "Möchten Sie diese Datei überschreiben?"
 
 #. Rename is required
-#: src/ptk/ptk-file-task.c:419
+#: src/ptk/ptk-file-task.c:420
 msgid "Please choose a new file name."
 msgstr "Neuen Dateinamen auswählen"
 
 #. Ths first %s is a file name, and the second one represents followed message.
 #. ex: "/home/pcman/some_file" has existed.\n\nDo you want to overwrite existing file?"
-#: src/ptk/ptk-file-task.c:427
+#: src/ptk/ptk-file-task.c:428
 #, c-format
 msgid ""
 "\"%s\" has existed.\n"
@@ -558,7 +533,7 @@ msgstr ""
 "%s"
 
 #. Ths first %s is a file name, and the second one represents followed message.
-#: src/ptk/ptk-file-task.c:432
+#: src/ptk/ptk-file-task.c:433
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -573,53 +548,53 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/ptk/ptk-file-task.c:449
+#: src/ptk/ptk-file-task.c:450
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: src/ptk/ptk-file-task.c:450
+#: src/ptk/ptk-file-task.c:451
 msgid "Overwrite All"
 msgstr "Alle überschreiben"
 
-#: src/ptk/ptk-file-task.c:455
+#: src/ptk/ptk-file-task.c:456
 msgid "Rename"
 msgstr "Umbenennen"
 
-#: src/ptk/ptk-file-task.c:456
+#: src/ptk/ptk-file-task.c:457
 msgid "Skip"
 msgstr "Überspringen"
 
-#: src/ptk/ptk-file-task.c:457
+#: src/ptk/ptk-file-task.c:458
 msgid "Skip All"
 msgstr "Alle überspringen"
 
-#: src/ptk/ptk-file-archiver.c:119
+#: src/ptk/ptk-file-archiver.c:120
 msgid "Save Compressd Files to..."
 msgstr "Archiv speichern unter..."
 
-#: src/ptk/ptk-file-archiver.c:127
+#: src/ptk/ptk-file-archiver.c:128
 msgid "Format of compressed File:"
 msgstr "Format des Archivs:"
 
-#: src/ptk/ptk-file-archiver.c:198
+#: src/ptk/ptk-file-archiver.c:199
 #, c-format
 msgid "Creating Compressed File: %s"
 msgstr "Archiv wird angelegt: %s"
 
-#: src/ptk/ptk-file-archiver.c:201
+#: src/ptk/ptk-file-archiver.c:202
 msgid "Compress Files"
 msgstr "Dateien archivieren"
 
-#: src/ptk/ptk-file-archiver.c:232
+#: src/ptk/ptk-file-archiver.c:233
 msgid "Extract File to..."
 msgstr "Datei entpacken nach..."
 
-#: src/ptk/ptk-file-archiver.c:281
+#: src/ptk/ptk-file-archiver.c:282
 #, c-format
 msgid "Extracting Files to: %s"
 msgstr "Dateien entpacken nach: %s"
 
-#: src/ptk/ptk-file-archiver.c:283
+#: src/ptk/ptk-file-archiver.c:284
 msgid "Extract Files"
 msgstr "A_usführen"
 
@@ -633,58 +608,59 @@ msgstr ""
 
 #: src/ptk/ptk-console-output.c:170
 msgid "Command:"
-msgstr "Befehlszeile:"
+msgstr "Befehl:"
 
-#: src/ptk/ptk-dir-tree.c:174 src/vfs/vfs-volume.c:149
+#: src/ptk/ptk-dir-tree.c:174
 msgid "File System"
-msgstr "_Dateisystem einbinden"
+msgstr "Dateisystem"
 
 #: src/ptk/ptk-dir-tree.c:398
 msgid "No Sub Folder"
-msgstr "Neues Verzeichnis"
+msgstr "Kein Unterverzeichnis"
 
-#: src/ptk/ptk-file-menu.c:99
+#: src/ptk/ptk-file-menu.c:105
 msgid "E_xtract Here"
 msgstr "Hier _entpacken"
 
-#: src/ptk/ptk-file-menu.c:100
+#: src/ptk/ptk-file-menu.c:106
 msgid "Extract _To"
 msgstr "Entpacken _nach"
 
-#: src/ptk/ptk-file-menu.c:106
+#: src/ptk/ptk-file-menu.c:112
 msgid "Open _with..."
 msgstr "Öffnen _mit..."
 
-#: src/ptk/ptk-file-menu.c:114
+#: src/ptk/ptk-file-menu.c:120
 msgid "Compress"
 msgstr "Archiv anlegen"
 
-#: src/ptk/ptk-file-menu.c:115
+#: src/ptk/ptk-file-menu.c:121
 msgid "E_xtract"
 msgstr "A_usführen"
 
-#: src/ptk/ptk-file-menu.c:118
+#: src/ptk/ptk-file-menu.c:124
 msgid "_Properties"
 msgstr "_Eigenschaften"
 
-#: src/ptk/ptk-file-menu.c:127
+#: src/ptk/ptk-file-menu.c:133
 msgid "Open in Terminal"
 msgstr "In Terminal öffnen"
 
-#: src/ptk/ptk-file-menu.c:307
+#: src/ptk/ptk-file-menu.c:345
 msgid "_Open with another program"
 msgstr "_Mit anderer Anwendung öffnen"
 
-#: src/ptk/ptk-file-menu.c:322
+#: src/ptk/ptk-file-menu.c:360
 msgid "E_xecute"
 msgstr "A_usführen"
 
-#: src/ptk/ptk-file-menu.c:331
+#: src/ptk/ptk-file-menu.c:369
 #, c-format
 msgid "_Open with \"%s\""
 msgstr "Öffnen _mit \"%s\""
 
-#: src/ptk/ptk-file-menu.c:342 src/ptk/ptk-file-menu.c:348
+#. delete some confusing menu item if this menu is for current folder
+#: src/ptk/ptk-file-menu.c:380 src/ptk/ptk-file-menu.c:389
 msgid "_Open"
 msgstr "Ö_ffnen"
 
@@ -692,16 +668,16 @@ msgstr "Ö_ffnen"
 msgid "Really delete selected files?"
 msgstr "Ausgewählte Objekte löschen?"
 
-#: src/ptk/ptk-file-misc.c:109
+#: src/ptk/ptk-file-misc.c:115
 msgid "Rename File"
 msgstr "Datei umbenennen"
 
-#: src/ptk/ptk-file-misc.c:110
+#: src/ptk/ptk-file-misc.c:116
 msgid "Please input new file name:"
 msgstr "Dateiname eingeben:"
 
-#: src/ptk/ptk-file-misc.c:138 src/ptk/ptk-file-misc.c:156
-#: src/ptk/ptk-file-misc.c:206
+#: src/ptk/ptk-file-misc.c:145 src/ptk/ptk-file-misc.c:166
+#: src/ptk/ptk-file-misc.c:219
 msgid ""
 "The file name you specified has existed.\n"
 "Please input a new one:"
@@ -709,216 +685,58 @@ msgstr ""
 "Der angegebene Dateiname existiert bereits.\n"
 "Bitte geben Sie einen neuen Namen ein:"
 
-#: src/ptk/ptk-file-misc.c:176 src/ptk/ptk-file-misc.c:178
+#: src/ptk/ptk-file-misc.c:189 src/ptk/ptk-file-misc.c:191
 msgid "New Folder"
 msgstr "Neues Verzeichnis"
 
-#: src/ptk/ptk-file-misc.c:177
+#: src/ptk/ptk-file-misc.c:190
 msgid "Input a name for the new folder:"
 msgstr "Name für neuen Ordner eingeben:"
 
-#: src/ptk/ptk-file-misc.c:183 src/ptk/ptk-file-misc.c:185
+#: src/ptk/ptk-file-misc.c:196 src/ptk/ptk-file-misc.c:198
 msgid "New File"
 msgstr "Neue Datei"
 
-#: src/ptk/ptk-file-misc.c:184
+#: src/ptk/ptk-file-misc.c:197
 msgid "Input a name for the new file:"
 msgstr "Dateiname eingeben:"
 
-#: src/ptk/ptk-file-misc.c:228
+#: src/ptk/ptk-file-misc.c:253
 msgid "The new file cannot be created!"
 msgstr "Die neue Datei konnte nicht angelegt werden!"
 
-#: src/file-properties-ui.c:83
-msgid "File Properties"
-msgstr "Eigenschaften"
-
-#: src/file-properties-ui.c:103
-msgid "File Name:"
-msgstr "Dateiname:"
-
-#: src/file-properties-ui.c:110
-msgid "File Type:"
-msgstr "Typ:"
-
-#: src/file-properties-ui.c:117
-msgid "Total Size of Files:"
-msgstr "Datei-Gesamtgröße:"
-
-#: src/file-properties-ui.c:124
-msgid "Last Modification:"
-msgstr "Geändert:"
-
-#: src/file-properties-ui.c:158
-msgid "Last Access:"
-msgstr "Zugegriffen:"
-
-#: src/file-properties-ui.c:172
-msgid "Location:"
-msgstr "Ort:"
-
-#: src/file-properties-ui.c:194
-msgid "Size on Disk:"
-msgstr "Benutzter Speicherplatz:"
-
-#: src/file-properties-ui.c:210
-msgid "Open with:"
-msgstr "Öffnen mit:"
-
-#: src/file-properties-ui.c:223 src/pref-dialog-ui.c:212
-msgid "_General"
-msgstr "_Allgemein"
-
-#: src/file-properties-ui.c:238 src/file-properties-ui.c:273
-msgid "Owner:"
-msgstr "Besitzer:"
-
-#: src/file-properties-ui.c:244 src/file-properties-ui.c:280
-msgid "Group:"
-msgstr "Gruppe:"
-
-#: src/file-properties-ui.c:287
-msgid "Other Users:"
-msgstr "Andere:"
-
-#: src/file-properties-ui.c:294 src/file-properties-ui.c:301
-#: src/file-properties-ui.c:308
-msgid "Read"
-msgstr "Lesen"
-
-#: src/file-properties-ui.c:315 src/file-properties-ui.c:322
-#: src/file-properties-ui.c:329
-msgid "Write"
-msgstr "Schreiben"
-
-#: src/file-properties-ui.c:336 src/file-properties-ui.c:343
-#: src/file-properties-ui.c:350
-msgid "Execute"
-msgstr "Ausführen"
-
-#. This is used in file attribute
-#: src/file-properties-ui.c:358
-msgid "Set UID"
-msgstr "Benutzerkennung festlegen"
-
-#. This is used in file attribute
-#: src/file-properties-ui.c:366
-msgid "Set GID"
-msgstr "Gruppenkennung festlegen"
-
-#. This is used in file attribute
-#: src/file-properties-ui.c:374
-msgid "Sticky"
-msgstr "Klebrig"
-
-#: src/file-properties-ui.c:387
-msgid "_Permissions"
-msgstr "_Zugriffsrechte"
-
-#: src/file-properties.c:286
+#: src/file-properties.c:303
 msgid "Multiple files are selected"
 msgstr "Mehrere Dateien ausgewählt"
 
-#: src/file-properties.c:364
+#: src/file-properties.c:381
 msgid "Multiple files of different types"
 msgstr "Mehrere Dateien verschiedenen Typs ausgewählt"
 
-#: src/file-properties.c:431
+#: src/file-properties.c:449
 msgid "Other program..."
 msgstr "Andere Anwendung..."
 
 #. The total file size displayed in "File Properties" is not
 #. completely calculated yet. So "Calculating..." is displayed.
-#: src/file-properties.c:515
+#: src/file-properties.c:543
 msgid "Calculating..."
 msgstr "Dateigröße wird berechnet..."
 
-#: src/file-properties.c:657
+#: src/file-properties.c:695
 msgid "Invalid User"
 msgstr "Ungültiger Benutzername"
 
-#: src/file-properties.c:668
+#: src/file-properties.c:706
 msgid "Invalid Group"
 msgstr "Ungültige Gruppe"
 
-#: src/file-properties.c:716
+#: src/file-properties.c:754
 msgid ""
 "Do you want to recursively apply these changes to all files and sub-folders?"
 msgstr ""
 "Möchten Sie diese Änderungen rekursiv auf alle Dateien und "
 "Unterverzeichnisse anwenden?"
-
-#: src/pref-dialog-ui.c:78
-msgid "Preference"
-msgstr "Einstellungen"
-
-#: src/pref-dialog-ui.c:100
-msgid "On-disk file name encoding:"
-msgstr "Kodierung von Dateinamen auf diesem System:"
-
-#: src/pref-dialog-ui.c:116
-msgid "Bookmarks:"
-msgstr "Lesezeichen:"
-
-#: src/pref-dialog-ui.c:123
-msgid "Opened in Current Tab"
-msgstr "In aktuellem Reiter öffnen"
-
-#: src/pref-dialog-ui.c:124
-msgid "Opened in New Tab"
-msgstr "In neuem Reiter öffnen"
-
-#: src/pref-dialog-ui.c:125
-msgid "Opened in New Window"
-msgstr "In neuem Fenster öffnen"
-
-#: src/pref-dialog-ui.c:132
-msgid "Icon Theme:"
-msgstr "Symbole:"
-
-#: src/pref-dialog-ui.c:145
-msgid "Size of Big Icons:"
-msgstr "Symbolansicht:"
-
-#: src/pref-dialog-ui.c:160
-msgid "Size of Small Icons:"
-msgstr "Listenansicht:"
-
-#: src/pref-dialog-ui.c:176
-msgid "Display image files with supported format as thumbnails"
-msgstr "Unterstützte Bildformate als Miniatur-Vorschaubilder anzeigen"
-
-#: src/pref-dialog-ui.c:185
-msgid "Max size of files displayed as thumbnails:"
-msgstr "Max. Größe für anzuzeigende Miniatur-Vorschaubilder:"
-
-#: src/pref-dialog-ui.c:204
-msgid "Terminal:"
-msgstr "Terminal:"
-
-#: src/pref-dialog-ui.c:221
-msgid "Show file icons on desktop"
-msgstr "Dateisymbole auf dem Desktop anzeigen"
-
-#: src/pref-dialog-ui.c:229
-msgid "Wallpaper:"
-msgstr "Desktop-Hintergrund:"
-
-#: src/pref-dialog-ui.c:233
-msgid "Please select an image file"
-msgstr "Bitte eine Bilddatei auswählen"
-
-#: src/pref-dialog-ui.c:246
-msgid "Background Color"
-msgstr "Hintergrundfarbe"
-
-#: src/pref-dialog-ui.c:258
-msgid "Text Color"
-msgstr "Textfarbe"
-
-#: src/pref-dialog-ui.c:266
-msgid "_Desktop"
-msgstr "_Desktop"
 
 #: src/edit-bookmarks.c:59
 msgid "New Item"
@@ -936,125 +754,85 @@ msgstr "Pfad"
 msgid "Use drag & drop to sort the items"
 msgstr "Lesezeichen können durch Ziehen und Ablegen sortiert werden"
 
-#: src/app-chooser-dialog-ui.c:61
-msgid "Choose an Application"
-msgstr "Anwendung auswählen"
-
-#: src/app-chooser-dialog-ui.c:73
-msgid "File Type To be Opened:"
-msgstr "Zu öffnender Dateityp:"
-
-#: src/app-chooser-dialog-ui.c:82
-msgid ""
-"Please choose an application from following lists or enter the command line "
-"by hand:"
-msgstr ""
-"Bitte wählen Sie eine Anwendung aus der Liste aus, oder geben Sie den Pfad "
-"dorthin manuell ein:"
-
-#: src/app-chooser-dialog-ui.c:103
-msgid "_Recommended Applications"
-msgstr "_Empfohlene Anwendungen"
-
-#: src/app-chooser-dialog-ui.c:118
-msgid "_All Applications"
-msgstr "_Alle Anwendungen"
-
-#: src/app-chooser-dialog-ui.c:127
-msgid "_Command Line: "
-msgstr "_Befehlszeile: "
-
-#: src/app-chooser-dialog-ui.c:152
-msgid "_Browse"
-msgstr "_Durchsuchen"
-
-#: src/app-chooser-dialog-ui.c:161
-msgid "Opened in Terminal"
-msgstr "In Terminal ausführen"
-
-#: src/app-chooser-dialog-ui.c:165
-msgid "Set selected application to default action"
-msgstr "Die ausgewählte Anwendung als Standard benutzen"
-
 #. mime-type: application
-#: src/file-assoc-dlg.c:36
+#: src/file-assoc-dlg.c:35
 msgid "application"
 msgstr "Anwendung"
 
 #. mime-type: audio
-#: src/file-assoc-dlg.c:39
+#: src/file-assoc-dlg.c:38
 msgid "audio"
 msgstr "Audio"
 
 #. mime-type: video
-#: src/file-assoc-dlg.c:42
+#: src/file-assoc-dlg.c:41
 msgid "video"
 msgstr "Video"
 
 #. mime-type: text
-#: src/file-assoc-dlg.c:45
+#: src/file-assoc-dlg.c:44
 msgid "text"
 msgstr "Text"
 
 #. mime-type: multipart
-#: src/file-assoc-dlg.c:48
+#: src/file-assoc-dlg.c:47
 msgid "multipart"
 msgstr "Multipart"
 
 #. mime-type: image
-#: src/file-assoc-dlg.c:51
+#: src/file-assoc-dlg.c:50
 msgid "image"
 msgstr "Bild"
 
 #. mime-type: message
-#: src/file-assoc-dlg.c:54
+#: src/file-assoc-dlg.c:53
 msgid "message"
 msgstr "Nachricht"
 
 #. mime-type: model
-#: src/file-assoc-dlg.c:57
+#: src/file-assoc-dlg.c:56
 msgid "model"
 msgstr "Modell"
 
 #. mime-type: inode
-#: src/file-assoc-dlg.c:60
+#: src/file-assoc-dlg.c:59
 msgid "inode"
 msgstr "Inode"
 
 #. mime-type: packages
-#: src/file-assoc-dlg.c:63
+#: src/file-assoc-dlg.c:62
 msgid "packages"
 msgstr "Pakete"
 
-#: src/file-assoc-dlg-ui.c:72
+#: src/file-assoc-dlg-ui.c:73
 msgid "File Associations"
 msgstr "Dateizuordnungen"
 
-#: src/file-assoc-dlg-ui.c:90
+#: src/file-assoc-dlg-ui.c:91
 msgid "Known File Types:"
 msgstr "Bekannte Dateitypen:"
 
-#: src/file-assoc-dlg-ui.c:111
+#: src/file-assoc-dlg-ui.c:112
 msgid "Actions Showed in Popup Menus"
 msgstr "In Popup-Menüs anzuzeigende Aktionen"
 
-#: src/file-assoc-dlg-ui.c:153
+#: src/file-assoc-dlg-ui.c:154
 msgid "Add _Application"
 msgstr "_Anwendung hinzufügen"
 
-#: src/file-assoc-dlg-ui.c:173
+#: src/file-assoc-dlg-ui.c:174
 msgid "Add _Custom Action"
 msgstr "_Benutzerdefinierte Aktion hinzufügen"
 
-#: src/file-assoc-dlg-ui.c:201
+#: src/file-assoc-dlg-ui.c:202
 msgid "Move _Up"
 msgstr "Nach _oben"
 
-#: src/file-assoc-dlg-ui.c:221
+#: src/file-assoc-dlg-ui.c:222
 msgid "Move _Down"
 msgstr "Nach _unten"
 
-#: src/vfs/vfs-app-desktop.c:408
+#: src/vfs/vfs-app-desktop.c:427
 #, c-format
 msgid "Command not found"
 msgstr "Befehl nicht gefunden"
@@ -1063,3 +841,553 @@ msgstr "Befehl nicht gefunden"
 #, c-format
 msgid "Destination directory \"%1$s\" is contained in source \"%2$s\""
 msgstr "Der Zielordner \"%1$s\" befindet sich im Quellordner \"%2$s\""
+
+#: src/vfs/vfs-volume-hal.c:459 src/vfs/vfs-volume-hal.c:682
+#, c-format
+msgid "%s Volume"
+msgstr "Datenträger %s"
+
+#: src/vfs/vfs-volume-hal.c:474
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: src/vfs/vfs-volume-hal.c:476
+msgid "CD-R"
+msgstr "CD-R"
+
+#: src/vfs/vfs-volume-hal.c:478
+msgid "CD-RW"
+msgstr "CD-RW"
+
+#: src/vfs/vfs-volume-hal.c:482
+msgid "DVD-ROM"
+msgstr "DVD-ROM"
+
+#: src/vfs/vfs-volume-hal.c:484
+msgid "DVD+R"
+msgstr "DVD+R"
+
+#: src/vfs/vfs-volume-hal.c:486
+msgid "DVD+RW"
+msgstr "DVD+RW"
+
+#: src/vfs/vfs-volume-hal.c:488
+msgid "DVD-R"
+msgstr "DVD-R"
+
+#: src/vfs/vfs-volume-hal.c:490
+msgid "DVD-RW"
+msgstr "DVD-RW"
+
+#: src/vfs/vfs-volume-hal.c:492
+msgid "DVD-RAM"
+msgstr "DVD-RAM"
+
+#: src/vfs/vfs-volume-hal.c:501
+#, c-format
+msgid "%s/%s Drive"
+msgstr "Laufwerk %s/%s"
+
+#: src/vfs/vfs-volume-hal.c:503
+#, c-format
+msgid "%s Drive"
+msgstr "Laufwerk %s"
+
+#: src/vfs/vfs-volume-hal.c:508
+msgid "Floppy Drive"
+msgstr "Diskettenlaufwerk"
+
+#: src/vfs/vfs-volume-hal.c:511
+msgid "Compact Flash Drive"
+msgstr "CompactFlash-Laufwerk"
+
+#: src/vfs/vfs-volume-hal.c:513
+msgid "Memory Stick Drive"
+msgstr "Memory-Stick-Laufwerk"
+
+#: src/vfs/vfs-volume-hal.c:515
+msgid "Smart Media Drive"
+msgstr "SmartMedia-Laufwerk"
+
+#: src/vfs/vfs-volume-hal.c:517
+msgid "SD/MMC Drive"
+msgstr "SD-/MMC-Laufwerk"
+
+#: src/vfs/vfs-volume-hal.c:519
+msgid "Zip Drive"
+msgstr "Zip-Laufwerk"
+
+#: src/vfs/vfs-volume-hal.c:522
+msgid "Jaz Drive"
+msgstr "Jaz-Laufwerk"
+
+#: src/vfs/vfs-volume-hal.c:525
+msgid "Pen Drive"
+msgstr "USB-Stick"
+
+#: src/vfs/vfs-volume-hal.c:531
+#, c-format
+msgid "%s %s Music Player"
+msgstr "Musik-Player %s %s"
+
+#: src/vfs/vfs-volume-hal.c:539
+#, c-format
+msgid "%s %s Digital Camera"
+msgstr "Digitalkamera %s %s"
+
+#: src/vfs/vfs-volume-hal.c:570
+msgid "Drive"
+msgstr "Laufwerk"
+
+#: src/vfs/vfs-volume-hal.c:575
+#, c-format
+msgid "External %s"
+msgstr ""
+
+#: src/vfs/vfs-volume-hal.c:609
+msgid "CD-ROM Disc"
+msgstr "CD-ROM-Medium"
+
+#: src/vfs/vfs-volume-hal.c:614
+msgid "Blank CD-R Disc"
+msgstr "Leeres CD-R-Medium"
+
+#: src/vfs/vfs-volume-hal.c:616
+msgid "CD-R Disc"
+msgstr "CD-R-Medium"
+
+#: src/vfs/vfs-volume-hal.c:621
+msgid "Blank CD-RW Disc"
+msgstr "Leeres CD-RW-Medium"
+
+#: src/vfs/vfs-volume-hal.c:623
+msgid "CD-RW Disc"
+msgstr "CD-RW-Medium"
+
+#: src/vfs/vfs-volume-hal.c:627
+msgid "DVD-ROM Disc"
+msgstr "DVD-ROM-Medium"
+
+#: src/vfs/vfs-volume-hal.c:632
+msgid "Blank DVD-RAM Disc"
+msgstr "Leeres DVD-RAM-Medium"
+
+#: src/vfs/vfs-volume-hal.c:634
+msgid "DVD-RAM Disc"
+msgstr "DVD-RAM-Medium"
+
+#: src/vfs/vfs-volume-hal.c:639
+msgid "Blank DVD-R Disc"
+msgstr "Leeres DVD-R-Medium"
+
+#: src/vfs/vfs-volume-hal.c:641
+msgid "DVD-R Disc"
+msgstr "DVD-R-Medium"
+
+#: src/vfs/vfs-volume-hal.c:646
+msgid "Blank DVD-RW Disc"
+msgstr "Leeres DVD-RW-Medium"
+
+#: src/vfs/vfs-volume-hal.c:648
+msgid "DVD-RW Disc"
+msgstr "DVD-RW-Medium"
+
+#: src/vfs/vfs-volume-hal.c:654
+msgid "Blank DVD+R Disc"
+msgstr "Leeres DVD+R-Medium"
+
+#: src/vfs/vfs-volume-hal.c:656
+msgid "DVD+R Disc"
+msgstr "DVD+R-Medium"
+
+#: src/vfs/vfs-volume-hal.c:661
+msgid "Blank DVD+RW Disc"
+msgstr "Leeres DVD+RW-Medium"
+
+#: src/vfs/vfs-volume-hal.c:663
+msgid "DVD+RW Disc"
+msgstr "DVD+RW-Medium"
+
+#: src/vfs/vfs-volume-hal.c:670
+msgid "Audio Disc"
+msgstr "Audio-CD"
+
+#: src/vfs/vfs-volume-hal.c:680
+#, c-format
+msgid "%s Removable Volume"
+msgstr "Wechselmedium %s"
+
+#: src/vfs/vfs-volume-hal.c:688
+msgid "Volume"
+msgstr "Datenträger"
+
+#: src/vfs/vfs-volume-hal.c:1084
+#, c-format
+msgid "Failed to connect to the HAL daemon: %s"
+msgstr "Fehler bei Verbindung zum HAL-Daemon: %s"
+
+#. definitely not a device that we're able to mount, eject or unmount
+#: src/vfs/vfs-volume-hal.c:1924 src/vfs/vfs-volume-hal.c:1980
+#, c-format
+msgid "Given device \"%s\" is not a volume or drive"
+msgstr "Das angegebene Gerät \"%s\" ist kein Datenträger oder Laufwerk"
+
+#. tell the caller that no matching device was found
+#: src/vfs/vfs-volume-hal.c:2056
+#, c-format
+msgid "Device \"%s\" not found in file system device table"
+msgstr "Das Gerät \"%s\" wurde nicht in der Dateisystemtabelle gefunden"
+
+#: src/vfs/vfs-volume-hal.c:2226
+#, c-format
+msgid "You are not privileged to mount the volume \"%s\""
+msgstr ""
+"Sie haben nicht die nötigen Zugriffsrechte, um den Datenträger \"%s\" "
+"einzubinden"
+
+#: src/vfs/vfs-volume-hal.c:2227
+#, c-format
+msgid "You are not privileged to unmount the volume \"%s\""
+msgstr ""
+"Sie haben nicht die nötigen Zugriffsrechte, um den Datenträger \"%s\" "
+"auszuhängen"
+
+#: src/vfs/vfs-volume-hal.c:2228
+#, c-format
+msgid "You are not privileged to eject the volume \"%s\""
+msgstr ""
+"Sie haben nicht die nötigen Zugriffsrechte, um den Datenträger \"%s\" "
+"auszuwerfen"
+
+#. TODO: slim down mount options to what is allowed, cf. volume.mount.valid_options
+#: src/vfs/vfs-volume-hal.c:2240
+#, c-format
+msgid "Invalid mount option when attempting to mount the volume \"%s\""
+msgstr "Ungültige Mount-Option beim Einbinden des Datenträgers \"%s\""
+
+#: src/vfs/vfs-volume-hal.c:2242
+#, c-format
+msgid ""
+"The volume \"%s\" uses the <i>%s</i> file system which is not supported by "
+"your system"
+msgstr ""
+"Auf dem Datenträger \"%s\" wird das Dateisystem <i>%s</i> verwendet, das "
+"nicht von Ihrem System unterstützt wird"
+
+#: src/vfs/vfs-volume-hal.c:2244
+#, c-format
+msgid "An application is preventing the volume \"%s\" from being unmounted"
+msgstr ""
+"Das Aushängen des Datenträgers \"%s\" wird durch eine Anwendung verhindert"
+
+#: src/vfs/vfs-volume-hal.c:2246
+#, c-format
+msgid "The volume \"%s\" is not mounted"
+msgstr "Der Datenträger \"%s\" ist nicht im System eingebunden"
+
+#: src/vfs/vfs-volume-hal.c:2248
+#, c-format
+msgid "Error <i>%s</i>"
+msgstr "Fehler <i>%s</i>"
+
+#. TRANSLATORS: HAL can only unmount volumes that were mounted via HAL.
+#: src/vfs/vfs-volume-hal.c:2251
+#, c-format
+msgid "The volume \"%s\" was probably mounted manually on the command line"
+msgstr ""
+"Der Datenträger \"%s\" wurde möglicherweise manuell über eine Befehlszeile "
+"eingebunden"
+
+#: src/vfs/vfs-volume-hal.c:2259
+#, c-format
+msgid ""
+"Blank discs cannot be mounted, use a CD recording application to record "
+"audio or data on the disc"
+msgstr ""
+"Leere Medien können nicht ins System eingebunden werden. Verwenden Sie ein "
+"Brennprogramm, um Audio- oder Datendateien auf den Datenträger zu kopieren"
+
+#: src/vfs/vfs-volume-hal.c:2270
+#, c-format
+msgid "Audio CDs cannot be mounted, use music players to play the audio tracks"
+msgstr ""
+"Audio-CDs können nicht eingebunden werden. Verwenden Sie Ihren Musik-Player, "
+"um Musik abzuspielen."
+
+#: data/ui/prefdlg.glade:7
+msgid "Preference"
+msgstr "Einstellungen"
+
+#: data/ui/prefdlg.glade:30
+msgid "On-disk file name encoding:"
+msgstr "Kodierung von Dateinamen auf diesem System:"
+
+#: data/ui/prefdlg.glade:62
+msgid "Bookmarks:"
+msgstr "Lesezeichen:"
+
+#: data/ui/prefdlg.glade:72
+msgid ""
+"Opened in Current Tab\n"
+"Opened in New Tab\n"
+"Opened in New Window"
+msgstr ""
+
+#: data/ui/prefdlg.glade:94
+msgid "Size of Big Icons:"
+msgstr "Symbolansicht:"
+
+#: data/ui/prefdlg.glade:121
+msgid "Size of Small Icons:"
+msgstr "Listenansicht:"
+
+#: data/ui/prefdlg.glade:155
+msgid "Display image files with supported format as thumbnails"
+msgstr "Unterstützte Bildformate als Miniatur-Vorschaubilder anzeigen"
+
+#: data/ui/prefdlg.glade:174
+msgid "Max size of files displayed as thumbnails:"
+msgstr "Max. Größe für anzuzeigende Miniatur-Vorschaubilder:"
+
+#: data/ui/prefdlg.glade:218
+msgid "Terminal:"
+msgstr "Terminal:"
+
+#: data/ui/prefdlg.glade:252 data/ui/file_properties.glade:254
+msgid "_General"
+msgstr "_Allgemein"
+
+#: data/ui/prefdlg.glade:268
+msgid "Show file icons on desktop"
+msgstr "Dateisymbole auf dem Desktop anzeigen"
+
+#: data/ui/prefdlg.glade:287
+msgid "Wallpaper:"
+msgstr "Desktop-Hintergrund:"
+
+#: data/ui/prefdlg.glade:300
+msgid "Please select an image file"
+msgstr "Bitte eine Bilddatei auswählen"
+
+#: data/ui/prefdlg.glade:325
+msgid "Background Color"
+msgstr "Hintergrundfarbe"
+
+#: data/ui/prefdlg.glade:357
+msgid "Text Color"
+msgstr "Textfarbe"
+
+#: data/ui/prefdlg.glade:395
+msgid "_Desktop"
+msgstr "_Desktop"
+
+#: data/ui/file_properties.glade:7
+msgid "File Properties"
+msgstr "Eigenschaften"
+
+#: data/ui/file_properties.glade:45
+msgid "Open with:"
+msgstr "Öffnen mit:"
+
+#: data/ui/file_properties.glade:74
+msgid "Size on Disk:"
+msgstr "Benutzter Speicherplatz:"
+
+#: data/ui/file_properties.glade:115
+msgid "Location:"
+msgstr "Ort:"
+
+#: data/ui/file_properties.glade:142
+msgid "Last Access:"
+msgstr "Zugegriffen:"
+
+#: data/ui/file_properties.glade:203
+msgid "Last Modification:"
+msgstr "Geändert:"
+
+#: data/ui/file_properties.glade:216
+msgid "Total Size of Files:"
+msgstr "Datei-Gesamtgröße:"
+
+#: data/ui/file_properties.glade:229
+msgid "File Type:"
+msgstr "Typ:"
+
+#: data/ui/file_properties.glade:242
+msgid "File Name:"
+msgstr "Dateiname:"
+
+#: data/ui/file_properties.glade:302 data/ui/file_properties.glade:594
+msgid "Group:"
+msgstr "Gruppe:"
+
+#: data/ui/file_properties.glade:314 data/ui/file_properties.glade:607
+msgid "Owner:"
+msgstr "Besitzer:"
+
+#: data/ui/file_properties.glade:362
+msgid "Sticky"
+msgstr "Klebrig"
+
+#: data/ui/file_properties.glade:381
+msgid "Set GID"
+msgstr "Gruppenkennung festlegen"
+
+#: data/ui/file_properties.glade:400
+msgid "Set UID"
+msgstr "Benutzerkennung festlegen"
+
+#: data/ui/file_properties.glade:417 data/ui/file_properties.glade:436
+#: data/ui/file_properties.glade:455
+msgid "Execute"
+msgstr "Ausführen"
+
+#: data/ui/file_properties.glade:472 data/ui/file_properties.glade:491
+#: data/ui/file_properties.glade:510
+msgid "Write"
+msgstr "Schreiben"
+
+#: data/ui/file_properties.glade:527 data/ui/file_properties.glade:546
+#: data/ui/file_properties.glade:565
+msgid "Read"
+msgstr "Lesen"
+
+#: data/ui/file_properties.glade:581
+msgid "Other Users:"
+msgstr "Andere:"
+
+#: data/ui/file_properties.glade:628
+msgid "_Permissions"
+msgstr "_Zugriffsrechte"
+
+#: data/ui/appchooserdlg.glade:6
+msgid "Choose an Application"
+msgstr "Anwendung auswählen"
+
+#: data/ui/appchooserdlg.glade:23
+msgid "File Type To be Opened:"
+msgstr "Zu öffnender Dateityp:"
+
+#: data/ui/appchooserdlg.glade:52
+msgid ""
+"Please choose an application from following lists or enter the command line "
+"by hand:"
+msgstr ""
+"Bitte wählen Sie eine Anwendung aus der Liste aus, oder geben Sie den Pfad "
+"dorthin manuell ein:"
+
+#: data/ui/appchooserdlg.glade:87
+msgid "_Recommended Applications"
+msgstr "_Empfohlene Anwendungen"
+
+#: data/ui/appchooserdlg.glade:117
+msgid "_All Applications"
+msgstr "_Alle Anwendungen"
+
+#: data/ui/appchooserdlg.glade:139
+msgid "_Command Line: "
+msgstr "_Befehlszeile: "
+
+#: data/ui/appchooserdlg.glade:186
+msgid "_Browse"
+msgstr "_Durchsuchen"
+
+#: data/ui/appchooserdlg.glade:221
+msgid "Opened in Terminal"
+msgstr "In Terminal ausführen"
+
+#: data/ui/appchooserdlg.glade:235
+msgid "Set selected application to default action"
+msgstr "Die ausgewählte Anwendung als Standard benutzen"
+
+#: data/ui/about-dlg.glade:11
+msgid "Copyright (C) 2005 - 2006"
+msgstr "Copyright (C) 2005 - 2006"
+
+#: data/ui/about-dlg.glade:12
+msgid ""
+"Lightweight file manager\n"
+"\n"
+"Developed by Hon Jen Yee (PCMan)"
+msgstr ""
+"Ressourcenschonender Datei-Manager\n"
+"\n"
+"Entwicklung von Hon Jen Yee (PCMan)"
+
+#: data/ui/about-dlg.glade:33
+msgid ""
+"洪任諭 Hong Jen Yee <pcman.tw@gmail.com>\n"
+"\n"
+"Source code taken from other projects:\n"
+" * libmd5-rfc: Aladdin Enterprises\n"
+" * Working area detection: Gary Kramlich\n"
+" * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer\n"
+" * Text and icon renderer uese code from Jonathan Blandford\n"
+" * Desktop icons use code from Brian Tarricone\n"
+" * Volume management uses code from following projects/authors:\n"
+"     * gnome-vfs: David Zeuthen\n"
+"     * thunar-vfs and libexo: Benedikt Meurer\n"
+"     * gnome-mount: David Zeuthen"
+msgstr ""
+
+#: data/ui/about-dlg.glade:45
+msgid "translator-credits"
+msgstr "Rüdiger Arp <ruediger@gmx.net>"
+
+#: data/ui/about-dlg.glade:46
+msgid ""
+"The icon was taken from \"nuoveXT 2\" icon theme\n"
+"created by Alexandre Moore (saki).\n"
+"http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625"
+msgstr ""
+
+#~ msgid "Source code taken from other projects:"
+#~ msgstr "Der Quelltext folgender Projekte wurde verwendet:"
+
+#~ msgid " * libmd5-rfc: Aladdin Enterprises"
+#~ msgstr " * libmd5-rfc: Aladdin Enterprises"
+
+#~ msgid " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
+#~ msgstr ""
+#~ " * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer"
+
+#~ msgid " * Text and icon renderer uese code from Jonathan Blandford"
+#~ msgstr ""
+#~ " * Für den Text- und Icon-Renderer wurde Code von Jonathan Blandford "
+#~ "verwendet"
+
+#~ msgid " * Desktop icons use code from Brian Tarricone"
+#~ msgstr " * Für die Desktop-Symbole wurde Code von Brian Tarricone verwendet"
+
+#~ msgid ""
+#~ " * Volume management uses code from following projects/authors:\n"
+#~ "     * gnome-vfs: David Zeuthen,\n"
+#~ "     * thunar-vfs and libexo: Benedikt Meurer\n"
+#~ "     * gnome-mount: David Zeuthen"
+#~ msgstr ""
+#~ " * Die Datenträgerverwaltung verwendet Code folgender Projekte/"
+#~ "Entwickler:\n"
+#~ "     * gnome-vfs: David Zeuthen,\n"
+#~ "     * thunar-vfs und libexo: Benedikt Meurer\n"
+#~ "     * gnome-mount: David Zeuthen"
+
+#~ msgid "PCMan File Manager"
+#~ msgstr "PCMan Datei-Manager"
+
+#~ msgid "Opened in Current Tab"
+#~ msgstr "In aktuellem Reiter öffnen"
+
+#~ msgid "Opened in New Tab"
+#~ msgstr "In neuem Reiter öffnen"
+
+#~ msgid "Opened in New Window"
+#~ msgstr "In neuem Fenster öffnen"
+
+#~ msgid "Icon Theme:"
+#~ msgstr "Symbole:"
+
+#~ msgid "A_ddress:"
+#~ msgstr "_Ort:"
+
+#~ msgid " * xdgmime: Red Hat, Inc & Jonathan Blandford"
+#~ msgstr " * xdgmime: Red Hat, Inc & Jonathan Blandford"

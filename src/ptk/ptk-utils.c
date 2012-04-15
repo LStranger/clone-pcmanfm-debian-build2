@@ -153,7 +153,7 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
           btn = GTK_WIDGET(gtk_menu_tool_button_new_from_stock ( ent->label ));
         else {
           btn = GTK_WIDGET(gtk_menu_tool_button_new ( image, _(ent->label) ));
-          if( G_LIKELY( ent->menu ) )  { /* Sub menu */
+          if( G_LIKELY( 3 < (int)ent->menu ) )  { /* Sub menu */
             menu = ptk_menu_new_from_data( ent->menu, cb_data, NULL );
             gtk_menu_tool_button_set_menu( GTK_MENU_TOOL_BUTTON(btn), menu );
           }
@@ -161,7 +161,7 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
       }
 
       if( G_LIKELY(ent->callback) )  { /* Callback */
-        if( G_LIKELY( ent->menu == NULL ) )
+        if( G_LIKELY( ent->menu == NULL || ent->menu == PTK_EMPTY_MENU) )
           g_signal_connect( btn, "clicked", ent->callback, cb_data);
         else
           g_signal_connect( btn, "toggled", ent->callback, cb_data);
@@ -187,9 +187,11 @@ GtkWidget* ptk_toolbar_add_items_from_data( GtkWidget* toolbar,
   return NULL;
 }
 
-void ptk_show_error(GtkWindow* parent, const char* message )
+void ptk_show_error(GtkWindow* parent, const char* title, const char* message )
 {
   GtkWidget* dlg = gtk_message_dialog_new(parent, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, message);
+  if( title )
+    gtk_window_set_title( (GtkWindow*)dlg, title );
   gtk_dialog_run( GTK_DIALOG(dlg) );
   gtk_widget_destroy( dlg );
 }

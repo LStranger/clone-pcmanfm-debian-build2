@@ -15,9 +15,10 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
+#include "private.h"
+
 #include "file-assoc-dlg.h"
 #include "file-assoc-dlg-ui.h"
-#include "glade-support.h"
 
 #define GLADE_HOOKUP_OBJECT(component,widget,name) \
   g_object_set_data_full (G_OBJECT (component), name, \

@@ -13,11 +13,11 @@
 #include "edit-bookmarks.h"
 #include "ptk-bookmarks.h"
 
+#include "private.h"
+
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <string.h>
-
-#include "glade-support.h"
 
 enum{
     COL_ICON = 0,

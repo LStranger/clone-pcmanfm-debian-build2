@@ -1,7 +1,7 @@
 /*
 *  C Implementation: vfs-execute
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
@@ -114,22 +114,26 @@ gboolean vfs_exec_on_screen( GdkScreen* screen,
     char** new_env = envp;
     int i, n_env = 0;
     char* display_name;
-    int display_index = -1;
+    int display_index = -1, startup_id_index = -1;
     time_t cur_time;
 
     if ( ! envp )
         envp = environ;
 
-    while ( envp[ n_env ] )
-        ++n_env;
+    n_env = g_strv_length(envp);
 
-    new_env = g_new( char*, n_env + 2 );
+    new_env = g_new0( char*, n_env + 4 );
     for ( i = 0; i < n_env; ++i )
     {
-        if ( strncmp( envp[ i ], "DISPLAY=", 8 ) == 0 )
+        /* g_debug( "old envp[%d] = \"%s\"" , i, envp[i]); */
+        if ( 0 == strncmp( envp[ i ], "DISPLAY=", 8 ) )
             display_index = i;
-        else if ( strncmp( envp[ i ], "DESKTOP_STARTUP_ID=", 19 ) )
-            new_env[ i ] = g_strdup( envp[ i ] );
+        else
+        {
+            if ( 0 == strncmp( envp[ i ], "DESKTOP_STARTUP_ID=", 19 ) )
+                startup_id_index = i;
+            new_env[i] = g_strdup( envp[ i ] );
+        }
     }
 
     display = sn_display_new ( GDK_SCREEN_XDISPLAY ( screen ),
@@ -157,7 +161,11 @@ gboolean vfs_exec_on_screen( GdkScreen* screen,
                                       argv[ 0 ], gtk_get_current_event_time() /*cur_time*/ );
 
         setup_func = sn_launcher_context_setup_child_process;
-        new_env[ i++ ] = g_strconcat( "DESKTOP_STARTUP_ID=",
+        if( startup_id_index >= 0 )
+            g_free( new_env[i] );
+        else
+            startup_id_index = i++;
+        new_env[ startup_id_index ] = g_strconcat( "DESKTOP_STARTUP_ID=",
                                       sn_launcher_context_get_startup_id ( ctx ), NULL );
     }
 
@@ -166,10 +174,8 @@ gboolean vfs_exec_on_screen( GdkScreen* screen,
     if ( display_index >= 0 )
         new_env[ display_index ] = g_strconcat( "DISPLAY=", display_name, NULL );
     else
-    {
-        ++n_env;
         new_env[ i++ ] = g_strconcat( "DISPLAY=", display_name, NULL );
-    }
+
     g_free( display_name );
     new_env[ i ] = NULL;
 
@@ -179,12 +185,27 @@ gboolean vfs_exec_on_screen( GdkScreen* screen,
                          NULL, NULL,
                          NULL, err );
 
+    /* for debugging */
+#if 0
+    g_debug( "debug vfs_execute_on_screen(): flags: %d, display_index=%d", flags, display_index );
+    for( i = 0; argv[i]; ++i ) {
+        g_debug( "argv[%d] = \"%s\"" , i, argv[i] );
+    }
+    for( i = 0; i < n_env /*new_env[i]*/; ++i ) {
+        g_debug( "new_env[%d] = \"%s\"" , i, new_env[i] );
+    }
+    if( ret )
+        g_debug( "the program was executed without error" );
+    else
+        g_debug( "launch failed: %s", (*err)->message );
+#endif
+
     g_strfreev( new_env );
 
     if ( G_LIKELY ( ctx ) )
     {
         if ( G_LIKELY ( ret ) )
-            g_timeout_add ( 30 * 1000, sn_timeout, ctx );
+            g_timeout_add ( 20 * 1000, sn_timeout, ctx );
         else
         {
             sn_launcher_context_complete ( ctx );

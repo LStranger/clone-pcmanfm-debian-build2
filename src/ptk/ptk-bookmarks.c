@@ -101,7 +101,7 @@ PtkBookmarks* ptk_bookmarks_get ()
             fclose( file );
         }
     }
-    ++bookmarks.n_ref;
+    g_atomic_int_inc( &bookmarks.n_ref );
     return &bookmarks;
 }
 
@@ -261,8 +261,7 @@ void ptk_bookmarks_remove_callback ( GFunc callback, gpointer user_data )
 
 void ptk_bookmarks_unref ()
 {
-    --bookmarks.n_ref;
-    if( bookmarks.n_ref <= 0 )
+    if( g_atomic_int_dec_and_test(&bookmarks.n_ref) )
     {
         bookmarks.n_ref = 0;
         if( bookmarks.list )

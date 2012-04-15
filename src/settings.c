@@ -1,3 +1,10 @@
+/*
+* Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
+*
+* Copyright: See COPYING file that comes with this distribution
+*
+*/
+
 #include "settings.h"
 #include <stdio.h>
 #include <string.h>
@@ -8,17 +15,19 @@
 #  include <config.h>
 #endif
 
+#include "glib-utils.h" /* for g_mkdir_with_parents() */
+
 #include <gtk/gtk.h>
 #include "ptk-file-browser.h"
 
 AppSettings appSettings = {0};
 /* const gboolean singleInstanceDefault = TRUE; */
 const gboolean showHiddenFilesDefault = FALSE;
-const gboolean showSidePaneDefault = FALSE;
+const gboolean showSidePaneDefault = TRUE;
 const int sidePaneModeDefault = FB_SIDE_PANE_BOOKMARKS;
 const gboolean showThumbnailDefault = TRUE;
 const int maxThumbSizeDefault = 1 << 20;
-const int bigIconSizeDefault = 32;
+const int bigIconSizeDefault = 48;
 const int smallIconSizeDefault = 20;
 const int openBookmarkMethodDefault = 1;
 const int viewModeDefault = FBVM_ICON_VIEW;
@@ -34,7 +43,7 @@ const GdkColor desktopTextDefault={0, 65535, 65535, 65535};
 typedef void ( *SettingsParseFunc ) ( char* line );
 
 static void color_from_str( GdkColor* ret, const char* value );
-static void save_color( FILE* file, const char* name, 
+static void save_color( FILE* file, const char* name,
                  GdkColor* color );
 
 static void parse_general_settings( char* line )
@@ -99,13 +108,13 @@ static void parse_general_settings( char* line )
 
 static void color_from_str( GdkColor* ret, const char* value )
 {
-    sscanf( value, "%d,%d,%d", 
+    sscanf( value, "%d,%d,%d",
             &ret->red, &ret->green, &ret->blue );
 }
 
 static void save_color( FILE* file, const char* name, GdkColor* color )
 {
-    fprintf( file, "%s=%d,%d,%d\n", name, 
+    fprintf( file, "%s=%d,%d,%d\n", name,
              color->red, color->green, color->blue );
 }
 
@@ -134,6 +143,10 @@ static void parse_window_state( char* line )
     {
         v = atoi( value );
         appSettings.height = ( v > 0 ? v : 480 );
+    }
+    if ( 0 == strcmp( name, "maximized" ) )
+    {
+        appSettings.maximized = atoi( value );
     }
 }
 
@@ -199,7 +212,7 @@ void load_settings()
     appSettings.height = 480;
 
     /* load settings */
-    path = g_build_filename( g_get_home_dir(), ".pcmanfm/main", NULL );
+    path = g_build_filename( g_get_user_config_dir(), "pcmanfm/main", NULL );
     file = fopen( path, "r" );
     g_free( path );
     if ( file )
@@ -243,12 +256,11 @@ void save_settings()
     FILE * file;
     gchar* path;
     /* load settings */
-    path = g_build_filename( g_get_home_dir(), ".pcmanfm", NULL );
+    path = g_build_filename( g_get_user_config_dir(), "pcmanfm", NULL );
 
     if ( ! g_file_test( path, G_FILE_TEST_EXISTS ) )
-    {
-        mkdir( path, 0766 );
-    }
+        g_mkdir_with_parents( path, 0766 );
+
     chdir( path );
     g_free( path );
     file = fopen( "main", "w" );
@@ -295,6 +307,7 @@ void save_settings()
         fprintf( file, "width=%d\n", appSettings.width );
         fprintf( file, "height=%d\n", appSettings.height );
         fprintf( file, "splitterPos=%d\n", appSettings.splitterPos );
+        fprintf( file, "maximized=%d\n", appSettings.maximized );
 
         /* Desktop */
         fputs( "\n[Desktop]\n", file );

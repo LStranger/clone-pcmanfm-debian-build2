@@ -75,6 +75,7 @@ struct _PtkFileBrowser
     GtkWidget* folder_view;
     GtkWidget* folder_view_scroll;
     PtkFileBrowserViewMode view_mode;
+    GtkCellRenderer* icon_render;
 
     gboolean busy;
     glong prev_update_time;
@@ -136,6 +137,8 @@ void ptk_file_browser_go_back( PtkFileBrowser* file_browser );
 
 gboolean ptk_file_browser_can_forward( PtkFileBrowser* file_browser );
 void ptk_file_browser_go_forward( PtkFileBrowser* file_browser );
+
+void ptk_file_browser_go_up( PtkFileBrowser* file_browser );
 
 void ptk_file_browser_refresh( PtkFileBrowser* file_browser );
 void ptk_file_browser_update_mime_icons( PtkFileBrowser* file_browser );

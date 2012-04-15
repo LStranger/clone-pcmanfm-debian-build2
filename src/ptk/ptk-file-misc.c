@@ -91,7 +91,7 @@ static void select_file_name_part( GtkEntry* entry )
     }
 }
 
-void ptk_rename_file( GtkWindow* parent_win,
+gboolean  ptk_rename_file( GtkWindow* parent_win,
                       const char* cwd,
                       VFSFileInfo* file )
 {
@@ -102,13 +102,20 @@ void ptk_rename_file( GtkWindow* parent_win,
     char* file_name;
     char* from_path;
     char* to_path;
+    gboolean ret = FALSE;
+    char* disp_name = NULL;
 
     if ( !cwd || !file )
-        return ;
+        return FALSE;
+
+    /* special processing for files with incosistent real name and display name */
+    if( G_UNLIKELY( vfs_file_info_is_desktop_entry(file) ) )
+        disp_name = g_filename_display_name( file->name );
 
     input_dlg = ptk_input_dialog_new( _( "Rename File" ),
                                       _( "Please input new file name:" ),
-                                      vfs_file_info_get_disp_name( file ), parent_win );
+                                      disp_name ? disp_name : vfs_file_info_get_disp_name( file ), parent_win );
+    g_free( disp_name );
     gtk_window_set_default_size( GTK_WINDOW( input_dlg ),
                                  360, -1 );
 
@@ -141,7 +148,10 @@ void ptk_rename_file( GtkWindow* parent_win,
             else
             {
                 if ( 0 == rename( from_path, to_path ) )
+                {
+                    ret = TRUE;
                     break;
+                }
                 else
                 {
                     gtk_label_set_text( prompt, strerror( errno ) );
@@ -158,11 +168,13 @@ void ptk_rename_file( GtkWindow* parent_win,
         }
     }
     gtk_widget_destroy( input_dlg );
+    return ret;
 }
 
-void ptk_create_new_file( GtkWindow* parent_win,
+gboolean  ptk_create_new_file( GtkWindow* parent_win,
                           const char* cwd,
-                          gboolean create_folder )
+                          gboolean create_folder,
+                          VFSFileInfo** file )
 {
     gchar * full_path;
     gchar* ufile_name;
@@ -170,6 +182,7 @@ void ptk_create_new_file( GtkWindow* parent_win,
     GtkLabel* prompt;
     int result;
     GtkWidget* dlg;
+    gboolean ret = FALSE;
 
     if ( create_folder )
     {
@@ -211,22 +224,35 @@ void ptk_create_new_file( GtkWindow* parent_win,
         if ( create_folder )
         {
             result = mkdir( full_path, S_IRWXU | S_IRUSR | S_IRGRP );
+            ret = (result==0);
         }
         else
         {
             result = open( full_path, O_CREAT, S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH );
             if ( result != -1 )
+            {
                 close( result );
+                ret = TRUE;
+            }
         }
+
+        if( ret && file )
+        {
+            *file = vfs_file_info_new();
+            vfs_file_info_get( *file, full_path, NULL );
+        }
+
         g_free( full_path );
         break;
     }
     gtk_widget_destroy( dlg );
 
-    if ( result == -1 )
+    if( ! ret )
         ptk_show_error( parent_win,
+                        _("Error"),
                         _( "The new file cannot be created!" ) );
 
+    return ret;
 }
 
 void ptk_show_file_properties( GtkWindow* parent_win,
@@ -296,6 +322,7 @@ static gboolean open_files_with_app( const char* cwd,
     {
         GtkWidget * toplevel = file_browser ? gtk_widget_get_toplevel( GTK_WIDGET( file_browser ) ) : NULL;
         ptk_show_error( GTK_WINDOW( toplevel ),
+                        _("Error"),
                         err->message );
         g_error_free( err );
     }
@@ -309,7 +336,7 @@ static void open_files_with_each_app( gpointer key, gpointer value, gpointer use
     const char* cwd;
     GList* files = ( GList* ) value;
     PtkFileBrowser* file_browser = ( PtkFileBrowser* ) user_data;
-    /* FIXME: cwd should be passed into this function */ 
+    /* FIXME: cwd should be passed into this function */
     cwd = file_browser ? ptk_file_browser_get_cwd(file_browser) : NULL;
     open_files_with_app( cwd, files, app_desktop, file_browser );
 }
@@ -355,7 +382,7 @@ void ptk_open_files_with_app( const char* cwd,
                                       NULL );
         if ( G_LIKELY( full_path ) )
         {
-            if ( ! app_desktop )
+            if ( ! app_desktop )    /* Use default apps for each file */
             {
                 if ( g_file_test( full_path, G_FILE_TEST_IS_DIR ) )
                 {
@@ -384,6 +411,7 @@ void ptk_open_files_with_app( const char* cwd,
                     {
                         toplevel = file_browser ? gtk_widget_get_toplevel( GTK_WIDGET( file_browser ) ) : NULL;
                         ptk_show_error( ( GtkWindow* ) toplevel,
+                                        _("Error"),
                                         err->message );
                         g_error_free( err );
                     }
@@ -398,7 +426,6 @@ void ptk_open_files_with_app( const char* cwd,
                     g_free( full_path );
                     continue;
                 }
-
                 mime_type = vfs_file_info_get_mime_type( file );
                 /* The file itself is a desktop entry file. */
                 /*                if( g_str_has_suffix( vfs_file_info_get_name( file ), ".desktop" ) ) */
@@ -407,10 +434,12 @@ void ptk_open_files_with_app( const char* cwd,
                 else
                     app_desktop = vfs_mime_type_get_default_action( mime_type );
 
-                if ( !app_desktop && xdg_mime_is_text_file( full_path, mime_type->type ) )
+                if ( !app_desktop && mime_type_is_text_file( full_path, mime_type->type ) )
                 {
                     /* FIXME: special handling for plain text file */
-                    /* app = get_default_app_for_mime_type( XDG_MIME_TYPE_PLAIN_TEXT ); */
+                    vfs_mime_type_unref( mime_type );
+                    mime_type = vfs_mime_type_get_from_type( XDG_MIME_TYPE_PLAIN_TEXT );
+                    app_desktop = vfs_mime_type_get_default_action( mime_type );
                 }
                 if ( !app_desktop )
                 {

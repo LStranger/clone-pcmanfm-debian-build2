@@ -79,15 +79,18 @@ static gboolean connect_to_fam()
     FAMNoExists( &fam );  /* This is an extension of gamin */
 #endif
 
-    fam_io_channel = g_io_channel_unix_new( fam.fd );
+    fam_io_channel = g_io_channel_unix_new( FAMCONNECTION_GETFD( &fam ) );
 #endif
+
+    /* set fam socket to non-blocking */
+    /* fcntl( FAMCONNECTION_GETFD( &fam ),F_SETFL,O_NONBLOCK); */
 
     g_io_channel_set_encoding( fam_io_channel, NULL, NULL );
     g_io_channel_set_buffered( fam_io_channel, FALSE );
     g_io_channel_set_flags( fam_io_channel, G_IO_FLAG_NONBLOCK, NULL );
 
     fam_io_watch = g_io_add_watch( fam_io_channel,
-                                   G_IO_IN | G_IO_PRI | G_IO_HUP,
+                                   G_IO_IN | G_IO_PRI | G_IO_HUP|G_IO_ERR,
                                    on_fam_event,
                                    NULL );
     return TRUE;
@@ -136,6 +139,7 @@ gboolean vfs_file_monitor_init()
 }
 
 VFSFileMonitor* vfs_file_monitor_add( char* path,
+                                      gboolean is_dir,
                                       VFSFileMonitorCallback cb,
                                       gpointer user_data )
 {
@@ -143,25 +147,21 @@ VFSFileMonitor* vfs_file_monitor_add( char* path,
     VFSFileMonitorCallbackEntry cb_ent;
     gboolean add_new = FALSE;
     struct stat file_stat;
-    gboolean is_dir;
     gchar* real_path = NULL;
 
     if ( ! monitor_hash )
-    {
-        if ( !vfs_file_monitor_init() )
-            return NULL;
-    }
+        return NULL;
 
     monitor = ( VFSFileMonitor* ) g_hash_table_lookup ( monitor_hash, path );
     if ( ! monitor )
     {
         monitor = g_slice_new0( VFSFileMonitor );
         monitor->path = g_strdup( path );
+
         monitor->callbacks = g_array_new ( FALSE, FALSE, sizeof( VFSFileMonitorCallbackEntry ) );
         g_hash_table_insert ( monitor_hash,
                               monitor->path,
                               monitor );
-        is_dir = ( stat( path, &file_stat ) == 0 && S_ISDIR(file_stat.st_mode) );
 
         /* NOTE: Since gamin, FAM and inotify don't follow symlinks,
                  we need to do some special processing here. */
@@ -215,15 +215,15 @@ VFSFileMonitor* vfs_file_monitor_add( char* path,
 
     if( G_LIKELY(monitor) )
     {
+        /* g_debug( "monitor installed: %s, %p", path, monitor ); */
         if ( cb )
         { /* Install a callback */
             cb_ent.callback = cb;
             cb_ent.user_data = user_data;
             monitor->callbacks = g_array_append_val( monitor->callbacks, cb_ent );
         }
-        ++monitor->n_ref;
+        g_atomic_int_inc( &monitor->n_ref );
     }
-
     return monitor;
 }
 
@@ -246,8 +246,8 @@ void vfs_file_monitor_remove( VFSFileMonitor * fm,
             }
         }
     }
-    --fm->n_ref;
-    if ( 0 == fm->n_ref )
+
+    if ( g_atomic_int_dec_and_test( &fm->n_ref ) )
     {
 #ifdef USE_INOTIFY /* Linux inotify */
         inotify_rm_watch ( inotify_fd, fm->wd );
@@ -357,13 +357,12 @@ static gboolean on_fam_event( GIOChannel * channel,
     char buf[ BUF_LEN ];
     int i, len;
 #else /* FAM|gamin */
-
     FAMEvent evt;
 #endif
 
     VFSFileMonitor* monitor = NULL;
 
-    if ( cond & G_IO_HUP )
+    if ( cond & (G_IO_HUP | G_IO_ERR) )
     {
         disconnect_from_fam();
         if ( g_hash_table_size ( monitor_hash ) > 0 )
@@ -377,7 +376,7 @@ static gboolean on_fam_event( GIOChannel * channel,
             g_hash_table_foreach( monitor_hash, ( GHFunc ) reconnect_fam, NULL );
         }
         return TRUE; /* don't need to remove the event source since
-                                                                                                                    it has been removed by disconnect_from_fam(). */
+                                    it has been removed by disconnect_from_fam(). */
     }
 
 #ifdef USE_INOTIFY /* Linux inotify */
@@ -439,8 +438,7 @@ static gboolean on_fam_event( GIOChannel * channel,
                 /* Call the callback functions */
                 dispatch_event( monitor, evt.code, evt.filename );
                 break;
-            default:
-                return TRUE;  /* Other events are not supported */
+                /* Other events are not supported */
             }
         }
     }

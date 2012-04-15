@@ -24,148 +24,90 @@
 #include "glib-mem.h"
 
 static GHashTable *mime_hash = NULL;
+GStaticRWLock mime_hash_lock = G_STATIC_RW_LOCK_INIT; /* mutex lock is needed */
+
 static guint reload_callback_id = 0;
+static GList* reload_cb = NULL;
+
 static int big_icon_size = 32, small_icon_size = 16;
 
-const char mime_actions_group[] = "MIME Cache";
-static GKeyFile *mime_actions = NULL;
-static GKeyFile *user_actions = NULL;
-VFSFileMonitor* mime_actions_monitor = NULL;
+static VFSFileMonitor** mime_caches_monitor = NULL;
 
 static guint theme_change_notify = 0;
 
 static void on_icon_theme_changed( GtkIconTheme *icon_theme,
                                    gpointer user_data );
 
-#if 0
-/* FIXME: Don't cache mime actions since they change often */
+typedef struct {
+    GFreeFunc cb;
+    gpointer user_data;
+}VFSMimeReloadCbEnt;
 
-static void free_old_actions( gpointer key,
-                              gpointer value,
-                              gpointer user_data )
+static gboolean vfs_mime_type_reload( gpointer user_data )
 {
-    VFSMimeType * mime_type = ( VFSMimeType* ) value;
-    g_strfreev( mime_type->actions );
-    mime_type->actions = NULL;
-}
-
-#endif
-
-static void reload_mime_actions( VFSFileMonitor* fm,
-                                 VFSFileMonitorEvent event,
-                                 const char* file_name,
-                                 gpointer user_data )
-{
-#if 0
-    /* unload all old cached data */
-    /* FIXME: Why sometimes this callback gets called twice? */
-    g_hash_table_foreach( mime_hash, free_old_actions, NULL );
-#endif
-    GDK_THREADS_ENTER();
-    if ( mime_actions )
-    {
-        g_key_file_free( mime_actions );
-        /* reload data */
-        mime_actions = g_key_file_new();
-        g_key_file_load_from_file( mime_actions,
-                                   fm->path,
-                                   G_KEY_FILE_NONE, NULL );
-    }
-    GDK_THREADS_LEAVE();
-}
-
-
-static void init_mime_actions()
-{
-    /* FIXME: Paths of directories shouldn't be hardcoded */
-    gchar * full_path = g_build_filename( "/usr/share",
-                                          "applications/mimeinfo.cache",
-                                          NULL );
-    mime_actions = g_key_file_new();
-    g_key_file_load_from_file( mime_actions,
-                               full_path,
-                               G_KEY_FILE_NONE, NULL );
-    /* FIXME: using file monitors for this purpose is a waste and should be changed */
-    mime_actions_monitor = vfs_file_monitor_add( full_path,
-                                                 reload_mime_actions,
-                                                 mime_hash );
-    g_free( full_path );
-
-    full_path = g_build_filename( g_get_home_dir(),
-                                  ".pcmanfm/mime_info",
-                                  NULL );
-
-    user_actions = g_key_file_new();
-    g_key_file_load_from_file( user_actions,
-                               full_path,
-                               G_KEY_FILE_NONE, NULL );
-    g_free( full_path );
-}
-
-/* Final clean up */
-void finalize_mime_actions()
-{
-    if ( mime_actions )
-        g_key_file_free( mime_actions );
-    if ( user_actions )
-        g_key_file_free( user_actions );
-    if ( mime_actions_monitor )
-        vfs_file_monitor_remove( mime_actions_monitor,
-                                 reload_mime_actions, mime_hash );
-}
-
-/* Save user profile */
-static void save_mime_actions()
-{
-    gchar * full_path;
-    gchar* data;
-    gsize len;
-    int file;
-
-    if ( ! mime_actions && ! user_actions )
-        init_mime_actions();
-
-    if ( user_actions )
-    {
-        if ( (data = g_key_file_to_data ( user_actions, &len, NULL )) )
-        {
-            full_path = g_build_filename( g_get_home_dir(),
-                                          ".pcmanfm/mime_info",
-                                          NULL );
-
-            file = creat( full_path, S_IWUSR | S_IRUSR | S_IRGRP );
-            g_free( full_path );
-
-            if ( file != -1 )
-            {
-                write( file, data, len );
-                close( file );
-            }
-            else
-            {
-                g_warning( "Cannot save mime actions\n" );
-            }
-            g_free( data );
-        }
-    }
-}
-
-static void vfs_mime_type_reload( void* user_data )
-{
+    GList* l;
     /* FIXME: process mime database reloading properly. */
     /* Remove all items in the hash table */
     GDK_THREADS_ENTER();
+
+    g_static_rw_lock_writer_lock( &mime_hash_lock );
     g_hash_table_foreach_remove ( mime_hash, ( GHRFunc ) gtk_true, NULL );
+    g_static_rw_lock_writer_unlock( &mime_hash_lock );
+
+    g_source_remove( reload_callback_id );
+    reload_callback_id = 0;
+
+    /* g_debug( "reload mime-types" ); */
+
+    /* call all registered callbacks */
+    for( l = reload_cb; l; l = l->next )
+    {
+        VFSMimeReloadCbEnt* ent = (VFSMimeReloadCbEnt*)l->data;
+        ent->cb( ent->user_data );
+    }
     GDK_THREADS_LEAVE();
+    return FALSE;
+}
+
+static void on_mime_cache_changed( VFSFileMonitor* fm,
+                                        VFSFileMonitorEvent event,
+                                        const char* file_name,
+                                        gpointer user_data )
+{
+    MimeCache* cache = (MimeCache*)user_data;
+    switch( event )
+    {
+    case VFS_FILE_MONITOR_CREATE:
+    case VFS_FILE_MONITOR_DELETE:
+        /* NOTE: FAM sometimes generate incorrect "delete" notification for non-existent files.
+         *  So if the cache is not loaded originally (the cache file is non-existent), we skip it. */
+        if( ! cache->buffer )
+            return;
+    case VFS_FILE_MONITOR_CHANGE:
+        mime_cache_reload( cache );
+        /* g_debug( "reload cache: %s", file_name ); */
+        if( 0 == reload_callback_id )
+            reload_callback_id = g_idle_add( vfs_mime_type_reload, NULL );
+    }
 }
 
 void vfs_mime_type_init()
 {
     GtkIconTheme * theme;
-    xdg_mime_init();
-    reload_callback_id = xdg_mime_register_reload_callback( vfs_mime_type_reload,
-                                                            NULL, NULL );
+    MimeCache** caches;
+    int i, n_caches;
 
+    mime_type_init();
+
+    /* install file alteration monitor for mime-cache */
+    caches = mime_type_get_caches( &n_caches );
+    mime_caches_monitor = g_new0( VFSFileMonitor*, n_caches );
+    for( i = 0; i < n_caches; ++i )
+    {
+        VFSFileMonitor* fm = vfs_file_monitor_add_file( caches[i]->file_path,
+                                                                on_mime_cache_changed, caches[i] );
+        mime_caches_monitor[i] = fm;
+    }
     mime_hash = g_hash_table_new_full( g_str_hash, g_str_equal,
                                        NULL, vfs_mime_type_unref );
     theme = gtk_icon_theme_get_default();
@@ -177,21 +119,31 @@ void vfs_mime_type_init()
 void vfs_mime_type_clean()
 {
     GtkIconTheme * theme;
+    MimeCache** caches;
+    int i, n_caches;
+
     theme = gtk_icon_theme_get_default();
     g_signal_handler_disconnect( theme, theme_change_notify );
 
-    xdg_mime_remove_callback( reload_callback_id );
-    xdg_mime_shutdown();
-    g_hash_table_destroy( mime_hash );
+    /* remove file alteration monitor for mime-cache */
+    caches = mime_type_get_caches( &n_caches );
+    for( i = 0; i < n_caches; ++i )
+    {
+        vfs_file_monitor_remove( mime_caches_monitor[i],
+                                        on_mime_cache_changed, caches[i] );
+    }
+    g_free( mime_caches_monitor );
 
-    if ( mime_actions || user_actions )
-        finalize_mime_actions();
+    mime_type_finalize();
+
+    g_hash_table_destroy( mime_hash );
 }
 
 VFSMimeType* vfs_mime_type_get_from_file_name( const char* ufile_name )
 {
     const char * type;
-    type = xdg_mime_get_mime_type_from_file_name( ufile_name );
+    /* type = xdg_mime_get_mime_type_from_file_name( ufile_name ); */
+    type = mime_type_get_by_filename( ufile_name, NULL );
     return vfs_mime_type_get_from_type( type );
 }
 
@@ -200,36 +152,8 @@ VFSMimeType* vfs_mime_type_get_from_file( const char* file_path,
                                           struct stat* pstat )
 {
     struct stat file_stat;
-    const char* type;
-
-    /* We have to get the mime-type of target path
-       when the file itself is a symlink */
-    if ( !pstat || S_ISLNK( pstat->st_mode ) )
-    {
-        /* FIXME: If the file doesn't exist, should we return NULL? */
-        if ( stat( file_path, &file_stat ) == 0 )
-            pstat = &file_stat;
-    }
-    if ( S_ISDIR( pstat->st_mode ) )
-    {
-        type = XDG_MIME_TYPE_DIRECTORY;
-    }
-    else
-    {
-        if ( !base_name )
-        {
-            base_name = strrchr( file_path, '/' );
-            if ( base_name )
-            {
-                ++base_name;
-            }
-            else
-            {
-                base_name = file_path;
-            }
-        }
-        type = xdg_mime_get_mime_type_for_file( file_path, base_name, pstat );
-    }
+    const char * type;
+    type = mime_type_get_by_file( file_path, pstat, base_name );
     return vfs_mime_type_get_from_type( type );
 }
 
@@ -237,11 +161,16 @@ VFSMimeType* vfs_mime_type_get_from_type( const char* type )
 {
     VFSMimeType * mime_type;
 
+    g_static_rw_lock_reader_lock( &mime_hash_lock );
     mime_type = g_hash_table_lookup( mime_hash, type );
+    g_static_rw_lock_reader_unlock( &mime_hash_lock );
+
     if ( !mime_type )
     {
         mime_type = vfs_mime_type_new( type );
+        g_static_rw_lock_writer_lock( &mime_hash_lock );
         g_hash_table_insert( mime_hash, mime_type->type, mime_type );
+        g_static_rw_lock_writer_unlock( &mime_hash_lock );
     }
     vfs_mime_type_ref( mime_type );
     return mime_type;
@@ -257,14 +186,13 @@ VFSMimeType* vfs_mime_type_new( const char* type_name )
 
 void vfs_mime_type_ref( VFSMimeType* mime_type )
 {
-    ++mime_type->n_ref;
+    g_atomic_int_inc(&mime_type->n_ref);
 }
 
 void vfs_mime_type_unref( gpointer mime_type_ )
 {
     VFSMimeType* mime_type = (VFSMimeType*)mime_type_;
-    --mime_type->n_ref;
-    if ( mime_type->n_ref == 0 )
+    if ( g_atomic_int_dec_and_test(&mime_type->n_ref) )
     {
         g_free( mime_type->type );
         if ( mime_type->big_icon )
@@ -312,21 +240,28 @@ GdkPixbuf* vfs_mime_type_get_icon( VFSMimeType* mime_type, gboolean big )
     }
 
     sep = strchr( mime_type->type, '/' );
-    if ( !sep )
-        return NULL;
-    strcpy( icon_name, "gnome-mime-" );
-    strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
-    strcat( icon_name, "-" );
-    strcat( icon_name, sep + 1 );
-    icon = gtk_icon_theme_load_icon ( icon_theme, icon_name,
-                                      size, 0, NULL );
-
-    if ( ! icon )
+    if ( sep )
     {
-        icon_name[ 11 ] = 0;
-        strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
+        strcpy( icon_name, mime_type->type );
+        icon_name[ (sep - mime_type->type) ] = '-';
         icon = gtk_icon_theme_load_icon ( icon_theme, icon_name,
                                           size, 0, NULL );
+        if ( ! icon )
+        {
+            strcpy( icon_name, "gnome-mime-" );
+            strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
+            strcat( icon_name, "-" );
+            strcat( icon_name, sep + 1 );
+            icon = gtk_icon_theme_load_icon ( icon_theme, icon_name,
+                                              size, 0, NULL );
+        }
+        if ( G_UNLIKELY( ! icon ) )
+        {
+            icon_name[ 11 ] = 0;
+            strncat( icon_name, mime_type->type, ( sep - mime_type->type ) );
+            icon = gtk_icon_theme_load_icon ( icon_theme, icon_name,
+                                              size, 0, NULL );
+        }
     }
     if( G_UNLIKELY( !icon ) )
     {
@@ -379,6 +314,7 @@ static void free_cached_icons ( gpointer key,
 
 void vfs_mime_type_set_icon_size( int big, int small )
 {
+    g_static_rw_lock_writer_lock( &mime_hash_lock );
     if ( big != big_icon_size )
     {
         big_icon_size = big;
@@ -395,6 +331,7 @@ void vfs_mime_type_set_icon_size( int big, int small )
                               free_cached_icons,
                               ( gpointer ) FALSE );
     }
+    g_static_rw_lock_writer_unlock( &mime_hash_lock );
 }
 
 void vfs_mime_type_get_icon_size( int* big, int* small )
@@ -413,75 +350,17 @@ const char* vfs_mime_type_get_type( VFSMimeType* mime_type )
 /* Get human-readable description of mime type */
 const char* vfs_mime_type_get_description( VFSMimeType* mime_type )
 {
-    int fd;
-    struct stat file_stat;
-    const gchar* const * lang;
-    char full_path[ 256 ];
-    char* buf = NULL;
-    char* desc = NULL;
-    char* eng_desc = NULL;
-    char* tmp;
-    int len;
-    if ( mime_type->description )
-        return mime_type->description;
-
-    /* FIXME: This path shouldn't be hard-coded. */
-    sprintf( full_path, "/usr/share/mime/%s.xml", mime_type->type );
-
-    fd = open( full_path, O_RDONLY );
-    if ( fd != -1 )
+    if ( G_UNLIKELY( ! mime_type->description ) )
     {
-        fstat( fd, &file_stat );
-        if ( file_stat.st_size > 0 )
+        mime_type->description = mime_type_get_desc( mime_type->type, NULL );
+        /* FIXME: should handle this better */
+        if ( G_UNLIKELY( ! mime_type->description || ! *mime_type->description ) )
         {
-            buf = g_malloc( file_stat.st_size + 1 );
-            read( fd, buf, file_stat.st_size );
-            buf[ file_stat.st_size ] = '\0';
-            eng_desc = strstr( buf, "<comment>" );
-            if ( eng_desc )
-            {
-                eng_desc += 9;
-                for ( desc = eng_desc; *desc != '\n' && *desc; ++desc )
-                    ;
-                while ( (desc = strstr( desc, "<comment xml:lang=" )) )
-                {
-                    if ( !desc )
-                        break;
-
-                    desc += 19;
-                    lang = g_get_language_names();
-                    tmp = strchr( lang[ 0 ], '.' );
-                    len = tmp ? ( ( int ) tmp - ( int ) lang[ 0 ] ) : strlen( lang[ 0 ] );
-
-                    if ( lang && 0 == strncmp( desc, lang[ 0 ], len ) )
-                    {
-                        desc += ( len + 2 );
-                        break;
-                    }
-                    while ( *desc != '\n' && *desc )
-                        ++desc;
-                }
-            }
+            g_warning( "mime-type %s has no desc", mime_type->type );
+            mime_type->description = mime_type_get_desc( XDG_MIME_TYPE_UNKNOWN, NULL );
         }
-        close( fd );
     }
-
-    if ( !desc )
-    {
-        desc = eng_desc;
-        if ( !desc )
-            return mime_type->type;
-    }
-
-    if ( desc )
-    {
-        if ( (tmp = strstr( desc, "</" )) )
-            * tmp = '\0';
-        desc = g_strdup( desc );
-    }
-    g_free( buf );
-    mime_type->description = desc;
-    return desc;
+    return mime_type->description;
 }
 
 /*
@@ -518,183 +397,27 @@ char** vfs_mime_type_join_actions( char** list1, gsize len1,
 
 char** vfs_mime_type_get_actions( VFSMimeType* mime_type )
 {
-    gchar **vals;
-    gsize len;
-    gchar **text_vals;
-    gsize text_len;
-    gchar **tmp_vals;
-    gsize tmp_len;
-    gboolean is_text = FALSE;
-    int i, j, k;
-    GKeyFile* profiles[ 2 ];
-    char** apps[ 2 ];
-    char** parents;
-    char** actions;
-
-    if ( ! mime_actions && ! user_actions )
-        init_mime_actions();
-
-    /*  FIXME: Cancel this useless cache since it causes problems.
-    if ( mime_type->actions )
-        return mime_type->actions;
-        mime_type->actions = NULL;
-    */
-    actions = NULL;
-
-    profiles[ 0 ] = user_actions;
-    profiles[ 1 ] = mime_actions;
-
-    is_text = xdg_mime_mime_type_subclass(mime_type, XDG_MIME_TYPE_PLAIN_TEXT);
-
-    for ( i = 0; i < 2; ++i )
-    {
-        len = 0;
-        vals = g_key_file_get_string_list ( profiles[ i ], mime_actions_group,
-                                            mime_type->type, &len, NULL );
-
-        /* Special process for text files */
-        if ( is_text )
-        {
-            text_len = 0;
-            text_vals = g_key_file_get_string_list ( profiles[ i ], mime_actions_group,
-                                                     XDG_MIME_TYPE_PLAIN_TEXT,
-                                                     &text_len, NULL );
-            tmp_vals = vfs_mime_type_join_actions( vals, len, text_vals, text_len );
-            if ( vals )
-                g_strfreev( vals );
-            if ( text_vals )
-                g_strfreev( text_vals );
-            vals = tmp_vals;
-        }
-        apps[ i ] = vals;
-    }
-    len = apps[ 0 ] ? g_strv_length( apps[ 0 ] ) : 0;
-    tmp_len = apps[ 1 ] ? g_strv_length( apps[ 1 ] ) : 0;
-    actions = vfs_mime_type_join_actions( apps[ 0 ], len,
-                                                     apps[ 1 ], tmp_len );
-    if ( apps[ 0 ] )
-        g_strfreev( apps[ 0 ] );
-    if ( apps[ 1 ] )
-        g_strfreev( apps[ 1 ] );
-
-    /* FIXME: This part is extremely buggy!!!
-              Must be re-written before release. */
-    parents = xdg_mime_list_mime_parents( mime_type->type );
-    if ( parents )
-    {
-        char** parent_actions;
-        char** parent;
-        VFSMimeType* parent_mime;
-        for ( parent = parents; *parent; ++parent )
-        {
-            parent_mime = vfs_mime_type_get_from_type( *parent );
-            parent_actions = vfs_mime_type_get_actions( parent_mime );
-            vfs_mime_type_unref( parent_mime );
-            if ( parent_actions )
-            {
-                len = actions ? g_strv_length( actions ) : 0;
-                tmp_len = g_strv_length( parent_actions );
-                tmp_vals = vfs_mime_type_join_actions(
-                               actions, len,
-                               parent_actions, tmp_len );
-                g_strfreev( actions );
-                g_strfreev( parent_actions );
-                actions = tmp_vals;
-            }
-        }
-        g_free( parents );
-    }
-    return actions;
+    return (char**)mime_type_get_actions( mime_type->type );
 }
 
 char* vfs_mime_type_get_default_action( VFSMimeType* mime_type )
 {
-    char** actions = vfs_mime_type_get_actions( mime_type );
-    char* action = actions ? g_strdup( actions[ 0 ] ) : NULL;
-    g_strfreev( actions );
-    return action;
-}
-
-/*
-* Add app.desktop to specified mime-type
-* app can be the name of the desktop file or a command line.
-* If default_action = TRUE, the action will be inserted as 
-* the first element; otherwise, it will be added to the list
-* at non-specific place.
-*/
-static void _vfs_mime_type_add_action( VFSMimeType* mime_type,
-                                       const char* action,
-                                       gboolean default_action )
-{
-    gchar **vals;
-    gchar **new_vals;
-    gchar **new_val;
-    int i;
-    gsize len;
-    gboolean already_exists;
-
-    if ( ! mime_actions && ! user_actions )
-        init_mime_actions();
-
-    if( default_action )
+    char* def = (char*)mime_type_get_default_action( mime_type->type );
+    /* FIXME:
+     * If default app is not set, choose one from all availble actions.
+     * Is there any better way to do this?
+     * Should we put this fallback handling here, or at API of higher level?
+     */
+    if( ! def )
     {
-        vals = g_key_file_get_string_list ( user_actions,
-                                            mime_actions_group,
-                                            mime_type->type, &len,
-                                            NULL );
-        if( !vals )
+        char** actions = mime_type_get_actions( mime_type->type );
+        if( actions )
         {
-            g_key_file_set_string( user_actions, mime_actions_group,
-                                mime_type->type, action );
-            save_mime_actions();
-            return ;
+            def = g_strdup( actions[0] );
+            g_strfreev( actions );
         }
     }
-    else
-    {
-        vals = vfs_mime_type_get_actions( mime_type );
-        len = vals ? g_strv_length( vals ) : 0;
-    }
-
-    new_vals = g_new0( gchar*, len + 2 );
-    if ( default_action )
-        new_vals[ 0 ] = g_strdup( action );
-    else
-        already_exists = FALSE;
-
-    new_val = default_action ? ( new_vals + 1 ) : new_vals;
-    for ( i = 0; i < len; ++i )
-    {
-        if ( strcmp( vals[ i ], action ) )
-        {
-            *new_val = vals[ i ];
-            ++new_val;
-        }
-        else    /* the action already exists */
-        {
-            if ( default_action )
-                g_free( vals[ i ] );
-            else
-            {
-                already_exists = TRUE;
-                *new_val = vals[ i ];
-                ++new_val;
-            }
-        }
-        vals[ i ] = NULL;
-    }
-    if ( vals )
-        g_free( vals );
-    if ( ! default_action && ! already_exists )
-        new_vals[ i ] = g_strdup( action );
-
-    g_key_file_set_string_list( user_actions,
-                                mime_actions_group,
-                                mime_type->type,
-                                new_vals,
-                                g_strv_length( new_vals ) );
-    save_mime_actions();
-    g_strfreev( new_vals );
+    return def;
 }
 
 /*
@@ -702,17 +425,28 @@ static void _vfs_mime_type_add_action( VFSMimeType* mime_type,
 * app can be the name of the desktop file or a command line.
 */
 void vfs_mime_type_set_default_action( VFSMimeType* mime_type,
-                                       const char* action )
+                                       const char* desktop_id )
 {
-    _vfs_mime_type_add_action( mime_type, action, TRUE );
+    char* cust_desktop = NULL;
+/*
+    if( ! g_str_has_suffix( desktop_id, ".desktop" ) )
+        return;
+*/
+    vfs_mime_type_add_action( mime_type, desktop_id, &cust_desktop );
+    if( cust_desktop )
+        desktop_id = cust_desktop;
+    mime_type_set_default_action( mime_type->type, desktop_id );
+
+    g_free( cust_desktop );
 }
 
+/* If user-custom desktop file is created, it's returned in custom_desktop. */
 void vfs_mime_type_add_action( VFSMimeType* mime_type,
-                               const char* action )
+                               const char* desktop_id,
+                               char** custom_desktop )
 {
-    _vfs_mime_type_add_action( mime_type, action, FALSE );
+    mime_type_add_action( mime_type->type, desktop_id, custom_desktop );
 }
-
 
 /*
 * char** vfs_mime_type_get_all_known_apps():
@@ -729,81 +463,33 @@ static void hash_to_strv ( gpointer key, gpointer value, gpointer user_data )
     ++*all_apps;
 }
 
-static char** get_all_known_apps_from_profile( GKeyFile* profile,
-                                               gsize* list_len )
-{
-    char** all_apps = NULL;
-    GHashTable* hash;
-    gchar **keys;
-    gchar **key;
-    gchar **apps;
-    gchar **app;
-    gboolean hash_value_true = TRUE;
-    int len = 0;
-
-    hash = g_hash_table_new( g_str_hash, g_str_equal );
-
-    keys = g_key_file_get_keys( profile,
-                                mime_actions_group,
-                                NULL, NULL );
-    /* "MIME Cache" cannot be found. */
-    if ( NULL == keys )
-        goto just_free_keys;
-
-    for ( key = keys; *key; ++key )
-    {
-        apps = g_key_file_get_string_list ( profile,
-                                            mime_actions_group,
-                                            *key, NULL, NULL );
-        if ( !apps )
-            continue;
-        for ( app = apps; *app; ++app )
-        {
-            /* duplicated */
-            if ( g_hash_table_lookup( hash, *app ) )
-                continue;
-            g_hash_table_insert( hash, g_strdup( *app ), &hash_value_true );
-            ++len;
-        }
-        g_strfreev( apps );
-    }
-
-just_free_keys:
-    g_strfreev( keys );
-
-    app = all_apps = g_new( char*, len + 1 );
-    g_hash_table_foreach( hash, hash_to_strv, &app );
-    all_apps[ len ] = NULL;
-
-    g_hash_table_destroy( hash );
-    *list_len = len;
-    return all_apps;
-}
-
-char** vfs_mime_type_get_all_known_apps()
-{
-    char** user_apps;
-    char** mime_apps;
-    gsize len1, len2;
-    char** all_apps;
-
-    user_apps = get_all_known_apps_from_profile( user_actions, &len1 );
-    mime_apps = get_all_known_apps_from_profile( mime_actions, &len2 );
-    all_apps = vfs_mime_type_join_actions( user_apps, len1, mime_apps, len2 );
-    g_strfreev( user_apps );
-    g_strfreev( mime_apps );
-
-    return all_apps;
-}
-
 void on_icon_theme_changed( GtkIconTheme *icon_theme,
                             gpointer user_data )
 {
     /* reload_mime_icons */
+    g_static_rw_lock_writer_lock( &mime_hash_lock );
+
     g_hash_table_foreach( mime_hash,
                           free_cached_icons,
                           ( gpointer ) TRUE );
     g_hash_table_foreach( mime_hash,
                           free_cached_icons,
                           ( gpointer ) FALSE );
+
+    g_static_rw_lock_writer_unlock( &mime_hash_lock );
+}
+
+GList* vfs_mime_type_add_reload_cb( GFreeFunc cb, gpointer user_data )
+{
+    VFSMimeReloadCbEnt* ent = g_slice_new( VFSMimeReloadCbEnt );
+    ent->cb = cb;
+    ent->user_data = user_data;
+    reload_cb = g_list_append( reload_cb, ent );
+    return g_list_last( reload_cb );
+}
+
+void vfs_mime_type_remove_reload_cb( GList* cb )
+{
+    g_slice_free( VFSMimeReloadCbEnt, cb->data );
+    reload_cb = g_list_delete_link( reload_cb, cb );
 }

@@ -1,7 +1,7 @@
 /*
 *  C Interface: ptk-file-list
 *
-* Description: 
+* Description:
 *
 *
 * Author: Hong Jen Yee (PCMan) <pcman.tw (AT) gmail.com>, (C) 2006
@@ -55,7 +55,8 @@ struct _PtkFileList
     GList* files;
     guint n_files;
 
-    gboolean show_hidden;
+    gboolean show_hidden : 1;
+    gboolean big_thumbnail : 1;
     int max_thumbnail;
 
     int sort_col;
@@ -80,16 +81,19 @@ PtkFileList *ptk_file_list_new ( VFSDir* dir, gboolean show_hidden );
 
 void ptk_file_list_set_dir( PtkFileList* list, VFSDir* dir );
 
-void ptk_file_list_show_thumbnails( PtkFileList* list, gboolean big,
+gboolean ptk_file_list_find_iter(  PtkFileList* list, GtkTreeIter* it, VFSFileInfo* fi );
+
+void ptk_file_list_file_created( VFSDir* dir, VFSFileInfo* file,
+                                        PtkFileList* list );
+
+void ptk_file_list_file_deleted( VFSDir* dir, VFSFileInfo* file,
+                                        PtkFileList* list );
+
+void ptk_file_list_file_changed( VFSDir* dir, VFSFileInfo* file,
+                                        PtkFileList* list );
+
+void ptk_file_list_show_thumbnails( PtkFileList* list, gboolean is_big,
                                     int max_file_size );
-
-#if 0
-/* I still have doubt if these functions work */
-
-void ptk_file_list_show_hidden_files( PtkFileList* list );
-
-void ptk_file_list_hide_hidden_files( PtkFileList* list );
-#endif
 
 G_END_DECLS
 

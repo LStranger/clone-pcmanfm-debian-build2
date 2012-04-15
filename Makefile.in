@@ -34,12 +34,14 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-subdir = .
+build_triplet = @build@
+host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(srcdir)/pcmanfm.desktop.in $(top_srcdir)/configure AUTHORS \
 	COPYING ChangeLog INSTALL NEWS TODO config.guess config.sub \
 	depcomp install-sh missing mkinstalldirs
+subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -63,9 +65,18 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(desktopdir)"
+am__installdirs = "$(DESTDIR)$(desktopdir)" \
+	"$(DESTDIR)$(fallbackicondir)" "$(DESTDIR)$(filedir)" \
+	"$(DESTDIR)$(icondir)" "$(DESTDIR)$(mimedir)" \
+	"$(DESTDIR)$(uidir)"
 desktopDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(desktop_DATA)
+fallbackiconDATA_INSTALL = $(INSTALL_DATA)
+fileDATA_INSTALL = $(INSTALL_DATA)
+iconDATA_INSTALL = $(INSTALL_DATA)
+mimeDATA_INSTALL = $(INSTALL_DATA)
+uiDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(desktop_DATA) $(fallbackicon_DATA) $(file_DATA) $(icon_DATA) \
+	$(mime_DATA) $(ui_DATA)
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = $(SUBDIRS)
@@ -128,6 +139,7 @@ MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
+MSGFMT_OPTS = @MSGFMT_OPTS@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -146,6 +158,8 @@ PO_IN_DATADIR_TRUE = @PO_IN_DATADIR_TRUE@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+USE_HAL_FALSE = @USE_HAL_FALSE@
+USE_HAL_TRUE = @USE_HAL_TRUE@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -158,13 +172,21 @@ am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
+build = @build@
 build_alias = @build_alias@
+build_cpu = @build_cpu@
+build_os = @build_os@
+build_vendor = @build_vendor@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
+host = @host@
 host_alias = @host_alias@
+host_cpu = @host_cpu@
+host_os = @host_os@
+host_vendor = @host_vendor@
 htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
@@ -185,14 +207,37 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 SUBDIRS = src po
-EXTRA_DIST = \
-	autogen.sh \
-	pcmanfm.glade \
-	pcmanfm.gladep \
-	pcmanfm.desktop.in
-
 desktopdir = $(datadir)/applications
 desktop_DATA = pcmanfm.desktop
+mimedir = $(datadir)/mime/packages
+mime_DATA = src/mime-type/libmimetype.xml
+icondir = $(datadir)/pixmaps
+icon_DATA = pcmanfm.png
+filedir = $(datadir)/pcmanfm
+fallbackicondir = $(filedir)/icons
+uidir = $(filedir)/ui
+file_DATA = \
+	data/mount.rules
+
+fallbackicon_DATA = \
+	data/icons/file.png \
+	data/icons/folder.png
+
+ui_DATA = \
+	data/ui/prefdlg.glade \
+	data/ui/appchooserdlg.glade \
+	data/ui/file_properties.glade \
+	data/ui/about-dlg.glade
+
+EXTRA_DIST = \
+	autogen.sh \
+	pcmanfm.desktop.in \
+	$(icon_DATA) \
+	$(mime_DATA) \
+	$(file_DATA) \
+	$(fallbackicon_DATA) \
+	$(ui_DATA)
+
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -266,6 +311,91 @@ uninstall-desktopDATA:
 	  f=$(am__strip_dir) \
 	  echo " rm -f '$(DESTDIR)$(desktopdir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(desktopdir)/$$f"; \
+	done
+install-fallbackiconDATA: $(fallbackicon_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(fallbackicondir)" || $(mkdir_p) "$(DESTDIR)$(fallbackicondir)"
+	@list='$(fallbackicon_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(fallbackiconDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(fallbackicondir)/$$f'"; \
+	  $(fallbackiconDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(fallbackicondir)/$$f"; \
+	done
+
+uninstall-fallbackiconDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(fallbackicon_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(fallbackicondir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(fallbackicondir)/$$f"; \
+	done
+install-fileDATA: $(file_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(filedir)" || $(mkdir_p) "$(DESTDIR)$(filedir)"
+	@list='$(file_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(fileDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(filedir)/$$f'"; \
+	  $(fileDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(filedir)/$$f"; \
+	done
+
+uninstall-fileDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(file_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(filedir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(filedir)/$$f"; \
+	done
+install-iconDATA: $(icon_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(icondir)" || $(mkdir_p) "$(DESTDIR)$(icondir)"
+	@list='$(icon_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(iconDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(icondir)/$$f'"; \
+	  $(iconDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(icondir)/$$f"; \
+	done
+
+uninstall-iconDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(icon_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(icondir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(icondir)/$$f"; \
+	done
+install-mimeDATA: $(mime_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(mimedir)" || $(mkdir_p) "$(DESTDIR)$(mimedir)"
+	@list='$(mime_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(mimeDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(mimedir)/$$f'"; \
+	  $(mimeDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(mimedir)/$$f"; \
+	done
+
+uninstall-mimeDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(mime_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(mimedir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(mimedir)/$$f"; \
+	done
+install-uiDATA: $(ui_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(uidir)" || $(mkdir_p) "$(DESTDIR)$(uidir)"
+	@list='$(ui_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(uiDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(uidir)/$$f'"; \
+	  $(uiDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(uidir)/$$f"; \
+	done
+
+uninstall-uiDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(ui_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(uidir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(uidir)/$$f"; \
 	done
 
 # This directory's subdirectories are mostly independent; you can cd
@@ -403,7 +533,7 @@ distclean-tags:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/. $(distdir)/po
+	$(mkdir_p) $(distdir)/. $(distdir)/data $(distdir)/data/icons $(distdir)/data/ui $(distdir)/po $(distdir)/src/mime-type
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -550,7 +680,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(desktopdir)"; do \
+	for dir in "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(fallbackicondir)" "$(DESTDIR)$(filedir)" "$(DESTDIR)$(icondir)" "$(DESTDIR)$(mimedir)" "$(DESTDIR)$(uidir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-recursive
@@ -596,7 +726,9 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-data-local install-desktopDATA
+install-data-am: install-data-local install-desktopDATA \
+	install-fallbackiconDATA install-fileDATA install-iconDATA \
+	install-mimeDATA install-uiDATA
 
 install-exec-am:
 
@@ -624,7 +756,9 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-desktopDATA uninstall-info-am
+uninstall-am: uninstall-desktopDATA uninstall-fallbackiconDATA \
+	uninstall-fileDATA uninstall-iconDATA uninstall-info-am \
+	uninstall-mimeDATA uninstall-uiDATA
 
 uninstall-info: uninstall-info-recursive
 
@@ -636,37 +770,38 @@ uninstall-info: uninstall-info-recursive
 	distclean-tags distcleancheck distdir distuninstallcheck dvi \
 	dvi-am html html-am info info-am install install-am \
 	install-data install-data-am install-data-local \
-	install-desktopDATA install-exec install-exec-am install-info \
-	install-info-am install-man install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
+	install-desktopDATA install-exec install-exec-am \
+	install-fallbackiconDATA install-fileDATA install-iconDATA \
+	install-info install-info-am install-man install-mimeDATA \
+	install-strip install-uiDATA installcheck installcheck-am \
+	installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic maintainer-clean-recursive \
 	mostlyclean mostlyclean-generic mostlyclean-recursive pdf \
 	pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
-	uninstall-desktopDATA uninstall-info-am
+	uninstall-desktopDATA uninstall-fallbackiconDATA \
+	uninstall-fileDATA uninstall-iconDATA uninstall-info-am \
+	uninstall-mimeDATA uninstall-uiDATA
 
-
-# icondir = $(datadir)/pixmaps
-# icon_DATA = data/pcmanfm.png
 
 install-data-local:
 	@$(NORMAL_INSTALL)
 	if test -d $(srcdir)/pixmaps; then \
-	  $(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/pixmaps; \
-	  for pixmap in $(srcdir)/pixmaps/*; do \
-	    if test -f $$pixmap; then \
-	      $(INSTALL_DATA) $$pixmap $(DESTDIR)$(pkgdatadir)/pixmaps; \
-	    fi \
-	  done \
+	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/pixmaps; \
+	for pixmap in $(srcdir)/pixmaps/*; do \
+        	if test -f $$pixmap; then \
+			$(INSTALL_DATA) $$pixmap $(DESTDIR)$(pkgdatadir)/pixmaps; \
+		fi \
+	done \
 	fi
 
 dist-hook:
 	if test -d pixmaps; then \
-	  mkdir $(distdir)/pixmaps; \
-	  for pixmap in pixmaps/*; do \
-	    if test -f $$pixmap; then \
-	      cp -p $$pixmap $(distdir)/pixmaps; \
-	    fi \
-	  done \
+		mkdir $(distdir)/pixmaps; \
+		for pixmap in pixmaps/*; do \
+			if test -f $$pixmap; then \
+				cp -p $$pixmap $(distdir)/pixmaps; \
+			fi \
+		done \
 	fi
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

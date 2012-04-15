@@ -112,7 +112,9 @@ GtkWidget* ptk_dir_tree_view_new( PtkFileBrowser* browser,
 
     dir_tree_view = GTK_TREE_VIEW( gtk_tree_view_new () );
     gtk_tree_view_set_headers_visible( dir_tree_view, FALSE );
-
+#if GTK_CHECK_VERSION(2, 10, 0)
+    gtk_tree_view_set_enable_tree_lines(dir_tree_view, TRUE);
+#endif
     /*
     FIXME: Temporarily disable drag & drop since it doesn't work right now.
     gtk_tree_view_enable_model_drag_dest ( dir_tree_view,
@@ -255,8 +257,8 @@ _found:
     return TRUE;
 }
 
-static char*
-ptk_dir_view_get_dir_path( GtkTreeModel* model, GtkTreeIter* it )
+/* FIXME: should this API be put here? Maybe it belongs to prk-dir-tree.c */
+char* ptk_dir_view_get_dir_path( GtkTreeModel* model, GtkTreeIter* it )
 {
     GtkTreeModel * tree;
     GtkTreeIter real_it;
@@ -389,8 +391,7 @@ gboolean on_dir_tree_view_button_press( GtkWidget* view,
                     char* dir_name;
                     file_path = ptk_dir_view_get_dir_path( model, &it );
 
-                    vfs_file_info_ref( file );
-                    sel_files = g_list_prepend( NULL, file );
+                    sel_files = g_list_prepend( NULL, vfs_file_info_ref(file) );
                     dir_name = g_path_get_dirname( file_path );
                     popup = ptk_file_menu_new(
                                 file_path, file,

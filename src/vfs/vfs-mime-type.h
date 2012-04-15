@@ -14,7 +14,7 @@
 #define _VFS_MIME_TYPE_H_
 
 #include <gdk/gdk.h>
-#include "xdgmime.h"
+#include "mime-type/mime-type.h"
 
 G_BEGIN_DECLS
 
@@ -71,15 +71,21 @@ char** vfs_mime_type_get_actions( VFSMimeType* mime_type );
 char* vfs_mime_type_get_default_action( VFSMimeType* mime_type );
 
 void vfs_mime_type_set_default_action( VFSMimeType* mime_type,
-                                       const char* action );
+                                       const char* desktop_id );
 
+/* If user-custom desktop file is created, it's returned in custom_desktop. */
 void vfs_mime_type_add_action( VFSMimeType* mime_type,
-                               const char* action );
+                               const char* desktop_id,
+                               char** custom_desktop );
 
 char** vfs_mime_type_get_all_known_apps();
 
 char** vfs_mime_type_join_actions( char** list1, gsize len1,
                                    char** list2, gsize len2 );
+
+GList* vfs_mime_type_add_reload_cb( GFreeFunc cb, gpointer user_data );
+
+void vfs_mime_type_remove_reload_cb( GList* cb );
 
 G_END_DECLS
 

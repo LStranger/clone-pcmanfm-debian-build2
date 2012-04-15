@@ -1,2 +1,13 @@
-Hong Jen Yee (PCMan)  <pcman.tw@gmail.com>
+Lead Developer:
+洪任諭 (Hong Jen Yee, aka PCMan) <pcman.tw@gmail.com>
 
+External source code taken from other projects:
+ * libmd5-rfc: Aladdin Enterprises
+ * Working area detection: Gary Kramlich
+ * ExoIconView: os-cillation e.K, Anders Carlsson, & Benedikt Meurer
+ * Text and icon renderer uese code from Jonathan Blandford
+ * Desktop icons use code from Brian Tarricone
+
+Icon:
+ * Taken from "nuoveXT 2" icon theme created by Alexandre Moore (saki).
+   http://www.gnome-look.org/content/show.php/nuoveXT+2?content=56625

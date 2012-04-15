@@ -10,12 +10,18 @@
 *
 */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "ptk-file-menu.h"
 #include <glib.h>
 #include "glib-mem.h"
 
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
+
+#include <unistd.h> /* for access */
 
 #include "vfs-app-desktop.h"
 #include "ptk-utils.h"
@@ -170,8 +176,8 @@ GtkWidget* ptk_file_menu_new( const char* file_path,
 
     GtkWidget *open;
     char* open_title;
-    GtkWidget *open_with, *open_with_menu, *open_with_another;
-    GtkWidget *seperator;
+    GtkWidget *open_with, *cut, *copy, *del, *rename, *open_with_menu, *open_with_another;
+    GtkWidget *seperator, *top_separator = NULL;
     GtkWidget *create_new;
     GtkWidget *extract;
     GtkWidget *paste;
@@ -189,13 +195,13 @@ GtkWidget* ptk_file_menu_new( const char* file_path,
     GtkWidget* app_img;
 
     PtkFileMenu* data;
+    int no_write_access = 0;
 
     data = g_slice_new0( PtkFileMenu );
     data->cwd = g_strdup( cwd );
     data->browser = browser;
     data->file_path = g_strdup( file_path );
-    data->info = info;
-    vfs_file_info_ref( info );
+    data->info = vfs_file_info_ref( info );
     data->sel_files = sel_files;
 
     data->accel_group = gtk_accel_group_new ();
@@ -210,6 +216,7 @@ GtkWidget* ptk_file_menu_new( const char* file_path,
 
     if ( g_file_test( file_path, G_FILE_TEST_IS_DIR ) )
     {
+        dir_popup_menu_items[0].ret = &top_separator;
         ptk_menu_add_items_from_data( popup, dir_popup_menu_items,
                                       data, data->accel_group );
         is_dir = TRUE;
@@ -220,16 +227,45 @@ GtkWidget* ptk_file_menu_new( const char* file_path,
     }
 
     basic_popup_menu[ 0 ].ret = &open_with;
+    basic_popup_menu[ 2 ].ret = &cut;
+    basic_popup_menu[ 3 ].ret = &copy;
     basic_popup_menu[ 4 ].ret = &paste;
+    basic_popup_menu[ 5 ].ret = &del;
+    basic_popup_menu[ 6 ].ret = &rename;
     basic_popup_menu[ 9 ].ret = &extract;
     basic_popup_menu[ 10 ].ret = &create_new;
     ptk_menu_add_items_from_data( popup, basic_popup_menu, data, data->accel_group );
     gtk_widget_show_all( GTK_WIDGET( popup ) );
 
+#if defined(HAVE_EUIDACCESS)
+    no_write_access = euidaccess( file_path, W_OK );
+#elif defined(HAVE_EACCESS)
+    no_write_access = eaccess( file_path, W_OK );
+#endif
+
+    if( no_write_access )
+    {
+        /* have no write access to current file */
+        gtk_widget_set_sensitive( cut, FALSE );
+        gtk_widget_set_sensitive( copy, FALSE );
+        gtk_widget_set_sensitive( paste, FALSE );
+        gtk_widget_set_sensitive( del, FALSE );
+        gtk_widget_set_sensitive( rename, FALSE );
+        gtk_widget_set_sensitive( create_new, FALSE );
+    }
+
     if ( ! is_dir )
     {
         gtk_widget_destroy( paste );
         gtk_widget_destroy( create_new );
+    }
+    else if( 0 == strcmp( file_path, cwd ) ) /* menu for cwd */
+    {
+        /* delete some confusing menu item if this menu is for current folder */
+        gtk_widget_destroy( cut );
+        gtk_widget_destroy( copy );
+        gtk_widget_destroy( del );
+        gtk_widget_destroy( rename );
     }
 
     /*  Add all of the apps  */
@@ -248,8 +284,10 @@ GtkWidget* ptk_file_menu_new( const char* file_path,
         {
             len1 = apps ? g_strv_length( apps ) : 0;
             len2 = g_strv_length( txt_apps );
+            tmp = apps;
             apps = vfs_mime_type_join_actions( apps, len1, txt_apps, len2 );
             g_strfreev( txt_apps );
+            g_strfreev( tmp );
         }
         vfs_mime_type_unref( txt_type );
     }
@@ -284,7 +322,7 @@ GtkWidget* ptk_file_menu_new( const char* file_path,
                                                &icon_w, &icon_h );
 
             app_icon = vfs_app_desktop_get_icon( desktop_file,
-                                                 icon_w > icon_h ? icon_w : icon_h );
+                                                 icon_w > icon_h ? icon_w : icon_h, TRUE );
             if ( app_icon )
             {
                 app_img = gtk_image_new_from_pixbuf( app_icon );
@@ -345,13 +383,22 @@ GtkWidget* ptk_file_menu_new( const char* file_path,
     }
     else
     {
-        open = gtk_image_menu_item_new_with_mnemonic( _( "_Open" ) );
-        app_img = gtk_image_new_from_icon_name( "gnome-fs-directory", GTK_ICON_SIZE_MENU );
-        gtk_image_menu_item_set_image( GTK_IMAGE_MENU_ITEM( open ), app_img );
+        if( 0 != strcmp( file_path, cwd ) ) /* not menu for cwd */
+        {
+            /* delete some confusing menu item if this menu is for current folder */
+            open = gtk_image_menu_item_new_with_mnemonic( _( "_Open" ) );
+            app_img = gtk_image_new_from_icon_name( "gnome-fs-directory", GTK_ICON_SIZE_MENU );
+            gtk_image_menu_item_set_image( GTK_IMAGE_MENU_ITEM( open ), app_img );
+        }
     }
-    gtk_widget_show( open );
-    g_signal_connect( open, "activate", G_CALLBACK( on_popup_open_activate ), data );
-    gtk_menu_shell_insert( GTK_MENU_SHELL( popup ), open, 0 );
+    if( open )
+    {
+        gtk_widget_show( open );
+        g_signal_connect( open, "activate", G_CALLBACK( on_popup_open_activate ), data );
+        gtk_menu_shell_insert( GTK_MENU_SHELL( popup ), open, 0 );
+    }
+    else if( top_separator )
+        gtk_widget_destroy( top_separator );
 
     if ( open_icon )
         gdk_pixbuf_unref( open_icon );
@@ -604,13 +651,16 @@ create_new_file( PtkFileMenu* data, gboolean create_dir )
         char* cwd;
         GtkWidget* parent;
         parent = gtk_widget_get_toplevel( GTK_WIDGET(data->browser) );
-        if( data->file_path && 
+        if( data->file_path &&
             g_file_test( data->file_path, G_FILE_TEST_IS_DIR ) )
             cwd = data->file_path;
         else
             cwd = data->cwd;
-        ptk_create_new_file( GTK_WINDOW( parent ),
-                             cwd, create_dir );
+        if( G_LIKELY(data->browser) )
+            ptk_file_browser_create_new_file( data->browser, create_dir );
+        else /* Is this possible? */
+            ptk_create_new_file( GTK_WINDOW( parent ),
+                                 cwd, create_dir, NULL );
     }
 }
 
