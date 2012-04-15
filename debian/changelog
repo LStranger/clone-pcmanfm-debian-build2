@@ -1,3 +1,20 @@
+pcmanfm (0.4.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #481957)
+    - Finally support drag and drop of desktop icons.
+    - Finally support rubber banding selection of desktop icons.
+    - Finally support adding folder to bookmark pane with drag and drop.
+    - Fix some permission problems.
+    - Update some locales
+  Don't ask why pcmanfm didn't support those listed basic features in
+  previous releases. GTK+ has very few supports for those things and its
+  default behavior isn't suitable for more complicated applications. So,
+  those listed features are coded by the author of PCManFM line by line,
+  which is very time-consuming... 
+  However, after endless hacking, we got them. Cheers!
+
+ -- Andrew Lee <andrew@linux.org.tw>  Wed, 18 Jun 2008 04:40:48 +0800
+
 pcmanfm (0.4.1.1-1) unstable; urgency=low
 
   * New upstream release
