@@ -49,7 +49,17 @@ static void fm_app_config_finalize(GObject *object)
     g_return_if_fail(IS_FM_APP_CONFIG(object));
 
     cfg = FM_APP_CONFIG(object);
+    if(cfg->wallpapers_configured > 0)
+    {
+        int i;
+
+        for(i = 0; i < cfg->wallpapers_configured; i++)
+            g_free(cfg->wallpapers[i]);
+        g_free(cfg->wallpapers);
+    }
     g_free(cfg->wallpaper);
+    g_free(cfg->desktop_font);
+    g_free(cfg->su_cmd);
 
     G_OBJECT_CLASS(fm_app_config_parent_class)->finalize(object);
 }
@@ -78,6 +88,11 @@ static void fm_app_config_init(FmAppConfig *cfg)
     cfg->show_hidden = FALSE;
     cfg->sort_type = GTK_SORT_ASCENDING;
     cfg->sort_by = COL_FILE_NAME;
+
+    cfg->desktop_sort_type = GTK_SORT_ASCENDING;
+    cfg->desktop_sort_by = COL_FILE_MTIME;
+
+    cfg->wallpaper_common = TRUE;
 }
 
 
@@ -89,9 +104,12 @@ FmConfig *fm_app_config_new(void)
 void fm_app_config_load_from_key_file(FmAppConfig* cfg, GKeyFile* kf)
 {
     char* tmp;
+    int tmp_int;
     /* behavior */
-    fm_key_file_get_bool(kf, "config", "bm_open_method", &cfg->bm_open_method);
-    cfg->su_cmd = g_key_file_get_string(kf, "config", "su_cmd", NULL);
+    fm_key_file_get_int(kf, "config", "bm_open_method", &cfg->bm_open_method);
+    tmp = g_key_file_get_string(kf, "config", "su_cmd", NULL);
+    g_free(cfg->su_cmd);
+    cfg->su_cmd = tmp;
 
     /* volume management */
     fm_key_file_get_bool(kf, "volume", "mount_on_startup", &cfg->mount_on_startup);
@@ -99,11 +117,38 @@ void fm_app_config_load_from_key_file(FmAppConfig* cfg, GKeyFile* kf)
     fm_key_file_get_bool(kf, "volume", "autorun", &cfg->autorun);
 
     /* desktop */
-    fm_key_file_get_int(kf, "desktop", "wallpaper_mode", &cfg->wallpaper_mode);
+    fm_key_file_get_int(kf, "desktop", "wallpaper_mode", &tmp_int);
+    cfg->wallpaper_mode = (FmWallpaperMode)tmp_int;
 
-    tmp = g_key_file_get_string(kf, "desktop", "wallpaper", NULL);
+    if(cfg->wallpapers_configured > 0)
+    {
+        int i;
+
+        for(i = 0; i < cfg->wallpapers_configured; i++)
+            g_free(cfg->wallpapers[i]);
+        g_free(cfg->wallpapers);
+    }
     g_free(cfg->wallpaper);
-    cfg->wallpaper = tmp;
+    fm_key_file_get_int(kf, "desktop", "wallpapers_configured", &cfg->wallpapers_configured);
+    if(cfg->wallpapers_configured > 0)
+    {
+        char wpn_buf[32];
+        int i;
+
+        cfg->wallpapers = g_malloc(cfg->wallpapers_configured * sizeof(char *));
+        for(i = 0; i < cfg->wallpapers_configured; i++)
+        {
+            snprintf(wpn_buf, sizeof(wpn_buf), "wallpaper%d", i);
+            tmp = g_key_file_get_string(kf, "desktop", wpn_buf, NULL);
+            cfg->wallpapers[i] = tmp;
+        }
+    }
+    fm_key_file_get_bool(kf, "desktop", "wallpaper_common", &cfg->wallpaper_common);
+    if (cfg->wallpaper_common)
+    {
+        tmp = g_key_file_get_string(kf, "desktop", "wallpaper", NULL);
+        cfg->wallpaper = tmp;
+    }
 
     tmp = g_key_file_get_string(kf, "desktop", "desktop_bg", NULL);
     if(tmp)
@@ -129,6 +174,14 @@ void fm_app_config_load_from_key_file(FmAppConfig* cfg, GKeyFile* kf)
     cfg->desktop_font = tmp;
 
     fm_key_file_get_bool(kf, "desktop", "show_wm_menu", &cfg->show_wm_menu);
+    if(fm_key_file_get_int(kf, "desktop", "sort_type", &tmp_int) &&
+       tmp_int == GTK_SORT_DESCENDING)
+        cfg->desktop_sort_type = GTK_SORT_DESCENDING;
+    else
+        cfg->desktop_sort_type = GTK_SORT_ASCENDING;
+    if(fm_key_file_get_int(kf, "desktop", "sort_by", &tmp_int) &&
+       FM_FOLDER_MODEL_COL_IS_VALID((guint)tmp_int))
+        cfg->desktop_sort_by = tmp_int;
 
     /* ui */
     fm_key_file_get_int(kf, "ui", "always_show_tabs", &cfg->always_show_tabs);
@@ -140,15 +193,20 @@ void fm_app_config_load_from_key_file(FmAppConfig* cfg, GKeyFile* kf)
 
     fm_key_file_get_int(kf, "ui", "splitter_pos", &cfg->splitter_pos);
 
-    fm_key_file_get_int(kf, "ui", "side_pane_mode", &cfg->side_pane_mode);
+    fm_key_file_get_int(kf, "ui", "side_pane_mode", &tmp_int);
+    cfg->side_pane_mode = (FmSidePaneMode)tmp_int;
 
     /* default values for folder views */
-    fm_key_file_get_int(kf, "ui", "view_mode", &cfg->view_mode);
-    if(!FM_FOLDER_VIEW_MODE_IS_VALID(cfg->view_mode))
+    fm_key_file_get_int(kf, "ui", "view_mode", &tmp_int);
+    if(!FM_FOLDER_VIEW_MODE_IS_VALID(tmp_int))
         cfg->view_mode = FM_FV_ICON_VIEW;
+    else
+        cfg->view_mode = tmp_int;
     fm_key_file_get_bool(kf, "ui", "show_hidden", &cfg->show_hidden);
-    fm_key_file_get_int(kf, "ui", "sort_type", &cfg->sort_type);
-    if(cfg->sort_type != GTK_SORT_ASCENDING && cfg->sort_type != GTK_SORT_DESCENDING)
+    fm_key_file_get_int(kf, "ui", "sort_type", &tmp_int);
+    if(tmp_int == GTK_SORT_DESCENDING)
+        cfg->sort_type = GTK_SORT_DESCENDING;
+    else
         cfg->sort_type = GTK_SORT_ASCENDING;
     fm_key_file_get_int(kf, "ui", "sort_by", &cfg->sort_by);
     if(!FM_FOLDER_MODEL_COL_IS_VALID(cfg->sort_by))
@@ -157,8 +215,8 @@ void fm_app_config_load_from_key_file(FmAppConfig* cfg, GKeyFile* kf)
 
 void fm_app_config_load_from_profile(FmAppConfig* cfg, const char* name)
 {
-    char **dirs, **dir;
-    char *path, *rel_path;
+    const gchar * const *dirs, * const *dir;
+    char *path;
     GKeyFile* kf = g_key_file_new();
     const char* old_name = name;
 
@@ -209,7 +267,6 @@ void fm_app_config_load_from_profile(FmAppConfig* cfg, const char* name)
     }
     g_free(path);
 
-_out:
     g_key_file_free(kf);
 
     /* set some additional default values when needed. */
@@ -242,13 +299,27 @@ void fm_app_config_save_profile(FmAppConfig* cfg, const char* name)
 
         g_string_append(buf, "\n[desktop]\n");
         g_string_append_printf(buf, "wallpaper_mode=%d\n", cfg->wallpaper_mode);
-        g_string_append_printf(buf, "wallpaper=%s\n", cfg->wallpaper ? cfg->wallpaper : "");
+        g_string_append_printf(buf, "wallpaper_common=%d\n", cfg->wallpaper_common);
+        if (cfg->wallpapers && cfg->wallpapers_configured > 0)
+        {
+            int i;
+
+            g_string_append_printf(buf, "wallpapers_configured=%d\n", cfg->wallpapers_configured);
+            for (i = 0; i < cfg->wallpapers_configured; i++)
+                if (cfg->wallpapers[i])
+                    g_string_append_printf(buf, "wallpaper%d=%s\n", i, cfg->wallpapers[i]);
+        }
+        if (cfg->wallpaper_common)
+            g_string_append_printf(buf, "wallpaper=%s\n", cfg->wallpaper ? cfg->wallpaper : "");
+        //FIXME: should desktop_bg and wallpaper_mode be set for each desktop too?
         g_string_append_printf(buf, "desktop_bg=#%02x%02x%02x\n", cfg->desktop_bg.red/257, cfg->desktop_bg.green/257, cfg->desktop_bg.blue/257);
         g_string_append_printf(buf, "desktop_fg=#%02x%02x%02x\n", cfg->desktop_fg.red/257, cfg->desktop_fg.green/257, cfg->desktop_fg.blue/257);
         g_string_append_printf(buf, "desktop_shadow=#%02x%02x%02x\n", cfg->desktop_shadow.red/257, cfg->desktop_shadow.green/257, cfg->desktop_shadow.blue/257);
         if(cfg->desktop_font && *cfg->desktop_font)
             g_string_append_printf(buf, "desktop_font=%s\n", cfg->desktop_font);
         g_string_append_printf(buf, "show_wm_menu=%d\n", cfg->show_wm_menu);
+        g_string_append_printf(buf, "sort_type=%d\n", cfg->desktop_sort_type);
+        g_string_append_printf(buf, "sort_by=%d\n", cfg->desktop_sort_by);
 
         g_string_append(buf, "\n[ui]\n");
         g_string_append_printf(buf, "always_show_tabs=%d\n", cfg->always_show_tabs);

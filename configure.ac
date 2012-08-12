@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.63])
-AC_INIT([pcmanfm], [0.9.10], [http://pcmanfm.sf.net/])
+AC_INIT([pcmanfm], [1.0], [http://pcmanfm.sf.net/])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 AC_CONFIG_HEADERS([config.h])
@@ -10,9 +10,8 @@ AC_CONFIG_HEADERS([config.h])
 # Checks for programs.
 AC_ISC_POSIX
 AC_PROG_CC
-AM_PROG_LIBTOOL
 AM_PROG_CC_STDC
-AC_HEADER_STDC
+AM_PROG_CC_C_O
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -53,6 +52,13 @@ AC_ARG_ENABLE(debug,
 if test "$enable_debug" = "yes"; then
     # turn on debug and disable optimization
     CPPFLAGS="$CPPFLAGS -DG_ENABLE_DEBUG -O0 -g"
+    case "$CC" in
+    gcc*)
+        CPPFLAGS="$CPPFLAGS -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers"
+        ;;
+    *)
+        ;;
+    esac
 else
     # turn off glib debug checks
     # G_DISABLE_CAST_CHECKS is already handled by $(G_CAST_CHECKS)
@@ -93,7 +99,7 @@ PKG_CHECK_MODULES(GMODULE, [$gmodule_modules])
 AC_SUBST(GMODULE_CFLAGS)
 AC_SUBST(GMODULE_LIBS)
 
-fm_modules="libfm >= 0.1.15 libfm-gtk >= 0.1.15"
+fm_modules="libfm >= 0.1.99 libfm-gtk >= 0.1.99"
 PKG_CHECK_MODULES(FM, [$fm_modules])
 AC_SUBST(FM_CFLAGS)
 AC_SUBST(FM_LIBS)
@@ -124,6 +130,7 @@ AC_CONFIG_FILES([
     src/Makefile
     po/Makefile.in
     data/Makefile
+    data/pcmanfm.1
     data/ui/Makefile
     data/ui/about.glade
 ])

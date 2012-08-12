@@ -25,6 +25,7 @@
 
 #include <gtk/gtk.h>
 #include <libfm/fm-gtk.h>
+#include "tab-page.h"
 
 G_BEGIN_DECLS
 
@@ -44,24 +45,26 @@ typedef struct _FmMainWinClass      FmMainWinClass;
 struct _FmMainWin
 {
     GtkWindow parent;
+    GtkWindowGroup* win_group;
 
     GtkUIManager* ui;
-    GtkWidget* toolbar;
-    GtkWidget* location;
-    GtkWidget* notebook;
-    GtkWidget* current_page;
-    GtkWidget* side_pane;
-    GtkWidget* folder_view;
-    GtkWidget* statusbar;
-    GtkWidget* vol_status;
-    GtkWidget* bookmarks_menu;
+    GtkToolbar* toolbar;
+    FmPathEntry* location;
+    GtkNotebook* notebook;
+    FmTabPage* current_page;
+    FmSidePane* side_pane;
+    FmFolderView* folder_view;
+    GtkStatusbar* statusbar;
+    GtkFrame* vol_status;
+    GtkMenuShell* bookmarks_menu;
     GtkWidget* history_menu;
-    GtkWidget* popup;
+    GtkMenu* popup;
     /* <private> */
     FmNavHistory* nav_history;
     guint statusbar_ctx;
     guint statusbar_ctx2;
     FmBookmarks* bookmarks;
+    guint idle_handler; /* fix for GtkEntry bug */
 };
 
 struct _FmMainWinClass
@@ -70,13 +73,13 @@ struct _FmMainWinClass
 };
 
 GType       fm_main_win_get_type        (void);
-GtkWidget*  fm_main_win_new         (FmPath* path);
+FmMainWin*  fm_main_win_new         (FmPath* path);
 void fm_main_win_chdir(FmMainWin* win, FmPath* path);
 void fm_main_win_chdir_by_name(FmMainWin* win, const char* path_str);
 gint fm_main_win_add_tab(FmMainWin* win, FmPath* path);
 FmMainWin* fm_main_win_add_win(FmMainWin* win, FmPath* path);
 
-FmMainWin* fm_main_win_get_last_active();
+FmMainWin* fm_main_win_get_last_active(void);
 void fm_main_win_open_in_last_active(FmPath* path);
 
 G_END_DECLS

@@ -1,7 +1,7 @@
 /*
  *      main-win-ui.c
  *
- *      Copyright 2009 PCMan <pcman.tw@gmail.com>
+ *      Copyright 2009 - 2012 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -114,6 +114,7 @@ static const char main_menu_xml[] =
   "<menu action='CreateNew'>"
     "<menuitem action='NewFolder'/>"
     "<menuitem action='NewBlank'/>"
+    "<menuitem action='NewShortcut'/>"
   "</menu>"
   "<separator/>"
   "<menuitem action='Paste'/>"
@@ -189,6 +190,7 @@ static GtkActionEntry main_win_actions[]=
     {"CreateNew", NULL, N_("Create _New..."), "", NULL, NULL},
     {"NewFolder", "folder", N_("Folder"), "<Ctrl><Shift>N", NULL, G_CALLBACK(on_create_new)},
     {"NewBlank", "text-x-generic", N_("Blank File"), NULL, NULL, G_CALLBACK(on_create_new)},
+    {"NewShortcut", "system-run", N_("Shortcut"), NULL, NULL, G_CALLBACK(on_create_new)},
     {"Prop", GTK_STOCK_PROPERTIES, NULL, NULL, NULL, G_CALLBACK(on_prop)}
 };
 

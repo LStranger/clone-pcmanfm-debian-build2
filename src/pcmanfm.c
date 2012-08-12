@@ -2,6 +2,7 @@
  *      pcmanfm.c
  *
  *      Copyright 2009 - 2010 Hong Jen Yee (PCMan) <pcman.tw@gmail.com>
+ *      Copyright 2012 Andriy Grytsenko (LStranger) <andrej@rep.kiev.ua>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -95,18 +96,41 @@ static gboolean pcmanfm_run();
 static void unix_signal_handler(int sig_num)
 {
     /* postpond the signal handling by using a pipe */
-    write(signal_pipe[1], &sig_num, sizeof(sig_num));
+    if (write(signal_pipe[1], &sig_num, sizeof(sig_num)) != sizeof(sig_num)) {
+        g_critical("cannot bounce the signal, stop");
+        exit(2);
+    }
 }
 
 static gboolean on_unix_signal(GIOChannel* ch, GIOCondition cond, gpointer user_data)
 {
     int sig_num;
-    g_io_channel_read_chars(ch, &sig_num, 1, NULL, NULL);
-    switch(sig_num)
+    GIOStatus status;
+    gsize got;
+
+    while(1)
     {
-    case SIGTERM:
-    default:
-        gtk_main_quit();
+        status = g_io_channel_read_chars(ch, (gchar*)&sig_num, sizeof(sig_num),
+                                         &got, NULL);
+        if(status == G_IO_STATUS_AGAIN) /* we read all the pipe */
+        {
+            g_debug("got G_IO_STATUS_AGAIN");
+            return TRUE;
+        }
+        if(status != G_IO_STATUS_NORMAL || got != sizeof(sig_num)) /* broken pipe */
+        {
+            g_debug("signal pipe is broken");
+            gtk_main_quit();
+            return FALSE;
+        }
+        g_debug("got signal %d from pipe", sig_num);
+        switch(sig_num)
+        {
+        case SIGTERM:
+        default:
+            gtk_main_quit();
+            return FALSE;
+        }
     }
     return TRUE;
 }
@@ -145,6 +169,7 @@ int main(int argc, char** argv)
 {
     FmConfig* config;
     GError* err = NULL;
+    SingleInstData inst;
 
 #ifdef ENABLE_NLS
     bindtextdomain ( GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR );
@@ -161,15 +186,20 @@ int main(int argc, char** argv)
     }
 
     /* ensure that there is only one instance of pcmanfm. */
-    switch(single_inst_init("pcmanfm", single_inst_cb, opt_entries + 3, gdk_x11_get_default_screen()))
+    inst.prog_name = "pcmanfm";
+    inst.cb = single_inst_cb;
+    inst.opt_entries = opt_entries + 3;
+    inst.screen_num = gdk_x11_get_default_screen();
+    switch(single_inst_init(&inst))
     {
     case SINGLE_INST_CLIENT: /* we're not the first instance. */
-        single_inst_finalize();
+        single_inst_finalize(&inst);
         gdk_notify_startup_complete();
         return 0;
     case SINGLE_INST_ERROR: /* error happened. */
-        single_inst_finalize();
+        single_inst_finalize(&inst);
         return 1;
+    case SINGLE_INST_SERVER: ; /* FIXME */
     }
 
     if(pipe(signal_pipe) == 0)
@@ -182,8 +212,7 @@ int main(int argc, char** argv)
         // signal( SIGPIPE, SIG_IGN );
         signal( SIGHUP, unix_signal_handler );
         signal( SIGTERM, unix_signal_handler );
-        signal( SIGPOLL, unix_signal_handler );
-        signal( SIGHUP, unix_signal_handler );
+        signal( SIGINT, unix_signal_handler );
     }
 
     config = fm_app_config_new(); /* this automatically load libfm config file. */
@@ -197,6 +226,7 @@ int main(int argc, char** argv)
     {
         fm_volume_manager_init();
         gtk_main();
+        /* g_debug("main loop ended"); */
         if(desktop_running)
             fm_desktop_manager_finalize();
 
@@ -209,7 +239,7 @@ int main(int argc, char** argv)
         fm_volume_manager_finalize();
     }
 
-    single_inst_finalize();
+    single_inst_finalize(&inst);
     fm_gtk_finalize();
 
     g_object_unref(config);
@@ -261,13 +291,15 @@ gboolean pcmanfm_run()
         }
         else if(show_pref > 0)
         {
-            fm_edit_preference(NULL, show_pref - 1);
+            /* FIXME: pass screen number from client */
+            fm_edit_preference(GTK_WINDOW(fm_desktop_get(0)), show_pref - 1);
             show_pref = 0;
             return TRUE;
         }
         else if(desktop_pref)
         {
-            fm_desktop_preference();
+            /* FIXME: pass screen number from client */
+            fm_desktop_preference(NULL, GTK_WINDOW(fm_desktop_get(0)));
             desktop_pref = FALSE;
             return TRUE;
         }
@@ -297,7 +329,7 @@ gboolean pcmanfm_run()
 
             if(wallpaper_mode)
             {
-                int i = 0;
+                guint i = 0;
                 for(i = 0; i < G_N_ELEMENTS(valid_wallpaper_modes); ++i)
                 {
                     if(strcmp(valid_wallpaper_modes[i], wallpaper_mode) == 0)
@@ -334,7 +366,7 @@ gboolean pcmanfm_run()
         if(files_to_open)
         {
             char** filename;
-            FmJob* job = fm_file_info_job_new(NULL, 0);
+            FmFileInfoJob* job = fm_file_info_job_new(NULL, 0);
             FmPath* cwd = NULL;
             GList* infos;
             for(filename=files_to_open; *filename; ++filename)
@@ -357,19 +389,19 @@ gboolean pcmanfm_run()
                         /* FIXME: This won't work if those filenames are passed via IPC since the receiving process has different cwd. */
                         /* FIXME: should we use ipc_cwd here? */
                         char* cwd_str = g_get_current_dir();
-                        cwd = fm_path_new(cwd_str);
+                        cwd = fm_path_new_for_str(cwd_str);
                         g_free(cwd_str);
                     }
                     path = fm_path_new_relative(cwd, *filename);
                 }
-                fm_file_info_job_add(FM_FILE_INFO_JOB(job), path);
+                fm_file_info_job_add(job, path);
                 fm_path_unref(path);
             }
             if(cwd)
                 fm_path_unref(cwd);
             g_signal_connect(job, "error", G_CALLBACK(on_file_info_job_error), NULL);
-            fm_job_run_sync_with_mainloop(job);
-            infos = fm_list_peek_head_link(FM_FILE_INFO_JOB(job)->file_infos);
+            fm_job_run_sync_with_mainloop(FM_JOB(job));
+            infos = fm_file_info_list_peek_head_link(job->file_infos);
             fm_launch_files_simple(NULL, NULL, infos, pcmanfm_open_folder, NULL);
             g_object_unref(job);
             ret = (n_pcmanfm_ref >= 1); /* if there is opened window, return true to run the main loop. */
@@ -379,8 +411,18 @@ gboolean pcmanfm_run()
         }
         else
         {
-            if(!daemon_mode)
+            static gboolean first_run = TRUE;
+            if(first_run && daemon_mode)
             {
+                /* If the function is called the first time and we're in daemon mode,
+               * don't open any folder.
+               * Checking if pcmanfm_run() is called the first time is needed to fix
+               * #3397444 - pcmanfm dont show window in daemon mode if i call 'pcmanfm' */
+            }
+            else
+            {
+                /* If we're not in daemon mode, or pcmanfm_run() is called because another
+               * instance send signal to us, open cwd by default. */
                 FmPath* path;
                 char* cwd = ipc_cwd ? ipc_cwd : g_get_current_dir();
                 path = fm_path_new_for_path(cwd);
@@ -389,6 +431,7 @@ gboolean pcmanfm_run()
                 g_free(cwd);
                 ipc_cwd = NULL;
             }
+            first_run = FALSE;
         }
     }
     return ret;
@@ -412,14 +455,44 @@ void pcmanfm_unref()
         gtk_main_quit();
 }
 
+static void move_window_to_desktop(FmMainWin* win, FmDesktop* desktop)
+{
+    GdkScreen* screen = gtk_widget_get_screen(GTK_WIDGET(desktop));
+    Atom atom;
+    char* atom_name = "_NET_WM_DESKTOP";
+    XClientMessageEvent xev;
+
+    gtk_window_set_screen(GTK_WINDOW(win), screen);
+    if(!XInternAtoms(GDK_DISPLAY(), &atom_name, 1, False, &atom))
+    {
+        /* g_debug("cannot get Atom for _NET_WM_DESKTOP"); */
+        return;
+    }
+    xev.type = ClientMessage;
+    xev.window = GDK_WINDOW_XID(GTK_WIDGET(win)->window);
+    xev.message_type = atom;
+    xev.format = 32;
+    xev.data.l[0] = desktop->cur_desktop;
+    xev.data.l[1] = 0;
+    xev.data.l[2] = 0;
+    xev.data.l[3] = 0;
+    xev.data.l[4] = 0;
+    /* g_debug("moving window to current desktop"); */
+    XSendEvent(GDK_DISPLAY(), GDK_ROOT_WINDOW(), False,
+               (SubstructureNotifyMask | SubstructureRedirectMask),
+               (XEvent *) &xev);
+}
+
 gboolean pcmanfm_open_folder(GAppLaunchContext* ctx, GList* folder_infos, gpointer user_data, GError** err)
 {
     GList* l = folder_infos;
     for(; l; l=l->next)
     {
         FmFileInfo* fi = (FmFileInfo*)l->data;
-        fm_main_win_open_in_last_active(fi->path);
+        fm_main_win_open_in_last_active(fm_file_info_get_path(fi));
     }
+    if(user_data && FM_IS_DESKTOP(user_data))
+        move_window_to_desktop(fm_main_win_get_last_active(), user_data);
     return TRUE;
 }
 
@@ -463,7 +536,7 @@ void pcmanfm_open_folder_in_terminal(GtkWindow* parent, FmPath* dir)
     if(app)
     {
         GError* err = NULL;
-        GAppLaunchContext* ctx = gdk_app_launch_context_new();
+        GdkAppLaunchContext* ctx = gdk_app_launch_context_new();
         char* cwd_str;
         char* old_cwd = g_get_current_dir();
 
@@ -475,12 +548,12 @@ void pcmanfm_open_folder_in_terminal(GtkWindow* parent, FmPath* dir)
             cwd_str = g_file_get_path(gf);
             g_object_unref(gf);
         }
-        gdk_app_launch_context_set_screen(GDK_APP_LAUNCH_CONTEXT(ctx), parent ? gtk_widget_get_screen(GTK_WIDGET(parent)) : gdk_screen_get_default());
-        gdk_app_launch_context_set_timestamp(GDK_APP_LAUNCH_CONTEXT(ctx), gtk_get_current_event_time());
+        gdk_app_launch_context_set_screen(ctx, parent ? gtk_widget_get_screen(GTK_WIDGET(parent)) : gdk_screen_get_default());
+        gdk_app_launch_context_set_timestamp(ctx, gtk_get_current_event_time());
         g_chdir(cwd_str); /* FIXME: currently we don't have better way for this. maybe a wrapper script? */
         g_free(cwd_str);
 
-        if(!g_app_info_launch(app, NULL, ctx, &err))
+        if(!g_app_info_launch(app, NULL, G_APP_LAUNCH_CONTEXT(ctx), &err))
         {
             fm_show_error(parent, NULL, err->message);
             g_error_free(err);
@@ -501,7 +574,7 @@ void pcmanfm_create_new(GtkWindow* parent, FmPath* cwd, const char* templ)
     FmPath* dest;
     char* basename;
     const char* msg;
-    FmMainWin* win = FM_MAIN_WIN(parent);
+    //FmMainWin* win = FM_MAIN_WIN(parent);
 _retry:
     if(templ == TEMPL_NAME_FOLDER)
         msg = N_("Enter a name for the newly created folder:");
@@ -576,12 +649,44 @@ _retry:
         }
         g_object_unref(gf);
     }
+    else if ( templ == TEMPL_NAME_SHORTCUT )
+    {
+        /* FIXME: a temp. workaround until ~/Templates support is implemented */
+         char buf[256];
+         GFile* gf = fm_path_to_gfile(dest);
+
+         if (g_find_program_in_path("lxshortcut"))
+         {
+            char* path = g_file_get_path(gf);
+            int s = snprintf(buf, sizeof(buf), "lxshortcut -i %s", path);
+            g_free(path);
+            if(s >= (int)sizeof(buf))
+                buf[0] = '\0';
+         }
+         else
+         {
+             GtkWidget* msg;
+
+             msg = gtk_message_dialog_new( NULL,
+                                           0,
+                                           GTK_MESSAGE_ERROR,
+                                           GTK_BUTTONS_OK,
+                                           _("Error, lxshortcut not installed") );
+             gtk_dialog_run( GTK_DIALOG(msg) );
+             gtk_widget_destroy( msg );
+         }
+         if(buf[0] && !g_spawn_command_line_async(buf, NULL))
+            fm_show_error(parent, NULL, _("Failed to start lxshortcut"));
+         g_object_unref(gf);
+    }
     else /* templates in ~/Templates */
     {
-        FmPath* dir = fm_path_new(g_get_user_special_dir(G_USER_DIRECTORY_TEMPLATES));
+        /* FIXME: need an extended processing with desktop entries support */
+        FmPath* dir = fm_path_new_for_str(g_get_user_special_dir(G_USER_DIRECTORY_TEMPLATES));
         FmPath* template = fm_path_new_child(dir, templ);
         fm_copy_file(parent, template, cwd);
         fm_path_unref(template);
+        fm_path_unref(dir);
     }
     fm_path_unref(dest);
 }
