@@ -8,6 +8,7 @@ pcmanfm (1.0.2-0.1) unstable; urgency=low
     - Removing wrong dependency on libfm-gtk-bin.
     - Adding two alternative icon themes: oxygen-icon-theme, tango-icon-theme.
     - Removing unneeded autoreconf call.
+    - Updating Build-Depends: it should require libfm-gtk-dev now.
 
  -- Andriy Grytsenko (LStranger) <andrej@rep.kiev.ua>  Wed, 19 Sep 2012 22:00:00 +0300
 
